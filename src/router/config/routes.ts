@@ -8,76 +8,40 @@ export const routeConfig: RouteOptions[] = [
     type: 'link'
   },
   {
-    path: 'A',
-    name: 'A',
-    title: 'A',
-    icon: 'Edit',
+    path: 'cesium',
+    name: 'cesium',
+    title: 'cesium',
+    icon: 'cesium.jpeg',
     type: 'menu',
-    component: 'A',
+    component: 'cesium',
     children: [
       {
-        path: 'A-a',
-        name: 'A-a',
-        title: 'A-a',
+        path: 'entity',
+        name: 'entity',
+        title: 'entity',
         icon: 'Edit',
-        component: 'A/A-a',
-        type: 'link',
-        children: [
-          {
-            path: 'detail',
-            name: 'detail',
-            title: 'detail',
-            icon: 'Edit',
-            type: 'other',
-            component: 'A/A-a/detail'
-          }
-        ]
+        component: 'cesium/entity',
+        type: 'menu'
       },
       {
-        path: 'A-b',
-        name: 'A-b',
-        title: 'A-b',
+        path: 'scene',
+        name: 'scene',
+        title: 'scene',
         icon: 'Edit',
-        type: 'link',
-        component: 'A/A-b'
-      }
-    ]
-  },
-  {
-    path: 'B',
-    name: 'B',
-    title: 'B',
-    icon: 'logo.png',
-    type: 'menu',
-    component: 'B',
-    children: [
-      {
-        path: 'B1',
-        name: 'B1',
-        title: 'B1',
-        icon: 'Edit',
-        component: 'B/B1',
+        component: 'cesium/scene',
         type: 'menu',
         children: [
           {
-            path: 'B11',
-            name: 'B11',
-            title: 'B11',
+            path: 'createScene',
+            name: 'createScene',
+            title: '基础场景',
             icon: 'Edit',
-            type: 'link',
-            component: 'B/B1/B1'
+            component: 'cesium/scene/createScene',
+            type: 'link'
           }
         ]
       }
     ]
-  },
-  {
-    path: 'C',
-    name: 'C',
-    title: 'C',
-    icon: 'Edit',
-    type: 'link',
-    component: 'C'
   },
   {
     path: 'auth',

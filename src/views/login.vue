@@ -1,9 +1,3 @@
-<template>
-  <div>
-    <el-button size="large" @click="login">登录</el-button>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { useMenuStore } from '@/store/useMenu';
 import { routeConfig } from '@/router/config/routes';
@@ -17,6 +11,7 @@ const login = () => {
   sessionStorage.setItem('token', '123');
   router.push('/');
 };
+login();
 </script>
 
 <style lang="scss" scoped>
