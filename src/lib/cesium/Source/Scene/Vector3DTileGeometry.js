@@ -1,14 +1,14 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import Matrix4 from "../Core/Matrix4.js";
-import TaskProcessor from "../Core/TaskProcessor.js";
-import ClassificationType from "./ClassificationType.js";
-import Vector3DTileBatch from "./Vector3DTileBatch.js";
-import Vector3DTilePrimitive from "./Vector3DTilePrimitive.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import Matrix4 from '../Core/Matrix4.js';
+import TaskProcessor from '../Core/TaskProcessor.js';
+import ClassificationType from './ClassificationType.js';
+import Vector3DTileBatch from './Vector3DTileBatch.js';
+import Vector3DTilePrimitive from './Vector3DTilePrimitive.js';
 
 /**
  * Creates a batch of box, cylinder, ellipsoid and/or sphere geometries intersecting terrain or 3D Tiles.
@@ -115,7 +115,7 @@ Object.defineProperties(Vector3DTileGeometry.prototype, {
         return this._primitive.trianglesLength;
       }
       return 0;
-    },
+    }
   },
 
   /**
@@ -132,7 +132,7 @@ Object.defineProperties(Vector3DTileGeometry.prototype, {
         return this._primitive.geometryByteLength;
       }
       return 0;
-    },
+    }
   },
 
   /**
@@ -144,8 +144,8 @@ Object.defineProperties(Vector3DTileGeometry.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
-  },
+    }
+  }
 });
 
 Vector3DTileGeometry.packedBoxLength =
@@ -201,7 +201,7 @@ function unpackBuffer(geometries, packedBuffer) {
       color: color,
       offset: indexOffset,
       count: count,
-      batchIds: batchIds,
+      batchIds: batchIds
     });
   }
 
@@ -209,7 +209,7 @@ function unpackBuffer(geometries, packedBuffer) {
 }
 
 const createVerticesTaskProcessor = new TaskProcessor(
-  "createVectorTileGeometries",
+  'createVectorTileGeometries',
   5
 );
 const scratchColor = new Color();
@@ -242,12 +242,14 @@ function createPrimitive(geometries) {
       }
       if (defined(geometries._cylinders)) {
         cylinders = geometries._cylinders = cylinders.slice();
-        cylinderBatchIds = geometries._cylinderBatchIds = cylinderBatchIds.slice();
+        cylinderBatchIds = geometries._cylinderBatchIds =
+          cylinderBatchIds.slice();
         length += cylinderBatchIds.length;
       }
       if (defined(geometries._ellipsoids)) {
         ellipsoids = geometries._ellipsoids = ellipsoids.slice();
-        ellipsoidBatchIds = geometries._ellipsoidBatchIds = ellipsoidBatchIds.slice();
+        ellipsoidBatchIds = geometries._ellipsoidBatchIds =
+          ellipsoidBatchIds.slice();
         length += ellipsoidBatchIds.length;
       }
       if (defined(geometries._spheres)) {
@@ -296,13 +298,14 @@ function createPrimitive(geometries) {
       spheres: defined(spheres) ? spheres.buffer : undefined,
       sphereBatchIds: defined(spheres) ? sphereBatchIds.buffer : undefined,
       batchTableColors: batchTableColors.buffer,
-      packedBuffer: packedBuffer.buffer,
+      packedBuffer: packedBuffer.buffer
     };
 
-    const verticesPromise = (geometries._verticesPromise = createVerticesTaskProcessor.scheduleTask(
-      parameters,
-      transferrableObjects
-    ));
+    const verticesPromise = (geometries._verticesPromise =
+      createVerticesTaskProcessor.scheduleTask(
+        parameters,
+        transferrableObjects
+      ));
     if (!defined(verticesPromise)) {
       // Postponed
       return;
@@ -345,7 +348,7 @@ function finishPrimitive(geometries) {
       boundingVolume: geometries._boundingVolume,
       boundingVolumes: geometries._boundingVolumes,
       center: geometries._center,
-      pickObject: defaultValue(geometries._pickObject, geometries),
+      pickObject: defaultValue(geometries._pickObject, geometries)
     });
 
     geometries._boxes = undefined;

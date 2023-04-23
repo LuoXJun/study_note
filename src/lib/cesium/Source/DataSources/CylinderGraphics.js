@@ -1,9 +1,9 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import createMaterialPropertyDescriptor from "./createMaterialPropertyDescriptor.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import createMaterialPropertyDescriptor from './createMaterialPropertyDescriptor.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
 
 /**
  * @typedef {Object} CylinderGraphics.ConstructorOptions
@@ -80,7 +80,7 @@ Object.defineProperties(CylinderGraphics.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -89,28 +89,28 @@ Object.defineProperties(CylinderGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  show: createPropertyDescriptor("show"),
+  show: createPropertyDescriptor('show'),
 
   /**
    * Gets or sets the numeric Property specifying the length of the cylinder.
    * @memberof CylinderGraphics.prototype
    * @type {Property|undefined}
    */
-  length: createPropertyDescriptor("length"),
+  length: createPropertyDescriptor('length'),
 
   /**
    * Gets or sets the numeric Property specifying the radius of the top of the cylinder.
    * @memberof CylinderGraphics.prototype
    * @type {Property|undefined}
    */
-  topRadius: createPropertyDescriptor("topRadius"),
+  topRadius: createPropertyDescriptor('topRadius'),
 
   /**
    * Gets or sets the numeric Property specifying the radius of the bottom of the cylinder.
    * @memberof CylinderGraphics.prototype
    * @type {Property|undefined}
    */
-  bottomRadius: createPropertyDescriptor("bottomRadius"),
+  bottomRadius: createPropertyDescriptor('bottomRadius'),
 
   /**
    * Gets or sets the Property specifying the {@link HeightReference}.
@@ -118,7 +118,7 @@ Object.defineProperties(CylinderGraphics.prototype, {
    * @type {Property|undefined}
    * @default HeightReference.NONE
    */
-  heightReference: createPropertyDescriptor("heightReference"),
+  heightReference: createPropertyDescriptor('heightReference'),
 
   /**
    * Gets or sets the boolean Property specifying whether the cylinder is filled with the provided material.
@@ -126,7 +126,7 @@ Object.defineProperties(CylinderGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  fill: createPropertyDescriptor("fill"),
+  fill: createPropertyDescriptor('fill'),
 
   /**
    * Gets or sets the Property specifying the material used to fill the cylinder.
@@ -134,7 +134,7 @@ Object.defineProperties(CylinderGraphics.prototype, {
    * @type {MaterialProperty|undefined}
    * @default Color.WHITE
    */
-  material: createMaterialPropertyDescriptor("material"),
+  material: createMaterialPropertyDescriptor('material'),
 
   /**
    * Gets or sets the boolean Property specifying whether the cylinder is outlined.
@@ -142,7 +142,7 @@ Object.defineProperties(CylinderGraphics.prototype, {
    * @type {Property|undefined}
    * @default false
    */
-  outline: createPropertyDescriptor("outline"),
+  outline: createPropertyDescriptor('outline'),
 
   /**
    * Gets or sets the Property specifying the {@link Color} of the outline.
@@ -150,7 +150,7 @@ Object.defineProperties(CylinderGraphics.prototype, {
    * @type {Property|undefined}
    * @default Color.BLACK
    */
-  outlineColor: createPropertyDescriptor("outlineColor"),
+  outlineColor: createPropertyDescriptor('outlineColor'),
 
   /**
    * Gets or sets the numeric Property specifying the width of the outline.
@@ -161,7 +161,7 @@ Object.defineProperties(CylinderGraphics.prototype, {
    * @type {Property|undefined}
    * @default 1.0
    */
-  outlineWidth: createPropertyDescriptor("outlineWidth"),
+  outlineWidth: createPropertyDescriptor('outlineWidth'),
 
   /**
    * Gets or sets the Property specifying the number of vertical lines to draw along the perimeter for the outline.
@@ -169,7 +169,7 @@ Object.defineProperties(CylinderGraphics.prototype, {
    * @type {Property|undefined}
    * @default 16
    */
-  numberOfVerticalLines: createPropertyDescriptor("numberOfVerticalLines"),
+  numberOfVerticalLines: createPropertyDescriptor('numberOfVerticalLines'),
 
   /**
    * Gets or sets the Property specifying the number of edges around the perimeter of the cylinder.
@@ -177,7 +177,7 @@ Object.defineProperties(CylinderGraphics.prototype, {
    * @type {Property|undefined}
    * @default 128
    */
-  slices: createPropertyDescriptor("slices"),
+  slices: createPropertyDescriptor('slices'),
 
   /**
    * Get or sets the enum Property specifying whether the cylinder
@@ -186,16 +186,14 @@ Object.defineProperties(CylinderGraphics.prototype, {
    * @type {Property|undefined}
    * @default ShadowMode.DISABLED
    */
-  shadows: createPropertyDescriptor("shadows"),
+  shadows: createPropertyDescriptor('shadows'),
 
   /**
    * Gets or sets the {@link DistanceDisplayCondition} Property specifying at what distance from the camera that this cylinder will be displayed.
    * @memberof CylinderGraphics.prototype
    * @type {Property|undefined}
    */
-  distanceDisplayCondition: createPropertyDescriptor(
-    "distanceDisplayCondition"
-  ),
+  distanceDisplayCondition: createPropertyDescriptor('distanceDisplayCondition')
 });
 
 /**
@@ -234,7 +232,7 @@ CylinderGraphics.prototype.clone = function (result) {
 CylinderGraphics.prototype.merge = function (source) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
-    throw new DeveloperError("source is required.");
+    throw new DeveloperError('source is required.');
   }
   //>>includeEnd('debug');
 

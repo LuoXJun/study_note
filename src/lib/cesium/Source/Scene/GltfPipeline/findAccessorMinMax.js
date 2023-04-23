@@ -1,8 +1,8 @@
-import getAccessorByteStride from "./getAccessorByteStride.js";
-import getComponentReader from "./getComponentReader.js";
-import numberOfComponentsForType from "./numberOfComponentsForType.js";
-import ComponentDatatype from "../../Core/ComponentDatatype.js";
-import defined from "../../Core/defined.js";
+import getAccessorByteStride from './getAccessorByteStride.js';
+import getComponentReader from './getComponentReader.js';
+import numberOfComponentsForType from './numberOfComponentsForType.js';
+import ComponentDatatype from '../../Core/ComponentDatatype.js';
+import defined from '../../Core/defined.js';
 
 /**
  * Finds the min and max values of the accessor.
@@ -23,7 +23,7 @@ function findAccessorMinMax(gltf, accessor) {
   if (!defined(accessor.bufferView)) {
     return {
       min: new Array(numberOfComponents).fill(0.0),
-      max: new Array(numberOfComponents).fill(0.0),
+      max: new Array(numberOfComponents).fill(0.0)
     };
   }
 
@@ -64,7 +64,7 @@ function findAccessorMinMax(gltf, accessor) {
 
   return {
     min: min,
-    max: max,
+    max: max
   };
 }
 

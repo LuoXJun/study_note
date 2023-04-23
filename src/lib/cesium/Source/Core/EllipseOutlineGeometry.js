@@ -1,18 +1,18 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import EllipseGeometryLibrary from "./EllipseGeometryLibrary.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import GeometryOffsetAttribute from "./GeometryOffsetAttribute.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
-import PrimitiveType from "./PrimitiveType.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import EllipseGeometryLibrary from './EllipseGeometryLibrary.js';
+import Ellipsoid from './Ellipsoid.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import GeometryOffsetAttribute from './GeometryOffsetAttribute.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
+import PrimitiveType from './PrimitiveType.js';
 
 const scratchCartesian1 = new Cartesian3();
 let boundingSphereCenter = new Cartesian3();
@@ -47,8 +47,8 @@ function computeEllipse(options) {
         positions,
         options,
         false
-      ),
-    }),
+      )
+    })
   });
 
   const length = positions.length / 3;
@@ -62,7 +62,7 @@ function computeEllipse(options) {
   return {
     boundingSphere: boundingSphere,
     attributes: attributes,
-    indices: indices,
+    indices: indices
   };
 }
 
@@ -109,8 +109,8 @@ function computeExtrudedEllipse(options) {
         positions,
         options,
         true
-      ),
-    }),
+      )
+    })
   });
 
   positions = attributes.position.values;
@@ -133,7 +133,7 @@ function computeExtrudedEllipse(options) {
     attributes.applyOffset = new GeometryAttribute({
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 1,
-      values: applyOffset,
+      values: applyOffset
     });
   }
 
@@ -174,7 +174,7 @@ function computeExtrudedEllipse(options) {
   return {
     boundingSphere: boundingSphere,
     attributes: attributes,
-    indices: indices,
+    indices: indices
   };
 }
 
@@ -224,21 +224,21 @@ function EllipseOutlineGeometry(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(center)) {
-    throw new DeveloperError("center is required.");
+    throw new DeveloperError('center is required.');
   }
   if (!defined(semiMajorAxis)) {
-    throw new DeveloperError("semiMajorAxis is required.");
+    throw new DeveloperError('semiMajorAxis is required.');
   }
   if (!defined(semiMinorAxis)) {
-    throw new DeveloperError("semiMinorAxis is required.");
+    throw new DeveloperError('semiMinorAxis is required.');
   }
   if (semiMajorAxis < semiMinorAxis) {
     throw new DeveloperError(
-      "semiMajorAxis must be greater than or equal to the semiMinorAxis."
+      'semiMajorAxis must be greater than or equal to the semiMinorAxis.'
     );
   }
   if (granularity <= 0.0) {
-    throw new DeveloperError("granularity must be greater than zero.");
+    throw new DeveloperError('granularity must be greater than zero.');
   }
   //>>includeEnd('debug');
 
@@ -258,7 +258,7 @@ function EllipseOutlineGeometry(options) {
     0
   );
   this._offsetAttribute = options.offsetAttribute;
-  this._workerName = "createEllipseOutlineGeometry";
+  this._workerName = 'createEllipseOutlineGeometry';
 }
 
 /**
@@ -280,10 +280,10 @@ EllipseOutlineGeometry.packedLength =
 EllipseOutlineGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(value)) {
-    throw new DeveloperError("value is required");
+    throw new DeveloperError('value is required');
   }
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -319,7 +319,7 @@ const scratchOptions = {
   granularity: undefined,
   extrudedHeight: undefined,
   numberOfVerticalLines: undefined,
-  offsetAttribute: undefined,
+  offsetAttribute: undefined
 };
 
 /**
@@ -333,7 +333,7 @@ const scratchOptions = {
 EllipseOutlineGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -418,7 +418,7 @@ EllipseOutlineGeometry.createGeometry = function (ellipseGeometry) {
     rotation: ellipseGeometry._rotation,
     height: height,
     granularity: ellipseGeometry._granularity,
-    numberOfVerticalLines: ellipseGeometry._numberOfVerticalLines,
+    numberOfVerticalLines: ellipseGeometry._numberOfVerticalLines
   };
   let geometry;
   if (extrude) {
@@ -438,7 +438,7 @@ EllipseOutlineGeometry.createGeometry = function (ellipseGeometry) {
       geometry.attributes.applyOffset = new GeometryAttribute({
         componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,
-        values: applyOffset,
+        values: applyOffset
       });
     }
   }
@@ -448,7 +448,7 @@ EllipseOutlineGeometry.createGeometry = function (ellipseGeometry) {
     indices: geometry.indices,
     primitiveType: PrimitiveType.LINES,
     boundingSphere: geometry.boundingSphere,
-    offsetAttribute: ellipseGeometry._offsetAttribute,
+    offsetAttribute: ellipseGeometry._offsetAttribute
   });
 };
 export default EllipseOutlineGeometry;

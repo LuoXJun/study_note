@@ -1,5 +1,5 @@
-import Check from "../../Core/Check.js";
-import clone from "../../Core/clone.js";
+import Check from '../../Core/Check.js';
+import clone from '../../Core/clone.js';
 
 /**
  * A model is made up of one or more nodes in the scene graph. Some details
@@ -16,8 +16,8 @@ import clone from "../../Core/clone.js";
  */
 export default function NodeRenderResources(modelRenderResources, runtimeNode) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("modelRenderResources", modelRenderResources);
-  Check.typeOf.object("runtimeNode", runtimeNode);
+  Check.typeOf.object('modelRenderResources', modelRenderResources);
+  Check.typeOf.object('runtimeNode', runtimeNode);
   //>>includeEnd('debug');
 
   // Properties inherited from the ModelRenderResources.

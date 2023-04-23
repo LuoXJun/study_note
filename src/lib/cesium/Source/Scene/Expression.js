@@ -1,14 +1,14 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import CesiumMath from "../Core/Math.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import jsep from "../ThirdParty/jsep.js";
-import ExpressionNodeType from "./ExpressionNodeType.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import CesiumMath from '../Core/Math.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import jsep from '../ThirdParty/jsep.js';
+import ExpressionNodeType from './ExpressionNodeType.js';
 
 /**
  * An expression for a style applied to a {@link Cesium3DTileset}.
@@ -36,7 +36,7 @@ import ExpressionNodeType from "./ExpressionNodeType.js";
  */
 function Expression(expression, defines) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("expression", expression);
+  Check.typeOf.string('expression', expression);
   //>>includeEnd('debug');
 
   this._expression = expression;
@@ -44,8 +44,8 @@ function Expression(expression, defines) {
   expression = replaceVariables(removeBackslashes(expression));
 
   // customize jsep operators
-  jsep.addBinaryOp("=~", 0);
-  jsep.addBinaryOp("!~", 0);
+  jsep.addBinaryOp('=~', 0);
+  jsep.addBinaryOp('!~', 0);
 
   let ast;
   try {
@@ -71,8 +71,8 @@ Object.defineProperties(Expression.prototype, {
   expression: {
     get: function () {
       return this._expression;
-    },
-  },
+    }
+  }
 });
 
 // Scratch storage manager while evaluating deep expressions.
@@ -117,7 +117,7 @@ const scratchStorage = {
       this.cartesian4Array.push(new Cartesian4());
     }
     return this.cartesian4Array[this.cartesian4Index++];
-  },
+  }
 };
 
 /**
@@ -240,28 +240,28 @@ Expression.prototype.getVariables = function () {
   return variables;
 };
 
-const unaryOperators = ["!", "-", "+"];
+const unaryOperators = ['!', '-', '+'];
 const binaryOperators = [
-  "+",
-  "-",
-  "*",
-  "/",
-  "%",
-  "===",
-  "!==",
-  ">",
-  ">=",
-  "<",
-  "<=",
-  "&&",
-  "||",
-  "!~",
-  "=~",
+  '+',
+  '-',
+  '*',
+  '/',
+  '%',
+  '===',
+  '!==',
+  '>',
+  '>=',
+  '<',
+  '<=',
+  '&&',
+  '||',
+  '!~',
+  '=~'
 ];
 
 const variableRegex = /\${(.*?)}/g; // Matches ${variable_name}
 const backslashRegex = /\\/g;
-const backslashReplacement = "@#%";
+const backslashReplacement = '@#%';
 const replacementRegex = /@#%/g;
 
 const scratchColor = new Color();
@@ -287,7 +287,7 @@ const unaryFunctions = {
   log2: getEvaluateUnaryComponentwise(log2),
   fract: getEvaluateUnaryComponentwise(fract),
   length: length,
-  normalize: normalize,
+  normalize: normalize
 };
 
 const binaryFunctions = {
@@ -297,12 +297,12 @@ const binaryFunctions = {
   max: getEvaluateBinaryComponentwise(Math.max, true),
   distance: distance,
   dot: dot,
-  cross: cross,
+  cross: cross
 };
 
 const ternaryFunctions = {
   clamp: getEvaluateTernaryComponentwise(CesiumMath.clamp, true),
-  mix: getEvaluateTernaryComponentwise(CesiumMath.lerp, true),
+  mix: getEvaluateTernaryComponentwise(CesiumMath.lerp, true)
 };
 
 function fract(number) {
@@ -319,7 +319,7 @@ function log2(number) {
 
 function getEvaluateUnaryComponentwise(operation) {
   return function (call, left) {
-    if (typeof left === "number") {
+    if (typeof left === 'number') {
       return operation(left);
     } else if (left instanceof Cartesian2) {
       return Cartesian2.fromElements(
@@ -351,8 +351,8 @@ function getEvaluateUnaryComponentwise(operation) {
 
 function getEvaluateBinaryComponentwise(operation, allowScalar) {
   return function (call, left, right) {
-    if (allowScalar && typeof right === "number") {
-      if (typeof left === "number") {
+    if (allowScalar && typeof right === 'number') {
+      if (typeof left === 'number') {
         return operation(left, right);
       } else if (left instanceof Cartesian2) {
         return Cartesian2.fromElements(
@@ -378,7 +378,7 @@ function getEvaluateBinaryComponentwise(operation, allowScalar) {
       }
     }
 
-    if (typeof left === "number" && typeof right === "number") {
+    if (typeof left === 'number' && typeof right === 'number') {
       return operation(left, right);
     } else if (left instanceof Cartesian2 && right instanceof Cartesian2) {
       return Cartesian2.fromElements(
@@ -411,8 +411,8 @@ function getEvaluateBinaryComponentwise(operation, allowScalar) {
 
 function getEvaluateTernaryComponentwise(operation, allowScalar) {
   return function (call, left, right, test) {
-    if (allowScalar && typeof test === "number") {
-      if (typeof left === "number" && typeof right === "number") {
+    if (allowScalar && typeof test === 'number') {
+      if (typeof left === 'number' && typeof right === 'number') {
         return operation(left, right, test);
       } else if (left instanceof Cartesian2 && right instanceof Cartesian2) {
         return Cartesian2.fromElements(
@@ -439,9 +439,9 @@ function getEvaluateTernaryComponentwise(operation, allowScalar) {
     }
 
     if (
-      typeof left === "number" &&
-      typeof right === "number" &&
-      typeof test === "number"
+      typeof left === 'number' &&
+      typeof right === 'number' &&
+      typeof test === 'number'
     ) {
       return operation(left, right, test);
     } else if (
@@ -486,7 +486,7 @@ function getEvaluateTernaryComponentwise(operation, allowScalar) {
 }
 
 function length(call, left) {
-  if (typeof left === "number") {
+  if (typeof left === 'number') {
     return Math.abs(left);
   } else if (left instanceof Cartesian2) {
     return Cartesian2.magnitude(left);
@@ -502,7 +502,7 @@ function length(call, left) {
 }
 
 function normalize(call, left) {
-  if (typeof left === "number") {
+  if (typeof left === 'number') {
     return 1.0;
   } else if (left instanceof Cartesian2) {
     return Cartesian2.normalize(left, scratchStorage.getCartesian2());
@@ -518,7 +518,7 @@ function normalize(call, left) {
 }
 
 function distance(call, left, right) {
-  if (typeof left === "number" && typeof right === "number") {
+  if (typeof left === 'number' && typeof right === 'number') {
     return Math.abs(left - right);
   } else if (left instanceof Cartesian2 && right instanceof Cartesian2) {
     return Cartesian2.distance(left, right);
@@ -534,7 +534,7 @@ function distance(call, left, right) {
 }
 
 function dot(call, left, right) {
-  if (typeof left === "number" && typeof right === "number") {
+  if (typeof left === 'number' && typeof right === 'number') {
     return left * right;
   } else if (left instanceof Cartesian2 && right instanceof Cartesian2) {
     return Cartesian2.dot(left, right);
@@ -576,7 +576,7 @@ function replaceDefines(expression, defines) {
   }
   for (const key in defines) {
     if (defines.hasOwnProperty(key)) {
-      const definePlaceholder = new RegExp(`\\$\\{${key}\\}`, "g");
+      const definePlaceholder = new RegExp(`\\$\\{${key}\\}`, 'g');
       const defineReplace = `(${defines[key]})`;
       if (defined(defineReplace)) {
         expression = expression.replace(definePlaceholder, defineReplace);
@@ -591,13 +591,13 @@ function removeBackslashes(expression) {
 }
 
 function replaceBackslashes(expression) {
-  return expression.replace(replacementRegex, "\\");
+  return expression.replace(replacementRegex, '\\');
 }
 
 function replaceVariables(expression) {
   let exp = expression;
-  let result = "";
-  let i = exp.indexOf("${");
+  let result = '';
+  let i = exp.indexOf('${');
   while (i >= 0) {
     // Check if string is inside quotes
     const openSingleQuote = exp.indexOf("'");
@@ -607,21 +607,21 @@ function replaceVariables(expression) {
       closeQuote = exp.indexOf("'", openSingleQuote + 1);
       result += exp.substr(0, closeQuote + 1);
       exp = exp.substr(closeQuote + 1);
-      i = exp.indexOf("${");
+      i = exp.indexOf('${');
     } else if (openDoubleQuote >= 0 && openDoubleQuote < i) {
       closeQuote = exp.indexOf('"', openDoubleQuote + 1);
       result += exp.substr(0, closeQuote + 1);
       exp = exp.substr(closeQuote + 1);
-      i = exp.indexOf("${");
+      i = exp.indexOf('${');
     } else {
       result += exp.substr(0, i);
-      const j = exp.indexOf("}");
+      const j = exp.indexOf('}');
       if (j < 0) {
-        throw new RuntimeError("Unmatched {.");
+        throw new RuntimeError('Unmatched {.');
       }
       result += `czm_${exp.substr(i + 2, j - (i + 2))}`;
       exp = exp.substr(j + 1);
-      i = exp.indexOf("${");
+      i = exp.indexOf('${');
     }
   }
   result += exp;
@@ -632,12 +632,12 @@ function parseLiteral(ast) {
   const type = typeof ast.value;
   if (ast.value === null) {
     return new Node(ExpressionNodeType.LITERAL_NULL, null);
-  } else if (type === "boolean") {
+  } else if (type === 'boolean') {
     return new Node(ExpressionNodeType.LITERAL_BOOLEAN, ast.value);
-  } else if (type === "number") {
+  } else if (type === 'number') {
     return new Node(ExpressionNodeType.LITERAL_NUMBER, ast.value);
-  } else if (type === "string") {
-    if (ast.value.indexOf("${") >= 0) {
+  } else if (type === 'string') {
+    if (ast.value.indexOf('${') >= 0) {
       return new Node(ExpressionNodeType.VARIABLE_IN_STRING, ast.value);
     }
     return new Node(
@@ -654,16 +654,16 @@ function parseCall(expression, ast) {
   let val, left, right;
 
   // Member function calls
-  if (ast.callee.type === "MemberExpression") {
+  if (ast.callee.type === 'MemberExpression') {
     call = ast.callee.property.name;
     const object = ast.callee.object;
-    if (call === "test" || call === "exec") {
+    if (call === 'test' || call === 'exec') {
       // Make sure this is called on a valid type
-      if (object.callee.name !== "regExp") {
+      if (object.callee.name !== 'regExp') {
         throw new RuntimeError(`${call} is not a function.`);
       }
       if (argsLength === 0) {
-        if (call === "test") {
+        if (call === 'test') {
           return new Node(ExpressionNodeType.LITERAL_BOOLEAN, false);
         }
         return new Node(ExpressionNodeType.LITERAL_NULL, null);
@@ -671,7 +671,7 @@ function parseCall(expression, ast) {
       left = createRuntimeAst(expression, object);
       right = createRuntimeAst(expression, args[0]);
       return new Node(ExpressionNodeType.FUNCTION_CALL, call, left, right);
-    } else if (call === "toString") {
+    } else if (call === 'toString') {
       val = createRuntimeAst(expression, object);
       return new Node(ExpressionNodeType.FUNCTION_CALL, call, val);
     }
@@ -681,7 +681,7 @@ function parseCall(expression, ast) {
 
   // Non-member function calls
   call = ast.callee.name;
-  if (call === "color") {
+  if (call === 'color') {
     if (argsLength === 0) {
       return new Node(ExpressionNodeType.LITERAL_COLOR, call);
     }
@@ -691,17 +691,17 @@ function parseCall(expression, ast) {
       return new Node(ExpressionNodeType.LITERAL_COLOR, call, [val, alpha]);
     }
     return new Node(ExpressionNodeType.LITERAL_COLOR, call, [val]);
-  } else if (call === "rgb" || call === "hsl") {
+  } else if (call === 'rgb' || call === 'hsl') {
     if (argsLength < 3) {
       throw new RuntimeError(`${call} requires three arguments.`);
     }
     val = [
       createRuntimeAst(expression, args[0]),
       createRuntimeAst(expression, args[1]),
-      createRuntimeAst(expression, args[2]),
+      createRuntimeAst(expression, args[2])
     ];
     return new Node(ExpressionNodeType.LITERAL_COLOR, call, val);
-  } else if (call === "rgba" || call === "hsla") {
+  } else if (call === 'rgba' || call === 'hsla') {
     if (argsLength < 4) {
       throw new RuntimeError(`${call} requires four arguments.`);
     }
@@ -709,32 +709,32 @@ function parseCall(expression, ast) {
       createRuntimeAst(expression, args[0]),
       createRuntimeAst(expression, args[1]),
       createRuntimeAst(expression, args[2]),
-      createRuntimeAst(expression, args[3]),
+      createRuntimeAst(expression, args[3])
     ];
     return new Node(ExpressionNodeType.LITERAL_COLOR, call, val);
-  } else if (call === "vec2" || call === "vec3" || call === "vec4") {
+  } else if (call === 'vec2' || call === 'vec3' || call === 'vec4') {
     // Check for invalid constructors at evaluation time
     val = new Array(argsLength);
     for (let i = 0; i < argsLength; ++i) {
       val[i] = createRuntimeAst(expression, args[i]);
     }
     return new Node(ExpressionNodeType.LITERAL_VECTOR, call, val);
-  } else if (call === "isNaN" || call === "isFinite") {
+  } else if (call === 'isNaN' || call === 'isFinite') {
     if (argsLength === 0) {
-      if (call === "isNaN") {
+      if (call === 'isNaN') {
         return new Node(ExpressionNodeType.LITERAL_BOOLEAN, true);
       }
       return new Node(ExpressionNodeType.LITERAL_BOOLEAN, false);
     }
     val = createRuntimeAst(expression, args[0]);
     return new Node(ExpressionNodeType.UNARY, call, val);
-  } else if (call === "isExactClass" || call === "isClass") {
+  } else if (call === 'isExactClass' || call === 'isClass') {
     if (argsLength < 1 || argsLength > 1) {
       throw new RuntimeError(`${call} requires exactly one argument.`);
     }
     val = createRuntimeAst(expression, args[0]);
     return new Node(ExpressionNodeType.UNARY, call, val);
-  } else if (call === "getExactClassName") {
+  } else if (call === 'getExactClassName') {
     if (argsLength > 0) {
       throw new RuntimeError(`${call} does not take any argument.`);
     }
@@ -760,25 +760,25 @@ function parseCall(expression, ast) {
     right = createRuntimeAst(expression, args[1]);
     const test = createRuntimeAst(expression, args[2]);
     return new Node(ExpressionNodeType.TERNARY, call, left, right, test);
-  } else if (call === "Boolean") {
+  } else if (call === 'Boolean') {
     if (argsLength === 0) {
       return new Node(ExpressionNodeType.LITERAL_BOOLEAN, false);
     }
     val = createRuntimeAst(expression, args[0]);
     return new Node(ExpressionNodeType.UNARY, call, val);
-  } else if (call === "Number") {
+  } else if (call === 'Number') {
     if (argsLength === 0) {
       return new Node(ExpressionNodeType.LITERAL_NUMBER, 0);
     }
     val = createRuntimeAst(expression, args[0]);
     return new Node(ExpressionNodeType.UNARY, call, val);
-  } else if (call === "String") {
+  } else if (call === 'String') {
     if (argsLength === 0) {
-      return new Node(ExpressionNodeType.LITERAL_STRING, "");
+      return new Node(ExpressionNodeType.LITERAL_STRING, '');
     }
     val = createRuntimeAst(expression, args[0]);
     return new Node(ExpressionNodeType.UNARY, call, val);
-  } else if (call === "regExp") {
+  } else if (call === 'regExp') {
     return parseRegex(expression, ast);
   }
 
@@ -827,15 +827,15 @@ function parseRegex(expression, ast) {
 function parseKeywordsAndVariables(ast) {
   if (isVariable(ast.name)) {
     const name = getPropertyName(ast.name);
-    if (name.substr(0, 8) === "tiles3d_") {
+    if (name.substr(0, 8) === 'tiles3d_') {
       return new Node(ExpressionNodeType.BUILTIN_VARIABLE, name);
     }
     return new Node(ExpressionNodeType.VARIABLE, name);
-  } else if (ast.name === "NaN") {
+  } else if (ast.name === 'NaN') {
     return new Node(ExpressionNodeType.LITERAL_NUMBER, NaN);
-  } else if (ast.name === "Infinity") {
+  } else if (ast.name === 'Infinity') {
     return new Node(ExpressionNodeType.LITERAL_NUMBER, Infinity);
-  } else if (ast.name === "undefined") {
+  } else if (ast.name === 'undefined') {
     return new Node(ExpressionNodeType.LITERAL_UNDEFINED, undefined);
   }
 
@@ -844,16 +844,16 @@ function parseKeywordsAndVariables(ast) {
 
 function parseMathConstant(ast) {
   const name = ast.property.name;
-  if (name === "PI") {
+  if (name === 'PI') {
     return new Node(ExpressionNodeType.LITERAL_NUMBER, Math.PI);
-  } else if (name === "E") {
+  } else if (name === 'E') {
     return new Node(ExpressionNodeType.LITERAL_NUMBER, Math.E);
   }
 }
 
 function parseNumberConstant(ast) {
   const name = ast.property.name;
-  if (name === "POSITIVE_INFINITY") {
+  if (name === 'POSITIVE_INFINITY') {
     return new Node(
       ExpressionNodeType.LITERAL_NUMBER,
       Number.POSITIVE_INFINITY
@@ -862,9 +862,9 @@ function parseNumberConstant(ast) {
 }
 
 function parseMemberExpression(expression, ast) {
-  if (ast.object.name === "Math") {
+  if (ast.object.name === 'Math') {
     return parseMathConstant(ast);
-  } else if (ast.object.name === "Number") {
+  } else if (ast.object.name === 'Number') {
     return parseNumberConstant(ast);
   }
 
@@ -872,11 +872,11 @@ function parseMemberExpression(expression, ast) {
   const obj = createRuntimeAst(expression, ast.object);
   if (ast.computed) {
     val = createRuntimeAst(expression, ast.property);
-    return new Node(ExpressionNodeType.MEMBER, "brackets", obj, val);
+    return new Node(ExpressionNodeType.MEMBER, 'brackets', obj, val);
   }
 
   val = new Node(ExpressionNodeType.LITERAL_STRING, ast.property.name);
-  return new Node(ExpressionNodeType.MEMBER, "dot", obj, val);
+  return new Node(ExpressionNodeType.MEMBER, 'dot', obj, val);
 }
 
 function isLiteralType(node) {
@@ -884,7 +884,7 @@ function isLiteralType(node) {
 }
 
 function isVariable(name) {
-  return name.substr(0, 4) === "czm_";
+  return name.substr(0, 4) === 'czm_';
 }
 
 function getPropertyName(variable) {
@@ -897,13 +897,13 @@ function createRuntimeAst(expression, ast) {
   let left;
   let right;
 
-  if (ast.type === "Literal") {
+  if (ast.type === 'Literal') {
     node = parseLiteral(ast);
-  } else if (ast.type === "CallExpression") {
+  } else if (ast.type === 'CallExpression') {
     node = parseCall(expression, ast);
-  } else if (ast.type === "Identifier") {
+  } else if (ast.type === 'Identifier') {
     node = parseKeywordsAndVariables(ast);
-  } else if (ast.type === "UnaryExpression") {
+  } else if (ast.type === 'UnaryExpression') {
     op = ast.operator;
     const child = createRuntimeAst(expression, ast.argument);
     if (unaryOperators.indexOf(op) > -1) {
@@ -911,7 +911,7 @@ function createRuntimeAst(expression, ast) {
     } else {
       throw new RuntimeError(`Unexpected operator "${op}".`);
     }
-  } else if (ast.type === "BinaryExpression") {
+  } else if (ast.type === 'BinaryExpression') {
     op = ast.operator;
     left = createRuntimeAst(expression, ast.left);
     right = createRuntimeAst(expression, ast.right);
@@ -920,31 +920,31 @@ function createRuntimeAst(expression, ast) {
     } else {
       throw new RuntimeError(`Unexpected operator "${op}".`);
     }
-  } else if (ast.type === "LogicalExpression") {
+  } else if (ast.type === 'LogicalExpression') {
     op = ast.operator;
     left = createRuntimeAst(expression, ast.left);
     right = createRuntimeAst(expression, ast.right);
     if (binaryOperators.indexOf(op) > -1) {
       node = new Node(ExpressionNodeType.BINARY, op, left, right);
     }
-  } else if (ast.type === "ConditionalExpression") {
+  } else if (ast.type === 'ConditionalExpression') {
     const test = createRuntimeAst(expression, ast.test);
     left = createRuntimeAst(expression, ast.consequent);
     right = createRuntimeAst(expression, ast.alternate);
-    node = new Node(ExpressionNodeType.CONDITIONAL, "?", left, right, test);
-  } else if (ast.type === "MemberExpression") {
+    node = new Node(ExpressionNodeType.CONDITIONAL, '?', left, right, test);
+  } else if (ast.type === 'MemberExpression') {
     node = parseMemberExpression(expression, ast);
-  } else if (ast.type === "ArrayExpression") {
+  } else if (ast.type === 'ArrayExpression') {
     const val = [];
     for (let i = 0; i < ast.elements.length; i++) {
       val[i] = createRuntimeAst(expression, ast.elements[i]);
     }
     node = new Node(ExpressionNodeType.ARRAY, val);
-  } else if (ast.type === "Compound") {
+  } else if (ast.type === 'Compound') {
     // empty expression or multiple expressions
-    throw new RuntimeError("Provide exactly one expression.");
+    throw new RuntimeError('Provide exactly one expression.');
   } else {
-    throw new RuntimeError("Cannot parse expression.");
+    throw new RuntimeError('Cannot parse expression.');
   }
 
   return node;
@@ -954,69 +954,69 @@ function setEvaluateFunction(node) {
   if (node._type === ExpressionNodeType.CONDITIONAL) {
     node.evaluate = node._evaluateConditional;
   } else if (node._type === ExpressionNodeType.FUNCTION_CALL) {
-    if (node._value === "test") {
+    if (node._value === 'test') {
       node.evaluate = node._evaluateRegExpTest;
-    } else if (node._value === "exec") {
+    } else if (node._value === 'exec') {
       node.evaluate = node._evaluateRegExpExec;
-    } else if (node._value === "toString") {
+    } else if (node._value === 'toString') {
       node.evaluate = node._evaluateToString;
     }
   } else if (node._type === ExpressionNodeType.UNARY) {
-    if (node._value === "!") {
+    if (node._value === '!') {
       node.evaluate = node._evaluateNot;
-    } else if (node._value === "-") {
+    } else if (node._value === '-') {
       node.evaluate = node._evaluateNegative;
-    } else if (node._value === "+") {
+    } else if (node._value === '+') {
       node.evaluate = node._evaluatePositive;
-    } else if (node._value === "isNaN") {
+    } else if (node._value === 'isNaN') {
       node.evaluate = node._evaluateNaN;
-    } else if (node._value === "isFinite") {
+    } else if (node._value === 'isFinite') {
       node.evaluate = node._evaluateIsFinite;
-    } else if (node._value === "isExactClass") {
+    } else if (node._value === 'isExactClass') {
       node.evaluate = node._evaluateIsExactClass;
-    } else if (node._value === "isClass") {
+    } else if (node._value === 'isClass') {
       node.evaluate = node._evaluateIsClass;
-    } else if (node._value === "getExactClassName") {
+    } else if (node._value === 'getExactClassName') {
       node.evaluate = node._evaluateGetExactClassName;
-    } else if (node._value === "Boolean") {
+    } else if (node._value === 'Boolean') {
       node.evaluate = node._evaluateBooleanConversion;
-    } else if (node._value === "Number") {
+    } else if (node._value === 'Number') {
       node.evaluate = node._evaluateNumberConversion;
-    } else if (node._value === "String") {
+    } else if (node._value === 'String') {
       node.evaluate = node._evaluateStringConversion;
     } else if (defined(unaryFunctions[node._value])) {
       node.evaluate = getEvaluateUnaryFunction(node._value);
     }
   } else if (node._type === ExpressionNodeType.BINARY) {
-    if (node._value === "+") {
+    if (node._value === '+') {
       node.evaluate = node._evaluatePlus;
-    } else if (node._value === "-") {
+    } else if (node._value === '-') {
       node.evaluate = node._evaluateMinus;
-    } else if (node._value === "*") {
+    } else if (node._value === '*') {
       node.evaluate = node._evaluateTimes;
-    } else if (node._value === "/") {
+    } else if (node._value === '/') {
       node.evaluate = node._evaluateDivide;
-    } else if (node._value === "%") {
+    } else if (node._value === '%') {
       node.evaluate = node._evaluateMod;
-    } else if (node._value === "===") {
+    } else if (node._value === '===') {
       node.evaluate = node._evaluateEqualsStrict;
-    } else if (node._value === "!==") {
+    } else if (node._value === '!==') {
       node.evaluate = node._evaluateNotEqualsStrict;
-    } else if (node._value === "<") {
+    } else if (node._value === '<') {
       node.evaluate = node._evaluateLessThan;
-    } else if (node._value === "<=") {
+    } else if (node._value === '<=') {
       node.evaluate = node._evaluateLessThanOrEquals;
-    } else if (node._value === ">") {
+    } else if (node._value === '>') {
       node.evaluate = node._evaluateGreaterThan;
-    } else if (node._value === ">=") {
+    } else if (node._value === '>=') {
       node.evaluate = node._evaluateGreaterThanOrEquals;
-    } else if (node._value === "&&") {
+    } else if (node._value === '&&') {
       node.evaluate = node._evaluateAnd;
-    } else if (node._value === "||") {
+    } else if (node._value === '||') {
       node.evaluate = node._evaluateOr;
-    } else if (node._value === "=~") {
+    } else if (node._value === '=~') {
       node.evaluate = node._evaluateRegExpMatch;
-    } else if (node._value === "!~") {
+    } else if (node._value === '!~') {
       node.evaluate = node._evaluateRegExpNotMatch;
     } else if (defined(binaryFunctions[node._value])) {
       node.evaluate = getEvaluateBinaryFunction(node._value);
@@ -1024,7 +1024,7 @@ function setEvaluateFunction(node) {
   } else if (node._type === ExpressionNodeType.TERNARY) {
     node.evaluate = getEvaluateTernaryFunction(node._value);
   } else if (node._type === ExpressionNodeType.MEMBER) {
-    if (node._value === "brackets") {
+    if (node._value === 'brackets') {
       node.evaluate = node._evaluateMemberBrackets;
     } else {
       node.evaluate = node._evaluateMemberDot;
@@ -1044,7 +1044,7 @@ function setEvaluateFunction(node) {
   } else if (node._type === ExpressionNodeType.REGEX) {
     node.evaluate = node._evaluateRegExp;
   } else if (node._type === ExpressionNodeType.BUILTIN_VARIABLE) {
-    if (node._value === "tiles3d_tileset_time") {
+    if (node._value === 'tiles3d_tileset_time') {
       node.evaluate = evaluateTilesetTime;
     }
   } else {
@@ -1100,7 +1100,7 @@ Node.prototype._evaluateLiteral = function () {
 Node.prototype._evaluateLiteralColor = function (feature) {
   const color = scratchColor;
   const args = this._left;
-  if (this._value === "color") {
+  if (this._value === 'color') {
     if (!defined(args)) {
       Color.fromBytes(255, 255, 255, 255, color);
     } else if (args.length > 1) {
@@ -1109,7 +1109,7 @@ Node.prototype._evaluateLiteralColor = function (feature) {
     } else {
       Color.fromCssColorString(args[0].evaluate(feature), color);
     }
-  } else if (this._value === "rgb") {
+  } else if (this._value === 'rgb') {
     Color.fromBytes(
       args[0].evaluate(feature),
       args[1].evaluate(feature),
@@ -1117,7 +1117,7 @@ Node.prototype._evaluateLiteralColor = function (feature) {
       255,
       color
     );
-  } else if (this._value === "rgba") {
+  } else if (this._value === 'rgba') {
     // convert between css alpha (0 to 1) and cesium alpha (0 to 255)
     const a = args[3].evaluate(feature) * 255;
     Color.fromBytes(
@@ -1127,7 +1127,7 @@ Node.prototype._evaluateLiteralColor = function (feature) {
       a,
       color
     );
-  } else if (this._value === "hsl") {
+  } else if (this._value === 'hsl') {
     Color.fromHsl(
       args[0].evaluate(feature),
       args[1].evaluate(feature),
@@ -1135,7 +1135,7 @@ Node.prototype._evaluateLiteralColor = function (feature) {
       1.0,
       color
     );
-  } else if (this._value === "hsla") {
+  } else if (this._value === 'hsla') {
     Color.fromHsl(
       args[0].evaluate(feature),
       args[1].evaluate(feature),
@@ -1167,7 +1167,7 @@ Node.prototype._evaluateLiteralVector = function (feature) {
   const argsLength = args.length;
   for (let i = 0; i < argsLength; ++i) {
     const value = args[i].evaluate(feature);
-    if (typeof value === "number") {
+    if (typeof value === 'number') {
       components.push(value);
     } else if (value instanceof Cartesian2) {
       components.push(value.x, value.y);
@@ -1201,11 +1201,11 @@ Node.prototype._evaluateLiteralVector = function (feature) {
     components.push(component, component, component);
   }
 
-  if (call === "vec2") {
+  if (call === 'vec2') {
     return Cartesian2.fromArray(components, 0, scratchStorage.getCartesian2());
-  } else if (call === "vec3") {
+  } else if (call === 'vec3') {
     return Cartesian3.fromArray(components, 0, scratchStorage.getCartesian3());
-  } else if (call === "vec4") {
+  } else if (call === 'vec4') {
     return Cartesian4.fromArray(components, 0, scratchStorage.getCartesian4());
   }
 };
@@ -1222,7 +1222,7 @@ Node.prototype._evaluateVariableString = function (feature) {
     const variableName = match[1];
     let property = getFeatureProperty(feature, variableName);
     if (!defined(property)) {
-      property = "";
+      property = '';
     }
     result = result.replace(placeholder, property);
     match = variableRegex.exec(result);
@@ -1236,7 +1236,7 @@ Node.prototype._evaluateVariable = function (feature) {
 };
 
 function checkFeature(ast) {
-  return ast._value === "feature";
+  return ast._value === 'feature';
 }
 
 // PERFORMANCE_IDEA: Determine if parent property needs to be computed before runtime
@@ -1256,13 +1256,13 @@ Node.prototype._evaluateMemberDot = function (feature) {
     property instanceof Cartesian4
   ) {
     // Vector components may be accessed with .r, .g, .b, .a and implicitly with .x, .y, .z, .w
-    if (member === "r") {
+    if (member === 'r') {
       return property.x;
-    } else if (member === "g") {
+    } else if (member === 'g') {
       return property.y;
-    } else if (member === "b") {
+    } else if (member === 'b') {
       return property.z;
-    } else if (member === "a") {
+    } else if (member === 'a') {
       return property.w;
     }
   }
@@ -1286,13 +1286,13 @@ Node.prototype._evaluateMemberBrackets = function (feature) {
   ) {
     // Vector components may be accessed with [0][1][2][3], ['r']['g']['b']['a'] and implicitly with ['x']['y']['z']['w']
     // For Cartesian2 and Cartesian3 out-of-range components will just return undefined
-    if (member === 0 || member === "r") {
+    if (member === 0 || member === 'r') {
       return property.x;
-    } else if (member === 1 || member === "g") {
+    } else if (member === 1 || member === 'g') {
       return property.y;
-    } else if (member === 2 || member === "b") {
+    } else if (member === 2 || member === 'b') {
       return property.z;
-    } else if (member === 3 || member === "a") {
+    } else if (member === 3 || member === 'a') {
       return property.w;
     }
   }
@@ -1312,7 +1312,7 @@ Node.prototype._evaluateArray = function (feature) {
 
 Node.prototype._evaluateNot = function (feature) {
   const left = this._left.evaluate(feature);
-  if (typeof left !== "boolean") {
+  if (typeof left !== 'boolean') {
     throw new RuntimeError(
       `Operator "!" requires a boolean argument. Argument is ${left}.`
     );
@@ -1328,7 +1328,7 @@ Node.prototype._evaluateNegative = function (feature) {
     return Cartesian3.negate(left, scratchStorage.getCartesian3());
   } else if (left instanceof Cartesian4) {
     return Cartesian4.negate(left, scratchStorage.getCartesian4());
-  } else if (typeof left === "number") {
+  } else if (typeof left === 'number') {
     return -left;
   }
 
@@ -1345,7 +1345,7 @@ Node.prototype._evaluatePositive = function (feature) {
       left instanceof Cartesian2 ||
       left instanceof Cartesian3 ||
       left instanceof Cartesian4 ||
-      typeof left === "number"
+      typeof left === 'number'
     )
   ) {
     throw new RuntimeError(
@@ -1360,7 +1360,7 @@ Node.prototype._evaluateLessThan = function (feature) {
   const left = this._left.evaluate(feature);
   const right = this._right.evaluate(feature);
 
-  if (typeof left !== "number" || typeof right !== "number") {
+  if (typeof left !== 'number' || typeof right !== 'number') {
     throw new RuntimeError(
       `Operator "<" requires number arguments. Arguments are ${left} and ${right}.`
     );
@@ -1373,7 +1373,7 @@ Node.prototype._evaluateLessThanOrEquals = function (feature) {
   const left = this._left.evaluate(feature);
   const right = this._right.evaluate(feature);
 
-  if (typeof left !== "number" || typeof right !== "number") {
+  if (typeof left !== 'number' || typeof right !== 'number') {
     throw new RuntimeError(
       `Operator "<=" requires number arguments. Arguments are ${left} and ${right}.`
     );
@@ -1386,7 +1386,7 @@ Node.prototype._evaluateGreaterThan = function (feature) {
   const left = this._left.evaluate(feature);
   const right = this._right.evaluate(feature);
 
-  if (typeof left !== "number" || typeof right !== "number") {
+  if (typeof left !== 'number' || typeof right !== 'number') {
     throw new RuntimeError(
       `Operator ">" requires number arguments. Arguments are ${left} and ${right}.`
     );
@@ -1399,7 +1399,7 @@ Node.prototype._evaluateGreaterThanOrEquals = function (feature) {
   const left = this._left.evaluate(feature);
   const right = this._right.evaluate(feature);
 
-  if (typeof left !== "number" || typeof right !== "number") {
+  if (typeof left !== 'number' || typeof right !== 'number') {
     throw new RuntimeError(
       `Operator ">=" requires number arguments. Arguments are ${left} and ${right}.`
     );
@@ -1410,7 +1410,7 @@ Node.prototype._evaluateGreaterThanOrEquals = function (feature) {
 
 Node.prototype._evaluateOr = function (feature) {
   const left = this._left.evaluate(feature);
-  if (typeof left !== "boolean") {
+  if (typeof left !== 'boolean') {
     throw new RuntimeError(
       `Operator "||" requires boolean arguments. First argument is ${left}.`
     );
@@ -1422,7 +1422,7 @@ Node.prototype._evaluateOr = function (feature) {
   }
 
   const right = this._right.evaluate(feature);
-  if (typeof right !== "boolean") {
+  if (typeof right !== 'boolean') {
     throw new RuntimeError(
       `Operator "||" requires boolean arguments. Second argument is ${right}.`
     );
@@ -1433,7 +1433,7 @@ Node.prototype._evaluateOr = function (feature) {
 
 Node.prototype._evaluateAnd = function (feature) {
   const left = this._left.evaluate(feature);
-  if (typeof left !== "boolean") {
+  if (typeof left !== 'boolean') {
     throw new RuntimeError(
       `Operator "&&" requires boolean arguments. First argument is ${left}.`
     );
@@ -1445,7 +1445,7 @@ Node.prototype._evaluateAnd = function (feature) {
   }
 
   const right = this._right.evaluate(feature);
-  if (typeof right !== "boolean") {
+  if (typeof right !== 'boolean') {
     throw new RuntimeError(
       `Operator "&&" requires boolean arguments. Second argument is ${right}.`
     );
@@ -1463,10 +1463,10 @@ Node.prototype._evaluatePlus = function (feature) {
     return Cartesian3.add(left, right, scratchStorage.getCartesian3());
   } else if (right instanceof Cartesian4 && left instanceof Cartesian4) {
     return Cartesian4.add(left, right, scratchStorage.getCartesian4());
-  } else if (typeof left === "string" || typeof right === "string") {
+  } else if (typeof left === 'string' || typeof right === 'string') {
     // If only one argument is a string the other argument calls its toString function.
     return left + right;
-  } else if (typeof left === "number" && typeof right === "number") {
+  } else if (typeof left === 'number' && typeof right === 'number') {
     return left + right;
   }
 
@@ -1484,7 +1484,7 @@ Node.prototype._evaluateMinus = function (feature) {
     return Cartesian3.subtract(left, right, scratchStorage.getCartesian3());
   } else if (right instanceof Cartesian4 && left instanceof Cartesian4) {
     return Cartesian4.subtract(left, right, scratchStorage.getCartesian4());
-  } else if (typeof left === "number" && typeof right === "number") {
+  } else if (typeof left === 'number' && typeof right === 'number') {
     return left - right;
   }
 
@@ -1502,13 +1502,13 @@ Node.prototype._evaluateTimes = function (feature) {
       right,
       scratchStorage.getCartesian2()
     );
-  } else if (right instanceof Cartesian2 && typeof left === "number") {
+  } else if (right instanceof Cartesian2 && typeof left === 'number') {
     return Cartesian2.multiplyByScalar(
       right,
       left,
       scratchStorage.getCartesian2()
     );
-  } else if (left instanceof Cartesian2 && typeof right === "number") {
+  } else if (left instanceof Cartesian2 && typeof right === 'number') {
     return Cartesian2.multiplyByScalar(
       left,
       right,
@@ -1520,13 +1520,13 @@ Node.prototype._evaluateTimes = function (feature) {
       right,
       scratchStorage.getCartesian3()
     );
-  } else if (right instanceof Cartesian3 && typeof left === "number") {
+  } else if (right instanceof Cartesian3 && typeof left === 'number') {
     return Cartesian3.multiplyByScalar(
       right,
       left,
       scratchStorage.getCartesian3()
     );
-  } else if (left instanceof Cartesian3 && typeof right === "number") {
+  } else if (left instanceof Cartesian3 && typeof right === 'number') {
     return Cartesian3.multiplyByScalar(
       left,
       right,
@@ -1538,19 +1538,19 @@ Node.prototype._evaluateTimes = function (feature) {
       right,
       scratchStorage.getCartesian4()
     );
-  } else if (right instanceof Cartesian4 && typeof left === "number") {
+  } else if (right instanceof Cartesian4 && typeof left === 'number') {
     return Cartesian4.multiplyByScalar(
       right,
       left,
       scratchStorage.getCartesian4()
     );
-  } else if (left instanceof Cartesian4 && typeof right === "number") {
+  } else if (left instanceof Cartesian4 && typeof right === 'number') {
     return Cartesian4.multiplyByScalar(
       left,
       right,
       scratchStorage.getCartesian4()
     );
-  } else if (typeof left === "number" && typeof right === "number") {
+  } else if (typeof left === 'number' && typeof right === 'number') {
     return left * right;
   }
 
@@ -1568,7 +1568,7 @@ Node.prototype._evaluateDivide = function (feature) {
       right,
       scratchStorage.getCartesian2()
     );
-  } else if (left instanceof Cartesian2 && typeof right === "number") {
+  } else if (left instanceof Cartesian2 && typeof right === 'number') {
     return Cartesian2.divideByScalar(
       left,
       right,
@@ -1580,7 +1580,7 @@ Node.prototype._evaluateDivide = function (feature) {
       right,
       scratchStorage.getCartesian3()
     );
-  } else if (left instanceof Cartesian3 && typeof right === "number") {
+  } else if (left instanceof Cartesian3 && typeof right === 'number') {
     return Cartesian3.divideByScalar(
       left,
       right,
@@ -1592,13 +1592,13 @@ Node.prototype._evaluateDivide = function (feature) {
       right,
       scratchStorage.getCartesian4()
     );
-  } else if (left instanceof Cartesian4 && typeof right === "number") {
+  } else if (left instanceof Cartesian4 && typeof right === 'number') {
     return Cartesian4.divideByScalar(
       left,
       right,
       scratchStorage.getCartesian4()
     );
-  } else if (typeof left === "number" && typeof right === "number") {
+  } else if (typeof left === 'number' && typeof right === 'number') {
     return left / right;
   }
 
@@ -1631,7 +1631,7 @@ Node.prototype._evaluateMod = function (feature) {
       left.w % right.w,
       scratchStorage.getCartesian4()
     );
-  } else if (typeof left === "number" && typeof right === "number") {
+  } else if (typeof left === 'number' && typeof right === 'number') {
     return left % right;
   }
 
@@ -1669,7 +1669,7 @@ Node.prototype._evaluateNotEqualsStrict = function (feature) {
 Node.prototype._evaluateConditional = function (feature) {
   const test = this._test.evaluate(feature);
 
-  if (typeof test !== "boolean") {
+  if (typeof test !== 'boolean') {
     throw new RuntimeError(
       `Conditional argument of conditional expression must be a boolean. Argument is ${test}.`
     );
@@ -1723,7 +1723,7 @@ Node.prototype._evaluateStringConversion = function (feature) {
 
 Node.prototype._evaluateRegExp = function (feature) {
   const pattern = this._value.evaluate(feature);
-  let flags = "";
+  let flags = '';
 
   if (defined(this._left)) {
     flags = this._left.evaluate(feature);
@@ -1742,7 +1742,7 @@ Node.prototype._evaluateRegExpTest = function (feature) {
   const left = this._left.evaluate(feature);
   const right = this._right.evaluate(feature);
 
-  if (!(left instanceof RegExp && typeof right === "string")) {
+  if (!(left instanceof RegExp && typeof right === 'string')) {
     throw new RuntimeError(
       `RegExp.test requires the first argument to be a RegExp and the second argument to be a string. Arguments are ${left} and ${right}.`
     );
@@ -1755,9 +1755,9 @@ Node.prototype._evaluateRegExpMatch = function (feature) {
   const left = this._left.evaluate(feature);
   const right = this._right.evaluate(feature);
 
-  if (left instanceof RegExp && typeof right === "string") {
+  if (left instanceof RegExp && typeof right === 'string') {
     return left.test(right);
-  } else if (right instanceof RegExp && typeof left === "string") {
+  } else if (right instanceof RegExp && typeof left === 'string') {
     return right.test(left);
   }
 
@@ -1770,9 +1770,9 @@ Node.prototype._evaluateRegExpNotMatch = function (feature) {
   const left = this._left.evaluate(feature);
   const right = this._right.evaluate(feature);
 
-  if (left instanceof RegExp && typeof right === "string") {
+  if (left instanceof RegExp && typeof right === 'string') {
     return !left.test(right);
-  } else if (right instanceof RegExp && typeof left === "string") {
+  } else if (right instanceof RegExp && typeof left === 'string') {
     return !right.test(left);
   }
 
@@ -1785,7 +1785,7 @@ Node.prototype._evaluateRegExpExec = function (feature) {
   const left = this._left.evaluate(feature);
   const right = this._right.evaluate(feature);
 
-  if (!(left instanceof RegExp && typeof right === "string")) {
+  if (!(left instanceof RegExp && typeof right === 'string')) {
     throw new RuntimeError(
       `RegExp.exec requires the first argument to be a RegExp and the second argument to be a string. Arguments are ${left} and ${right}.`
     );
@@ -1900,7 +1900,7 @@ function getVariableName(variableName, variableSubstitutionMap) {
 /**
  * @private
  */
-Expression.NULL_SENTINEL = "czm_infinity"; // null just needs to be some sentinel value that will cause "[expression] === null" to be false in nearly all cases. GLSL doesn't have a NaN constant so use czm_infinity.
+Expression.NULL_SENTINEL = 'czm_infinity'; // null just needs to be some sentinel value that will cause "[expression] === null" to be false in nearly all cases. GLSL doesn't have a NaN constant so use czm_infinity.
 
 Node.prototype.getShaderExpression = function (
   variableSubstitutionMap,
@@ -1970,25 +1970,25 @@ Node.prototype.getShaderExpression = function (
       return getVariableName(value, variableSubstitutionMap);
     case ExpressionNodeType.UNARY:
       // Supported types: +, -, !, Boolean, Number
-      if (value === "Boolean") {
+      if (value === 'Boolean') {
         return `bool(${left})`;
-      } else if (value === "Number") {
+      } else if (value === 'Number') {
         return `float(${left})`;
-      } else if (value === "round") {
+      } else if (value === 'round') {
         return `floor(${left} + 0.5)`;
       } else if (defined(unaryFunctions[value])) {
         return `${value}(${left})`;
-      } else if (value === "isNaN") {
+      } else if (value === 'isNaN') {
         // In GLSL 2.0 use isnan instead
         return `(${left} != ${left})`;
-      } else if (value === "isFinite") {
+      } else if (value === 'isFinite') {
         // In GLSL 2.0 use isinf instead. GLSL doesn't have an infinity constant so use czm_infinity which is an arbitrarily big enough number.
         return `(abs(${left}) < czm_infinity)`;
       } else if (
-        value === "String" ||
-        value === "isExactClass" ||
-        value === "isClass" ||
-        value === "getExactClassName"
+        value === 'String' ||
+        value === 'isExactClass' ||
+        value === 'isClass' ||
+        value === 'getExactClassName'
       ) {
         throw new RuntimeError(
           `Error generating style shader: "${value}" is not supported.`
@@ -1997,13 +1997,13 @@ Node.prototype.getShaderExpression = function (
       return value + left;
     case ExpressionNodeType.BINARY:
       // Supported types: ||, &&, ===, !==, <, >, <=, >=, +, -, *, /, %
-      if (value === "%") {
+      if (value === '%') {
         return `mod(${left}, ${right})`;
-      } else if (value === "===") {
+      } else if (value === '===') {
         return `(${left} == ${right})`;
-      } else if (value === "!==") {
+      } else if (value === '!==') {
         return `(${left} != ${right})`;
-      } else if (value === "atan2") {
+      } else if (value === 'atan2') {
         return `atan(${left}, ${right})`;
       } else if (defined(binaryFunctions[value])) {
         return `${value}(${left}, ${right})`;
@@ -2022,13 +2022,13 @@ Node.prototype.getShaderExpression = function (
       }
       // This is intended for accessing the components of vector properties. String members aren't supported.
       // Check for 0.0 rather than 0 because all numbers are previously converted to decimals.
-      if (right === "r" || right === "x" || right === "0.0") {
+      if (right === 'r' || right === 'x' || right === '0.0') {
         return `${left}[0]`;
-      } else if (right === "g" || right === "y" || right === "1.0") {
+      } else if (right === 'g' || right === 'y' || right === '1.0') {
         return `${left}[1]`;
-      } else if (right === "b" || right === "z" || right === "2.0") {
+      } else if (right === 'b' || right === 'z' || right === '2.0') {
         return `${left}[2]`;
-      } else if (right === "a" || right === "w" || right === "3.0") {
+      } else if (right === 'a' || right === 'w' || right === '3.0') {
         return `${left}[3]`;
       }
       return `${left}[int(${right})]`;
@@ -2045,33 +2045,33 @@ Node.prototype.getShaderExpression = function (
         return `vec2(${value[0]}, ${value[1]})`;
       }
       throw new RuntimeError(
-        "Error generating style shader: Invalid array length. Array length should be 2, 3, or 4."
+        'Error generating style shader: Invalid array length. Array length should be 2, 3, or 4.'
       );
     case ExpressionNodeType.REGEX:
       throw new RuntimeError(
-        "Error generating style shader: Regular expressions are not supported."
+        'Error generating style shader: Regular expressions are not supported.'
       );
     case ExpressionNodeType.VARIABLE_IN_STRING:
       throw new RuntimeError(
-        "Error generating style shader: Converting a variable to a string is not supported."
+        'Error generating style shader: Converting a variable to a string is not supported.'
       );
     case ExpressionNodeType.LITERAL_NULL:
       return Expression.NULL_SENTINEL;
     case ExpressionNodeType.LITERAL_BOOLEAN:
-      return value ? "true" : "false";
+      return value ? 'true' : 'false';
     case ExpressionNodeType.LITERAL_NUMBER:
       return numberToString(value);
     case ExpressionNodeType.LITERAL_STRING:
       if (defined(parent) && parent._type === ExpressionNodeType.MEMBER) {
         if (
-          value === "r" ||
-          value === "g" ||
-          value === "b" ||
-          value === "a" ||
-          value === "x" ||
-          value === "y" ||
-          value === "z" ||
-          value === "w" ||
+          value === 'r' ||
+          value === 'g' ||
+          value === 'b' ||
+          value === 'a' ||
+          value === 'x' ||
+          value === 'y' ||
+          value === 'z' ||
+          value === 'w' ||
           checkFeature(parent._left)
         ) {
           return value;
@@ -2083,30 +2083,30 @@ Node.prototype.getShaderExpression = function (
         return colorToVec3(color);
       }
       throw new RuntimeError(
-        "Error generating style shader: String literals are not supported."
+        'Error generating style shader: String literals are not supported.'
       );
     case ExpressionNodeType.LITERAL_COLOR:
       args = left;
-      if (value === "color") {
+      if (value === 'color') {
         if (!defined(args)) {
-          return "vec4(1.0)";
+          return 'vec4(1.0)';
         } else if (args.length > 1) {
           const rgb = args[0];
           const alpha = args[1];
-          if (alpha !== "1.0") {
+          if (alpha !== '1.0') {
             shaderState.translucent = true;
           }
           return `vec4(${rgb}, ${alpha})`;
         }
         return `vec4(${args[0]}, 1.0)`;
-      } else if (value === "rgb") {
+      } else if (value === 'rgb') {
         color = convertRGBToColor(this);
         if (defined(color)) {
           return colorToVec4(color);
         }
         return `vec4(${args[0]} / 255.0, ${args[1]} / 255.0, ${args[2]} / 255.0, 1.0)`;
-      } else if (value === "rgba") {
-        if (args[3] !== "1.0") {
+      } else if (value === 'rgba') {
+        if (args[3] !== '1.0') {
           shaderState.translucent = true;
         }
         color = convertRGBToColor(this);
@@ -2114,13 +2114,13 @@ Node.prototype.getShaderExpression = function (
           return colorToVec4(color);
         }
         return `vec4(${args[0]} / 255.0, ${args[1]} / 255.0, ${args[2]} / 255.0, ${args[3]})`;
-      } else if (value === "hsl") {
+      } else if (value === 'hsl') {
         color = convertHSLToRGB(this);
         if (defined(color)) {
           return colorToVec4(color);
         }
         return `vec4(czm_HSLToRGB(vec3(${args[0]}, ${args[1]}, ${args[2]})), 1.0)`;
-      } else if (value === "hsla") {
+      } else if (value === 'hsla') {
         color = convertHSLToRGB(this);
         if (defined(color)) {
           if (color.alpha !== 1.0) {
@@ -2128,7 +2128,7 @@ Node.prototype.getShaderExpression = function (
           }
           return colorToVec4(color);
         }
-        if (args[3] !== "1.0") {
+        if (args[3] !== '1.0') {
           shaderState.translucent = true;
         }
         return `vec4(czm_HSLToRGB(vec3(${args[0]}, ${args[1]}, ${args[2]})), ${args[3]})`;
@@ -2138,7 +2138,7 @@ Node.prototype.getShaderExpression = function (
       //>>includeStart('debug', pragmas.debug);
       if (!defined(left)) {
         throw new DeveloperError(
-          "left should always be defined for type ExpressionNodeType.LITERAL_VECTOR"
+          'left should always be defined for type ExpressionNodeType.LITERAL_VECTOR'
         );
       }
       //>>includeEnd('debug');
@@ -2147,20 +2147,20 @@ Node.prototype.getShaderExpression = function (
       for (let i = 0; i < length; ++i) {
         vectorExpression += left[i];
         if (i < length - 1) {
-          vectorExpression += ", ";
+          vectorExpression += ', ';
         }
       }
-      vectorExpression += ")";
+      vectorExpression += ')';
       return vectorExpression;
     case ExpressionNodeType.LITERAL_REGEX:
       throw new RuntimeError(
-        "Error generating style shader: Regular expressions are not supported."
+        'Error generating style shader: Regular expressions are not supported.'
       );
     case ExpressionNodeType.LITERAL_UNDEFINED:
       return Expression.NULL_SENTINEL;
     case ExpressionNodeType.BUILTIN_VARIABLE:
-      if (value === "tiles3d_tileset_time") {
-        return "u_time";
+      if (value === 'tiles3d_tileset_time') {
+        return 'u_time';
       }
   }
 };

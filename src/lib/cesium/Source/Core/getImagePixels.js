@@ -1,4 +1,4 @@
-import defined from "./defined.js";
+import defined from './defined.js';
 
 const context2DsByWidthAndHeight = {};
 
@@ -29,11 +29,11 @@ function getImagePixels(image, width, height) {
 
   let context2d = context2DsByHeight[height];
   if (!defined(context2d)) {
-    const canvas = document.createElement("canvas");
+    const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
-    context2d = canvas.getContext("2d");
-    context2d.globalCompositeOperation = "copy";
+    context2d = canvas.getContext('2d');
+    context2d.globalCompositeOperation = 'copy';
     context2DsByHeight[height] = context2d;
   }
 

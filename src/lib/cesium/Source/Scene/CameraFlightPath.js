@@ -1,14 +1,14 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import EasingFunction from "../Core/EasingFunction.js";
-import CesiumMath from "../Core/Math.js";
-import PerspectiveFrustum from "../Core/PerspectiveFrustum.js";
-import PerspectiveOffCenterFrustum from "../Core/PerspectiveOffCenterFrustum.js";
-import SceneMode from "./SceneMode.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import EasingFunction from '../Core/EasingFunction.js';
+import CesiumMath from '../Core/Math.js';
+import PerspectiveFrustum from '../Core/PerspectiveFrustum.js';
+import PerspectiveOffCenterFrustum from '../Core/PerspectiveOffCenterFrustum.js';
+import SceneMode from './SceneMode.js';
 
 /**
  * Creates tweens for camera flights.
@@ -186,8 +186,8 @@ function createUpdateCV(
       orientation: {
         heading: CesiumMath.lerp(startHeading, heading, time),
         pitch: pitchFunction(time),
-        roll: CesiumMath.lerp(startRoll, roll, time),
-      },
+        roll: CesiumMath.lerp(startRoll, roll, time)
+      }
     });
 
     Cartesian2.lerp(start, destination, time, camera.position);
@@ -323,8 +323,8 @@ function createUpdate3D(
         orientation: {
           heading: CesiumMath.lerp(startHeading, heading, time),
           pitch: pitchFunction(time),
-          roll: CesiumMath.lerp(startRoll, roll, time),
-        },
+          roll: CesiumMath.lerp(startRoll, roll, time)
+        }
       });
     };
   }
@@ -359,8 +359,8 @@ function createUpdate2D(
 
     camera.setView({
       orientation: {
-        heading: CesiumMath.lerp(startHeading, heading, time),
-      },
+        heading: CesiumMath.lerp(startHeading, heading, time)
+      }
     });
 
     Cartesian2.lerp(start, destination, time, camera.position);
@@ -388,13 +388,13 @@ function emptyFlight(complete, cancel) {
     stopObject: {},
     duration: 0.0,
     complete: complete,
-    cancel: cancel,
+    cancel: cancel
   };
 }
 
 function wrapCallback(controller, cb) {
   function wrapped() {
-    if (typeof cb === "function") {
+    if (typeof cb === 'function') {
       cb();
     }
 
@@ -409,10 +409,10 @@ CameraFlightPath.createTween = function (scene, options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required.");
+    throw new DeveloperError('scene is required.');
   }
   if (!defined(destination)) {
-    throw new DeveloperError("destination is required.");
+    throw new DeveloperError('destination is required.');
   }
   //>>includeEnd('debug');
   const mode = scene.mode;
@@ -525,7 +525,7 @@ CameraFlightPath.createTween = function (scene, options) {
       );
       update({ time: 1.0 });
 
-      if (typeof complete === "function") {
+      if (typeof complete === 'function') {
         complete();
       }
     };
@@ -563,14 +563,14 @@ CameraFlightPath.createTween = function (scene, options) {
     duration: duration,
     easingFunction: easingFunction,
     startObject: {
-      time: 0.0,
+      time: 0.0
     },
     stopObject: {
-      time: duration,
+      time: duration
     },
     update: update,
     complete: complete,
-    cancel: cancel,
+    cancel: cancel
   };
 };
 export default CameraFlightPath;

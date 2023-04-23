@@ -1,9 +1,9 @@
-import Color from "../../Core/Color.js";
-import combine from "../../Core/combine.js";
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import Pass from "../../Renderer/Pass.js";
-import ModelExperimental from "./ModelExperimental.js";
+import Color from '../../Core/Color.js';
+import combine from '../../Core/combine.js';
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import Pass from '../../Renderer/Pass.js';
+import ModelExperimental from './ModelExperimental.js';
 
 /**
  * Represents the contents of a glTF, glb or
@@ -42,67 +42,67 @@ Object.defineProperties(ModelExperimental3DTileContent.prototype, {
       }
 
       return 0;
-    },
+    }
   },
 
   pointsLength: {
     get: function () {
       return this._model.statistics.pointsLength;
-    },
+    }
   },
 
   trianglesLength: {
     get: function () {
       return this._model.statistics.trianglesLength;
-    },
+    }
   },
 
   geometryByteLength: {
     get: function () {
       return this._model.statistics.geometryByteLength;
-    },
+    }
   },
 
   texturesByteLength: {
     get: function () {
       return this._model.statistics.texturesByteLength;
-    },
+    }
   },
 
   batchTableByteLength: {
     get: function () {
       return this._model.statistics.propertyTablesByteLength;
-    },
+    }
   },
 
   innerContents: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   readyPromise: {
     get: function () {
       return this._model.readyPromise;
-    },
+    }
   },
 
   tileset: {
     get: function () {
       return this._tileset;
-    },
+    }
   },
 
   tile: {
     get: function () {
       return this._tile;
-    },
+    }
   },
 
   url: {
     get: function () {
       return this._resource.getUrlComponent(true);
-    },
+    }
   },
 
   batchTable: {
@@ -116,7 +116,7 @@ Object.defineProperties(ModelExperimental3DTileContent.prototype, {
       }
 
       return undefined;
-    },
+    }
   },
 
   metadata: {
@@ -125,7 +125,7 @@ Object.defineProperties(ModelExperimental3DTileContent.prototype, {
     },
     set: function (value) {
       this._metadata = value;
-    },
+    }
   },
 
   group: {
@@ -134,8 +134,8 @@ Object.defineProperties(ModelExperimental3DTileContent.prototype, {
     },
     set: function (value) {
       this._group = value;
-    },
-  },
+    }
+  }
 });
 
 ModelExperimental3DTileContent.prototype.getFeature = function (featureId) {
@@ -245,7 +245,7 @@ ModelExperimental3DTileContent.fromGltf = function (
 
   const additionalOptions = {
     gltf: gltf,
-    basePath: resource,
+    basePath: resource
   };
 
   const modelOptions = makeModelOptions(
@@ -270,7 +270,7 @@ ModelExperimental3DTileContent.fromB3dm = function (
   const additionalOptions = {
     arrayBuffer: arrayBuffer,
     byteOffset: byteOffset,
-    resource: resource,
+    resource: resource
   };
 
   const modelOptions = makeModelOptions(
@@ -295,7 +295,7 @@ ModelExperimental3DTileContent.fromI3dm = function (
   const additionalOptions = {
     arrayBuffer: arrayBuffer,
     byteOffset: byteOffset,
-    resource: resource,
+    resource: resource
   };
 
   const modelOptions = makeModelOptions(
@@ -320,7 +320,7 @@ ModelExperimental3DTileContent.fromPnts = function (
   const additionalOptions = {
     arrayBuffer: arrayBuffer,
     byteOffset: byteOffset,
-    resource: resource,
+    resource: resource
   };
 
   const modelOptions = makeModelOptions(
@@ -343,7 +343,7 @@ ModelExperimental3DTileContent.fromGeoJson = function (
 
   const additionalOptions = {
     geoJson: geoJson,
-    resource: resource,
+    resource: resource
   };
 
   const modelOptions = makeModelOptions(
@@ -382,7 +382,7 @@ function makeModelOptions(tileset, tile, content, additionalOptions) {
     splitDirection: tileset.splitDirection,
     enableDebugWireframe: tileset._enableDebugWireframe,
     debugWireframe: tileset.debugWireframe,
-    projectTo2D: tileset._projectTo2D,
+    projectTo2D: tileset._projectTo2D
   };
 
   return combine(additionalOptions, mainOptions);

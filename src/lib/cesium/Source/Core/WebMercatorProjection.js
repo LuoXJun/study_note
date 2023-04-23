@@ -1,10 +1,10 @@
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import CesiumMath from "./Math.js";
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import CesiumMath from './Math.js';
 
 /**
  * The map projection used by Google Maps, Bing Maps, and most of ArcGIS Online, EPSG:3857.  This
@@ -36,8 +36,8 @@ Object.defineProperties(WebMercatorProjection.prototype, {
   ellipsoid: {
     get: function () {
       return this._ellipsoid;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -85,9 +85,8 @@ WebMercatorProjection.geodeticLatitudeToMercatorAngle = function (latitude) {
  *
  * @type {Number}
  */
-WebMercatorProjection.MaximumLatitude = WebMercatorProjection.mercatorAngleToGeodeticLatitude(
-  Math.PI
-);
+WebMercatorProjection.MaximumLatitude =
+  WebMercatorProjection.mercatorAngleToGeodeticLatitude(Math.PI);
 
 /**
  * Converts geodetic ellipsoid coordinates, in radians, to the equivalent Web Mercator
@@ -131,7 +130,7 @@ WebMercatorProjection.prototype.project = function (cartographic, result) {
 WebMercatorProjection.prototype.unproject = function (cartesian, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(cartesian)) {
-    throw new DeveloperError("cartesian is required");
+    throw new DeveloperError('cartesian is required');
   }
   //>>includeEnd('debug');
 

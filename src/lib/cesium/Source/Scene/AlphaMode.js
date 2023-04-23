@@ -11,7 +11,7 @@ const AlphaMode = {
    * @type {String}
    * @constant
    */
-  OPAQUE: "OPAQUE",
+  OPAQUE: 'OPAQUE',
 
   /**
    * The rendered output is either fully opaque or fully transparent depending on the alpha value and the specified alpha cutoff value.
@@ -19,7 +19,7 @@ const AlphaMode = {
    * @type {String}
    * @constant
    */
-  MASK: "MASK",
+  MASK: 'MASK',
 
   /**
    * The rendered output is composited onto the destination with alpha blending.
@@ -27,7 +27,7 @@ const AlphaMode = {
    * @type {String}
    * @constant
    */
-  BLEND: "BLEND",
+  BLEND: 'BLEND'
 };
 
 export default Object.freeze(AlphaMode);

@@ -1,8 +1,8 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
 
 /**
  * @typedef {Object} LabelGraphics.ConstructorOptions
@@ -107,7 +107,7 @@ Object.defineProperties(LabelGraphics.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -115,7 +115,7 @@ Object.defineProperties(LabelGraphics.prototype, {
    * @memberof LabelGraphics.prototype
    * @type {Property|undefined}
    */
-  show: createPropertyDescriptor("show"),
+  show: createPropertyDescriptor('show'),
 
   /**
    * Gets or sets the string Property specifying the text of the label.
@@ -123,7 +123,7 @@ Object.defineProperties(LabelGraphics.prototype, {
    * @memberof LabelGraphics.prototype
    * @type {Property|undefined}
    */
-  text: createPropertyDescriptor("text"),
+  text: createPropertyDescriptor('text'),
 
   /**
    * Gets or sets the string Property specifying the font in CSS syntax.
@@ -131,14 +131,14 @@ Object.defineProperties(LabelGraphics.prototype, {
    * @type {Property|undefined}
    * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/font|CSS font on MDN}
    */
-  font: createPropertyDescriptor("font"),
+  font: createPropertyDescriptor('font'),
 
   /**
    * Gets or sets the Property specifying the {@link LabelStyle}.
    * @memberof LabelGraphics.prototype
    * @type {Property|undefined}
    */
-  style: createPropertyDescriptor("style"),
+  style: createPropertyDescriptor('style'),
 
   /**
    * Gets or sets the numeric Property specifying the uniform scale to apply to the image.
@@ -154,7 +154,7 @@ Object.defineProperties(LabelGraphics.prototype, {
    * @type {Property|undefined}
    * @default 1.0
    */
-  scale: createPropertyDescriptor("scale"),
+  scale: createPropertyDescriptor('scale'),
 
   /**
    * Gets or sets the boolean Property specifying the visibility of the background behind the label.
@@ -162,7 +162,7 @@ Object.defineProperties(LabelGraphics.prototype, {
    * @type {Property|undefined}
    * @default false
    */
-  showBackground: createPropertyDescriptor("showBackground"),
+  showBackground: createPropertyDescriptor('showBackground'),
 
   /**
    * Gets or sets the Property specifying the background {@link Color}.
@@ -170,7 +170,7 @@ Object.defineProperties(LabelGraphics.prototype, {
    * @type {Property|undefined}
    * @default new Color(0.165, 0.165, 0.165, 0.8)
    */
-  backgroundColor: createPropertyDescriptor("backgroundColor"),
+  backgroundColor: createPropertyDescriptor('backgroundColor'),
 
   /**
    * Gets or sets the {@link Cartesian2} Property specifying the label's horizontal and vertical
@@ -179,7 +179,7 @@ Object.defineProperties(LabelGraphics.prototype, {
    * @type {Property|undefined}
    * @default new Cartesian2(7, 5)
    */
-  backgroundPadding: createPropertyDescriptor("backgroundPadding"),
+  backgroundPadding: createPropertyDescriptor('backgroundPadding'),
 
   /**
    * Gets or sets the {@link Cartesian2} Property specifying the label's pixel offset in screen space
@@ -199,7 +199,7 @@ Object.defineProperties(LabelGraphics.prototype, {
    * @type {Property|undefined}
    * @default Cartesian2.ZERO
    */
-  pixelOffset: createPropertyDescriptor("pixelOffset"),
+  pixelOffset: createPropertyDescriptor('pixelOffset'),
 
   /**
    * Gets or sets the {@link Cartesian3} Property specifying the label's offset in eye coordinates.
@@ -224,21 +224,21 @@ Object.defineProperties(LabelGraphics.prototype, {
    * @type {Property|undefined}
    * @default Cartesian3.ZERO
    */
-  eyeOffset: createPropertyDescriptor("eyeOffset"),
+  eyeOffset: createPropertyDescriptor('eyeOffset'),
 
   /**
    * Gets or sets the Property specifying the {@link HorizontalOrigin}.
    * @memberof LabelGraphics.prototype
    * @type {Property|undefined}
    */
-  horizontalOrigin: createPropertyDescriptor("horizontalOrigin"),
+  horizontalOrigin: createPropertyDescriptor('horizontalOrigin'),
 
   /**
    * Gets or sets the Property specifying the {@link VerticalOrigin}.
    * @memberof LabelGraphics.prototype
    * @type {Property|undefined}
    */
-  verticalOrigin: createPropertyDescriptor("verticalOrigin"),
+  verticalOrigin: createPropertyDescriptor('verticalOrigin'),
 
   /**
    * Gets or sets the Property specifying the {@link HeightReference}.
@@ -246,28 +246,28 @@ Object.defineProperties(LabelGraphics.prototype, {
    * @type {Property|undefined}
    * @default HeightReference.NONE
    */
-  heightReference: createPropertyDescriptor("heightReference"),
+  heightReference: createPropertyDescriptor('heightReference'),
 
   /**
    * Gets or sets the Property specifying the fill {@link Color}.
    * @memberof LabelGraphics.prototype
    * @type {Property|undefined}
    */
-  fillColor: createPropertyDescriptor("fillColor"),
+  fillColor: createPropertyDescriptor('fillColor'),
 
   /**
    * Gets or sets the Property specifying the outline {@link Color}.
    * @memberof LabelGraphics.prototype
    * @type {Property|undefined}
    */
-  outlineColor: createPropertyDescriptor("outlineColor"),
+  outlineColor: createPropertyDescriptor('outlineColor'),
 
   /**
    * Gets or sets the numeric Property specifying the outline width.
    * @memberof LabelGraphics.prototype
    * @type {Property|undefined}
    */
-  outlineWidth: createPropertyDescriptor("outlineWidth"),
+  outlineWidth: createPropertyDescriptor('outlineWidth'),
 
   /**
    * Gets or sets {@link NearFarScalar} Property specifying the translucency of the label based on the distance from the camera.
@@ -278,7 +278,7 @@ Object.defineProperties(LabelGraphics.prototype, {
    * @memberof LabelGraphics.prototype
    * @type {Property|undefined}
    */
-  translucencyByDistance: createPropertyDescriptor("translucencyByDistance"),
+  translucencyByDistance: createPropertyDescriptor('translucencyByDistance'),
 
   /**
    * Gets or sets {@link NearFarScalar} Property specifying the pixel offset of the label based on the distance from the camera.
@@ -290,7 +290,7 @@ Object.defineProperties(LabelGraphics.prototype, {
    * @type {Property|undefined}
    */
   pixelOffsetScaleByDistance: createPropertyDescriptor(
-    "pixelOffsetScaleByDistance"
+    'pixelOffsetScaleByDistance'
   ),
 
   /**
@@ -303,7 +303,7 @@ Object.defineProperties(LabelGraphics.prototype, {
    * @memberof LabelGraphics.prototype
    * @type {Property|undefined}
    */
-  scaleByDistance: createPropertyDescriptor("scaleByDistance"),
+  scaleByDistance: createPropertyDescriptor('scaleByDistance'),
 
   /**
    * Gets or sets the {@link DistanceDisplayCondition} Property specifying at what distance from the camera that this label will be displayed.
@@ -311,7 +311,7 @@ Object.defineProperties(LabelGraphics.prototype, {
    * @type {Property|undefined}
    */
   distanceDisplayCondition: createPropertyDescriptor(
-    "distanceDisplayCondition"
+    'distanceDisplayCondition'
   ),
 
   /**
@@ -320,9 +320,7 @@ Object.defineProperties(LabelGraphics.prototype, {
    * @memberof LabelGraphics.prototype
    * @type {Property|undefined}
    */
-  disableDepthTestDistance: createPropertyDescriptor(
-    "disableDepthTestDistance"
-  ),
+  disableDepthTestDistance: createPropertyDescriptor('disableDepthTestDistance')
 });
 
 /**
@@ -368,7 +366,7 @@ LabelGraphics.prototype.clone = function (result) {
 LabelGraphics.prototype.merge = function (source) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
-    throw new DeveloperError("source is required.");
+    throw new DeveloperError('source is required.');
   }
   //>>includeEnd('debug');
 

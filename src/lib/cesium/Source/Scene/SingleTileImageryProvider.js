@@ -1,15 +1,15 @@
-import Credit from "../Core/Credit.js";
-import defaultValue from "../Core/defaultValue.js";
-import defer from "../Core/defer.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import GeographicTilingScheme from "../Core/GeographicTilingScheme.js";
-import Rectangle from "../Core/Rectangle.js";
-import Resource from "../Core/Resource.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import TileProviderError from "../Core/TileProviderError.js";
-import ImageryProvider from "./ImageryProvider.js";
+import Credit from '../Core/Credit.js';
+import defaultValue from '../Core/defaultValue.js';
+import defer from '../Core/defer.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import GeographicTilingScheme from '../Core/GeographicTilingScheme.js';
+import Rectangle from '../Core/Rectangle.js';
+import Resource from '../Core/Resource.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import TileProviderError from '../Core/TileProviderError.js';
+import ImageryProvider from './ImageryProvider.js';
 
 /**
  * @typedef {Object} SingleTileImageryProvider.ConstructorOptions
@@ -44,7 +44,7 @@ function SingleTileImageryProvider(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.url)) {
-    throw new DeveloperError("options.url is required.");
+    throw new DeveloperError('options.url is required.');
   }
   //>>includeEnd('debug');
 
@@ -141,7 +141,7 @@ function SingleTileImageryProvider(options) {
     rectangle: rectangle,
     numberOfLevelZeroTilesX: 1,
     numberOfLevelZeroTilesY: 1,
-    ellipsoid: options.ellipsoid,
+    ellipsoid: options.ellipsoid
   });
   this._tilingScheme = tilingScheme;
   this._resource = resource;
@@ -156,7 +156,7 @@ function SingleTileImageryProvider(options) {
   this._readyPromise = defer();
 
   let credit = options.credit;
-  if (typeof credit === "string") {
+  if (typeof credit === 'string') {
     credit = new Credit(credit);
   }
   this._credit = credit;
@@ -208,7 +208,7 @@ Object.defineProperties(SingleTileImageryProvider.prototype, {
   url: {
     get: function () {
       return this._resource.url;
-    },
+    }
   },
 
   /**
@@ -220,7 +220,7 @@ Object.defineProperties(SingleTileImageryProvider.prototype, {
   proxy: {
     get: function () {
       return this._resource.proxy;
-    },
+    }
   },
 
   /**
@@ -235,13 +235,13 @@ Object.defineProperties(SingleTileImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileWidth must not be called before the imagery provider is ready."
+          'tileWidth must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tileWidth;
-    },
+    }
   },
 
   /**
@@ -256,13 +256,13 @@ Object.defineProperties(SingleTileImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileHeight must not be called before the imagery provider is ready."
+          'tileHeight must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tileHeight;
-    },
+    }
   },
 
   /**
@@ -277,13 +277,13 @@ Object.defineProperties(SingleTileImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "maximumLevel must not be called before the imagery provider is ready."
+          'maximumLevel must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return 0;
-    },
+    }
   },
 
   /**
@@ -298,13 +298,13 @@ Object.defineProperties(SingleTileImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "minimumLevel must not be called before the imagery provider is ready."
+          'minimumLevel must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return 0;
-    },
+    }
   },
 
   /**
@@ -319,13 +319,13 @@ Object.defineProperties(SingleTileImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tilingScheme must not be called before the imagery provider is ready."
+          'tilingScheme must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tilingScheme;
-    },
+    }
   },
 
   /**
@@ -338,7 +338,7 @@ Object.defineProperties(SingleTileImageryProvider.prototype, {
   rectangle: {
     get: function () {
       return this._tilingScheme.rectangle;
-    },
+    }
   },
 
   /**
@@ -355,13 +355,13 @@ Object.defineProperties(SingleTileImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileDiscardPolicy must not be called before the imagery provider is ready."
+          'tileDiscardPolicy must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return undefined;
-    },
+    }
   },
 
   /**
@@ -375,7 +375,7 @@ Object.defineProperties(SingleTileImageryProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._errorEvent;
-    },
+    }
   },
 
   /**
@@ -387,7 +387,7 @@ Object.defineProperties(SingleTileImageryProvider.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -399,7 +399,7 @@ Object.defineProperties(SingleTileImageryProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise.promise;
-    },
+    }
   },
 
   /**
@@ -412,7 +412,7 @@ Object.defineProperties(SingleTileImageryProvider.prototype, {
   credit: {
     get: function () {
       return this._credit;
-    },
+    }
   },
 
   /**
@@ -428,8 +428,8 @@ Object.defineProperties(SingleTileImageryProvider.prototype, {
   hasAlphaChannel: {
     get: function () {
       return true;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -467,7 +467,7 @@ SingleTileImageryProvider.prototype.requestImage = function (
   //>>includeStart('debug', pragmas.debug);
   if (!this._ready) {
     throw new DeveloperError(
-      "requestImage must not be called before the imagery provider is ready."
+      'requestImage must not be called before the imagery provider is ready.'
     );
   }
   //>>includeEnd('debug');

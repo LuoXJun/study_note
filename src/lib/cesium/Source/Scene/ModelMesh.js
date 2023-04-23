@@ -36,7 +36,7 @@ Object.defineProperties(ModelMesh.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
 
   /**
@@ -50,7 +50,7 @@ Object.defineProperties(ModelMesh.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
 
   /**
@@ -65,7 +65,7 @@ Object.defineProperties(ModelMesh.prototype, {
   materials: {
     get: function () {
       return this._materials;
-    },
-  },
+    }
+  }
 });
 export default ModelMesh;

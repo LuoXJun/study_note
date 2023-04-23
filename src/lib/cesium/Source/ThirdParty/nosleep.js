@@ -7,13 +7,23 @@ var media = {
 const { webm, mp4 } = media;
 
 // Detect iOS browsers < version 10
-const oldIOS = typeof navigator !== 'undefined' && parseFloat(
-  ('' + (/CPU.*OS ([0-9_]{3,4})[0-9_]{0,1}|(CPU like).*AppleWebKit.*Mobile/i.exec(navigator.userAgent) || [0, ''])[1])
-    .replace('undefined', '3_2').replace('_', '.').replace('_', '')
-) < 10 && !window.MSStream;
+const oldIOS =
+  typeof navigator !== 'undefined' &&
+  parseFloat(
+    (
+      '' +
+      (/CPU.*OS ([0-9_]{3,4})[0-9_]{0,1}|(CPU like).*AppleWebKit.*Mobile/i.exec(
+        navigator.userAgent
+      ) || [0, ''])[1]
+    )
+      .replace('undefined', '3_2')
+      .replace('_', '.')
+      .replace('_', '')
+  ) < 10 &&
+  !window.MSStream;
 
 class NoSleep {
-  constructor () {
+  constructor() {
     if (oldIOS) {
       this.noSleepTimer = null;
     } else {
@@ -28,9 +38,11 @@ class NoSleep {
       this._addSourceToVideo(this.noSleepVideo, 'mp4', mp4);
 
       this.noSleepVideo.addEventListener('loadedmetadata', () => {
-        if (this.noSleepVideo.duration <= 1) { // webm source
+        if (this.noSleepVideo.duration <= 1) {
+          // webm source
           this.noSleepVideo.setAttribute('loop', '');
-        } else { // mp4 source
+        } else {
+          // mp4 source
           this.noSleepVideo.addEventListener('timeupdate', () => {
             if (this.noSleepVideo.currentTime > 0.5) {
               this.noSleepVideo.currentTime = Math.random();
@@ -41,14 +53,14 @@ class NoSleep {
     }
   }
 
-  _addSourceToVideo (element, type, dataURI) {
+  _addSourceToVideo(element, type, dataURI) {
     var source = document.createElement('source');
     source.src = dataURI;
     source.type = `video/${type}`;
     element.appendChild(source);
   }
 
-  enable () {
+  enable() {
     if (oldIOS) {
       this.disable();
       console.warn(`
@@ -67,7 +79,7 @@ class NoSleep {
     }
   }
 
-  disable () {
+  disable() {
     if (oldIOS) {
       if (this.noSleepTimer) {
         console.warn(`

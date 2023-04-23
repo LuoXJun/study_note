@@ -1,5 +1,5 @@
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
 
 /**
  * A function to port GLSL shaders from GLSL ES 1.00 to GLSL ES 3.00
@@ -15,7 +15,7 @@ import DeveloperError from "../Core/DeveloperError.js";
  */
 function modernizeShader(source, isFragmentShader) {
   const outputDeclarationRegex = /#define OUTPUT_DECLARATION/;
-  const splitSource = source.split("\n");
+  const splitSource = source.split('\n');
 
   if (/#version 300 es/g.test(source)) {
     return source;
@@ -32,7 +32,7 @@ function modernizeShader(source, isFragmentShader) {
   }
 
   if (outputDeclarationLine === -1) {
-    throw new DeveloperError("Could not find a #define OUTPUT_DECLARATION!");
+    throw new DeveloperError('Could not find a #define OUTPUT_DECLARATION!');
   }
 
   const outputVariables = [];
@@ -40,7 +40,7 @@ function modernizeShader(source, isFragmentShader) {
   for (i = 0; i < 10; i++) {
     const fragDataString = `gl_FragData\\[${i}\\]`;
     const newOutput = `czm_out${i}`;
-    const regex = new RegExp(fragDataString, "g");
+    const regex = new RegExp(fragDataString, 'g');
     if (regex.test(source)) {
       setAdd(newOutput, outputVariables);
       replaceInSourceString(fragDataString, newOutput, splitSource);
@@ -53,14 +53,14 @@ function modernizeShader(source, isFragmentShader) {
     }
   }
 
-  const czmFragColor = "czm_fragColor";
-  if (findInSource("gl_FragColor", splitSource)) {
+  const czmFragColor = 'czm_fragColor';
+  if (findInSource('gl_FragColor', splitSource)) {
     setAdd(czmFragColor, outputVariables);
-    replaceInSourceString("gl_FragColor", czmFragColor, splitSource);
+    replaceInSourceString('gl_FragColor', czmFragColor, splitSource);
     splitSource.splice(
       outputDeclarationLine,
       0,
-      "layout(location = 0) out vec4 czm_fragColor;"
+      'layout(location = 0) out vec4 czm_fragColor;'
     );
     outputDeclarationLine += 1;
   }
@@ -76,7 +76,7 @@ function modernizeShader(source, isFragmentShader) {
       if (variableMap.hasOwnProperty(variable)) {
         const matchVar = new RegExp(
           `(layout)[^]+(out)[^]+(${variable})[^]+`,
-          "g"
+          'g'
         );
         if (matchVar.test(line)) {
           lineAdds[line] = variable;
@@ -101,9 +101,9 @@ function modernizeShader(source, isFragmentShader) {
     }
   }
 
-  const webgl2UniqueID = "WEBGL_2";
+  const webgl2UniqueID = 'WEBGL_2';
   const webgl2DefineMacro = `#define ${webgl2UniqueID}`;
-  const versionThree = "#version 300 es";
+  const versionThree = '#version 300 es';
   let foundVersion = false;
   for (i = 0; i < splitSource.length; i++) {
     if (/#version/.test(splitSource[i])) {
@@ -119,20 +119,20 @@ function modernizeShader(source, isFragmentShader) {
 
   splitSource.splice(1, 0, webgl2DefineMacro);
 
-  removeExtension("EXT_draw_buffers", webgl2UniqueID, splitSource);
-  removeExtension("EXT_frag_depth", webgl2UniqueID, splitSource);
-  removeExtension("OES_standard_derivatives", webgl2UniqueID, splitSource);
+  removeExtension('EXT_draw_buffers', webgl2UniqueID, splitSource);
+  removeExtension('EXT_frag_depth', webgl2UniqueID, splitSource);
+  removeExtension('OES_standard_derivatives', webgl2UniqueID, splitSource);
 
-  replaceInSourceString("texture2D", "texture", splitSource);
-  replaceInSourceString("texture3D", "texture", splitSource);
-  replaceInSourceString("textureCube", "texture", splitSource);
-  replaceInSourceString("gl_FragDepthEXT", "gl_FragDepth", splitSource);
+  replaceInSourceString('texture2D', 'texture', splitSource);
+  replaceInSourceString('texture3D', 'texture', splitSource);
+  replaceInSourceString('textureCube', 'texture', splitSource);
+  replaceInSourceString('gl_FragDepthEXT', 'gl_FragDepth', splitSource);
 
   if (isFragmentShader) {
-    replaceInSourceString("varying", "in", splitSource);
+    replaceInSourceString('varying', 'in', splitSource);
   } else {
-    replaceInSourceString("attribute", "in", splitSource);
-    replaceInSourceString("varying", "out", splitSource);
+    replaceInSourceString('attribute', 'in', splitSource);
+    replaceInSourceString('varying', 'out', splitSource);
   }
 
   return compileSource(splitSource);
@@ -142,7 +142,7 @@ function modernizeShader(source, isFragmentShader) {
 // searchString[singleCharacter]searchString
 function replaceInSourceString(str, replacement, splitSource) {
   const regexStr = `(^|[^\\w])(${str})($|[^\\w])`;
-  const regex = new RegExp(regexStr, "g");
+  const regex = new RegExp(regexStr, 'g');
 
   const splitSourceLength = splitSource.length;
   for (let i = 0; i < splitSourceLength; ++i) {
@@ -161,7 +161,7 @@ function replaceInSourceRegex(regex, replacement, splitSource) {
 
 function findInSource(str, splitSource) {
   const regexStr = `(^|[^\\w])(${str})($|[^\\w])`;
-  const regex = new RegExp(regexStr, "g");
+  const regex = new RegExp(regexStr, 'g');
 
   const splitSourceLength = splitSource.length;
   for (let i = 0; i < splitSourceLength; ++i) {
@@ -174,7 +174,7 @@ function findInSource(str, splitSource) {
 }
 
 function compileSource(splitSource) {
-  let wholeSource = "";
+  let wholeSource = '';
 
   const splitSourceLength = splitSource.length;
   for (let i = 0; i < splitSourceLength; ++i) {
@@ -205,9 +205,9 @@ function getVariablePreprocessorBranch(layoutVariables, splitSource) {
       stack.push(line);
     } else if (hasELSE) {
       const top = stack[stack.length - 1];
-      let op = top.replace("ifdef", "ifndef");
+      let op = top.replace('ifdef', 'ifndef');
       if (/if/g.test(op)) {
-        op = op.replace(/(#if\s+)(\S*)([^]*)/, "$1!($2)$3");
+        op = op.replace(/(#if\s+)(\S*)([^]*)/, '$1!($2)$3');
       }
       stack.pop();
       stack.push(op);
@@ -234,7 +234,7 @@ function getVariablePreprocessorBranch(layoutVariables, splitSource) {
 
 function removeExtension(name, webgl2UniqueID, splitSource) {
   const regex = `#extension\\s+GL_${name}\\s+:\\s+[a-zA-Z0-9]+\\s*$`;
-  replaceInSourceRegex(new RegExp(regex, "g"), "", splitSource);
+  replaceInSourceRegex(new RegExp(regex, 'g'), '', splitSource);
 
   // replace any possible directive #ifdef (GL_EXT_extension) with WEBGL_2 unique directive
   replaceInSourceString(`GL_${name}`, webgl2UniqueID, splitSource);

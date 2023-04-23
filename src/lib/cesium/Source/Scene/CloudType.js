@@ -11,7 +11,7 @@ const CloudType = {
    * @type {Number}
    * @constant
    */
-  CUMULUS: 0,
+  CUMULUS: 0
 };
 
 /**

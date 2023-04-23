@@ -1,9 +1,9 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import createMaterialPropertyDescriptor from "./createMaterialPropertyDescriptor.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import createMaterialPropertyDescriptor from './createMaterialPropertyDescriptor.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
 
 /**
  * @typedef {Object} PolylineVolumeGraphics.ConstructorOptions
@@ -77,7 +77,7 @@ Object.defineProperties(PolylineVolumeGraphics.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -86,21 +86,21 @@ Object.defineProperties(PolylineVolumeGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  show: createPropertyDescriptor("show"),
+  show: createPropertyDescriptor('show'),
 
   /**
    * Gets or sets the Property specifying the array of {@link Cartesian3} positions which define the line strip.
    * @memberof PolylineVolumeGraphics.prototype
    * @type {Property|undefined}
    */
-  positions: createPropertyDescriptor("positions"),
+  positions: createPropertyDescriptor('positions'),
 
   /**
    * Gets or sets the Property specifying the array of {@link Cartesian2} positions which define the shape to be extruded.
    * @memberof PolylineVolumeGraphics.prototype
    * @type {Property|undefined}
    */
-  shape: createPropertyDescriptor("shape"),
+  shape: createPropertyDescriptor('shape'),
 
   /**
    * Gets or sets the {@link CornerType} Property specifying the style of the corners.
@@ -108,7 +108,7 @@ Object.defineProperties(PolylineVolumeGraphics.prototype, {
    * @type {Property|undefined}
    * @default CornerType.ROUNDED
    */
-  cornerType: createPropertyDescriptor("cornerType"),
+  cornerType: createPropertyDescriptor('cornerType'),
 
   /**
    * Gets or sets the numeric Property specifying the angular distance between points on the volume.
@@ -116,7 +116,7 @@ Object.defineProperties(PolylineVolumeGraphics.prototype, {
    * @type {Property|undefined}
    * @default {CesiumMath.RADIANS_PER_DEGREE}
    */
-  granularity: createPropertyDescriptor("granularity"),
+  granularity: createPropertyDescriptor('granularity'),
 
   /**
    * Gets or sets the boolean Property specifying whether the volume is filled with the provided material.
@@ -124,7 +124,7 @@ Object.defineProperties(PolylineVolumeGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  fill: createPropertyDescriptor("fill"),
+  fill: createPropertyDescriptor('fill'),
 
   /**
    * Gets or sets the Property specifying the material used to fill the volume.
@@ -132,7 +132,7 @@ Object.defineProperties(PolylineVolumeGraphics.prototype, {
    * @type {MaterialProperty}
    * @default Color.WHITE
    */
-  material: createMaterialPropertyDescriptor("material"),
+  material: createMaterialPropertyDescriptor('material'),
 
   /**
    * Gets or sets the Property specifying whether the volume is outlined.
@@ -140,7 +140,7 @@ Object.defineProperties(PolylineVolumeGraphics.prototype, {
    * @type {Property|undefined}
    * @default false
    */
-  outline: createPropertyDescriptor("outline"),
+  outline: createPropertyDescriptor('outline'),
 
   /**
    * Gets or sets the Property specifying the {@link Color} of the outline.
@@ -148,7 +148,7 @@ Object.defineProperties(PolylineVolumeGraphics.prototype, {
    * @type {Property|undefined}
    * @default Color.BLACK
    */
-  outlineColor: createPropertyDescriptor("outlineColor"),
+  outlineColor: createPropertyDescriptor('outlineColor'),
 
   /**
    * Gets or sets the numeric Property specifying the width of the outline.
@@ -159,7 +159,7 @@ Object.defineProperties(PolylineVolumeGraphics.prototype, {
    * @type {Property|undefined}
    * @default 1.0
    */
-  outlineWidth: createPropertyDescriptor("outlineWidth"),
+  outlineWidth: createPropertyDescriptor('outlineWidth'),
 
   /**
    * Get or sets the enum Property specifying whether the volume
@@ -168,16 +168,14 @@ Object.defineProperties(PolylineVolumeGraphics.prototype, {
    * @type {Property|undefined}
    * @default ShadowMode.DISABLED
    */
-  shadows: createPropertyDescriptor("shadows"),
+  shadows: createPropertyDescriptor('shadows'),
 
   /**
    * Gets or sets the {@link DistanceDisplayCondition} Property specifying at what distance from the camera that this volume will be displayed.
    * @memberof PolylineVolumeGraphics.prototype
    * @type {Property|undefined}
    */
-  distanceDisplayCondition: createPropertyDescriptor(
-    "distanceDisplayCondition"
-  ),
+  distanceDisplayCondition: createPropertyDescriptor('distanceDisplayCondition')
 });
 
 /**
@@ -214,7 +212,7 @@ PolylineVolumeGraphics.prototype.clone = function (result) {
 PolylineVolumeGraphics.prototype.merge = function (source) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
-    throw new DeveloperError("source is required.");
+    throw new DeveloperError('source is required.');
   }
   //>>includeEnd('debug');
 

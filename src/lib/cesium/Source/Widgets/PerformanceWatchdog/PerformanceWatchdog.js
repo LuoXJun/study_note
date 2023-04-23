@@ -1,9 +1,9 @@
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import knockout from "../../ThirdParty/knockout.js";
-import getElement from "../getElement.js";
-import PerformanceWatchdogViewModel from "./PerformanceWatchdogViewModel.js";
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import knockout from '../../ThirdParty/knockout.js';
+import getElement from '../getElement.js';
+import PerformanceWatchdogViewModel from './PerformanceWatchdogViewModel.js';
 
 /**
  * Monitors performance of the application and displays a message if poor performance is detected.
@@ -21,10 +21,10 @@ import PerformanceWatchdogViewModel from "./PerformanceWatchdogViewModel.js";
 function PerformanceWatchdog(options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options) || !defined(options.container)) {
-    throw new DeveloperError("options.container is required.");
+    throw new DeveloperError('options.container is required.');
   }
   if (!defined(options.scene)) {
-    throw new DeveloperError("options.scene is required.");
+    throw new DeveloperError('options.scene is required.');
   }
   //>>includeEnd('debug');
 
@@ -32,20 +32,20 @@ function PerformanceWatchdog(options) {
 
   const viewModel = new PerformanceWatchdogViewModel(options);
 
-  const element = document.createElement("div");
-  element.className = "cesium-performance-watchdog-message-area";
-  element.setAttribute("data-bind", "visible: showingLowFrameRateMessage");
+  const element = document.createElement('div');
+  element.className = 'cesium-performance-watchdog-message-area';
+  element.setAttribute('data-bind', 'visible: showingLowFrameRateMessage');
 
-  const dismissButton = document.createElement("button");
-  dismissButton.setAttribute("type", "button");
-  dismissButton.className = "cesium-performance-watchdog-message-dismiss";
-  dismissButton.innerHTML = "&times;";
-  dismissButton.setAttribute("data-bind", "click: dismissMessage");
+  const dismissButton = document.createElement('button');
+  dismissButton.setAttribute('type', 'button');
+  dismissButton.className = 'cesium-performance-watchdog-message-dismiss';
+  dismissButton.innerHTML = '&times;';
+  dismissButton.setAttribute('data-bind', 'click: dismissMessage');
   element.appendChild(dismissButton);
 
-  const message = document.createElement("div");
-  message.className = "cesium-performance-watchdog-message";
-  message.setAttribute("data-bind", "html: lowFrameRateMessage");
+  const message = document.createElement('div');
+  message.className = 'cesium-performance-watchdog-message';
+  message.setAttribute('data-bind', 'html: lowFrameRateMessage');
   element.appendChild(message);
 
   container.appendChild(element);
@@ -67,7 +67,7 @@ Object.defineProperties(PerformanceWatchdog.prototype, {
   container: {
     get: function () {
       return this._container;
-    },
+    }
   },
 
   /**
@@ -79,8 +79,8 @@ Object.defineProperties(PerformanceWatchdog.prototype, {
   viewModel: {
     get: function () {
       return this._viewModel;
-    },
-  },
+    }
+  }
 });
 
 /**

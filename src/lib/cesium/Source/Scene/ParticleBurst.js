@@ -1,4 +1,4 @@
-import defaultValue from "../Core/defaultValue.js";
+import defaultValue from '../Core/defaultValue.js';
 
 /**
  * Represents a burst of {@link Particle}s from a {@link ParticleSystem} at a given time in the systems lifetime.
@@ -45,7 +45,7 @@ Object.defineProperties(ParticleBurst.prototype, {
   complete: {
     get: function () {
       return this._complete;
-    },
-  },
+    }
+  }
 });
 export default ParticleBurst;

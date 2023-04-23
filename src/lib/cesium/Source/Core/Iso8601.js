@@ -1,16 +1,16 @@
-import JulianDate from "./JulianDate.js";
-import TimeInterval from "./TimeInterval.js";
+import JulianDate from './JulianDate.js';
+import TimeInterval from './TimeInterval.js';
 
 const MINIMUM_VALUE = Object.freeze(
-  JulianDate.fromIso8601("0000-01-01T00:00:00Z")
+  JulianDate.fromIso8601('0000-01-01T00:00:00Z')
 );
 const MAXIMUM_VALUE = Object.freeze(
-  JulianDate.fromIso8601("9999-12-31T24:00:00Z")
+  JulianDate.fromIso8601('9999-12-31T24:00:00Z')
 );
 const MAXIMUM_INTERVAL = Object.freeze(
   new TimeInterval({
     start: MINIMUM_VALUE,
-    stop: MAXIMUM_VALUE,
+    stop: MAXIMUM_VALUE
   })
 );
 
@@ -49,6 +49,6 @@ const Iso8601 = {
    * @type {TimeInterval}
    * @constant
    */
-  MAXIMUM_INTERVAL: MAXIMUM_INTERVAL,
+  MAXIMUM_INTERVAL: MAXIMUM_INTERVAL
 };
 export default Iso8601;

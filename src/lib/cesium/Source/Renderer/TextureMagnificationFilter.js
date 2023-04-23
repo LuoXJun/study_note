@@ -1,4 +1,4 @@
-import WebGLConstants from "../Core/WebGLConstants.js";
+import WebGLConstants from '../Core/WebGLConstants.js';
 
 /**
  * Enumerates all possible filters used when magnifying WebGL textures.
@@ -21,7 +21,7 @@ const TextureMagnificationFilter = {
    * @type {Number}
    * @constant
    */
-  LINEAR: WebGLConstants.LINEAR,
+  LINEAR: WebGLConstants.LINEAR
 };
 
 /**

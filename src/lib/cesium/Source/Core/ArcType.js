@@ -26,6 +26,6 @@ const ArcType = {
    * @type {Number}
    * @constant
    */
-  RHUMB: 2,
+  RHUMB: 2
 };
 export default Object.freeze(ArcType);

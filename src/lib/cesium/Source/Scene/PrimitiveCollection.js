@@ -1,8 +1,8 @@
-import createGuid from "../Core/createGuid.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
+import createGuid from '../Core/createGuid.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
 
 /**
  * A collection of primitives.  This is most often used with {@link Scene#primitives},
@@ -82,8 +82,8 @@ Object.defineProperties(PrimitiveCollection.prototype, {
   length: {
     get: function () {
       return this._primitives.length;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -103,14 +103,14 @@ PrimitiveCollection.prototype.add = function (primitive, index) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(primitive)) {
-    throw new DeveloperError("primitive is required.");
+    throw new DeveloperError('primitive is required.');
   }
   if (hasIndex) {
     if (index < 0) {
-      throw new DeveloperError("index must be greater than or equal to zero.");
+      throw new DeveloperError('index must be greater than or equal to zero.');
     } else if (index > this._primitives.length) {
       throw new DeveloperError(
-        "index must be less than or equal to the number of primitives."
+        'index must be less than or equal to the number of primitives.'
       );
     }
   }
@@ -119,7 +119,7 @@ PrimitiveCollection.prototype.add = function (primitive, index) {
   const external = (primitive._external = primitive._external || {});
   const composites = (external._composites = external._composites || {});
   composites[this._guid] = {
-    collection: this,
+    collection: this
   };
 
   if (!hasIndex) {
@@ -220,7 +220,7 @@ PrimitiveCollection.prototype.contains = function (primitive) {
 function getPrimitiveIndex(compositePrimitive, primitive) {
   //>>includeStart('debug', pragmas.debug);
   if (!compositePrimitive.contains(primitive)) {
-    throw new DeveloperError("primitive is not in this collection.");
+    throw new DeveloperError('primitive is not in this collection.');
   }
   //>>includeEnd('debug');
 
@@ -354,7 +354,7 @@ PrimitiveCollection.prototype.lowerToBottom = function (primitive) {
 PrimitiveCollection.prototype.get = function (index) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(index)) {
-    throw new DeveloperError("index is required.");
+    throw new DeveloperError('index is required.');
   }
   //>>includeEnd('debug');
 

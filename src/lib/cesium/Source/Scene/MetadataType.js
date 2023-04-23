@@ -1,11 +1,11 @@
-import Check from "../Core/Check.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Matrix2 from "../Core/Matrix2.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
+import Check from '../Core/Check.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Matrix2 from '../Core/Matrix2.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
 
 /**
  * An enum of metadata types. These metadata types are containers containing
@@ -23,7 +23,7 @@ const MetadataType = {
    * @constant
    * @private
    */
-  SCALAR: "SCALAR",
+  SCALAR: 'SCALAR',
   /**
    * A vector with two components
    *
@@ -31,7 +31,7 @@ const MetadataType = {
    * @constant
    * @private
    */
-  VEC2: "VEC2",
+  VEC2: 'VEC2',
   /**
    * A vector with three components
    *
@@ -39,7 +39,7 @@ const MetadataType = {
    * @constant
    * @private
    */
-  VEC3: "VEC3",
+  VEC3: 'VEC3',
   /**
    * A vector with four components
    *
@@ -47,7 +47,7 @@ const MetadataType = {
    * @constant
    * @private
    */
-  VEC4: "VEC4",
+  VEC4: 'VEC4',
   /**
    * A 2x2 matrix, stored in column-major format.
    *
@@ -55,7 +55,7 @@ const MetadataType = {
    * @constant
    * @private
    */
-  MAT2: "MAT2",
+  MAT2: 'MAT2',
   /**
    * A 2x2 matrix, stored in column-major format.
    *
@@ -63,7 +63,7 @@ const MetadataType = {
    * @constant
    * @private
    */
-  MAT3: "MAT3",
+  MAT3: 'MAT3',
   /**
    * A 2x2 matrix, stored in column-major format.
    *
@@ -71,7 +71,7 @@ const MetadataType = {
    * @constant
    * @private
    */
-  MAT4: "MAT4",
+  MAT4: 'MAT4',
   /**
    * A boolean (true/false) value
    *
@@ -79,7 +79,7 @@ const MetadataType = {
    * @constant
    * @private
    */
-  BOOLEAN: "BOOLEAN",
+  BOOLEAN: 'BOOLEAN',
   /**
    * A UTF-8 encoded string value
    *
@@ -87,7 +87,7 @@ const MetadataType = {
    * @constant
    * @private
    */
-  STRING: "STRING",
+  STRING: 'STRING',
   /**
    * An enumerated value. This type is used in conjunction with a {@link MetadataEnum} to describe the valid values.
    *
@@ -97,7 +97,7 @@ const MetadataType = {
    * @constant
    * @private
    */
-  ENUM: "ENUM",
+  ENUM: 'ENUM'
 };
 
 /**
@@ -108,7 +108,7 @@ const MetadataType = {
  */
 MetadataType.isVectorType = function (type) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("type", type);
+  Check.typeOf.string('type', type);
   //>>includeEnd('debug');
 
   switch (type) {
@@ -129,7 +129,7 @@ MetadataType.isVectorType = function (type) {
  */
 MetadataType.isMatrixType = function (type) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("type", type);
+  Check.typeOf.string('type', type);
   //>>includeEnd('debug');
 
   switch (type) {
@@ -151,7 +151,7 @@ MetadataType.isMatrixType = function (type) {
  */
 MetadataType.getComponentCount = function (type) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("type", type);
+  Check.typeOf.string('type', type);
   //>>includeEnd('debug');
 
   switch (type) {

@@ -1,16 +1,16 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import GroundPrimitive from "../Scene/GroundPrimitive.js";
-import MaterialAppearance from "../Scene/MaterialAppearance.js";
-import PerInstanceColorAppearance from "../Scene/PerInstanceColorAppearance.js";
-import Primitive from "../Scene/Primitive.js";
-import BoundingSphereState from "./BoundingSphereState.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import MaterialProperty from "./MaterialProperty.js";
-import Property from "./Property.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import GroundPrimitive from '../Scene/GroundPrimitive.js';
+import MaterialAppearance from '../Scene/MaterialAppearance.js';
+import PerInstanceColorAppearance from '../Scene/PerInstanceColorAppearance.js';
+import Primitive from '../Scene/Primitive.js';
+import BoundingSphereState from './BoundingSphereState.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import MaterialProperty from './MaterialProperty.js';
+import Property from './Property.js';
 
 /**
  * Defines the interface for a dynamic geometry updater.  A DynamicGeometryUpdater
@@ -32,9 +32,9 @@ function DynamicGeometryUpdater(
   orderedGroundPrimitives
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("geometryUpdater", geometryUpdater);
-  Check.defined("primitives", primitives);
-  Check.defined("orderedGroundPrimitives", orderedGroundPrimitives);
+  Check.defined('geometryUpdater', geometryUpdater);
+  Check.defined('primitives', primitives);
+  Check.defined('orderedGroundPrimitives', orderedGroundPrimitives);
   //>>includeEnd('debug');
 
   this._primitives = primitives;
@@ -67,7 +67,7 @@ DynamicGeometryUpdater.prototype._setOptions =
  */
 DynamicGeometryUpdater.prototype.update = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
   //>>includeEnd('debug');
 
   const geometryUpdater = this._geometryUpdater;
@@ -103,7 +103,7 @@ DynamicGeometryUpdater.prototype.update = function (time) {
       appearance = new PerInstanceColorAppearance({
         closed: closed,
         flat:
-          onTerrain && !geometryUpdater._supportsMaterialsforEntitiesOnTerrain,
+          onTerrain && !geometryUpdater._supportsMaterialsforEntitiesOnTerrain
       });
     } else {
       const material = MaterialProperty.getValue(
@@ -115,7 +115,7 @@ DynamicGeometryUpdater.prototype.update = function (time) {
       appearance = new MaterialAppearance({
         material: material,
         translucent: material.isTranslucent(),
-        closed: closed,
+        closed: closed
       });
     }
 
@@ -123,24 +123,21 @@ DynamicGeometryUpdater.prototype.update = function (time) {
       options.vertexFormat = PerInstanceColorAppearance.VERTEX_FORMAT;
       this._primitive = orderedGroundPrimitives.add(
         new GroundPrimitive({
-          geometryInstances: this._geometryUpdater.createFillGeometryInstance(
-            time
-          ),
+          geometryInstances:
+            this._geometryUpdater.createFillGeometryInstance(time),
           appearance: appearance,
           asynchronous: false,
           shadows: shadows,
-          classificationType: this._geometryUpdater.classificationTypeProperty.getValue(
-            time
-          ),
+          classificationType:
+            this._geometryUpdater.classificationTypeProperty.getValue(time)
         }),
         Property.getValueOrUndefined(this._geometryUpdater.zIndex, time)
       );
     } else {
       options.vertexFormat = appearance.vertexFormat;
 
-      const fillInstance = this._geometryUpdater.createFillGeometryInstance(
-        time
-      );
+      const fillInstance =
+        this._geometryUpdater.createFillGeometryInstance(time);
 
       if (isColorAppearance) {
         appearance.translucent = fillInstance.attributes.color.value[3] !== 255;
@@ -151,7 +148,7 @@ DynamicGeometryUpdater.prototype.update = function (time) {
           geometryInstances: fillInstance,
           appearance: appearance,
           asynchronous: false,
-          shadows: shadows,
+          shadows: shadows
         })
       );
     }
@@ -162,9 +159,8 @@ DynamicGeometryUpdater.prototype.update = function (time) {
     defined(geometry.outline) &&
     geometry.outline.getValue(time)
   ) {
-    const outlineInstance = this._geometryUpdater.createOutlineGeometryInstance(
-      time
-    );
+    const outlineInstance =
+      this._geometryUpdater.createOutlineGeometryInstance(time);
     const outlineWidth = Property.getValueOrDefault(
       geometry.outlineWidth,
       time,
@@ -178,11 +174,11 @@ DynamicGeometryUpdater.prototype.update = function (time) {
           flat: true,
           translucent: outlineInstance.attributes.color.value[3] !== 255,
           renderState: {
-            lineWidth: geometryUpdater._scene.clampLineWidth(outlineWidth),
-          },
+            lineWidth: geometryUpdater._scene.clampLineWidth(outlineWidth)
+          }
         }),
         asynchronous: false,
-        shadows: shadows,
+        shadows: shadows
       })
     );
   }
@@ -202,7 +198,7 @@ DynamicGeometryUpdater.prototype.update = function (time) {
 DynamicGeometryUpdater.prototype.getBoundingSphere = function (result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(result)) {
-    throw new DeveloperError("result is required.");
+    throw new DeveloperError('result is required.');
   }
   //>>includeEnd('debug');
   const entity = this._entity;

@@ -1,10 +1,10 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import Matrix2 from "../Core/Matrix2.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import Matrix2 from '../Core/Matrix2.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
 
 const ComponentsPerAttribute = {
   SCALAR: 1,
@@ -13,7 +13,7 @@ const ComponentsPerAttribute = {
   VEC4: 4,
   MAT2: 4,
   MAT3: 9,
-  MAT4: 16,
+  MAT4: 16
 };
 
 const ClassPerType = {
@@ -23,7 +23,7 @@ const ClassPerType = {
   VEC4: Cartesian4,
   MAT2: Matrix2,
   MAT3: Matrix3,
-  MAT4: Matrix4,
+  MAT4: Matrix4
 };
 
 /**
@@ -32,7 +32,7 @@ const ClassPerType = {
 function getBinaryAccessor(accessor) {
   const componentType = accessor.componentType;
   let componentDatatype;
-  if (typeof componentType === "string") {
+  if (typeof componentType === 'string') {
     componentDatatype = ComponentDatatype.fromName(componentType);
   } else {
     componentDatatype = componentType;
@@ -50,7 +50,7 @@ function getBinaryAccessor(accessor) {
         byteOffset,
         componentsPerAttribute * length
       );
-    },
+    }
   };
 }
 export default getBinaryAccessor;

@@ -1,8 +1,8 @@
-import decodeGoogleEarthEnterpriseData from "../Core/decodeGoogleEarthEnterpriseData.js";
-import GoogleEarthEnterpriseTileInformation from "../Core/GoogleEarthEnterpriseTileInformation.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import pako from "../ThirdParty/pako.js";
-import createTaskProcessorWorker from "./createTaskProcessorWorker.js";
+import decodeGoogleEarthEnterpriseData from '../Core/decodeGoogleEarthEnterpriseData.js';
+import GoogleEarthEnterpriseTileInformation from '../Core/GoogleEarthEnterpriseTileInformation.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import pako from '../ThirdParty/pako.js';
+import createTaskProcessorWorker from './createTaskProcessorWorker.js';
 
 // Datatype sizes
 const sizeOfUint16 = Uint16Array.BYTES_PER_ELEMENT;
@@ -12,15 +12,15 @@ const sizeOfUint32 = Uint32Array.BYTES_PER_ELEMENT;
 const Types = {
   METADATA: 0,
   TERRAIN: 1,
-  DBROOT: 2,
+  DBROOT: 2
 };
 
 Types.fromString = function (s) {
-  if (s === "Metadata") {
+  if (s === 'Metadata') {
     return Types.METADATA;
-  } else if (s === "Terrain") {
+  } else if (s === 'Terrain') {
     return Types.TERRAIN;
-  } else if (s === "DbRoot") {
+  } else if (s === 'DbRoot') {
     return Types.DBROOT;
   }
 };
@@ -42,7 +42,7 @@ function decodeGoogleEarthEnterprisePacket(parameters, transferableObjects) {
     case Types.DBROOT:
       transferableObjects.push(buffer);
       return {
-        buffer: buffer,
+        buffer: buffer
       };
   }
 }
@@ -55,13 +55,13 @@ function processMetadata(buffer, totalSize, quadKey) {
   const magic = dv.getUint32(offset, true);
   offset += sizeOfUint32;
   if (magic !== qtMagic) {
-    throw new RuntimeError("Invalid magic");
+    throw new RuntimeError('Invalid magic');
   }
 
   const dataTypeId = dv.getUint32(offset, true);
   offset += sizeOfUint32;
   if (dataTypeId !== 1) {
-    throw new RuntimeError("Invalid data type. Must be 1 for QuadTreePacket");
+    throw new RuntimeError('Invalid data type. Must be 1 for QuadTreePacket');
   }
 
   // Tile format version
@@ -69,7 +69,7 @@ function processMetadata(buffer, totalSize, quadKey) {
   offset += sizeOfUint32;
   if (quadVersion !== 2) {
     throw new RuntimeError(
-      "Invalid QuadTreePacket version. Only version 2 is supported."
+      'Invalid QuadTreePacket version. Only version 2 is supported.'
     );
   }
 
@@ -79,7 +79,7 @@ function processMetadata(buffer, totalSize, quadKey) {
   const dataInstanceSize = dv.getInt32(offset, true);
   offset += sizeOfInt32;
   if (dataInstanceSize !== 32) {
-    throw new RuntimeError("Invalid instance size.");
+    throw new RuntimeError('Invalid instance size.');
   }
 
   const dataBufferOffset = dv.getInt32(offset, true);
@@ -93,12 +93,12 @@ function processMetadata(buffer, totalSize, quadKey) {
 
   // Offset from beginning of packet (instances + current offset)
   if (dataBufferOffset !== numInstances * dataInstanceSize + offset) {
-    throw new RuntimeError("Invalid dataBufferOffset");
+    throw new RuntimeError('Invalid dataBufferOffset');
   }
 
   // Verify the packets is all there header + instances + dataBuffer + metaBuffer
   if (dataBufferOffset + dataBufferSize + metaBufferSize !== totalSize) {
-    throw new RuntimeError("Invalid packet offsets");
+    throw new RuntimeError('Invalid packet offsets');
   }
 
   // Read all the instances
@@ -172,7 +172,7 @@ function processMetadata(buffer, totalSize, quadKey) {
           tileInfo[childKey] = null;
         } else {
           if (index === numInstances) {
-            console.log("Incorrect number of instances");
+            console.log('Incorrect number of instances');
             return;
           }
 
@@ -186,7 +186,7 @@ function processMetadata(buffer, totalSize, quadKey) {
 
   let level = 0;
   const root = instances[index++];
-  if (quadKey === "") {
+  if (quadKey === '') {
     // Root tile has data at its root and one less level
     ++level;
   } else {
@@ -215,7 +215,7 @@ function processTerrain(buffer, totalSize, transferableObjects) {
       pos += sizeOfUint32;
       pos += size;
       if (pos > totalSize) {
-        throw new RuntimeError("Malformed terrain packet found.");
+        throw new RuntimeError('Malformed terrain packet found.');
       }
     }
     return pos;
@@ -249,7 +249,7 @@ function uncompressPacket(data) {
   const magic = dv.getUint32(offset, true);
   offset += sizeOfUint32;
   if (magic !== compressedMagic && magic !== compressedMagicSwap) {
-    throw new RuntimeError("Invalid magic");
+    throw new RuntimeError('Invalid magic');
   }
 
   // Get the size of the compressed buffer - the endianness depends on which magic was used

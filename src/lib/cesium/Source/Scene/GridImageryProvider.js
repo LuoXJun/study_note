@@ -1,8 +1,8 @@
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Event from "../Core/Event.js";
-import GeographicTilingScheme from "../Core/GeographicTilingScheme.js";
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Event from '../Core/Event.js';
+import GeographicTilingScheme from '../Core/GeographicTilingScheme.js';
 
 const defaultColor = new Color(1.0, 1.0, 1.0, 0.4);
 const defaultGlowColor = new Color(0.0, 1.0, 0.0, 0.05);
@@ -161,7 +161,7 @@ Object.defineProperties(GridImageryProvider.prototype, {
   proxy: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -174,7 +174,7 @@ Object.defineProperties(GridImageryProvider.prototype, {
   tileWidth: {
     get: function () {
       return this._tileWidth;
-    },
+    }
   },
 
   /**
@@ -187,7 +187,7 @@ Object.defineProperties(GridImageryProvider.prototype, {
   tileHeight: {
     get: function () {
       return this._tileHeight;
-    },
+    }
   },
 
   /**
@@ -200,7 +200,7 @@ Object.defineProperties(GridImageryProvider.prototype, {
   maximumLevel: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -213,7 +213,7 @@ Object.defineProperties(GridImageryProvider.prototype, {
   minimumLevel: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -226,7 +226,7 @@ Object.defineProperties(GridImageryProvider.prototype, {
   tilingScheme: {
     get: function () {
       return this._tilingScheme;
-    },
+    }
   },
 
   /**
@@ -239,7 +239,7 @@ Object.defineProperties(GridImageryProvider.prototype, {
   rectangle: {
     get: function () {
       return this._tilingScheme.rectangle;
-    },
+    }
   },
 
   /**
@@ -254,7 +254,7 @@ Object.defineProperties(GridImageryProvider.prototype, {
   tileDiscardPolicy: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -268,7 +268,7 @@ Object.defineProperties(GridImageryProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._errorEvent;
-    },
+    }
   },
 
   /**
@@ -280,7 +280,7 @@ Object.defineProperties(GridImageryProvider.prototype, {
   ready: {
     get: function () {
       return true;
-    },
+    }
   },
 
   /**
@@ -292,7 +292,7 @@ Object.defineProperties(GridImageryProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   /**
@@ -305,7 +305,7 @@ Object.defineProperties(GridImageryProvider.prototype, {
   credit: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -321,8 +321,8 @@ Object.defineProperties(GridImageryProvider.prototype, {
   hasAlphaChannel: {
     get: function () {
       return true;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -347,13 +347,13 @@ GridImageryProvider.prototype._drawGrid = function (context) {
  * Render a grid into a canvas with background and glow
  */
 GridImageryProvider.prototype._createGridCanvas = function () {
-  const canvas = document.createElement("canvas");
+  const canvas = document.createElement('canvas');
   canvas.width = this._canvasSize;
   canvas.height = this._canvasSize;
   const minPixel = 0;
   const maxPixel = this._canvasSize;
 
-  const context = canvas.getContext("2d");
+  const context = canvas.getContext('2d');
 
   // Fill the background
   const cssBackgroundColor = this._backgroundColor.toCssColorString();

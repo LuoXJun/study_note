@@ -1,11 +1,11 @@
-import Buffer from "../../Renderer/Buffer.js";
-import BufferUsage from "../../Renderer/BufferUsage.js";
-import defined from "../../Core/defined.js";
-import IndexDatatype from "../../Core/IndexDatatype.js";
-import PrimitiveType from "../../Core/PrimitiveType.js";
-import WireframeIndexGenerator from "../../Core/WireframeIndexGenerator.js";
-import VertexAttributeSemantic from "../VertexAttributeSemantic.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
+import Buffer from '../../Renderer/Buffer.js';
+import BufferUsage from '../../Renderer/BufferUsage.js';
+import defined from '../../Core/defined.js';
+import IndexDatatype from '../../Core/IndexDatatype.js';
+import PrimitiveType from '../../Core/PrimitiveType.js';
+import WireframeIndexGenerator from '../../Core/WireframeIndexGenerator.js';
+import VertexAttributeSemantic from '../VertexAttributeSemantic.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
 
 /**
  * The wireframe pipeline stage generates a new index buffer for rendering the
@@ -15,7 +15,7 @@ import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
  * @private
  */
 const WireframePipelineStage = {};
-WireframePipelineStage.name = "WireframePipelineStage"; // Helps with debugging
+WireframePipelineStage.name = 'WireframePipelineStage'; // Helps with debugging
 
 /**
  * Process a primitive. This modifies the render resources as follows:
@@ -98,7 +98,7 @@ function createWireframeIndexBuffer(primitive, indices, frameState) {
     context: frameState.context,
     typedArray: wireframeIndices,
     usage: BufferUsage.STATIC_DRAW,
-    indexDatatype: indexDatatype,
+    indexDatatype: indexDatatype
   });
 }
 

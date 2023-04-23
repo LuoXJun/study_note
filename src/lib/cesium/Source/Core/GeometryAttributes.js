@@ -1,4 +1,4 @@
-import defaultValue from "./defaultValue.js";
+import defaultValue from './defaultValue.js';
 
 /**
  * Attributes, which make up a geometry's vertices.  Each property in this object corresponds to a

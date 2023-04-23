@@ -1,7 +1,7 @@
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Value and type information for per-instance geometry attribute that determines if the geometry instance will be shown.
@@ -58,7 +58,7 @@ Object.defineProperties(ShowGeometryInstanceAttribute.prototype, {
   componentDatatype: {
     get: function () {
       return ComponentDatatype.UNSIGNED_BYTE;
-    },
+    }
   },
 
   /**
@@ -74,7 +74,7 @@ Object.defineProperties(ShowGeometryInstanceAttribute.prototype, {
   componentsPerAttribute: {
     get: function () {
       return 1;
-    },
+    }
   },
 
   /**
@@ -92,8 +92,8 @@ Object.defineProperties(ShowGeometryInstanceAttribute.prototype, {
   normalize: {
     get: function () {
       return false;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -110,7 +110,7 @@ Object.defineProperties(ShowGeometryInstanceAttribute.prototype, {
 ShowGeometryInstanceAttribute.toValue = function (show, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(show)) {
-    throw new DeveloperError("show is required.");
+    throw new DeveloperError('show is required.');
   }
   //>>includeEnd('debug');
 

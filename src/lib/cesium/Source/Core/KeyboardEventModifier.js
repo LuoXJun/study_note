@@ -27,6 +27,6 @@ const KeyboardEventModifier = {
    * @type {Number}
    * @constant
    */
-  ALT: 2,
+  ALT: 2
 };
 export default Object.freeze(KeyboardEventModifier);

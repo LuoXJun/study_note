@@ -33,6 +33,6 @@ const ClockStep = {
    * @type {Number}
    * @constant
    */
-  SYSTEM_CLOCK: 2,
+  SYSTEM_CLOCK: 2
 };
 export default Object.freeze(ClockStep);

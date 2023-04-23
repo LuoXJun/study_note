@@ -1,4 +1,4 @@
-import WebGLConstants from "../Core/WebGLConstants.js";
+import WebGLConstants from '../Core/WebGLConstants.js';
 
 /**
  * @private
@@ -14,6 +14,6 @@ const BufferUsage = {
       bufferUsage === BufferUsage.STATIC_DRAW ||
       bufferUsage === BufferUsage.DYNAMIC_DRAW
     );
-  },
+  }
 };
 export default Object.freeze(BufferUsage);

@@ -1,6 +1,6 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import PrimitiveType from "../Core/PrimitiveType.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import PrimitiveType from '../Core/PrimitiveType.js';
 
 const Flags = {
   CULL: 1,
@@ -10,7 +10,7 @@ const Flags = {
   CAST_SHADOWS: 16,
   RECEIVE_SHADOWS: 32,
   PICK_ONLY: 64,
-  DEPTH_FOR_TRANSLUCENT_CLASSIFICATION: 128,
+  DEPTH_FOR_TRANSLUCENT_CLASSIFICATION: 128
 };
 
 /**
@@ -107,7 +107,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._boundingVolume = value;
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -129,7 +129,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._orientedBoundingBox = value;
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -149,7 +149,7 @@ Object.defineProperties(DrawCommand.prototype, {
         setFlag(this, Flags.CULL, value);
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -169,7 +169,7 @@ Object.defineProperties(DrawCommand.prototype, {
         setFlag(this, Flags.OCCLUDE, value);
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -191,7 +191,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._modelMatrix = value;
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -210,7 +210,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._primitiveType = value;
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -229,7 +229,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._vertexArray = value;
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -248,7 +248,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._count = value;
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -267,7 +267,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._offset = value;
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -286,7 +286,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._instanceCount = value;
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -305,7 +305,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._shaderProgram = value;
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -324,7 +324,7 @@ Object.defineProperties(DrawCommand.prototype, {
         setFlag(this, Flags.CAST_SHADOWS, value);
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -343,7 +343,7 @@ Object.defineProperties(DrawCommand.prototype, {
         setFlag(this, Flags.RECEIVE_SHADOWS, value);
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -363,7 +363,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._uniformMap = value;
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -382,7 +382,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._renderState = value;
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -401,7 +401,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._framebuffer = value;
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -420,7 +420,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._pass = value;
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -440,7 +440,7 @@ Object.defineProperties(DrawCommand.prototype, {
         setFlag(this, Flags.EXECUTE_IN_CLOSEST_FRUSTUM, value);
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -464,7 +464,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._owner = value;
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -488,7 +488,7 @@ Object.defineProperties(DrawCommand.prototype, {
         setFlag(this, Flags.DEBUG_SHOW_BOUNDING_VOLUME, value);
         this.dirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -504,7 +504,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._debugOverlappingFrustums = value;
         this.dirty = true;
       }
-    },
+    }
   },
   /**
    * A GLSL string that will evaluate to a pick id. When <code>undefined</code>, the command will only draw depth
@@ -523,7 +523,7 @@ Object.defineProperties(DrawCommand.prototype, {
         this._pickId = value;
         this.dirty = true;
       }
-    },
+    }
   },
   /**
    * Whether this command should be executed in the pick pass only.
@@ -541,7 +541,7 @@ Object.defineProperties(DrawCommand.prototype, {
         setFlag(this, Flags.PICK_ONLY, value);
         this.dirty = true;
       }
-    },
+    }
   },
   /**
    * Whether this command should be derived to draw depth for classification of translucent primitives.
@@ -559,8 +559,8 @@ Object.defineProperties(DrawCommand.prototype, {
         setFlag(this, Flags.DEPTH_FOR_TRANSLUCENT_CLASSIFICATION, value);
         this.dirty = true;
       }
-    },
-  },
+    }
+  }
 });
 
 /**

@@ -1,8 +1,8 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import deprecationWarning from "../Core/deprecationWarning.js";
-import getJsonFromTypedArray from "../Core/getJsonFromTypedArray.js";
-import RuntimeError from "../Core/RuntimeError.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import deprecationWarning from '../Core/deprecationWarning.js';
+import getJsonFromTypedArray from '../Core/getJsonFromTypedArray.js';
+import RuntimeError from '../Core/RuntimeError.js';
 
 /**
  * Handles parsing of an Instanced 3D Model.
@@ -26,7 +26,7 @@ const sizeOfUint32 = Uint32Array.BYTES_PER_ELEMENT;
  */
 I3dmParser.parse = function (arrayBuffer, byteOffset) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("arrayBuffer", arrayBuffer);
+  Check.defined('arrayBuffer', arrayBuffer);
   //>>includeEnd('debug');
 
   const byteStart = defaultValue(byteOffset, 0);
@@ -50,7 +50,7 @@ I3dmParser.parse = function (arrayBuffer, byteOffset) {
   const featureTableJsonByteLength = view.getUint32(byteOffset, true);
   if (featureTableJsonByteLength === 0) {
     throw new RuntimeError(
-      "featureTableJsonByteLength is zero, the feature table must be defined."
+      'featureTableJsonByteLength is zero, the feature table must be defined.'
     );
   }
   byteOffset += sizeOfUint32;
@@ -111,7 +111,7 @@ I3dmParser.parse = function (arrayBuffer, byteOffset) {
 
   const gltfByteLength = byteStart + byteLength - byteOffset;
   if (gltfByteLength === 0) {
-    throw new RuntimeError("glTF byte length must be greater than 0.");
+    throw new RuntimeError('glTF byte length must be greater than 0.');
   }
 
   let gltfView;
@@ -120,8 +120,8 @@ I3dmParser.parse = function (arrayBuffer, byteOffset) {
   } else {
     // Create a copy of the glb so that it is 4-byte aligned
     I3dmParser._deprecationWarning(
-      "i3dm-glb-unaligned",
-      "The embedded glb is not aligned to a 4-byte boundary."
+      'i3dm-glb-unaligned',
+      'The embedded glb is not aligned to a 4-byte boundary.'
     );
     gltfView = new Uint8Array(
       uint8Array.subarray(byteOffset, byteOffset + gltfByteLength)
@@ -134,7 +134,7 @@ I3dmParser.parse = function (arrayBuffer, byteOffset) {
     featureTableBinary: featureTableBinary,
     batchTableJson: batchTableJson,
     batchTableBinary: batchTableBinary,
-    gltf: gltfView,
+    gltf: gltfView
   };
 };
 

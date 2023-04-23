@@ -1,7 +1,7 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import combine from "../Core/combine.js";
-import defined from "../Core/defined.js";
-import EasingFunction from "../Core/EasingFunction.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import combine from '../Core/combine.js';
+import defined from '../Core/defined.js';
+import EasingFunction from '../Core/EasingFunction.js';
 /**
  * Transitions the KmlTour to the next destination. This transition is facilitated
  * using a specified flyToMode over a given number of seconds.
@@ -17,7 +17,7 @@ import EasingFunction from "../Core/EasingFunction.js";
  * @see KmlTourWait
  */
 function KmlTourFlyTo(duration, flyToMode, view) {
-  this.type = "KmlTourFlyTo";
+  this.type = 'KmlTourFlyTo';
   this.blocking = true;
   this.activeCamera = null;
   this.activeCallback = null;
@@ -75,14 +75,14 @@ KmlTourFlyTo.prototype.stop = function () {
  */
 KmlTourFlyTo.prototype.getCameraOptions = function (cameraOptions) {
   let options = {
-    duration: this.duration,
+    duration: this.duration
   };
 
   if (defined(this.activeCallback)) {
     options.complete = this.activeCallback;
   }
 
-  if (this.flyToMode === "smooth") {
+  if (this.flyToMode === 'smooth') {
     options.easingFunction = EasingFunction.LINEAR_NONE;
   }
 

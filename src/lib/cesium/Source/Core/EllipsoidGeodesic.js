@@ -1,10 +1,10 @@
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Ellipsoid from "./Ellipsoid.js";
-import CesiumMath from "./Math.js";
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Ellipsoid from './Ellipsoid.js';
+import CesiumMath from './Math.js';
 
 function setConstants(ellipsoidGeodesic) {
   const uSquared = ellipsoidGeodesic._uSquared;
@@ -243,7 +243,7 @@ function computeProperties(ellipsoidGeodesic, start, end, ellipsoid) {
 
   //>>includeStart('debug', pragmas.debug);
   Check.typeOf.number.greaterThanOrEquals(
-    "value",
+    'value',
     Math.abs(
       Math.abs(Cartesian3.angleBetween(firstCartesian, lastCartesian)) - Math.PI
     ),
@@ -309,7 +309,7 @@ Object.defineProperties(EllipsoidGeodesic.prototype, {
   ellipsoid: {
     get: function () {
       return this._ellipsoid;
-    },
+    }
   },
 
   /**
@@ -321,11 +321,11 @@ Object.defineProperties(EllipsoidGeodesic.prototype, {
   surfaceDistance: {
     get: function () {
       //>>includeStart('debug', pragmas.debug);
-      Check.defined("distance", this._distance);
+      Check.defined('distance', this._distance);
       //>>includeEnd('debug');
 
       return this._distance;
-    },
+    }
   },
 
   /**
@@ -337,7 +337,7 @@ Object.defineProperties(EllipsoidGeodesic.prototype, {
   start: {
     get: function () {
       return this._start;
-    },
+    }
   },
 
   /**
@@ -349,7 +349,7 @@ Object.defineProperties(EllipsoidGeodesic.prototype, {
   end: {
     get: function () {
       return this._end;
-    },
+    }
   },
 
   /**
@@ -361,11 +361,11 @@ Object.defineProperties(EllipsoidGeodesic.prototype, {
   startHeading: {
     get: function () {
       //>>includeStart('debug', pragmas.debug);
-      Check.defined("distance", this._distance);
+      Check.defined('distance', this._distance);
       //>>includeEnd('debug');
 
       return this._startHeading;
-    },
+    }
   },
 
   /**
@@ -377,12 +377,12 @@ Object.defineProperties(EllipsoidGeodesic.prototype, {
   endHeading: {
     get: function () {
       //>>includeStart('debug', pragmas.debug);
-      Check.defined("distance", this._distance);
+      Check.defined('distance', this._distance);
       //>>includeEnd('debug');
 
       return this._endHeading;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -393,8 +393,8 @@ Object.defineProperties(EllipsoidGeodesic.prototype, {
  */
 EllipsoidGeodesic.prototype.setEndPoints = function (start, end) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("start", start);
-  Check.defined("end", end);
+  Check.defined('start', start);
+  Check.defined('end', end);
   //>>includeEnd('debug');
 
   computeProperties(this, start, end, this._ellipsoid);
@@ -431,7 +431,7 @@ EllipsoidGeodesic.prototype.interpolateUsingSurfaceDistance = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("distance", this._distance);
+  Check.defined('distance', this._distance);
   //>>includeEnd('debug');
 
   const constants = this._constants;

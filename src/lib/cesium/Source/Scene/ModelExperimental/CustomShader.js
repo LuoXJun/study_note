@@ -1,11 +1,11 @@
-import Check from "../../Core/Check.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import CustomShaderMode from "./CustomShaderMode.js";
-import UniformType from "./UniformType.js";
-import TextureManager from "./TextureManager.js";
+import Check from '../../Core/Check.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import CustomShaderMode from './CustomShaderMode.js';
+import UniformType from './UniformType.js';
+import TextureManager from './TextureManager.js';
 
 /**
  * An object describing a uniform, its type, and an initial value
@@ -214,7 +214,7 @@ export default function CustomShader(options) {
   this.usedVariablesVertex = {
     attributeSet: {},
     featureIdSet: {},
-    metadataSet: {},
+    metadataSet: {}
   };
   /**
    * A collection of variables used in <code>fragmentShaderText</code>. This
@@ -226,7 +226,7 @@ export default function CustomShader(options) {
     attributeSet: {},
     featureIdSet: {},
     metadataSet: {},
-    materialSet: {},
+    materialSet: {}
   };
 
   findUsedVariables(this);
@@ -243,7 +243,7 @@ function buildUniformMap(customShader) {
       //>>includeStart('debug', pragmas.debug);
       if (type === UniformType.SAMPLER_CUBE) {
         throw new DeveloperError(
-          "CustomShader does not support samplerCube uniforms"
+          'CustomShader does not support samplerCube uniforms'
         );
       }
       //>>includeEnd('debug');
@@ -367,33 +367,33 @@ function validateBuiltinVariables(customShader) {
   const attributesVS = customShader.usedVariablesVertex.attributeSet;
 
   // names without MC/WC/EC are ambiguous
-  validateVariableUsage(attributesVS, "position", "positionMC", "vertex");
-  validateVariableUsage(attributesVS, "normal", "normalMC", "vertex");
-  validateVariableUsage(attributesVS, "tangent", "tangentMC", "vertex");
-  validateVariableUsage(attributesVS, "bitangent", "bitangentMC", "vertex");
+  validateVariableUsage(attributesVS, 'position', 'positionMC', 'vertex');
+  validateVariableUsage(attributesVS, 'normal', 'normalMC', 'vertex');
+  validateVariableUsage(attributesVS, 'tangent', 'tangentMC', 'vertex');
+  validateVariableUsage(attributesVS, 'bitangent', 'bitangentMC', 'vertex');
 
   // world and eye coordinate positions are only available in the fragment shader.
-  validateVariableUsage(attributesVS, "positionWC", "positionMC", "vertex");
-  validateVariableUsage(attributesVS, "positionEC", "positionMC", "vertex");
+  validateVariableUsage(attributesVS, 'positionWC', 'positionMC', 'vertex');
+  validateVariableUsage(attributesVS, 'positionEC', 'positionMC', 'vertex');
 
   // normal, tangent and bitangent are in model coordinates in the vertex shader
-  validateVariableUsage(attributesVS, "normalEC", "normalMC", "vertex");
-  validateVariableUsage(attributesVS, "tangentEC", "tangentMC", "vertex");
-  validateVariableUsage(attributesVS, "bitangentEC", "bitangentMC", "vertex");
+  validateVariableUsage(attributesVS, 'normalEC', 'normalMC', 'vertex');
+  validateVariableUsage(attributesVS, 'tangentEC', 'tangentMC', 'vertex');
+  validateVariableUsage(attributesVS, 'bitangentEC', 'bitangentMC', 'vertex');
 
   const attributesFS = customShader.usedVariablesFragment.attributeSet;
 
   // names without MC/WC/EC are ambiguous
-  validateVariableUsage(attributesFS, "position", "positionEC", "fragment");
-  validateVariableUsage(attributesFS, "normal", "normalEC", "fragment");
-  validateVariableUsage(attributesFS, "tangent", "tangentEC", "fragment");
-  validateVariableUsage(attributesFS, "bitangent", "bitangentEC", "fragment");
+  validateVariableUsage(attributesFS, 'position', 'positionEC', 'fragment');
+  validateVariableUsage(attributesFS, 'normal', 'normalEC', 'fragment');
+  validateVariableUsage(attributesFS, 'tangent', 'tangentEC', 'fragment');
+  validateVariableUsage(attributesFS, 'bitangent', 'bitangentEC', 'fragment');
 
   // normal, tangent, and bitangent are in eye coordinates in the fragment
   // shader.
-  validateVariableUsage(attributesFS, "normalMC", "normalEC", "fragment");
-  validateVariableUsage(attributesFS, "tangentMC", "tangentEC", "fragment");
-  validateVariableUsage(attributesFS, "bitangentMC", "bitangentEC", "fragment");
+  validateVariableUsage(attributesFS, 'normalMC', 'normalEC', 'fragment');
+  validateVariableUsage(attributesFS, 'tangentMC', 'tangentEC', 'fragment');
+  validateVariableUsage(attributesFS, 'bitangentMC', 'bitangentEC', 'fragment');
 }
 
 /**
@@ -403,8 +403,8 @@ function validateBuiltinVariables(customShader) {
  */
 CustomShader.prototype.setUniform = function (uniformName, value) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("uniformName", uniformName);
-  Check.defined("value", value);
+  Check.typeOf.string('uniformName', uniformName);
+  Check.defined('value', value);
   if (!defined(this.uniforms[uniformName])) {
     throw new DeveloperError(
       `Uniform ${uniformName} must be declared in the CustomShader constructor.`

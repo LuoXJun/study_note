@@ -1,9 +1,9 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import createMaterialPropertyDescriptor from "./createMaterialPropertyDescriptor.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import createMaterialPropertyDescriptor from './createMaterialPropertyDescriptor.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
 
 /**
  * @typedef {Object} WallGraphics.ConstructorOptions
@@ -77,7 +77,7 @@ Object.defineProperties(WallGraphics.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -86,14 +86,14 @@ Object.defineProperties(WallGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  show: createPropertyDescriptor("show"),
+  show: createPropertyDescriptor('show'),
 
   /**
    * Gets or sets the Property specifying the array of {@link Cartesian3} positions which define the top of the wall.
    * @memberof WallGraphics.prototype
    * @type {Property|undefined}
    */
-  positions: createPropertyDescriptor("positions"),
+  positions: createPropertyDescriptor('positions'),
 
   /**
    * Gets or sets the Property specifying an array of heights to be used for the bottom of the wall instead of the surface of the globe.
@@ -101,7 +101,7 @@ Object.defineProperties(WallGraphics.prototype, {
    * @memberof WallGraphics.prototype
    * @type {Property|undefined}
    */
-  minimumHeights: createPropertyDescriptor("minimumHeights"),
+  minimumHeights: createPropertyDescriptor('minimumHeights'),
 
   /**
    * Gets or sets the Property specifying an array of heights to be used for the top of the wall instead of the height of each position.
@@ -109,7 +109,7 @@ Object.defineProperties(WallGraphics.prototype, {
    * @memberof WallGraphics.prototype
    * @type {Property|undefined}
    */
-  maximumHeights: createPropertyDescriptor("maximumHeights"),
+  maximumHeights: createPropertyDescriptor('maximumHeights'),
 
   /**
    * Gets or sets the numeric Property specifying the angular distance between points on the wall.
@@ -117,7 +117,7 @@ Object.defineProperties(WallGraphics.prototype, {
    * @type {Property|undefined}
    * @default {CesiumMath.RADIANS_PER_DEGREE}
    */
-  granularity: createPropertyDescriptor("granularity"),
+  granularity: createPropertyDescriptor('granularity'),
 
   /**
    * Gets or sets the boolean Property specifying whether the wall is filled with the provided material.
@@ -125,7 +125,7 @@ Object.defineProperties(WallGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  fill: createPropertyDescriptor("fill"),
+  fill: createPropertyDescriptor('fill'),
 
   /**
    * Gets or sets the Property specifying the material used to fill the wall.
@@ -133,7 +133,7 @@ Object.defineProperties(WallGraphics.prototype, {
    * @type {MaterialProperty}
    * @default Color.WHITE
    */
-  material: createMaterialPropertyDescriptor("material"),
+  material: createMaterialPropertyDescriptor('material'),
 
   /**
    * Gets or sets the Property specifying whether the wall is outlined.
@@ -141,7 +141,7 @@ Object.defineProperties(WallGraphics.prototype, {
    * @type {Property|undefined}
    * @default false
    */
-  outline: createPropertyDescriptor("outline"),
+  outline: createPropertyDescriptor('outline'),
 
   /**
    * Gets or sets the Property specifying the {@link Color} of the outline.
@@ -149,7 +149,7 @@ Object.defineProperties(WallGraphics.prototype, {
    * @type {Property|undefined}
    * @default Color.BLACK
    */
-  outlineColor: createPropertyDescriptor("outlineColor"),
+  outlineColor: createPropertyDescriptor('outlineColor'),
 
   /**
    * Gets or sets the numeric Property specifying the width of the outline.
@@ -160,7 +160,7 @@ Object.defineProperties(WallGraphics.prototype, {
    * @type {Property|undefined}
    * @default 1.0
    */
-  outlineWidth: createPropertyDescriptor("outlineWidth"),
+  outlineWidth: createPropertyDescriptor('outlineWidth'),
 
   /**
    * Get or sets the enum Property specifying whether the wall
@@ -169,16 +169,14 @@ Object.defineProperties(WallGraphics.prototype, {
    * @type {Property|undefined}
    * @default ShadowMode.DISABLED
    */
-  shadows: createPropertyDescriptor("shadows"),
+  shadows: createPropertyDescriptor('shadows'),
 
   /**
    * Gets or sets the {@link DistanceDisplayCondition} Property specifying at what distance from the camera that this wall will be displayed.
    * @memberof WallGraphics.prototype
    * @type {Property|undefined}
    */
-  distanceDisplayCondition: createPropertyDescriptor(
-    "distanceDisplayCondition"
-  ),
+  distanceDisplayCondition: createPropertyDescriptor('distanceDisplayCondition')
 });
 
 /**
@@ -215,7 +213,7 @@ WallGraphics.prototype.clone = function (result) {
 WallGraphics.prototype.merge = function (source) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
-    throw new DeveloperError("source is required.");
+    throw new DeveloperError('source is required.');
   }
   //>>includeEnd('debug');
 

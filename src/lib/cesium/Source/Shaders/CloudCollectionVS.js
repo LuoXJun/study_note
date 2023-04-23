@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "#ifdef INSTANCED\n\
+export default '#ifdef INSTANCED\n\
 attribute vec2 direction;\n\
 #endif\n\
 attribute vec4 positionHighAndScaleX;\n\
@@ -47,4 +47,4 @@ void main() {\n\
     v_slice = slice;\n\
     v_brightness = brightness;\n\
 }\n\
-";
+';

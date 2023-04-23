@@ -1,8 +1,8 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import GroupMetadata from "./GroupMetadata.js";
-import TilesetMetadata from "./TilesetMetadata.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import GroupMetadata from './GroupMetadata.js';
+import TilesetMetadata from './TilesetMetadata.js';
 
 /**
  * An object containing metadata about a 3D Tileset.
@@ -32,8 +32,8 @@ function Cesium3DTilesetMetadata(options) {
   const schema = options.schema;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.metadataJson", metadataJson);
-  Check.typeOf.object("options.schema", schema);
+  Check.typeOf.object('options.metadataJson', metadataJson);
+  Check.typeOf.object('options.schema', schema);
   //>>includeEnd('debug');
 
   // An older schema stored the tileset metadata in the "tileset" property.
@@ -43,7 +43,7 @@ function Cesium3DTilesetMetadata(options) {
   if (defined(metadata)) {
     tileset = new TilesetMetadata({
       tileset: metadata,
-      class: schema.classes[metadata.class],
+      class: schema.classes[metadata.class]
     });
   }
 
@@ -57,7 +57,7 @@ function Cesium3DTilesetMetadata(options) {
       groups.push(
         new GroupMetadata({
           group: group,
-          class: schema.classes[group.class],
+          class: schema.classes[group.class]
         })
       );
     }
@@ -74,7 +74,7 @@ function Cesium3DTilesetMetadata(options) {
           new GroupMetadata({
             id: groupId,
             group: groupsJson[groupId],
-            class: schema.classes[group.class],
+            class: schema.classes[group.class]
           })
         );
       }
@@ -103,7 +103,7 @@ Object.defineProperties(Cesium3DTilesetMetadata.prototype, {
   schema: {
     get: function () {
       return this._schema;
-    },
+    }
   },
 
   /**
@@ -117,7 +117,7 @@ Object.defineProperties(Cesium3DTilesetMetadata.prototype, {
   groups: {
     get: function () {
       return this._groups;
-    },
+    }
   },
 
   /**
@@ -132,7 +132,7 @@ Object.defineProperties(Cesium3DTilesetMetadata.prototype, {
   groupIds: {
     get: function () {
       return this._groupIds;
-    },
+    }
   },
 
   /**
@@ -146,7 +146,7 @@ Object.defineProperties(Cesium3DTilesetMetadata.prototype, {
   tileset: {
     get: function () {
       return this._tileset;
-    },
+    }
   },
 
   /**
@@ -164,7 +164,7 @@ Object.defineProperties(Cesium3DTilesetMetadata.prototype, {
   statistics: {
     get: function () {
       return this._statistics;
-    },
+    }
   },
 
   /**
@@ -178,7 +178,7 @@ Object.defineProperties(Cesium3DTilesetMetadata.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -192,8 +192,8 @@ Object.defineProperties(Cesium3DTilesetMetadata.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
-  },
+    }
+  }
 });
 
 export default Cesium3DTilesetMetadata;

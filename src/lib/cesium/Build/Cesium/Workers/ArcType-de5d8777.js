@@ -22,4 +22,8 @@
  * Portions licensed separately.
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
-define(["exports"],(function(e){"use strict";var r=Object.freeze({NONE:0,GEODESIC:1,RHUMB:2});e.ArcType=r}));
+define(['exports'], function (e) {
+  'use strict';
+  var r = Object.freeze({ NONE: 0, GEODESIC: 1, RHUMB: 2 });
+  e.ArcType = r;
+});

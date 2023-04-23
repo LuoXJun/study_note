@@ -1,6 +1,6 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
 
 /**
  * An object containing structural metadata.
@@ -27,7 +27,7 @@ import defined from "../Core/defined.js";
 function StructuralMetadata(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.schema", options.schema);
+  Check.typeOf.object('options.schema', options.schema);
   //>>includeEnd('debug');
 
   this._schema = options.schema;
@@ -55,7 +55,7 @@ Object.defineProperties(StructuralMetadata.prototype, {
   schema: {
     get: function () {
       return this._schema;
-    },
+    }
   },
 
   /**
@@ -72,7 +72,7 @@ Object.defineProperties(StructuralMetadata.prototype, {
   statistics: {
     get: function () {
       return this._statistics;
-    },
+    }
   },
 
   /**
@@ -86,7 +86,7 @@ Object.defineProperties(StructuralMetadata.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -100,7 +100,7 @@ Object.defineProperties(StructuralMetadata.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
+    }
   },
 
   /**
@@ -114,7 +114,7 @@ Object.defineProperties(StructuralMetadata.prototype, {
   propertyTableCount: {
     get: function () {
       return this._propertyTableCount;
-    },
+    }
   },
 
   /**
@@ -128,7 +128,7 @@ Object.defineProperties(StructuralMetadata.prototype, {
   propertyTables: {
     get: function () {
       return this._propertyTables;
-    },
+    }
   },
 
   /**
@@ -142,7 +142,7 @@ Object.defineProperties(StructuralMetadata.prototype, {
   propertyTextures: {
     get: function () {
       return this._propertyTextures;
-    },
+    }
   },
 
   /**
@@ -156,7 +156,7 @@ Object.defineProperties(StructuralMetadata.prototype, {
   propertyAttributes: {
     get: function () {
       return this._propertyAttributes;
-    },
+    }
   },
 
   /**
@@ -180,8 +180,8 @@ Object.defineProperties(StructuralMetadata.prototype, {
       }
 
       return totalByteLength;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -197,7 +197,7 @@ Object.defineProperties(StructuralMetadata.prototype, {
  */
 StructuralMetadata.prototype.getPropertyTable = function (propertyTableId) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("propertyTableId", propertyTableId);
+  Check.typeOf.number('propertyTableId', propertyTableId);
   //>>includeEnd('debug');
 
   return this._propertyTables[propertyTableId];
@@ -216,7 +216,7 @@ StructuralMetadata.prototype.getPropertyTable = function (propertyTableId) {
  */
 StructuralMetadata.prototype.getPropertyTexture = function (propertyTextureId) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("propertyTextureId", propertyTextureId);
+  Check.typeOf.number('propertyTextureId', propertyTextureId);
   //>>includeEnd('debug');
 
   return this._propertyTextures[propertyTextureId];
@@ -234,7 +234,7 @@ StructuralMetadata.prototype.getPropertyAttribute = function (
   propertyAttributeId
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("propertyAttributeId", propertyAttributeId);
+  Check.typeOf.number('propertyAttributeId', propertyAttributeId);
   //>>includeEnd('debug');
 
   return this._propertyAttributes[propertyAttributeId];

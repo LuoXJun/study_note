@@ -1,7 +1,7 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import defined from "../Core/defined.js";
-import CesiumMath from "../Core/Math.js";
-import SceneMode from "./SceneMode.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import defined from '../Core/defined.js';
+import CesiumMath from '../Core/Math.js';
+import SceneMode from './SceneMode.js';
 
 /**
  * Blends the atmosphere to geometry far from the camera for horizon views. Allows for additional
@@ -54,48 +54,15 @@ function Fog() {
 
 // These values were found by sampling the density at certain views and finding at what point culled tiles impacted the view at the horizon.
 const heightsTable = [
-  359.393,
-  800.749,
-  1275.6501,
-  2151.1192,
-  3141.7763,
-  4777.5198,
-  6281.2493,
-  12364.307,
-  15900.765,
-  49889.0549,
-  78026.8259,
-  99260.7344,
-  120036.3873,
-  151011.0158,
-  156091.1953,
-  203849.3112,
-  274866.9803,
-  319916.3149,
-  493552.0528,
-  628733.5874,
+  359.393, 800.749, 1275.6501, 2151.1192, 3141.7763, 4777.5198, 6281.2493,
+  12364.307, 15900.765, 49889.0549, 78026.8259, 99260.7344, 120036.3873,
+  151011.0158, 156091.1953, 203849.3112, 274866.9803, 319916.3149, 493552.0528,
+  628733.5874
 ];
 const densityTable = [
-  2.0e-5,
-  2.0e-4,
-  1.0e-4,
-  7.0e-5,
-  5.0e-5,
-  4.0e-5,
-  3.0e-5,
-  1.9e-5,
-  1.0e-5,
-  8.5e-6,
-  6.2e-6,
-  5.8e-6,
-  5.3e-6,
-  5.2e-6,
-  5.1e-6,
-  4.2e-6,
-  4.0e-6,
-  3.4e-6,
-  2.6e-6,
-  2.2e-6,
+  2.0e-5, 2.0e-4, 1.0e-4, 7.0e-5, 5.0e-5, 4.0e-5, 3.0e-5, 1.9e-5, 1.0e-5,
+  8.5e-6, 6.2e-6, 5.8e-6, 5.3e-6, 5.2e-6, 5.1e-6, 4.2e-6, 4.0e-6, 3.4e-6,
+  2.6e-6, 2.2e-6
 ];
 
 // Scale densities by 1e6 to bring lowest value to ~1. Prevents divide by zero.

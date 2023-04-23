@@ -1,11 +1,11 @@
-import Cartesian3 from "./Cartesian3.js";
-import CornerType from "./CornerType.js";
-import defined from "./defined.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
-import PolylinePipeline from "./PolylinePipeline.js";
-import PolylineVolumeGeometryLibrary from "./PolylineVolumeGeometryLibrary.js";
-import Quaternion from "./Quaternion.js";
+import Cartesian3 from './Cartesian3.js';
+import CornerType from './CornerType.js';
+import defined from './defined.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
+import PolylinePipeline from './PolylinePipeline.js';
+import PolylineVolumeGeometryLibrary from './PolylineVolumeGeometryLibrary.js';
+import Quaternion from './Quaternion.js';
 
 /**
  * @private
@@ -148,7 +148,7 @@ function computeMiteredCorner(
     cornerPoint.z,
     lastPoint.x,
     lastPoint.y,
-    lastPoint.z,
+    lastPoint.z
   ];
 }
 
@@ -331,7 +331,7 @@ CorridorGeometryLibrary.computePositions = function (params) {
         subdividedPositions = PolylinePipeline.generateArc({
           positions: scaleArray2,
           granularity: granularity,
-          ellipsoid: ellipsoid,
+          ellipsoid: ellipsoid
         });
         calculatedPositions = addShiftedPositions(
           subdividedPositions,
@@ -369,7 +369,7 @@ CorridorGeometryLibrary.computePositions = function (params) {
               leftPos,
               cornerType,
               leftIsOutside
-            ),
+            )
           });
         } else {
           corners.push({
@@ -378,7 +378,7 @@ CorridorGeometryLibrary.computePositions = function (params) {
               Cartesian3.negate(cornerDirection, cornerDirection),
               leftPos,
               leftIsOutside
-            ),
+            )
           });
         }
       } else {
@@ -404,7 +404,7 @@ CorridorGeometryLibrary.computePositions = function (params) {
         subdividedPositions = PolylinePipeline.generateArc({
           positions: scaleArray2,
           granularity: granularity,
-          ellipsoid: ellipsoid,
+          ellipsoid: ellipsoid
         });
         calculatedPositions = addShiftedPositions(
           subdividedPositions,
@@ -448,7 +448,7 @@ CorridorGeometryLibrary.computePositions = function (params) {
               rightPos,
               cornerType,
               leftIsOutside
-            ),
+            )
           });
         } else {
           corners.push({
@@ -457,7 +457,7 @@ CorridorGeometryLibrary.computePositions = function (params) {
               cornerDirection,
               rightPos,
               leftIsOutside
-            ),
+            )
           });
         }
       }
@@ -472,7 +472,7 @@ CorridorGeometryLibrary.computePositions = function (params) {
   subdividedPositions = PolylinePipeline.generateArc({
     positions: scaleArray2,
     granularity: granularity,
-    ellipsoid: ellipsoid,
+    ellipsoid: ellipsoid
   });
   calculatedPositions = addShiftedPositions(
     subdividedPositions,
@@ -495,7 +495,7 @@ CorridorGeometryLibrary.computePositions = function (params) {
     corners: corners,
     lefts: calculatedLefts,
     normals: calculatedNormals,
-    endPositions: endPositions,
+    endPositions: endPositions
   };
 };
 export default CorridorGeometryLibrary;

@@ -1,7 +1,7 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import MetadataEntity from "./MetadataEntity.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import MetadataEntity from './MetadataEntity.js';
 
 /**
  * Metadata about a group of {@link Cesium3DTileContent}
@@ -26,8 +26,8 @@ function GroupMetadata(options) {
   const metadataClass = options.class;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.group", group);
-  Check.typeOf.object("options.class", metadataClass);
+  Check.typeOf.object('options.group', group);
+  Check.typeOf.object('options.class', metadataClass);
   //>>includeEnd('debug');
 
   const properties = defined(group.properties) ? group.properties : {};
@@ -51,7 +51,7 @@ Object.defineProperties(GroupMetadata.prototype, {
   class: {
     get: function () {
       return this._class;
-    },
+    }
   },
 
   /**
@@ -65,7 +65,7 @@ Object.defineProperties(GroupMetadata.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
 
   /**
@@ -79,7 +79,7 @@ Object.defineProperties(GroupMetadata.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -93,8 +93,8 @@ Object.defineProperties(GroupMetadata.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
-  },
+    }
+  }
 });
 
 /**

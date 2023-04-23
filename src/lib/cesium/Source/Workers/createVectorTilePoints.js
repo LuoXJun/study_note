@@ -1,5 +1,22 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './createTaskProcessorWorker', './RuntimeError-c581ca93', './defaultValue-94c3e563', './WebGLConstants-7dccdc96'], (function (AttributeCompression, Matrix2, ComponentDatatype, createTaskProcessorWorker, RuntimeError, defaultValue, WebGLConstants) { 'use strict';
+define([
+  './AttributeCompression-4d18cc04',
+  './Matrix2-fc7e9822',
+  './ComponentDatatype-4a60b8d6',
+  './createTaskProcessorWorker',
+  './RuntimeError-c581ca93',
+  './defaultValue-94c3e563',
+  './WebGLConstants-7dccdc96'
+], function (
+  AttributeCompression,
+  Matrix2,
+  ComponentDatatype,
+  createTaskProcessorWorker,
+  RuntimeError,
+  defaultValue,
+  WebGLConstants
+) {
+  'use strict';
 
   const maxShort = 32767;
 
@@ -10,7 +27,7 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './ComponentDat
   const scratchEllipsoid = new Matrix2.Ellipsoid();
   const scratchMinMaxHeights = {
     min: undefined,
-    max: undefined,
+    max: undefined
   };
 
   function unpackBuffer(packedBuffer) {
@@ -42,7 +59,11 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './ComponentDat
       2 * positionsLength,
       3 * positionsLength
     );
-    AttributeCompression.AttributeCompression.zigZagDeltaDecode(uBuffer, vBuffer, heightBuffer);
+    AttributeCompression.AttributeCompression.zigZagDeltaDecode(
+      uBuffer,
+      vBuffer,
+      heightBuffer
+    );
 
     const decoded = new Float64Array(positions.length);
     for (let i = 0; i < positionsLength; ++i) {
@@ -50,9 +71,21 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './ComponentDat
       const v = vBuffer[i];
       const h = heightBuffer[i];
 
-      const lon = ComponentDatatype.CesiumMath.lerp(rectangle.west, rectangle.east, u / maxShort);
-      const lat = ComponentDatatype.CesiumMath.lerp(rectangle.south, rectangle.north, v / maxShort);
-      const alt = ComponentDatatype.CesiumMath.lerp(minimumHeight, maximumHeight, h / maxShort);
+      const lon = ComponentDatatype.CesiumMath.lerp(
+        rectangle.west,
+        rectangle.east,
+        u / maxShort
+      );
+      const lat = ComponentDatatype.CesiumMath.lerp(
+        rectangle.south,
+        rectangle.north,
+        v / maxShort
+      );
+      const alt = ComponentDatatype.CesiumMath.lerp(
+        minimumHeight,
+        maximumHeight,
+        h / maxShort
+      );
 
       const cartographic = Matrix2.Cartographic.fromRadians(
         lon,
@@ -70,11 +103,12 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './ComponentDat
     transferableObjects.push(decoded.buffer);
 
     return {
-      positions: decoded.buffer,
+      positions: decoded.buffer
     };
   }
-  var createVectorTilePoints$1 = createTaskProcessorWorker(createVectorTilePoints);
+  var createVectorTilePoints$1 = createTaskProcessorWorker(
+    createVectorTilePoints
+  );
 
   return createVectorTilePoints$1;
-
-}));
+});

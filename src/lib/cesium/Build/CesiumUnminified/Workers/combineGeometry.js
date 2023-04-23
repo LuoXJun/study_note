@@ -23,13 +23,56 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./PrimitivePipeline-be008fb1', './createTaskProcessorWorker', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './ComponentDatatype-4eeb6d9b', './WebGLConstants-6da700a2', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './GeometryPipeline-d7363877', './AttributeCompression-f202be44', './EncodedCartesian3-491ac596', './IndexDatatype-f228f5fd', './IntersectionTests-ea138127', './Plane-76b84425', './WebMercatorProjection-3b121d41'], (function (PrimitivePipeline, createTaskProcessorWorker, Transforms, Matrix2, RuntimeError, defaultValue, ComponentDatatype, WebGLConstants, _commonjsHelpers3aae1032, combine, GeometryAttribute, GeometryAttributes, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection) { 'use strict';
+define([
+  './PrimitivePipeline-be008fb1',
+  './createTaskProcessorWorker',
+  './Transforms-273eeb44',
+  './Matrix2-9e1c22e2',
+  './RuntimeError-4f8ec8a2',
+  './defaultValue-97284df2',
+  './ComponentDatatype-4eeb6d9b',
+  './WebGLConstants-6da700a2',
+  './_commonjsHelpers-3aae1032-65601a27',
+  './combine-d11b1f00',
+  './GeometryAttribute-9be2d2e5',
+  './GeometryAttributes-734a3446',
+  './GeometryPipeline-d7363877',
+  './AttributeCompression-f202be44',
+  './EncodedCartesian3-491ac596',
+  './IndexDatatype-f228f5fd',
+  './IntersectionTests-ea138127',
+  './Plane-76b84425',
+  './WebMercatorProjection-3b121d41'
+], function (
+  PrimitivePipeline,
+  createTaskProcessorWorker,
+  Transforms,
+  Matrix2,
+  RuntimeError,
+  defaultValue,
+  ComponentDatatype,
+  WebGLConstants,
+  _commonjsHelpers3aae1032,
+  combine,
+  GeometryAttribute,
+  GeometryAttributes,
+  GeometryPipeline,
+  AttributeCompression,
+  EncodedCartesian3,
+  IndexDatatype,
+  IntersectionTests,
+  Plane,
+  WebMercatorProjection
+) {
+  'use strict';
 
   function combineGeometry(packedParameters, transferableObjects) {
-    const parameters = PrimitivePipeline.PrimitivePipeline.unpackCombineGeometryParameters(
-      packedParameters
-    );
-    const results = PrimitivePipeline.PrimitivePipeline.combineGeometry(parameters);
+    const parameters =
+      PrimitivePipeline.PrimitivePipeline.unpackCombineGeometryParameters(
+        packedParameters
+      );
+    const results =
+      PrimitivePipeline.PrimitivePipeline.combineGeometry(parameters);
     return PrimitivePipeline.PrimitivePipeline.packCombineGeometryResults(
       results,
       transferableObjects
@@ -38,6 +81,5 @@ define(['./PrimitivePipeline-be008fb1', './createTaskProcessorWorker', './Transf
   var combineGeometry$1 = createTaskProcessorWorker(combineGeometry);
 
   return combineGeometry$1;
-
-}));
+});
 //# sourceMappingURL=combineGeometry.js.map

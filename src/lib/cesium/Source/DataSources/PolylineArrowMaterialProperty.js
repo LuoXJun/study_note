@@ -1,8 +1,8 @@
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import Event from "../Core/Event.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
-import Property from "./Property.js";
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import Event from '../Core/Event.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
+import Property from './Property.js';
 
 /**
  * A {@link MaterialProperty} that maps to PolylineArrow {@link Material} uniforms.
@@ -32,7 +32,7 @@ Object.defineProperties(PolylineArrowMaterialProperty.prototype, {
   isConstant: {
     get: function () {
       return Property.isConstant(this._color);
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -46,7 +46,7 @@ Object.defineProperties(PolylineArrowMaterialProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   /**
    * Gets or sets the {@link Color} {@link Property}.
@@ -54,7 +54,7 @@ Object.defineProperties(PolylineArrowMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default Color.WHITE
    */
-  color: createPropertyDescriptor("color"),
+  color: createPropertyDescriptor('color')
 });
 
 /**
@@ -64,7 +64,7 @@ Object.defineProperties(PolylineArrowMaterialProperty.prototype, {
  * @returns {String} The type of material.
  */
 PolylineArrowMaterialProperty.prototype.getType = function (time) {
-  return "PolylineArrow";
+  return 'PolylineArrow';
 };
 
 /**

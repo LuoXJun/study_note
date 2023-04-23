@@ -1,7 +1,7 @@
-import CesiumMath from "../Core/Math.js";
-import Check from "../Core/Check.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import FeatureDetection from "../Core/FeatureDetection.js";
+import CesiumMath from '../Core/Math.js';
+import Check from '../Core/Check.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import FeatureDetection from '../Core/FeatureDetection.js';
 
 /**
  * An enum of metadata component types.
@@ -18,7 +18,7 @@ const MetadataComponentType = {
    * @constant
    * @private
    */
-  INT8: "INT8",
+  INT8: 'INT8',
   /**
    * An 8-bit unsigned integer
    *
@@ -26,7 +26,7 @@ const MetadataComponentType = {
    * @constant
    * @private
    */
-  UINT8: "UINT8",
+  UINT8: 'UINT8',
   /**
    * A 16-bit signed integer
    *
@@ -34,7 +34,7 @@ const MetadataComponentType = {
    * @constant
    * @private
    */
-  INT16: "INT16",
+  INT16: 'INT16',
   /**
    * A 16-bit unsigned integer
    *
@@ -42,7 +42,7 @@ const MetadataComponentType = {
    * @constant
    * @private
    */
-  UINT16: "UINT16",
+  UINT16: 'UINT16',
   /**
    * A 32-bit signed integer
    *
@@ -50,7 +50,7 @@ const MetadataComponentType = {
    * @constant
    * @private
    */
-  INT32: "INT32",
+  INT32: 'INT32',
   /**
    * A 32-bit unsigned integer
    *
@@ -58,7 +58,7 @@ const MetadataComponentType = {
    * @constant
    * @private
    */
-  UINT32: "UINT32",
+  UINT32: 'UINT32',
   /**
    * A 64-bit signed integer. This type requires BigInt support.
    *
@@ -68,7 +68,7 @@ const MetadataComponentType = {
    * @constant
    * @private
    */
-  INT64: "INT64",
+  INT64: 'INT64',
   /**
    * A 64-bit signed integer. This type requires BigInt support
    *
@@ -78,7 +78,7 @@ const MetadataComponentType = {
    * @constant
    * @private
    */
-  UINT64: "UINT64",
+  UINT64: 'UINT64',
   /**
    * A 32-bit (single precision) floating point number
    *
@@ -86,7 +86,7 @@ const MetadataComponentType = {
    * @constant
    * @private
    */
-  FLOAT32: "FLOAT32",
+  FLOAT32: 'FLOAT32',
   /**
    * A 64-bit (double precision) floating point number
    *
@@ -94,7 +94,7 @@ const MetadataComponentType = {
    * @constant
    * @private
    */
-  FLOAT64: "FLOAT64",
+  FLOAT64: 'FLOAT64'
 };
 
 /**
@@ -114,7 +114,7 @@ const MetadataComponentType = {
 MetadataComponentType.getMinimum = function (type) {
   //>>includeStart('debug', pragmas.debug);
   if (!MetadataComponentType.isNumericType(type)) {
-    throw new DeveloperError("type must be a numeric type");
+    throw new DeveloperError('type must be a numeric type');
   }
   //>>includeEnd('debug');
 
@@ -133,7 +133,7 @@ MetadataComponentType.getMinimum = function (type) {
       return 0;
     case MetadataComponentType.INT64:
       if (FeatureDetection.supportsBigInt()) {
-        return BigInt("-9223372036854775808"); // eslint-disable-line
+        return BigInt('-9223372036854775808'); // eslint-disable-line
       }
       return -Math.pow(2, 63);
     case MetadataComponentType.UINT64:
@@ -166,7 +166,7 @@ MetadataComponentType.getMinimum = function (type) {
 MetadataComponentType.getMaximum = function (type) {
   //>>includeStart('debug', pragmas.debug);
   if (!MetadataComponentType.isNumericType(type)) {
-    throw new DeveloperError("type must be a numeric type");
+    throw new DeveloperError('type must be a numeric type');
   }
   //>>includeEnd('debug');
 
@@ -186,13 +186,13 @@ MetadataComponentType.getMaximum = function (type) {
     case MetadataComponentType.INT64:
       if (FeatureDetection.supportsBigInt()) {
         // Need to initialize with a string otherwise the value will be 9223372036854775808
-        return BigInt("9223372036854775807"); // eslint-disable-line
+        return BigInt('9223372036854775807'); // eslint-disable-line
       }
       return Math.pow(2, 63) - 1;
     case MetadataComponentType.UINT64:
       if (FeatureDetection.supportsBigInt()) {
         // Need to initialize with a string otherwise the value will be 18446744073709551616
-        return BigInt("18446744073709551615"); // eslint-disable-line
+        return BigInt('18446744073709551615'); // eslint-disable-line
       }
       return Math.pow(2, 64) - 1;
     case MetadataComponentType.FLOAT32:
@@ -213,7 +213,7 @@ MetadataComponentType.getMaximum = function (type) {
  */
 MetadataComponentType.isNumericType = function (type) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("type", type);
+  Check.typeOf.string('type', type);
   //>>includeEnd('debug');
 
   switch (type) {
@@ -243,7 +243,7 @@ MetadataComponentType.isNumericType = function (type) {
  */
 MetadataComponentType.isIntegerType = function (type) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("type", type);
+  Check.typeOf.string('type', type);
   //>>includeEnd('debug');
 
   switch (type) {
@@ -271,7 +271,7 @@ MetadataComponentType.isIntegerType = function (type) {
  */
 MetadataComponentType.isUnsignedIntegerType = function (type) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("type", type);
+  Check.typeOf.string('type', type);
   //>>includeEnd('debug');
 
   switch (type) {
@@ -295,7 +295,7 @@ MetadataComponentType.isUnsignedIntegerType = function (type) {
  */
 MetadataComponentType.isVectorCompatible = function (type) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("type", type);
+  Check.typeOf.string('type', type);
   //>>includeEnd('debug');
 
   switch (type) {
@@ -333,11 +333,11 @@ MetadataComponentType.isVectorCompatible = function (type) {
  */
 MetadataComponentType.normalize = function (value, type) {
   //>>includeStart('debug', pragmas.debug);
-  if (typeof value !== "number" && typeof value !== "bigint") {
-    throw new DeveloperError("value must be a number or a BigInt");
+  if (typeof value !== 'number' && typeof value !== 'bigint') {
+    throw new DeveloperError('value must be a number or a BigInt');
   }
   if (!MetadataComponentType.isIntegerType(type)) {
-    throw new DeveloperError("type must be an integer type");
+    throw new DeveloperError('type must be an integer type');
   }
   //>>includeEnd('debug');
 
@@ -365,9 +365,9 @@ MetadataComponentType.normalize = function (value, type) {
  */
 MetadataComponentType.unnormalize = function (value, type) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("value", value);
+  Check.typeOf.number('value', value);
   if (!MetadataComponentType.isIntegerType(type)) {
-    throw new DeveloperError("type must be an integer type");
+    throw new DeveloperError('type must be an integer type');
   }
   //>>includeEnd('debug');
 
@@ -422,7 +422,7 @@ MetadataComponentType.unapplyValueTransform = function (value, offset, scale) {
 MetadataComponentType.getSizeInBytes = function (type) {
   //>>includeStart('debug', pragmas.debug);
   if (!MetadataComponentType.isNumericType(type)) {
-    throw new DeveloperError("type must be a numeric type");
+    throw new DeveloperError('type must be a numeric type');
   }
   //>>includeEnd('debug');
   switch (type) {

@@ -1,5 +1,34 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './ComponentDatatype-4a60b8d6', './FrustumGeometry-f724a035', './GeometryAttribute-a441ff32', './GeometryAttributes-7df9bef6', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './WebGLConstants-7dccdc96', './Plane-e20fba8c', './VertexFormat-e46f29d6'], (function (defaultValue, Transforms, Matrix2, RuntimeError, ComponentDatatype, FrustumGeometry, GeometryAttribute, GeometryAttributes, _commonjsHelpers3aae1032, combine, WebGLConstants, Plane, VertexFormat) { 'use strict';
+define([
+  './defaultValue-94c3e563',
+  './Transforms-3ac41eb6',
+  './Matrix2-fc7e9822',
+  './RuntimeError-c581ca93',
+  './ComponentDatatype-4a60b8d6',
+  './FrustumGeometry-f724a035',
+  './GeometryAttribute-a441ff32',
+  './GeometryAttributes-7df9bef6',
+  './_commonjsHelpers-3aae1032-f55dc0c4',
+  './combine-761d9c3f',
+  './WebGLConstants-7dccdc96',
+  './Plane-e20fba8c',
+  './VertexFormat-e46f29d6'
+], function (
+  defaultValue,
+  Transforms,
+  Matrix2,
+  RuntimeError,
+  ComponentDatatype,
+  FrustumGeometry,
+  GeometryAttribute,
+  GeometryAttributes,
+  _commonjsHelpers3aae1032,
+  combine,
+  WebGLConstants,
+  Plane,
+  VertexFormat
+) {
+  'use strict';
 
   const PERSPECTIVE = 0;
   const ORTHOGRAPHIC = 1;
@@ -17,10 +46,13 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
    */
   function FrustumOutlineGeometry(options) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("options", options);
-    RuntimeError.Check.typeOf.object("options.frustum", options.frustum);
-    RuntimeError.Check.typeOf.object("options.origin", options.origin);
-    RuntimeError.Check.typeOf.object("options.orientation", options.orientation);
+    RuntimeError.Check.typeOf.object('options', options);
+    RuntimeError.Check.typeOf.object('options.frustum', options.frustum);
+    RuntimeError.Check.typeOf.object('options.origin', options.origin);
+    RuntimeError.Check.typeOf.object(
+      'options.orientation',
+      options.orientation
+    );
     //>>includeEnd('debug');
 
     const frustum = options.frustum;
@@ -30,7 +62,10 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
     // This is private because it is used by DebugCameraPrimitive to draw a multi-frustum by
     // creating multiple FrustumOutlineGeometrys. This way the near plane of one frustum doesn't overlap
     // the far plane of another.
-    const drawNearPlane = defaultValue.defaultValue(options._drawNearPlane, true);
+    const drawNearPlane = defaultValue.defaultValue(
+      options._drawNearPlane,
+      true
+    );
 
     let frustumType;
     let frustumPackedLength;
@@ -47,14 +82,17 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
     this._origin = Matrix2.Cartesian3.clone(origin);
     this._orientation = Transforms.Quaternion.clone(orientation);
     this._drawNearPlane = drawNearPlane;
-    this._workerName = "createFrustumOutlineGeometry";
+    this._workerName = 'createFrustumOutlineGeometry';
 
     /**
      * The number of elements used to pack the object into an array.
      * @type {Number}
      */
     this.packedLength =
-      2 + frustumPackedLength + Matrix2.Cartesian3.packedLength + Transforms.Quaternion.packedLength;
+      2 +
+      frustumPackedLength +
+      Matrix2.Cartesian3.packedLength +
+      Transforms.Quaternion.packedLength;
   }
 
   /**
@@ -68,8 +106,8 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
    */
   FrustumOutlineGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -110,7 +148,7 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
    */
   FrustumOutlineGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -134,7 +172,11 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
       startingIndex += FrustumGeometry.OrthographicFrustum.packedLength;
     }
 
-    const origin = Matrix2.Cartesian3.unpack(array, startingIndex, scratchPackorigin);
+    const origin = Matrix2.Cartesian3.unpack(
+      array,
+      startingIndex,
+      scratchPackorigin
+    );
     startingIndex += Matrix2.Cartesian3.packedLength;
     const orientation = Transforms.Quaternion.unpack(
       array,
@@ -149,7 +191,7 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
         frustum: frustum,
         origin: origin,
         orientation: orientation,
-        _drawNearPlane: drawNearPlane,
+        _drawNearPlane: drawNearPlane
       });
     }
 
@@ -159,7 +201,10 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
 
     result._frustumType = frustumType;
     result._origin = Matrix2.Cartesian3.clone(origin, result._origin);
-    result._orientation = Transforms.Quaternion.clone(orientation, result._orientation);
+    result._orientation = Transforms.Quaternion.clone(
+      orientation,
+      result._orientation
+    );
     result._drawNearPlane = drawNearPlane;
 
     return result;
@@ -191,8 +236,8 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
       position: new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: positions,
-      }),
+        values: positions
+      })
     });
 
     let offset;
@@ -236,7 +281,7 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
       attributes: attributes,
       indices: indices,
       primitiveType: GeometryAttribute.PrimitiveType.LINES,
-      boundingSphere: Transforms.BoundingSphere.fromVertices(positions),
+      boundingSphere: Transforms.BoundingSphere.fromVertices(positions)
     });
   };
 
@@ -248,5 +293,4 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
   }
 
   return createFrustumOutlineGeometry;
-
-}));
+});

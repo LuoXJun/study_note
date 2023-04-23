@@ -1,7 +1,7 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import MetadataEnumValue from "./MetadataEnumValue.js";
-import MetadataComponentType from "./MetadataComponentType.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import MetadataEnumValue from './MetadataEnumValue.js';
+import MetadataComponentType from './MetadataComponentType.js';
 
 /**
  * A metadata enum.
@@ -24,8 +24,8 @@ function MetadataEnum(options) {
   const enumDefinition = options.enum;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("options.id", id);
-  Check.typeOf.object("options.enum", enumDefinition);
+  Check.typeOf.string('options.id', id);
+  Check.typeOf.object('options.enum', enumDefinition);
   //>>includeEnd('debug');
 
   const namesByValue = {};
@@ -64,7 +64,7 @@ Object.defineProperties(MetadataEnum.prototype, {
   values: {
     get: function () {
       return this._values;
-    },
+    }
   },
 
   /**
@@ -79,7 +79,7 @@ Object.defineProperties(MetadataEnum.prototype, {
   namesByValue: {
     get: function () {
       return this._namesByValue;
-    },
+    }
   },
 
   /**
@@ -94,7 +94,7 @@ Object.defineProperties(MetadataEnum.prototype, {
   valuesByName: {
     get: function () {
       return this._valuesByName;
-    },
+    }
   },
 
   /**
@@ -109,7 +109,7 @@ Object.defineProperties(MetadataEnum.prototype, {
   valueType: {
     get: function () {
       return this._valueType;
-    },
+    }
   },
 
   /**
@@ -123,7 +123,7 @@ Object.defineProperties(MetadataEnum.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
 
   /**
@@ -137,7 +137,7 @@ Object.defineProperties(MetadataEnum.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
 
   /**
@@ -151,7 +151,7 @@ Object.defineProperties(MetadataEnum.prototype, {
   description: {
     get: function () {
       return this._description;
-    },
+    }
   },
 
   /**
@@ -165,7 +165,7 @@ Object.defineProperties(MetadataEnum.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -179,8 +179,8 @@ Object.defineProperties(MetadataEnum.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
-  },
+    }
+  }
 });
 
 export default MetadataEnum;

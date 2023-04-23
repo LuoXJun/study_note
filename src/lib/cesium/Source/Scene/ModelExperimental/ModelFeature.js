@@ -1,6 +1,6 @@
-import Color from "../../Core/Color.js";
-import defined from "../../Core/defined.js";
-import deprecationWarning from "../../Core/deprecationWarning.js";
+import Color from '../../Core/Color.js';
+import defined from '../../Core/defined.js';
+import deprecationWarning from '../../Core/deprecationWarning.js';
 
 /**
  * A feature of a {@link ModelExperimental}.
@@ -60,7 +60,7 @@ Object.defineProperties(ModelFeature.prototype, {
     },
     set: function (value) {
       this._featureTable.setShow(this._featureId, value);
-    },
+    }
   },
 
   /**
@@ -83,7 +83,7 @@ Object.defineProperties(ModelFeature.prototype, {
     },
     set: function (value) {
       this._featureTable.setColor(this._featureId, value);
-    },
+    }
   },
   /**
    * All objects returned by {@link Scene#pick} have a <code>primitive</code> property. This returns
@@ -99,7 +99,7 @@ Object.defineProperties(ModelFeature.prototype, {
   primitive: {
     get: function () {
       return this._model;
-    },
+    }
   },
 
   /**
@@ -115,7 +115,7 @@ Object.defineProperties(ModelFeature.prototype, {
   featureTable: {
     get: function () {
       return this._featureTable;
-    },
+    }
   },
 
   /**
@@ -133,8 +133,8 @@ Object.defineProperties(ModelFeature.prototype, {
   featureId: {
     get: function () {
       return this._featureId;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -203,8 +203,8 @@ ModelFeature.prototype.getPropertyInherited = function (name) {
  */
 ModelFeature.prototype.getPropertyNames = function (results) {
   deprecationWarning(
-    "ModelFeature.getPropertyNames",
-    "ModelFeature.getPropertyNames is deprecated in CesiumJS 1.95, and will be removed in 1.98. Use ModelFeature.getPropertyIds instead"
+    'ModelFeature.getPropertyNames',
+    'ModelFeature.getPropertyNames is deprecated in CesiumJS 1.95, and will be removed in 1.98. Use ModelFeature.getPropertyIds instead'
   );
   return this._featureTable.getPropertyIds(results);
 };

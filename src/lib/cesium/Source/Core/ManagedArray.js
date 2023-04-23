@@ -1,5 +1,5 @@
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
 
 /**
  * A wrapper around arrays so that the internal length of the array can be manually managed.
@@ -30,7 +30,7 @@ Object.defineProperties(ManagedArray.prototype, {
     },
     set: function (length) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number.greaterThanOrEquals("length", length, 0);
+      Check.typeOf.number.greaterThanOrEquals('length', length, 0);
       //>>includeEnd('debug');
       const array = this._array;
       const originalLength = this._length;
@@ -43,7 +43,7 @@ Object.defineProperties(ManagedArray.prototype, {
         array.length = length;
       }
       this._length = length;
-    },
+    }
   },
 
   /**
@@ -56,8 +56,8 @@ Object.defineProperties(ManagedArray.prototype, {
   values: {
     get: function () {
       return this._array;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -67,7 +67,7 @@ Object.defineProperties(ManagedArray.prototype, {
  */
 ManagedArray.prototype.get = function (index) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number.lessThan("index", index, this._array.length);
+  Check.typeOf.number.lessThan('index', index, this._array.length);
   //>>includeEnd('debug');
 
   return this._array[index];
@@ -81,7 +81,7 @@ ManagedArray.prototype.get = function (index) {
  */
 ManagedArray.prototype.set = function (index, element) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("index", index);
+  Check.typeOf.number('index', index);
   //>>includeEnd('debug');
 
   if (index >= this._length) {
@@ -130,7 +130,7 @@ ManagedArray.prototype.pop = function () {
  */
 ManagedArray.prototype.reserve = function (length) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number.greaterThanOrEquals("length", length, 0);
+  Check.typeOf.number.greaterThanOrEquals('length', length, 0);
   //>>includeEnd('debug');
 
   if (length > this._array.length) {
@@ -145,7 +145,7 @@ ManagedArray.prototype.reserve = function (length) {
  */
 ManagedArray.prototype.resize = function (length) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number.greaterThanOrEquals("length", length, 0);
+  Check.typeOf.number.greaterThanOrEquals('length', length, 0);
   //>>includeEnd('debug');
 
   this.length = length;

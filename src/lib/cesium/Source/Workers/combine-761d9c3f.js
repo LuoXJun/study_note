@@ -1,5 +1,9 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './defaultValue-94c3e563'], (function (exports, defaultValue) { 'use strict';
+define(['exports', './defaultValue-94c3e563'], function (
+  exports,
+  defaultValue
+) {
+  'use strict';
 
   /**
    * Merges two objects, copying their properties onto a new combined object. When two objects have the same
@@ -49,11 +53,11 @@ define(['exports', './defaultValue-94c3e563'], (function (exports, defaultValue)
           if (
             object2Defined &&
             deep &&
-            typeof object1Value === "object" &&
+            typeof object1Value === 'object' &&
             object2.hasOwnProperty(property)
           ) {
             object2Value = object2[property];
-            if (typeof object2Value === "object") {
+            if (typeof object2Value === 'object') {
               result[property] = combine(object1Value, object2Value, deep);
             } else {
               result[property] = object1Value;
@@ -79,5 +83,4 @@ define(['exports', './defaultValue-94c3e563'], (function (exports, defaultValue)
   }
 
   exports.combine = combine;
-
-}));
+});

@@ -1,38 +1,38 @@
-import BoundingSphere from "../../Core/BoundingSphere.js";
-import Cartesian3 from "../../Core/Cartesian3.js";
-import Cartographic from "../../Core/Cartographic.js";
-import Check from "../../Core/Check.js";
-import Credit from "../../Core/Credit.js";
-import ColorBlendMode from "../ColorBlendMode.js";
-import ClippingPlaneCollection from "../ClippingPlaneCollection.js";
-import defined from "../../Core/defined.js";
-import defaultValue from "../../Core/defaultValue.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import DistanceDisplayCondition from "../../Core/DistanceDisplayCondition.js";
-import GltfLoader from "../GltfLoader.js";
-import HeightReference from "../HeightReference.js";
-import ImageBasedLighting from "../ImageBasedLighting.js";
-import ModelExperimentalAnimationCollection from "./ModelExperimentalAnimationCollection.js";
-import ModelExperimentalSceneGraph from "./ModelExperimentalSceneGraph.js";
-import ModelExperimentalStatistics from "./ModelExperimentalStatistics.js";
-import ModelExperimentalType from "./ModelExperimentalType.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
-import Pass from "../../Renderer/Pass.js";
-import Resource from "../../Core/Resource.js";
-import destroyObject from "../../Core/destroyObject.js";
-import Matrix3 from "../../Core/Matrix3.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import ModelFeatureTable from "./ModelFeatureTable.js";
-import PointCloudShading from "../PointCloudShading.js";
-import B3dmLoader from "./B3dmLoader.js";
-import GeoJsonLoader from "./GeoJsonLoader.js";
-import I3dmLoader from "./I3dmLoader.js";
-import PntsLoader from "./PntsLoader.js";
-import Color from "../../Core/Color.js";
-import SceneMode from "../SceneMode.js";
-import SceneTransforms from "../SceneTransforms.js";
-import ShadowMode from "../ShadowMode.js";
-import SplitDirection from "../SplitDirection.js";
+import BoundingSphere from '../../Core/BoundingSphere.js';
+import Cartesian3 from '../../Core/Cartesian3.js';
+import Cartographic from '../../Core/Cartographic.js';
+import Check from '../../Core/Check.js';
+import Credit from '../../Core/Credit.js';
+import ColorBlendMode from '../ColorBlendMode.js';
+import ClippingPlaneCollection from '../ClippingPlaneCollection.js';
+import defined from '../../Core/defined.js';
+import defaultValue from '../../Core/defaultValue.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import DistanceDisplayCondition from '../../Core/DistanceDisplayCondition.js';
+import GltfLoader from '../GltfLoader.js';
+import HeightReference from '../HeightReference.js';
+import ImageBasedLighting from '../ImageBasedLighting.js';
+import ModelExperimentalAnimationCollection from './ModelExperimentalAnimationCollection.js';
+import ModelExperimentalSceneGraph from './ModelExperimentalSceneGraph.js';
+import ModelExperimentalStatistics from './ModelExperimentalStatistics.js';
+import ModelExperimentalType from './ModelExperimentalType.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
+import Pass from '../../Renderer/Pass.js';
+import Resource from '../../Core/Resource.js';
+import destroyObject from '../../Core/destroyObject.js';
+import Matrix3 from '../../Core/Matrix3.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import ModelFeatureTable from './ModelFeatureTable.js';
+import PointCloudShading from '../PointCloudShading.js';
+import B3dmLoader from './B3dmLoader.js';
+import GeoJsonLoader from './GeoJsonLoader.js';
+import I3dmLoader from './I3dmLoader.js';
+import PntsLoader from './PntsLoader.js';
+import Color from '../../Core/Color.js';
+import SceneMode from '../SceneMode.js';
+import SceneTransforms from '../SceneTransforms.js';
+import ShadowMode from '../ShadowMode.js';
+import SplitDirection from '../SplitDirection.js';
 
 /**
  * A 3D model. This is a new architecture that is more decoupled than the older {@link Model}. This class is still experimental.
@@ -86,8 +86,8 @@ import SplitDirection from "../SplitDirection.js";
 export default function ModelExperimental(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.loader", options.loader);
-  Check.typeOf.object("options.resource", options.resource);
+  Check.typeOf.object('options.loader', options.loader);
+  Check.typeOf.object('options.resource', options.resource);
   //>>includeEnd('debug');
 
   /**
@@ -207,17 +207,17 @@ export default function ModelExperimental(options) {
 
   this._style = undefined;
 
-  let featureIdLabel = defaultValue(options.featureIdLabel, "featureId_0");
-  if (typeof featureIdLabel === "number") {
+  let featureIdLabel = defaultValue(options.featureIdLabel, 'featureId_0');
+  if (typeof featureIdLabel === 'number') {
     featureIdLabel = `featureId_${featureIdLabel}`;
   }
   this._featureIdLabel = featureIdLabel;
 
   let instanceFeatureIdLabel = defaultValue(
     options.instanceFeatureIdLabel,
-    "instanceFeatureId_0"
+    'instanceFeatureId_0'
   );
-  if (typeof instanceFeatureIdLabel === "number") {
+  if (typeof instanceFeatureIdLabel === 'number') {
     instanceFeatureIdLabel = `instanceFeatureId_${instanceFeatureIdLabel}`;
   }
   this._instanceFeatureIdLabel = instanceFeatureIdLabel;
@@ -253,12 +253,10 @@ export default function ModelExperimental(options) {
 
   const scene = options.scene;
   if (defined(scene) && defined(scene.terrainProviderChanged)) {
-    this._terrainProviderChangedCallback = scene.terrainProviderChanged.addEventListener(
-      function () {
+    this._terrainProviderChangedCallback =
+      scene.terrainProviderChanged.addEventListener(function () {
         this._heightDirty = true;
-      },
-      this
-    );
+      }, this);
   }
   this._scene = scene;
 
@@ -272,7 +270,7 @@ export default function ModelExperimental(options) {
   // Otherwise, the clipping planes are passed down from a tileset.
   const clippingPlanes = options.clippingPlanes;
   if (defined(clippingPlanes) && clippingPlanes.owner === undefined) {
-    ClippingPlaneCollection.setOwner(clippingPlanes, this, "_clippingPlanes");
+    ClippingPlaneCollection.setOwner(clippingPlanes, this, '_clippingPlanes');
   } else {
     this._clippingPlanes = clippingPlanes;
   }
@@ -306,7 +304,7 @@ export default function ModelExperimental(options) {
 
   // Credit specified by the user.
   let credit = options.credit;
-  if (typeof credit === "string") {
+  if (typeof credit === 'string') {
     credit = new Credit(credit);
   }
 
@@ -345,7 +343,7 @@ function createModelFeatureTables(model, structuralMetadata) {
     const propertyTable = propertyTables[i];
     const modelFeatureTable = new ModelFeatureTable({
       model: model,
-      propertyTable: propertyTable,
+      propertyTable: propertyTable
     });
 
     featureTables.push(modelFeatureTable);
@@ -435,7 +433,7 @@ function initialize(model) {
 
     const sceneGraph = new ModelExperimentalSceneGraph({
       model: model,
-      modelComponents: components,
+      modelComponents: components
     });
 
     model._sceneGraph = sceneGraph;
@@ -467,7 +465,7 @@ function initialize(model) {
       }
     })
     .catch(
-      ModelExperimentalUtility.getFailedLoadFunction(model, "model", resource)
+      ModelExperimentalUtility.getFailedLoadFunction(model, 'model', resource)
     );
 
   const promise = new Promise(function (resolve, reject) {
@@ -486,7 +484,7 @@ function initialize(model) {
       return promise;
     })
     .catch(
-      ModelExperimentalUtility.getFailedLoadFunction(model, "model", resource)
+      ModelExperimentalUtility.getFailedLoadFunction(model, 'model', resource)
     );
 }
 
@@ -506,7 +504,7 @@ Object.defineProperties(ModelExperimental.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -524,7 +522,7 @@ Object.defineProperties(ModelExperimental.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   /**
@@ -542,7 +540,7 @@ Object.defineProperties(ModelExperimental.prototype, {
   texturesLoadedPromise: {
     get: function () {
       return this._texturesLoadedPromise;
-    },
+    }
   },
 
   /**
@@ -551,7 +549,7 @@ Object.defineProperties(ModelExperimental.prototype, {
   loader: {
     get: function () {
       return this._loader;
-    },
+    }
   },
 
   /**
@@ -567,7 +565,7 @@ Object.defineProperties(ModelExperimental.prototype, {
   statistics: {
     get: function () {
       return this._statistics;
-    },
+    }
   },
 
   /**
@@ -581,7 +579,7 @@ Object.defineProperties(ModelExperimental.prototype, {
   activeAnimations: {
     get: function () {
       return this._activeAnimations;
-    },
+    }
   },
 
   /**
@@ -598,7 +596,7 @@ Object.defineProperties(ModelExperimental.prototype, {
     },
     set: function (value) {
       this._clampAnimations = value;
-    },
+    }
   },
 
   /**
@@ -613,7 +611,7 @@ Object.defineProperties(ModelExperimental.prototype, {
   cull: {
     get: function () {
       return this._cull;
-    },
+    }
   },
 
   /**
@@ -629,7 +627,7 @@ Object.defineProperties(ModelExperimental.prototype, {
   opaquePass: {
     get: function () {
       return this._opaquePass;
-    },
+    }
   },
 
   /**
@@ -647,13 +645,13 @@ Object.defineProperties(ModelExperimental.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.defined("pointCloudShading", value);
+      Check.defined('pointCloudShading', value);
       //>>includeEnd('debug');
       if (value !== this._pointCloudShading) {
         this.resetDrawCommands();
       }
       this._pointCloudShading = value;
-    },
+    }
   },
 
   /**
@@ -673,7 +671,7 @@ Object.defineProperties(ModelExperimental.prototype, {
         this.resetDrawCommands();
       }
       this._customShader = value;
-    },
+    }
   },
 
   /**
@@ -687,7 +685,7 @@ Object.defineProperties(ModelExperimental.prototype, {
   sceneGraph: {
     get: function () {
       return this._sceneGraph;
-    },
+    }
   },
 
   /**
@@ -703,7 +701,7 @@ Object.defineProperties(ModelExperimental.prototype, {
   content: {
     get: function () {
       return this._content;
-    },
+    }
   },
 
   /**
@@ -725,7 +723,7 @@ Object.defineProperties(ModelExperimental.prototype, {
         this._heightDirty = true;
       }
       this._heightReference = value;
-    },
+    }
   },
 
   /**
@@ -746,14 +744,14 @@ Object.defineProperties(ModelExperimental.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (defined(value) && value.far <= value.near) {
-        throw new DeveloperError("far must be greater than near");
+        throw new DeveloperError('far must be greater than near');
       }
       //>>includeEnd('debug');
       this._distanceDisplayCondition = DistanceDisplayCondition.clone(
         value,
         this._distanceDisplayCondition
       );
-    },
+    }
   },
 
   /**
@@ -769,7 +767,7 @@ Object.defineProperties(ModelExperimental.prototype, {
   structuralMetadata: {
     get: function () {
       return this._sceneGraph.components.structuralMetadata;
-    },
+    }
   },
 
   /**
@@ -787,7 +785,7 @@ Object.defineProperties(ModelExperimental.prototype, {
     },
     set: function (value) {
       this._featureTableId = value;
-    },
+    }
   },
 
   /**
@@ -806,7 +804,7 @@ Object.defineProperties(ModelExperimental.prototype, {
     },
     set: function (value) {
       this._featureTables = value;
-    },
+    }
   },
 
   /**
@@ -830,7 +828,7 @@ Object.defineProperties(ModelExperimental.prototype, {
       }
 
       this._id = value;
-    },
+    }
   },
 
   /**
@@ -846,7 +844,7 @@ Object.defineProperties(ModelExperimental.prototype, {
   allowPicking: {
     get: function () {
       return this._allowPicking;
-    },
+    }
   },
 
   /**
@@ -865,7 +863,7 @@ Object.defineProperties(ModelExperimental.prototype, {
         this.applyStyle(value);
       }
       this._style = value;
-    },
+    }
   },
 
   /**
@@ -884,7 +882,7 @@ Object.defineProperties(ModelExperimental.prototype, {
         this.resetDrawCommands();
       }
       this._color = Color.clone(value, this._color);
-    },
+    }
   },
 
   /**
@@ -902,7 +900,7 @@ Object.defineProperties(ModelExperimental.prototype, {
     },
     set: function (value) {
       this._colorBlendMode = value;
-    },
+    }
   },
 
   /**
@@ -920,7 +918,7 @@ Object.defineProperties(ModelExperimental.prototype, {
     },
     set: function (value) {
       this._colorBlendAmount = value;
-    },
+    }
   },
 
   /**
@@ -943,7 +941,7 @@ Object.defineProperties(ModelExperimental.prototype, {
       }
 
       this._silhouetteColor = Color.clone(value, this._silhouetteColor);
-    },
+    }
   },
 
   /**
@@ -973,7 +971,7 @@ Object.defineProperties(ModelExperimental.prototype, {
       }
 
       this._silhouetteSize = value;
-    },
+    }
   },
 
   /**
@@ -991,13 +989,13 @@ Object.defineProperties(ModelExperimental.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The model is not loaded. Use ModelExperimental.readyPromise or wait for ModelExperimental.ready to be true."
+          'The model is not loaded. Use ModelExperimental.readyPromise or wait for ModelExperimental.ready to be true.'
         );
       }
       //>>includeEnd('debug');
 
       return this._boundingSphere;
-    },
+    }
   },
 
   /**
@@ -1021,7 +1019,7 @@ Object.defineProperties(ModelExperimental.prototype, {
         this._debugShowBoundingVolumeDirty = true;
       }
       this._debugShowBoundingVolume = value;
-    },
+    }
   },
 
   /**
@@ -1045,7 +1043,7 @@ Object.defineProperties(ModelExperimental.prototype, {
         this.resetDrawCommands();
       }
       this._debugWireframe = value;
-    },
+    }
   },
 
   /**
@@ -1063,7 +1061,7 @@ Object.defineProperties(ModelExperimental.prototype, {
     },
     set: function (value) {
       this._show = value;
-    },
+    }
   },
 
   /**
@@ -1094,12 +1092,12 @@ Object.defineProperties(ModelExperimental.prototype, {
     },
     set: function (value) {
       // indices get converted into featureId_N
-      if (typeof value === "number") {
+      if (typeof value === 'number') {
         value = `featureId_${value}`;
       }
 
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.string("value", value);
+      Check.typeOf.string('value', value);
       //>>includeEnd('debug');
 
       if (value !== this._featureIdLabel) {
@@ -1107,7 +1105,7 @@ Object.defineProperties(ModelExperimental.prototype, {
       }
 
       this._featureIdLabel = value;
-    },
+    }
   },
 
   /**
@@ -1130,12 +1128,12 @@ Object.defineProperties(ModelExperimental.prototype, {
     },
     set: function (value) {
       // indices get converted into instanceFeatureId_N
-      if (typeof value === "number") {
+      if (typeof value === 'number') {
         value = `instanceFeatureId_${value}`;
       }
 
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.string("value", value);
+      Check.typeOf.string('value', value);
       //>>includeEnd('debug');
 
       if (value !== this._instanceFeatureIdLabel) {
@@ -1143,7 +1141,7 @@ Object.defineProperties(ModelExperimental.prototype, {
       }
 
       this._instanceFeatureIdLabel = value;
-    },
+    }
   },
 
   /**
@@ -1160,10 +1158,10 @@ Object.defineProperties(ModelExperimental.prototype, {
     set: function (value) {
       if (value !== this._clippingPlanes) {
         // Handle destroying old clipping planes, new clipping planes ownership
-        ClippingPlaneCollection.setOwner(value, this, "_clippingPlanes");
+        ClippingPlaneCollection.setOwner(value, this, '_clippingPlanes');
         this.resetDrawCommands();
       }
-    },
+    }
   },
 
   /**
@@ -1189,7 +1187,7 @@ Object.defineProperties(ModelExperimental.prototype, {
       }
 
       this._lightColor = Cartesian3.clone(value, this._lightColor);
-    },
+    }
   },
 
   /**
@@ -1205,7 +1203,7 @@ Object.defineProperties(ModelExperimental.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.object("imageBasedLighting", this._imageBasedLighting);
+      Check.typeOf.object('imageBasedLighting', this._imageBasedLighting);
       //>>includeEnd('debug');
 
       if (value !== this._imageBasedLighting) {
@@ -1219,7 +1217,7 @@ Object.defineProperties(ModelExperimental.prototype, {
         this._shouldDestroyImageBasedLighting = false;
         this.resetDrawCommands();
       }
-    },
+    }
   },
 
   /**
@@ -1244,7 +1242,7 @@ Object.defineProperties(ModelExperimental.prototype, {
       }
 
       this._backFaceCulling = value;
-    },
+    }
   },
 
   /**
@@ -1267,7 +1265,7 @@ Object.defineProperties(ModelExperimental.prototype, {
         this._updateModelMatrix = true;
       }
       this._scale = value;
-    },
+    }
   },
 
   /**
@@ -1284,7 +1282,7 @@ Object.defineProperties(ModelExperimental.prototype, {
   computedScale: {
     get: function () {
       return this._computedScale;
-    },
+    }
   },
 
   /**
@@ -1307,7 +1305,7 @@ Object.defineProperties(ModelExperimental.prototype, {
         this._updateModelMatrix = true;
       }
       this._minimumPixelSize = value;
-    },
+    }
   },
 
   /**
@@ -1328,7 +1326,7 @@ Object.defineProperties(ModelExperimental.prototype, {
         this._updateModelMatrix = true;
       }
       this._maximumScale = value;
-    },
+    }
   },
 
   /**
@@ -1350,7 +1348,7 @@ Object.defineProperties(ModelExperimental.prototype, {
       }
 
       this._shadows = value;
-    },
+    }
   },
 
   /**
@@ -1364,7 +1362,7 @@ Object.defineProperties(ModelExperimental.prototype, {
   credit: {
     get: function () {
       return this._credit;
-    },
+    }
   },
 
   /**
@@ -1386,7 +1384,7 @@ Object.defineProperties(ModelExperimental.prototype, {
       }
 
       this._showCreditsOnScreen = value;
-    },
+    }
   },
 
   /**
@@ -1407,8 +1405,8 @@ Object.defineProperties(ModelExperimental.prototype, {
         this.resetDrawCommands();
       }
       this._splitDirection = value;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -1432,10 +1430,10 @@ ModelExperimental.prototype.setArticulationStage = function (
   value
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("value", value);
+  Check.typeOf.number('value', value);
   if (!this._ready) {
     throw new DeveloperError(
-      "The model is not loaded. Use ModelExperimental.readyPromise or wait for ModelExperimental.ready to be true."
+      'The model is not loaded. Use ModelExperimental.readyPromise or wait for ModelExperimental.ready to be true.'
     );
   }
   //>>includeEnd('debug');
@@ -1454,7 +1452,7 @@ ModelExperimental.prototype.applyArticulations = function () {
   //>>includeStart('debug', pragmas.debug);
   if (!this._ready) {
     throw new DeveloperError(
-      "The model is not loaded. Use ModelExperimental.readyPromise or wait for ModelExperimental.ready to be true."
+      'The model is not loaded. Use ModelExperimental.readyPromise or wait for ModelExperimental.ready to be true.'
     );
   }
   //>>includeEnd('debug');
@@ -1656,7 +1654,7 @@ function updateModelMatrix(model, frameState) {
     //>>includeStart('debug', pragmas.debug);
     if (frameState.mode !== SceneMode.SCENE3D && model._projectTo2D) {
       throw new DeveloperError(
-        "ModelExperimental.modelMatrix cannot be changed in 2D or Columbus View if projectTo2D is true."
+        'ModelExperimental.modelMatrix cannot be changed in 2D or Columbus View if projectTo2D is true.'
       );
     }
     //>>includeEnd('debug');
@@ -1691,7 +1689,7 @@ function updateClamping(model) {
     //>>includeStart('debug', pragmas.debug);
     if (model.heightReference !== HeightReference.NONE) {
       throw new DeveloperError(
-        "Height reference is not supported without a scene and globe."
+        'Height reference is not supported without a scene and globe.'
       );
     }
     //>>includeEnd('debug');
@@ -2268,7 +2266,7 @@ ModelExperimental.fromGltf = function (options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.url) && !defined(options.gltf)) {
-    throw new DeveloperError("options.url is required.");
+    throw new DeveloperError('options.url is required.');
   }
   //>>includeEnd('debug');
 
@@ -2284,10 +2282,10 @@ ModelExperimental.fromGltf = function (options) {
     upAxis: options.upAxis,
     forwardAxis: options.forwardAxis,
     loadAttributesFor2D: options.projectTo2D,
-    loadIndicesForWireframe: options.enableDebugWireframe,
+    loadIndicesForWireframe: options.enableDebugWireframe
   };
 
-  const basePath = defaultValue(options.basePath, "");
+  const basePath = defaultValue(options.basePath, '');
   const baseResource = Resource.createIfNeeded(basePath);
 
   if (defined(gltf.asset)) {
@@ -2331,7 +2329,7 @@ ModelExperimental.fromB3dm = function (options) {
     upAxis: options.upAxis,
     forwardAxis: options.forwardAxis,
     loadAttributesFor2D: options.projectTo2D,
-    loadIndicesForWireframe: options.enableDebugWireframe,
+    loadIndicesForWireframe: options.enableDebugWireframe
   };
 
   const loader = new B3dmLoader(loaderOptions);
@@ -2351,7 +2349,7 @@ ModelExperimental.fromB3dm = function (options) {
 ModelExperimental.fromPnts = function (options) {
   const loaderOptions = {
     arrayBuffer: options.arrayBuffer,
-    byteOffset: options.byteOffset,
+    byteOffset: options.byteOffset
   };
   const loader = new PntsLoader(loaderOptions);
 
@@ -2378,7 +2376,7 @@ ModelExperimental.fromI3dm = function (options) {
     upAxis: options.upAxis,
     forwardAxis: options.forwardAxis,
     loadAttributesFor2D: options.projectTo2D,
-    loadIndicesForWireframe: options.enableDebugWireframe,
+    loadIndicesForWireframe: options.enableDebugWireframe
   };
   const loader = new I3dmLoader(loaderOptions);
 
@@ -2396,7 +2394,7 @@ ModelExperimental.fromI3dm = function (options) {
  */
 ModelExperimental.fromGeoJson = function (options) {
   const loaderOptions = {
-    geoJson: options.geoJson,
+    geoJson: options.geoJson
   };
   const loader = new GeoJsonLoader(loaderOptions);
   const modelOptions = makeModelOptions(
@@ -2479,6 +2477,6 @@ function makeModelOptions(loader, modelType, options) {
     projectTo2D: options.projectTo2D,
     featureIdLabel: options.featureIdLabel,
     instanceFeatureIdLabel: options.instanceFeatureIdLabel,
-    pointCloudShading: options.pointCloudShading,
+    pointCloudShading: options.pointCloudShading
   };
 }

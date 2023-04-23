@@ -1,15 +1,15 @@
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import EllipsoidGeodesic from "./EllipsoidGeodesic.js";
-import EllipsoidRhumbLine from "./EllipsoidRhumbLine.js";
-import IntersectionTests from "./IntersectionTests.js";
-import CesiumMath from "./Math.js";
-import Matrix4 from "./Matrix4.js";
-import Plane from "./Plane.js";
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import EllipsoidGeodesic from './EllipsoidGeodesic.js';
+import EllipsoidRhumbLine from './EllipsoidRhumbLine.js';
+import IntersectionTests from './IntersectionTests.js';
+import CesiumMath from './Math.js';
+import Matrix4 from './Matrix4.js';
+import Plane from './Plane.js';
 
 /**
  * @private
@@ -301,7 +301,7 @@ PolylinePipeline.wrapLongitude = function (positions, modelMatrix) {
 
   return {
     positions: cartesians,
-    lengths: segments,
+    lengths: segments
   };
 };
 
@@ -332,7 +332,7 @@ PolylinePipeline.generateArc = function (options) {
   const positions = options.positions;
   //>>includeStart('debug', pragmas.debug);
   if (!defined(positions)) {
-    throw new DeveloperError("options.positions is required.");
+    throw new DeveloperError('options.positions is required.');
   }
   //>>includeEnd('debug');
 
@@ -439,7 +439,7 @@ PolylinePipeline.generateRhumbArc = function (options) {
   const positions = options.positions;
   //>>includeStart('debug', pragmas.debug);
   if (!defined(positions)) {
-    throw new DeveloperError("options.positions is required.");
+    throw new DeveloperError('options.positions is required.');
   }
   //>>includeEnd('debug');
 

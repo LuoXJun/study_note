@@ -1,12 +1,12 @@
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import GeometryPipeline from "../Core/GeometryPipeline.js";
-import Matrix4 from "../Core/Matrix4.js";
-import PerInstanceColorAppearance from "./PerInstanceColorAppearance.js";
-import Primitive from "./Primitive.js";
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import GeometryPipeline from '../Core/GeometryPipeline.js';
+import Matrix4 from '../Core/Matrix4.js';
+import PerInstanceColorAppearance from './PerInstanceColorAppearance.js';
+import Primitive from './Primitive.js';
 
 /**
  * Creates a {@link Primitive} to visualize well-known vector vertex attributes:
@@ -36,7 +36,7 @@ function createTangentSpaceDebugPrimitive(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(geometry)) {
-    throw new DeveloperError("options.geometry is required.");
+    throw new DeveloperError('options.geometry is required.');
   }
   //>>includeEnd('debug');
 
@@ -57,13 +57,13 @@ function createTangentSpaceDebugPrimitive(options) {
       new GeometryInstance({
         geometry: GeometryPipeline.createLineSegmentsForVectors(
           geometry,
-          "normal",
+          'normal',
           length
         ),
         attributes: {
-          color: new ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 1.0),
+          color: new ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 1.0)
         },
-        modelMatrix: modelMatrix,
+        modelMatrix: modelMatrix
       })
     );
   }
@@ -73,13 +73,13 @@ function createTangentSpaceDebugPrimitive(options) {
       new GeometryInstance({
         geometry: GeometryPipeline.createLineSegmentsForVectors(
           geometry,
-          "tangent",
+          'tangent',
           length
         ),
         attributes: {
-          color: new ColorGeometryInstanceAttribute(0.0, 1.0, 0.0, 1.0),
+          color: new ColorGeometryInstanceAttribute(0.0, 1.0, 0.0, 1.0)
         },
-        modelMatrix: modelMatrix,
+        modelMatrix: modelMatrix
       })
     );
   }
@@ -89,13 +89,13 @@ function createTangentSpaceDebugPrimitive(options) {
       new GeometryInstance({
         geometry: GeometryPipeline.createLineSegmentsForVectors(
           geometry,
-          "bitangent",
+          'bitangent',
           length
         ),
         attributes: {
-          color: new ColorGeometryInstanceAttribute(0.0, 0.0, 1.0, 1.0),
+          color: new ColorGeometryInstanceAttribute(0.0, 0.0, 1.0, 1.0)
         },
-        modelMatrix: modelMatrix,
+        modelMatrix: modelMatrix
       })
     );
   }
@@ -106,8 +106,8 @@ function createTangentSpaceDebugPrimitive(options) {
       geometryInstances: instances,
       appearance: new PerInstanceColorAppearance({
         flat: true,
-        translucent: false,
-      }),
+        translucent: false
+      })
     });
   }
 

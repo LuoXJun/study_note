@@ -1,26 +1,26 @@
-import AttributeCompression from "./AttributeCompression.js";
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import Credit from "./Credit.js";
-import defaultValue from "./defaultValue.js";
-import defer from "./defer.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Event from "./Event.js";
-import GeographicTilingScheme from "./GeographicTilingScheme.js";
-import WebMercatorTilingScheme from "./WebMercatorTilingScheme.js";
-import getJsonFromTypedArray from "./getJsonFromTypedArray.js";
-import HeightmapTerrainData from "./HeightmapTerrainData.js";
-import IndexDatatype from "./IndexDatatype.js";
-import OrientedBoundingBox from "./OrientedBoundingBox.js";
-import QuantizedMeshTerrainData from "./QuantizedMeshTerrainData.js";
-import Request from "./Request.js";
-import RequestType from "./RequestType.js";
-import Resource from "./Resource.js";
-import RuntimeError from "./RuntimeError.js";
-import TerrainProvider from "./TerrainProvider.js";
-import TileAvailability from "./TileAvailability.js";
-import TileProviderError from "./TileProviderError.js";
+import AttributeCompression from './AttributeCompression.js';
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import Credit from './Credit.js';
+import defaultValue from './defaultValue.js';
+import defer from './defer.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Event from './Event.js';
+import GeographicTilingScheme from './GeographicTilingScheme.js';
+import WebMercatorTilingScheme from './WebMercatorTilingScheme.js';
+import getJsonFromTypedArray from './getJsonFromTypedArray.js';
+import HeightmapTerrainData from './HeightmapTerrainData.js';
+import IndexDatatype from './IndexDatatype.js';
+import OrientedBoundingBox from './OrientedBoundingBox.js';
+import QuantizedMeshTerrainData from './QuantizedMeshTerrainData.js';
+import Request from './Request.js';
+import RequestType from './RequestType.js';
+import Resource from './Resource.js';
+import RuntimeError from './RuntimeError.js';
+import TerrainProvider from './TerrainProvider.js';
+import TileAvailability from './TileAvailability.js';
+import TileProviderError from './TileProviderError.js';
 
 function LayerInformation(layer) {
   this.resource = layer.resource;
@@ -72,7 +72,7 @@ function LayerInformation(layer) {
 function CesiumTerrainProvider(options) {
   //>>includeStart('debug', pragmas.debug)
   if (!defined(options) || !defined(options.url)) {
-    throw new DeveloperError("options.url is required.");
+    throw new DeveloperError('options.url is required.');
   }
   //>>includeEnd('debug');
 
@@ -112,7 +112,7 @@ function CesiumTerrainProvider(options) {
   this._errorEvent = new Event();
 
   let credit = options.credit;
-  if (typeof credit === "string") {
+  if (typeof credit === 'string') {
     credit = new Credit(credit);
   }
   this._credit = credit;
@@ -130,7 +130,7 @@ function CesiumTerrainProvider(options) {
   let metadataError;
 
   const layers = (this._layers = []);
-  let attribution = "";
+  let attribution = '';
   const overallAvailability = [];
   let overallMaxZoom = 0;
   Promise.resolve(options.url)
@@ -139,7 +139,7 @@ function CesiumTerrainProvider(options) {
       resource.appendForwardSlash();
       lastResource = resource;
       layerJsonResource = lastResource.getDerivedResource({
-        url: "layer.json",
+        url: 'layer.json'
       });
 
       // ion resources have a credits property we can use for additional attribution.
@@ -155,7 +155,7 @@ function CesiumTerrainProvider(options) {
     let message;
 
     if (!data.format) {
-      message = "The tile format is not specified in the layer.json file.";
+      message = 'The tile format is not specified in the layer.json file.';
       metadataError = TileProviderError.handleError(
         metadataError,
         that,
@@ -170,7 +170,7 @@ function CesiumTerrainProvider(options) {
     }
 
     if (!data.tiles || data.tiles.length === 0) {
-      message = "The layer.json file does not specify any tile URL templates.";
+      message = 'The layer.json file does not specify any tile URL templates.';
       metadataError = TileProviderError.handleError(
         metadataError,
         that,
@@ -189,7 +189,7 @@ function CesiumTerrainProvider(options) {
     let hasMetadata = false;
     let littleEndianExtensionSize = true;
     let isHeightmap = false;
-    if (data.format === "heightmap-1.0") {
+    if (data.format === 'heightmap-1.0') {
       isHeightmap = true;
       if (!defined(that._heightmapStructure)) {
         that._heightmapStructure = {
@@ -200,12 +200,12 @@ function CesiumTerrainProvider(options) {
           elementMultiplier: 256.0,
           isBigEndian: false,
           lowestEncodedHeight: 0,
-          highestEncodedHeight: 256 * 256 - 1,
+          highestEncodedHeight: 256 * 256 - 1
         };
       }
       hasWaterMask = true;
       that._requestWaterMask = true;
-    } else if (data.format.indexOf("quantized-mesh-1.") !== 0) {
+    } else if (data.format.indexOf('quantized-mesh-1.') !== 0) {
       message = `The tile format "${data.format}" is invalid or not supported.`;
       metadataError = TileProviderError.handleError(
         metadataError,
@@ -226,17 +226,17 @@ function CesiumTerrainProvider(options) {
     overallMaxZoom = Math.max(overallMaxZoom, maxZoom);
     // Keeps track of which of the availablity containing tiles have been loaded
 
-    if (!data.projection || data.projection === "EPSG:4326") {
+    if (!data.projection || data.projection === 'EPSG:4326') {
       that._tilingScheme = new GeographicTilingScheme({
         numberOfLevelZeroTilesX: 2,
         numberOfLevelZeroTilesY: 1,
-        ellipsoid: that._ellipsoid,
+        ellipsoid: that._ellipsoid
       });
-    } else if (data.projection === "EPSG:3857") {
+    } else if (data.projection === 'EPSG:3857') {
       that._tilingScheme = new WebMercatorTilingScheme({
         numberOfLevelZeroTilesX: 1,
         numberOfLevelZeroTilesY: 1,
-        ellipsoid: that._ellipsoid,
+        ellipsoid: that._ellipsoid
       });
     } else {
       message = `The projection "${data.projection}" is invalid or not supported.`;
@@ -253,12 +253,13 @@ function CesiumTerrainProvider(options) {
       return;
     }
 
-    that._levelZeroMaximumGeometricError = TerrainProvider.getEstimatedLevelZeroGeometricErrorForAHeightmap(
-      that._tilingScheme.ellipsoid,
-      that._heightmapWidth,
-      that._tilingScheme.getNumberOfXTilesAtLevel(0)
-    );
-    if (!data.scheme || data.scheme === "tms" || data.scheme === "slippyMap") {
+    that._levelZeroMaximumGeometricError =
+      TerrainProvider.getEstimatedLevelZeroGeometricErrorForAHeightmap(
+        that._tilingScheme.ellipsoid,
+        that._heightmapWidth,
+        that._tilingScheme.getNumberOfXTilesAtLevel(0)
+      );
+    if (!data.scheme || data.scheme === 'tms' || data.scheme === 'slippyMap') {
       that._scheme = data.scheme;
     } else {
       message = `The scheme "${data.scheme}" is invalid or not supported.`;
@@ -285,25 +286,25 @@ function CesiumTerrainProvider(options) {
     // over 'vertexnormals' if both extensions are supported by the server.
     if (
       defined(data.extensions) &&
-      data.extensions.indexOf("octvertexnormals") !== -1
+      data.extensions.indexOf('octvertexnormals') !== -1
     ) {
       hasVertexNormals = true;
     } else if (
       defined(data.extensions) &&
-      data.extensions.indexOf("vertexnormals") !== -1
+      data.extensions.indexOf('vertexnormals') !== -1
     ) {
       hasVertexNormals = true;
       littleEndianExtensionSize = false;
     }
     if (
       defined(data.extensions) &&
-      data.extensions.indexOf("watermask") !== -1
+      data.extensions.indexOf('watermask') !== -1
     ) {
       hasWaterMask = true;
     }
     if (
       defined(data.extensions) &&
-      data.extensions.indexOf("metadata") !== -1
+      data.extensions.indexOf('metadata') !== -1
     ) {
       hasMetadata = true;
     }
@@ -335,7 +336,7 @@ function CesiumTerrainProvider(options) {
             range.startX,
             yStart,
             range.endX,
-            yEnd,
+            yEnd
           ]);
           availability.addAvailableTileRange(
             level,
@@ -361,7 +362,7 @@ function CesiumTerrainProvider(options) {
     that._hasMetadata = that._hasMetadata || hasMetadata;
     if (defined(data.attribution)) {
       if (attribution.length > 0) {
-        attribution += " ";
+        attribution += ' ';
       }
       attribution += data.attribution;
     }
@@ -378,7 +379,7 @@ function CesiumTerrainProvider(options) {
         hasMetadata: hasMetadata,
         availabilityLevels: availabilityLevels,
         availabilityTilesLoaded: availabilityTilesLoaded,
-        littleEndianExtensionSize: littleEndianExtensionSize,
+        littleEndianExtensionSize: littleEndianExtensionSize
       })
     );
 
@@ -391,11 +392,11 @@ function CesiumTerrainProvider(options) {
         return Promise.resolve();
       }
       lastResource = lastResource.getDerivedResource({
-        url: parentUrl,
+        url: parentUrl
       });
       lastResource.appendForwardSlash(); // Terrain always expects a directory
       layerJsonResource = lastResource.getDerivedResource({
-        url: "layer.json",
+        url: 'layer.json'
       });
       const parentMetadata = layerJsonResource.fetchJson();
       return Promise.resolve(parentMetadata)
@@ -466,11 +467,11 @@ function CesiumTerrainProvider(options) {
     // If the metadata is not found, assume this is a pre-metadata heightmap tileset.
     if (defined(data) && data.statusCode === 404) {
       metadataSuccess({
-        tilejson: "2.1.0",
-        format: "heightmap-1.0",
-        version: "1.0.0",
-        scheme: "tms",
-        tiles: ["{z}/{x}/{y}.terrain?v={version}"],
+        tilejson: '2.1.0',
+        format: 'heightmap-1.0',
+        version: '1.0.0',
+        scheme: 'tms',
+        tiles: ['{z}/{x}/{y}.terrain?v={version}']
       });
       return;
     }
@@ -516,19 +517,19 @@ const QuantizedMeshExtensionIds = {
    * @constant
    * @default 4
    */
-  METADATA: 4,
+  METADATA: 4
 };
 
 function getRequestHeader(extensionsList) {
   if (!defined(extensionsList) || extensionsList.length === 0) {
     return {
       Accept:
-        "application/vnd.quantized-mesh,application/octet-stream;q=0.9,*/*;q=0.01",
+        'application/vnd.quantized-mesh,application/octet-stream;q=0.9,*/*;q=0.01'
     };
   }
-  const extensions = extensionsList.join("-");
+  const extensions = extensionsList.join('-');
   return {
-    Accept: `application/vnd.quantized-mesh;extensions=${extensions},application/octet-stream;q=0.9,*/*;q=0.01`,
+    Accept: `application/vnd.quantized-mesh;extensions=${extensions},application/octet-stream;q=0.9,*/*;q=0.01`
   };
 }
 
@@ -549,7 +550,7 @@ function createHeightmapTerrainData(provider, buffer, level, x, y) {
     width: provider._heightmapWidth,
     height: provider._heightmapWidth,
     structure: provider._heightmapStructure,
-    credits: provider._tileCredits,
+    credits: provider._tileCredits
   });
 }
 
@@ -721,9 +722,8 @@ function createQuantizedMeshTerrainData(provider, buffer, level, x, y, layer) {
           for (let offset = 0; offset < availableTiles.length; ++offset) {
             const availableLevel = level + offset + 1;
             const rangesAtLevel = availableTiles[offset];
-            const yTiles = provider._tilingScheme.getNumberOfYTilesAtLevel(
-              availableLevel
-            );
+            const yTiles =
+              provider._tilingScheme.getNumberOfYTilesAtLevel(availableLevel);
 
             for (
               let rangeIndex = 0;
@@ -791,7 +791,7 @@ function createQuantizedMeshTerrainData(provider, buffer, level, x, y, layer) {
     northSkirtHeight: skirtHeight,
     childTileMask: provider.availability.computeChildMaskForTile(level, x, y),
     waterMask: waterMaskBuffer,
-    credits: provider._tileCredits,
+    credits: provider._tileCredits
   });
 }
 
@@ -821,7 +821,7 @@ CesiumTerrainProvider.prototype.requestTileGeometry = function (
   //>>includeStart('debug', pragmas.debug)
   if (!this._ready) {
     throw new DeveloperError(
-      "requestTileGeometry must not be called before the terrain provider is ready."
+      'requestTileGeometry must not be called before the terrain provider is ready.'
     );
   }
   //>>includeEnd('debug');
@@ -861,7 +861,7 @@ function requestTileGeometry(provider, x, y, level, layerToUse, request) {
 
   // The TileMapService scheme counts from the bottom left
   let terrainY;
-  if (!provider._scheme || provider._scheme === "tms") {
+  if (!provider._scheme || provider._scheme === 'tms') {
     const yTiles = provider._tilingScheme.getNumberOfYTilesAtLevel(level);
     terrainY = yTiles - y - 1;
   } else {
@@ -872,15 +872,15 @@ function requestTileGeometry(provider, x, y, level, layerToUse, request) {
   if (provider._requestVertexNormals && layerToUse.hasVertexNormals) {
     extensionList.push(
       layerToUse.littleEndianExtensionSize
-        ? "octvertexnormals"
-        : "vertexnormals"
+        ? 'octvertexnormals'
+        : 'vertexnormals'
     );
   }
   if (provider._requestWaterMask && layerToUse.hasWaterMask) {
-    extensionList.push("watermask");
+    extensionList.push('watermask');
   }
   if (provider._requestMetadata && layerToUse.hasMetadata) {
-    extensionList.push("metadata");
+    extensionList.push('metadata');
   }
 
   let headers;
@@ -894,7 +894,7 @@ function requestTileGeometry(provider, x, y, level, layerToUse, request) {
   ) {
     // ion uses query paremeters to request extensions
     if (extensionList.length !== 0) {
-      query = { extensions: extensionList.join("-") };
+      query = { extensions: extensionList.join('-') };
     }
     headers = getRequestHeader(undefined);
   } else {
@@ -909,11 +909,11 @@ function requestTileGeometry(provider, x, y, level, layerToUse, request) {
         version: layerToUse.version,
         z: level,
         x: x,
-        y: terrainY,
+        y: terrainY
       },
       queryParameters: query,
       headers: headers,
-      request: request,
+      request: request
     })
     .fetchArrayBuffer();
 
@@ -948,7 +948,7 @@ Object.defineProperties(CesiumTerrainProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._errorEvent;
-    },
+    }
   },
 
   /**
@@ -963,13 +963,13 @@ Object.defineProperties(CesiumTerrainProvider.prototype, {
       //>>includeStart('debug', pragmas.debug)
       if (!this._ready) {
         throw new DeveloperError(
-          "credit must not be called before the terrain provider is ready."
+          'credit must not be called before the terrain provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._credit;
-    },
+    }
   },
 
   /**
@@ -984,13 +984,13 @@ Object.defineProperties(CesiumTerrainProvider.prototype, {
       //>>includeStart('debug', pragmas.debug)
       if (!this._ready) {
         throw new DeveloperError(
-          "tilingScheme must not be called before the terrain provider is ready."
+          'tilingScheme must not be called before the terrain provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tilingScheme;
-    },
+    }
   },
 
   /**
@@ -1002,7 +1002,7 @@ Object.defineProperties(CesiumTerrainProvider.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -1014,7 +1014,7 @@ Object.defineProperties(CesiumTerrainProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise.promise;
-    },
+    }
   },
 
   /**
@@ -1032,13 +1032,13 @@ Object.defineProperties(CesiumTerrainProvider.prototype, {
       //>>includeStart('debug', pragmas.debug)
       if (!this._ready) {
         throw new DeveloperError(
-          "hasWaterMask must not be called before the terrain provider is ready."
+          'hasWaterMask must not be called before the terrain provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._hasWaterMask && this._requestWaterMask;
-    },
+    }
   },
 
   /**
@@ -1054,14 +1054,14 @@ Object.defineProperties(CesiumTerrainProvider.prototype, {
       //>>includeStart('debug', pragmas.debug)
       if (!this._ready) {
         throw new DeveloperError(
-          "hasVertexNormals must not be called before the terrain provider is ready."
+          'hasVertexNormals must not be called before the terrain provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       // returns true if we can request vertex normals from the server
       return this._hasVertexNormals && this._requestVertexNormals;
-    },
+    }
   },
 
   /**
@@ -1077,14 +1077,14 @@ Object.defineProperties(CesiumTerrainProvider.prototype, {
       //>>includeStart('debug', pragmas.debug)
       if (!this._ready) {
         throw new DeveloperError(
-          "hasMetadata must not be called before the terrain provider is ready."
+          'hasMetadata must not be called before the terrain provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       // returns true if we can request metadata from the server
       return this._hasMetadata && this._requestMetadata;
-    },
+    }
   },
 
   /**
@@ -1098,7 +1098,7 @@ Object.defineProperties(CesiumTerrainProvider.prototype, {
   requestVertexNormals: {
     get: function () {
       return this._requestVertexNormals;
-    },
+    }
   },
 
   /**
@@ -1112,7 +1112,7 @@ Object.defineProperties(CesiumTerrainProvider.prototype, {
   requestWaterMask: {
     get: function () {
       return this._requestWaterMask;
-    },
+    }
   },
 
   /**
@@ -1126,7 +1126,7 @@ Object.defineProperties(CesiumTerrainProvider.prototype, {
   requestMetadata: {
     get: function () {
       return this._requestMetadata;
-    },
+    }
   },
 
   /**
@@ -1146,13 +1146,13 @@ Object.defineProperties(CesiumTerrainProvider.prototype, {
       //>>includeStart('debug', pragmas.debug)
       if (!this._ready) {
         throw new DeveloperError(
-          "availability must not be called before the terrain provider is ready."
+          'availability must not be called before the terrain provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._availability;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -1255,7 +1255,7 @@ function getAvailabilityTile(layer, x, y, level) {
   return {
     level: parentLevel,
     x: parentX,
-    y: parentY,
+    y: parentY
   };
 }
 
@@ -1263,7 +1263,7 @@ function checkLayer(provider, x, y, level, layer, topLayer) {
   if (!defined(layer.availabilityLevels)) {
     // It's definitely not in this layer
     return {
-      result: false,
+      result: false
     };
   }
 
@@ -1290,7 +1290,7 @@ function checkLayer(provider, x, y, level, layer, topLayer) {
           const request = new Request({
             throttle: false,
             throttleByServer: true,
-            type: RequestType.TERRAIN,
+            type: RequestType.TERRAIN
           });
           requestPromise = requestTileGeometry(
             provider,
@@ -1311,7 +1311,7 @@ function checkLayer(provider, x, y, level, layer, topLayer) {
       //  is still a chance that it may become available at some point
       return {
         result: true,
-        promise: requestPromise,
+        promise: requestPromise
       };
     }
 
@@ -1319,7 +1319,7 @@ function checkLayer(provider, x, y, level, layer, topLayer) {
   }
 
   return {
-    result: false,
+    result: false
   };
 }
 

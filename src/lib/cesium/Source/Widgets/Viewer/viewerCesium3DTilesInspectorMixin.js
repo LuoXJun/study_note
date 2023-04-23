@@ -1,5 +1,5 @@
-import Check from "../../Core/Check.js";
-import Cesium3DTilesInspector from "../Cesium3DTilesInspector/Cesium3DTilesInspector.js";
+import Check from '../../Core/Check.js';
+import Cesium3DTilesInspector from '../Cesium3DTilesInspector/Cesium3DTilesInspector.js';
 
 /**
  * A mixin which adds the {@link Cesium3DTilesInspector} widget to the {@link Viewer} widget.
@@ -15,11 +15,11 @@ import Cesium3DTilesInspector from "../Cesium3DTilesInspector/Cesium3DTilesInspe
  */
 function viewerCesium3DTilesInspectorMixin(viewer) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("viewer", viewer);
+  Check.typeOf.object('viewer', viewer);
   //>>includeEnd('debug');
 
-  const container = document.createElement("div");
-  container.className = "cesium-viewer-cesium3DTilesInspectorContainer";
+  const container = document.createElement('div');
+  container.className = 'cesium-viewer-cesium3DTilesInspectorContainer';
   viewer.container.appendChild(container);
   const cesium3DTilesInspector = new Cesium3DTilesInspector(
     container,
@@ -30,8 +30,8 @@ function viewerCesium3DTilesInspectorMixin(viewer) {
     cesium3DTilesInspector: {
       get: function () {
         return cesium3DTilesInspector;
-      },
-    },
+      }
+    }
   });
 }
 export default viewerCesium3DTilesInspectorMixin;

@@ -23,7 +23,32 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './defaultValue-97284df2', './RuntimeError-4f8ec8a2', './Matrix2-9e1c22e2', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './GeometryPipeline-d7363877', './IndexDatatype-f228f5fd', './WebMercatorProjection-3b121d41'], (function (exports, Transforms, ComponentDatatype, defaultValue, RuntimeError, Matrix2, GeometryAttribute, GeometryAttributes, GeometryPipeline, IndexDatatype, WebMercatorProjection) { 'use strict';
+define([
+  'exports',
+  './Transforms-273eeb44',
+  './ComponentDatatype-4eeb6d9b',
+  './defaultValue-97284df2',
+  './RuntimeError-4f8ec8a2',
+  './Matrix2-9e1c22e2',
+  './GeometryAttribute-9be2d2e5',
+  './GeometryAttributes-734a3446',
+  './GeometryPipeline-d7363877',
+  './IndexDatatype-f228f5fd',
+  './WebMercatorProjection-3b121d41'
+], function (
+  exports,
+  Transforms,
+  ComponentDatatype,
+  defaultValue,
+  RuntimeError,
+  Matrix2,
+  GeometryAttribute,
+  GeometryAttributes,
+  GeometryPipeline,
+  IndexDatatype,
+  WebMercatorProjection
+) {
+  'use strict';
 
   /**
    * Value and type information for per-instance geometry attribute that determines the geometry instance offset
@@ -68,7 +93,7 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
     componentDatatype: {
       get: function () {
         return ComponentDatatype.ComponentDatatype.FLOAT;
-      },
+      }
     },
 
     /**
@@ -84,7 +109,7 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
     componentsPerAttribute: {
       get: function () {
         return 3;
-      },
+      }
     },
 
     /**
@@ -102,8 +127,8 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
     normalize: {
       get: function () {
         return false;
-      },
-    },
+      }
+    }
   });
 
   /**
@@ -114,7 +139,7 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
    */
   OffsetGeometryInstanceAttribute.fromCartesian3 = function (offset) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("offset", offset);
+    RuntimeError.Check.defined('offset', offset);
     //>>includeEnd('debug');
 
     return new OffsetGeometryInstanceAttribute(offset.x, offset.y, offset.z);
@@ -133,7 +158,7 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
    */
   OffsetGeometryInstanceAttribute.toValue = function (offset, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("offset", offset);
+    RuntimeError.Check.defined('offset', offset);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -169,7 +194,9 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
     if (toWorld) {
       for (i = 0; i < length; ++i) {
         if (defaultValue.defined(instances[i].geometry)) {
-          GeometryPipeline.GeometryPipeline.transformToWorldCoordinates(instances[i]);
+          GeometryPipeline.GeometryPipeline.transformToWorldCoordinates(
+            instances[i]
+          );
         }
       }
     } else {
@@ -191,7 +218,7 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
     attributes.batchId = new GeometryAttribute.GeometryAttribute({
       componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
       componentsPerAttribute: 1,
-      values: new Float32Array(numberOfComponents),
+      values: new Float32Array(numberOfComponents)
     });
 
     const values = attributes.batchId.values;
@@ -245,7 +272,7 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
         instances[i].geometry.primitiveType !== primitiveType
       ) {
         throw new RuntimeError.DeveloperError(
-          "All instance geometries must have the same primitiveType."
+          'All instance geometries must have the same primitiveType.'
         );
       }
     }
@@ -270,8 +297,12 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
       for (i = 0; i < length; ++i) {
         const instance = instances[i];
         if (defaultValue.defined(instance.geometry)) {
-          GeometryPipeline.GeometryPipeline.reorderForPostVertexCache(instance.geometry);
-          GeometryPipeline.GeometryPipeline.reorderForPreVertexCache(instance.geometry);
+          GeometryPipeline.GeometryPipeline.reorderForPostVertexCache(
+            instance.geometry
+          );
+          GeometryPipeline.GeometryPipeline.reorderForPreVertexCache(
+            instance.geometry
+          );
         } else if (
           defaultValue.defined(instance.westHemisphereGeometry) &&
           defaultValue.defined(instance.eastHemisphereGeometry)
@@ -294,7 +325,8 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
     }
 
     // Combine into single geometry for better rendering performance.
-    let geometries = GeometryPipeline.GeometryPipeline.combineInstances(instances);
+    let geometries =
+      GeometryPipeline.GeometryPipeline.combineInstances(instances);
 
     length = geometries.length;
     for (i = 0; i < length; ++i) {
@@ -306,7 +338,8 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
         for (const name in attributes) {
           if (
             attributes.hasOwnProperty(name) &&
-            attributes[name].componentDatatype === ComponentDatatype.ComponentDatatype.DOUBLE
+            attributes[name].componentDatatype ===
+              ComponentDatatype.ComponentDatatype.DOUBLE
           ) {
             const name3D = `${name}3D`;
             const name2D = `${name}2D`;
@@ -319,10 +352,14 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
               name2D,
               projection
             );
-            if (defaultValue.defined(geometry.boundingSphere) && name === "position") {
-              geometry.boundingSphereCV = Transforms.BoundingSphere.fromVertices(
-                geometry.attributes.position2D.values
-              );
+            if (
+              defaultValue.defined(geometry.boundingSphere) &&
+              name === 'position'
+            ) {
+              geometry.boundingSphereCV =
+                Transforms.BoundingSphere.fromVertices(
+                  geometry.attributes.position2D.values
+                );
             }
 
             GeometryPipeline.GeometryPipeline.encodeAttribute(
@@ -343,7 +380,8 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
         for (const name in attributes) {
           if (
             attributes.hasOwnProperty(name) &&
-            attributes[name].componentDatatype === ComponentDatatype.ComponentDatatype.DOUBLE
+            attributes[name].componentDatatype ===
+              ComponentDatatype.ComponentDatatype.DOUBLE
           ) {
             GeometryPipeline.GeometryPipeline.encodeAttribute(
               geometry,
@@ -413,7 +451,7 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
       pickOffsets.push({
         index: geometryIndex,
         offset: offset,
-        count: count,
+        count: count
       });
       offset += count;
     }
@@ -421,16 +459,16 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
 
   function createInstancePickOffsets(instances, geometries) {
     const pickOffsets = [];
-    createPickOffsets(instances, "geometry", geometries, pickOffsets);
+    createPickOffsets(instances, 'geometry', geometries, pickOffsets);
     createPickOffsets(
       instances,
-      "westHemisphereGeometry",
+      'westHemisphereGeometry',
       geometries,
       pickOffsets
     );
     createPickOffsets(
       instances,
-      "eastHemisphereGeometry",
+      'eastHemisphereGeometry',
       geometries,
       pickOffsets
     );
@@ -457,9 +495,10 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
     if (length > 0) {
       geometries = geometryPipeline(parameters);
       if (geometries.length > 0) {
-        attributeLocations = GeometryPipeline.GeometryPipeline.createAttributeLocations(
-          geometries[0]
-        );
+        attributeLocations =
+          GeometryPipeline.GeometryPipeline.createAttributeLocations(
+            geometries[0]
+          );
         if (parameters.createPickOffsets) {
           pickOffsets = createInstancePickOffsets(instances, geometries);
         }
@@ -488,7 +527,10 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
 
       const eastHemisphereGeometry = instance.eastHemisphereGeometry;
       const westHemisphereGeometry = instance.westHemisphereGeometry;
-      if (defaultValue.defined(eastHemisphereGeometry) && defaultValue.defined(westHemisphereGeometry)) {
+      if (
+        defaultValue.defined(eastHemisphereGeometry) &&
+        defaultValue.defined(westHemisphereGeometry)
+      ) {
         if (
           defaultValue.defined(eastHemisphereGeometry.boundingSphere) &&
           defaultValue.defined(westHemisphereGeometry.boundingSphere)
@@ -517,7 +559,7 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
       pickOffsets: pickOffsets,
       offsetInstanceExtend: offsetInstanceExtend,
       boundingSpheres: boundingSpheres,
-      boundingSpheresCV: boundingSpheresCV,
+      boundingSpheresCV: boundingSpheresCV
     };
   };
 
@@ -527,7 +569,10 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
       if (attributes.hasOwnProperty(name)) {
         const attribute = attributes[name];
 
-        if (defaultValue.defined(attribute) && defaultValue.defined(attribute.values)) {
+        if (
+          defaultValue.defined(attribute) &&
+          defaultValue.defined(attribute.values)
+        ) {
           transferableObjects.push(attribute.values.buffer);
         }
       }
@@ -604,22 +649,37 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
 
       packedData[count++] = geometry.primitiveType;
       packedData[count++] = geometry.geometryType;
-      packedData[count++] = defaultValue.defaultValue(geometry.offsetAttribute, -1);
+      packedData[count++] = defaultValue.defaultValue(
+        geometry.offsetAttribute,
+        -1
+      );
 
-      const validBoundingSphere = defaultValue.defined(geometry.boundingSphere) ? 1.0 : 0.0;
+      const validBoundingSphere = defaultValue.defined(geometry.boundingSphere)
+        ? 1.0
+        : 0.0;
       packedData[count++] = validBoundingSphere;
       if (validBoundingSphere) {
-        Transforms.BoundingSphere.pack(geometry.boundingSphere, packedData, count);
+        Transforms.BoundingSphere.pack(
+          geometry.boundingSphere,
+          packedData,
+          count
+        );
       }
 
       count += Transforms.BoundingSphere.packedLength;
 
-      const validBoundingSphereCV = defaultValue.defined(geometry.boundingSphereCV)
+      const validBoundingSphereCV = defaultValue.defined(
+        geometry.boundingSphereCV
+      )
         ? 1.0
         : 0.0;
       packedData[count++] = validBoundingSphereCV;
       if (validBoundingSphereCV) {
-        Transforms.BoundingSphere.pack(geometry.boundingSphereCV, packedData, count);
+        Transforms.BoundingSphere.pack(
+          geometry.boundingSphereCV,
+          packedData,
+          count
+        );
       }
 
       count += Transforms.BoundingSphere.packedLength;
@@ -667,7 +727,7 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
 
     return {
       stringTable: stringTable,
-      packedData: packedData,
+      packedData: packedData
     };
   };
 
@@ -712,7 +772,8 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
 
       packedGeometryIndex += Transforms.BoundingSphere.packedLength;
 
-      const validBoundingSphereCV = packedGeometry[packedGeometryIndex++] === 1.0;
+      const validBoundingSphereCV =
+        packedGeometry[packedGeometryIndex++] === 1.0;
       if (validBoundingSphereCV) {
         boundingSphereCV = Transforms.BoundingSphere.unpack(
           packedGeometry,
@@ -734,7 +795,10 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
         const normalize = packedGeometry[packedGeometryIndex++] !== 0;
 
         length = packedGeometry[packedGeometryIndex++];
-        values = ComponentDatatype.ComponentDatatype.createTypedArray(componentDatatype, length);
+        values = ComponentDatatype.ComponentDatatype.createTypedArray(
+          componentDatatype,
+          length
+        );
         for (let valuesIndex = 0; valuesIndex < length; valuesIndex++) {
           values[valuesIndex] = packedGeometry[packedGeometryIndex++];
         }
@@ -743,7 +807,7 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
           componentDatatype: componentDatatype,
           componentsPerAttribute: componentsPerAttribute,
           normalize: normalize,
-          values: values,
+          values: values
         });
       }
 
@@ -752,7 +816,10 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
 
       if (length > 0) {
         const numberOfVertices = values.length / componentsPerAttribute;
-        indices = IndexDatatype.IndexDatatype.createTypedArray(numberOfVertices, length);
+        indices = IndexDatatype.IndexDatatype.createTypedArray(
+          numberOfVertices,
+          length
+        );
         for (i = 0; i < length; i++) {
           indices[i] = packedGeometry[packedGeometryIndex++];
         }
@@ -765,7 +832,7 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
         boundingSphereCV: boundingSphereCV,
         indices: indices,
         attributes: attributes,
-        offsetAttribute: offsetAttribute,
+        offsetAttribute: offsetAttribute
       });
     }
 
@@ -781,7 +848,10 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
       const instance = instances[i];
       Matrix2.Matrix4.pack(instance.modelMatrix, packedData, count);
       count += Matrix2.Matrix4.packedLength;
-      if (defaultValue.defined(instance.attributes) && defaultValue.defined(instance.attributes.offset)) {
+      if (
+        defaultValue.defined(instance.attributes) &&
+        defaultValue.defined(instance.attributes.offset)
+      ) {
         const values = instance.attributes.offset.value;
         packedData[count] = values[0];
         packedData[count + 1] = values[1];
@@ -810,14 +880,14 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
             packedInstances[i],
             packedInstances[i + 1],
             packedInstances[i + 2]
-          ),
+          )
         };
       }
       i += 3;
 
       result[count++] = {
         modelMatrix: modelMatrix,
-        attributes: attributes,
+        attributes: attributes
       };
     }
 
@@ -845,13 +915,14 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
         transferableObjects
       ),
       ellipsoid: parameters.ellipsoid,
-      isGeographic: parameters.projection instanceof Transforms.GeographicProjection,
+      isGeographic:
+        parameters.projection instanceof Transforms.GeographicProjection,
       elementIndexUintSupported: parameters.elementIndexUintSupported,
       scene3DOnly: parameters.scene3DOnly,
       vertexCacheOptimize: parameters.vertexCacheOptimize,
       compressVertices: parameters.compressVertices,
       modelMatrix: parameters.modelMatrix,
-      createPickOffsets: parameters.createPickOffsets,
+      createPickOffsets: parameters.createPickOffsets
     };
   };
 
@@ -861,7 +932,9 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
   PrimitivePipeline.unpackCombineGeometryParameters = function (
     packedParameters
   ) {
-    const instances = unpackInstancesForCombine(packedParameters.packedInstances);
+    const instances = unpackInstancesForCombine(
+      packedParameters.packedInstances
+    );
     const createGeometryResults = packedParameters.createGeometryResults;
     const length = createGeometryResults.length;
     let instanceIndex = 0;
@@ -897,13 +970,14 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
       vertexCacheOptimize: packedParameters.vertexCacheOptimize,
       compressVertices: packedParameters.compressVertices,
       modelMatrix: Matrix2.Matrix4.clone(packedParameters.modelMatrix),
-      createPickOffsets: packedParameters.createPickOffsets,
+      createPickOffsets: packedParameters.createPickOffsets
     };
   };
 
   function packBoundingSpheres(boundingSpheres) {
     const length = boundingSpheres.length;
-    const bufferLength = 1 + (Transforms.BoundingSphere.packedLength + 1) * length;
+    const bufferLength =
+      1 + (Transforms.BoundingSphere.packedLength + 1) * length;
     const buffer = new Float32Array(bufferLength);
 
     let bufferIndex = 0;
@@ -966,7 +1040,7 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
       pickOffsets: results.pickOffsets,
       offsetInstanceExtend: results.offsetInstanceExtend,
       boundingSpheres: packedBoundingSpheres,
-      boundingSpheresCV: packedBoundingSpheresCV,
+      boundingSpheresCV: packedBoundingSpheresCV
     };
   };
 
@@ -981,11 +1055,10 @@ define(['exports', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b', './d
       pickOffsets: packedResult.pickOffsets,
       offsetInstanceExtend: packedResult.offsetInstanceExtend,
       boundingSpheres: unpackBoundingSpheres(packedResult.boundingSpheres),
-      boundingSpheresCV: unpackBoundingSpheres(packedResult.boundingSpheresCV),
+      boundingSpheresCV: unpackBoundingSpheres(packedResult.boundingSpheresCV)
     };
   };
 
   exports.PrimitivePipeline = PrimitivePipeline;
-
-}));
+});
 //# sourceMappingURL=PrimitivePipeline-be008fb1.js.map

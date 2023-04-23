@@ -1,10 +1,10 @@
-import Cartesian3 from "./Cartesian3.js";
-import Cartesian4 from "./Cartesian4.js";
-import Check from "./Check.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import CesiumMath from "./Math.js";
-import Matrix4 from "./Matrix4.js";
+import Cartesian3 from './Cartesian3.js';
+import Cartesian4 from './Cartesian4.js';
+import Check from './Check.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import CesiumMath from './Math.js';
+import Matrix4 from './Matrix4.js';
 
 /**
  * A plane in Hessian Normal Form defined by
@@ -33,7 +33,7 @@ import Matrix4 from "./Matrix4.js";
  */
 function Plane(normal, distance) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("normal", normal);
+  Check.typeOf.object('normal', normal);
   if (
     !CesiumMath.equalsEpsilon(
       Cartesian3.magnitude(normal),
@@ -41,9 +41,9 @@ function Plane(normal, distance) {
       CesiumMath.EPSILON6
     )
   ) {
-    throw new DeveloperError("normal must be normalized.");
+    throw new DeveloperError('normal must be normalized.');
   }
-  Check.typeOf.number("distance", distance);
+  Check.typeOf.number('distance', distance);
   //>>includeEnd('debug');
 
   /**
@@ -82,8 +82,8 @@ function Plane(normal, distance) {
  */
 Plane.fromPointNormal = function (point, normal, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("point", point);
-  Check.typeOf.object("normal", normal);
+  Check.typeOf.object('point', point);
+  Check.typeOf.object('normal', normal);
   if (
     !CesiumMath.equalsEpsilon(
       Cartesian3.magnitude(normal),
@@ -91,7 +91,7 @@ Plane.fromPointNormal = function (point, normal, result) {
       CesiumMath.EPSILON6
     )
   ) {
-    throw new DeveloperError("normal must be normalized.");
+    throw new DeveloperError('normal must be normalized.');
   }
   //>>includeEnd('debug');
 
@@ -118,7 +118,7 @@ const scratchNormal = new Cartesian3();
  */
 Plane.fromCartesian4 = function (coefficients, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("coefficients", coefficients);
+  Check.typeOf.object('coefficients', coefficients);
   //>>includeEnd('debug');
 
   const normal = Cartesian3.fromCartesian4(coefficients, scratchNormal);
@@ -132,7 +132,7 @@ Plane.fromCartesian4 = function (coefficients, result) {
       CesiumMath.EPSILON6
     )
   ) {
-    throw new DeveloperError("normal must be normalized.");
+    throw new DeveloperError('normal must be normalized.');
   }
   //>>includeEnd('debug');
 
@@ -157,8 +157,8 @@ Plane.fromCartesian4 = function (coefficients, result) {
  */
 Plane.getPointDistance = function (plane, point) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("plane", plane);
-  Check.typeOf.object("point", point);
+  Check.typeOf.object('plane', plane);
+  Check.typeOf.object('point', point);
   //>>includeEnd('debug');
 
   return Cartesian3.dot(plane.normal, point) + plane.distance;
@@ -174,8 +174,8 @@ const scratchCartesian = new Cartesian3();
  */
 Plane.projectPointOntoPlane = function (plane, point, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("plane", plane);
-  Check.typeOf.object("point", point);
+  Check.typeOf.object('plane', plane);
+  Check.typeOf.object('point', point);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -206,8 +206,8 @@ const scratchTransformNormal = new Cartesian3();
  */
 Plane.transform = function (plane, transform, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("plane", plane);
-  Check.typeOf.object("transform", transform);
+  Check.typeOf.object('plane', plane);
+  Check.typeOf.object('transform', transform);
   //>>includeEnd('debug');
 
   const normal = plane.normal;
@@ -253,7 +253,7 @@ Plane.transform = function (plane, transform, result) {
  */
 Plane.clone = function (plane, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("plane", plane);
+  Check.typeOf.object('plane', plane);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -276,8 +276,8 @@ Plane.clone = function (plane, result) {
  */
 Plane.equals = function (left, right) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("left", left);
-  Check.typeOf.object("right", right);
+  Check.typeOf.object('left', left);
+  Check.typeOf.object('right', right);
   //>>includeEnd('debug');
 
   return (

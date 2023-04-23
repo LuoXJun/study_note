@@ -1,4 +1,4 @@
-import defined from "../Core/defined.js";
+import defined from '../Core/defined.js';
 
 /**
  * @private
@@ -20,8 +20,8 @@ Object.defineProperties(Cesium3DTileStyleEngine.prototype, {
       }
       this._style = value;
       this._styleDirty = true;
-    },
-  },
+    }
+  }
 });
 
 Cesium3DTileStyleEngine.prototype.makeDirty = function () {

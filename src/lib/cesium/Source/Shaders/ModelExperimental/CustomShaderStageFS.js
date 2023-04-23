@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "void customShaderStage(\n\
+export default 'void customShaderStage(\n\
     inout czm_modelMaterial material,\n\
     ProcessedAttributes attributes,\n\
     FeatureIds featureIds,\n\
@@ -13,4 +13,4 @@ export default "void customShaderStage(\n\
     fsInput.metadata = metadata;\n\
     fragmentMain(fsInput, material);\n\
 }\n\
-";
+';

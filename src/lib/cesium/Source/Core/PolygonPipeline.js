@@ -1,18 +1,18 @@
-import earcut from "../ThirdParty/earcut.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Ellipsoid from "./Ellipsoid.js";
-import EllipsoidRhumbLine from "./EllipsoidRhumbLine.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import CesiumMath from "./Math.js";
-import PrimitiveType from "./PrimitiveType.js";
-import WindingOrder from "./WindingOrder.js";
+import earcut from '../ThirdParty/earcut.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Ellipsoid from './Ellipsoid.js';
+import EllipsoidRhumbLine from './EllipsoidRhumbLine.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import CesiumMath from './Math.js';
+import PrimitiveType from './PrimitiveType.js';
+import WindingOrder from './WindingOrder.js';
 
 const scaleToGeodeticHeightN = new Cartesian3();
 const scaleToGeodeticHeightP = new Cartesian3();
@@ -27,9 +27,9 @@ const PolygonPipeline = {};
  */
 PolygonPipeline.computeArea2D = function (positions) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("positions", positions);
+  Check.defined('positions', positions);
   Check.typeOf.number.greaterThanOrEquals(
-    "positions.length",
+    'positions.length',
     positions.length,
     3
   );
@@ -67,7 +67,7 @@ PolygonPipeline.computeWindingOrder2D = function (positions) {
  */
 PolygonPipeline.triangulate = function (positions, holes) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("positions", positions);
+  Check.defined('positions', positions);
   //>>includeEnd('debug');
 
   const flattenedPositions = Cartesian2.packArray(positions);
@@ -111,12 +111,12 @@ PolygonPipeline.computeSubdivision = function (
   const hasTexcoords = defined(texcoords);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("ellipsoid", ellipsoid);
-  Check.defined("positions", positions);
-  Check.defined("indices", indices);
-  Check.typeOf.number.greaterThanOrEquals("indices.length", indices.length, 3);
-  Check.typeOf.number.equals("indices.length % 3", "0", indices.length % 3, 0);
-  Check.typeOf.number.greaterThan("granularity", granularity, 0.0);
+  Check.typeOf.object('ellipsoid', ellipsoid);
+  Check.defined('positions', positions);
+  Check.defined('indices', indices);
+  Check.typeOf.number.greaterThanOrEquals('indices.length', indices.length, 3);
+  Check.typeOf.number.equals('indices.length % 3', '0', indices.length % 3, 0);
+  Check.typeOf.number.greaterThan('granularity', granularity, 0.0);
   //>>includeEnd('debug');
 
   // triangles that need (or might need) to be subdivided.
@@ -298,18 +298,18 @@ PolygonPipeline.computeSubdivision = function (
       position: new GeometryAttribute({
         componentDatatype: ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: subdividedPositions,
-      }),
+        values: subdividedPositions
+      })
     },
     indices: subdividedIndices,
-    primitiveType: PrimitiveType.TRIANGLES,
+    primitiveType: PrimitiveType.TRIANGLES
   };
 
   if (hasTexcoords) {
     geometryOptions.attributes.st = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 2,
-      values: subdividedTexcoords,
+      values: subdividedTexcoords
     });
   }
 
@@ -346,12 +346,12 @@ PolygonPipeline.computeRhumbLineSubdivision = function (
   const hasTexcoords = defined(texcoords);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("ellipsoid", ellipsoid);
-  Check.defined("positions", positions);
-  Check.defined("indices", indices);
-  Check.typeOf.number.greaterThanOrEquals("indices.length", indices.length, 3);
-  Check.typeOf.number.equals("indices.length % 3", "0", indices.length % 3, 0);
-  Check.typeOf.number.greaterThan("granularity", granularity, 0.0);
+  Check.typeOf.object('ellipsoid', ellipsoid);
+  Check.defined('positions', positions);
+  Check.defined('indices', indices);
+  Check.typeOf.number.greaterThanOrEquals('indices.length', indices.length, 3);
+  Check.typeOf.number.equals('indices.length % 3', '0', indices.length % 3, 0);
+  Check.typeOf.number.greaterThan('granularity', granularity, 0.0);
   //>>includeEnd('debug');
 
   // triangles that need (or might need) to be subdivided.
@@ -564,18 +564,18 @@ PolygonPipeline.computeRhumbLineSubdivision = function (
       position: new GeometryAttribute({
         componentDatatype: ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: subdividedPositions,
-      }),
+        values: subdividedPositions
+      })
     },
     indices: subdividedIndices,
-    primitiveType: PrimitiveType.TRIANGLES,
+    primitiveType: PrimitiveType.TRIANGLES
   };
 
   if (hasTexcoords) {
     geometryOptions.attributes.st = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 2,
-      values: subdividedTexcoords,
+      values: subdividedTexcoords
     });
   }
 

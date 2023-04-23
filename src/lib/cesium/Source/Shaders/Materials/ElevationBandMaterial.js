@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "uniform sampler2D heights;\n\
+export default 'uniform sampler2D heights;\n\
 uniform sampler2D colors;\n\
 \n\
 // This material expects heights to be sorted from lowest to highest.\n\
@@ -73,4 +73,4 @@ czm_material czm_getMaterial(czm_materialInput materialInput)\n\
     material.alpha = color.a;\n\
     return material;\n\
 }\n\
-";
+';

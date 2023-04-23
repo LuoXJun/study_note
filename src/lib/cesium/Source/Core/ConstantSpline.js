@@ -1,6 +1,6 @@
-import Check from "./Check.js";
-import DeveloperError from "./DeveloperError.js";
-import Spline from "./Spline.js";
+import Check from './Check.js';
+import DeveloperError from './DeveloperError.js';
+import Spline from './Spline.js';
 
 /**
  * A spline that evaluates to a constant value. Although this follows the {@link Spline} interface,
@@ -40,8 +40,8 @@ Object.defineProperties(ConstantSpline.prototype, {
   value: {
     get: function () {
       return this._value;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -58,7 +58,7 @@ Object.defineProperties(ConstantSpline.prototype, {
 ConstantSpline.prototype.findTimeInterval = function (time) {
   //>>includeStart('debug', pragmas.debug);
   throw new DeveloperError(
-    "findTimeInterval cannot be called on a ConstantSpline."
+    'findTimeInterval cannot be called on a ConstantSpline.'
   );
   //>>includeEnd('debug');
 };
@@ -72,7 +72,7 @@ ConstantSpline.prototype.findTimeInterval = function (time) {
  */
 ConstantSpline.prototype.wrapTime = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("time", time);
+  Check.typeOf.number('time', time);
   //>>includeEnd('debug');
 
   return 0.0;
@@ -87,7 +87,7 @@ ConstantSpline.prototype.wrapTime = function (time) {
  */
 ConstantSpline.prototype.clampTime = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("time", time);
+  Check.typeOf.number('time', time);
   //>>includeEnd('debug');
 
   return 0.0;
@@ -103,7 +103,7 @@ ConstantSpline.prototype.clampTime = function (time) {
  */
 ConstantSpline.prototype.evaluate = function (time, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("time", time);
+  Check.typeOf.number('time', time);
   //>>includeEnd('debug');
 
   const value = this._value;

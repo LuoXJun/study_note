@@ -23,7 +23,14 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Transforms-273eeb44'], (function (exports, Matrix2, RuntimeError, defaultValue, Transforms) { 'use strict';
+define([
+  'exports',
+  './Matrix2-9e1c22e2',
+  './RuntimeError-4f8ec8a2',
+  './defaultValue-97284df2',
+  './Transforms-273eeb44'
+], function (exports, Matrix2, RuntimeError, defaultValue, Transforms) {
+  'use strict';
 
   /**
    * Creates an instance of an AxisAlignedBoundingBox from the minimum and maximum points along the x, y, and z axes.
@@ -43,18 +50,26 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
      * @type {Cartesian3}
      * @default {@link Cartesian3.ZERO}
      */
-    this.minimum = Matrix2.Cartesian3.clone(defaultValue.defaultValue(minimum, Matrix2.Cartesian3.ZERO));
+    this.minimum = Matrix2.Cartesian3.clone(
+      defaultValue.defaultValue(minimum, Matrix2.Cartesian3.ZERO)
+    );
 
     /**
      * The maximum point defining the bounding box.
      * @type {Cartesian3}
      * @default {@link Cartesian3.ZERO}
      */
-    this.maximum = Matrix2.Cartesian3.clone(defaultValue.defaultValue(maximum, Matrix2.Cartesian3.ZERO));
+    this.maximum = Matrix2.Cartesian3.clone(
+      defaultValue.defaultValue(maximum, Matrix2.Cartesian3.ZERO)
+    );
 
     // If center was not defined, compute it.
     if (!defaultValue.defined(center)) {
-      center = Matrix2.Cartesian3.midpoint(this.minimum, this.maximum, new Matrix2.Cartesian3());
+      center = Matrix2.Cartesian3.midpoint(
+        this.minimum,
+        this.maximum,
+        new Matrix2.Cartesian3()
+      );
     } else {
       center = Matrix2.Cartesian3.clone(center);
     }
@@ -80,8 +95,8 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
    */
   AxisAlignedBoundingBox.fromCorners = function (minimum, maximum, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("minimum", minimum);
-    RuntimeError.Check.defined("maximum", maximum);
+    RuntimeError.Check.defined('minimum', minimum);
+    RuntimeError.Check.defined('maximum', maximum);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -90,7 +105,11 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
 
     result.minimum = Matrix2.Cartesian3.clone(minimum, result.minimum);
     result.maximum = Matrix2.Cartesian3.clone(maximum, result.maximum);
-    result.center = Matrix2.Cartesian3.midpoint(minimum, maximum, result.center);
+    result.center = Matrix2.Cartesian3.midpoint(
+      minimum,
+      maximum,
+      result.center
+    );
 
     return result;
   };
@@ -113,9 +132,18 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     }
 
     if (!defaultValue.defined(positions) || positions.length === 0) {
-      result.minimum = Matrix2.Cartesian3.clone(Matrix2.Cartesian3.ZERO, result.minimum);
-      result.maximum = Matrix2.Cartesian3.clone(Matrix2.Cartesian3.ZERO, result.maximum);
-      result.center = Matrix2.Cartesian3.clone(Matrix2.Cartesian3.ZERO, result.center);
+      result.minimum = Matrix2.Cartesian3.clone(
+        Matrix2.Cartesian3.ZERO,
+        result.minimum
+      );
+      result.maximum = Matrix2.Cartesian3.clone(
+        Matrix2.Cartesian3.ZERO,
+        result.maximum
+      );
+      result.center = Matrix2.Cartesian3.clone(
+        Matrix2.Cartesian3.ZERO,
+        result.center
+      );
       return result;
     }
 
@@ -152,7 +180,11 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     maximum.y = maximumY;
     maximum.z = maximumZ;
 
-    result.center = Matrix2.Cartesian3.midpoint(minimum, maximum, result.center);
+    result.center = Matrix2.Cartesian3.midpoint(
+      minimum,
+      maximum,
+      result.center
+    );
 
     return result;
   };
@@ -211,8 +243,8 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
    */
   AxisAlignedBoundingBox.intersectPlane = function (box, plane) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("box", box);
-    RuntimeError.Check.defined("plane", plane);
+    RuntimeError.Check.defined('box', box);
+    RuntimeError.Check.defined('plane', plane);
     //>>includeEnd('debug');
 
     intersectScratch = Matrix2.Cartesian3.subtract(
@@ -279,6 +311,5 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
   };
 
   exports.AxisAlignedBoundingBox = AxisAlignedBoundingBox;
-
-}));
+});
 //# sourceMappingURL=AxisAlignedBoundingBox-1aaf78c2.js.map

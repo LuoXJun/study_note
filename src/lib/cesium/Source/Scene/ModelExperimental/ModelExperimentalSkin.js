@@ -1,6 +1,6 @@
-import Matrix4 from "../../Core/Matrix4.js";
-import Check from "../../Core/Check.js";
-import defaultValue from "../../Core/defaultValue.js";
+import Matrix4 from '../../Core/Matrix4.js';
+import Check from '../../Core/Check.js';
+import defaultValue from '../../Core/defaultValue.js';
 
 /**
  * An in-memory representation of a skin that affects nodes in the {@link ModelExperimentalSceneGraph}.
@@ -19,8 +19,8 @@ import defaultValue from "../../Core/defaultValue.js";
 export default function ModelExperimentalSkin(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.skin", options.skin);
-  Check.typeOf.object("options.sceneGraph", options.sceneGraph);
+  Check.typeOf.object('options.skin', options.skin);
+  Check.typeOf.object('options.sceneGraph', options.sceneGraph);
   //>>includeEnd('debug');
 
   this._sceneGraph = options.sceneGraph;
@@ -48,7 +48,7 @@ Object.defineProperties(ModelExperimentalSkin.prototype, {
   skin: {
     get: function () {
       return this._skin;
-    },
+    }
   },
 
   /**
@@ -63,7 +63,7 @@ Object.defineProperties(ModelExperimentalSkin.prototype, {
   sceneGraph: {
     get: function () {
       return this._sceneGraph;
-    },
+    }
   },
 
   /**
@@ -78,7 +78,7 @@ Object.defineProperties(ModelExperimentalSkin.prototype, {
   inverseBindMatrices: {
     get: function () {
       return this._inverseBindMatrices;
-    },
+    }
   },
 
   /**
@@ -93,7 +93,7 @@ Object.defineProperties(ModelExperimentalSkin.prototype, {
   joints: {
     get: function () {
       return this._joints;
-    },
+    }
   },
 
   /**
@@ -112,8 +112,8 @@ Object.defineProperties(ModelExperimentalSkin.prototype, {
   jointMatrices: {
     get: function () {
       return this._jointMatrices;
-    },
-  },
+    }
+  }
 });
 
 function initialize(runtimeSkin) {

@@ -1,11 +1,11 @@
-import buildModuleUrl from "./buildModuleUrl.js";
-import defaultValue from "./defaultValue.js";
-import defer from "./defer.js";
-import defined from "./defined.js";
-import Iau2006XysSample from "./Iau2006XysSample.js";
-import JulianDate from "./JulianDate.js";
-import Resource from "./Resource.js";
-import TimeStandard from "./TimeStandard.js";
+import buildModuleUrl from './buildModuleUrl.js';
+import defaultValue from './defaultValue.js';
+import defer from './defer.js';
+import defined from './defined.js';
+import Iau2006XysSample from './Iau2006XysSample.js';
+import JulianDate from './JulianDate.js';
+import Resource from './Resource.js';
+import TimeStandard from './TimeStandard.js';
 
 /**
  * A set of IAU2006 XYS data that is used to evaluate the transformation between the International
@@ -255,12 +255,12 @@ function requestXysChunk(xysData, chunkIndex) {
   if (defined(xysFileUrlTemplate)) {
     chunkUrl = xysFileUrlTemplate.getDerivedResource({
       templateValues: {
-        0: chunkIndex,
-      },
+        0: chunkIndex
+      }
     });
   } else {
     chunkUrl = new Resource({
-      url: buildModuleUrl(`Assets/IAU2006_XYS/IAU2006_XYS_${chunkIndex}.json`),
+      url: buildModuleUrl(`Assets/IAU2006_XYS/IAU2006_XYS_${chunkIndex}.json`)
     });
   }
 

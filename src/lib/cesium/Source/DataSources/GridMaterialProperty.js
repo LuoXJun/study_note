@@ -1,10 +1,10 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Event from "../Core/Event.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
-import Property from "./Property.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Event from '../Core/Event.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
+import Property from './Property.js';
 
 const defaultColor = Color.WHITE;
 const defaultCellAlpha = 0.1;
@@ -65,7 +65,7 @@ Object.defineProperties(GridMaterialProperty.prototype, {
         Property.isConstant(this._lineThickness) &&
         Property.isConstant(this._lineOffset)
       );
-    },
+    }
   },
 
   /**
@@ -80,7 +80,7 @@ Object.defineProperties(GridMaterialProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -89,7 +89,7 @@ Object.defineProperties(GridMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default Color.WHITE
    */
-  color: createPropertyDescriptor("color"),
+  color: createPropertyDescriptor('color'),
 
   /**
    * Gets or sets the numeric Property specifying cell alpha values.
@@ -97,7 +97,7 @@ Object.defineProperties(GridMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default 0.1
    */
-  cellAlpha: createPropertyDescriptor("cellAlpha"),
+  cellAlpha: createPropertyDescriptor('cellAlpha'),
 
   /**
    * Gets or sets the {@link Cartesian2} Property specifying the number of grid lines along each axis.
@@ -105,7 +105,7 @@ Object.defineProperties(GridMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default new Cartesian2(8.0, 8.0)
    */
-  lineCount: createPropertyDescriptor("lineCount"),
+  lineCount: createPropertyDescriptor('lineCount'),
 
   /**
    * Gets or sets the {@link Cartesian2} Property specifying the thickness of grid lines along each axis.
@@ -113,7 +113,7 @@ Object.defineProperties(GridMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default new Cartesian2(1.0, 1.0)
    */
-  lineThickness: createPropertyDescriptor("lineThickness"),
+  lineThickness: createPropertyDescriptor('lineThickness'),
 
   /**
    * Gets or sets the {@link Cartesian2} Property specifying the starting offset of grid lines along each axis.
@@ -121,7 +121,7 @@ Object.defineProperties(GridMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default new Cartesian2(0.0, 0.0)
    */
-  lineOffset: createPropertyDescriptor("lineOffset"),
+  lineOffset: createPropertyDescriptor('lineOffset')
 });
 
 /**
@@ -131,7 +131,7 @@ Object.defineProperties(GridMaterialProperty.prototype, {
  * @returns {String} The type of material.
  */
 GridMaterialProperty.prototype.getType = function (time) {
-  return "Grid";
+  return 'Grid';
 };
 
 /**

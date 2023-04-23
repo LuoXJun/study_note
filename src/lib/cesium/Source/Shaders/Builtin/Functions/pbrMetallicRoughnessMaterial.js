@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "/**\n\
+export default '/**\n\
  * Compute parameters for physically based rendering using the\n\
  * metallic/roughness workflow. All inputs are linear; sRGB texture values must\n\
  * be decoded beforehand\n\
@@ -36,4 +36,4 @@ czm_pbrParameters czm_pbrMetallicRoughnessMaterial(\n\
 \n\
     return results;\n\
 }\n\
-";
+';

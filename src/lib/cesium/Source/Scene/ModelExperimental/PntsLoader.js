@@ -1,28 +1,28 @@
-import AttributeCompression from "../../Core/AttributeCompression.js";
-import Cartesian3 from "../../Core/Cartesian3.js";
-import Color from "../../Core/Color.js";
-import Check from "../../Core/Check.js";
-import ComponentDatatype from "../../Core/ComponentDatatype.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import PrimitiveType from "../../Core/PrimitiveType.js";
-import MersenneTwister from "../../ThirdParty/mersenne-twister.js";
-import Buffer from "../../Renderer/Buffer.js";
-import BufferUsage from "../../Renderer/BufferUsage.js";
-import AlphaMode from "../AlphaMode.js";
-import AttributeType from "../AttributeType.js";
-import Axis from "../Axis.js";
-import parseBatchTable from "../parseBatchTable.js";
-import DracoLoader from "../DracoLoader.js";
-import StructuralMetadata from "../StructuralMetadata.js";
-import ResourceLoader from "../ResourceLoader.js";
-import MetadataClass from "../MetadataClass.js";
-import ModelComponents from "../ModelComponents.js";
-import PntsParser from "../PntsParser.js";
-import PropertyTable from "../PropertyTable.js";
-import ResourceLoaderState from "../ResourceLoaderState.js";
-import VertexAttributeSemantic from "../VertexAttributeSemantic.js";
+import AttributeCompression from '../../Core/AttributeCompression.js';
+import Cartesian3 from '../../Core/Cartesian3.js';
+import Color from '../../Core/Color.js';
+import Check from '../../Core/Check.js';
+import ComponentDatatype from '../../Core/ComponentDatatype.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import PrimitiveType from '../../Core/PrimitiveType.js';
+import MersenneTwister from '../../ThirdParty/mersenne-twister.js';
+import Buffer from '../../Renderer/Buffer.js';
+import BufferUsage from '../../Renderer/BufferUsage.js';
+import AlphaMode from '../AlphaMode.js';
+import AttributeType from '../AttributeType.js';
+import Axis from '../Axis.js';
+import parseBatchTable from '../parseBatchTable.js';
+import DracoLoader from '../DracoLoader.js';
+import StructuralMetadata from '../StructuralMetadata.js';
+import ResourceLoader from '../ResourceLoader.js';
+import MetadataClass from '../MetadataClass.js';
+import ModelComponents from '../ModelComponents.js';
+import PntsParser from '../PntsParser.js';
+import PropertyTable from '../PropertyTable.js';
+import ResourceLoaderState from '../ResourceLoaderState.js';
+import VertexAttributeSemantic from '../VertexAttributeSemantic.js';
 
 const Components = ModelComponents.Components;
 const Scene = ModelComponents.Scene;
@@ -53,7 +53,7 @@ export default function PntsLoader(options) {
   const byteOffset = defaultValue(options.byteOffset, 0);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.arrayBuffer", arrayBuffer);
+  Check.typeOf.object('options.arrayBuffer', arrayBuffer);
   //>>includeEnd('debug');
 
   this._arrayBuffer = arrayBuffer;
@@ -91,7 +91,7 @@ Object.defineProperties(PntsLoader.prototype, {
   promise: {
     get: function () {
       return this._promise;
-    },
+    }
   },
   /**
    * The cache key of the resource
@@ -105,7 +105,7 @@ Object.defineProperties(PntsLoader.prototype, {
   cacheKey: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -120,7 +120,7 @@ Object.defineProperties(PntsLoader.prototype, {
   components: {
     get: function () {
       return this._components;
-    },
+    }
   },
 
   /**
@@ -136,8 +136,8 @@ Object.defineProperties(PntsLoader.prototype, {
   transform: {
     get: function () {
       return this._transform;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -199,7 +199,7 @@ function decodeDraco(loader, context) {
     .catch(function (error) {
       loader.unload();
       loader._state = ResourceLoaderState.FAILED;
-      const errorMessage = "Failed to load Draco";
+      const errorMessage = 'Failed to load Draco';
       return Promise.reject(loader.getError(errorMessage, error));
     });
 }
@@ -211,12 +211,12 @@ function processDracoAttributes(loader, draco, result) {
   let attribute;
   if (defined(result.POSITION)) {
     attribute = {
-      name: "POSITION",
+      name: 'POSITION',
       semantic: VertexAttributeSemantic.POSITION,
       typedArray: result.POSITION.array,
       componentDatatype: ComponentDatatype.FLOAT,
       type: AttributeType.VEC3,
-      isQuantized: false,
+      isQuantized: false
     };
 
     if (defined(result.POSITION.data.quantization)) {
@@ -241,14 +241,14 @@ function processDracoAttributes(loader, draco, result) {
 
   if (defined(result.NORMAL)) {
     attribute = {
-      name: "NORMAL",
+      name: 'NORMAL',
       semantic: VertexAttributeSemantic.NORMAL,
       typedArray: result.NORMAL.array,
       componentDatatype: ComponentDatatype.FLOAT,
       type: AttributeType.VEC3,
       isQuantized: false,
       octEncoded: false,
-      octEncodedZXY: false,
+      octEncodedZXY: false
     };
 
     if (defined(result.NORMAL.data.quantization)) {
@@ -266,25 +266,25 @@ function processDracoAttributes(loader, draco, result) {
 
   if (defined(result.RGBA)) {
     parsedContent.colors = {
-      name: "COLOR",
+      name: 'COLOR',
       semantic: VertexAttributeSemantic.COLOR,
       setIndex: 0,
       typedArray: result.RGBA.array,
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       type: AttributeType.VEC4,
       normalized: true,
-      isTranslucent: true,
+      isTranslucent: true
     };
   } else if (defined(result.RGB)) {
     parsedContent.colors = {
-      name: "COLOR",
+      name: 'COLOR',
       semantic: VertexAttributeSemantic.COLOR,
       setIndex: 0,
       typedArray: result.RGB.array,
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       type: AttributeType.VEC3,
       normalized: true,
-      isTranslucent: false,
+      isTranslucent: false
     };
   }
 
@@ -292,12 +292,12 @@ function processDracoAttributes(loader, draco, result) {
   if (defined(result.BATCH_ID)) {
     const batchIds = result.BATCH_ID.array;
     parsedContent.batchIds = {
-      name: "_FEATURE_ID",
+      name: '_FEATURE_ID',
       semantic: VertexAttributeSemantic.FEATURE_ID,
       setIndex: 0,
       typedArray: batchIds,
       componentDatatype: ComponentDatatype.fromTypedArray(batchIds),
-      type: AttributeType.SCALAR,
+      type: AttributeType.SCALAR
     };
   }
 
@@ -311,7 +311,7 @@ function processDracoAttributes(loader, draco, result) {
       }
       styleableProperties[name] = {
         typedArray: property.array,
-        componentCount: property.data.componentsPerAttribute,
+        componentCount: property.data.componentsPerAttribute
       };
     }
   }
@@ -369,7 +369,7 @@ function makeAttribute(loader, attributeInfo, context) {
     const buffer = Buffer.createVertexBuffer({
       typedArray: typedArray,
       context: context,
-      usage: BufferUsage.STATIC_DRAW,
+      usage: BufferUsage.STATIC_DRAW
     });
     buffer.vertexArrayDestroyable = false;
     loader._buffers.push(buffer);
@@ -440,7 +440,7 @@ const defaultColorAttribute = {
   componentDatatype: ComponentDatatype.FLOAT,
   type: AttributeType.VEC4,
   isQuantized: false,
-  isTranslucent: false,
+  isTranslucent: false
 };
 
 function makeAttributes(loader, parsedContent, context) {
@@ -485,18 +485,18 @@ function makeStructuralMetadata(parsedContent) {
     return parseBatchTable({
       count: count,
       batchTable: parsedContent.batchTableJson,
-      binaryBody: batchTableBinary,
+      binaryBody: batchTableBinary
     });
   }
 
   // If batch table is not defined, create a property table without any properties.
   const emptyPropertyTable = new PropertyTable({
     name: MetadataClass.BATCH_TABLE_CLASS_NAME,
-    count: pointsLength,
+    count: pointsLength
   });
   return new StructuralMetadata({
     schema: {},
-    propertyTables: [emptyPropertyTable],
+    propertyTables: [emptyPropertyTable]
   });
 }
 
@@ -529,7 +529,7 @@ function makeComponents(loader, context) {
     const featureIdAttribute = new FeatureIdAttribute();
     featureIdAttribute.propertyTableId = 0;
     featureIdAttribute.setIndex = 0;
-    featureIdAttribute.positionalLabel = "featureId_0";
+    featureIdAttribute.positionalLabel = 'featureId_0';
     primitive.featureIds.push(featureIdAttribute);
   }
 

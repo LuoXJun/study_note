@@ -8,7 +8,7 @@
 const InterpolationType = {
   STEP: 0,
   LINEAR: 1,
-  CUBICSPLINE: 2,
+  CUBICSPLINE: 2
 };
 
 export default Object.freeze(InterpolationType);

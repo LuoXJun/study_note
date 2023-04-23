@@ -1,8 +1,8 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import getMagic from "../Core/getMagic.js";
-import RuntimeError from "../Core/RuntimeError.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import getMagic from '../Core/getMagic.js';
+import RuntimeError from '../Core/RuntimeError.js';
 
 /**
  * Represents the contents of a
@@ -55,7 +55,7 @@ Object.defineProperties(Composite3DTileContent.prototype, {
       for (let i = 0; i < length; ++i) {
         contents[i].featurePropertiesDirty = value;
       }
-    },
+    }
   },
 
   /**
@@ -66,7 +66,7 @@ Object.defineProperties(Composite3DTileContent.prototype, {
   featuresLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   /**
@@ -77,7 +77,7 @@ Object.defineProperties(Composite3DTileContent.prototype, {
   pointsLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   /**
@@ -88,7 +88,7 @@ Object.defineProperties(Composite3DTileContent.prototype, {
   trianglesLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   /**
@@ -99,7 +99,7 @@ Object.defineProperties(Composite3DTileContent.prototype, {
   geometryByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   /**
@@ -110,7 +110,7 @@ Object.defineProperties(Composite3DTileContent.prototype, {
   texturesByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   /**
@@ -121,37 +121,37 @@ Object.defineProperties(Composite3DTileContent.prototype, {
   batchTableByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   innerContents: {
     get: function () {
       return this._contents;
-    },
+    }
   },
 
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   tileset: {
     get: function () {
       return this._tileset;
-    },
+    }
   },
 
   tile: {
     get: function () {
       return this._tile;
-    },
+    }
   },
 
   url: {
     get: function () {
       return this._resource.getUrlComponent(true);
-    },
+    }
   },
 
   /**
@@ -172,7 +172,7 @@ Object.defineProperties(Composite3DTileContent.prototype, {
       for (let i = 0; i < length; ++i) {
         contents[i].metadata = value;
       }
-    },
+    }
   },
 
   /**
@@ -183,7 +183,7 @@ Object.defineProperties(Composite3DTileContent.prototype, {
   batchTable: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -204,8 +204,8 @@ Object.defineProperties(Composite3DTileContent.prototype, {
       for (let i = 0; i < length; ++i) {
         contents[i].group = value;
       }
-    },
-  },
+    }
+  }
 });
 
 const sizeOfUint32 = Uint32Array.BYTES_PER_ELEMENT;

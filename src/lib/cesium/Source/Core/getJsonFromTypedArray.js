@@ -1,4 +1,4 @@
-import getStringFromTypedArray from "./getStringFromTypedArray.js";
+import getStringFromTypedArray from './getStringFromTypedArray.js';
 
 /**
  * Parses JSON from a Uint8Array.

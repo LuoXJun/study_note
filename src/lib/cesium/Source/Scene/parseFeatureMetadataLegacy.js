@@ -1,11 +1,11 @@
-import Check from "../Core/Check.js";
-import combine from "../Core/combine.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import PropertyTable from "./PropertyTable.js";
-import PropertyTexture from "./PropertyTexture.js";
-import StructuralMetadata from "./StructuralMetadata.js";
-import MetadataTable from "./MetadataTable.js";
+import Check from '../Core/Check.js';
+import combine from '../Core/combine.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import PropertyTable from './PropertyTable.js';
+import PropertyTexture from './PropertyTexture.js';
+import StructuralMetadata from './StructuralMetadata.js';
+import MetadataTable from './MetadataTable.js';
 
 /**
  * Parse the <code>EXT_feature_metadata</code> glTF extension to create a
@@ -29,8 +29,8 @@ export default function parseFeatureMetadataLegacy(options) {
   const schema = options.schema;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.extension", extension);
-  Check.typeOf.object("options.schema", schema);
+  Check.typeOf.object('options.extension', extension);
+  Check.typeOf.object('options.schema', schema);
   //>>includeEnd('debug');
 
   let i;
@@ -50,7 +50,7 @@ export default function parseFeatureMetadataLegacy(options) {
         count: featureTable.count,
         properties: featureTable.properties,
         class: classDefinition,
-        bufferViews: options.bufferViews,
+        bufferViews: options.bufferViews
       });
 
       propertyTables.push(
@@ -59,7 +59,7 @@ export default function parseFeatureMetadataLegacy(options) {
           count: featureTable.count,
           metadataTable: metadataTable,
           extras: featureTable.extras,
-          extensions: featureTable.extensions,
+          extensions: featureTable.extensions
         })
       );
     }
@@ -79,7 +79,7 @@ export default function parseFeatureMetadataLegacy(options) {
           id: featureTextureId,
           propertyTexture: transcodeToPropertyTexture(featureTexture),
           class: schema.classes[featureTexture.class],
-          textures: options.textures,
+          textures: options.textures
         })
       );
     }
@@ -91,14 +91,14 @@ export default function parseFeatureMetadataLegacy(options) {
     propertyTextures: propertyTextures,
     statistics: extension.statistics,
     extras: extension.extras,
-    extensions: extension.extensions,
+    extensions: extension.extensions
   });
 }
 
 function transcodeToPropertyTexture(featureTexture) {
   const propertyTexture = {
     class: featureTexture.class,
-    properties: {},
+    properties: {}
   };
 
   const properties = featureTexture.properties;
@@ -110,7 +110,7 @@ function transcodeToPropertyTexture(featureTexture) {
         // a string of channel letters like "rgba".
         channels: reformatChannels(oldProperty.channels),
         extras: oldProperty.extras,
-        extensions: oldProperty.extensions,
+        extensions: oldProperty.extensions
       };
 
       // EXT_feature_metadata puts the textureInfo in property.texture.
@@ -131,7 +131,7 @@ function reformatChannels(channelsString) {
   const length = channelsString.length;
   const result = new Array(length);
   for (let i = 0; i < length; i++) {
-    result[i] = "rgba".indexOf(channelsString[i]);
+    result[i] = 'rgba'.indexOf(channelsString[i]);
   }
   return result;
 }

@@ -1,7 +1,7 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import CesiumMath from "./Math.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import CesiumMath from './Math.js';
 
 /**
  * A rotation expressed as a heading, pitch, and roll. Heading is the rotation about the
@@ -45,7 +45,7 @@ function HeadingPitchRoll(heading, pitch, roll) {
 HeadingPitchRoll.fromQuaternion = function (quaternion, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(quaternion)) {
-    throw new DeveloperError("quaternion is required");
+    throw new DeveloperError('quaternion is required');
   }
   //>>includeEnd('debug');
   if (!defined(result)) {
@@ -78,13 +78,13 @@ HeadingPitchRoll.fromQuaternion = function (quaternion, result) {
 HeadingPitchRoll.fromDegrees = function (heading, pitch, roll, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(heading)) {
-    throw new DeveloperError("heading is required");
+    throw new DeveloperError('heading is required');
   }
   if (!defined(pitch)) {
-    throw new DeveloperError("pitch is required");
+    throw new DeveloperError('pitch is required');
   }
   if (!defined(roll)) {
-    throw new DeveloperError("roll is required");
+    throw new DeveloperError('roll is required');
   }
   //>>includeEnd('debug');
   if (!defined(result)) {

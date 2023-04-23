@@ -1,5 +1,5 @@
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import WebGLConstants from "./WebGLConstants.js";
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import WebGLConstants from './WebGLConstants.js';
 
 /**
  * The format of a pixel, i.e., the number of components it has and what they represent.
@@ -165,7 +165,7 @@ const PixelFormat = {
    * @type {Number}
    * @constant
    */
-  RGBA_BC7: WebGLConstants.COMPRESSED_RGBA_BPTC_UNORM,
+  RGBA_BC7: WebGLConstants.COMPRESSED_RGBA_BPTC_UNORM
 };
 
 /**

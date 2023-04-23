@@ -1,5 +1,5 @@
-import usesExtension from "./usesExtension.js";
-import defined from "../../Core/defined.js";
+import usesExtension from './usesExtension.js';
+import defined from '../../Core/defined.js';
 
 /**
  * Contains traversal functions for processing elements of the glTF hierarchy.
@@ -59,7 +59,7 @@ ForEach.topLevel = function (gltf, name, handler) {
 };
 
 ForEach.accessor = function (gltf, handler) {
-  return ForEach.topLevel(gltf, "accessors", handler);
+  return ForEach.topLevel(gltf, 'accessors', handler);
 };
 
 ForEach.accessorWithSemantic = function (gltf, semantic, handler) {
@@ -168,7 +168,7 @@ ForEach.accessorContainingIndexData = function (gltf, handler) {
 };
 
 ForEach.animation = function (gltf, handler) {
-  return ForEach.topLevel(gltf, "animations", handler);
+  return ForEach.topLevel(gltf, 'animations', handler);
 };
 
 ForEach.animationChannel = function (animation, handler) {
@@ -182,23 +182,23 @@ ForEach.animationSampler = function (animation, handler) {
 };
 
 ForEach.buffer = function (gltf, handler) {
-  return ForEach.topLevel(gltf, "buffers", handler);
+  return ForEach.topLevel(gltf, 'buffers', handler);
 };
 
 ForEach.bufferView = function (gltf, handler) {
-  return ForEach.topLevel(gltf, "bufferViews", handler);
+  return ForEach.topLevel(gltf, 'bufferViews', handler);
 };
 
 ForEach.camera = function (gltf, handler) {
-  return ForEach.topLevel(gltf, "cameras", handler);
+  return ForEach.topLevel(gltf, 'cameras', handler);
 };
 
 ForEach.image = function (gltf, handler) {
-  return ForEach.topLevel(gltf, "images", handler);
+  return ForEach.topLevel(gltf, 'images', handler);
 };
 
 ForEach.material = function (gltf, handler) {
-  return ForEach.topLevel(gltf, "materials", handler);
+  return ForEach.topLevel(gltf, 'materials', handler);
 };
 
 ForEach.materialValue = function (material, handler) {
@@ -222,7 +222,7 @@ ForEach.materialValue = function (material, handler) {
 };
 
 ForEach.mesh = function (gltf, handler) {
-  return ForEach.topLevel(gltf, "meshes", handler);
+  return ForEach.topLevel(gltf, 'meshes', handler);
 };
 
 ForEach.meshPrimitive = function (mesh, handler) {
@@ -281,7 +281,7 @@ ForEach.meshPrimitiveTargetAttribute = function (target, handler) {
 };
 
 ForEach.node = function (gltf, handler) {
-  return ForEach.topLevel(gltf, "nodes", handler);
+  return ForEach.topLevel(gltf, 'nodes', handler);
 };
 
 ForEach.nodeInTree = function (gltf, nodeIds, handler) {
@@ -319,37 +319,37 @@ ForEach.nodeInScene = function (gltf, scene, handler) {
 };
 
 ForEach.program = function (gltf, handler) {
-  if (usesExtension(gltf, "KHR_techniques_webgl")) {
+  if (usesExtension(gltf, 'KHR_techniques_webgl')) {
     return ForEach.object(
       gltf.extensions.KHR_techniques_webgl.programs,
       handler
     );
   }
 
-  return ForEach.topLevel(gltf, "programs", handler);
+  return ForEach.topLevel(gltf, 'programs', handler);
 };
 
 ForEach.sampler = function (gltf, handler) {
-  return ForEach.topLevel(gltf, "samplers", handler);
+  return ForEach.topLevel(gltf, 'samplers', handler);
 };
 
 ForEach.scene = function (gltf, handler) {
-  return ForEach.topLevel(gltf, "scenes", handler);
+  return ForEach.topLevel(gltf, 'scenes', handler);
 };
 
 ForEach.shader = function (gltf, handler) {
-  if (usesExtension(gltf, "KHR_techniques_webgl")) {
+  if (usesExtension(gltf, 'KHR_techniques_webgl')) {
     return ForEach.object(
       gltf.extensions.KHR_techniques_webgl.shaders,
       handler
     );
   }
 
-  return ForEach.topLevel(gltf, "shaders", handler);
+  return ForEach.topLevel(gltf, 'shaders', handler);
 };
 
 ForEach.skin = function (gltf, handler) {
-  return ForEach.topLevel(gltf, "skins", handler);
+  return ForEach.topLevel(gltf, 'skins', handler);
 };
 
 ForEach.skinJoint = function (skin, handler) {
@@ -407,18 +407,18 @@ ForEach.techniqueParameter = function (technique, handler) {
 };
 
 ForEach.technique = function (gltf, handler) {
-  if (usesExtension(gltf, "KHR_techniques_webgl")) {
+  if (usesExtension(gltf, 'KHR_techniques_webgl')) {
     return ForEach.object(
       gltf.extensions.KHR_techniques_webgl.techniques,
       handler
     );
   }
 
-  return ForEach.topLevel(gltf, "techniques", handler);
+  return ForEach.topLevel(gltf, 'techniques', handler);
 };
 
 ForEach.texture = function (gltf, handler) {
-  return ForEach.topLevel(gltf, "textures", handler);
+  return ForEach.topLevel(gltf, 'textures', handler);
 };
 
 export default ForEach;

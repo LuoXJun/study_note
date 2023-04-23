@@ -1,25 +1,25 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import CullingVolume from "../Core/CullingVolume.js";
-import defined from "../Core/defined.js";
-import getTimestamp from "../Core/getTimestamp.js";
-import Interval from "../Core/Interval.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import ClearCommand from "../Renderer/ClearCommand.js";
-import Pass from "../Renderer/Pass.js";
-import PassState from "../Renderer/PassState.js";
-import Camera from "./Camera.js";
-import FrustumCommands from "./FrustumCommands.js";
-import GlobeDepth from "./GlobeDepth.js";
-import GlobeTranslucencyFramebuffer from "./GlobeTranslucencyFramebuffer.js";
-import OIT from "./OIT.js";
-import PickDepthFramebuffer from "./PickDepthFramebuffer.js";
-import PickFramebuffer from "./PickFramebuffer.js";
-import SceneFramebuffer from "./SceneFramebuffer.js";
-import SceneMode from "./SceneMode.js";
-import ShadowMap from "./ShadowMap.js";
-import TranslucentTileClassification from "./TranslucentTileClassification.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import CullingVolume from '../Core/CullingVolume.js';
+import defined from '../Core/defined.js';
+import getTimestamp from '../Core/getTimestamp.js';
+import Interval from '../Core/Interval.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import ClearCommand from '../Renderer/ClearCommand.js';
+import Pass from '../Renderer/Pass.js';
+import PassState from '../Renderer/PassState.js';
+import Camera from './Camera.js';
+import FrustumCommands from './FrustumCommands.js';
+import GlobeDepth from './GlobeDepth.js';
+import GlobeTranslucencyFramebuffer from './GlobeTranslucencyFramebuffer.js';
+import OIT from './OIT.js';
+import PickDepthFramebuffer from './PickDepthFramebuffer.js';
+import PickFramebuffer from './PickFramebuffer.js';
+import SceneFramebuffer from './SceneFramebuffer.js';
+import SceneMode from './SceneMode.js';
+import ShadowMap from './ShadowMap.js';
+import TranslucentTileClassification from './TranslucentTileClassification.js';
 
 function CommandExtent() {
   this.command = undefined;
@@ -245,7 +245,7 @@ View.prototype.createPotentiallyVisibleSet = function (scene) {
   if (scene.debugShowFrustums) {
     this.debugFrustumStatistics = {
       totalCommands: 0,
-      commandsInFrustums: {},
+      commandsInFrustums: {}
     };
   }
 

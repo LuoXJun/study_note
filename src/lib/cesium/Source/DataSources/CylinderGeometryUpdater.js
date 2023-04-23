@@ -1,25 +1,25 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import CylinderGeometry from "../Core/CylinderGeometry.js";
-import CylinderOutlineGeometry from "../Core/CylinderOutlineGeometry.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DistanceDisplayConditionGeometryInstanceAttribute from "../Core/DistanceDisplayConditionGeometryInstanceAttribute.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import GeometryOffsetAttribute from "../Core/GeometryOffsetAttribute.js";
-import Iso8601 from "../Core/Iso8601.js";
-import OffsetGeometryInstanceAttribute from "../Core/OffsetGeometryInstanceAttribute.js";
-import ShowGeometryInstanceAttribute from "../Core/ShowGeometryInstanceAttribute.js";
-import HeightReference from "../Scene/HeightReference.js";
-import MaterialAppearance from "../Scene/MaterialAppearance.js";
-import PerInstanceColorAppearance from "../Scene/PerInstanceColorAppearance.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import DynamicGeometryUpdater from "./DynamicGeometryUpdater.js";
-import GeometryUpdater from "./GeometryUpdater.js";
-import heightReferenceOnEntityPropertyChanged from "./heightReferenceOnEntityPropertyChanged.js";
-import Property from "./Property.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import CylinderGeometry from '../Core/CylinderGeometry.js';
+import CylinderOutlineGeometry from '../Core/CylinderOutlineGeometry.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DistanceDisplayConditionGeometryInstanceAttribute from '../Core/DistanceDisplayConditionGeometryInstanceAttribute.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import GeometryOffsetAttribute from '../Core/GeometryOffsetAttribute.js';
+import Iso8601 from '../Core/Iso8601.js';
+import OffsetGeometryInstanceAttribute from '../Core/OffsetGeometryInstanceAttribute.js';
+import ShowGeometryInstanceAttribute from '../Core/ShowGeometryInstanceAttribute.js';
+import HeightReference from '../Scene/HeightReference.js';
+import MaterialAppearance from '../Scene/MaterialAppearance.js';
+import PerInstanceColorAppearance from '../Scene/PerInstanceColorAppearance.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import DynamicGeometryUpdater from './DynamicGeometryUpdater.js';
+import GeometryUpdater from './GeometryUpdater.js';
+import heightReferenceOnEntityPropertyChanged from './heightReferenceOnEntityPropertyChanged.js';
+import Property from './Property.js';
 
 const defaultOffset = Cartesian3.ZERO;
 
@@ -52,16 +52,16 @@ function CylinderGeometryUpdater(entity, scene) {
     entity: entity,
     scene: scene,
     geometryOptions: new CylinderGeometryOptions(entity),
-    geometryPropertyName: "cylinder",
+    geometryPropertyName: 'cylinder',
     observedPropertyNames: [
-      "availability",
-      "position",
-      "orientation",
-      "cylinder",
-    ],
+      'availability',
+      'position',
+      'orientation',
+      'cylinder'
+    ]
   });
 
-  this._onEntityPropertyChanged(entity, "cylinder", entity.cylinder, undefined);
+  this._onEntityPropertyChanged(entity, 'cylinder', entity.cylinder, undefined);
 }
 
 if (defined(Object.create)) {
@@ -80,8 +80,8 @@ Object.defineProperties(CylinderGeometryUpdater.prototype, {
   terrainOffsetProperty: {
     get: function () {
       return this._terrainOffsetProperty;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -94,11 +94,11 @@ Object.defineProperties(CylinderGeometryUpdater.prototype, {
  */
 CylinderGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
 
   if (!this._fillEnabled) {
     throw new DeveloperError(
-      "This instance does not represent a filled geometry."
+      'This instance does not represent a filled geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -112,18 +112,18 @@ CylinderGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
       this._showProperty.getValue(time) &&
       this._fillProperty.getValue(time)
   );
-  const distanceDisplayCondition = this._distanceDisplayConditionProperty.getValue(
-    time
-  );
-  const distanceDisplayConditionAttribute = DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-    distanceDisplayCondition
-  );
+  const distanceDisplayCondition =
+    this._distanceDisplayConditionProperty.getValue(time);
+  const distanceDisplayConditionAttribute =
+    DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+      distanceDisplayCondition
+    );
 
   const attributes = {
     show: show,
     distanceDisplayCondition: distanceDisplayConditionAttribute,
     color: undefined,
-    offset: undefined,
+    offset: undefined
   };
   if (this._materialProperty instanceof ColorMaterialProperty) {
     let currentColor;
@@ -159,7 +159,7 @@ CylinderGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
       this._options.length * 0.5,
       this._scene.mapProjection.ellipsoid
     ),
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -175,11 +175,11 @@ CylinderGeometryUpdater.prototype.createOutlineGeometryInstance = function (
   time
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
 
   if (!this._outlineEnabled) {
     throw new DeveloperError(
-      "This instance does not represent an outlined geometry."
+      'This instance does not represent an outlined geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -192,9 +192,8 @@ CylinderGeometryUpdater.prototype.createOutlineGeometryInstance = function (
     Color.BLACK,
     scratchColor
   );
-  const distanceDisplayCondition = this._distanceDisplayConditionProperty.getValue(
-    time
-  );
+  const distanceDisplayCondition =
+    this._distanceDisplayConditionProperty.getValue(time);
 
   const attributes = {
     show: new ShowGeometryInstanceAttribute(
@@ -204,10 +203,11 @@ CylinderGeometryUpdater.prototype.createOutlineGeometryInstance = function (
         this._showOutlineProperty.getValue(time)
     ),
     color: ColorGeometryInstanceAttribute.fromColor(outlineColor),
-    distanceDisplayCondition: DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-      distanceDisplayCondition
-    ),
-    offset: undefined,
+    distanceDisplayCondition:
+      DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+        distanceDisplayCondition
+      ),
+    offset: undefined
   };
   if (defined(this._options.offsetAttribute)) {
     attributes.offset = OffsetGeometryInstanceAttribute.fromCartesian3(
@@ -229,7 +229,7 @@ CylinderGeometryUpdater.prototype.createOutlineGeometryInstance = function (
       this._options.length * 0.5,
       this._scene.mapProjection.ellipsoid
     ),
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -291,7 +291,8 @@ CylinderGeometryUpdater.prototype._setStaticOptions = function (
       : undefined;
 };
 
-CylinderGeometryUpdater.prototype._onEntityPropertyChanged = heightReferenceOnEntityPropertyChanged;
+CylinderGeometryUpdater.prototype._onEntityPropertyChanged =
+  heightReferenceOnEntityPropertyChanged;
 
 CylinderGeometryUpdater.DynamicGeometryUpdater = DynamicCylinderGeometryUpdater;
 
@@ -315,7 +316,8 @@ if (defined(Object.create)) {
   DynamicCylinderGeometryUpdater.prototype = Object.create(
     DynamicGeometryUpdater.prototype
   );
-  DynamicCylinderGeometryUpdater.prototype.constructor = DynamicCylinderGeometryUpdater;
+  DynamicCylinderGeometryUpdater.prototype.constructor =
+    DynamicCylinderGeometryUpdater;
 }
 
 DynamicCylinderGeometryUpdater.prototype._isHidden = function (

@@ -1,5 +1,24 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultValue-94c3e563', './EllipsoidTangentPlane-53e32153', './ComponentDatatype-4a60b8d6', './Plane-e20fba8c'], (function (exports, Transforms, Matrix2, RuntimeError, defaultValue, EllipsoidTangentPlane, ComponentDatatype, Plane) { 'use strict';
+define([
+  'exports',
+  './Transforms-3ac41eb6',
+  './Matrix2-fc7e9822',
+  './RuntimeError-c581ca93',
+  './defaultValue-94c3e563',
+  './EllipsoidTangentPlane-53e32153',
+  './ComponentDatatype-4a60b8d6',
+  './Plane-e20fba8c'
+], function (
+  exports,
+  Transforms,
+  Matrix2,
+  RuntimeError,
+  defaultValue,
+  EllipsoidTangentPlane,
+  ComponentDatatype,
+  Plane
+) {
+  'use strict';
 
   /**
    * Creates an instance of an OrientedBoundingBox.
@@ -29,13 +48,17 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
      * @type {Cartesian3}
      * @default {@link Cartesian3.ZERO}
      */
-    this.center = Matrix2.Cartesian3.clone(defaultValue.defaultValue(center, Matrix2.Cartesian3.ZERO));
+    this.center = Matrix2.Cartesian3.clone(
+      defaultValue.defaultValue(center, Matrix2.Cartesian3.ZERO)
+    );
     /**
      * The transformation matrix, to rotate the box to the right position.
      * @type {Matrix3}
      * @default {@link Matrix3.ZERO}
      */
-    this.halfAxes = Matrix2.Matrix3.clone(defaultValue.defaultValue(halfAxes, Matrix2.Matrix3.ZERO));
+    this.halfAxes = Matrix2.Matrix3.clone(
+      defaultValue.defaultValue(halfAxes, Matrix2.Matrix3.ZERO)
+    );
   }
 
   /**
@@ -56,14 +79,18 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
    */
   OrientedBoundingBox.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     Matrix2.Cartesian3.pack(value.center, array, startingIndex);
-    Matrix2.Matrix3.pack(value.halfAxes, array, startingIndex + Matrix2.Cartesian3.packedLength);
+    Matrix2.Matrix3.pack(
+      value.halfAxes,
+      array,
+      startingIndex + Matrix2.Cartesian3.packedLength
+    );
 
     return array;
   };
@@ -78,7 +105,7 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
    */
   OrientedBoundingBox.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -105,7 +132,7 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
   const scratchCovarianceResult = new Matrix2.Matrix3();
   const scratchEigenResult = {
     unitary: new Matrix2.Matrix3(),
-    diagonal: new Matrix2.Matrix3(),
+    diagonal: new Matrix2.Matrix3()
   };
 
   /**
@@ -151,7 +178,11 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
     let p;
 
     for (i = 0; i < length; i++) {
-      p = Matrix2.Cartesian3.subtract(positions[i], meanPoint, scratchCartesian2);
+      p = Matrix2.Cartesian3.subtract(
+        positions[i],
+        meanPoint,
+        scratchCartesian2
+      );
       exx += p.x * p.x;
       exy += p.x * p.y;
       exz += p.x * p.z;
@@ -182,7 +213,10 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
       covarianceMatrix,
       scratchEigenResult
     );
-    const rotation = Matrix2.Matrix3.clone(eigenDecomposition.unitary, result.halfAxes);
+    const rotation = Matrix2.Matrix3.clone(
+      eigenDecomposition.unitary,
+      result.halfAxes
+    );
 
     let v1 = Matrix2.Matrix3.getColumn(rotation, 0, scratchCartesian4);
     let v2 = Matrix2.Matrix3.getColumn(rotation, 1, scratchCartesian5);
@@ -248,7 +282,7 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
       !defaultValue.defined(maximumZ)
     ) {
       throw new RuntimeError.DeveloperError(
-        "all extents (minimum/maximum X/Y/Z) are required."
+        'all extents (minimum/maximum X/Y/Z) are required.'
       );
     }
     //>>includeEnd('debug');
@@ -273,7 +307,11 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
     scale.z = (maximumZ - minimumZ) / 2.0;
 
     const center = result.center;
-    centerOffset = Matrix2.Matrix3.multiplyByVector(halfAxes, centerOffset, centerOffset);
+    centerOffset = Matrix2.Matrix3.multiplyByVector(
+      halfAxes,
+      centerOffset,
+      centerOffset
+    );
     Matrix2.Cartesian3.add(planeOrigin, centerOffset, center);
     Matrix2.Matrix3.multiplyByScale(halfAxes, scale, halfAxes);
 
@@ -332,13 +370,23 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(rectangle)) {
-      throw new RuntimeError.DeveloperError("rectangle is required");
+      throw new RuntimeError.DeveloperError('rectangle is required');
     }
-    if (rectangle.width < 0.0 || rectangle.width > ComponentDatatype.CesiumMath.TWO_PI) {
-      throw new RuntimeError.DeveloperError("Rectangle width must be between 0 and 2*pi");
+    if (
+      rectangle.width < 0.0 ||
+      rectangle.width > ComponentDatatype.CesiumMath.TWO_PI
+    ) {
+      throw new RuntimeError.DeveloperError(
+        'Rectangle width must be between 0 and 2*pi'
+      );
     }
-    if (rectangle.height < 0.0 || rectangle.height > ComponentDatatype.CesiumMath.PI) {
-      throw new RuntimeError.DeveloperError("Rectangle height must be between 0 and pi");
+    if (
+      rectangle.height < 0.0 ||
+      rectangle.height > ComponentDatatype.CesiumMath.PI
+    ) {
+      throw new RuntimeError.DeveloperError(
+        'Rectangle height must be between 0 and pi'
+      );
     }
     if (
       defaultValue.defined(ellipsoid) &&
@@ -349,7 +397,7 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
       )
     ) {
       throw new RuntimeError.DeveloperError(
-        "Ellipsoid must be an ellipsoid of revolution (radii.x == radii.y)"
+        'Ellipsoid must be an ellipsoid of revolution (radii.x == radii.y)'
       );
     }
     //>>includeEnd('debug');
@@ -370,7 +418,10 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
         tangentPointCartographic,
         scratchRectangleCenter
       );
-      const tangentPlane = new EllipsoidTangentPlane.EllipsoidTangentPlane(tangentPoint, ellipsoid);
+      const tangentPlane = new EllipsoidTangentPlane.EllipsoidTangentPlane(
+        tangentPoint,
+        ellipsoid
+      );
       plane = tangentPlane.plane;
 
       // If the rectangle spans the equator, CW is instead aligned with the equator (because it sticks out the farthest at the equator).
@@ -465,7 +516,8 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
       minY = Math.min(perimeterProjectedSW.y, perimeterProjectedSC.y);
 
       // Compute minimum Z using the rectangle at minimum height, since it will be deeper than the maximum height
-      perimeterCartographicNW.height = perimeterCartographicSW.height = minimumHeight;
+      perimeterCartographicNW.height = perimeterCartographicSW.height =
+        minimumHeight;
       perimeterCartesianNW = ellipsoid.cartographicToCartesian(
         perimeterCartographicNW,
         scratchPerimeterCartesianNW
@@ -602,15 +654,21 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
    */
   OrientedBoundingBox.fromTransformation = function (transformation, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("transformation", transformation);
+    RuntimeError.Check.typeOf.object('transformation', transformation);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
       result = new OrientedBoundingBox();
     }
 
-    result.center = Matrix2.Matrix4.getTranslation(transformation, result.center);
-    result.halfAxes = Matrix2.Matrix4.getMatrix3(transformation, result.halfAxes);
+    result.center = Matrix2.Matrix4.getTranslation(
+      transformation,
+      result.center
+    );
+    result.halfAxes = Matrix2.Matrix4.getMatrix3(
+      transformation,
+      result.halfAxes
+    );
     result.halfAxes = Matrix2.Matrix3.multiplyByScalar(
       result.halfAxes,
       0.5,
@@ -654,11 +712,11 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
   OrientedBoundingBox.intersectPlane = function (box, plane) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(box)) {
-      throw new RuntimeError.DeveloperError("box is required.");
+      throw new RuntimeError.DeveloperError('box is required.');
     }
 
     if (!defaultValue.defined(plane)) {
-      throw new RuntimeError.DeveloperError("plane is required.");
+      throw new RuntimeError.DeveloperError('plane is required.');
     }
     //>>includeEnd('debug');
 
@@ -685,7 +743,8 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
           normalY * halfAxes[Matrix2.Matrix3.COLUMN2ROW1] +
           normalZ * halfAxes[Matrix2.Matrix3.COLUMN2ROW2]
       );
-    const distanceToPlane = Matrix2.Cartesian3.dot(normal, center) + plane.distance;
+    const distanceToPlane =
+      Matrix2.Cartesian3.dot(normal, center) + plane.distance;
 
     if (distanceToPlane <= -radEffective) {
       // The entire box is on the negative side of the plane normal
@@ -722,14 +781,18 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
 
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(box)) {
-      throw new RuntimeError.DeveloperError("box is required.");
+      throw new RuntimeError.DeveloperError('box is required.');
     }
     if (!defaultValue.defined(cartesian)) {
-      throw new RuntimeError.DeveloperError("cartesian is required.");
+      throw new RuntimeError.DeveloperError('cartesian is required.');
     }
     //>>includeEnd('debug');
 
-    const offset = Matrix2.Cartesian3.subtract(cartesian, box.center, scratchOffset);
+    const offset = Matrix2.Cartesian3.subtract(
+      cartesian,
+      box.center,
+      scratchOffset
+    );
 
     const halfAxes = box.halfAxes;
     let u = Matrix2.Matrix3.getColumn(halfAxes, 0, scratchCartesianU);
@@ -779,7 +842,11 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
         validAxis2 = u;
       }
 
-      validAxis3 = Matrix2.Cartesian3.cross(validAxis1, validAxis2, scratchValidAxis3);
+      validAxis3 = Matrix2.Cartesian3.cross(
+        validAxis1,
+        validAxis2,
+        scratchValidAxis3
+      );
 
       if (degenerateAxis === u) {
         u = validAxis3;
@@ -797,13 +864,26 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
       }
 
       let crossVector = Matrix2.Cartesian3.UNIT_Y;
-      if (crossVector.equalsEpsilon(validAxis1, ComponentDatatype.CesiumMath.EPSILON3)) {
+      if (
+        crossVector.equalsEpsilon(
+          validAxis1,
+          ComponentDatatype.CesiumMath.EPSILON3
+        )
+      ) {
         crossVector = Matrix2.Cartesian3.UNIT_X;
       }
 
-      validAxis2 = Matrix2.Cartesian3.cross(validAxis1, crossVector, scratchValidAxis2);
+      validAxis2 = Matrix2.Cartesian3.cross(
+        validAxis1,
+        crossVector,
+        scratchValidAxis2
+      );
       Matrix2.Cartesian3.normalize(validAxis2, validAxis2);
-      validAxis3 = Matrix2.Cartesian3.cross(validAxis1, validAxis2, scratchValidAxis3);
+      validAxis3 = Matrix2.Cartesian3.cross(
+        validAxis1,
+        validAxis2,
+        scratchValidAxis3
+      );
       Matrix2.Cartesian3.normalize(validAxis3, validAxis3);
 
       if (validAxis1 === u) {
@@ -880,15 +960,15 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(box)) {
-      throw new RuntimeError.DeveloperError("box is required.");
+      throw new RuntimeError.DeveloperError('box is required.');
     }
 
     if (!defaultValue.defined(position)) {
-      throw new RuntimeError.DeveloperError("position is required.");
+      throw new RuntimeError.DeveloperError('position is required.');
     }
 
     if (!defaultValue.defined(direction)) {
-      throw new RuntimeError.DeveloperError("direction is required.");
+      throw new RuntimeError.DeveloperError('direction is required.');
     }
     //>>includeEnd('debug');
 
@@ -911,7 +991,11 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
     Matrix2.Cartesian3.add(corner, w, corner);
     Matrix2.Cartesian3.add(corner, center, corner);
 
-    const toCenter = Matrix2.Cartesian3.subtract(corner, position, scratchToCenter);
+    const toCenter = Matrix2.Cartesian3.subtract(
+      corner,
+      position,
+      scratchToCenter
+    );
     let mag = Matrix2.Cartesian3.dot(direction, toCenter);
 
     minDist = Math.min(mag, minDist);
@@ -1012,7 +1096,7 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
    */
   OrientedBoundingBox.computeCorners = function (box, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("box", box);
+    RuntimeError.Check.typeOf.object('box', box);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -1024,7 +1108,7 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
         new Matrix2.Cartesian3(),
         new Matrix2.Cartesian3(),
         new Matrix2.Cartesian3(),
-        new Matrix2.Cartesian3(),
+        new Matrix2.Cartesian3()
       ];
     }
 
@@ -1088,7 +1172,7 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
    */
   OrientedBoundingBox.computeTransformation = function (box, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("box", box);
+    RuntimeError.Check.typeOf.object('box', box);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -1101,7 +1185,11 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
       2.0,
       scratchRotationScale
     );
-    return Matrix2.Matrix4.fromRotationTranslation(rotationScale, translation, result);
+    return Matrix2.Matrix4.fromRotationTranslation(
+      rotationScale,
+      translation,
+      result
+    );
   };
 
   const scratchBoundingSphere = new Transforms.BoundingSphere();
@@ -1116,10 +1204,10 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
   OrientedBoundingBox.isOccluded = function (box, occluder) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(box)) {
-      throw new RuntimeError.DeveloperError("box is required.");
+      throw new RuntimeError.DeveloperError('box is required.');
     }
     if (!defaultValue.defined(occluder)) {
-      throw new RuntimeError.DeveloperError("occluder is required.");
+      throw new RuntimeError.DeveloperError('occluder is required.');
     }
     //>>includeEnd('debug');
 
@@ -1254,5 +1342,4 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeErro
   };
 
   exports.OrientedBoundingBox = OrientedBoundingBox;
-
-}));
+});

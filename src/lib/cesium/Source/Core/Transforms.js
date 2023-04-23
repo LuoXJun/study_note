@@ -1,23 +1,23 @@
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartesian4 from "./Cartesian4.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import EarthOrientationParameters from "./EarthOrientationParameters.js";
-import EarthOrientationParametersSample from "./EarthOrientationParametersSample.js";
-import Ellipsoid from "./Ellipsoid.js";
-import HeadingPitchRoll from "./HeadingPitchRoll.js";
-import Iau2006XysData from "./Iau2006XysData.js";
-import Iau2006XysSample from "./Iau2006XysSample.js";
-import JulianDate from "./JulianDate.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
-import Matrix4 from "./Matrix4.js";
-import Quaternion from "./Quaternion.js";
-import TimeConstants from "./TimeConstants.js";
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartesian4 from './Cartesian4.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import EarthOrientationParameters from './EarthOrientationParameters.js';
+import EarthOrientationParametersSample from './EarthOrientationParametersSample.js';
+import Ellipsoid from './Ellipsoid.js';
+import HeadingPitchRoll from './HeadingPitchRoll.js';
+import Iau2006XysData from './Iau2006XysData.js';
+import Iau2006XysSample from './Iau2006XysSample.js';
+import JulianDate from './JulianDate.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
+import Matrix4 from './Matrix4.js';
+import Quaternion from './Quaternion.js';
+import TimeConstants from './TimeConstants.js';
 
 /**
  * Contains functions for transforming positions to various reference frames.
@@ -28,41 +28,41 @@ const Transforms = {};
 
 const vectorProductLocalFrame = {
   up: {
-    south: "east",
-    north: "west",
-    west: "south",
-    east: "north",
+    south: 'east',
+    north: 'west',
+    west: 'south',
+    east: 'north'
   },
   down: {
-    south: "west",
-    north: "east",
-    west: "north",
-    east: "south",
+    south: 'west',
+    north: 'east',
+    west: 'north',
+    east: 'south'
   },
   south: {
-    up: "west",
-    down: "east",
-    west: "down",
-    east: "up",
+    up: 'west',
+    down: 'east',
+    west: 'down',
+    east: 'up'
   },
   north: {
-    up: "east",
-    down: "west",
-    west: "up",
-    east: "down",
+    up: 'east',
+    down: 'west',
+    west: 'up',
+    east: 'down'
   },
   west: {
-    up: "north",
-    down: "south",
-    north: "down",
-    south: "up",
+    up: 'north',
+    down: 'south',
+    north: 'down',
+    south: 'up'
   },
   east: {
-    up: "south",
-    down: "north",
-    north: "up",
-    south: "down",
-  },
+    up: 'south',
+    down: 'north',
+    north: 'up',
+    south: 'down'
+  }
 };
 
 const degeneratePositionLocalFrame = {
@@ -71,7 +71,7 @@ const degeneratePositionLocalFrame = {
   up: [0, 0, 1],
   south: [1, 0, 0],
   west: [0, -1, 0],
-  down: [0, 0, -1],
+  down: [0, 0, -1]
 };
 
 const localFrameToFixedFrameCache = {};
@@ -82,7 +82,7 @@ const scratchCalculateCartesian = {
   up: new Cartesian3(),
   west: new Cartesian3(),
   south: new Cartesian3(),
-  down: new Cartesian3(),
+  down: new Cartesian3()
 };
 let scratchFirstCartesian = new Cartesian3();
 let scratchSecondCartesian = new Cartesian3();
@@ -103,7 +103,7 @@ Transforms.localFrameToFixedFrameGenerator = function (firstAxis, secondAxis) {
     !vectorProductLocalFrame[firstAxis].hasOwnProperty(secondAxis)
   ) {
     throw new DeveloperError(
-      "firstAxis and secondAxis must be east, north, up, west, south or down."
+      'firstAxis and secondAxis must be east, north, up, west, south or down.'
     );
   }
   const thirdAxis = vectorProductLocalFrame[firstAxis][secondAxis];
@@ -125,7 +125,7 @@ Transforms.localFrameToFixedFrameGenerator = function (firstAxis, secondAxis) {
     resultat = function (origin, ellipsoid, result) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(origin)) {
-        throw new DeveloperError("origin is required.");
+        throw new DeveloperError('origin is required.');
       }
       //>>includeEnd('debug');
       if (!defined(result)) {
@@ -162,7 +162,7 @@ Transforms.localFrameToFixedFrameGenerator = function (firstAxis, secondAxis) {
           0,
           scratchFirstCartesian
         );
-        if (firstAxis !== "east" && firstAxis !== "west") {
+        if (firstAxis !== 'east' && firstAxis !== 'west') {
           Cartesian3.multiplyByScalar(
             scratchFirstCartesian,
             sign,
@@ -175,7 +175,7 @@ Transforms.localFrameToFixedFrameGenerator = function (firstAxis, secondAxis) {
           0,
           scratchSecondCartesian
         );
-        if (secondAxis !== "east" && secondAxis !== "west") {
+        if (secondAxis !== 'east' && secondAxis !== 'west') {
           Cartesian3.multiplyByScalar(
             scratchSecondCartesian,
             sign,
@@ -188,7 +188,7 @@ Transforms.localFrameToFixedFrameGenerator = function (firstAxis, secondAxis) {
           0,
           scratchThirdCartesian
         );
-        if (thirdAxis !== "east" && thirdAxis !== "west") {
+        if (thirdAxis !== 'east' && thirdAxis !== 'west') {
           Cartesian3.multiplyByScalar(
             scratchThirdCartesian,
             sign,
@@ -272,8 +272,8 @@ Transforms.localFrameToFixedFrameGenerator = function (firstAxis, secondAxis) {
  * const transform = Cesium.Transforms.eastNorthUpToFixedFrame(center);
  */
 Transforms.eastNorthUpToFixedFrame = Transforms.localFrameToFixedFrameGenerator(
-  "east",
-  "north"
+  'east',
+  'north'
 );
 
 /**
@@ -297,10 +297,8 @@ Transforms.eastNorthUpToFixedFrame = Transforms.localFrameToFixedFrameGenerator(
  * const center = Cesium.Cartesian3.fromDegrees(0.0, 0.0);
  * const transform = Cesium.Transforms.northEastDownToFixedFrame(center);
  */
-Transforms.northEastDownToFixedFrame = Transforms.localFrameToFixedFrameGenerator(
-  "north",
-  "east"
-);
+Transforms.northEastDownToFixedFrame =
+  Transforms.localFrameToFixedFrameGenerator('north', 'east');
 
 /**
  * Computes a 4x4 transformation matrix from a reference frame with an north-up-east axes
@@ -324,8 +322,8 @@ Transforms.northEastDownToFixedFrame = Transforms.localFrameToFixedFrameGenerato
  * const transform = Cesium.Transforms.northUpEastToFixedFrame(center);
  */
 Transforms.northUpEastToFixedFrame = Transforms.localFrameToFixedFrameGenerator(
-  "north",
-  "up"
+  'north',
+  'up'
 );
 
 /**
@@ -350,8 +348,8 @@ Transforms.northUpEastToFixedFrame = Transforms.localFrameToFixedFrameGenerator(
  * const transform = Cesium.Transforms.northWestUpToFixedFrame(center);
  */
 Transforms.northWestUpToFixedFrame = Transforms.localFrameToFixedFrameGenerator(
-  "north",
-  "west"
+  'north',
+  'west'
 );
 
 const scratchHPRQuaternion = new Quaternion();
@@ -389,7 +387,7 @@ Transforms.headingPitchRollToFixedFrame = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("HeadingPitchRoll", headingPitchRoll);
+  Check.typeOf.object('HeadingPitchRoll', headingPitchRoll);
   //>>includeEnd('debug');
 
   fixedFrameTransform = defaultValue(
@@ -444,7 +442,7 @@ Transforms.headingPitchRollQuaternion = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("HeadingPitchRoll", headingPitchRoll);
+  Check.typeOf.object('HeadingPitchRoll', headingPitchRoll);
   //>>includeEnd('debug');
 
   const transform = Transforms.headingPitchRollToFixedFrame(
@@ -483,7 +481,7 @@ Transforms.fixedFrameToHeadingPitchRoll = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("transform", transform);
+  Check.defined('transform', transform);
   //>>includeEnd('debug');
 
   ellipsoid = defaultValue(ellipsoid, Ellipsoid.WGS84);
@@ -557,7 +555,7 @@ let dateInUtc = new JulianDate();
 Transforms.computeTemeToPseudoFixedMatrix = function (date, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(date)) {
-    throw new DeveloperError("date is required.");
+    throw new DeveloperError('date is required.');
   }
   //>>includeEnd('debug');
 
@@ -712,7 +710,7 @@ Transforms.preloadIcrfFixed = function (timeInterval) {
 Transforms.computeIcrfToFixedMatrix = function (date, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(date)) {
-    throw new DeveloperError("date is required.");
+    throw new DeveloperError('date is required.');
   }
   //>>includeEnd('debug');
   if (!defined(result)) {
@@ -767,7 +765,7 @@ const rotation2Scratch = new Matrix3();
 Transforms.computeFixedToIcrfMatrix = function (date, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(date)) {
-    throw new DeveloperError("date is required.");
+    throw new DeveloperError('date is required.');
   }
   //>>includeEnd('debug');
 
@@ -914,15 +912,15 @@ Transforms.pointToGLWindowCoordinates = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(modelViewProjectionMatrix)) {
-    throw new DeveloperError("modelViewProjectionMatrix is required.");
+    throw new DeveloperError('modelViewProjectionMatrix is required.');
   }
 
   if (!defined(viewportTransformation)) {
-    throw new DeveloperError("viewportTransformation is required.");
+    throw new DeveloperError('viewportTransformation is required.');
   }
 
   if (!defined(point)) {
-    throw new DeveloperError("point is required.");
+    throw new DeveloperError('point is required.');
   }
   //>>includeEnd('debug');
 
@@ -963,11 +961,11 @@ Transforms.rotationMatrixFromPositionVelocity = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(position)) {
-    throw new DeveloperError("position is required.");
+    throw new DeveloperError('position is required.');
   }
 
   if (!defined(velocity)) {
-    throw new DeveloperError("velocity is required.");
+    throw new DeveloperError('velocity is required.');
   }
   //>>includeEnd('debug');
 
@@ -1036,13 +1034,13 @@ const scratchToENU = new Matrix4();
 Transforms.basisTo2D = function (projection, matrix, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(projection)) {
-    throw new DeveloperError("projection is required.");
+    throw new DeveloperError('projection is required.');
   }
   if (!defined(matrix)) {
-    throw new DeveloperError("matrix is required.");
+    throw new DeveloperError('matrix is required.');
   }
   if (!defined(result)) {
-    throw new DeveloperError("result is required.");
+    throw new DeveloperError('result is required.');
   }
   //>>includeEnd('debug');
 
@@ -1086,13 +1084,13 @@ Transforms.basisTo2D = function (projection, matrix, result) {
 Transforms.wgs84To2DModelMatrix = function (projection, center, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(projection)) {
-    throw new DeveloperError("projection is required.");
+    throw new DeveloperError('projection is required.');
   }
   if (!defined(center)) {
-    throw new DeveloperError("center is required.");
+    throw new DeveloperError('center is required.');
   }
   if (!defined(result)) {
-    throw new DeveloperError("result is required.");
+    throw new DeveloperError('result is required.');
   }
   //>>includeEnd('debug');
 

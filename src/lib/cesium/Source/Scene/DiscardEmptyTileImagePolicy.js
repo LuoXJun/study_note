@@ -1,4 +1,4 @@
-import defined from "../Core/defined.js";
+import defined from '../Core/defined.js';
 
 /**
  * A policy for discarding tile images that contain no data (and so aren't actually images).
@@ -45,10 +45,10 @@ Object.defineProperties(DiscardEmptyTileImagePolicy, {
         emptyImage = new Image();
         // load a blank data URI with a 1x1 transparent pixel.
         emptyImage.src =
-          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
+          'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
       }
       return emptyImage;
-    },
-  },
+    }
+  }
 });
 export default DiscardEmptyTileImagePolicy;

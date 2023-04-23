@@ -1,14 +1,14 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import VertexFormat from "../Core/VertexFormat.js";
-import AllMaterialAppearanceFS from "../Shaders/Appearances/AllMaterialAppearanceFS.js";
-import AllMaterialAppearanceVS from "../Shaders/Appearances/AllMaterialAppearanceVS.js";
-import BasicMaterialAppearanceFS from "../Shaders/Appearances/BasicMaterialAppearanceFS.js";
-import BasicMaterialAppearanceVS from "../Shaders/Appearances/BasicMaterialAppearanceVS.js";
-import TexturedMaterialAppearanceFS from "../Shaders/Appearances/TexturedMaterialAppearanceFS.js";
-import TexturedMaterialAppearanceVS from "../Shaders/Appearances/TexturedMaterialAppearanceVS.js";
-import Appearance from "./Appearance.js";
-import Material from "./Material.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import VertexFormat from '../Core/VertexFormat.js';
+import AllMaterialAppearanceFS from '../Shaders/Appearances/AllMaterialAppearanceFS.js';
+import AllMaterialAppearanceVS from '../Shaders/Appearances/AllMaterialAppearanceVS.js';
+import BasicMaterialAppearanceFS from '../Shaders/Appearances/BasicMaterialAppearanceFS.js';
+import BasicMaterialAppearanceVS from '../Shaders/Appearances/BasicMaterialAppearanceVS.js';
+import TexturedMaterialAppearanceFS from '../Shaders/Appearances/TexturedMaterialAppearanceFS.js';
+import TexturedMaterialAppearanceVS from '../Shaders/Appearances/TexturedMaterialAppearanceVS.js';
+import Appearance from './Appearance.js';
+import Material from './Material.js';
 
 /**
      * An appearance for arbitrary geometry (as opposed to {@link EllipsoidSurfaceAppearance}, for example)
@@ -114,7 +114,7 @@ Object.defineProperties(MaterialAppearance.prototype, {
   vertexShaderSource: {
     get: function () {
       return this._vertexShaderSource;
-    },
+    }
   },
 
   /**
@@ -131,7 +131,7 @@ Object.defineProperties(MaterialAppearance.prototype, {
   fragmentShaderSource: {
     get: function () {
       return this._fragmentShaderSource;
-    },
+    }
   },
 
   /**
@@ -150,7 +150,7 @@ Object.defineProperties(MaterialAppearance.prototype, {
   renderState: {
     get: function () {
       return this._renderState;
-    },
+    }
   },
 
   /**
@@ -168,7 +168,7 @@ Object.defineProperties(MaterialAppearance.prototype, {
   closed: {
     get: function () {
       return this._closed;
-    },
+    }
   },
 
   /**
@@ -185,7 +185,7 @@ Object.defineProperties(MaterialAppearance.prototype, {
   materialSupport: {
     get: function () {
       return this._materialSupport;
-    },
+    }
   },
 
   /**
@@ -203,7 +203,7 @@ Object.defineProperties(MaterialAppearance.prototype, {
   vertexFormat: {
     get: function () {
       return this._vertexFormat;
-    },
+    }
   },
 
   /**
@@ -220,7 +220,7 @@ Object.defineProperties(MaterialAppearance.prototype, {
   flat: {
     get: function () {
       return this._flat;
-    },
+    }
   },
 
   /**
@@ -239,8 +239,8 @@ Object.defineProperties(MaterialAppearance.prototype, {
   faceForward: {
     get: function () {
       return this._faceForward;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -302,7 +302,7 @@ MaterialAppearance.MaterialSupport = {
   BASIC: Object.freeze({
     vertexFormat: VertexFormat.POSITION_AND_NORMAL,
     vertexShaderSource: BasicMaterialAppearanceVS,
-    fragmentShaderSource: BasicMaterialAppearanceFS,
+    fragmentShaderSource: BasicMaterialAppearanceFS
   }),
   /**
    * Materials with textures, which require <code>position</code>,
@@ -315,7 +315,7 @@ MaterialAppearance.MaterialSupport = {
   TEXTURED: Object.freeze({
     vertexFormat: VertexFormat.POSITION_NORMAL_AND_ST,
     vertexShaderSource: TexturedMaterialAppearanceVS,
-    fragmentShaderSource: TexturedMaterialAppearanceFS,
+    fragmentShaderSource: TexturedMaterialAppearanceFS
   }),
   /**
    * All materials, including those that work in tangent space, are supported.
@@ -328,7 +328,7 @@ MaterialAppearance.MaterialSupport = {
   ALL: Object.freeze({
     vertexFormat: VertexFormat.ALL,
     vertexShaderSource: AllMaterialAppearanceVS,
-    fragmentShaderSource: AllMaterialAppearanceFS,
-  }),
+    fragmentShaderSource: AllMaterialAppearanceFS
+  })
 };
 export default MaterialAppearance;

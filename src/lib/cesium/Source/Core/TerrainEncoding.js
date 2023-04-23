@@ -1,13 +1,13 @@
-import AttributeCompression from "./AttributeCompression.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import CesiumMath from "./Math.js";
-import Matrix4 from "./Matrix4.js";
-import TerrainExaggeration from "./TerrainExaggeration.js";
-import TerrainQuantization from "./TerrainQuantization.js";
+import AttributeCompression from './AttributeCompression.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import CesiumMath from './Math.js';
+import Matrix4 from './Matrix4.js';
+import TerrainExaggeration from './TerrainExaggeration.js';
+import TerrainQuantization from './TerrainQuantization.js';
 
 const cartesian3Scratch = new Cartesian3();
 const cartesian3DimScratch = new Cartesian3();
@@ -223,19 +223,16 @@ TerrainEncoding.prototype.encode = function (
     const h = CesiumMath.clamp((height - this.minimumHeight) / hDim, 0.0, 1.0);
 
     Cartesian2.fromElements(position.x, position.y, cartesian2Scratch);
-    const compressed0 = AttributeCompression.compressTextureCoordinates(
-      cartesian2Scratch
-    );
+    const compressed0 =
+      AttributeCompression.compressTextureCoordinates(cartesian2Scratch);
 
     Cartesian2.fromElements(position.z, h, cartesian2Scratch);
-    const compressed1 = AttributeCompression.compressTextureCoordinates(
-      cartesian2Scratch
-    );
+    const compressed1 =
+      AttributeCompression.compressTextureCoordinates(cartesian2Scratch);
 
     Cartesian2.fromElements(u, v, cartesian2Scratch);
-    const compressed2 = AttributeCompression.compressTextureCoordinates(
-      cartesian2Scratch
-    );
+    const compressed2 =
+      AttributeCompression.compressTextureCoordinates(cartesian2Scratch);
 
     vertexBuffer[bufferIndex++] = compressed0;
     vertexBuffer[bufferIndex++] = compressed1;
@@ -243,9 +240,8 @@ TerrainEncoding.prototype.encode = function (
 
     if (this.hasWebMercatorT) {
       Cartesian2.fromElements(webMercatorT, 0.0, cartesian2Scratch);
-      const compressed3 = AttributeCompression.compressTextureCoordinates(
-        cartesian2Scratch
-      );
+      const compressed3 =
+        AttributeCompression.compressTextureCoordinates(cartesian2Scratch);
       vertexBuffer[bufferIndex++] = compressed3;
     }
   } else {
@@ -264,9 +260,8 @@ TerrainEncoding.prototype.encode = function (
   }
 
   if (this.hasVertexNormals) {
-    vertexBuffer[bufferIndex++] = AttributeCompression.octPackFloat(
-      normalToPack
-    );
+    vertexBuffer[bufferIndex++] =
+      AttributeCompression.octPackFloat(normalToPack);
   }
 
   if (this.hasGeodeticSurfaceNormals) {
@@ -506,12 +501,12 @@ TerrainEncoding.prototype._calculateStrideAndOffsets = function () {
 const attributesIndicesNone = {
   position3DAndHeight: 0,
   textureCoordAndEncodedNormals: 1,
-  geodeticSurfaceNormal: 2,
+  geodeticSurfaceNormal: 2
 };
 const attributesIndicesBits12 = {
   compressed0: 0,
   compressed1: 1,
-  geodeticSurfaceNormal: 2,
+  geodeticSurfaceNormal: 2
 };
 
 TerrainEncoding.prototype.getAttributes = function (buffer) {
@@ -528,7 +523,7 @@ TerrainEncoding.prototype.getAttributes = function (buffer) {
       componentDatatype: datatype,
       componentsPerAttribute: componentsPerAttribute,
       offsetInBytes: offsetInBytes,
-      strideInBytes: strideInBytes,
+      strideInBytes: strideInBytes
     });
     offsetInBytes += componentsPerAttribute * sizeInBytes;
   }

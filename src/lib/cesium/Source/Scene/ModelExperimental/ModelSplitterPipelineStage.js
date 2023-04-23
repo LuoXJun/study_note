@@ -1,6 +1,6 @@
-import combine from "../../Core/combine.js";
-import ModelSplitterStageFS from "../../Shaders/ModelExperimental/ModelSplitterStageFS.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
+import combine from '../../Core/combine.js';
+import ModelSplitterStageFS from '../../Shaders/ModelExperimental/ModelSplitterStageFS.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
 
 /**
  * The model splitting pipeline stage is responsible for discarding fragments on the wrong side of the splitter.
@@ -10,10 +10,10 @@ import ShaderDestination from "../../Renderer/ShaderDestination.js";
  * @private
  */
 const ModelSplitterPipelineStage = {};
-ModelSplitterPipelineStage.name = "ModelSplitterPipelineStage"; // Helps with debugging
+ModelSplitterPipelineStage.name = 'ModelSplitterPipelineStage'; // Helps with debugging
 
 ModelSplitterPipelineStage.SPLIT_DIRECTION_UNIFORM_NAME =
-  "model_splitDirection";
+  'model_splitDirection';
 
 /**
  * Process a model. This modifies the following parts of the render resources:
@@ -38,7 +38,7 @@ ModelSplitterPipelineStage.process = function (
   const shaderBuilder = renderResources.shaderBuilder;
 
   shaderBuilder.addDefine(
-    "HAS_MODEL_SPLITTER",
+    'HAS_MODEL_SPLITTER',
     undefined,
     ShaderDestination.FRAGMENT
   );
@@ -47,15 +47,14 @@ ModelSplitterPipelineStage.process = function (
   const stageUniforms = {};
 
   shaderBuilder.addUniform(
-    "float",
+    'float',
     ModelSplitterPipelineStage.SPLIT_DIRECTION_UNIFORM_NAME,
     ShaderDestination.FRAGMENT
   );
-  stageUniforms[
-    ModelSplitterPipelineStage.SPLIT_DIRECTION_UNIFORM_NAME
-  ] = function () {
-    return model.splitDirection;
-  };
+  stageUniforms[ModelSplitterPipelineStage.SPLIT_DIRECTION_UNIFORM_NAME] =
+    function () {
+      return model.splitDirection;
+    };
 
   renderResources.uniformMap = combine(
     stageUniforms,

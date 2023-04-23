@@ -1,4 +1,4 @@
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
+import createPropertyDescriptor from './createPropertyDescriptor.js';
 
 function createRawProperty(value) {
   return value;

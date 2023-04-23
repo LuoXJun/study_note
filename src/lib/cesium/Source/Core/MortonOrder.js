@@ -1,6 +1,6 @@
-import Check from "./Check.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import Check from './Check.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Morton Order (aka Z-Order Curve) helper functions.
@@ -117,10 +117,10 @@ function removeTwoSpacing(v) {
  */
 MortonOrder.encode2D = function (x, y) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("x", x);
-  Check.typeOf.number("y", y);
+  Check.typeOf.number('x', x);
+  Check.typeOf.number('y', y);
   if (x < 0 || x > 65535 || y < 0 || y > 65535) {
-    throw new DeveloperError("inputs must be 16-bit unsigned integers");
+    throw new DeveloperError('inputs must be 16-bit unsigned integers');
   }
   //>>includeEnd('debug');
 
@@ -142,9 +142,9 @@ MortonOrder.encode2D = function (x, y) {
  */
 MortonOrder.decode2D = function (mortonIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("mortonIndex", mortonIndex);
+  Check.typeOf.number('mortonIndex', mortonIndex);
   if (mortonIndex < 0 || mortonIndex > 4294967295) {
-    throw new DeveloperError("input must be a 32-bit unsigned integer");
+    throw new DeveloperError('input must be a 32-bit unsigned integer');
   }
   //>>includeEnd('debug');
 
@@ -169,11 +169,11 @@ MortonOrder.decode2D = function (mortonIndex, result) {
  */
 MortonOrder.encode3D = function (x, y, z) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("x", x);
-  Check.typeOf.number("y", y);
-  Check.typeOf.number("z", z);
+  Check.typeOf.number('x', x);
+  Check.typeOf.number('y', y);
+  Check.typeOf.number('z', z);
   if (x < 0 || x > 1023 || y < 0 || y > 1023 || z < 0 || z > 1023) {
-    throw new DeveloperError("inputs must be 10-bit unsigned integers");
+    throw new DeveloperError('inputs must be 10-bit unsigned integers');
   }
   //>>includeEnd('debug');
 
@@ -195,9 +195,9 @@ MortonOrder.encode3D = function (x, y, z) {
  */
 MortonOrder.decode3D = function (mortonIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("mortonIndex", mortonIndex);
+  Check.typeOf.number('mortonIndex', mortonIndex);
   if (mortonIndex < 0 || mortonIndex > 1073741823) {
-    throw new DeveloperError("input must be a 30-bit unsigned integer");
+    throw new DeveloperError('input must be a 30-bit unsigned integer');
   }
   //>>includeEnd('debug');
 

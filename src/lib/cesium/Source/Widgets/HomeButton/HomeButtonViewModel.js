@@ -1,7 +1,7 @@
-import defined from "../../Core/defined.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import knockout from "../../ThirdParty/knockout.js";
-import createCommand from "../createCommand.js";
+import defined from '../../Core/defined.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import knockout from '../../ThirdParty/knockout.js';
+import createCommand from '../createCommand.js';
 
 /**
  * The view model for {@link HomeButton}.
@@ -14,7 +14,7 @@ import createCommand from "../createCommand.js";
 function HomeButtonViewModel(scene, duration) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required.");
+    throw new DeveloperError('scene is required.');
   }
   //>>includeEnd('debug');
 
@@ -31,9 +31,9 @@ function HomeButtonViewModel(scene, duration) {
    *
    * @type {String}
    */
-  this.tooltip = "View Home";
+  this.tooltip = 'View Home';
 
-  knockout.track(this, ["tooltip"]);
+  knockout.track(this, ['tooltip']);
 }
 
 Object.defineProperties(HomeButtonViewModel.prototype, {
@@ -46,7 +46,7 @@ Object.defineProperties(HomeButtonViewModel.prototype, {
   scene: {
     get: function () {
       return this._scene;
-    },
+    }
   },
 
   /**
@@ -58,7 +58,7 @@ Object.defineProperties(HomeButtonViewModel.prototype, {
   command: {
     get: function () {
       return this._command;
-    },
+    }
   },
 
   /**
@@ -76,12 +76,12 @@ Object.defineProperties(HomeButtonViewModel.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (defined(value) && value < 0) {
-        throw new DeveloperError("value must be positive.");
+        throw new DeveloperError('value must be positive.');
       }
       //>>includeEnd('debug');
 
       this._duration = value;
-    },
-  },
+    }
+  }
 });
 export default HomeButtonViewModel;

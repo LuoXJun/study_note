@@ -1,17 +1,17 @@
-import Check from "../../Core/Check.js";
-import Color from "../../Core/Color.js";
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import ScreenSpaceEventHandler from "../../Core/ScreenSpaceEventHandler.js";
-import ScreenSpaceEventType from "../../Core/ScreenSpaceEventType.js";
-import Cesium3DTileColorBlendMode from "../../Scene/Cesium3DTileColorBlendMode.js";
-import Cesium3DTileFeature from "../../Scene/Cesium3DTileFeature.js";
-import Cesium3DTilePass from "../../Scene/Cesium3DTilePass.js";
-import Cesium3DTileset from "../../Scene/Cesium3DTileset.js";
-import Cesium3DTileStyle from "../../Scene/Cesium3DTileStyle.js";
-import PerformanceDisplay from "../../Scene/PerformanceDisplay.js";
-import ResourceCache from "../../Scene/ResourceCache.js";
-import knockout from "../../ThirdParty/knockout.js";
+import Check from '../../Core/Check.js';
+import Color from '../../Core/Color.js';
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import ScreenSpaceEventHandler from '../../Core/ScreenSpaceEventHandler.js';
+import ScreenSpaceEventType from '../../Core/ScreenSpaceEventType.js';
+import Cesium3DTileColorBlendMode from '../../Scene/Cesium3DTileColorBlendMode.js';
+import Cesium3DTileFeature from '../../Scene/Cesium3DTileFeature.js';
+import Cesium3DTilePass from '../../Scene/Cesium3DTilePass.js';
+import Cesium3DTileset from '../../Scene/Cesium3DTileset.js';
+import Cesium3DTileStyle from '../../Scene/Cesium3DTileStyle.js';
+import PerformanceDisplay from '../../Scene/PerformanceDisplay.js';
+import ResourceCache from '../../Scene/ResourceCache.js';
+import knockout from '../../ThirdParty/knockout.js';
 
 function getPickTileset(viewModel) {
   return function (e) {
@@ -41,7 +41,7 @@ function selectTilesetOnHover(viewModel, value) {
 }
 
 const stringOptions = {
-  maximumFractionDigits: 3,
+  maximumFractionDigits: 3
 };
 
 function formatMemoryString(memorySizeInBytes) {
@@ -54,7 +54,7 @@ function formatMemoryString(memorySizeInBytes) {
 
 function getStatistics(tileset, isPick) {
   if (!defined(tileset)) {
-    return "";
+    return '';
   }
 
   const statistics = isPick
@@ -73,7 +73,7 @@ function getStatistics(tileset, isPick) {
     // Number of commands executed is likely to be higher because of commands overlapping
     // multiple frustums.
     `<li><strong>Commands: </strong>${statistics.numberOfCommands.toLocaleString()}</li>`;
-  s += "</ul>";
+  s += '</ul>';
   if (!isPick) {
     s += '<ul class="cesium-cesiumInspector-statistics">';
     s +=
@@ -85,7 +85,7 @@ function getStatistics(tileset, isPick) {
       // Total number of tiles includes tiles without content, so "Ready" may never reach
       // "Total."  Total also will increase when a tile with a tileset JSON content is loaded.
       `<li><strong>Total: </strong>${statistics.numberOfTilesTotal.toLocaleString()}</li>`;
-    s += "</ul>";
+    s += '</ul>';
     s += '<ul class="cesium-cesiumInspector-statistics">';
     s +=
       // --- Features statistics
@@ -94,18 +94,18 @@ function getStatistics(tileset, isPick) {
       `<li><strong>Points Selected: </strong>${statistics.numberOfPointsSelected.toLocaleString()}</li>` +
       `<li><strong>Points Loaded: </strong>${statistics.numberOfPointsLoaded.toLocaleString()}</li>` +
       `<li><strong>Triangles Selected: </strong>${statistics.numberOfTrianglesSelected.toLocaleString()}</li>`;
-    s += "</ul>";
+    s += '</ul>';
     s += '<ul class="cesium-cesiumInspector-statistics">';
     s +=
       // --- Styling statistics
       `<li><strong>Tiles styled: </strong>${statistics.numberOfTilesStyled.toLocaleString()}</li>` +
       `<li><strong>Features styled: </strong>${statistics.numberOfFeaturesStyled.toLocaleString()}</li>`;
-    s += "</ul>";
+    s += '</ul>';
     s += '<ul class="cesium-cesiumInspector-statistics">';
     s +=
       // --- Optimization statistics
       `<li><strong>Children Union Culled: </strong>${statistics.numberOfTilesCulledWithChildrenUnion.toLocaleString()}</li>`;
-    s += "</ul>";
+    s += '</ul>';
     s += '<ul class="cesium-cesiumInspector-statistics">';
     s +=
       // --- Memory statistics
@@ -118,7 +118,7 @@ function getStatistics(tileset, isPick) {
       `<li><strong>Batch Table Memory (MB): </strong>${formatMemoryString(
         statistics.batchTableByteLength
       )}</li>`;
-    s += "</ul>";
+    s += '</ul>';
   }
   return s;
 }
@@ -140,17 +140,17 @@ function getResourceCacheStatistics() {
 
 const colorBlendModes = [
   {
-    text: "Highlight",
-    value: Cesium3DTileColorBlendMode.HIGHLIGHT,
+    text: 'Highlight',
+    value: Cesium3DTileColorBlendMode.HIGHLIGHT
   },
   {
-    text: "Replace",
-    value: Cesium3DTileColorBlendMode.REPLACE,
+    text: 'Replace',
+    value: Cesium3DTileColorBlendMode.REPLACE
   },
   {
-    text: "Mix",
-    value: Cesium3DTileColorBlendMode.MIX,
-  },
+    text: 'Mix',
+    value: Cesium3DTileColorBlendMode.MIX
+  }
 ];
 
 const highlightColor = new Color(1.0, 1.0, 0.0, 0.4);
@@ -167,8 +167,8 @@ const oldColor = new Color();
  */
 function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("scene", scene);
-  Check.typeOf.object("performanceContainer", performanceContainer);
+  Check.typeOf.object('scene', scene);
+  Check.typeOf.object('performanceContainer', performanceContainer);
   //>>includeEnd('debug');
 
   const that = this;
@@ -179,13 +179,13 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this._canvas = canvas;
 
   this._performanceDisplay = new PerformanceDisplay({
-    container: performanceContainer,
+    container: performanceContainer
   });
 
-  this._statisticsText = "";
-  this._pickStatisticsText = "";
-  this._resourceCacheStatisticsText = "";
-  this._editorError = "";
+  this._statisticsText = '';
+  this._pickStatisticsText = '';
+  this._resourceCacheStatisticsText = '';
+  this._editorError = '';
 
   /**
    * Gets or sets the flag to enable performance display.  This property is observable.
@@ -290,32 +290,32 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
    * @type {String}
    * @default '{}'
    */
-  this.styleString = "{}";
+  this.styleString = '{}';
 
   this._tileset = undefined;
   this._feature = undefined;
   this._tile = undefined;
 
   knockout.track(this, [
-    "performance",
-    "inspectorVisible",
-    "_statisticsText",
-    "_pickStatisticsText",
-    "_resourceCacheStatisticsText",
-    "_editorError",
-    "showPickStatistics",
-    "showStatistics",
-    "showResourceCacheStatistics",
-    "tilesetVisible",
-    "displayVisible",
-    "updateVisible",
-    "loggingVisible",
-    "styleVisible",
-    "optimizationVisible",
-    "tileDebugLabelsVisible",
-    "styleString",
-    "_feature",
-    "_tile",
+    'performance',
+    'inspectorVisible',
+    '_statisticsText',
+    '_pickStatisticsText',
+    '_resourceCacheStatisticsText',
+    '_editorError',
+    'showPickStatistics',
+    'showStatistics',
+    'showResourceCacheStatistics',
+    'tilesetVisible',
+    'displayVisible',
+    'updateVisible',
+    'loggingVisible',
+    'styleVisible',
+    'optimizationVisible',
+    'tileDebugLabelsVisible',
+    'styleString',
+    '_feature',
+    '_tile'
   ]);
 
   this._properties = knockout.observable({});
@@ -325,7 +325,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
    * @readonly
    */
   this.properties = [];
-  knockout.defineProperty(this, "properties", function () {
+  knockout.defineProperty(this, 'properties', function () {
     const names = [];
     const properties = that._properties();
     for (const prop in properties) {
@@ -337,7 +337,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   });
 
   const dynamicScreenSpaceError = knockout.observable();
-  knockout.defineProperty(this, "dynamicScreenSpaceError", {
+  knockout.defineProperty(this, 'dynamicScreenSpaceError', {
     get: function () {
       return dynamicScreenSpaceError();
     },
@@ -346,7 +346,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
       if (defined(that._tileset)) {
         that._tileset.dynamicScreenSpaceError = value;
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag to enable dynamic screen space error.  This property is observable.
@@ -357,7 +357,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.dynamicScreenSpaceError = false;
 
   const colorBlendMode = knockout.observable();
-  knockout.defineProperty(this, "colorBlendMode", {
+  knockout.defineProperty(this, 'colorBlendMode', {
     get: function () {
       return colorBlendMode();
     },
@@ -367,7 +367,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
         that._tileset.colorBlendMode = value;
         that._scene.requestRender();
       }
-    },
+    }
   });
   /**
    * Gets or sets the color blend mode.  This property is observable.
@@ -379,7 +379,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
 
   const showOnlyPickedTileDebugLabel = knockout.observable();
   const picking = knockout.observable();
-  knockout.defineProperty(this, "picking", {
+  knockout.defineProperty(this, 'picking', {
     get: function () {
       return picking();
     },
@@ -427,7 +427,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
         that.tile = undefined;
         that._eventHandler.removeInputAction(ScreenSpaceEventType.MOUSE_MOVE);
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag to enable picking.  This property is observable.
@@ -438,7 +438,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.picking = true;
 
   const colorize = knockout.observable();
-  knockout.defineProperty(this, "colorize", {
+  knockout.defineProperty(this, 'colorize', {
     get: function () {
       return colorize();
     },
@@ -448,7 +448,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
         that._tileset.debugColorizeTiles = value;
         that._scene.requestRender();
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag to colorize tiles.  This property is observable.
@@ -459,7 +459,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.colorize = false;
 
   const wireframe = knockout.observable();
-  knockout.defineProperty(this, "wireframe", {
+  knockout.defineProperty(this, 'wireframe', {
     get: function () {
       return wireframe();
     },
@@ -469,7 +469,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
         that._tileset.debugWireframe = value;
         that._scene.requestRender();
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag to draw with wireframe.  This property is observable.
@@ -480,7 +480,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.wireframe = false;
 
   const showBoundingVolumes = knockout.observable();
-  knockout.defineProperty(this, "showBoundingVolumes", {
+  knockout.defineProperty(this, 'showBoundingVolumes', {
     get: function () {
       return showBoundingVolumes();
     },
@@ -490,7 +490,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
         that._tileset.debugShowBoundingVolume = value;
         that._scene.requestRender();
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag to show bounding volumes.  This property is observable.
@@ -501,7 +501,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.showBoundingVolumes = false;
 
   const showContentBoundingVolumes = knockout.observable();
-  knockout.defineProperty(this, "showContentBoundingVolumes", {
+  knockout.defineProperty(this, 'showContentBoundingVolumes', {
     get: function () {
       return showContentBoundingVolumes();
     },
@@ -511,7 +511,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
         that._tileset.debugShowContentBoundingVolume = value;
         that._scene.requestRender();
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag to show content volumes.  This property is observable.
@@ -522,7 +522,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.showContentBoundingVolumes = false;
 
   const showRequestVolumes = knockout.observable();
-  knockout.defineProperty(this, "showRequestVolumes", {
+  knockout.defineProperty(this, 'showRequestVolumes', {
     get: function () {
       return showRequestVolumes();
     },
@@ -532,7 +532,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
         that._tileset.debugShowViewerRequestVolume = value;
         that._scene.requestRender();
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag to show request volumes.  This property is observable.
@@ -543,7 +543,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.showRequestVolumes = false;
 
   const freezeFrame = knockout.observable();
-  knockout.defineProperty(this, "freezeFrame", {
+  knockout.defineProperty(this, 'freezeFrame', {
     get: function () {
       return freezeFrame();
     },
@@ -554,7 +554,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
         that._scene.debugShowFrustumPlanes = value;
         that._scene.requestRender();
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag to suspend updates.  This property is observable.
@@ -564,7 +564,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
    */
   this.freezeFrame = false;
 
-  knockout.defineProperty(this, "showOnlyPickedTileDebugLabel", {
+  knockout.defineProperty(this, 'showOnlyPickedTileDebugLabel', {
     get: function () {
       return showOnlyPickedTileDebugLabel();
     },
@@ -574,7 +574,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
         that._tileset.debugPickedTileLabelOnly = value;
         that._scene.requestRender();
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag to show debug labels only for the currently picked tile.  This property is observable.
@@ -585,7 +585,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.showOnlyPickedTileDebugLabel = false;
 
   const showGeometricError = knockout.observable();
-  knockout.defineProperty(this, "showGeometricError", {
+  knockout.defineProperty(this, 'showGeometricError', {
     get: function () {
       return showGeometricError();
     },
@@ -595,7 +595,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
         that._tileset.debugShowGeometricError = value;
         that._scene.requestRender();
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag to show tile geometric error.  This property is observable.
@@ -606,7 +606,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.showGeometricError = false;
 
   const showRenderingStatistics = knockout.observable();
-  knockout.defineProperty(this, "showRenderingStatistics", {
+  knockout.defineProperty(this, 'showRenderingStatistics', {
     get: function () {
       return showRenderingStatistics();
     },
@@ -616,7 +616,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
         that._tileset.debugShowRenderingStatistics = value;
         that._scene.requestRender();
       }
-    },
+    }
   });
   /**
    * Displays the number of commands, points, triangles and features used per tile.  This property is observable.
@@ -627,7 +627,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.showRenderingStatistics = false;
 
   const showMemoryUsage = knockout.observable();
-  knockout.defineProperty(this, "showMemoryUsage", {
+  knockout.defineProperty(this, 'showMemoryUsage', {
     get: function () {
       return showMemoryUsage();
     },
@@ -637,7 +637,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
         that._tileset.debugShowMemoryUsage = value;
         that._scene.requestRender();
       }
-    },
+    }
   });
   /**
    * Displays the memory used per tile.  This property is observable.
@@ -648,7 +648,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.showMemoryUsage = false;
 
   const showUrl = knockout.observable();
-  knockout.defineProperty(this, "showUrl", {
+  knockout.defineProperty(this, 'showUrl', {
     get: function () {
       return showUrl();
     },
@@ -658,7 +658,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
         that._tileset.debugShowUrl = value;
         that._scene.requestRender();
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag to show the tile url.  This property is observable.
@@ -669,7 +669,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.showUrl = false;
 
   const maximumScreenSpaceError = knockout.observable();
-  knockout.defineProperty(this, "maximumScreenSpaceError", {
+  knockout.defineProperty(this, 'maximumScreenSpaceError', {
     get: function () {
       return maximumScreenSpaceError();
     },
@@ -681,7 +681,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
           that._tileset.maximumScreenSpaceError = value;
         }
       }
-    },
+    }
   });
   /**
    * Gets or sets the maximum screen space error.  This property is observable.
@@ -692,7 +692,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.maximumScreenSpaceError = 16;
 
   const dynamicScreenSpaceErrorDensity = knockout.observable();
-  knockout.defineProperty(this, "dynamicScreenSpaceErrorDensity", {
+  knockout.defineProperty(this, 'dynamicScreenSpaceErrorDensity', {
     get: function () {
       return dynamicScreenSpaceErrorDensity();
     },
@@ -704,7 +704,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
           that._tileset.dynamicScreenSpaceErrorDensity = value;
         }
       }
-    },
+    }
   });
   /**
    * Gets or sets the dynamic screen space error density.  This property is observable.
@@ -723,17 +723,17 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
    * @default 0.00278
    */
   this.dynamicScreenSpaceErrorDensitySliderValue = undefined;
-  knockout.defineProperty(this, "dynamicScreenSpaceErrorDensitySliderValue", {
+  knockout.defineProperty(this, 'dynamicScreenSpaceErrorDensitySliderValue', {
     get: function () {
       return Math.pow(dynamicScreenSpaceErrorDensity(), 1 / 6);
     },
     set: function (value) {
       dynamicScreenSpaceErrorDensity(Math.pow(value, 6));
-    },
+    }
   });
 
   const dynamicScreenSpaceErrorFactor = knockout.observable();
-  knockout.defineProperty(this, "dynamicScreenSpaceErrorFactor", {
+  knockout.defineProperty(this, 'dynamicScreenSpaceErrorFactor', {
     get: function () {
       return dynamicScreenSpaceErrorFactor();
     },
@@ -745,7 +745,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
           that._tileset.dynamicScreenSpaceErrorFactor = value;
         }
       }
-    },
+    }
   });
   /**
    * Gets or sets the dynamic screen space error factor.  This property is observable.
@@ -757,7 +757,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
 
   const pickTileset = getPickTileset(this);
   const pickActive = knockout.observable();
-  knockout.defineProperty(this, "pickActive", {
+  knockout.defineProperty(this, 'pickActive', {
     get: function () {
       return pickActive();
     },
@@ -771,11 +771,11 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
       } else {
         that._eventHandler.removeInputAction(ScreenSpaceEventType.LEFT_CLICK);
       }
-    },
+    }
   });
 
   const pointCloudShading = knockout.observable();
-  knockout.defineProperty(this, "pointCloudShading", {
+  knockout.defineProperty(this, 'pointCloudShading', {
     get: function () {
       return pointCloudShading();
     },
@@ -784,7 +784,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
       if (defined(that._tileset)) {
         that._tileset.pointCloudShading.attenuation = value;
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag to enable point cloud shading. This property is observable.
@@ -795,7 +795,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.pointCloudShading = false;
 
   const geometricErrorScale = knockout.observable();
-  knockout.defineProperty(this, "geometricErrorScale", {
+  knockout.defineProperty(this, 'geometricErrorScale', {
     get: function () {
       return geometricErrorScale();
     },
@@ -807,7 +807,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
           that._tileset.pointCloudShading.geometricErrorScale = value;
         }
       }
-    },
+    }
   });
   /**
    * Gets or sets the geometric error scale.  This property is observable.
@@ -818,7 +818,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.geometricErrorScale = 1.0;
 
   const maximumAttenuation = knockout.observable();
-  knockout.defineProperty(this, "maximumAttenuation", {
+  knockout.defineProperty(this, 'maximumAttenuation', {
     get: function () {
       return maximumAttenuation();
     },
@@ -831,7 +831,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
             value === 0 ? undefined : value;
         }
       }
-    },
+    }
   });
   /**
    * Gets or sets the maximum attenuation.  This property is observable.
@@ -842,7 +842,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.maximumAttenuation = 0;
 
   const baseResolution = knockout.observable();
-  knockout.defineProperty(this, "baseResolution", {
+  knockout.defineProperty(this, 'baseResolution', {
     get: function () {
       return baseResolution();
     },
@@ -855,7 +855,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
             value === 0 ? undefined : value;
         }
       }
-    },
+    }
   });
   /**
    * Gets or sets the base resolution.  This property is observable.
@@ -866,7 +866,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.baseResolution = 0;
 
   const eyeDomeLighting = knockout.observable();
-  knockout.defineProperty(this, "eyeDomeLighting", {
+  knockout.defineProperty(this, 'eyeDomeLighting', {
     get: function () {
       return eyeDomeLighting();
     },
@@ -875,7 +875,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
       if (defined(that._tileset)) {
         that._tileset.pointCloudShading.eyeDomeLighting = value;
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag to enable eye dome lighting. This property is observable.
@@ -886,7 +886,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.eyeDomeLighting = false;
 
   const eyeDomeLightingStrength = knockout.observable();
-  knockout.defineProperty(this, "eyeDomeLightingStrength", {
+  knockout.defineProperty(this, 'eyeDomeLightingStrength', {
     get: function () {
       return eyeDomeLightingStrength();
     },
@@ -898,7 +898,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
           that._tileset.pointCloudShading.eyeDomeLightingStrength = value;
         }
       }
-    },
+    }
   });
   /**
    * Gets or sets the eye dome lighting strength.  This property is observable.
@@ -909,7 +909,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.eyeDomeLightingStrength = 1.0;
 
   const eyeDomeLightingRadius = knockout.observable();
-  knockout.defineProperty(this, "eyeDomeLightingRadius", {
+  knockout.defineProperty(this, 'eyeDomeLightingRadius', {
     get: function () {
       return eyeDomeLightingRadius();
     },
@@ -921,7 +921,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
           that._tileset.pointCloudShading.eyeDomeLightingRadius = value;
         }
       }
-    },
+    }
   });
   /**
    * Gets or sets the eye dome lighting radius.  This property is observable.
@@ -940,7 +940,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.pickActive = false;
 
   const skipLevelOfDetail = knockout.observable();
-  knockout.defineProperty(this, "skipLevelOfDetail", {
+  knockout.defineProperty(this, 'skipLevelOfDetail', {
     get: function () {
       return skipLevelOfDetail();
     },
@@ -949,7 +949,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
       if (defined(that._tileset)) {
         that._tileset.skipLevelOfDetail = value;
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag to determine if level of detail skipping should be applied during the traversal.
@@ -960,7 +960,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.skipLevelOfDetail = true;
 
   const skipScreenSpaceErrorFactor = knockout.observable();
-  knockout.defineProperty(this, "skipScreenSpaceErrorFactor", {
+  knockout.defineProperty(this, 'skipScreenSpaceErrorFactor', {
     get: function () {
       return skipScreenSpaceErrorFactor();
     },
@@ -972,7 +972,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
           that._tileset.skipScreenSpaceErrorFactor = value;
         }
       }
-    },
+    }
   });
   /**
    * Gets or sets the multiplier defining the minimum screen space error to skip. This property is observable.
@@ -982,7 +982,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.skipScreenSpaceErrorFactor = 16;
 
   const baseScreenSpaceError = knockout.observable();
-  knockout.defineProperty(this, "baseScreenSpaceError", {
+  knockout.defineProperty(this, 'baseScreenSpaceError', {
     get: function () {
       return baseScreenSpaceError();
     },
@@ -994,7 +994,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
           that._tileset.baseScreenSpaceError = value;
         }
       }
-    },
+    }
   });
   /**
    * Gets or sets the screen space error that must be reached before skipping levels of detail. This property is observable.
@@ -1004,7 +1004,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.baseScreenSpaceError = 1024;
 
   const skipLevels = knockout.observable();
-  knockout.defineProperty(this, "skipLevels", {
+  knockout.defineProperty(this, 'skipLevels', {
     get: function () {
       return skipLevels();
     },
@@ -1016,7 +1016,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
           that._tileset.skipLevels = value;
         }
       }
-    },
+    }
   });
   /**
    * Gets or sets the constant defining the minimum number of levels to skip when loading tiles. This property is observable.
@@ -1026,7 +1026,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.skipLevels = 1;
 
   const immediatelyLoadDesiredLevelOfDetail = knockout.observable();
-  knockout.defineProperty(this, "immediatelyLoadDesiredLevelOfDetail", {
+  knockout.defineProperty(this, 'immediatelyLoadDesiredLevelOfDetail', {
     get: function () {
       return immediatelyLoadDesiredLevelOfDetail();
     },
@@ -1035,7 +1035,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
       if (defined(that._tileset)) {
         that._tileset.immediatelyLoadDesiredLevelOfDetail = value;
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag which, when true, only tiles that meet the maximum screen space error will ever be downloaded.
@@ -1046,7 +1046,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this.immediatelyLoadDesiredLevelOfDetail = false;
 
   const loadSiblings = knockout.observable();
-  knockout.defineProperty(this, "loadSiblings", {
+  knockout.defineProperty(this, 'loadSiblings', {
     get: function () {
       return loadSiblings();
     },
@@ -1055,7 +1055,7 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
       if (defined(that._tileset)) {
         that._tileset.loadSiblings = value;
       }
-    },
+    }
   });
   /**
    * Gets or sets the flag which determines whether siblings of visible tiles are always downloaded during traversal.
@@ -1068,39 +1068,39 @@ function Cesium3DTilesInspectorViewModel(scene, performanceContainer) {
   this._style = undefined;
   this._shouldStyle = false;
   this._definedProperties = [
-    "properties",
-    "dynamicScreenSpaceError",
-    "colorBlendMode",
-    "picking",
-    "colorize",
-    "wireframe",
-    "showBoundingVolumes",
-    "showContentBoundingVolumes",
-    "showRequestVolumes",
-    "freezeFrame",
-    "maximumScreenSpaceError",
-    "dynamicScreenSpaceErrorDensity",
-    "baseScreenSpaceError",
-    "skipScreenSpaceErrorFactor",
-    "skipLevelOfDetail",
-    "skipLevels",
-    "immediatelyLoadDesiredLevelOfDetail",
-    "loadSiblings",
-    "dynamicScreenSpaceErrorDensitySliderValue",
-    "dynamicScreenSpaceErrorFactor",
-    "pickActive",
-    "showOnlyPickedTileDebugLabel",
-    "showGeometricError",
-    "showRenderingStatistics",
-    "showMemoryUsage",
-    "showUrl",
-    "pointCloudShading",
-    "geometricErrorScale",
-    "maximumAttenuation",
-    "baseResolution",
-    "eyeDomeLighting",
-    "eyeDomeLightingStrength",
-    "eyeDomeLightingRadius",
+    'properties',
+    'dynamicScreenSpaceError',
+    'colorBlendMode',
+    'picking',
+    'colorize',
+    'wireframe',
+    'showBoundingVolumes',
+    'showContentBoundingVolumes',
+    'showRequestVolumes',
+    'freezeFrame',
+    'maximumScreenSpaceError',
+    'dynamicScreenSpaceErrorDensity',
+    'baseScreenSpaceError',
+    'skipScreenSpaceErrorFactor',
+    'skipLevelOfDetail',
+    'skipLevels',
+    'immediatelyLoadDesiredLevelOfDetail',
+    'loadSiblings',
+    'dynamicScreenSpaceErrorDensitySliderValue',
+    'dynamicScreenSpaceErrorFactor',
+    'pickActive',
+    'showOnlyPickedTileDebugLabel',
+    'showGeometricError',
+    'showRenderingStatistics',
+    'showMemoryUsage',
+    'showUrl',
+    'pointCloudShading',
+    'geometricErrorScale',
+    'maximumAttenuation',
+    'baseResolution',
+    'eyeDomeLighting',
+    'eyeDomeLightingStrength',
+    'eyeDomeLightingRadius'
   ];
   this._removePostRenderEvent = scene.postRender.addEventListener(function () {
     that._update();
@@ -1121,7 +1121,7 @@ Object.defineProperties(Cesium3DTilesInspectorViewModel.prototype, {
   scene: {
     get: function () {
       return this._scene;
-    },
+    }
   },
   /**
    * Gets the performance container
@@ -1132,7 +1132,7 @@ Object.defineProperties(Cesium3DTilesInspectorViewModel.prototype, {
   performanceContainer: {
     get: function () {
       return this._performanceContainer;
-    },
+    }
   },
 
   /**
@@ -1144,7 +1144,7 @@ Object.defineProperties(Cesium3DTilesInspectorViewModel.prototype, {
   statisticsText: {
     get: function () {
       return this._statisticsText;
-    },
+    }
   },
   /**
    * Gets the pick statistics text.  This property is observable.
@@ -1155,7 +1155,7 @@ Object.defineProperties(Cesium3DTilesInspectorViewModel.prototype, {
   pickStatisticsText: {
     get: function () {
       return this._pickStatisticsText;
-    },
+    }
   },
 
   /**
@@ -1167,7 +1167,7 @@ Object.defineProperties(Cesium3DTilesInspectorViewModel.prototype, {
   resourceCacheStatisticsText: {
     get: function () {
       return this._resourceCacheStatisticsText;
-    },
+    }
   },
 
   /**
@@ -1179,7 +1179,7 @@ Object.defineProperties(Cesium3DTilesInspectorViewModel.prototype, {
   colorBlendModes: {
     get: function () {
       return colorBlendModes;
-    },
+    }
   },
 
   /**
@@ -1191,7 +1191,7 @@ Object.defineProperties(Cesium3DTilesInspectorViewModel.prototype, {
   editorError: {
     get: function () {
       return this._editorError;
-    },
+    }
   },
 
   /**
@@ -1206,7 +1206,7 @@ Object.defineProperties(Cesium3DTilesInspectorViewModel.prototype, {
     set: function (tileset) {
       this._tileset = tileset;
       this._style = undefined;
-      this.styleString = "{}";
+      this.styleString = '{}';
       this.feature = undefined;
       this.tile = undefined;
 
@@ -1220,17 +1220,17 @@ Object.defineProperties(Cesium3DTilesInspectorViewModel.prototype, {
 
         // update tileset with existing settings
         const settings = [
-          "colorize",
-          "wireframe",
-          "showBoundingVolumes",
-          "showContentBoundingVolumes",
-          "showRequestVolumes",
-          "freezeFrame",
-          "showOnlyPickedTileDebugLabel",
-          "showGeometricError",
-          "showRenderingStatistics",
-          "showMemoryUsage",
-          "showUrl",
+          'colorize',
+          'wireframe',
+          'showBoundingVolumes',
+          'showContentBoundingVolumes',
+          'showRequestVolumes',
+          'freezeFrame',
+          'showOnlyPickedTileDebugLabel',
+          'showGeometricError',
+          'showRenderingStatistics',
+          'showMemoryUsage',
+          'showUrl'
         ];
         const length = settings.length;
         for (let i = 0; i < length; ++i) {
@@ -1278,7 +1278,7 @@ Object.defineProperties(Cesium3DTilesInspectorViewModel.prototype, {
       this._pickStatisticsText = getStatistics(tileset, true);
       this._resourceCacheStatisticsText = getResourceCacheStatistics();
       selectTilesetOnHover(this, false);
-    },
+    }
   },
 
   /**
@@ -1313,7 +1313,7 @@ Object.defineProperties(Cesium3DTilesInspectorViewModel.prototype, {
         this._scene.requestRender();
       }
       this._feature = feature;
-    },
+    }
   },
 
   /**
@@ -1348,8 +1348,8 @@ Object.defineProperties(Cesium3DTilesInspectorViewModel.prototype, {
         this._scene.requestRender();
       }
       this._tile = tile;
-    },
-  },
+    }
+  }
 });
 
 function hasFeatures(content) {
@@ -1453,10 +1453,10 @@ Cesium3DTilesInspectorViewModel.prototype.compileStyle = function () {
   if (!defined(tileset) || this.styleString === JSON.stringify(tileset.style)) {
     return;
   }
-  this._editorError = "";
+  this._editorError = '';
   try {
     if (this.styleString.length === 0) {
-      this.styleString = "{}";
+      this.styleString = '{}';
     }
     this._style = new Cesium3DTileStyle(JSON.parse(this.styleString));
     this._shouldStyle = true;
@@ -1485,7 +1485,7 @@ Cesium3DTilesInspectorViewModel.prototype.styleEditorKeyPress = function (
     const end = textArea.selectionEnd;
     let newEnd = end;
     const selected = textArea.value.slice(start, end);
-    const lines = selected.split("\n");
+    const lines = selected.split('\n');
     const length = lines.length;
     let i;
     if (!event.shiftKey) {
@@ -1495,8 +1495,8 @@ Cesium3DTilesInspectorViewModel.prototype.styleEditorKeyPress = function (
       }
     } else {
       for (i = 0; i < length; ++i) {
-        if (lines[i][0] === " ") {
-          if (lines[i][1] === " ") {
+        if (lines[i][0] === ' ') {
+          if (lines[i][1] === ' ') {
             lines[i] = lines[i].substr(2);
             newEnd -= 2;
           } else {
@@ -1506,7 +1506,7 @@ Cesium3DTilesInspectorViewModel.prototype.styleEditorKeyPress = function (
         }
       }
     }
-    const newText = lines.join("\n");
+    const newText = lines.join('\n');
     textArea.value =
       textArea.value.slice(0, start) + newText + textArea.value.slice(end);
     textArea.selectionStart = start !== end ? start : newEnd;
@@ -1544,7 +1544,7 @@ Cesium3DTilesInspectorViewModel.prototype._update = function () {
         this._shouldStyle = false;
       } else {
         this._style = style;
-        this.styleString = JSON.stringify(style.style, null, "  ");
+        this.styleString = JSON.stringify(style.style, null, '  ');
       }
     }
   }

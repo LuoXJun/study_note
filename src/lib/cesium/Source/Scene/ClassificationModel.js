@@ -1,35 +1,35 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Color from "../Core/Color.js";
-import combine from "../Core/combine.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defer from "../Core/defer.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import FeatureDetection from "../Core/FeatureDetection.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import Matrix4 from "../Core/Matrix4.js";
-import PrimitiveType from "../Core/PrimitiveType.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import Transforms from "../Core/Transforms.js";
-import WebGLConstants from "../Core/WebGLConstants.js";
-import addDefaults from "./GltfPipeline/addDefaults.js";
-import ForEach from "./GltfPipeline/ForEach.js";
-import getAccessorByteStride from "./GltfPipeline/getAccessorByteStride.js";
-import numberOfComponentsForType from "./GltfPipeline/numberOfComponentsForType.js";
-import parseGlb from "./GltfPipeline/parseGlb.js";
-import updateVersion from "./GltfPipeline/updateVersion.js";
-import Axis from "./Axis.js";
-import ModelLoadResources from "./ModelLoadResources.js";
-import ModelUtility from "./ModelUtility.js";
-import processModelMaterialsCommon from "./processModelMaterialsCommon.js";
-import processPbrMaterials from "./processPbrMaterials.js";
-import SceneMode from "./SceneMode.js";
-import Vector3DTileBatch from "./Vector3DTileBatch.js";
-import Vector3DTilePrimitive from "./Vector3DTilePrimitive.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Color from '../Core/Color.js';
+import combine from '../Core/combine.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defer from '../Core/defer.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import FeatureDetection from '../Core/FeatureDetection.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import Matrix4 from '../Core/Matrix4.js';
+import PrimitiveType from '../Core/PrimitiveType.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import Transforms from '../Core/Transforms.js';
+import WebGLConstants from '../Core/WebGLConstants.js';
+import addDefaults from './GltfPipeline/addDefaults.js';
+import ForEach from './GltfPipeline/ForEach.js';
+import getAccessorByteStride from './GltfPipeline/getAccessorByteStride.js';
+import numberOfComponentsForType from './GltfPipeline/numberOfComponentsForType.js';
+import parseGlb from './GltfPipeline/parseGlb.js';
+import updateVersion from './GltfPipeline/updateVersion.js';
+import Axis from './Axis.js';
+import ModelLoadResources from './ModelLoadResources.js';
+import ModelUtility from './ModelUtility.js';
+import processModelMaterialsCommon from './processModelMaterialsCommon.js';
+import processPbrMaterials from './processPbrMaterials.js';
+import SceneMode from './SceneMode.js';
+import Vector3DTileBatch from './Vector3DTileBatch.js';
+import Vector3DTilePrimitive from './Vector3DTilePrimitive.js';
 
 const boundingSphereCartesian3Scratch = new Cartesian3();
 
@@ -78,13 +78,13 @@ function ClassificationModel(options) {
     processModelMaterialsCommon(gltf);
     processPbrMaterials(gltf);
   } else {
-    throw new RuntimeError("Only binary glTF is supported as a classifier.");
+    throw new RuntimeError('Only binary glTF is supported as a classifier.');
   }
 
   ForEach.buffer(gltf, function (buffer) {
     if (!defined(buffer.extras._pipeline.source)) {
       throw new RuntimeError(
-        "Buffer data must be embedded in the binary gltf."
+        'Buffer data must be embedded in the binary gltf.'
       );
     }
   });
@@ -96,31 +96,31 @@ function ClassificationModel(options) {
   const meshId = gltfNode.mesh;
   if (gltfNodes.length !== 1 || !defined(meshId)) {
     throw new RuntimeError(
-      "Only one node is supported for classification and it must have a mesh."
+      'Only one node is supported for classification and it must have a mesh.'
     );
   }
 
   if (gltfMeshes.length !== 1) {
     throw new RuntimeError(
-      "Only one mesh is supported when using b3dm for classification."
+      'Only one mesh is supported when using b3dm for classification.'
     );
   }
 
   const gltfPrimitives = gltfMeshes[0].primitives;
   if (gltfPrimitives.length !== 1) {
     throw new RuntimeError(
-      "Only one primitive per mesh is supported when using b3dm for classification."
+      'Only one primitive per mesh is supported when using b3dm for classification.'
     );
   }
 
   const gltfPositionAttribute = gltfPrimitives[0].attributes.POSITION;
   if (!defined(gltfPositionAttribute)) {
-    throw new RuntimeError("The mesh must have a position attribute.");
+    throw new RuntimeError('The mesh must have a position attribute.');
   }
 
   const gltfBatchIdAttribute = gltfPrimitives[0].attributes._BATCHID;
   if (!defined(gltfBatchIdAttribute)) {
-    throw new RuntimeError("The mesh must have a batch id attribute.");
+    throw new RuntimeError('The mesh must have a batch id attribute.');
   }
 
   this._gltf = gltf;
@@ -244,7 +244,7 @@ Object.defineProperties(ClassificationModel.prototype, {
   gltf: {
     get: function () {
       return this._gltf;
-    },
+    }
   },
 
   /**
@@ -256,7 +256,7 @@ Object.defineProperties(ClassificationModel.prototype, {
   gltfInternal: {
     get: function () {
       return this._gltf;
-    },
+    }
   },
 
   /**
@@ -280,7 +280,7 @@ Object.defineProperties(ClassificationModel.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (this._state !== ModelState.LOADED) {
         throw new DeveloperError(
-          "The model is not loaded.  Use ClassificationModel.readyPromise or wait for ClassificationModel.ready to be true."
+          'The model is not loaded.  Use ClassificationModel.readyPromise or wait for ClassificationModel.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -309,7 +309,7 @@ Object.defineProperties(ClassificationModel.prototype, {
       }
 
       return scaledBoundingSphere;
-    },
+    }
   },
 
   /**
@@ -327,7 +327,7 @@ Object.defineProperties(ClassificationModel.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -346,7 +346,7 @@ Object.defineProperties(ClassificationModel.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise.promise;
-    },
+    }
   },
 
   /**
@@ -362,7 +362,7 @@ Object.defineProperties(ClassificationModel.prototype, {
   dirty: {
     get: function () {
       return this._dirty;
-    },
+    }
   },
 
   /**
@@ -379,7 +379,7 @@ Object.defineProperties(ClassificationModel.prototype, {
         this._extensionsUsed = ModelUtility.getUsedExtensions(this.gltf);
       }
       return this._extensionsUsed;
-    },
+    }
   },
 
   /**
@@ -398,7 +398,7 @@ Object.defineProperties(ClassificationModel.prototype, {
         );
       }
       return this._extensionsRequired;
-    },
+    }
   },
 
   /**
@@ -416,7 +416,7 @@ Object.defineProperties(ClassificationModel.prototype, {
   upAxis: {
     get: function () {
       return this._upAxis;
-    },
+    }
   },
 
   /**
@@ -427,7 +427,7 @@ Object.defineProperties(ClassificationModel.prototype, {
   trianglesLength: {
     get: function () {
       return this._trianglesLength;
-    },
+    }
   },
 
   /**
@@ -438,7 +438,7 @@ Object.defineProperties(ClassificationModel.prototype, {
   geometryByteLength: {
     get: function () {
       return this._geometryByteLength;
-    },
+    }
   },
 
   /**
@@ -449,7 +449,7 @@ Object.defineProperties(ClassificationModel.prototype, {
   texturesByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   /**
@@ -460,8 +460,8 @@ Object.defineProperties(ClassificationModel.prototype, {
   classificationType: {
     get: function () {
       return this._classificationType;
-    },
-  },
+    }
+  }
 });
 
 ///////////////////////////////////////////////////////////////////////////
@@ -503,7 +503,7 @@ function parseBufferViews(model) {
       indexBufferIds[bufferViewId] = true;
       indexBuffersToCreate.enqueue({
         id: bufferViewId,
-        componentType: accessor.componentType,
+        componentType: accessor.componentType
       });
     }
   });
@@ -524,7 +524,7 @@ function createIndexBuffer(bufferViewId, componentType, model) {
   const bufferView = bufferViews[bufferViewId];
   const indexBuffer = {
     typedArray: loadResources.getBuffer(bufferView),
-    indexDatatype: componentType,
+    indexDatatype: componentType
   };
   model._buffers[bufferViewId] = indexBuffer;
   model._geometryByteLength += indexBuffer.typedArray.byteLength;
@@ -573,11 +573,11 @@ function createProgram(model) {
 
   const positionName = ModelUtility.getAttributeOrUniformBySemantic(
     gltf,
-    "POSITION"
+    'POSITION'
   );
   const batchIdName = ModelUtility.getAttributeOrUniformBySemantic(
     gltf,
-    "_BATCHID"
+    '_BATCHID'
   );
 
   const attributeLocations = {};
@@ -586,7 +586,7 @@ function createProgram(model) {
 
   const modelViewProjectionName = ModelUtility.getAttributeOrUniformBySemantic(
     gltf,
-    "MODELVIEWPROJECTION"
+    'MODELVIEWPROJECTION'
   );
 
   let uniformDecl;
@@ -595,16 +595,16 @@ function createProgram(model) {
   if (!defined(modelViewProjectionName)) {
     const projectionName = ModelUtility.getAttributeOrUniformBySemantic(
       gltf,
-      "PROJECTION"
+      'PROJECTION'
     );
     let modelViewName = ModelUtility.getAttributeOrUniformBySemantic(
       gltf,
-      "MODELVIEW"
+      'MODELVIEW'
     );
     if (!defined(modelViewName)) {
       modelViewName = ModelUtility.getAttributeOrUniformBySemantic(
         gltf,
-        "CESIUM_RTC_MODELVIEW"
+        'CESIUM_RTC_MODELVIEW'
       );
     }
 
@@ -623,14 +623,14 @@ function createProgram(model) {
     `attribute float ${batchIdName};\n${uniformDecl}void main() {\n${computePosition}    gl_Position = czm_depthClamp(positionInClipCoords);\n` +
     `}\n`;
   const fs =
-    "#ifdef GL_EXT_frag_depth\n" +
-    "#extension GL_EXT_frag_depth : enable\n" +
-    "#endif\n" +
-    "void main() \n" +
-    "{ \n" +
-    "    gl_FragColor = vec4(1.0); \n" +
-    "    czm_writeDepthClamp();\n" +
-    "}\n";
+    '#ifdef GL_EXT_frag_depth\n' +
+    '#extension GL_EXT_frag_depth : enable\n' +
+    '#endif\n' +
+    'void main() \n' +
+    '{ \n' +
+    '    gl_FragColor = vec4(1.0); \n' +
+    '    czm_writeDepthClamp();\n' +
+    '}\n';
 
   if (model.extensionsUsed.WEB3D_quantized_attributes) {
     vs = modifyShaderForQuantizedAttributes(vs, model);
@@ -642,14 +642,14 @@ function createProgram(model) {
   model._shaderProgram = {
     vertexShaderSource: drawVS,
     fragmentShaderSource: drawFS,
-    attributeLocations: attributeLocations,
+    attributeLocations: attributeLocations
   };
 }
 
 function getAttributeLocations() {
   return {
     POSITION: 0,
-    _BATCHID: 1,
+    _BATCHID: 1
   };
 }
 
@@ -668,25 +668,25 @@ function createVertexArray(model) {
   const primitive = primitives[0];
   const attributeLocations = getAttributeLocations();
   const attributes = {};
-  ForEach.meshPrimitiveAttribute(primitive, function (
-    accessorId,
-    attributeName
-  ) {
-    // Skip if the attribute is not used by the material, e.g., because the asset
-    // was exported with an attribute that wasn't used and the asset wasn't optimized.
-    const attributeLocation = attributeLocations[attributeName];
-    if (defined(attributeLocation)) {
-      const a = accessors[accessorId];
-      attributes[attributeName] = {
-        index: attributeLocation,
-        vertexBuffer: rendererBuffers[a.bufferView],
-        componentsPerAttribute: numberOfComponentsForType(a.type),
-        componentDatatype: a.componentType,
-        offsetInBytes: a.byteOffset,
-        strideInBytes: getAccessorByteStride(gltf, a),
-      };
+  ForEach.meshPrimitiveAttribute(
+    primitive,
+    function (accessorId, attributeName) {
+      // Skip if the attribute is not used by the material, e.g., because the asset
+      // was exported with an attribute that wasn't used and the asset wasn't optimized.
+      const attributeLocation = attributeLocations[attributeName];
+      if (defined(attributeLocation)) {
+        const a = accessors[accessorId];
+        attributes[attributeName] = {
+          index: attributeLocation,
+          vertexBuffer: rendererBuffers[a.bufferView],
+          componentsPerAttribute: numberOfComponentsForType(a.type),
+          componentDatatype: a.componentType,
+          offsetInBytes: a.byteOffset,
+          strideInBytes: getAccessorByteStride(gltf, a)
+        };
+      }
     }
-  });
+  );
 
   let indexBuffer;
   if (defined(primitive.indices)) {
@@ -695,7 +695,7 @@ function createVertexArray(model) {
   }
   model._vertexArray = {
     attributes: attributes,
-    indexBuffer: indexBuffer,
+    indexBuffer: indexBuffer
   };
 }
 
@@ -723,7 +723,7 @@ const gltfSemanticUniforms = {
       uniformState,
       model
     );
-  },
+  }
 };
 
 function createUniformMap(model, context) {
@@ -892,7 +892,7 @@ function createPrimitive(model) {
           offset: indexOffset,
           count: indexCount,
           batchIds: [currentId],
-          color: Color.WHITE,
+          color: Color.WHITE
         })
       );
 
@@ -909,7 +909,7 @@ function createPrimitive(model) {
       offset: indexOffset,
       count: indexCount,
       batchIds: [currentId],
-      color: Color.WHITE,
+      color: Color.WHITE
     })
   );
 
@@ -938,7 +938,7 @@ function createPrimitive(model) {
     _uniformMap: uniformMap,
     _pickId: pickId,
     _modelMatrix: new Matrix4(), // updated in update()
-    _boundingSphere: boundingSphere, // used to update boundingVolume
+    _boundingSphere: boundingSphere // used to update boundingVolume
   });
 
   // Release CPU resources

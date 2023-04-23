@@ -1,6 +1,6 @@
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import defined from "./defined.js";
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import defined from './defined.js';
 
 /**
  * A fixed-point encoding of a {@link Cartesian3} with 64-bit floating-point components, as two {@link Cartesian3}
@@ -51,13 +51,13 @@ function EncodedCartesian3() {
  */
 EncodedCartesian3.encode = function (value, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("value", value);
+  Check.typeOf.number('value', value);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
     result = {
       high: 0.0,
-      low: 0.0,
+      low: 0.0
     };
   }
 
@@ -77,7 +77,7 @@ EncodedCartesian3.encode = function (value, result) {
 
 const scratchEncode = {
   high: 0.0,
-  low: 0.0,
+  low: 0.0
 };
 
 /**
@@ -97,7 +97,7 @@ const scratchEncode = {
  */
 EncodedCartesian3.fromCartesian = function (cartesian, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("cartesian", cartesian);
+  Check.typeOf.object('cartesian', cartesian);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -151,9 +151,9 @@ const encodedP = new EncodedCartesian3();
  */
 EncodedCartesian3.writeElements = function (cartesian, cartesianArray, index) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("cartesianArray", cartesianArray);
-  Check.typeOf.number("index", index);
-  Check.typeOf.number.greaterThanOrEquals("index", index, 0);
+  Check.defined('cartesianArray', cartesianArray);
+  Check.typeOf.number('index', index);
+  Check.typeOf.number.greaterThanOrEquals('index', index, 0);
   //>>includeEnd('debug');
 
   EncodedCartesian3.fromCartesian(cartesian, encodedP);

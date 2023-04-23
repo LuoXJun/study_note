@@ -1,8 +1,8 @@
-import defaultValue from "../../Core/defaultValue.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import AlphaMode from "../AlphaMode.js";
-import BlendingState from "../BlendingState.js";
-import Pass from "../../Renderer/Pass.js";
+import defaultValue from '../../Core/defaultValue.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import AlphaMode from '../AlphaMode.js';
+import BlendingState from '../BlendingState.js';
+import Pass from '../../Renderer/Pass.js';
 
 /**
  * A pipeline stage for configuring the alpha options for handling translucency.
@@ -12,7 +12,7 @@ import Pass from "../../Renderer/Pass.js";
  * @private
  */
 const AlphaPipelineStage = {};
-AlphaPipelineStage.name = "AlphaPipelineStage"; // Helps with debugging
+AlphaPipelineStage.name = 'AlphaPipelineStage'; // Helps with debugging
 
 AlphaPipelineStage.process = function (renderResources, primitive, frameState) {
   const alphaOptions = renderResources.alphaOptions;
@@ -34,13 +34,13 @@ AlphaPipelineStage.process = function (renderResources, primitive, frameState) {
 
   if (alphaMode === AlphaMode.MASK) {
     shaderBuilder.addDefine(
-      "ALPHA_MODE_MASK",
+      'ALPHA_MODE_MASK',
       undefined,
       ShaderDestination.FRAGMENT
     );
     shaderBuilder.addUniform(
-      "float",
-      "u_alphaCutoff",
+      'float',
+      'u_alphaCutoff',
       ShaderDestination.FRAGMENT
     );
     uniformMap.u_alphaCutoff = function () {
@@ -48,13 +48,13 @@ AlphaPipelineStage.process = function (renderResources, primitive, frameState) {
     };
   } else if (alphaMode === AlphaMode.BLEND) {
     shaderBuilder.addDefine(
-      "ALPHA_MODE_BLEND",
+      'ALPHA_MODE_BLEND',
       undefined,
       ShaderDestination.FRAGMENT
     );
   } else {
     shaderBuilder.addDefine(
-      "ALPHA_MODE_OPAQUE",
+      'ALPHA_MODE_OPAQUE',
       undefined,
       ShaderDestination.FRAGMENT
     );

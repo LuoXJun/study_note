@@ -1,6 +1,6 @@
-import Uri from "../ThirdParty/Uri.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import Uri from '../ThirdParty/Uri.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Given a URI, returns the base path of the URI.
@@ -20,12 +20,12 @@ import DeveloperError from "./DeveloperError.js";
 function getBaseUri(uri, includeQuery) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(uri)) {
-    throw new DeveloperError("uri is required.");
+    throw new DeveloperError('uri is required.');
   }
   //>>includeEnd('debug');
 
-  let basePath = "";
-  const i = uri.lastIndexOf("/");
+  let basePath = '';
+  const i = uri.lastIndexOf('/');
   if (i !== -1) {
     basePath = uri.substring(0, i + 1);
   }

@@ -1,9 +1,9 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import MetadataSchema from "./MetadataSchema.js";
-import ResourceLoader from "./ResourceLoader.js";
-import ResourceLoaderState from "./ResourceLoaderState.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import MetadataSchema from './MetadataSchema.js';
+import ResourceLoader from './ResourceLoader.js';
+import ResourceLoaderState from './ResourceLoaderState.js';
 
 /**
  * A {@link MetadataSchema} loader.
@@ -34,7 +34,7 @@ export default function MetadataSchemaLoader(options) {
   //>>includeStart('debug', pragmas.debug);
   if (defined(schema) === defined(resource)) {
     throw new DeveloperError(
-      "One of options.schema and options.resource must be defined."
+      'One of options.schema and options.resource must be defined.'
     );
   }
   //>>includeEnd('debug');
@@ -64,7 +64,7 @@ Object.defineProperties(MetadataSchemaLoader.prototype, {
   promise: {
     get: function () {
       return this._promise;
-    },
+    }
   },
   /**
    * The cache key of the resource.
@@ -78,7 +78,7 @@ Object.defineProperties(MetadataSchemaLoader.prototype, {
   cacheKey: {
     get: function () {
       return this._cacheKey;
-    },
+    }
   },
   /**
    * The metadata schema object.
@@ -92,8 +92,8 @@ Object.defineProperties(MetadataSchemaLoader.prototype, {
   schema: {
     get: function () {
       return this._schema;
-    },
-  },
+    }
+  }
 });
 
 /**

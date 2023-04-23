@@ -1,10 +1,10 @@
-import Cartesian3 from "./Cartesian3.js";
-import Cartesian4 from "./Cartesian4.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Intersect from "./Intersect.js";
-import Plane from "./Plane.js";
+import Cartesian3 from './Cartesian3.js';
+import Cartesian4 from './Cartesian4.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Intersect from './Intersect.js';
+import Plane from './Plane.js';
 
 /**
  * The culling volume defined by planes.
@@ -45,7 +45,7 @@ const scratchPlane = new Plane(new Cartesian3(1.0, 0.0, 0.0), 0.0);
 CullingVolume.fromBoundingSphere = function (boundingSphere, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(boundingSphere)) {
-    throw new DeveloperError("boundingSphere is required.");
+    throw new DeveloperError('boundingSphere is required.');
   }
   //>>includeEnd('debug');
 
@@ -109,7 +109,7 @@ CullingVolume.fromBoundingSphere = function (boundingSphere, result) {
 CullingVolume.prototype.computeVisibility = function (boundingVolume) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(boundingVolume)) {
-    throw new DeveloperError("boundingVolume is required.");
+    throw new DeveloperError('boundingVolume is required.');
   }
   //>>includeEnd('debug');
 
@@ -147,10 +147,10 @@ CullingVolume.prototype.computeVisibilityWithPlaneMask = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(boundingVolume)) {
-    throw new DeveloperError("boundingVolume is required.");
+    throw new DeveloperError('boundingVolume is required.');
   }
   if (!defined(parentPlaneMask)) {
-    throw new DeveloperError("parentPlaneMask is required.");
+    throw new DeveloperError('parentPlaneMask is required.');
   }
   //>>includeEnd('debug');
 

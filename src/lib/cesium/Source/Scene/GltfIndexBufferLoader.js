@@ -1,14 +1,14 @@
-import Check from "../Core/Check.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import Buffer from "../Renderer/Buffer.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import JobType from "./JobType.js";
-import ResourceLoader from "./ResourceLoader.js";
-import ResourceLoaderState from "./ResourceLoaderState.js";
+import Check from '../Core/Check.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import Buffer from '../Renderer/Buffer.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import JobType from './JobType.js';
+import ResourceLoader from './ResourceLoader.js';
+import ResourceLoaderState from './ResourceLoaderState.js';
 
 /**
  * Loads an index buffer from a glTF accessor.
@@ -47,14 +47,14 @@ export default function GltfIndexBufferLoader(options) {
   const loadTypedArray = defaultValue(options.loadTypedArray, false);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.func("options.resourceCache", resourceCache);
-  Check.typeOf.object("options.gltf", gltf);
-  Check.typeOf.number("options.accessorId", accessorId);
-  Check.typeOf.object("options.gltfResource", gltfResource);
-  Check.typeOf.object("options.baseResource", baseResource);
+  Check.typeOf.func('options.resourceCache', resourceCache);
+  Check.typeOf.object('options.gltf', gltf);
+  Check.typeOf.number('options.accessorId', accessorId);
+  Check.typeOf.object('options.gltfResource', gltfResource);
+  Check.typeOf.object('options.baseResource', baseResource);
   if (!loadBuffer && !loadTypedArray) {
     throw new DeveloperError(
-      "At least one of loadBuffer and loadTypedArray must be true."
+      'At least one of loadBuffer and loadTypedArray must be true.'
     );
   }
   //>>includeEnd('debug');
@@ -99,7 +99,7 @@ Object.defineProperties(GltfIndexBufferLoader.prototype, {
   promise: {
     get: function () {
       return this._promise;
-    },
+    }
   },
   /**
    * The cache key of the resource.
@@ -113,7 +113,7 @@ Object.defineProperties(GltfIndexBufferLoader.prototype, {
   cacheKey: {
     get: function () {
       return this._cacheKey;
-    },
+    }
   },
   /**
    * The index buffer. This is only defined when <code>loadBuffer</code> is true.
@@ -127,7 +127,7 @@ Object.defineProperties(GltfIndexBufferLoader.prototype, {
   buffer: {
     get: function () {
       return this._buffer;
-    },
+    }
   },
   /**
    * The typed array containing indices. This is only defined when <code>loadTypedArray</code> is true.
@@ -141,7 +141,7 @@ Object.defineProperties(GltfIndexBufferLoader.prototype, {
   typedArray: {
     get: function () {
       return this._typedArray;
-    },
+    }
   },
 
   /**
@@ -156,8 +156,8 @@ Object.defineProperties(GltfIndexBufferLoader.prototype, {
   indexDatatype: {
     get: function () {
       return this._indexDatatype;
-    },
-  },
+    }
+  }
 });
 
 const scratchIndexBufferJob = new CreateIndexBufferJob();
@@ -252,7 +252,7 @@ function loadFromDraco(indexBufferLoader) {
     gltf: indexBufferLoader._gltf,
     draco: indexBufferLoader._draco,
     gltfResource: indexBufferLoader._gltfResource,
-    baseResource: indexBufferLoader._baseResource,
+    baseResource: indexBufferLoader._baseResource
   });
 
   indexBufferLoader._dracoLoader = dracoLoader;
@@ -266,9 +266,8 @@ function loadFromDraco(indexBufferLoader) {
     const typedArray = dracoLoader.decodedData.indices.typedArray;
     indexBufferLoader._typedArray = typedArray;
     // The index datatype may be a smaller datatype after draco decode
-    indexBufferLoader._indexDatatype = ComponentDatatype.fromTypedArray(
-      typedArray
-    );
+    indexBufferLoader._indexDatatype =
+      ComponentDatatype.fromTypedArray(typedArray);
     indexBufferLoader._state = ResourceLoaderState.PROCESSING;
     return indexBufferLoader;
   });
@@ -285,7 +284,7 @@ function loadFromBufferView(indexBufferLoader) {
     gltf: gltf,
     bufferViewId: bufferViewId,
     gltfResource: indexBufferLoader._gltfResource,
-    baseResource: indexBufferLoader._baseResource,
+    baseResource: indexBufferLoader._baseResource
   });
   indexBufferLoader._state = ResourceLoaderState.LOADING;
   indexBufferLoader._bufferViewLoader = bufferViewLoader;
@@ -331,7 +330,7 @@ function createIndicesTypedArray(indexBufferLoader, bufferViewTypedArray) {
 function handleError(indexBufferLoader, error) {
   indexBufferLoader.unload();
   indexBufferLoader._state = ResourceLoaderState.FAILED;
-  const errorMessage = "Failed to load index buffer";
+  const errorMessage = 'Failed to load index buffer';
   error = indexBufferLoader.getError(errorMessage, error);
   return Promise.reject(error);
 }
@@ -366,7 +365,7 @@ function createIndexBuffer(typedArray, indexDatatype, context) {
     typedArray: typedArray,
     context: context,
     usage: BufferUsage.STATIC_DRAW,
-    indexDatatype: indexDatatype,
+    indexDatatype: indexDatatype
   });
   buffer.vertexArrayDestroyable = false;
   return buffer;
@@ -380,7 +379,7 @@ function createIndexBuffer(typedArray, indexDatatype, context) {
  */
 GltfIndexBufferLoader.prototype.process = function (frameState) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("frameState", frameState);
+  Check.typeOf.object('frameState', frameState);
   //>>includeEnd('debug');
 
   return this._process(this, frameState);

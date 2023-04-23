@@ -1,5 +1,5 @@
-import defined from "../Core/defined.js";
-import FrustumOutlineGeometry from "../Core/FrustumOutlineGeometry.js";
+import defined from '../Core/defined.js';
+import FrustumOutlineGeometry from '../Core/FrustumOutlineGeometry.js';
 
 function createFrustumOutlineGeometry(frustumGeometry, offset) {
   if (defined(offset)) {

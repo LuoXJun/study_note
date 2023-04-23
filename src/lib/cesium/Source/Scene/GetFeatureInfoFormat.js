@@ -1,8 +1,8 @@
-import Cartographic from "../Core/Cartographic.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import ImageryLayerFeatureInfo from "./ImageryLayerFeatureInfo.js";
+import Cartographic from '../Core/Cartographic.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import ImageryLayerFeatureInfo from './ImageryLayerFeatureInfo.js';
 
 /**
  * Describes the format in which to request GetFeatureInfo from a Web Map Service (WMS) server.
@@ -22,21 +22,21 @@ import ImageryLayerFeatureInfo from "./ImageryLayerFeatureInfo.js";
 function GetFeatureInfoFormat(type, format, callback) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(type)) {
-    throw new DeveloperError("type is required.");
+    throw new DeveloperError('type is required.');
   }
   //>>includeEnd('debug');
 
   this.type = type;
 
   if (!defined(format)) {
-    if (type === "json") {
-      format = "application/json";
-    } else if (type === "xml") {
-      format = "text/xml";
-    } else if (type === "html") {
-      format = "text/html";
-    } else if (type === "text") {
-      format = "text/plain";
+    if (type === 'json') {
+      format = 'application/json';
+    } else if (type === 'xml') {
+      format = 'text/xml';
+    } else if (type === 'html') {
+      format = 'text/html';
+    } else if (type === 'text') {
+      format = 'text/plain';
     }
     //>>includeStart('debug', pragmas.debug);
     else {
@@ -50,13 +50,13 @@ function GetFeatureInfoFormat(type, format, callback) {
   this.format = format;
 
   if (!defined(callback)) {
-    if (type === "json") {
+    if (type === 'json') {
       callback = geoJsonToFeatureInfo;
-    } else if (type === "xml") {
+    } else if (type === 'xml') {
       callback = xmlToFeatureInfo;
-    } else if (type === "html") {
+    } else if (type === 'html') {
       callback = textToFeatureInfo;
-    } else if (type === "text") {
+    } else if (type === 'text') {
       callback = textToFeatureInfo;
     }
     //>>includeStart('debug', pragmas.debug);
@@ -85,7 +85,7 @@ function geoJsonToFeatureInfo(json) {
     featureInfo.configureDescriptionFromProperties(feature.properties);
 
     // If this is a point feature, use the coordinates of the point.
-    if (defined(feature.geometry) && feature.geometry.type === "Point") {
+    if (defined(feature.geometry) && feature.geometry.type === 'Point') {
       const longitude = feature.geometry.coordinates[0];
       const latitude = feature.geometry.coordinates[1];
       featureInfo.position = Cartographic.fromDegrees(longitude, latitude);
@@ -97,37 +97,37 @@ function geoJsonToFeatureInfo(json) {
   return result;
 }
 
-const mapInfoMxpNamespace = "http://www.mapinfo.com/mxp";
-const esriWmsNamespace = "http://www.esri.com/wms";
-const wfsNamespace = "http://www.opengis.net/wfs";
-const gmlNamespace = "http://www.opengis.net/gml";
+const mapInfoMxpNamespace = 'http://www.mapinfo.com/mxp';
+const esriWmsNamespace = 'http://www.esri.com/wms';
+const wfsNamespace = 'http://www.opengis.net/wfs';
+const gmlNamespace = 'http://www.opengis.net/gml';
 
 function xmlToFeatureInfo(xml) {
   const documentElement = xml.documentElement;
   if (
-    documentElement.localName === "MultiFeatureCollection" &&
+    documentElement.localName === 'MultiFeatureCollection' &&
     documentElement.namespaceURI === mapInfoMxpNamespace
   ) {
     // This looks like a MapInfo MXP response
     return mapInfoXmlToFeatureInfo(xml);
   } else if (
-    documentElement.localName === "FeatureInfoResponse" &&
+    documentElement.localName === 'FeatureInfoResponse' &&
     documentElement.namespaceURI === esriWmsNamespace
   ) {
     // This looks like an Esri WMS response
     return esriXmlToFeatureInfo(xml);
   } else if (
-    documentElement.localName === "FeatureCollection" &&
+    documentElement.localName === 'FeatureCollection' &&
     documentElement.namespaceURI === wfsNamespace
   ) {
     // This looks like a WFS/GML response.
     return gmlToFeatureInfo(xml);
-  } else if (documentElement.localName === "ServiceExceptionReport") {
+  } else if (documentElement.localName === 'ServiceExceptionReport') {
     // This looks like a WMS server error, so no features picked.
     throw new RuntimeError(
       new XMLSerializer().serializeToString(documentElement)
     );
-  } else if (documentElement.localName === "msGMLOutput") {
+  } else if (documentElement.localName === 'msGMLOutput') {
     return msGmlToFeatureInfo(xml);
   } else {
     // Unknown response type, so just dump the XML itself into the description.
@@ -142,7 +142,7 @@ function mapInfoXmlToFeatureInfo(xml) {
 
   const features = multiFeatureCollection.getElementsByTagNameNS(
     mapInfoMxpNamespace,
-    "Feature"
+    'Feature'
   );
   for (let featureIndex = 0; featureIndex < features.length; ++featureIndex) {
     const feature = features[featureIndex];
@@ -151,7 +151,7 @@ function mapInfoXmlToFeatureInfo(xml) {
 
     const propertyElements = feature.getElementsByTagNameNS(
       mapInfoMxpNamespace,
-      "Val"
+      'Val'
     );
     for (
       let propertyIndex = 0;
@@ -159,8 +159,8 @@ function mapInfoXmlToFeatureInfo(xml) {
       ++propertyIndex
     ) {
       const propertyElement = propertyElements[propertyIndex];
-      if (propertyElement.hasAttribute("ref")) {
-        const name = propertyElement.getAttribute("ref");
+      if (propertyElement.hasAttribute('ref')) {
+        const name = propertyElement.getAttribute('ref');
         const value = propertyElement.textContent.trim();
         properties[name] = value;
       }
@@ -182,7 +182,7 @@ function esriXmlToFeatureInfo(xml) {
   const result = [];
   let properties;
 
-  const features = featureInfoResponse.getElementsByTagNameNS("*", "FIELDS");
+  const features = featureInfoResponse.getElementsByTagNameNS('*', 'FIELDS');
   if (features.length > 0) {
     // Standard esri format
     for (let featureIndex = 0; featureIndex < features.length; ++featureIndex) {
@@ -207,8 +207,8 @@ function esriXmlToFeatureInfo(xml) {
   } else {
     // Thredds format -- looks like esri, but instead of containing FIELDS, contains FeatureInfo element
     const featureInfoElements = featureInfoResponse.getElementsByTagNameNS(
-      "*",
-      "FeatureInfo"
+      '*',
+      'FeatureInfo'
     );
     for (
       let featureInfoElementIndex = 0;
@@ -251,7 +251,7 @@ function gmlToFeatureInfo(xml) {
 
   const featureMembers = featureCollection.getElementsByTagNameNS(
     gmlNamespace,
-    "featureMember"
+    'featureMember'
   );
   for (
     let featureIndex = 0;
@@ -288,7 +288,7 @@ function msGmlToFeatureInfo(xml) {
   }
   if (!defined(layer)) {
     throw new RuntimeError(
-      "Unable to find first child of the feature info xml document"
+      'Unable to find first child of the feature info xml document'
     );
   }
   const featureMembers = layer.childNodes;
@@ -321,10 +321,10 @@ function getGmlPropertiesRecursively(gmlNode, properties) {
     }
 
     if (
-      child.localName === "Point" ||
-      child.localName === "LineString" ||
-      child.localName === "Polygon" ||
-      child.localName === "boundedBy"
+      child.localName === 'Point' ||
+      child.localName === 'LineString' ||
+      child.localName === 'Polygon' ||
+      child.localName === 'boundedBy'
     ) {
       continue;
     }
@@ -352,8 +352,8 @@ function imageryLayerFeatureInfoFromDataAndProperties(data, properties) {
 function unknownXmlToFeatureInfo(xml) {
   const xmlText = new XMLSerializer().serializeToString(xml);
 
-  const element = document.createElement("div");
-  const pre = document.createElement("pre");
+  const element = document.createElement('div');
+  const pre = document.createElement('pre');
   pre.textContent = xmlText;
   element.appendChild(pre);
 
@@ -364,7 +364,8 @@ function unknownXmlToFeatureInfo(xml) {
 }
 
 const emptyBodyRegex = /<body>\s*<\/body>/im;
-const wmsServiceExceptionReportRegex = /<ServiceExceptionReport([\s\S]*)<\/ServiceExceptionReport>/im;
+const wmsServiceExceptionReportRegex =
+  /<ServiceExceptionReport([\s\S]*)<\/ServiceExceptionReport>/im;
 const titleRegex = /<title>([\s\S]*)<\/title>/im;
 
 function textToFeatureInfo(text) {

@@ -1,9 +1,9 @@
-import Credit from "../Core/Credit.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Resource from "../Core/Resource.js";
-import UrlTemplateImageryProvider from "./UrlTemplateImageryProvider.js";
+import Credit from '../Core/Credit.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Resource from '../Core/Resource.js';
+import UrlTemplateImageryProvider from './UrlTemplateImageryProvider.js';
 
 const trailingSlashRegex = /\/$/;
 const defaultCredit = new Credit(
@@ -51,14 +51,14 @@ function MapboxImageryProvider(options) {
   const mapId = options.mapId;
   //>>includeStart('debug', pragmas.debug);
   if (!defined(mapId)) {
-    throw new DeveloperError("options.mapId is required.");
+    throw new DeveloperError('options.mapId is required.');
   }
   //>>includeEnd('debug');
 
   const accessToken = options.accessToken;
   //>>includeStart('debug', pragmas.debug);
   if (!defined(accessToken)) {
-    throw new DeveloperError("options.accessToken is required.");
+    throw new DeveloperError('options.accessToken is required.');
   }
   //>>includeEnd('debug');
 
@@ -149,13 +149,13 @@ function MapboxImageryProvider(options) {
   this.defaultMagnificationFilter = undefined;
 
   const resource = Resource.createIfNeeded(
-    defaultValue(options.url, "https://{s}.tiles.mapbox.com/v4/")
+    defaultValue(options.url, 'https://{s}.tiles.mapbox.com/v4/')
   );
 
   this._mapId = mapId;
   this._accessToken = accessToken;
 
-  let format = defaultValue(options.format, "png");
+  let format = defaultValue(options.format, 'png');
   if (!/\./.test(format)) {
     format = `.${format}`;
   }
@@ -163,19 +163,19 @@ function MapboxImageryProvider(options) {
 
   let templateUrl = resource.getUrlComponent();
   if (!trailingSlashRegex.test(templateUrl)) {
-    templateUrl += "/";
+    templateUrl += '/';
   }
   templateUrl += `${mapId}/{z}/{x}/{y}${this._format}`;
   resource.url = templateUrl;
 
   resource.setQueryParameters({
-    access_token: accessToken,
+    access_token: accessToken
   });
 
   let credit;
   if (defined(options.credit)) {
     credit = options.credit;
-    if (typeof credit === "string") {
+    if (typeof credit === 'string') {
       credit = new Credit(credit);
     }
   } else {
@@ -189,7 +189,7 @@ function MapboxImageryProvider(options) {
     ellipsoid: options.ellipsoid,
     minimumLevel: options.minimumLevel,
     maximumLevel: options.maximumLevel,
-    rectangle: options.rectangle,
+    rectangle: options.rectangle
   });
 }
 
@@ -203,7 +203,7 @@ Object.defineProperties(MapboxImageryProvider.prototype, {
   url: {
     get: function () {
       return this._imageryProvider.url;
-    },
+    }
   },
 
   /**
@@ -215,7 +215,7 @@ Object.defineProperties(MapboxImageryProvider.prototype, {
   ready: {
     get: function () {
       return this._imageryProvider.ready;
-    },
+    }
   },
 
   /**
@@ -227,7 +227,7 @@ Object.defineProperties(MapboxImageryProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._imageryProvider.readyPromise;
-    },
+    }
   },
 
   /**
@@ -240,7 +240,7 @@ Object.defineProperties(MapboxImageryProvider.prototype, {
   rectangle: {
     get: function () {
       return this._imageryProvider.rectangle;
-    },
+    }
   },
 
   /**
@@ -253,7 +253,7 @@ Object.defineProperties(MapboxImageryProvider.prototype, {
   tileWidth: {
     get: function () {
       return this._imageryProvider.tileWidth;
-    },
+    }
   },
 
   /**
@@ -266,7 +266,7 @@ Object.defineProperties(MapboxImageryProvider.prototype, {
   tileHeight: {
     get: function () {
       return this._imageryProvider.tileHeight;
-    },
+    }
   },
 
   /**
@@ -279,7 +279,7 @@ Object.defineProperties(MapboxImageryProvider.prototype, {
   maximumLevel: {
     get: function () {
       return this._imageryProvider.maximumLevel;
-    },
+    }
   },
 
   /**
@@ -296,7 +296,7 @@ Object.defineProperties(MapboxImageryProvider.prototype, {
   minimumLevel: {
     get: function () {
       return this._imageryProvider.minimumLevel;
-    },
+    }
   },
 
   /**
@@ -309,7 +309,7 @@ Object.defineProperties(MapboxImageryProvider.prototype, {
   tilingScheme: {
     get: function () {
       return this._imageryProvider.tilingScheme;
-    },
+    }
   },
 
   /**
@@ -324,7 +324,7 @@ Object.defineProperties(MapboxImageryProvider.prototype, {
   tileDiscardPolicy: {
     get: function () {
       return this._imageryProvider.tileDiscardPolicy;
-    },
+    }
   },
 
   /**
@@ -338,7 +338,7 @@ Object.defineProperties(MapboxImageryProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._imageryProvider.errorEvent;
-    },
+    }
   },
 
   /**
@@ -352,7 +352,7 @@ Object.defineProperties(MapboxImageryProvider.prototype, {
   credit: {
     get: function () {
       return this._imageryProvider.credit;
-    },
+    }
   },
 
   /**
@@ -364,7 +364,7 @@ Object.defineProperties(MapboxImageryProvider.prototype, {
   proxy: {
     get: function () {
       return this._imageryProvider.proxy;
-    },
+    }
   },
 
   /**
@@ -380,8 +380,8 @@ Object.defineProperties(MapboxImageryProvider.prototype, {
   hasAlphaChannel: {
     get: function () {
       return this._imageryProvider.hasAlphaChannel;
-    },
-  },
+    }
+  }
 });
 
 /**

@@ -1,30 +1,30 @@
-import arrayRemoveDuplicates from "./arrayRemoveDuplicates.js";
-import BoundingRectangle from "./BoundingRectangle.js";
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import CornerType from "./CornerType.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
-import PolygonPipeline from "./PolygonPipeline.js";
-import PolylineVolumeGeometryLibrary from "./PolylineVolumeGeometryLibrary.js";
-import PrimitiveType from "./PrimitiveType.js";
-import WindingOrder from "./WindingOrder.js";
+import arrayRemoveDuplicates from './arrayRemoveDuplicates.js';
+import BoundingRectangle from './BoundingRectangle.js';
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import CornerType from './CornerType.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
+import PolygonPipeline from './PolygonPipeline.js';
+import PolylineVolumeGeometryLibrary from './PolylineVolumeGeometryLibrary.js';
+import PrimitiveType from './PrimitiveType.js';
+import WindingOrder from './WindingOrder.js';
 
 function computeAttributes(positions, shape) {
   const attributes = new GeometryAttributes();
   attributes.position = new GeometryAttribute({
     componentDatatype: ComponentDatatype.DOUBLE,
     componentsPerAttribute: 3,
-    values: positions,
+    values: positions
   });
 
   const shapeLength = shape.length;
@@ -68,7 +68,7 @@ function computeAttributes(positions, shape) {
     attributes: attributes,
     indices: IndexDatatype.createTypedArray(vertexCount, indices),
     boundingSphere: BoundingSphere.fromVertices(positions),
-    primitiveType: PrimitiveType.LINES,
+    primitiveType: PrimitiveType.LINES
   });
 
   return geometry;
@@ -114,10 +114,10 @@ function PolylineVolumeOutlineGeometry(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(positions)) {
-    throw new DeveloperError("options.polylinePositions is required.");
+    throw new DeveloperError('options.polylinePositions is required.');
   }
   if (!defined(shape)) {
-    throw new DeveloperError("options.shapePositions is required.");
+    throw new DeveloperError('options.shapePositions is required.');
   }
   //>>includeEnd('debug');
 
@@ -131,7 +131,7 @@ function PolylineVolumeOutlineGeometry(options) {
     options.granularity,
     CesiumMath.RADIANS_PER_DEGREE
   );
-  this._workerName = "createPolylineVolumeOutlineGeometry";
+  this._workerName = 'createPolylineVolumeOutlineGeometry';
 
   let numComponents = 1 + positions.length * Cartesian3.packedLength;
   numComponents += 1 + shape.length * Cartesian2.packedLength;
@@ -155,10 +155,10 @@ function PolylineVolumeOutlineGeometry(options) {
 PolylineVolumeOutlineGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(value)) {
-    throw new DeveloperError("value is required");
+    throw new DeveloperError('value is required');
   }
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -198,7 +198,7 @@ const scratchOptions = {
   ellipsoid: scratchEllipsoid,
   height: undefined,
   cornerType: undefined,
-  granularity: undefined,
+  granularity: undefined
 };
 
 /**
@@ -212,7 +212,7 @@ const scratchOptions = {
 PolylineVolumeOutlineGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 

@@ -1,22 +1,22 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import Check from "../Core/Check.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import IntersectionTests from "../Core/IntersectionTests.js";
-import Matrix4 from "../Core/Matrix4.js";
-import OrientedBoundingBox from "../Core/OrientedBoundingBox.js";
-import Plane from "../Core/Plane.js";
-import Ray from "../Core/Ray.js";
-import Rectangle from "../Core/Rectangle.js";
-import RectangleOutlineGeometry from "../Core/RectangleOutlineGeometry.js";
-import PerInstanceColorAppearance from "./PerInstanceColorAppearance.js";
-import Primitive from "./Primitive.js";
-import SceneMode from "./SceneMode.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import Check from '../Core/Check.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import IntersectionTests from '../Core/IntersectionTests.js';
+import Matrix4 from '../Core/Matrix4.js';
+import OrientedBoundingBox from '../Core/OrientedBoundingBox.js';
+import Plane from '../Core/Plane.js';
+import Ray from '../Core/Ray.js';
+import Rectangle from '../Core/Rectangle.js';
+import RectangleOutlineGeometry from '../Core/RectangleOutlineGeometry.js';
+import PerInstanceColorAppearance from './PerInstanceColorAppearance.js';
+import Primitive from './Primitive.js';
+import SceneMode from './SceneMode.js';
 
 /**
  * A tile bounding volume specified as a longitude/latitude/height region.
@@ -35,8 +35,8 @@ import SceneMode from "./SceneMode.js";
  */
 function TileBoundingRegion(options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options", options);
-  Check.typeOf.object("options.rectangle", options.rectangle);
+  Check.typeOf.object('options', options);
+  Check.typeOf.object('options.rectangle', options.rectangle);
   //>>includeEnd('debug');
 
   this.rectangle = Rectangle.clone(options.rectangle);
@@ -122,7 +122,7 @@ Object.defineProperties(TileBoundingRegion.prototype, {
   boundingVolume: {
     get: function () {
       return this._orientedBoundingBox;
-    },
+    }
   },
   /**
    * The underlying bounding sphere
@@ -135,8 +135,8 @@ Object.defineProperties(TileBoundingRegion.prototype, {
   boundingSphere: {
     get: function () {
       return this._boundingSphere;
-    },
-  },
+    }
+  }
 });
 
 TileBoundingRegion.prototype.computeBoundingVolumes = function (ellipsoid) {
@@ -418,7 +418,7 @@ function distanceToCameraRegion(tileBB, frameState) {
  */
 TileBoundingRegion.prototype.distanceToCamera = function (frameState) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("frameState", frameState);
+  Check.defined('frameState', frameState);
   //>>includeEnd('debug');
 
   const regionResult = distanceToCameraRegion(this, frameState);
@@ -445,7 +445,7 @@ TileBoundingRegion.prototype.distanceToCamera = function (frameState) {
  */
 TileBoundingRegion.prototype.intersectPlane = function (plane) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("plane", plane);
+  Check.defined('plane', plane);
   //>>includeEnd('debug');
   return this._orientedBoundingBox.intersectPlane(plane);
 };
@@ -460,31 +460,31 @@ TileBoundingRegion.prototype.intersectPlane = function (plane) {
  */
 TileBoundingRegion.prototype.createDebugVolume = function (color) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("color", color);
+  Check.defined('color', color);
   //>>includeEnd('debug');
 
   const modelMatrix = new Matrix4.clone(Matrix4.IDENTITY);
   const geometry = new RectangleOutlineGeometry({
     rectangle: this.rectangle,
     height: this.minimumHeight,
-    extrudedHeight: this.maximumHeight,
+    extrudedHeight: this.maximumHeight
   });
   const instance = new GeometryInstance({
     geometry: geometry,
-    id: "outline",
+    id: 'outline',
     modelMatrix: modelMatrix,
     attributes: {
-      color: ColorGeometryInstanceAttribute.fromColor(color),
-    },
+      color: ColorGeometryInstanceAttribute.fromColor(color)
+    }
   });
 
   return new Primitive({
     geometryInstances: instance,
     appearance: new PerInstanceColorAppearance({
       translucent: false,
-      flat: true,
+      flat: true
     }),
-    asynchronous: false,
+    asynchronous: false
   });
 };
 export default TileBoundingRegion;

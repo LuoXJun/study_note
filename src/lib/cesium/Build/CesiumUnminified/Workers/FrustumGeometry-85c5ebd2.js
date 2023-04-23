@@ -23,7 +23,30 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './ComponentDatatype-4eeb6d9b', './defaultValue-97284df2', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './Plane-76b84425', './VertexFormat-563ab2cc'], (function (exports, Transforms, Matrix2, RuntimeError, ComponentDatatype, defaultValue, GeometryAttribute, GeometryAttributes, Plane, VertexFormat) { 'use strict';
+define([
+  'exports',
+  './Transforms-273eeb44',
+  './Matrix2-9e1c22e2',
+  './RuntimeError-4f8ec8a2',
+  './ComponentDatatype-4eeb6d9b',
+  './defaultValue-97284df2',
+  './GeometryAttribute-9be2d2e5',
+  './GeometryAttributes-734a3446',
+  './Plane-76b84425',
+  './VertexFormat-563ab2cc'
+], function (
+  exports,
+  Transforms,
+  Matrix2,
+  RuntimeError,
+  ComponentDatatype,
+  defaultValue,
+  GeometryAttribute,
+  GeometryAttributes,
+  Plane,
+  VertexFormat
+) {
+  'use strict';
 
   /**
    * The culling volume defined by planes.
@@ -44,14 +67,21 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     this.planes = defaultValue.defaultValue(planes, []);
   }
 
-  const faces = [new Matrix2.Cartesian3(), new Matrix2.Cartesian3(), new Matrix2.Cartesian3()];
+  const faces = [
+    new Matrix2.Cartesian3(),
+    new Matrix2.Cartesian3(),
+    new Matrix2.Cartesian3()
+  ];
   Matrix2.Cartesian3.clone(Matrix2.Cartesian3.UNIT_X, faces[0]);
   Matrix2.Cartesian3.clone(Matrix2.Cartesian3.UNIT_Y, faces[1]);
   Matrix2.Cartesian3.clone(Matrix2.Cartesian3.UNIT_Z, faces[2]);
 
   const scratchPlaneCenter = new Matrix2.Cartesian3();
   const scratchPlaneNormal = new Matrix2.Cartesian3();
-  const scratchPlane = new Plane.Plane(new Matrix2.Cartesian3(1.0, 0.0, 0.0), 0.0);
+  const scratchPlane = new Plane.Plane(
+    new Matrix2.Cartesian3(1.0, 0.0, 0.0),
+    0.0
+  );
 
   /**
    * Constructs a culling volume from a bounding sphere. Creates six planes that create a box containing the sphere.
@@ -64,7 +94,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
   CullingVolume.fromBoundingSphere = function (boundingSphere, result) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(boundingSphere)) {
-      throw new RuntimeError.DeveloperError("boundingSphere is required.");
+      throw new RuntimeError.DeveloperError('boundingSphere is required.');
     }
     //>>includeEnd('debug');
 
@@ -94,7 +124,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         plane1 = planes[planeIndex + 1] = new Matrix2.Cartesian4();
       }
 
-      Matrix2.Cartesian3.multiplyByScalar(faceNormal, -radius, scratchPlaneCenter);
+      Matrix2.Cartesian3.multiplyByScalar(
+        faceNormal,
+        -radius,
+        scratchPlaneCenter
+      );
       Matrix2.Cartesian3.add(center, scratchPlaneCenter, scratchPlaneCenter);
 
       plane0.x = faceNormal.x;
@@ -102,7 +136,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       plane0.z = faceNormal.z;
       plane0.w = -Matrix2.Cartesian3.dot(faceNormal, scratchPlaneCenter);
 
-      Matrix2.Cartesian3.multiplyByScalar(faceNormal, radius, scratchPlaneCenter);
+      Matrix2.Cartesian3.multiplyByScalar(
+        faceNormal,
+        radius,
+        scratchPlaneCenter
+      );
       Matrix2.Cartesian3.add(center, scratchPlaneCenter, scratchPlaneCenter);
 
       plane1.x = -faceNormal.x;
@@ -128,7 +166,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
   CullingVolume.prototype.computeVisibility = function (boundingVolume) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(boundingVolume)) {
-      throw new RuntimeError.DeveloperError("boundingVolume is required.");
+      throw new RuntimeError.DeveloperError('boundingVolume is required.');
     }
     //>>includeEnd('debug');
 
@@ -145,7 +183,9 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       }
     }
 
-    return intersecting ? Transforms.Intersect.INTERSECTING : Transforms.Intersect.INSIDE;
+    return intersecting
+      ? Transforms.Intersect.INTERSECTING
+      : Transforms.Intersect.INSIDE;
   };
 
   /**
@@ -166,10 +206,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(boundingVolume)) {
-      throw new RuntimeError.DeveloperError("boundingVolume is required.");
+      throw new RuntimeError.DeveloperError('boundingVolume is required.');
     }
     if (!defaultValue.defined(parentPlaneMask)) {
-      throw new RuntimeError.DeveloperError("parentPlaneMask is required.");
+      throw new RuntimeError.DeveloperError('parentPlaneMask is required.');
     }
     //>>includeEnd('debug');
 
@@ -263,7 +303,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * frustum.far = 50.0 * maxRadii;
    */
   function OrthographicOffCenterFrustum(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     /**
      * The left clipping plane.
@@ -328,7 +371,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       !defaultValue.defined(frustum.far)
     ) {
       throw new RuntimeError.DeveloperError(
-        "right, left, top, bottom, near, or far parameters are not set."
+        'right, left, top, bottom, near, or far parameters are not set.'
       );
     }
     //>>includeEnd('debug');
@@ -343,14 +386,18 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     ) {
       //>>includeStart('debug', pragmas.debug);
       if (frustum.left > frustum.right) {
-        throw new RuntimeError.DeveloperError("right must be greater than left.");
+        throw new RuntimeError.DeveloperError(
+          'right must be greater than left.'
+        );
       }
       if (frustum.bottom > frustum.top) {
-        throw new RuntimeError.DeveloperError("top must be greater than bottom.");
+        throw new RuntimeError.DeveloperError(
+          'top must be greater than bottom.'
+        );
       }
       if (frustum.near <= 0 || frustum.near > frustum.far) {
         throw new RuntimeError.DeveloperError(
-          "near must be greater than zero and less than far."
+          'near must be greater than zero and less than far.'
         );
       }
       //>>includeEnd('debug');
@@ -361,15 +408,16 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       frustum._bottom = frustum.bottom;
       frustum._near = frustum.near;
       frustum._far = frustum.far;
-      frustum._orthographicMatrix = Matrix2.Matrix4.computeOrthographicOffCenter(
-        frustum.left,
-        frustum.right,
-        frustum.bottom,
-        frustum.top,
-        frustum.near,
-        frustum.far,
-        frustum._orthographicMatrix
-      );
+      frustum._orthographicMatrix =
+        Matrix2.Matrix4.computeOrthographicOffCenter(
+          frustum.left,
+          frustum.right,
+          frustum.bottom,
+          frustum.top,
+          frustum.near,
+          frustum.far,
+          frustum._orthographicMatrix
+        );
     }
   }
 
@@ -384,8 +432,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       get: function () {
         update$3(this);
         return this._orthographicMatrix;
-      },
-    },
+      }
+    }
   });
 
   const getPlanesRight$1 = new Matrix2.Cartesian3();
@@ -413,13 +461,13 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(position)) {
-      throw new RuntimeError.DeveloperError("position is required.");
+      throw new RuntimeError.DeveloperError('position is required.');
     }
     if (!defaultValue.defined(direction)) {
-      throw new RuntimeError.DeveloperError("direction is required.");
+      throw new RuntimeError.DeveloperError('direction is required.');
     }
     if (!defaultValue.defined(up)) {
-      throw new RuntimeError.DeveloperError("up is required.");
+      throw new RuntimeError.DeveloperError('up is required.');
     }
     //>>includeEnd('debug');
 
@@ -463,7 +511,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     plane.x = -right.x;
     plane.y = -right.y;
     plane.z = -right.z;
-    plane.w = -Matrix2.Cartesian3.dot(Matrix2.Cartesian3.negate(right, negateScratch), point);
+    plane.w = -Matrix2.Cartesian3.dot(
+      Matrix2.Cartesian3.negate(right, negateScratch),
+      point
+    );
 
     // Bottom plane
     Matrix2.Cartesian3.multiplyByScalar(up, b, point);
@@ -489,7 +540,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     plane.x = -up.x;
     plane.y = -up.y;
     plane.z = -up.z;
-    plane.w = -Matrix2.Cartesian3.dot(Matrix2.Cartesian3.negate(up, negateScratch), point);
+    plane.w = -Matrix2.Cartesian3.dot(
+      Matrix2.Cartesian3.negate(up, negateScratch),
+      point
+    );
 
     // Near plane
     plane = planes[4];
@@ -512,7 +566,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     plane.x = -direction.x;
     plane.y = -direction.y;
     plane.z = -direction.z;
-    plane.w = -Matrix2.Cartesian3.dot(Matrix2.Cartesian3.negate(direction, negateScratch), point);
+    plane.w = -Matrix2.Cartesian3.dot(
+      Matrix2.Cartesian3.negate(direction, negateScratch),
+      point
+    );
 
     return this._cullingVolume;
   };
@@ -546,28 +603,37 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     update$3(this);
 
     //>>includeStart('debug', pragmas.debug);
-    if (!defaultValue.defined(drawingBufferWidth) || !defaultValue.defined(drawingBufferHeight)) {
+    if (
+      !defaultValue.defined(drawingBufferWidth) ||
+      !defaultValue.defined(drawingBufferHeight)
+    ) {
       throw new RuntimeError.DeveloperError(
-        "Both drawingBufferWidth and drawingBufferHeight are required."
+        'Both drawingBufferWidth and drawingBufferHeight are required.'
       );
     }
     if (drawingBufferWidth <= 0) {
-      throw new RuntimeError.DeveloperError("drawingBufferWidth must be greater than zero.");
+      throw new RuntimeError.DeveloperError(
+        'drawingBufferWidth must be greater than zero.'
+      );
     }
     if (drawingBufferHeight <= 0) {
-      throw new RuntimeError.DeveloperError("drawingBufferHeight must be greater than zero.");
+      throw new RuntimeError.DeveloperError(
+        'drawingBufferHeight must be greater than zero.'
+      );
     }
     if (!defaultValue.defined(distance)) {
-      throw new RuntimeError.DeveloperError("distance is required.");
+      throw new RuntimeError.DeveloperError('distance is required.');
     }
     if (!defaultValue.defined(pixelRatio)) {
-      throw new RuntimeError.DeveloperError("pixelRatio is required.");
+      throw new RuntimeError.DeveloperError('pixelRatio is required.');
     }
     if (pixelRatio <= 0) {
-      throw new RuntimeError.DeveloperError("pixelRatio must be greater than zero.");
+      throw new RuntimeError.DeveloperError(
+        'pixelRatio must be greater than zero.'
+      );
     }
     if (!defaultValue.defined(result)) {
-      throw new RuntimeError.DeveloperError("A result object is required.");
+      throw new RuntimeError.DeveloperError('A result object is required.');
     }
     //>>includeEnd('debug');
 
@@ -711,7 +777,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * frustum.far = 50.0 * maxRadii;
    */
   function OrthographicFrustum(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     this._offCenterFrustum = new OrthographicOffCenterFrustum();
 
@@ -765,8 +834,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    */
   OrthographicFrustum.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -789,7 +858,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    */
   OrthographicFrustum.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -815,7 +884,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       !defaultValue.defined(frustum.far)
     ) {
       throw new RuntimeError.DeveloperError(
-        "width, aspectRatio, near, or far parameters are not set."
+        'width, aspectRatio, near, or far parameters are not set.'
       );
     }
     //>>includeEnd('debug');
@@ -830,11 +899,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     ) {
       //>>includeStart('debug', pragmas.debug);
       if (frustum.aspectRatio < 0) {
-        throw new RuntimeError.DeveloperError("aspectRatio must be positive.");
+        throw new RuntimeError.DeveloperError('aspectRatio must be positive.');
       }
       if (frustum.near < 0 || frustum.near > frustum.far) {
         throw new RuntimeError.DeveloperError(
-          "near must be greater than zero and less than far."
+          'near must be greater than zero and less than far.'
         );
       }
       //>>includeEnd('debug');
@@ -865,8 +934,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       get: function () {
         update$2(this);
         return this._offCenterFrustum.projectionMatrix;
-      },
-    },
+      }
+    }
   });
 
   /**
@@ -962,7 +1031,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * @returns {Boolean} <code>true</code> if they are equal, <code>false</code> otherwise.
    */
   OrthographicFrustum.prototype.equals = function (other) {
-    if (!defaultValue.defined(other) || !(other instanceof OrthographicFrustum)) {
+    if (
+      !defaultValue.defined(other) ||
+      !(other instanceof OrthographicFrustum)
+    ) {
       return false;
     }
 
@@ -991,7 +1063,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     relativeEpsilon,
     absoluteEpsilon
   ) {
-    if (!defaultValue.defined(other) || !(other instanceof OrthographicFrustum)) {
+    if (
+      !defaultValue.defined(other) ||
+      !(other instanceof OrthographicFrustum)
+    ) {
       return false;
     }
 
@@ -1049,7 +1124,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * @see PerspectiveFrustum
    */
   function PerspectiveOffCenterFrustum(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     /**
      * Defines the left clipping plane.
@@ -1115,7 +1193,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       !defaultValue.defined(frustum.far)
     ) {
       throw new RuntimeError.DeveloperError(
-        "right, left, top, bottom, near, or far parameters are not set."
+        'right, left, top, bottom, near, or far parameters are not set.'
       );
     }
     //>>includeEnd('debug');
@@ -1138,7 +1216,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       //>>includeStart('debug', pragmas.debug);
       if (frustum.near <= 0 || frustum.near > frustum.far) {
         throw new RuntimeError.DeveloperError(
-          "near must be greater than zero and less than far."
+          'near must be greater than zero and less than far.'
         );
       }
       //>>includeEnd('debug');
@@ -1158,14 +1236,15 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         f,
         frustum._perspectiveMatrix
       );
-      frustum._infinitePerspective = Matrix2.Matrix4.computeInfinitePerspectiveOffCenter(
-        l,
-        r,
-        b,
-        t,
-        n,
-        frustum._infinitePerspective
-      );
+      frustum._infinitePerspective =
+        Matrix2.Matrix4.computeInfinitePerspectiveOffCenter(
+          l,
+          r,
+          b,
+          t,
+          n,
+          frustum._infinitePerspective
+        );
     }
   }
 
@@ -1182,7 +1261,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       get: function () {
         update$1(this);
         return this._perspectiveMatrix;
-      },
+      }
     },
 
     /**
@@ -1197,8 +1276,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       get: function () {
         update$1(this);
         return this._infinitePerspective;
-      },
-    },
+      }
+    }
   });
 
   const getPlanesRight = new Matrix2.Cartesian3();
@@ -1225,15 +1304,15 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(position)) {
-      throw new RuntimeError.DeveloperError("position is required.");
+      throw new RuntimeError.DeveloperError('position is required.');
     }
 
     if (!defaultValue.defined(direction)) {
-      throw new RuntimeError.DeveloperError("direction is required.");
+      throw new RuntimeError.DeveloperError('direction is required.');
     }
 
     if (!defaultValue.defined(up)) {
-      throw new RuntimeError.DeveloperError("up is required.");
+      throw new RuntimeError.DeveloperError('up is required.');
     }
     //>>includeEnd('debug');
 
@@ -1388,28 +1467,37 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     update$1(this);
 
     //>>includeStart('debug', pragmas.debug);
-    if (!defaultValue.defined(drawingBufferWidth) || !defaultValue.defined(drawingBufferHeight)) {
+    if (
+      !defaultValue.defined(drawingBufferWidth) ||
+      !defaultValue.defined(drawingBufferHeight)
+    ) {
       throw new RuntimeError.DeveloperError(
-        "Both drawingBufferWidth and drawingBufferHeight are required."
+        'Both drawingBufferWidth and drawingBufferHeight are required.'
       );
     }
     if (drawingBufferWidth <= 0) {
-      throw new RuntimeError.DeveloperError("drawingBufferWidth must be greater than zero.");
+      throw new RuntimeError.DeveloperError(
+        'drawingBufferWidth must be greater than zero.'
+      );
     }
     if (drawingBufferHeight <= 0) {
-      throw new RuntimeError.DeveloperError("drawingBufferHeight must be greater than zero.");
+      throw new RuntimeError.DeveloperError(
+        'drawingBufferHeight must be greater than zero.'
+      );
     }
     if (!defaultValue.defined(distance)) {
-      throw new RuntimeError.DeveloperError("distance is required.");
+      throw new RuntimeError.DeveloperError('distance is required.');
     }
     if (!defaultValue.defined(pixelRatio)) {
-      throw new RuntimeError.DeveloperError("pixelRatio is required");
+      throw new RuntimeError.DeveloperError('pixelRatio is required');
     }
     if (pixelRatio <= 0) {
-      throw new RuntimeError.DeveloperError("pixelRatio must be greater than zero.");
+      throw new RuntimeError.DeveloperError(
+        'pixelRatio must be greater than zero.'
+      );
     }
     if (!defaultValue.defined(result)) {
-      throw new RuntimeError.DeveloperError("A result object is required.");
+      throw new RuntimeError.DeveloperError('A result object is required.');
     }
     //>>includeEnd('debug');
 
@@ -1561,7 +1649,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * @see PerspectiveOffCenterFrustum
    */
   function PerspectiveFrustum(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     this._offCenterFrustum = new PerspectiveOffCenterFrustum();
 
@@ -1636,8 +1727,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    */
   PerspectiveFrustum.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -1662,7 +1753,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    */
   PerspectiveFrustum.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -1690,7 +1781,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       !defaultValue.defined(frustum.far)
     ) {
       throw new RuntimeError.DeveloperError(
-        "fov, aspectRatio, near, or far parameters are not set."
+        'fov, aspectRatio, near, or far parameters are not set.'
       );
     }
     //>>includeEnd('debug');
@@ -1707,16 +1798,18 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     ) {
       //>>includeStart('debug', pragmas.debug);
       if (frustum.fov < 0 || frustum.fov >= Math.PI) {
-        throw new RuntimeError.DeveloperError("fov must be in the range [0, PI).");
+        throw new RuntimeError.DeveloperError(
+          'fov must be in the range [0, PI).'
+        );
       }
 
       if (frustum.aspectRatio < 0) {
-        throw new RuntimeError.DeveloperError("aspectRatio must be positive.");
+        throw new RuntimeError.DeveloperError('aspectRatio must be positive.');
       }
 
       if (frustum.near < 0 || frustum.near > frustum.far) {
         throw new RuntimeError.DeveloperError(
-          "near must be greater than zero and less than far."
+          'near must be greater than zero and less than far.'
         );
       }
       //>>includeEnd('debug');
@@ -1760,7 +1853,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       get: function () {
         update(this);
         return this._offCenterFrustum.projectionMatrix;
-      },
+      }
     },
 
     /**
@@ -1775,7 +1868,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       get: function () {
         update(this);
         return this._offCenterFrustum.infiniteProjectionMatrix;
-      },
+      }
     },
 
     /**
@@ -1789,7 +1882,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       get: function () {
         update(this);
         return this._fovy;
-      },
+      }
     },
 
     /**
@@ -1800,8 +1893,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       get: function () {
         update(this);
         return this._sseDenominator;
-      },
-    },
+      }
+    }
   });
 
   /**
@@ -1908,7 +2001,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * @returns {Boolean} <code>true</code> if they are equal, <code>false</code> otherwise.
    */
   PerspectiveFrustum.prototype.equals = function (other) {
-    if (!defaultValue.defined(other) || !(other instanceof PerspectiveFrustum)) {
+    if (
+      !defaultValue.defined(other) ||
+      !(other instanceof PerspectiveFrustum)
+    ) {
       return false;
     }
 
@@ -1937,7 +2033,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     relativeEpsilon,
     absoluteEpsilon
   ) {
-    if (!defaultValue.defined(other) || !(other instanceof PerspectiveFrustum)) {
+    if (
+      !defaultValue.defined(other) ||
+      !(other instanceof PerspectiveFrustum)
+    ) {
       return false;
     }
 
@@ -1982,21 +2081,30 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    */
   function FrustumGeometry(options) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("options", options);
-    RuntimeError.Check.typeOf.object("options.frustum", options.frustum);
-    RuntimeError.Check.typeOf.object("options.origin", options.origin);
-    RuntimeError.Check.typeOf.object("options.orientation", options.orientation);
+    RuntimeError.Check.typeOf.object('options', options);
+    RuntimeError.Check.typeOf.object('options.frustum', options.frustum);
+    RuntimeError.Check.typeOf.object('options.origin', options.origin);
+    RuntimeError.Check.typeOf.object(
+      'options.orientation',
+      options.orientation
+    );
     //>>includeEnd('debug');
 
     const frustum = options.frustum;
     const orientation = options.orientation;
     const origin = options.origin;
-    const vertexFormat = defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
+    const vertexFormat = defaultValue.defaultValue(
+      options.vertexFormat,
+      VertexFormat.VertexFormat.DEFAULT
+    );
 
     // This is private because it is used by DebugCameraPrimitive to draw a multi-frustum by
     // creating multiple FrustumGeometrys. This way the near plane of one frustum doesn't overlap
     // the far plane of another.
-    const drawNearPlane = defaultValue.defaultValue(options._drawNearPlane, true);
+    const drawNearPlane = defaultValue.defaultValue(
+      options._drawNearPlane,
+      true
+    );
 
     let frustumType;
     let frustumPackedLength;
@@ -2014,7 +2122,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     this._orientation = Transforms.Quaternion.clone(orientation);
     this._drawNearPlane = drawNearPlane;
     this._vertexFormat = vertexFormat;
-    this._workerName = "createFrustumGeometry";
+    this._workerName = 'createFrustumGeometry';
 
     /**
      * The number of elements used to pack the object into an array.
@@ -2039,8 +2147,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    */
   FrustumGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -2084,7 +2192,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    */
   FrustumGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -2108,7 +2216,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       startingIndex += OrthographicFrustum.packedLength;
     }
 
-    const origin = Matrix2.Cartesian3.unpack(array, startingIndex, scratchPackorigin);
+    const origin = Matrix2.Cartesian3.unpack(
+      array,
+      startingIndex,
+      scratchPackorigin
+    );
     startingIndex += Matrix2.Cartesian3.packedLength;
     const orientation = Transforms.Quaternion.unpack(
       array,
@@ -2130,7 +2242,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         origin: origin,
         orientation: orientation,
         vertexFormat: vertexFormat,
-        _drawNearPlane: drawNearPlane,
+        _drawNearPlane: drawNearPlane
       });
     }
 
@@ -2140,8 +2252,14 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
 
     result._frustumType = frustumType;
     result._origin = Matrix2.Cartesian3.clone(origin, result._origin);
-    result._orientation = Transforms.Quaternion.clone(orientation, result._orientation);
-    result._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat, result._vertexFormat);
+    result._orientation = Transforms.Quaternion.clone(
+      orientation,
+      result._orientation
+    );
+    result._vertexFormat = VertexFormat.VertexFormat.clone(
+      vertexFormat,
+      result._vertexFormat
+    );
     result._drawNearPlane = drawNearPlane;
 
     return result;
@@ -2240,7 +2358,13 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
 
     Matrix2.Cartesian3.negate(x, x);
 
-    const view = Matrix2.Matrix4.computeView(origin, z, y, x, scratchViewMatrix);
+    const view = Matrix2.Matrix4.computeView(
+      origin,
+      z,
+      y,
+      x,
+      scratchViewMatrix
+    );
 
     let inverseView;
     let inverseViewProjection;
@@ -2256,7 +2380,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         scratchInverseMatrix
       );
     } else {
-      inverseView = Matrix2.Matrix4.inverseTransformation(view, scratchInverseMatrix);
+      inverseView = Matrix2.Matrix4.inverseTransformation(
+        view,
+        scratchInverseMatrix
+      );
     }
 
     if (defaultValue.defined(inverseViewProjection)) {
@@ -2312,7 +2439,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
           Matrix2.Cartesian3.normalize(corner, corner);
 
           const fac = Matrix2.Cartesian3.dot(z, corner);
-          Matrix2.Cartesian3.multiplyByScalar(corner, frustumSplits[i] / fac, corner);
+          Matrix2.Cartesian3.multiplyByScalar(
+            corner,
+            frustumSplits[i] / fac,
+            corner
+          );
           Matrix2.Cartesian3.add(corner, origin, corner);
         }
 
@@ -2415,8 +2546,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       position: new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: positions,
-      }),
+        values: positions
+      })
     });
 
     if (
@@ -2448,7 +2579,16 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
 
       offset = 0;
       if (drawNearPlane) {
-        getAttributes(offset, normals, tangents, bitangents, st, negativeZ, x, y); // near
+        getAttributes(
+          offset,
+          normals,
+          tangents,
+          bitangents,
+          st,
+          negativeZ,
+          x,
+          y
+        ); // near
         offset += 3 * 4;
       }
       getAttributes(offset, normals, tangents, bitangents, st, z, negativeX, y); // far
@@ -2483,28 +2623,28 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         attributes.normal = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 3,
-          values: normals,
+          values: normals
         });
       }
       if (defaultValue.defined(tangents)) {
         attributes.tangent = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 3,
-          values: tangents,
+          values: tangents
         });
       }
       if (defaultValue.defined(bitangents)) {
         attributes.bitangent = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 3,
-          values: bitangents,
+          values: bitangents
         });
       }
       if (defaultValue.defined(st)) {
         attributes.st = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 2,
-          values: st,
+          values: st
         });
       }
     }
@@ -2526,13 +2666,12 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       attributes: attributes,
       indices: indices,
       primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES,
-      boundingSphere: Transforms.BoundingSphere.fromVertices(positions),
+      boundingSphere: Transforms.BoundingSphere.fromVertices(positions)
     });
   };
 
   exports.FrustumGeometry = FrustumGeometry;
   exports.OrthographicFrustum = OrthographicFrustum;
   exports.PerspectiveFrustum = PerspectiveFrustum;
-
-}));
+});
 //# sourceMappingURL=FrustumGeometry-85c5ebd2.js.map

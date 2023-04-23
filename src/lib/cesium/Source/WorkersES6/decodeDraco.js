@@ -1,9 +1,9 @@
 /* global require */
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defined from "../Core/defined.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import createTaskProcessorWorker from "./createTaskProcessorWorker.js";
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defined from '../Core/defined.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import createTaskProcessorWorker from './createTaskProcessorWorker.js';
 
 let draco;
 
@@ -28,7 +28,7 @@ function decodeIndexArray(dracoGeometry, dracoDecoder) {
 
   return {
     typedArray: indexArray,
-    numberOfIndices: numIndices,
+    numberOfIndices: numIndices
   };
 }
 
@@ -170,7 +170,7 @@ function decodeAttribute(dracoGeometry, dracoDecoder, dracoAttribute) {
       quantizationBits: transform.quantization_bits(),
       minValues: minValues,
       range: transform.range(),
-      octEncoded: false,
+      octEncoded: false
     };
   }
   draco.destroy(transform);
@@ -179,7 +179,7 @@ function decodeAttribute(dracoGeometry, dracoDecoder, dracoAttribute) {
   if (transform.InitFromAttribute(dracoAttribute)) {
     quantization = {
       quantizationBits: transform.quantization_bits(),
-      octEncoded: true,
+      octEncoded: true
     };
   }
   draco.destroy(transform);
@@ -214,8 +214,8 @@ function decodeAttribute(dracoGeometry, dracoDecoder, dracoAttribute) {
       byteStride:
         ComponentDatatype.getSizeInBytes(componentDatatype) * numComponents,
       normalized: dracoAttribute.normalized(),
-      quantization: quantization,
-    },
+      quantization: quantization
+    }
   };
 }
 
@@ -232,7 +232,7 @@ function decodePointCloud(parameters) {
 
   const geometryType = dracoDecoder.GetEncodedGeometryType(buffer);
   if (geometryType !== draco.POINT_CLOUD) {
-    throw new RuntimeError("Draco geometry type must be POINT_CLOUD.");
+    throw new RuntimeError('Draco geometry type must be POINT_CLOUD.');
   }
 
   const dracoPointCloud = new draco.PointCloud();
@@ -254,7 +254,7 @@ function decodePointCloud(parameters) {
   for (const propertyName in properties) {
     if (properties.hasOwnProperty(propertyName)) {
       let dracoAttribute;
-      if (propertyName === "POSITION" || propertyName === "NORMAL") {
+      if (propertyName === 'POSITION' || propertyName === 'NORMAL') {
         const dracoAttributeId = dracoDecoder.GetAttributeId(
           dracoPointCloud,
           draco[propertyName]
@@ -288,7 +288,7 @@ function decodePrimitive(parameters) {
   const dracoDecoder = new draco.Decoder();
 
   // Skip all parameter types except generic
-  const attributesToSkip = ["POSITION", "NORMAL", "COLOR", "TEX_COORD"];
+  const attributesToSkip = ['POSITION', 'NORMAL', 'COLOR', 'TEX_COORD'];
   if (parameters.dequantizeInShader) {
     for (let i = 0; i < attributesToSkip.length; ++i) {
       dracoDecoder.SkipAttributeTransform(draco[attributesToSkip[i]]);
@@ -301,7 +301,7 @@ function decodePrimitive(parameters) {
 
   const geometryType = dracoDecoder.GetEncodedGeometryType(buffer);
   if (geometryType !== draco.TRIANGULAR_MESH) {
-    throw new RuntimeError("Unsupported draco mesh geometry type.");
+    throw new RuntimeError('Unsupported draco mesh geometry type.');
   }
 
   const dracoGeometry = new draco.Mesh();
@@ -334,7 +334,7 @@ function decodePrimitive(parameters) {
 
   const result = {
     indexArray: decodeIndexArray(dracoGeometry, dracoDecoder),
-    attributeData: attributeData,
+    attributeData: attributeData
   };
 
   draco.destroy(dracoGeometry);

@@ -1,10 +1,10 @@
-import defaultValue from "../Core/defaultValue.js";
-import FeatureDetection from "../Core/FeatureDetection.js";
-import VertexFormat from "../Core/VertexFormat.js";
-import PerInstanceFlatColorAppearanceFS from "../Shaders/Appearances/PerInstanceFlatColorAppearanceFS.js";
-import PolylineColorAppearanceVS from "../Shaders/Appearances/PolylineColorAppearanceVS.js";
-import PolylineCommon from "../Shaders/PolylineCommon.js";
-import Appearance from "./Appearance.js";
+import defaultValue from '../Core/defaultValue.js';
+import FeatureDetection from '../Core/FeatureDetection.js';
+import VertexFormat from '../Core/VertexFormat.js';
+import PerInstanceFlatColorAppearanceFS from '../Shaders/Appearances/PerInstanceFlatColorAppearanceFS.js';
+import PolylineColorAppearanceVS from '../Shaders/Appearances/PolylineColorAppearanceVS.js';
+import PolylineCommon from '../Shaders/PolylineCommon.js';
+import Appearance from './Appearance.js';
 
 let defaultVertexShaderSource = `${PolylineCommon}\n${PolylineColorAppearanceVS}`;
 const defaultFragmentShaderSource = PerInstanceFlatColorAppearanceFS;
@@ -108,7 +108,7 @@ Object.defineProperties(PolylineColorAppearance.prototype, {
   vertexShaderSource: {
     get: function () {
       return this._vertexShaderSource;
-    },
+    }
   },
 
   /**
@@ -122,7 +122,7 @@ Object.defineProperties(PolylineColorAppearance.prototype, {
   fragmentShaderSource: {
     get: function () {
       return this._fragmentShaderSource;
-    },
+    }
   },
 
   /**
@@ -140,7 +140,7 @@ Object.defineProperties(PolylineColorAppearance.prototype, {
   renderState: {
     get: function () {
       return this._renderState;
-    },
+    }
   },
 
   /**
@@ -158,7 +158,7 @@ Object.defineProperties(PolylineColorAppearance.prototype, {
   closed: {
     get: function () {
       return this._closed;
-    },
+    }
   },
 
   /**
@@ -176,8 +176,8 @@ Object.defineProperties(PolylineColorAppearance.prototype, {
   vertexFormat: {
     get: function () {
       return this._vertexFormat;
-    },
-  },
+    }
+  }
 });
 
 /**

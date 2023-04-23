@@ -1,19 +1,19 @@
-import BlendingState from "../BlendingState.js";
-import BoundingSphere from "../../Core/BoundingSphere.js";
-import CesiumMath from "../../Core/Math.js";
-import Check from "../../Core/Check.js";
-import clone from "../../Core/clone.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import DrawCommand from "../../Renderer/DrawCommand.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import Pass from "../../Renderer/Pass.js";
-import RenderState from "../../Renderer/RenderState.js";
-import RuntimeError from "../../Core/RuntimeError.js";
-import SceneMode from "../SceneMode.js";
-import ShadowMode from "../ShadowMode.js";
-import StyleCommandsNeeded from "./StyleCommandsNeeded.js";
-import WebGLConstants from "../../Core/WebGLConstants.js";
+import BlendingState from '../BlendingState.js';
+import BoundingSphere from '../../Core/BoundingSphere.js';
+import CesiumMath from '../../Core/Math.js';
+import Check from '../../Core/Check.js';
+import clone from '../../Core/clone.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import DrawCommand from '../../Renderer/DrawCommand.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import Pass from '../../Renderer/Pass.js';
+import RenderState from '../../Renderer/RenderState.js';
+import RuntimeError from '../../Core/RuntimeError.js';
+import SceneMode from '../SceneMode.js';
+import ShadowMode from '../ShadowMode.js';
+import StyleCommandsNeeded from './StyleCommandsNeeded.js';
+import WebGLConstants from '../../Core/WebGLConstants.js';
 
 /**
  * A wrapper around the draw commands used to render a {@link ModelExperimentalPrimitive}.
@@ -40,8 +40,8 @@ function ModelExperimentalDrawCommand(options) {
   );
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.command", command);
-  Check.typeOf.object("options.primitiveRenderResources", renderResources);
+  Check.typeOf.object('options.command', command);
+  Check.typeOf.object('options.primitiveRenderResources', renderResources);
   //>>includeEnd('debug');
 
   this._command = command;
@@ -93,7 +93,7 @@ function initialize(drawCommand) {
         break;
       //>>includeStart('debug', pragmas.debug);
       default:
-        throw new RuntimeError("styleCommandsNeeded is not a valid value.");
+        throw new RuntimeError('styleCommandsNeeded is not a valid value.');
       //>>includeEnd('debug');
     }
   }
@@ -114,7 +114,7 @@ Object.defineProperties(ModelExperimentalDrawCommand.prototype, {
   command: {
     get: function () {
       return this._command;
-    },
+    }
   },
 
   /**
@@ -129,7 +129,7 @@ Object.defineProperties(ModelExperimentalDrawCommand.prototype, {
   runtimePrimitive: {
     get: function () {
       return this._runtimePrimitive;
-    },
+    }
   },
 
   /**
@@ -144,7 +144,7 @@ Object.defineProperties(ModelExperimentalDrawCommand.prototype, {
   model: {
     get: function () {
       return this._model;
-    },
+    }
   },
 
   /**
@@ -159,7 +159,7 @@ Object.defineProperties(ModelExperimentalDrawCommand.prototype, {
   primitiveType: {
     get: function () {
       return this._command.primitiveType;
-    },
+    }
   },
 
   /**
@@ -180,7 +180,7 @@ Object.defineProperties(ModelExperimentalDrawCommand.prototype, {
       this._modelMatrix = Matrix4.clone(value, this._modelMatrix);
       this._modelMatrix2DDirty = true;
       updateModelMatrix(this);
-    },
+    }
   },
 
   /**
@@ -197,7 +197,7 @@ Object.defineProperties(ModelExperimentalDrawCommand.prototype, {
   boundingVolume: {
     get: function () {
       return this._command.boundingVolume;
-    },
+    }
   },
 
   /**
@@ -215,7 +215,7 @@ Object.defineProperties(ModelExperimentalDrawCommand.prototype, {
     set: function (value) {
       this._shadows = value;
       updateShadows(this);
-    },
+    }
   },
 
   /**
@@ -241,7 +241,7 @@ Object.defineProperties(ModelExperimentalDrawCommand.prototype, {
 
       this._backFaceCulling = value;
       updateBackFaceCulling(this);
-    },
+    }
   },
 
   /**
@@ -263,7 +263,7 @@ Object.defineProperties(ModelExperimentalDrawCommand.prototype, {
 
       this._cullFace = value;
       updateCullFace(this);
-    },
+    }
   },
 
   /**
@@ -285,8 +285,8 @@ Object.defineProperties(ModelExperimentalDrawCommand.prototype, {
 
       this._debugShowBoundingVolume = value;
       updateShowBoundingVolume(this);
-    },
-  },
+    }
+  }
 });
 
 function buildCommandList(drawCommand) {
@@ -312,7 +312,7 @@ function buildCommandList(drawCommand) {
         break;
       //>>includeStart('debug', pragmas.debug);
       default:
-        throw new RuntimeError("styleCommandsNeeded is not a valid value.");
+        throw new RuntimeError('styleCommandsNeeded is not a valid value.');
       //>>includeEnd('debug');
     }
   } else {
@@ -576,13 +576,13 @@ function deriveSilhouetteModelCommand(command, model) {
     frontOperation: {
       fail: WebGLConstants.KEEP,
       zFail: WebGLConstants.KEEP,
-      zPass: WebGLConstants.REPLACE,
+      zPass: WebGLConstants.REPLACE
     },
     backOperation: {
       fail: WebGLConstants.KEEP,
       zFail: WebGLConstants.KEEP,
-      zPass: WebGLConstants.REPLACE,
-    },
+      zPass: WebGLConstants.REPLACE
+    }
   };
 
   if (model.isInvisible()) {
@@ -592,7 +592,7 @@ function deriveSilhouetteModelCommand(command, model) {
       red: false,
       green: false,
       blue: false,
-      alpha: false,
+      alpha: false
     };
     renderState.depthMask = false;
   }
@@ -634,13 +634,13 @@ function deriveSilhouetteColorCommand(command, model) {
     frontOperation: {
       fail: WebGLConstants.KEEP,
       zFail: WebGLConstants.KEEP,
-      zPass: WebGLConstants.KEEP,
+      zPass: WebGLConstants.KEEP
     },
     backOperation: {
       fail: WebGLConstants.KEEP,
       zFail: WebGLConstants.KEEP,
-      zPass: WebGLConstants.KEEP,
-    },
+      zPass: WebGLConstants.KEEP
+    }
   };
 
   renderState = RenderState.fromCache(renderState);

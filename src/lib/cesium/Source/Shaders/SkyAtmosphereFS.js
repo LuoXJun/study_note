@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "varying vec3 v_outerPositionWC;\n\
+export default 'varying vec3 v_outerPositionWC;\n\
 \n\
 uniform vec3 u_hsbShift;\n\
 \n\
@@ -63,4 +63,4 @@ void main (void)\n\
 \n\
     gl_FragColor = color;\n\
 }\n\
-";
+';

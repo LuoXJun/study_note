@@ -1,15 +1,15 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Matrix2 from "../Core/Matrix2.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
-import MetadataType from "./MetadataType.js";
-import MetadataComponentType from "./MetadataComponentType.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Matrix2 from '../Core/Matrix2.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
+import MetadataType from './MetadataType.js';
+import MetadataComponentType from './MetadataComponentType.js';
 
 /**
  * A metadata property, as part of a {@link MetadataClass}
@@ -30,9 +30,9 @@ function MetadataClassProperty(options) {
   const property = options.property;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("options.id", id);
-  Check.typeOf.object("options.property", property);
-  Check.typeOf.string("options.property.type", property.type);
+  Check.typeOf.string('options.id', id);
+  Check.typeOf.object('options.property', property);
+  Check.typeOf.string('options.property.type', property.type);
   //>>includeEnd('debug');
 
   // Try to determine if this is the legacy extension. This is not
@@ -128,7 +128,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
 
   /**
@@ -142,7 +142,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
 
   /**
@@ -156,7 +156,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   description: {
     get: function () {
       return this._description;
-    },
+    }
   },
 
   /**
@@ -171,7 +171,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   type: {
     get: function () {
       return this._type;
-    },
+    }
   },
 
   /**
@@ -185,7 +185,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   enumType: {
     get: function () {
       return this._enumType;
-    },
+    }
   },
 
   /**
@@ -200,7 +200,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   componentType: {
     get: function () {
       return this._componentType;
-    },
+    }
   },
 
   /**
@@ -216,7 +216,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   valueType: {
     get: function () {
       return this._valueType;
-    },
+    }
   },
 
   /**
@@ -231,7 +231,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   isArray: {
     get: function () {
       return this._isArray;
-    },
+    }
   },
 
   /**
@@ -245,7 +245,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   isVariableLengthArray: {
     get: function () {
       return this._isVariableLengthArray;
-    },
+    }
   },
 
   /**
@@ -260,7 +260,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   arrayLength: {
     get: function () {
       return this._arrayLength;
-    },
+    }
   },
 
   /**
@@ -274,7 +274,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   normalized: {
     get: function () {
       return this._normalized;
-    },
+    }
   },
 
   /**
@@ -288,7 +288,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   max: {
     get: function () {
       return this._max;
-    },
+    }
   },
 
   /**
@@ -302,7 +302,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   min: {
     get: function () {
       return this._min;
-    },
+    }
   },
 
   /**
@@ -316,7 +316,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   noData: {
     get: function () {
       return this._noData;
-    },
+    }
   },
 
   /**
@@ -330,7 +330,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   default: {
     get: function () {
       return this._default;
-    },
+    }
   },
 
   /**
@@ -344,7 +344,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   required: {
     get: function () {
       return this._required;
-    },
+    }
   },
 
   /**
@@ -358,7 +358,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   semantic: {
     get: function () {
       return this._semantic;
-    },
+    }
   },
 
   /**
@@ -373,7 +373,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   hasValueTransform: {
     get: function () {
       return this._hasValueTransform;
-    },
+    }
   },
 
   /**
@@ -387,7 +387,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   offset: {
     get: function () {
       return this._offset;
-    },
+    }
   },
 
   /**
@@ -401,7 +401,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   scale: {
     get: function () {
       return this._scale;
-    },
+    }
   },
 
   /**
@@ -415,7 +415,7 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -429,12 +429,12 @@ Object.defineProperties(MetadataClassProperty.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
-  },
+    }
+  }
 });
 
 function isLegacy(property) {
-  if (property.type === "ARRAY") {
+  if (property.type === 'ARRAY') {
     return true;
   }
 
@@ -481,7 +481,7 @@ function parseType(property, enums) {
 
   // EXT_feature_metadata had an ARRAY type. This is now handled
   // with array + count, so some details need to be transcoded
-  const isLegacyArray = type === "ARRAY";
+  const isLegacyArray = type === 'ARRAY';
   let isArray;
   let arrayLength;
   let isVariableLengthArray;
@@ -517,7 +517,7 @@ function parseType(property, enums) {
       valueType: enumType.valueType,
       isArray: isArray,
       isVariableLengthArray: isVariableLengthArray,
-      arrayLength: arrayLength,
+      arrayLength: arrayLength
     };
   }
 
@@ -530,7 +530,7 @@ function parseType(property, enums) {
       valueType: enumType.valueType,
       isArray: isArray,
       isVariableLengthArray: isVariableLengthArray,
-      arrayLength: arrayLength,
+      arrayLength: arrayLength
     };
   }
 
@@ -547,7 +547,7 @@ function parseType(property, enums) {
       valueType: componentType,
       isArray: isArray,
       isVariableLengthArray: isVariableLengthArray,
-      arrayLength: arrayLength,
+      arrayLength: arrayLength
     };
   }
 
@@ -561,7 +561,7 @@ function parseType(property, enums) {
       valueType: undefined,
       isArray: isArray,
       isVariableLengthArray: isVariableLengthArray,
-      arrayLength: arrayLength,
+      arrayLength: arrayLength
     };
   }
 
@@ -579,7 +579,7 @@ function parseType(property, enums) {
       valueType: undefined,
       isArray: isArray,
       isVariableLengthArray: isVariableLengthArray,
-      arrayLength: arrayLength,
+      arrayLength: arrayLength
     };
   }
 
@@ -596,7 +596,7 @@ function parseType(property, enums) {
       valueType: componentType,
       isArray: isArray,
       isVariableLengthArray: isVariableLengthArray,
-      arrayLength: arrayLength,
+      arrayLength: arrayLength
     };
   }
 
@@ -610,7 +610,7 @@ function parseType(property, enums) {
       valueType: type,
       isArray: isArray,
       isVariableLengthArray: isVariableLengthArray,
-      arrayLength: arrayLength,
+      arrayLength: arrayLength
     };
   }
 
@@ -908,7 +908,7 @@ function validateArray(classProperty, value) {
     !classProperty._isVariableLengthArray &&
     length !== classProperty._arrayLength
   ) {
-    return "Array length does not match property.arrayLength";
+    return 'Array length does not match property.arrayLength';
   }
 
   for (let i = 0; i < length; i++) {
@@ -977,13 +977,13 @@ function validateMatrix(value, type, componentType) {
 }
 
 function validateString(value) {
-  if (typeof value !== "string") {
+  if (typeof value !== 'string') {
     return getTypeErrorMessage(value, MetadataType.STRING);
   }
 }
 
 function validateBoolean(value) {
-  if (typeof value !== "boolean") {
+  if (typeof value !== 'boolean') {
     return getTypeErrorMessage(value, MetadataType.BOOLEAN);
   }
 }
@@ -991,7 +991,7 @@ function validateBoolean(value) {
 function validateEnum(value, enumType) {
   const javascriptType = typeof value;
   if (defined(enumType)) {
-    if (javascriptType !== "string" || !defined(enumType.valuesByName[value])) {
+    if (javascriptType !== 'string' || !defined(enumType.valuesByName[value])) {
       return `value ${value} is not a valid enum name for ${enumType.id}`;
     }
     return;
@@ -1010,7 +1010,7 @@ function validateScalar(value, componentType, normalized) {
     case MetadataComponentType.UINT32:
     case MetadataComponentType.FLOAT32:
     case MetadataComponentType.FLOAT64:
-      if (javascriptType !== "number") {
+      if (javascriptType !== 'number') {
         return getTypeErrorMessage(value, componentType);
       }
       if (!isFinite(value)) {
@@ -1019,10 +1019,10 @@ function validateScalar(value, componentType, normalized) {
       return checkInRange(value, componentType, normalized);
     case MetadataComponentType.INT64:
     case MetadataComponentType.UINT64:
-      if (javascriptType !== "number" && javascriptType !== "bigint") {
+      if (javascriptType !== 'number' && javascriptType !== 'bigint') {
         return getTypeErrorMessage(value, componentType);
       }
-      if (javascriptType === "number" && !isFinite(value)) {
+      if (javascriptType === 'number' && !isFinite(value)) {
         return getNonFiniteErrorMessage(value, componentType);
       }
       return checkInRange(value, componentType, normalized);
@@ -1036,7 +1036,7 @@ function getTypeErrorMessage(value, type) {
 function getOutOfRangeErrorMessage(value, type, normalized) {
   let errorMessage = `value ${value} is out of range for type ${type}`;
   if (normalized) {
-    errorMessage += " (normalized)";
+    errorMessage += ' (normalized)';
   }
   return errorMessage;
 }

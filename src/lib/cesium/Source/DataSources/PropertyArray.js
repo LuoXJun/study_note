@@ -1,8 +1,8 @@
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import EventHelper from "../Core/EventHelper.js";
-import Property from "./Property.js";
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import EventHelper from '../Core/EventHelper.js';
+import Property from './Property.js';
 
 /**
  * A {@link Property} whose value is an array whose items are the computed value
@@ -42,7 +42,7 @@ Object.defineProperties(PropertyArray.prototype, {
         }
       }
       return true;
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -56,8 +56,8 @@ Object.defineProperties(PropertyArray.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -70,7 +70,7 @@ Object.defineProperties(PropertyArray.prototype, {
 PropertyArray.prototype.getValue = function (time, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required.");
+    throw new DeveloperError('time is required.');
   }
   //>>includeEnd('debug');
 

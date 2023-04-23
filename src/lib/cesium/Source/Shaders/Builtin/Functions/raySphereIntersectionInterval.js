@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "/**\n\
+export default '/**\n\
  * Compute the intersection interval of a ray with a sphere.\n\
  *\n\
  * @name czm_raySphereIntersectionInterval\n\
@@ -35,4 +35,4 @@ czm_raySegment czm_raySphereIntersectionInterval(czm_ray ray, vec3 center, float
     czm_raySegment result = czm_raySegment(t0, t1);\n\
     return result;\n\
 }\n\
-";
+';

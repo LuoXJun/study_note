@@ -1,4 +1,4 @@
-import defaultValue from "./defaultValue.js";
+import defaultValue from './defaultValue.js';
 
 /**
  * Represents the closed interval [start, stop].

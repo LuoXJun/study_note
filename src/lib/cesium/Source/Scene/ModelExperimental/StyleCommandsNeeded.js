@@ -6,7 +6,7 @@
 const StyleCommandsNeeded = {
   ALL_OPAQUE: 0,
   ALL_TRANSLUCENT: 1,
-  OPAQUE_AND_TRANSLUCENT: 2,
+  OPAQUE_AND_TRANSLUCENT: 2
 };
 
 /**

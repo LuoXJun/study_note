@@ -1,10 +1,10 @@
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import Event from "../../Core/Event.js";
-import JulianDate from "../../Core/JulianDate.js";
-import ModelAnimationLoop from ".././ModelAnimationLoop.js";
-import ModelAnimationState from ".././ModelAnimationState.js";
-import ModelExperimentalAnimationChannel from "../ModelExperimental/ModelExperimentalAnimationChannel.js";
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import Event from '../../Core/Event.js';
+import JulianDate from '../../Core/JulianDate.js';
+import ModelAnimationLoop from '.././ModelAnimationLoop.js';
+import ModelAnimationState from '.././ModelAnimationState.js';
+import ModelExperimentalAnimationChannel from '../ModelExperimental/ModelExperimentalAnimationChannel.js';
 
 /**
  * An active animation derived from a glTF asset. An active animation is an
@@ -140,7 +140,7 @@ Object.defineProperties(ModelExperimentalAnimation.prototype, {
   animation: {
     get: function () {
       return this._animation;
-    },
+    }
   },
 
   /**
@@ -154,7 +154,7 @@ Object.defineProperties(ModelExperimentalAnimation.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
 
   /**
@@ -170,7 +170,7 @@ Object.defineProperties(ModelExperimentalAnimation.prototype, {
   runtimeChannels: {
     get: function () {
       return this._runtimeChannels;
-    },
+    }
   },
 
   /**
@@ -186,7 +186,7 @@ Object.defineProperties(ModelExperimentalAnimation.prototype, {
   model: {
     get: function () {
       return this._model;
-    },
+    }
   },
 
   /**
@@ -203,7 +203,7 @@ Object.defineProperties(ModelExperimentalAnimation.prototype, {
   localStartTime: {
     get: function () {
       return this._localStartTime;
-    },
+    }
   },
 
   /**
@@ -220,7 +220,7 @@ Object.defineProperties(ModelExperimentalAnimation.prototype, {
   localStopTime: {
     get: function () {
       return this._localStopTime;
-    },
+    }
   },
 
   /**
@@ -237,7 +237,7 @@ Object.defineProperties(ModelExperimentalAnimation.prototype, {
   startTime: {
     get: function () {
       return this._startTime;
-    },
+    }
   },
 
   /**
@@ -253,7 +253,7 @@ Object.defineProperties(ModelExperimentalAnimation.prototype, {
   delay: {
     get: function () {
       return this._delay;
-    },
+    }
   },
 
   /**
@@ -271,7 +271,7 @@ Object.defineProperties(ModelExperimentalAnimation.prototype, {
   stopTime: {
     get: function () {
       return this._stopTime;
-    },
+    }
   },
 
   /**
@@ -291,7 +291,7 @@ Object.defineProperties(ModelExperimentalAnimation.prototype, {
   multiplier: {
     get: function () {
       return this._multiplier;
-    },
+    }
   },
 
   /**
@@ -307,7 +307,7 @@ Object.defineProperties(ModelExperimentalAnimation.prototype, {
   reverse: {
     get: function () {
       return this._reverse;
-    },
+    }
   },
 
   /**
@@ -323,7 +323,7 @@ Object.defineProperties(ModelExperimentalAnimation.prototype, {
   loop: {
     get: function () {
       return this._loop;
-    },
+    }
   },
 
   /**
@@ -338,8 +338,8 @@ Object.defineProperties(ModelExperimentalAnimation.prototype, {
   animationTime: {
     get: function () {
       return this._animationTime;
-    },
-  },
+    }
+  }
 });
 
 function initialize(runtimeAnimation) {
@@ -368,7 +368,7 @@ function initialize(runtimeAnimation) {
     const runtimeChannel = new ModelExperimentalAnimationChannel({
       channel: channel,
       runtimeAnimation: runtimeAnimation,
-      runtimeNode: runtimeNode,
+      runtimeNode: runtimeNode
     });
 
     const times = channel.sampler.input;

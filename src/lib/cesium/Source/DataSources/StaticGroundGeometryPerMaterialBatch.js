@@ -1,15 +1,15 @@
-import AssociativeArray from "../Core/AssociativeArray.js";
-import defined from "../Core/defined.js";
-import DistanceDisplayCondition from "../Core/DistanceDisplayCondition.js";
-import DistanceDisplayConditionGeometryInstanceAttribute from "../Core/DistanceDisplayConditionGeometryInstanceAttribute.js";
-import RectangleCollisionChecker from "../Core/RectangleCollisionChecker.js";
-import ShowGeometryInstanceAttribute from "../Core/ShowGeometryInstanceAttribute.js";
-import GroundPrimitive from "../Scene/GroundPrimitive.js";
-import ShadowVolumeAppearance from "../Scene/ShadowVolumeAppearance.js";
-import BoundingSphereState from "./BoundingSphereState.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import MaterialProperty from "./MaterialProperty.js";
-import Property from "./Property.js";
+import AssociativeArray from '../Core/AssociativeArray.js';
+import defined from '../Core/defined.js';
+import DistanceDisplayCondition from '../Core/DistanceDisplayCondition.js';
+import DistanceDisplayConditionGeometryInstanceAttribute from '../Core/DistanceDisplayConditionGeometryInstanceAttribute.js';
+import RectangleCollisionChecker from '../Core/RectangleCollisionChecker.js';
+import ShowGeometryInstanceAttribute from '../Core/ShowGeometryInstanceAttribute.js';
+import GroundPrimitive from '../Scene/GroundPrimitive.js';
+import ShadowVolumeAppearance from '../Scene/ShadowVolumeAppearance.js';
+import BoundingSphereState from './BoundingSphereState.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import MaterialProperty from './MaterialProperty.js';
+import Property from './Property.js';
 
 const distanceDisplayConditionScratch = new DistanceDisplayCondition();
 const defaultDistanceDisplayCondition = new DistanceDisplayCondition();
@@ -36,10 +36,11 @@ function Batch(
   this.updatersWithAttributes = new AssociativeArray();
   this.attributes = new AssociativeArray();
   this.invalidated = false;
-  this.removeMaterialSubscription = materialProperty.definitionChanged.addEventListener(
-    Batch.prototype.onMaterialChanged,
-    this
-  );
+  this.removeMaterialSubscription =
+    materialProperty.definitionChanged.addEventListener(
+      Batch.prototype.onMaterialChanged,
+      this
+    );
   this.subscriptions = new AssociativeArray();
   this.showsUpdated = new AssociativeArray();
   this.usingSphericalTextureCoordinates = usingSphericalTextureCoordinates;
@@ -93,7 +94,7 @@ Batch.prototype.add = function (time, updater, geometryInstance) {
         newValue,
         oldValue
       ) {
-        if (propertyName === "isShowing") {
+        if (propertyName === 'isShowing') {
           that.showsUpdated.set(updater.id, updater);
         }
       })
@@ -153,10 +154,10 @@ Batch.prototype.update = function (time) {
         asynchronous: true,
         geometryInstances: geometries.slice(),
         appearance: new this.appearanceType({
-          material: this.material,
+          material: this.material
           // translucent and closed properties overridden
         }),
-        classificationType: this.classificationType,
+        classificationType: this.classificationType
       });
 
       primitives.add(primitive, this.zIndex);
@@ -228,14 +229,16 @@ Batch.prototype.update = function (time) {
             attributes._lastDistanceDisplayCondition
           )
         ) {
-          attributes._lastDistanceDisplayCondition = DistanceDisplayCondition.clone(
-            distanceDisplayCondition,
-            attributes._lastDistanceDisplayCondition
-          );
-          attributes.distanceDisplayCondition = DistanceDisplayConditionGeometryInstanceAttribute.toValue(
-            distanceDisplayCondition,
-            attributes.distanceDisplayCondition
-          );
+          attributes._lastDistanceDisplayCondition =
+            DistanceDisplayCondition.clone(
+              distanceDisplayCondition,
+              attributes._lastDistanceDisplayCondition
+            );
+          attributes.distanceDisplayCondition =
+            DistanceDisplayConditionGeometryInstanceAttribute.toValue(
+              distanceDisplayCondition,
+              attributes.distanceDisplayCondition
+            );
         }
       }
     }
@@ -326,9 +329,10 @@ StaticGroundGeometryPerMaterialBatch.prototype.add = function (time, updater) {
   const items = this._items;
   const length = items.length;
   const geometryInstance = updater.createFillGeometryInstance(time);
-  const usingSphericalTextureCoordinates = ShadowVolumeAppearance.shouldUseSphericalCoordinates(
-    geometryInstance.geometry.rectangle
-  );
+  const usingSphericalTextureCoordinates =
+    ShadowVolumeAppearance.shouldUseSphericalCoordinates(
+      geometryInstance.geometry.rectangle
+    );
   const zIndex = Property.getValueOrDefault(updater.zIndex, 0);
   // Check if the Entity represented by the updater can be placed in an existing batch. Requirements:
   // * compatible material (same material or same color)
@@ -415,12 +419,13 @@ StaticGroundGeometryPerMaterialBatch.prototype.getBoundingSphere = function (
   return BoundingSphereState.FAILED;
 };
 
-StaticGroundGeometryPerMaterialBatch.prototype.removeAllPrimitives = function () {
-  const items = this._items;
-  const length = items.length;
-  for (let i = 0; i < length; i++) {
-    items[i].destroy();
-  }
-  this._items.length = 0;
-};
+StaticGroundGeometryPerMaterialBatch.prototype.removeAllPrimitives =
+  function () {
+    const items = this._items;
+    const length = items.length;
+    for (let i = 0; i < length; i++) {
+      items[i].destroy();
+    }
+    this._items.length = 0;
+  };
 export default StaticGroundGeometryPerMaterialBatch;

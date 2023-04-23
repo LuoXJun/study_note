@@ -1,15 +1,15 @@
-import Cartesian3 from "../../Core/Cartesian3.js";
-import Check from "../../Core/Check.js";
-import ConstantSpline from "../../Core/ConstantSpline.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import HermiteSpline from "../../Core/HermiteSpline.js";
-import InterpolationType from "../../Core/InterpolationType.js";
-import LinearSpline from "../../Core/LinearSpline.js";
-import ModelComponents from "../ModelComponents.js";
-import SteppedSpline from "../../Core/SteppedSpline.js";
-import Quaternion from "../../Core/Quaternion.js";
-import QuaternionSpline from "../../Core/QuaternionSpline.js";
+import Cartesian3 from '../../Core/Cartesian3.js';
+import Check from '../../Core/Check.js';
+import ConstantSpline from '../../Core/ConstantSpline.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import HermiteSpline from '../../Core/HermiteSpline.js';
+import InterpolationType from '../../Core/InterpolationType.js';
+import LinearSpline from '../../Core/LinearSpline.js';
+import ModelComponents from '../ModelComponents.js';
+import SteppedSpline from '../../Core/SteppedSpline.js';
+import Quaternion from '../../Core/Quaternion.js';
+import QuaternionSpline from '../../Core/QuaternionSpline.js';
 
 const AnimatedPropertyType = ModelComponents.AnimatedPropertyType;
 
@@ -35,9 +35,9 @@ function ModelExperimentalAnimationChannel(options) {
   const runtimeAnimation = options.runtimeAnimation;
   const runtimeNode = options.runtimeNode;
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.channel", channel);
-  Check.typeOf.object("options.runtimeAnimation", runtimeAnimation);
-  Check.typeOf.object("options.runtimeNode", runtimeNode);
+  Check.typeOf.object('options.channel', channel);
+  Check.typeOf.object('options.runtimeAnimation', runtimeAnimation);
+  Check.typeOf.object('options.runtimeNode', runtimeNode);
   //>>includeEnd('debug');
 
   this._channel = channel;
@@ -66,7 +66,7 @@ Object.defineProperties(ModelExperimentalAnimationChannel.prototype, {
   channel: {
     get: function () {
       return this._channel;
-    },
+    }
   },
 
   /**
@@ -82,7 +82,7 @@ Object.defineProperties(ModelExperimentalAnimationChannel.prototype, {
   runtimeAnimation: {
     get: function () {
       return this._runtimeAnimation;
-    },
+    }
   },
 
   /**
@@ -98,7 +98,7 @@ Object.defineProperties(ModelExperimentalAnimationChannel.prototype, {
   runtimeNode: {
     get: function () {
       return this._runtimeNode;
-    },
+    }
   },
 
   /**
@@ -114,8 +114,8 @@ Object.defineProperties(ModelExperimentalAnimationChannel.prototype, {
   splines: {
     get: function () {
       return this._splines;
-    },
-  },
+    }
+  }
 });
 
 function createCubicSpline(times, points) {
@@ -139,7 +139,7 @@ function createCubicSpline(times, points) {
     times: times,
     points: cubicPoints,
     inTangents: inTangents,
-    outTangents: outTangents,
+    outTangents: outTangents
   });
 }
 
@@ -152,7 +152,7 @@ function createSpline(times, points, interpolation, path) {
     case InterpolationType.STEP:
       return new SteppedSpline({
         times: times,
-        points: points,
+        points: points
       });
     case InterpolationType.CUBICSPLINE:
       return createCubicSpline(times, points);
@@ -160,12 +160,12 @@ function createSpline(times, points, interpolation, path) {
       if (path === AnimatedPropertyType.ROTATION) {
         return new QuaternionSpline({
           times: times,
-          points: points,
+          points: points
         });
       }
       return new LinearSpline({
         times: times,
-        points: points,
+        points: points
       });
   }
 }

@@ -1,7 +1,7 @@
-import combine from "../../Core/combine.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import ModelSilhouetteStageFS from "../../Shaders/ModelExperimental/ModelSilhouetteStageFS.js";
-import ModelSilhouetteStageVS from "../../Shaders/ModelExperimental/ModelSilhouetteStageVS.js";
+import combine from '../../Core/combine.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import ModelSilhouetteStageFS from '../../Shaders/ModelExperimental/ModelSilhouetteStageFS.js';
+import ModelSilhouetteStageVS from '../../Shaders/ModelExperimental/ModelSilhouetteStageVS.js';
 
 /**
  * The model silhouette pipeline stage is responsible applying silhouettes to the model.
@@ -11,7 +11,7 @@ import ModelSilhouetteStageVS from "../../Shaders/ModelExperimental/ModelSilhoue
  * @private
  */
 const ModelSilhouettePipelineStage = {};
-ModelSilhouettePipelineStage.name = "ModelSilhouettePipelineStage"; // Helps with debugging
+ModelSilhouettePipelineStage.name = 'ModelSilhouettePipelineStage'; // Helps with debugging
 
 /**
  * Process a model. This modifies the following parts of the render resources:
@@ -41,20 +41,20 @@ ModelSilhouettePipelineStage.process = function (
   frameState
 ) {
   const shaderBuilder = renderResources.shaderBuilder;
-  shaderBuilder.addDefine("HAS_SILHOUETTE", undefined, ShaderDestination.BOTH);
+  shaderBuilder.addDefine('HAS_SILHOUETTE', undefined, ShaderDestination.BOTH);
 
   shaderBuilder.addVertexLines([ModelSilhouetteStageVS]);
   shaderBuilder.addFragmentLines([ModelSilhouetteStageFS]);
 
   shaderBuilder.addUniform(
-    "vec4",
-    "model_silhouetteColor",
+    'vec4',
+    'model_silhouetteColor',
     ShaderDestination.FRAGMENT
   );
 
   shaderBuilder.addUniform(
-    "float",
-    "model_silhouetteSize",
+    'float',
+    'model_silhouetteSize',
     ShaderDestination.VERTEX
   );
 
@@ -67,8 +67,8 @@ ModelSilhouettePipelineStage.process = function (
   // is used to distinguish between the two draw commands. The second command will set
   // this uniform true, such that only it applies the silhouette stage.
   shaderBuilder.addUniform(
-    "bool",
-    "model_silhouettePass",
+    'bool',
+    'model_silhouettePass',
     ShaderDestination.BOTH
   );
 
@@ -82,7 +82,7 @@ ModelSilhouettePipelineStage.process = function (
     model_silhouettePass: function () {
       // This will be set to true by the draw command that draws the silhouette.
       return false;
-    },
+    }
   };
 
   renderResources.uniformMap = combine(uniformMap, renderResources.uniformMap);

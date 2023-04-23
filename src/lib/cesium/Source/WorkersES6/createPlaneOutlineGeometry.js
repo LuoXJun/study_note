@@ -1,5 +1,5 @@
-import defined from "../Core/defined.js";
-import PlaneOutlineGeometry from "../Core/PlaneOutlineGeometry.js";
+import defined from '../Core/defined.js';
+import PlaneOutlineGeometry from '../Core/PlaneOutlineGeometry.js';
 
 function createPlaneOutlineGeometry(planeGeometry, offset) {
   if (defined(offset)) {

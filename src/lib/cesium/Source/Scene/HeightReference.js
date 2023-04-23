@@ -23,6 +23,6 @@ const HeightReference = {
    * @type {Number}
    * @constant
    */
-  RELATIVE_TO_GROUND: 2,
+  RELATIVE_TO_GROUND: 2
 };
 export default Object.freeze(HeightReference);

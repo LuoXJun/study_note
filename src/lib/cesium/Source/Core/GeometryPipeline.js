@@ -1,28 +1,28 @@
-import AttributeCompression from "./AttributeCompression.js";
-import barycentricCoordinates from "./barycentricCoordinates.js";
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartesian4 from "./Cartesian4.js";
-import Cartographic from "./Cartographic.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import EncodedCartesian3 from "./EncodedCartesian3.js";
-import GeographicProjection from "./GeographicProjection.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryType from "./GeometryType.js";
-import IndexDatatype from "./IndexDatatype.js";
-import Intersect from "./Intersect.js";
-import IntersectionTests from "./IntersectionTests.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
-import Matrix4 from "./Matrix4.js";
-import Plane from "./Plane.js";
-import PrimitiveType from "./PrimitiveType.js";
-import Tipsify from "./Tipsify.js";
+import AttributeCompression from './AttributeCompression.js';
+import barycentricCoordinates from './barycentricCoordinates.js';
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartesian4 from './Cartesian4.js';
+import Cartographic from './Cartographic.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import EncodedCartesian3 from './EncodedCartesian3.js';
+import GeographicProjection from './GeographicProjection.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryType from './GeometryType.js';
+import IndexDatatype from './IndexDatatype.js';
+import Intersect from './Intersect.js';
+import IntersectionTests from './IntersectionTests.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
+import Matrix4 from './Matrix4.js';
+import Plane from './Plane.js';
+import PrimitiveType from './PrimitiveType.js';
+import Tipsify from './Tipsify.js';
 
 /**
  * Content pipeline functions for geometries.
@@ -119,7 +119,7 @@ function triangleFanToLines(triangles) {
 GeometryPipeline.toWireframe = function (geometry) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(geometry)) {
-    throw new DeveloperError("geometry is required.");
+    throw new DeveloperError('geometry is required.');
   }
   //>>includeEnd('debug');
 
@@ -138,7 +138,7 @@ GeometryPipeline.toWireframe = function (geometry) {
       //>>includeStart('debug', pragmas.debug);
       default:
         throw new DeveloperError(
-          "geometry.primitiveType must be TRIANGLES, TRIANGLE_STRIP, or TRIANGLE_FAN."
+          'geometry.primitiveType must be TRIANGLES, TRIANGLE_STRIP, or TRIANGLE_FAN.'
         );
       //>>includeEnd('debug');
     }
@@ -169,14 +169,14 @@ GeometryPipeline.createLineSegmentsForVectors = function (
   attributeName,
   length
 ) {
-  attributeName = defaultValue(attributeName, "normal");
+  attributeName = defaultValue(attributeName, 'normal');
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(geometry)) {
-    throw new DeveloperError("geometry is required.");
+    throw new DeveloperError('geometry is required.');
   }
   if (!defined(geometry.attributes.position)) {
-    throw new DeveloperError("geometry.attributes.position is required.");
+    throw new DeveloperError('geometry.attributes.position is required.');
   }
   if (!defined(geometry.attributes[attributeName])) {
     throw new DeveloperError(
@@ -215,11 +215,11 @@ GeometryPipeline.createLineSegmentsForVectors = function (
       position: new GeometryAttribute({
         componentDatatype: ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: newPositions,
-      }),
+        values: newPositions
+      })
     },
     primitiveType: PrimitiveType.LINES,
-    boundingSphere: newBoundingSphere,
+    boundingSphere: newBoundingSphere
   });
 };
 
@@ -241,37 +241,37 @@ GeometryPipeline.createLineSegmentsForVectors = function (
 GeometryPipeline.createAttributeLocations = function (geometry) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(geometry)) {
-    throw new DeveloperError("geometry is required.");
+    throw new DeveloperError('geometry is required.');
   }
   //>>includeEnd('debug')
 
   // There can be a WebGL performance hit when attribute 0 is disabled, so
   // assign attribute locations to well-known attributes.
   const semantics = [
-    "position",
-    "positionHigh",
-    "positionLow",
+    'position',
+    'positionHigh',
+    'positionLow',
 
     // From VertexFormat.position - after 2D projection and high-precision encoding
-    "position3DHigh",
-    "position3DLow",
-    "position2DHigh",
-    "position2DLow",
+    'position3DHigh',
+    'position3DLow',
+    'position2DHigh',
+    'position2DLow',
 
     // From Primitive
-    "pickColor",
+    'pickColor',
 
     // From VertexFormat
-    "normal",
-    "st",
-    "tangent",
-    "bitangent",
+    'normal',
+    'st',
+    'tangent',
+    'bitangent',
 
     // For shadow volumes
-    "extrudeDirection",
+    'extrudeDirection',
 
     // From compressing texture coordinates and normals
-    "compressedAttributes",
+    'compressedAttributes'
   ];
 
   const attributes = geometry.attributes;
@@ -316,7 +316,7 @@ GeometryPipeline.createAttributeLocations = function (geometry) {
 GeometryPipeline.reorderForPreVertexCache = function (geometry) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(geometry)) {
-    throw new DeveloperError("geometry is required.");
+    throw new DeveloperError('geometry is required.');
   }
   //>>includeEnd('debug');
 
@@ -413,7 +413,7 @@ GeometryPipeline.reorderForPostVertexCache = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(geometry)) {
-    throw new DeveloperError("geometry is required.");
+    throw new DeveloperError('geometry is required.');
   }
   //>>includeEnd('debug');
 
@@ -429,7 +429,7 @@ GeometryPipeline.reorderForPostVertexCache = function (
     geometry.indices = Tipsify.tipsify({
       indices: indices,
       maximumIndex: maximumIndex,
-      cacheSize: cacheCapacity,
+      cacheSize: cacheCapacity
     });
   }
 
@@ -450,7 +450,7 @@ function copyAttributesDescriptions(attributes) {
         componentDatatype: attr.componentDatatype,
         componentsPerAttribute: attr.componentsPerAttribute,
         normalize: attr.normalize,
-        values: [],
+        values: []
       });
     }
   }
@@ -496,7 +496,7 @@ function copyVertex(destinationAttributes, sourceAttributes, index) {
 GeometryPipeline.fitToUnsignedShortIndices = function (geometry) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(geometry)) {
-    throw new DeveloperError("geometry is required.");
+    throw new DeveloperError('geometry is required.');
   }
   if (
     defined(geometry.indices) &&
@@ -505,7 +505,7 @@ GeometryPipeline.fitToUnsignedShortIndices = function (geometry) {
     geometry.primitiveType !== PrimitiveType.POINTS
   ) {
     throw new DeveloperError(
-      "geometry.primitiveType must equal to PrimitiveType.TRIANGLES, PrimitiveType.LINES, or PrimitiveType.POINTS."
+      'geometry.primitiveType must equal to PrimitiveType.TRIANGLES, PrimitiveType.LINES, or PrimitiveType.POINTS.'
     );
   }
   //>>includeEnd('debug');
@@ -559,7 +559,7 @@ GeometryPipeline.fitToUnsignedShortIndices = function (geometry) {
             indices: newIndices,
             primitiveType: geometry.primitiveType,
             boundingSphere: geometry.boundingSphere,
-            boundingSphereCV: geometry.boundingSphereCV,
+            boundingSphereCV: geometry.boundingSphereCV
           })
         );
 
@@ -578,7 +578,7 @@ GeometryPipeline.fitToUnsignedShortIndices = function (geometry) {
           indices: newIndices,
           primitiveType: geometry.primitiveType,
           boundingSphere: geometry.boundingSphere,
-          boundingSphereCV: geometry.boundingSphereCV,
+          boundingSphereCV: geometry.boundingSphereCV
         })
       );
     }
@@ -623,16 +623,16 @@ GeometryPipeline.projectTo2D = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(geometry)) {
-    throw new DeveloperError("geometry is required.");
+    throw new DeveloperError('geometry is required.');
   }
   if (!defined(attributeName)) {
-    throw new DeveloperError("attributeName is required.");
+    throw new DeveloperError('attributeName is required.');
   }
   if (!defined(attributeName3D)) {
-    throw new DeveloperError("attributeName3D is required.");
+    throw new DeveloperError('attributeName3D is required.');
   }
   if (!defined(attributeName2D)) {
-    throw new DeveloperError("attributeName2D is required.");
+    throw new DeveloperError('attributeName2D is required.');
   }
   if (!defined(geometry.attributes[attributeName])) {
     throw new DeveloperError(
@@ -644,7 +644,7 @@ GeometryPipeline.projectTo2D = function (
     ComponentDatatype.DOUBLE
   ) {
     throw new DeveloperError(
-      "The attribute componentDatatype must be ComponentDatatype.DOUBLE."
+      'The attribute componentDatatype must be ComponentDatatype.DOUBLE.'
     );
   }
   //>>includeEnd('debug');
@@ -694,7 +694,7 @@ GeometryPipeline.projectTo2D = function (
   geometry.attributes[attributeName2D] = new GeometryAttribute({
     componentDatatype: ComponentDatatype.DOUBLE,
     componentsPerAttribute: 3,
-    values: projectedValues,
+    values: projectedValues
   });
   delete geometry.attributes[attributeName];
 
@@ -703,7 +703,7 @@ GeometryPipeline.projectTo2D = function (
 
 const encodedResult = {
   high: 0.0,
-  low: 0.0,
+  low: 0.0
 };
 
 /**
@@ -733,16 +733,16 @@ GeometryPipeline.encodeAttribute = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(geometry)) {
-    throw new DeveloperError("geometry is required.");
+    throw new DeveloperError('geometry is required.');
   }
   if (!defined(attributeName)) {
-    throw new DeveloperError("attributeName is required.");
+    throw new DeveloperError('attributeName is required.');
   }
   if (!defined(attributeHighName)) {
-    throw new DeveloperError("attributeHighName is required.");
+    throw new DeveloperError('attributeHighName is required.');
   }
   if (!defined(attributeLowName)) {
-    throw new DeveloperError("attributeLowName is required.");
+    throw new DeveloperError('attributeLowName is required.');
   }
   if (!defined(geometry.attributes[attributeName])) {
     throw new DeveloperError(
@@ -754,7 +754,7 @@ GeometryPipeline.encodeAttribute = function (
     ComponentDatatype.DOUBLE
   ) {
     throw new DeveloperError(
-      "The attribute componentDatatype must be ComponentDatatype.DOUBLE."
+      'The attribute componentDatatype must be ComponentDatatype.DOUBLE.'
     );
   }
   //>>includeEnd('debug');
@@ -776,12 +776,12 @@ GeometryPipeline.encodeAttribute = function (
   geometry.attributes[attributeHighName] = new GeometryAttribute({
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: componentsPerAttribute,
-    values: highValues,
+    values: highValues
   });
   geometry.attributes[attributeLowName] = new GeometryAttribute({
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: componentsPerAttribute,
-    values: lowValues,
+    values: lowValues
   });
   delete geometry.attributes[attributeName];
 
@@ -836,7 +836,7 @@ const normalMatrix = new Matrix3();
 GeometryPipeline.transformToWorldCoordinates = function (instance) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(instance)) {
-    throw new DeveloperError("instance is required.");
+    throw new DeveloperError('instance is required.');
   }
   //>>includeEnd('debug');
 
@@ -926,7 +926,7 @@ function findAttributesInAllGeometries(instances, propertyName) {
           values: ComponentDatatype.createTypedArray(
             attribute.componentDatatype,
             numberOfComponents
-          ),
+          )
         });
       }
     }
@@ -952,16 +952,16 @@ function combineGeometries(instances, propertyName) {
   //>>includeStart('debug', pragmas.debug);
   for (i = 1; i < length; ++i) {
     if (!Matrix4.equals(instances[i].modelMatrix, m)) {
-      throw new DeveloperError("All instances must have the same modelMatrix.");
+      throw new DeveloperError('All instances must have the same modelMatrix.');
     }
     if (defined(instances[i][propertyName].indices) !== haveIndices) {
       throw new DeveloperError(
-        "All instance geometries must have an indices or not have one."
+        'All instance geometries must have an indices or not have one.'
       );
     }
     if (instances[i][propertyName].primitiveType !== primitiveType) {
       throw new DeveloperError(
-        "All instance geometries must have the same primitiveType."
+        'All instance geometries must have the same primitiveType.'
       );
     }
   }
@@ -1002,7 +1002,7 @@ function combineGeometries(instances, propertyName) {
     const numberOfVertices = Geometry.computeNumberOfVertices(
       new Geometry({
         attributes: attributes,
-        primitiveType: PrimitiveType.POINTS,
+        primitiveType: PrimitiveType.POINTS
       })
     );
     const destIndices = IndexDatatype.createTypedArray(
@@ -1065,7 +1065,7 @@ function combineGeometries(instances, propertyName) {
     primitiveType: primitiveType,
     boundingSphere: defined(center)
       ? new BoundingSphere(center, radius)
-      : undefined,
+      : undefined
   });
 }
 
@@ -1103,7 +1103,7 @@ GeometryPipeline.combineInstances = function (instances) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(instances) || instances.length < 1) {
     throw new DeveloperError(
-      "instances is required and must have length greater than zero."
+      'instances is required and must have length greater than zero.'
     );
   }
   //>>includeEnd('debug');
@@ -1126,15 +1126,15 @@ GeometryPipeline.combineInstances = function (instances) {
 
   const geometries = [];
   if (instanceGeometry.length > 0) {
-    geometries.push(combineGeometries(instanceGeometry, "geometry"));
+    geometries.push(combineGeometries(instanceGeometry, 'geometry'));
   }
 
   if (instanceSplitGeometry.length > 0) {
     geometries.push(
-      combineGeometries(instanceSplitGeometry, "westHemisphereGeometry")
+      combineGeometries(instanceSplitGeometry, 'westHemisphereGeometry')
     );
     geometries.push(
-      combineGeometries(instanceSplitGeometry, "eastHemisphereGeometry")
+      combineGeometries(instanceSplitGeometry, 'eastHemisphereGeometry')
     );
   }
 
@@ -1163,27 +1163,27 @@ const v2 = new Cartesian3();
 GeometryPipeline.computeNormal = function (geometry) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(geometry)) {
-    throw new DeveloperError("geometry is required.");
+    throw new DeveloperError('geometry is required.');
   }
   if (
     !defined(geometry.attributes.position) ||
     !defined(geometry.attributes.position.values)
   ) {
     throw new DeveloperError(
-      "geometry.attributes.position.values is required."
+      'geometry.attributes.position.values is required.'
     );
   }
   if (!defined(geometry.indices)) {
-    throw new DeveloperError("geometry.indices is required.");
+    throw new DeveloperError('geometry.indices is required.');
   }
   if (geometry.indices.length < 2 || geometry.indices.length % 3 !== 0) {
     throw new DeveloperError(
-      "geometry.indices length must be greater than 0 and be a multiple of 3."
+      'geometry.indices length must be greater than 0 and be a multiple of 3.'
     );
   }
   if (geometry.primitiveType !== PrimitiveType.TRIANGLES) {
     throw new DeveloperError(
-      "geometry.primitiveType must be PrimitiveType.TRIANGLES."
+      'geometry.primitiveType must be PrimitiveType.TRIANGLES.'
     );
   }
   //>>includeEnd('debug');
@@ -1201,7 +1201,7 @@ GeometryPipeline.computeNormal = function (geometry) {
     normalsPerVertex[i] = {
       indexOffset: 0,
       count: 0,
-      currentCount: 0,
+      currentCount: 0
     };
   }
 
@@ -1303,7 +1303,7 @@ GeometryPipeline.computeNormal = function (geometry) {
   geometry.attributes.normal = new GeometryAttribute({
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: 3,
-    values: normalValues,
+    values: normalValues
   });
 
   return geometry;
@@ -1334,7 +1334,7 @@ const tScratch = new Cartesian3();
 GeometryPipeline.computeTangentAndBitangent = function (geometry) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(geometry)) {
-    throw new DeveloperError("geometry is required.");
+    throw new DeveloperError('geometry is required.');
   }
   //>>includeEnd('debug');
 
@@ -1344,26 +1344,26 @@ GeometryPipeline.computeTangentAndBitangent = function (geometry) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(attributes.position) || !defined(attributes.position.values)) {
     throw new DeveloperError(
-      "geometry.attributes.position.values is required."
+      'geometry.attributes.position.values is required.'
     );
   }
   if (!defined(attributes.normal) || !defined(attributes.normal.values)) {
-    throw new DeveloperError("geometry.attributes.normal.values is required.");
+    throw new DeveloperError('geometry.attributes.normal.values is required.');
   }
   if (!defined(attributes.st) || !defined(attributes.st.values)) {
-    throw new DeveloperError("geometry.attributes.st.values is required.");
+    throw new DeveloperError('geometry.attributes.st.values is required.');
   }
   if (!defined(indices)) {
-    throw new DeveloperError("geometry.indices is required.");
+    throw new DeveloperError('geometry.indices is required.');
   }
   if (indices.length < 2 || indices.length % 3 !== 0) {
     throw new DeveloperError(
-      "geometry.indices length must be greater than 0 and be a multiple of 3."
+      'geometry.indices length must be greater than 0 and be a multiple of 3.'
     );
   }
   if (geometry.primitiveType !== PrimitiveType.TRIANGLES) {
     throw new DeveloperError(
-      "geometry.primitiveType must be PrimitiveType.TRIANGLES."
+      'geometry.primitiveType must be PrimitiveType.TRIANGLES.'
     );
   }
   //>>includeEnd('debug');
@@ -1452,13 +1452,13 @@ GeometryPipeline.computeTangentAndBitangent = function (geometry) {
   geometry.attributes.tangent = new GeometryAttribute({
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: 3,
-    values: tangentValues,
+    values: tangentValues
   });
 
   geometry.attributes.bitangent = new GeometryAttribute({
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: 3,
-    values: bitangentValues,
+    values: bitangentValues
   });
 
   return geometry;
@@ -1481,7 +1481,7 @@ let encodeResult2 = new Cartesian2();
 GeometryPipeline.compressVertices = function (geometry) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(geometry)) {
-    throw new DeveloperError("geometry is required.");
+    throw new DeveloperError('geometry is required.');
   }
   //>>includeEnd('debug');
 
@@ -1513,7 +1513,7 @@ GeometryPipeline.compressVertices = function (geometry) {
     geometry.attributes.compressedAttributes = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 2,
-      values: compressedDirections,
+      values: compressedDirections
     });
     delete geometry.attributes.extrudeDirection;
     return geometry;
@@ -1567,9 +1567,8 @@ GeometryPipeline.compressVertices = function (geometry) {
   for (i = 0; i < numVertices; ++i) {
     if (hasSt) {
       Cartesian2.fromArray(st, i * 2.0, scratchCartesian2);
-      compressedAttributes[
-        normalIndex++
-      ] = AttributeCompression.compressTextureCoordinates(scratchCartesian2);
+      compressedAttributes[normalIndex++] =
+        AttributeCompression.compressTextureCoordinates(scratchCartesian2);
     }
 
     const index = i * 3.0;
@@ -1589,23 +1588,20 @@ GeometryPipeline.compressVertices = function (geometry) {
     } else {
       if (hasNormal) {
         Cartesian3.fromArray(normals, index, toEncode1);
-        compressedAttributes[
-          normalIndex++
-        ] = AttributeCompression.octEncodeFloat(toEncode1);
+        compressedAttributes[normalIndex++] =
+          AttributeCompression.octEncodeFloat(toEncode1);
       }
 
       if (hasTangent) {
         Cartesian3.fromArray(tangents, index, toEncode1);
-        compressedAttributes[
-          normalIndex++
-        ] = AttributeCompression.octEncodeFloat(toEncode1);
+        compressedAttributes[normalIndex++] =
+          AttributeCompression.octEncodeFloat(toEncode1);
       }
 
       if (hasBitangent) {
         Cartesian3.fromArray(bitangents, index, toEncode1);
-        compressedAttributes[
-          normalIndex++
-        ] = AttributeCompression.octEncodeFloat(toEncode1);
+        compressedAttributes[normalIndex++] =
+          AttributeCompression.octEncodeFloat(toEncode1);
       }
     }
   }
@@ -1613,7 +1609,7 @@ GeometryPipeline.compressVertices = function (geometry) {
   geometry.attributes.compressedAttributes = new GeometryAttribute({
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: numCompressedComponents,
-    values: compressedAttributes,
+    values: compressedAttributes
   });
 
   if (hasNormal) {
@@ -1640,11 +1636,11 @@ function indexTriangles(geometry) {
 
   //>>includeStart('debug', pragmas.debug);
   if (numberOfVertices < 3) {
-    throw new DeveloperError("The number of vertices must be at least three.");
+    throw new DeveloperError('The number of vertices must be at least three.');
   }
   if (numberOfVertices % 3 !== 0) {
     throw new DeveloperError(
-      "The number of vertices must be a multiple of three."
+      'The number of vertices must be a multiple of three.'
     );
   }
   //>>includeEnd('debug');
@@ -1666,7 +1662,7 @@ function indexTriangleFan(geometry) {
 
   //>>includeStart('debug', pragmas.debug);
   if (numberOfVertices < 3) {
-    throw new DeveloperError("The number of vertices must be at least three.");
+    throw new DeveloperError('The number of vertices must be at least three.');
   }
   //>>includeEnd('debug');
 
@@ -1695,7 +1691,7 @@ function indexTriangleStrip(geometry) {
 
   //>>includeStart('debug', pragmas.debug);
   if (numberOfVertices < 3) {
-    throw new DeveloperError("The number of vertices must be at least 3.");
+    throw new DeveloperError('The number of vertices must be at least 3.');
   }
   //>>includeEnd('debug');
 
@@ -1739,10 +1735,10 @@ function indexLines(geometry) {
 
   //>>includeStart('debug', pragmas.debug);
   if (numberOfVertices < 2) {
-    throw new DeveloperError("The number of vertices must be at least two.");
+    throw new DeveloperError('The number of vertices must be at least two.');
   }
   if (numberOfVertices % 2 !== 0) {
-    throw new DeveloperError("The number of vertices must be a multiple of 2.");
+    throw new DeveloperError('The number of vertices must be a multiple of 2.');
   }
   //>>includeEnd('debug');
 
@@ -1763,7 +1759,7 @@ function indexLineStrip(geometry) {
 
   //>>includeStart('debug', pragmas.debug);
   if (numberOfVertices < 2) {
-    throw new DeveloperError("The number of vertices must be at least two.");
+    throw new DeveloperError('The number of vertices must be at least two.');
   }
   //>>includeEnd('debug');
 
@@ -1789,7 +1785,7 @@ function indexLineLoop(geometry) {
 
   //>>includeStart('debug', pragmas.debug);
   if (numberOfVertices < 2) {
-    throw new DeveloperError("The number of vertices must be at least two.");
+    throw new DeveloperError('The number of vertices must be at least two.');
   }
   //>>includeEnd('debug');
 
@@ -1898,7 +1894,7 @@ const q2 = new Cartesian3();
 
 const splitTriangleResult = {
   positions: new Array(7),
-  indices: new Array(3 * 3),
+  indices: new Array(3 * 3)
 };
 
 function splitTriangle(p0, p1, p2) {
@@ -2056,7 +2052,7 @@ function copyGeometryForSplit(geometry) {
         componentDatatype: attribute.componentDatatype,
         componentsPerAttribute: attribute.componentsPerAttribute,
         normalize: attribute.normalize,
-        values: [],
+        values: []
       });
     }
   }
@@ -2064,7 +2060,7 @@ function copyGeometryForSplit(geometry) {
   return new Geometry({
     attributes: copiedAttributes,
     indices: [],
-    primitiveType: geometry.primitiveType,
+    primitiveType: geometry.primitiveType
   });
 }
 
@@ -2411,7 +2407,7 @@ const NAMED_ATTRIBUTES = {
   tangent: true,
   st: true,
   extrudeDirection: true,
-  applyOffset: true,
+  applyOffset: true
 };
 function splitLongitudeTriangles(instance) {
   const geometry = instance.geometry;
@@ -3253,7 +3249,7 @@ function splitLongitudePolyline(instance) {
 GeometryPipeline.splitLongitude = function (instance) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(instance)) {
-    throw new DeveloperError("instance is required.");
+    throw new DeveloperError('instance is required.');
   }
   //>>includeEnd('debug');
 

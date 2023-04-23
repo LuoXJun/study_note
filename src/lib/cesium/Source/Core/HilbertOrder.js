@@ -1,5 +1,5 @@
-import Check from "./Check.js";
-import DeveloperError from "./DeveloperError.js";
+import Check from './Check.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Hilbert Order helper functions.
@@ -20,20 +20,20 @@ const HilbertOrder = {};
 HilbertOrder.encode2D = function (level, x, y) {
   const n = Math.pow(2, level);
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("level", level);
-  Check.typeOf.number("x", x);
-  Check.typeOf.number("y", y);
+  Check.typeOf.number('level', level);
+  Check.typeOf.number('x', x);
+  Check.typeOf.number('y', y);
   if (level < 1) {
-    throw new DeveloperError("Hilbert level cannot be less than 1.");
+    throw new DeveloperError('Hilbert level cannot be less than 1.');
   }
   if (x < 0 || x >= n || y < 0 || y >= n) {
-    throw new DeveloperError("Invalid coordinates for given level.");
+    throw new DeveloperError('Invalid coordinates for given level.');
   }
   //>>includeEnd('debug');
 
   const p = {
     x: x,
-    y: y,
+    y: y
   };
   let rx,
     ry,
@@ -62,15 +62,15 @@ HilbertOrder.encode2D = function (level, x, y) {
  */
 HilbertOrder.decode2D = function (level, index) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("level", level);
-  Check.typeOf.bigint("index", index);
+  Check.typeOf.number('level', level);
+  Check.typeOf.bigint('index', index);
   if (level < 1) {
-    throw new DeveloperError("Hilbert level cannot be less than 1.");
+    throw new DeveloperError('Hilbert level cannot be less than 1.');
   }
   // eslint-disable-next-line no-undef
   if (index < BigInt(0) || index >= BigInt(Math.pow(4, level))) {
     throw new DeveloperError(
-      "Hilbert index exceeds valid maximum for given level."
+      'Hilbert index exceeds valid maximum for given level.'
     );
   }
   //>>includeEnd('debug');
@@ -78,7 +78,7 @@ HilbertOrder.decode2D = function (level, index) {
   const n = Math.pow(2, level);
   const p = {
     x: 0,
-    y: 0,
+    y: 0
   };
   let rx, ry, s, t;
 

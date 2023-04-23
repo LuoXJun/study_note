@@ -23,7 +23,24 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './ComponentDatatype-4eeb6d9b', './createTaskProcessorWorker', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './WebGLConstants-6da700a2'], (function (AttributeCompression, Matrix2, ComponentDatatype, createTaskProcessorWorker, RuntimeError, defaultValue, WebGLConstants) { 'use strict';
+define([
+  './AttributeCompression-f202be44',
+  './Matrix2-9e1c22e2',
+  './ComponentDatatype-4eeb6d9b',
+  './createTaskProcessorWorker',
+  './RuntimeError-4f8ec8a2',
+  './defaultValue-97284df2',
+  './WebGLConstants-6da700a2'
+], function (
+  AttributeCompression,
+  Matrix2,
+  ComponentDatatype,
+  createTaskProcessorWorker,
+  RuntimeError,
+  defaultValue,
+  WebGLConstants
+) {
+  'use strict';
 
   const maxShort = 32767;
 
@@ -34,7 +51,7 @@ define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './ComponentDat
   const scratchEllipsoid = new Matrix2.Ellipsoid();
   const scratchMinMaxHeights = {
     min: undefined,
-    max: undefined,
+    max: undefined
   };
 
   function unpackBuffer(packedBuffer) {
@@ -66,7 +83,11 @@ define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './ComponentDat
       2 * positionsLength,
       3 * positionsLength
     );
-    AttributeCompression.AttributeCompression.zigZagDeltaDecode(uBuffer, vBuffer, heightBuffer);
+    AttributeCompression.AttributeCompression.zigZagDeltaDecode(
+      uBuffer,
+      vBuffer,
+      heightBuffer
+    );
 
     const decoded = new Float64Array(positions.length);
     for (let i = 0; i < positionsLength; ++i) {
@@ -74,9 +95,21 @@ define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './ComponentDat
       const v = vBuffer[i];
       const h = heightBuffer[i];
 
-      const lon = ComponentDatatype.CesiumMath.lerp(rectangle.west, rectangle.east, u / maxShort);
-      const lat = ComponentDatatype.CesiumMath.lerp(rectangle.south, rectangle.north, v / maxShort);
-      const alt = ComponentDatatype.CesiumMath.lerp(minimumHeight, maximumHeight, h / maxShort);
+      const lon = ComponentDatatype.CesiumMath.lerp(
+        rectangle.west,
+        rectangle.east,
+        u / maxShort
+      );
+      const lat = ComponentDatatype.CesiumMath.lerp(
+        rectangle.south,
+        rectangle.north,
+        v / maxShort
+      );
+      const alt = ComponentDatatype.CesiumMath.lerp(
+        minimumHeight,
+        maximumHeight,
+        h / maxShort
+      );
 
       const cartographic = Matrix2.Cartographic.fromRadians(
         lon,
@@ -94,12 +127,13 @@ define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './ComponentDat
     transferableObjects.push(decoded.buffer);
 
     return {
-      positions: decoded.buffer,
+      positions: decoded.buffer
     };
   }
-  var createVectorTilePoints$1 = createTaskProcessorWorker(createVectorTilePoints);
+  var createVectorTilePoints$1 = createTaskProcessorWorker(
+    createVectorTilePoints
+  );
 
   return createVectorTilePoints$1;
-
-}));
+});
 //# sourceMappingURL=createVectorTilePoints.js.map

@@ -1,40 +1,40 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import FeatureDetection from "../Core/FeatureDetection.js";
-import GeographicProjection from "../Core/GeographicProjection.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import CesiumMath from "../Core/Math.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import Rectangle from "../Core/Rectangle.js";
-import Request from "../Core/Request.js";
-import RequestState from "../Core/RequestState.js";
-import RequestType from "../Core/RequestType.js";
-import TerrainProvider from "../Core/TerrainProvider.js";
-import TileProviderError from "../Core/TileProviderError.js";
-import WebMercatorProjection from "../Core/WebMercatorProjection.js";
-import Buffer from "../Renderer/Buffer.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import ComputeCommand from "../Renderer/ComputeCommand.js";
-import ContextLimits from "../Renderer/ContextLimits.js";
-import MipmapHint from "../Renderer/MipmapHint.js";
-import Sampler from "../Renderer/Sampler.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import Texture from "../Renderer/Texture.js";
-import TextureMagnificationFilter from "../Renderer/TextureMagnificationFilter.js";
-import TextureMinificationFilter from "../Renderer/TextureMinificationFilter.js";
-import TextureWrap from "../Renderer/TextureWrap.js";
-import VertexArray from "../Renderer/VertexArray.js";
-import ReprojectWebMercatorFS from "../Shaders/ReprojectWebMercatorFS.js";
-import ReprojectWebMercatorVS from "../Shaders/ReprojectWebMercatorVS.js";
-import Imagery from "./Imagery.js";
-import ImageryState from "./ImageryState.js";
-import SplitDirection from "./SplitDirection.js";
-import TileImagery from "./TileImagery.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import FeatureDetection from '../Core/FeatureDetection.js';
+import GeographicProjection from '../Core/GeographicProjection.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import CesiumMath from '../Core/Math.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import Rectangle from '../Core/Rectangle.js';
+import Request from '../Core/Request.js';
+import RequestState from '../Core/RequestState.js';
+import RequestType from '../Core/RequestType.js';
+import TerrainProvider from '../Core/TerrainProvider.js';
+import TileProviderError from '../Core/TileProviderError.js';
+import WebMercatorProjection from '../Core/WebMercatorProjection.js';
+import Buffer from '../Renderer/Buffer.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import ComputeCommand from '../Renderer/ComputeCommand.js';
+import ContextLimits from '../Renderer/ContextLimits.js';
+import MipmapHint from '../Renderer/MipmapHint.js';
+import Sampler from '../Renderer/Sampler.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import Texture from '../Renderer/Texture.js';
+import TextureMagnificationFilter from '../Renderer/TextureMagnificationFilter.js';
+import TextureMinificationFilter from '../Renderer/TextureMinificationFilter.js';
+import TextureWrap from '../Renderer/TextureWrap.js';
+import VertexArray from '../Renderer/VertexArray.js';
+import ReprojectWebMercatorFS from '../Shaders/ReprojectWebMercatorFS.js';
+import ReprojectWebMercatorVS from '../Shaders/ReprojectWebMercatorVS.js';
+import Imagery from './Imagery.js';
+import ImageryState from './ImageryState.js';
+import SplitDirection from './SplitDirection.js';
+import TileImagery from './TileImagery.js';
 
 /**
  * An imagery layer that displays tiled image data from a single imagery provider
@@ -345,7 +345,7 @@ Object.defineProperties(ImageryLayer.prototype, {
   imageryProvider: {
     get: function () {
       return this._imageryProvider;
-    },
+    }
   },
 
   /**
@@ -358,8 +358,8 @@ Object.defineProperties(ImageryLayer.prototype, {
   rectangle: {
     get: function () {
       return this._rectangle;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -742,15 +742,13 @@ ImageryLayer.prototype._createTileImagerySkeletons = function (
       imageryBounds,
       imageryBounds
     );
-    imageryTileXYToRectangle = imageryTilingScheme.tileXYToNativeRectangle.bind(
-      imageryTilingScheme
-    );
+    imageryTileXYToRectangle =
+      imageryTilingScheme.tileXYToNativeRectangle.bind(imageryTilingScheme);
     veryCloseX = terrainRectangle.width / 512.0;
     veryCloseY = terrainRectangle.height / 512.0;
   } else {
-    imageryTileXYToRectangle = imageryTilingScheme.tileXYToRectangle.bind(
-      imageryTilingScheme
-    );
+    imageryTileXYToRectangle =
+      imageryTilingScheme.tileXYToRectangle.bind(imageryTilingScheme);
   }
 
   let minU;
@@ -982,7 +980,7 @@ ImageryLayer.prototype._requestImagery = function (imagery) {
     const request = new Request({
       throttle: false,
       throttleByServer: true,
-      type: RequestType.IMAGERY,
+      type: RequestType.IMAGERY
     });
     imagery.request = request;
     imagery.state = ImageryState.TRANSITIONING;
@@ -1023,7 +1021,7 @@ ImageryLayer.prototype._requestImagery = function (imagery) {
 ImageryLayer.prototype._createTextureWebGL = function (context, imagery) {
   const sampler = new Sampler({
     minificationFilter: this.minificationFilter,
-    magnificationFilter: this.magnificationFilter,
+    magnificationFilter: this.magnificationFilter
   });
 
   const image = imagery.image;
@@ -1035,9 +1033,9 @@ ImageryLayer.prototype._createTextureWebGL = function (context, imagery) {
       width: image.width,
       height: image.height,
       source: {
-        arrayBufferView: image.bufferView,
+        arrayBufferView: image.bufferView
       },
-      sampler: sampler,
+      sampler: sampler
     });
   }
   return new Texture({
@@ -1046,7 +1044,7 @@ ImageryLayer.prototype._createTextureWebGL = function (context, imagery) {
     pixelFormat: this._imageryProvider.hasAlphaChannel
       ? PixelFormat.RGBA
       : PixelFormat.RGB,
-    sampler: sampler,
+    sampler: sampler
   });
 };
 
@@ -1088,7 +1086,7 @@ ImageryLayer.prototype._createTexture = function (context, imagery) {
     this.minificationFilter !== TextureMinificationFilter.LINEAR
   ) {
     throw new DeveloperError(
-      "ImageryLayer minification filter must be NEAREST or LINEAR"
+      'ImageryLayer minification filter must be NEAREST or LINEAR'
     );
   }
   //>>includeEnd('debug');
@@ -1153,7 +1151,7 @@ ImageryLayer.prototype._finalizeReprojectTexture = function (context, texture) {
         wrapT: TextureWrap.CLAMP_TO_EDGE,
         minificationFilter: minificationFilter,
         magnificationFilter: magnificationFilter,
-        maximumAnisotropy: maximumAnisotropy,
+        maximumAnisotropy: maximumAnisotropy
       });
     }
     texture.generateMipmap(MipmapHint.NICEST);
@@ -1175,7 +1173,7 @@ ImageryLayer.prototype._finalizeReprojectTexture = function (context, texture) {
         wrapS: TextureWrap.CLAMP_TO_EDGE,
         wrapT: TextureWrap.CLAMP_TO_EDGE,
         minificationFilter: minificationFilter,
-        magnificationFilter: magnificationFilter,
+        magnificationFilter: magnificationFilter
       });
     }
     texture.sampler = nonMipmapSampler;
@@ -1234,7 +1232,7 @@ ImageryLayer.prototype._reprojectTexture = function (
       canceled: function () {
         imagery.state = ImageryState.TEXTURE_LOADED;
         imagery.releaseReference();
-      },
+      }
     });
     this._reprojectComputeCommands.push(computeCommand);
   } else {
@@ -1312,7 +1310,7 @@ const uniformMap = {
   },
 
   textureDimensions: new Cartesian2(),
-  texture: undefined,
+  texture: undefined
 };
 
 const float32ArrayScratch = FeatureDetection.supportsTypedArrays()
@@ -1372,7 +1370,7 @@ function reprojectToGeographic(command, context, texture, rectangle) {
         if (defined(this.shaderProgram)) {
           this.shaderProgram.destroy();
         }
-      },
+      }
     };
 
     const positions = new Float32Array(2 * 64 * 2);
@@ -1387,7 +1385,7 @@ function reprojectToGeographic(command, context, texture, rectangle) {
 
     const reprojectAttributeIndices = {
       position: 0,
-      webMercatorT: 1,
+      webMercatorT: 1
     };
 
     const indices = TerrainProvider.getRegularGridIndices(2, 64);
@@ -1395,7 +1393,7 @@ function reprojectToGeographic(command, context, texture, rectangle) {
       context: context,
       typedArray: indices,
       usage: BufferUsage.STATIC_DRAW,
-      indexDatatype: IndexDatatype.UNSIGNED_SHORT,
+      indexDatatype: IndexDatatype.UNSIGNED_SHORT
     });
 
     reproject.vertexArray = new VertexArray({
@@ -1406,39 +1404,39 @@ function reprojectToGeographic(command, context, texture, rectangle) {
           vertexBuffer: Buffer.createVertexBuffer({
             context: context,
             typedArray: positions,
-            usage: BufferUsage.STATIC_DRAW,
+            usage: BufferUsage.STATIC_DRAW
           }),
-          componentsPerAttribute: 2,
+          componentsPerAttribute: 2
         },
         {
           index: reprojectAttributeIndices.webMercatorT,
           vertexBuffer: Buffer.createVertexBuffer({
             context: context,
             sizeInBytes: 64 * 2 * 4,
-            usage: BufferUsage.STREAM_DRAW,
+            usage: BufferUsage.STREAM_DRAW
           }),
-          componentsPerAttribute: 1,
-        },
+          componentsPerAttribute: 1
+        }
       ],
-      indexBuffer: indexBuffer,
+      indexBuffer: indexBuffer
     });
 
     const vs = new ShaderSource({
-      sources: [ReprojectWebMercatorVS],
+      sources: [ReprojectWebMercatorVS]
     });
 
     reproject.shaderProgram = ShaderProgram.fromCache({
       context: context,
       vertexShaderSource: vs,
       fragmentShaderSource: ReprojectWebMercatorFS,
-      attributeLocations: reprojectAttributeIndices,
+      attributeLocations: reprojectAttributeIndices
     });
 
     reproject.sampler = new Sampler({
       wrapS: TextureWrap.CLAMP_TO_EDGE,
       wrapT: TextureWrap.CLAMP_TO_EDGE,
       minificationFilter: TextureMinificationFilter.LINEAR,
-      magnificationFilter: TextureMagnificationFilter.LINEAR,
+      magnificationFilter: TextureMagnificationFilter.LINEAR
     });
   }
 
@@ -1464,7 +1462,7 @@ function reprojectToGeographic(command, context, texture, rectangle) {
     height: height,
     pixelFormat: texture.pixelFormat,
     pixelDatatype: texture.pixelDatatype,
-    preMultiplyAlpha: texture.preMultiplyAlpha,
+    preMultiplyAlpha: texture.preMultiplyAlpha
   });
 
   // Allocate memory for the mipmaps.  Failure to do this before rendering

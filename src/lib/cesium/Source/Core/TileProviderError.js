@@ -1,6 +1,6 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import formatError from "./formatError.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import formatError from './formatError.js';
 
 /**
  * Provides details about an error that occurred in an {@link ImageryProvider} or a {@link TerrainProvider}.

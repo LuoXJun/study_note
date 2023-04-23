@@ -1,9 +1,9 @@
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
 
 /**
  * A simple map projection where longitude and latitude are linearly mapped to X and Y by multiplying
@@ -36,8 +36,8 @@ Object.defineProperties(GeographicProjection.prototype, {
   ellipsoid: {
     get: function () {
       return this._ellipsoid;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -84,7 +84,7 @@ GeographicProjection.prototype.project = function (cartographic, result) {
 GeographicProjection.prototype.unproject = function (cartesian, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(cartesian)) {
-    throw new DeveloperError("cartesian is required");
+    throw new DeveloperError('cartesian is required');
   }
   //>>includeEnd('debug');
 

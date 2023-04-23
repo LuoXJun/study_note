@@ -1,4 +1,4 @@
-import DeveloperError from "./DeveloperError.js";
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Wraps a function on the provided objects with another function called in the
@@ -9,12 +9,12 @@ import DeveloperError from "./DeveloperError.js";
  */
 function wrapFunction(obj, oldFunction, newFunction) {
   //>>includeStart('debug', pragmas.debug);
-  if (typeof oldFunction !== "function") {
-    throw new DeveloperError("oldFunction is required to be a function.");
+  if (typeof oldFunction !== 'function') {
+    throw new DeveloperError('oldFunction is required to be a function.');
   }
 
-  if (typeof newFunction !== "function") {
-    throw new DeveloperError("oldFunction is required to be a function.");
+  if (typeof newFunction !== 'function') {
+    throw new DeveloperError('oldFunction is required to be a function.');
   }
   //>>includeEnd('debug');
 

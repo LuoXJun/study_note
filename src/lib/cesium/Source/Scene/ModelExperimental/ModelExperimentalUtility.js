@@ -1,14 +1,14 @@
-import Cartesian3 from "../../Core/Cartesian3.js";
-import defined from "../../Core/defined.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import Quaternion from "../../Core/Quaternion.js";
-import RuntimeError from "../../Core/RuntimeError.js";
-import Axis from "../Axis.js";
-import AttributeType from "../AttributeType.js";
-import VertexAttributeSemantic from "../VertexAttributeSemantic.js";
-import CullFace from "../CullFace.js";
-import PrimitiveType from "../../Core/PrimitiveType.js";
-import Matrix3 from "../../Core/Matrix3.js";
+import Cartesian3 from '../../Core/Cartesian3.js';
+import defined from '../../Core/defined.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import Quaternion from '../../Core/Quaternion.js';
+import RuntimeError from '../../Core/RuntimeError.js';
+import Axis from '../Axis.js';
+import AttributeType from '../AttributeType.js';
+import VertexAttributeSemantic from '../VertexAttributeSemantic.js';
+import CullFace from '../CullFace.js';
+import PrimitiveType from '../../Core/PrimitiveType.js';
+import Matrix3 from '../../Core/Matrix3.js';
 
 /**
  * Utility functions for {@link ModelExperimental}.
@@ -161,7 +161,7 @@ ModelExperimentalUtility.getAttributeInfo = function (attribute) {
     variableName = attribute.name;
     // According to the glTF 2.0 spec, custom attributes must be prepended with
     // an underscore.
-    variableName = variableName.replace(/^_/, "");
+    variableName = variableName.replace(/^_/, '');
     variableName = variableName.toLowerCase();
   }
 
@@ -173,7 +173,7 @@ ModelExperimentalUtility.getAttributeInfo = function (attribute) {
   // attribute vec4 since GLSL promotes vec3 attribute data to vec4 with
   // the .a channel set to 1.0.
   if (isVertexColor) {
-    glslType = "vec4";
+    glslType = 'vec4';
   }
 
   const isQuantized = defined(attribute.quantization);
@@ -181,7 +181,7 @@ ModelExperimentalUtility.getAttributeInfo = function (attribute) {
   if (isQuantized) {
     // The quantized color_n attribute also is promoted to a vec4 in the shader
     quantizedGlslType = isVertexColor
-      ? "vec4"
+      ? 'vec4'
       : AttributeType.getGlslType(attribute.quantization.type);
   }
 
@@ -191,7 +191,7 @@ ModelExperimentalUtility.getAttributeInfo = function (attribute) {
     variableName: variableName,
     hasSemantic: hasSemantic,
     glslType: glslType,
-    quantizedGlslType: quantizedGlslType,
+    quantizedGlslType: quantizedGlslType
   };
 };
 
@@ -218,7 +218,7 @@ ModelExperimentalUtility.getPositionMinMax = function (
 ) {
   const positionGltfAttribute = ModelExperimentalUtility.getAttributeBySemantic(
     primitive,
-    "POSITION"
+    'POSITION'
   );
 
   let positionMax = positionGltfAttribute.max;
@@ -239,7 +239,7 @@ ModelExperimentalUtility.getPositionMinMax = function (
 
   return {
     min: positionMin,
-    max: positionMax,
+    max: positionMax
   };
 };
 

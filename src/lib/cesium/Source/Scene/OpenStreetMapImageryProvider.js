@@ -1,14 +1,14 @@
-import Credit from "../Core/Credit.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Rectangle from "../Core/Rectangle.js";
-import Resource from "../Core/Resource.js";
-import WebMercatorTilingScheme from "../Core/WebMercatorTilingScheme.js";
-import UrlTemplateImageryProvider from "./UrlTemplateImageryProvider.js";
+import Credit from '../Core/Credit.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Rectangle from '../Core/Rectangle.js';
+import Resource from '../Core/Resource.js';
+import WebMercatorTilingScheme from '../Core/WebMercatorTilingScheme.js';
+import UrlTemplateImageryProvider from './UrlTemplateImageryProvider.js';
 
 const defaultCredit = new Credit(
-  "MapQuest, Open Street Map and contributors, CC-BY-SA"
+  'MapQuest, Open Street Map and contributors, CC-BY-SA'
 );
 
 /**
@@ -59,13 +59,13 @@ function OpenStreetMapImageryProvider(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   const resource = Resource.createIfNeeded(
-    defaultValue(options.url, "https://a.tile.openstreetmap.org/")
+    defaultValue(options.url, 'https://a.tile.openstreetmap.org/')
   );
   resource.appendForwardSlash();
-  resource.url += `{z}/{x}/{y}.${defaultValue(options.fileExtension, "png")}`;
+  resource.url += `{z}/{x}/{y}.${defaultValue(options.fileExtension, 'png')}`;
 
   const tilingScheme = new WebMercatorTilingScheme({
-    ellipsoid: options.ellipsoid,
+    ellipsoid: options.ellipsoid
   });
 
   const tileWidth = 256;
@@ -98,7 +98,7 @@ function OpenStreetMapImageryProvider(options) {
   //>>includeEnd('debug');
 
   let credit = defaultValue(options.credit, defaultCredit);
-  if (typeof credit === "string") {
+  if (typeof credit === 'string') {
     credit = new Credit(credit);
   }
 
@@ -110,7 +110,7 @@ function OpenStreetMapImageryProvider(options) {
     tileHeight: tileHeight,
     minimumLevel: minimumLevel,
     maximumLevel: maximumLevel,
-    rectangle: rectangle,
+    rectangle: rectangle
   });
 }
 
@@ -118,7 +118,8 @@ if (defined(Object.create)) {
   OpenStreetMapImageryProvider.prototype = Object.create(
     UrlTemplateImageryProvider.prototype
   );
-  OpenStreetMapImageryProvider.prototype.constructor = OpenStreetMapImageryProvider;
+  OpenStreetMapImageryProvider.prototype.constructor =
+    OpenStreetMapImageryProvider;
 }
 
 export default OpenStreetMapImageryProvider;

@@ -1,10 +1,10 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import ClearCommand from "../Renderer/ClearCommand.js";
-import FramebufferManager from "../Renderer/FramebufferManager.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import ClearCommand from '../Renderer/ClearCommand.js';
+import FramebufferManager from '../Renderer/FramebufferManager.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
 
 /**
  * A post process stage that will get the luminance value at each pixel and
@@ -23,7 +23,7 @@ function AutoExposure() {
 
   this._ready = false;
 
-  this._name = "czm_autoexposure";
+  this._name = 'czm_autoexposure';
 
   this._logDepthChanged = undefined;
   this._useLogDepth = undefined;
@@ -74,7 +74,7 @@ Object.defineProperties(AutoExposure.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
   /**
    * The unique name of this post-process stage for reference by other stages.
@@ -86,7 +86,7 @@ Object.defineProperties(AutoExposure.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
 
   /**
@@ -104,8 +104,8 @@ Object.defineProperties(AutoExposure.prototype, {
         return undefined;
       }
       return framebuffers[framebuffers.length - 1].getColorTexture(0);
-    },
-  },
+    }
+  }
 });
 
 function destroyFramebuffers(autoexposure) {
@@ -176,7 +176,7 @@ function createUniformMap(autoexposure, index) {
       },
       colorTextureDimensions: function () {
         return autoexposure._colorTexture.dimensions;
-      },
+      }
     };
   } else {
     const texture = autoexposure._framebuffers[index - 1].getColorTexture(0);
@@ -186,7 +186,7 @@ function createUniformMap(autoexposure, index) {
       },
       colorTextureDimensions: function () {
         return texture.dimensions;
-      },
+      }
     };
   }
 
@@ -202,55 +202,55 @@ function createUniformMap(autoexposure, index) {
 
 function getShaderSource(index, length) {
   let source =
-    "uniform sampler2D colorTexture; \n" +
-    "varying vec2 v_textureCoordinates; \n" +
-    "float sampleTexture(vec2 offset) { \n";
+    'uniform sampler2D colorTexture; \n' +
+    'varying vec2 v_textureCoordinates; \n' +
+    'float sampleTexture(vec2 offset) { \n';
 
   if (index === 0) {
     source +=
-      "    vec4 color = texture2D(colorTexture, v_textureCoordinates + offset); \n" +
-      "    return czm_luminance(color.rgb); \n";
+      '    vec4 color = texture2D(colorTexture, v_textureCoordinates + offset); \n' +
+      '    return czm_luminance(color.rgb); \n';
   } else {
     source +=
-      "    return texture2D(colorTexture, v_textureCoordinates + offset).r; \n";
+      '    return texture2D(colorTexture, v_textureCoordinates + offset).r; \n';
   }
 
-  source += "}\n\n";
+  source += '}\n\n';
 
   source +=
-    "uniform vec2 colorTextureDimensions; \n" +
-    "uniform vec2 minMaxLuminance; \n" +
-    "uniform sampler2D previousLuminance; \n" +
-    "void main() { \n" +
-    "    float color = 0.0; \n" +
-    "    float xStep = 1.0 / colorTextureDimensions.x; \n" +
-    "    float yStep = 1.0 / colorTextureDimensions.y; \n" +
-    "    int count = 0; \n" +
-    "    for (int i = 0; i < 3; ++i) { \n" +
-    "        for (int j = 0; j < 3; ++j) { \n" +
-    "            vec2 offset; \n" +
-    "            offset.x = -xStep + float(i) * xStep; \n" +
-    "            offset.y = -yStep + float(j) * yStep; \n" +
-    "            if (offset.x < 0.0 || offset.x > 1.0 || offset.y < 0.0 || offset.y > 1.0) { \n" +
-    "                continue; \n" +
-    "            } \n" +
-    "            color += sampleTexture(offset); \n" +
-    "            ++count; \n" +
-    "        } \n" +
-    "    } \n" +
-    "    if (count > 0) { \n" +
-    "        color /= float(count); \n" +
-    "    } \n";
+    'uniform vec2 colorTextureDimensions; \n' +
+    'uniform vec2 minMaxLuminance; \n' +
+    'uniform sampler2D previousLuminance; \n' +
+    'void main() { \n' +
+    '    float color = 0.0; \n' +
+    '    float xStep = 1.0 / colorTextureDimensions.x; \n' +
+    '    float yStep = 1.0 / colorTextureDimensions.y; \n' +
+    '    int count = 0; \n' +
+    '    for (int i = 0; i < 3; ++i) { \n' +
+    '        for (int j = 0; j < 3; ++j) { \n' +
+    '            vec2 offset; \n' +
+    '            offset.x = -xStep + float(i) * xStep; \n' +
+    '            offset.y = -yStep + float(j) * yStep; \n' +
+    '            if (offset.x < 0.0 || offset.x > 1.0 || offset.y < 0.0 || offset.y > 1.0) { \n' +
+    '                continue; \n' +
+    '            } \n' +
+    '            color += sampleTexture(offset); \n' +
+    '            ++count; \n' +
+    '        } \n' +
+    '    } \n' +
+    '    if (count > 0) { \n' +
+    '        color /= float(count); \n' +
+    '    } \n';
 
   if (index === length - 1) {
     source +=
-      "    float previous = texture2D(previousLuminance, vec2(0.5)).r; \n" +
-      "    color = clamp(color, minMaxLuminance.x, minMaxLuminance.y); \n" +
-      "    color = previous + (color - previous) / (60.0 * 1.5); \n" +
-      "    color = clamp(color, minMaxLuminance.x, minMaxLuminance.y); \n";
+      '    float previous = texture2D(previousLuminance, vec2(0.5)).r; \n' +
+      '    color = clamp(color, minMaxLuminance.x, minMaxLuminance.y); \n' +
+      '    color = previous + (color - previous) / (60.0 * 1.5); \n' +
+      '    color = clamp(color, minMaxLuminance.x, minMaxLuminance.y); \n';
   }
 
-  source += "    gl_FragColor = vec4(color); \n" + "} \n";
+  source += '    gl_FragColor = vec4(color); \n' + '} \n';
   return source;
 }
 
@@ -266,7 +266,7 @@ function createCommands(autoexposure, context) {
       getShaderSource(i, length),
       {
         framebuffer: framebuffers[i].framebuffer,
-        uniformMap: createUniformMap(autoexposure, i),
+        uniformMap: createUniformMap(autoexposure, i)
       }
     );
   }
@@ -288,7 +288,7 @@ AutoExposure.prototype.clear = function (context) {
   if (!defined(clearCommand)) {
     clearCommand = this._clearCommand = new ClearCommand({
       color: new Color(0.0, 0.0, 0.0, 0.0),
-      framebuffer: undefined,
+      framebuffer: undefined
     });
   }
 
@@ -325,9 +325,8 @@ AutoExposure.prototype.update = function (context) {
   const framebuffers = this._framebuffers;
   const temp = framebuffers[framebuffers.length - 1];
   framebuffers[framebuffers.length - 1] = this._previousLuminance;
-  this._commands[
-    this._commands.length - 1
-  ].framebuffer = this._previousLuminance.framebuffer;
+  this._commands[this._commands.length - 1].framebuffer =
+    this._previousLuminance.framebuffer;
   this._previousLuminance = temp;
 };
 

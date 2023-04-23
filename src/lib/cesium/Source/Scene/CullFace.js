@@ -1,4 +1,4 @@
-import WebGLConstants from "../Core/WebGLConstants.js";
+import WebGLConstants from '../Core/WebGLConstants.js';
 
 /**
  * Determines which triangles, if any, are culled.
@@ -28,6 +28,6 @@ const CullFace = {
    * @type {Number}
    * @constant
    */
-  FRONT_AND_BACK: WebGLConstants.FRONT_AND_BACK,
+  FRONT_AND_BACK: WebGLConstants.FRONT_AND_BACK
 };
 export default Object.freeze(CullFace);

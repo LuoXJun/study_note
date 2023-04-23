@@ -1,9 +1,9 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Event from "../Core/Event.js";
-import TranslationRotationScale from "../Core/TranslationRotationScale.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
-import Property from "./Property.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Event from '../Core/Event.js';
+import TranslationRotationScale from '../Core/TranslationRotationScale.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
+import Property from './Property.js';
 
 const defaultNodeTransformation = new TranslationRotationScale();
 
@@ -49,7 +49,7 @@ Object.defineProperties(NodeTransformationProperty.prototype, {
         Property.isConstant(this._rotation) &&
         Property.isConstant(this._scale)
       );
-    },
+    }
   },
 
   /**
@@ -64,7 +64,7 @@ Object.defineProperties(NodeTransformationProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -73,7 +73,7 @@ Object.defineProperties(NodeTransformationProperty.prototype, {
    * @type {Property|undefined}
    * @default Cartesian3.ZERO
    */
-  translation: createPropertyDescriptor("translation"),
+  translation: createPropertyDescriptor('translation'),
 
   /**
    * Gets or sets the {@link Quaternion} Property specifying the (x, y, z, w) rotation to apply to the node.
@@ -81,7 +81,7 @@ Object.defineProperties(NodeTransformationProperty.prototype, {
    * @type {Property|undefined}
    * @default Quaternion.IDENTITY
    */
-  rotation: createPropertyDescriptor("rotation"),
+  rotation: createPropertyDescriptor('rotation'),
 
   /**
    * Gets or sets the {@link Cartesian3} Property specifying the (x, y, z) scaling to apply to the node.
@@ -89,7 +89,7 @@ Object.defineProperties(NodeTransformationProperty.prototype, {
    * @type {Property|undefined}
    * @default new Cartesian3(1.0, 1.0, 1.0)
    */
-  scale: createPropertyDescriptor("scale"),
+  scale: createPropertyDescriptor('scale')
 });
 
 /**

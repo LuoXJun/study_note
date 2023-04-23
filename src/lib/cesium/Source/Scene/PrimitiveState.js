@@ -8,6 +8,6 @@ const PrimitiveState = {
   COMBINING: 3,
   COMBINED: 4,
   COMPLETE: 5,
-  FAILED: 6,
+  FAILED: 6
 };
 export default Object.freeze(PrimitiveState);

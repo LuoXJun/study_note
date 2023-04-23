@@ -1,14 +1,14 @@
 /* global require */
-import defined from "../Core/defined.js";
-import PrimitivePipeline from "../Scene/PrimitivePipeline.js";
-import createTaskProcessorWorker from "./createTaskProcessorWorker.js";
+import defined from '../Core/defined.js';
+import PrimitivePipeline from '../Scene/PrimitivePipeline.js';
+import createTaskProcessorWorker from './createTaskProcessorWorker.js';
 
 const moduleCache = {};
 
 function getModule(moduleName) {
   let module = moduleCache[moduleName];
   if (!defined(module)) {
-    if (typeof exports === "object") {
+    if (typeof exports === 'object') {
       // Use CommonJS-style require.
       moduleCache[module] = module = require(`Workers/${moduleName}`);
     } else {

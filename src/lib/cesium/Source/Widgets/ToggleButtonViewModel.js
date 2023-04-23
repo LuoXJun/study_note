@@ -1,7 +1,7 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import knockout from "../ThirdParty/knockout.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import knockout from '../ThirdParty/knockout.js';
 
 /**
  * A view model which exposes the properties of a toggle button.
@@ -16,7 +16,7 @@ import knockout from "../ThirdParty/knockout.js";
 function ToggleButtonViewModel(command, options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(command)) {
-    throw new DeveloperError("command is required.");
+    throw new DeveloperError('command is required.');
   }
   //>>includeEnd('debug');
 
@@ -36,9 +36,9 @@ function ToggleButtonViewModel(command, options) {
    * @type {String}
    * @default ''
    */
-  this.tooltip = defaultValue(options.tooltip, "");
+  this.tooltip = defaultValue(options.tooltip, '');
 
-  knockout.track(this, ["toggled", "tooltip"]);
+  knockout.track(this, ['toggled', 'tooltip']);
 }
 
 Object.defineProperties(ToggleButtonViewModel.prototype, {
@@ -50,7 +50,7 @@ Object.defineProperties(ToggleButtonViewModel.prototype, {
   command: {
     get: function () {
       return this._command;
-    },
-  },
+    }
+  }
 });
 export default ToggleButtonViewModel;

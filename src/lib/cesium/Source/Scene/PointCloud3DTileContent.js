@@ -1,17 +1,17 @@
-import Color from "../Core/Color.js";
-import combine from "../Core/combine.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import CesiumMath from "../Core/Math.js";
-import Pass from "../Renderer/Pass.js";
-import Cesium3DTileBatchTable from "./Cesium3DTileBatchTable.js";
-import Cesium3DTileFeature from "./Cesium3DTileFeature.js";
-import Cesium3DTileRefine from "./Cesium3DTileRefine.js";
-import PointCloud from "./PointCloud.js";
-import PointCloudShading from "./PointCloudShading.js";
-import SceneMode from "./SceneMode.js";
+import Color from '../Core/Color.js';
+import combine from '../Core/combine.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import CesiumMath from '../Core/Math.js';
+import Pass from '../Renderer/Pass.js';
+import Cesium3DTileBatchTable from './Cesium3DTileBatchTable.js';
+import Cesium3DTileFeature from './Cesium3DTileFeature.js';
+import Cesium3DTileRefine from './Cesium3DTileRefine.js';
+import PointCloud from './PointCloud.js';
+import PointCloudShading from './PointCloudShading.js';
+import SceneMode from './SceneMode.js';
 
 /**
  * Represents the contents of a
@@ -55,7 +55,7 @@ function PointCloud3DTileContent(
     fragmentShaderLoaded: getFragmentShaderLoaded(this),
     uniformMapLoaded: getUniformMapLoaded(this),
     batchTableLoaded: getBatchTableLoaded(this),
-    pickIdLoaded: getPickIdLoaded(this),
+    pickIdLoaded: getPickIdLoaded(this)
   });
 }
 
@@ -66,31 +66,31 @@ Object.defineProperties(PointCloud3DTileContent.prototype, {
         return this._batchTable.featuresLength;
       }
       return 0;
-    },
+    }
   },
 
   pointsLength: {
     get: function () {
       return this._pointCloud.pointsLength;
-    },
+    }
   },
 
   trianglesLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   geometryByteLength: {
     get: function () {
       return this._pointCloud.geometryByteLength;
-    },
+    }
   },
 
   texturesByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   batchTableByteLength: {
@@ -99,37 +99,37 @@ Object.defineProperties(PointCloud3DTileContent.prototype, {
         return this._batchTable.batchTableByteLength;
       }
       return 0;
-    },
+    }
   },
 
   innerContents: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   readyPromise: {
     get: function () {
       return this._pointCloud.readyPromise;
-    },
+    }
   },
 
   tileset: {
     get: function () {
       return this._tileset;
-    },
+    }
   },
 
   tile: {
     get: function () {
       return this._tile;
-    },
+    }
   },
 
   url: {
     get: function () {
       return this._resource.getUrlComponent(true);
-    },
+    }
   },
 
   metadata: {
@@ -138,13 +138,13 @@ Object.defineProperties(PointCloud3DTileContent.prototype, {
     },
     set: function (value) {
       this._metadata = value;
-    },
+    }
   },
 
   batchTable: {
     get: function () {
       return this._batchTable;
-    },
+    }
   },
 
   group: {
@@ -153,8 +153,8 @@ Object.defineProperties(PointCloud3DTileContent.prototype, {
     },
     set: function (value) {
       this._group = value;
-    },
-  },
+    }
+  }
 });
 
 function getVertexShaderLoaded(content) {
@@ -162,7 +162,7 @@ function getVertexShaderLoaded(content) {
     if (defined(content._batchTable)) {
       return content._batchTable.getVertexShaderCallback(
         false,
-        "a_batchId",
+        'a_batchId',
         undefined
       )(vs);
     }
@@ -191,7 +191,7 @@ function getUniformMapLoaded(content) {
     return combine(uniformMap, {
       czm_pickColor: function () {
         return content._pickId.color;
-      },
+      }
     });
   };
 }
@@ -211,13 +211,14 @@ function getPickIdLoaded(content) {
   return function () {
     return defined(content._batchTable)
       ? content._batchTable.getPickId()
-      : "czm_pickColor";
+      : 'czm_pickColor';
   };
 }
 
 function getGeometricError(content) {
   const pointCloudShading = content._tileset.pointCloudShading;
-  const sphereVolume = content._tile.contentBoundingVolume.boundingSphere.volume();
+  const sphereVolume =
+    content._tile.contentBoundingVolume.boundingSphere.volume();
   const baseResolutionApproximation = CesiumMath.cbrt(
     sphereVolume / content.pointsLength
   );
@@ -315,7 +316,7 @@ PointCloud3DTileContent.prototype.update = function (tileset, frameState) {
   if (!defined(this._pickId) && !defined(batchTable)) {
     this._pickId = frameState.context.createPickId({
       primitive: tileset,
-      content: this,
+      content: this
     });
   }
 

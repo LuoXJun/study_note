@@ -122,6 +122,6 @@ const ScreenSpaceEventType = {
    * @type {Number}
    * @constant
    */
-  PINCH_MOVE: 19,
+  PINCH_MOVE: 19
 };
 export default Object.freeze(ScreenSpaceEventType);

@@ -1,9 +1,9 @@
-import AlphaMode from "../AlphaMode.js";
-import ColorBlendMode from "../ColorBlendMode.js";
-import combine from "../../Core/combine.js";
-import ModelColorStageFS from "../../Shaders/ModelExperimental/ModelColorStageFS.js";
-import Pass from "../../Renderer/Pass.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
+import AlphaMode from '../AlphaMode.js';
+import ColorBlendMode from '../ColorBlendMode.js';
+import combine from '../../Core/combine.js';
+import ModelColorStageFS from '../../Shaders/ModelExperimental/ModelColorStageFS.js';
+import Pass from '../../Renderer/Pass.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
 
 /**
  * The model color pipeline stage is responsible for handling the application of a static color to the model.
@@ -13,10 +13,10 @@ import ShaderDestination from "../../Renderer/ShaderDestination.js";
  * @private
  */
 const ModelColorPipelineStage = {};
-ModelColorPipelineStage.name = "ModelColorPipelineStage"; // Helps with debugging
+ModelColorPipelineStage.name = 'ModelColorPipelineStage'; // Helps with debugging
 
-ModelColorPipelineStage.COLOR_UNIFORM_NAME = "model_color";
-ModelColorPipelineStage.COLOR_BLEND_UNIFORM_NAME = "model_colorBlend";
+ModelColorPipelineStage.COLOR_UNIFORM_NAME = 'model_color';
+ModelColorPipelineStage.COLOR_BLEND_UNIFORM_NAME = 'model_colorBlend';
 
 /**
  * Process a model. This modifies the following parts of the render resources:
@@ -42,7 +42,7 @@ ModelColorPipelineStage.process = function (
   const shaderBuilder = renderResources.shaderBuilder;
 
   shaderBuilder.addDefine(
-    "HAS_MODEL_COLOR",
+    'HAS_MODEL_COLOR',
     undefined,
     ShaderDestination.FRAGMENT
   );
@@ -61,7 +61,7 @@ ModelColorPipelineStage.process = function (
       red: false,
       green: false,
       blue: false,
-      alpha: false,
+      alpha: false
     };
     renderStateOptions.depthMask = false;
   } else if (color.alpha < 1.0) {
@@ -70,7 +70,7 @@ ModelColorPipelineStage.process = function (
   }
 
   shaderBuilder.addUniform(
-    "vec4",
+    'vec4',
     ModelColorPipelineStage.COLOR_UNIFORM_NAME,
     ShaderDestination.FRAGMENT
   );
@@ -80,18 +80,17 @@ ModelColorPipelineStage.process = function (
 
   // Create a colorBlend from the model's colorBlendMode and colorBlendAmount and pass it as a uniform.
   shaderBuilder.addUniform(
-    "float",
+    'float',
     ModelColorPipelineStage.COLOR_BLEND_UNIFORM_NAME,
     ShaderDestination.FRAGMENT
   );
-  stageUniforms[
-    ModelColorPipelineStage.COLOR_BLEND_UNIFORM_NAME
-  ] = function () {
-    return ColorBlendMode.getColorBlend(
-      model.colorBlendMode,
-      model.colorBlendAmount
-    );
-  };
+  stageUniforms[ModelColorPipelineStage.COLOR_BLEND_UNIFORM_NAME] =
+    function () {
+      return ColorBlendMode.getColorBlend(
+        model.colorBlendMode,
+        model.colorBlendAmount
+      );
+    };
 
   renderResources.uniformMap = combine(
     stageUniforms,

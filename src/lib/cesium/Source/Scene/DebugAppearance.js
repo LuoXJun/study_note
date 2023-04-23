@@ -1,7 +1,7 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Appearance from "./Appearance.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Appearance from './Appearance.js';
 
 /**
  * Visualizes a vertex attribute by displaying it as a color for debugging.
@@ -39,7 +39,7 @@ function DebugAppearance(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(attributeName)) {
-    throw new DeveloperError("options.attributeName is required.");
+    throw new DeveloperError('options.attributeName is required.');
   }
   //>>includeEnd('debug');
 
@@ -47,40 +47,40 @@ function DebugAppearance(options) {
     perInstanceAttribute = false;
   }
 
-  let glslDatatype = defaultValue(options.glslDatatype, "vec3");
+  let glslDatatype = defaultValue(options.glslDatatype, 'vec3');
   const varyingName = `v_${attributeName}`;
   let getColor;
 
   // Well-known normalized vector attributes in VertexFormat
   if (
-    attributeName === "normal" ||
-    attributeName === "tangent" ||
-    attributeName === "bitangent"
+    attributeName === 'normal' ||
+    attributeName === 'tangent' ||
+    attributeName === 'bitangent'
   ) {
     getColor = `vec4 getColor() { return vec4((${varyingName} + vec3(1.0)) * 0.5, 1.0); }\n`;
   } else {
     // All other attributes, both well-known and custom
-    if (attributeName === "st") {
-      glslDatatype = "vec2";
+    if (attributeName === 'st') {
+      glslDatatype = 'vec2';
     }
 
     switch (glslDatatype) {
-      case "float":
+      case 'float':
         getColor = `vec4 getColor() { return vec4(vec3(${varyingName}), 1.0); }\n`;
         break;
-      case "vec2":
+      case 'vec2':
         getColor = `vec4 getColor() { return vec4(${varyingName}, 0.0, 1.0); }\n`;
         break;
-      case "vec3":
+      case 'vec3':
         getColor = `vec4 getColor() { return vec4(${varyingName}, 1.0); }\n`;
         break;
-      case "vec4":
+      case 'vec4':
         getColor = `vec4 getColor() { return ${varyingName}; }\n`;
         break;
       //>>includeStart('debug', pragmas.debug);
       default:
         throw new DeveloperError(
-          "options.glslDatatype must be float, vec2, vec3, or vec4."
+          'options.glslDatatype must be float, vec2, vec3, or vec4.'
         );
       //>>includeEnd('debug');
     }
@@ -88,12 +88,12 @@ function DebugAppearance(options) {
 
   const vs =
     `${
-      "attribute vec3 position3DHigh;\n" +
-      "attribute vec3 position3DLow;\n" +
-      "attribute float batchId;\n"
+      'attribute vec3 position3DHigh;\n' +
+      'attribute vec3 position3DLow;\n' +
+      'attribute float batchId;\n'
     }${
       perInstanceAttribute
-        ? ""
+        ? ''
         : `attribute ${glslDatatype} ${attributeName};\n`
     }varying ${glslDatatype} ${varyingName};\n` +
     `void main()\n` +
@@ -157,7 +157,7 @@ Object.defineProperties(DebugAppearance.prototype, {
   vertexShaderSource: {
     get: function () {
       return this._vertexShaderSource;
-    },
+    }
   },
 
   /**
@@ -173,7 +173,7 @@ Object.defineProperties(DebugAppearance.prototype, {
   fragmentShaderSource: {
     get: function () {
       return this._fragmentShaderSource;
-    },
+    }
   },
 
   /**
@@ -187,7 +187,7 @@ Object.defineProperties(DebugAppearance.prototype, {
   renderState: {
     get: function () {
       return this._renderState;
-    },
+    }
   },
 
   /**
@@ -203,7 +203,7 @@ Object.defineProperties(DebugAppearance.prototype, {
   closed: {
     get: function () {
       return this._closed;
-    },
+    }
   },
 
   /**
@@ -217,7 +217,7 @@ Object.defineProperties(DebugAppearance.prototype, {
   attributeName: {
     get: function () {
       return this._attributeName;
-    },
+    }
   },
 
   /**
@@ -231,8 +231,8 @@ Object.defineProperties(DebugAppearance.prototype, {
   glslDatatype: {
     get: function () {
       return this._glslDatatype;
-    },
-  },
+    }
+  }
 });
 
 /**

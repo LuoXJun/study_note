@@ -1,9 +1,9 @@
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import EllipseOutlineGeometry from "./EllipseOutlineGeometry.js";
-import Ellipsoid from "./Ellipsoid.js";
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import EllipseOutlineGeometry from './EllipseOutlineGeometry.js';
+import Ellipsoid from './Ellipsoid.js';
 
 /**
  * A description of the outline of a circle on the ellipsoid.
@@ -39,7 +39,7 @@ function CircleOutlineGeometry(options) {
   const radius = options.radius;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("radius", radius);
+  Check.typeOf.number('radius', radius);
   //>>includeEnd('debug');
 
   const ellipseGeometryOptions = {
@@ -50,10 +50,10 @@ function CircleOutlineGeometry(options) {
     height: options.height,
     extrudedHeight: options.extrudedHeight,
     granularity: options.granularity,
-    numberOfVerticalLines: options.numberOfVerticalLines,
+    numberOfVerticalLines: options.numberOfVerticalLines
   };
   this._ellipseGeometry = new EllipseOutlineGeometry(ellipseGeometryOptions);
-  this._workerName = "createCircleOutlineGeometry";
+  this._workerName = 'createCircleOutlineGeometry';
 }
 
 /**
@@ -73,7 +73,7 @@ CircleOutlineGeometry.packedLength = EllipseOutlineGeometry.packedLength;
  */
 CircleOutlineGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
+  Check.typeOf.object('value', value);
   //>>includeEnd('debug');
   return EllipseOutlineGeometry.pack(
     value._ellipseGeometry,
@@ -85,7 +85,7 @@ CircleOutlineGeometry.pack = function (value, array, startingIndex) {
 const scratchEllipseGeometry = new EllipseOutlineGeometry({
   center: new Cartesian3(),
   semiMajorAxis: 1.0,
-  semiMinorAxis: 1.0,
+  semiMinorAxis: 1.0
 });
 const scratchOptions = {
   center: new Cartesian3(),
@@ -96,7 +96,7 @@ const scratchOptions = {
   granularity: undefined,
   numberOfVerticalLines: undefined,
   semiMajorAxis: undefined,
-  semiMinorAxis: undefined,
+  semiMinorAxis: undefined
 };
 
 /**

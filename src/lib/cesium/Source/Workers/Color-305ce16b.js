@@ -1,5 +1,18 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Transforms-3ac41eb6', './ComponentDatatype-4a60b8d6'], (function (exports, RuntimeError, defaultValue, Transforms, ComponentDatatype) { 'use strict';
+define([
+  'exports',
+  './RuntimeError-c581ca93',
+  './defaultValue-94c3e563',
+  './Transforms-3ac41eb6',
+  './ComponentDatatype-4a60b8d6'
+], function (
+  exports,
+  RuntimeError,
+  defaultValue,
+  Transforms,
+  ComponentDatatype
+) {
+  'use strict';
 
   function hue2rgb(m1, m2, h) {
     if (h < 0) {
@@ -70,7 +83,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    */
   Color.fromCartesian4 = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -125,8 +138,8 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    */
   Color.fromAlpha = function (color, alpha, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("color", color);
-    RuntimeError.Check.typeOf.number("alpha", alpha);
+    RuntimeError.Check.typeOf.object('color', color);
+    RuntimeError.Check.typeOf.number('alpha', alpha);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -266,7 +279,10 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * });
    */
   Color.fromRandom = function (options, result) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     let red = options.red;
     if (!defaultValue.defined(red)) {
@@ -274,11 +290,17 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
       const maximumRed = defaultValue.defaultValue(options.maximumRed, 1.0);
 
       //>>includeStart('debug', pragmas.debug);
-      RuntimeError.Check.typeOf.number.lessThanOrEquals("minimumRed", minimumRed, maximumRed);
+      RuntimeError.Check.typeOf.number.lessThanOrEquals(
+        'minimumRed',
+        minimumRed,
+        maximumRed
+      );
       //>>includeEnd('debug');
 
       red =
-        minimumRed + ComponentDatatype.CesiumMath.nextRandomNumber() * (maximumRed - minimumRed);
+        minimumRed +
+        ComponentDatatype.CesiumMath.nextRandomNumber() *
+          (maximumRed - minimumRed);
     }
 
     let green = options.green;
@@ -288,14 +310,15 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
 
       //>>includeStart('debug', pragmas.debug);
       RuntimeError.Check.typeOf.number.lessThanOrEquals(
-        "minimumGreen",
+        'minimumGreen',
         minimumGreen,
         maximumGreen
       );
       //>>includeEnd('debug');
       green =
         minimumGreen +
-        ComponentDatatype.CesiumMath.nextRandomNumber() * (maximumGreen - minimumGreen);
+        ComponentDatatype.CesiumMath.nextRandomNumber() *
+          (maximumGreen - minimumGreen);
     }
 
     let blue = options.blue;
@@ -305,14 +328,16 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
 
       //>>includeStart('debug', pragmas.debug);
       RuntimeError.Check.typeOf.number.lessThanOrEquals(
-        "minimumBlue",
+        'minimumBlue',
         minimumBlue,
         maximumBlue
       );
       //>>includeEnd('debug');
 
       blue =
-        minimumBlue + ComponentDatatype.CesiumMath.nextRandomNumber() * (maximumBlue - minimumBlue);
+        minimumBlue +
+        ComponentDatatype.CesiumMath.nextRandomNumber() *
+          (maximumBlue - minimumBlue);
     }
 
     let alpha = options.alpha;
@@ -322,7 +347,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
 
       //>>includeStart('debug', pragmas.debug);
       RuntimeError.Check.typeOf.number.lessThanOrEquals(
-        "minumumAlpha",
+        'minumumAlpha',
         minimumAlpha,
         maximumAlpha
       );
@@ -330,7 +355,8 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
 
       alpha =
         minimumAlpha +
-        ComponentDatatype.CesiumMath.nextRandomNumber() * (maximumAlpha - minimumAlpha);
+        ComponentDatatype.CesiumMath.nextRandomNumber() *
+          (maximumAlpha - minimumAlpha);
     }
 
     if (!defaultValue.defined(result)) {
@@ -347,11 +373,14 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
   //#rgba
   const rgbaMatcher = /^#([0-9a-f])([0-9a-f])([0-9a-f])([0-9a-f])?$/i;
   //#rrggbbaa
-  const rrggbbaaMatcher = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})?$/i;
+  const rrggbbaaMatcher =
+    /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})?$/i;
   //rgb(), rgba(), or rgb%()
-  const rgbParenthesesMatcher = /^rgba?\(\s*([0-9.]+%?)\s*,\s*([0-9.]+%?)\s*,\s*([0-9.]+%?)(?:\s*,\s*([0-9.]+))?\s*\)$/i;
+  const rgbParenthesesMatcher =
+    /^rgba?\(\s*([0-9.]+%?)\s*,\s*([0-9.]+%?)\s*,\s*([0-9.]+%?)(?:\s*,\s*([0-9.]+))?\s*\)$/i;
   //hsl() or hsla()
-  const hslParenthesesMatcher = /^hsla?\(\s*([0-9.]+)\s*,\s*([0-9.]+%)\s*,\s*([0-9.]+%)(?:\s*,\s*([0-9.]+))?\s*\)$/i;
+  const hslParenthesesMatcher =
+    /^hsla?\(\s*([0-9.]+)\s*,\s*([0-9.]+%)\s*,\s*([0-9.]+%)(?:\s*,\s*([0-9.]+))?\s*\)$/i;
 
   /**
    * Creates a Color instance from a CSS color value.
@@ -369,7 +398,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    */
   Color.fromCssColorString = function (color, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.string("color", color);
+    RuntimeError.Check.typeOf.string('color', color);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -377,7 +406,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
     }
 
     // Remove all whitespaces from the color string
-    color = color.replace(/\s/g, "");
+    color = color.replace(/\s/g, '');
 
     const namedColor = Color[color.toUpperCase()];
     if (defaultValue.defined(namedColor)) {
@@ -390,7 +419,8 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
       result.red = parseInt(matches[1], 16) / 15;
       result.green = parseInt(matches[2], 16) / 15.0;
       result.blue = parseInt(matches[3], 16) / 15.0;
-      result.alpha = parseInt(defaultValue.defaultValue(matches[4], "f"), 16) / 15.0;
+      result.alpha =
+        parseInt(defaultValue.defaultValue(matches[4], 'f'), 16) / 15.0;
       return result;
     }
 
@@ -399,19 +429,23 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
       result.red = parseInt(matches[1], 16) / 255.0;
       result.green = parseInt(matches[2], 16) / 255.0;
       result.blue = parseInt(matches[3], 16) / 255.0;
-      result.alpha = parseInt(defaultValue.defaultValue(matches[4], "ff"), 16) / 255.0;
+      result.alpha =
+        parseInt(defaultValue.defaultValue(matches[4], 'ff'), 16) / 255.0;
       return result;
     }
 
     matches = rgbParenthesesMatcher.exec(color);
     if (matches !== null) {
       result.red =
-        parseFloat(matches[1]) / ("%" === matches[1].substr(-1) ? 100.0 : 255.0);
+        parseFloat(matches[1]) /
+        ('%' === matches[1].substr(-1) ? 100.0 : 255.0);
       result.green =
-        parseFloat(matches[2]) / ("%" === matches[2].substr(-1) ? 100.0 : 255.0);
+        parseFloat(matches[2]) /
+        ('%' === matches[2].substr(-1) ? 100.0 : 255.0);
       result.blue =
-        parseFloat(matches[3]) / ("%" === matches[3].substr(-1) ? 100.0 : 255.0);
-      result.alpha = parseFloat(defaultValue.defaultValue(matches[4], "1.0"));
+        parseFloat(matches[3]) /
+        ('%' === matches[3].substr(-1) ? 100.0 : 255.0);
+      result.alpha = parseFloat(defaultValue.defaultValue(matches[4], '1.0'));
       return result;
     }
 
@@ -421,7 +455,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
         parseFloat(matches[1]) / 360.0,
         parseFloat(matches[2]) / 100.0,
         parseFloat(matches[3]) / 100.0,
-        parseFloat(defaultValue.defaultValue(matches[4], "1.0")),
+        parseFloat(defaultValue.defaultValue(matches[4], '1.0')),
         result
       );
     }
@@ -447,8 +481,8 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    */
   Color.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -470,7 +504,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    */
   Color.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -706,9 +740,13 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    */
   Color.prototype.brighten = function (magnitude, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("magnitude", magnitude);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("magnitude", magnitude, 0.0);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.number('magnitude', magnitude);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'magnitude',
+      magnitude,
+      0.0
+    );
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     magnitude = 1.0 - magnitude;
@@ -731,9 +769,13 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    */
   Color.prototype.darken = function (magnitude, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("magnitude", magnitude);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("magnitude", magnitude, 0.0);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.number('magnitude', magnitude);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'magnitude',
+      magnitude,
+      0.0
+    );
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     magnitude = 1.0 - magnitude;
@@ -768,9 +810,9 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    */
   Color.add = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.red = left.red + right.red;
@@ -790,9 +832,9 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    */
   Color.subtract = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.red = left.red - right.red;
@@ -812,9 +854,9 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    */
   Color.multiply = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.red = left.red * right.red;
@@ -834,9 +876,9 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    */
   Color.divide = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.red = left.red / right.red;
@@ -856,9 +898,9 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    */
   Color.mod = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.red = left.red % right.red;
@@ -879,10 +921,10 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    */
   Color.lerp = function (start, end, t, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("start", start);
-    RuntimeError.Check.typeOf.object("end", end);
-    RuntimeError.Check.typeOf.number("t", t);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('start', start);
+    RuntimeError.Check.typeOf.object('end', end);
+    RuntimeError.Check.typeOf.number('t', t);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.red = ComponentDatatype.CesiumMath.lerp(start.red, end.red, t);
@@ -902,9 +944,9 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    */
   Color.multiplyByScalar = function (color, scalar, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("color", color);
-    RuntimeError.Check.typeOf.number("scalar", scalar);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('color', color);
+    RuntimeError.Check.typeOf.number('scalar', scalar);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.red = color.red * scalar;
@@ -924,9 +966,9 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    */
   Color.divideByScalar = function (color, scalar, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("color", color);
-    RuntimeError.Check.typeOf.number("scalar", scalar);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('color', color);
+    RuntimeError.Check.typeOf.number('scalar', scalar);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.red = color.red / scalar;
@@ -943,7 +985,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.ALICEBLUE = Object.freeze(Color.fromCssColorString("#F0F8FF"));
+  Color.ALICEBLUE = Object.freeze(Color.fromCssColorString('#F0F8FF'));
 
   /**
    * An immutable Color instance initialized to CSS color #FAEBD7
@@ -952,7 +994,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.ANTIQUEWHITE = Object.freeze(Color.fromCssColorString("#FAEBD7"));
+  Color.ANTIQUEWHITE = Object.freeze(Color.fromCssColorString('#FAEBD7'));
 
   /**
    * An immutable Color instance initialized to CSS color #00FFFF
@@ -961,7 +1003,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.AQUA = Object.freeze(Color.fromCssColorString("#00FFFF"));
+  Color.AQUA = Object.freeze(Color.fromCssColorString('#00FFFF'));
 
   /**
    * An immutable Color instance initialized to CSS color #7FFFD4
@@ -970,7 +1012,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.AQUAMARINE = Object.freeze(Color.fromCssColorString("#7FFFD4"));
+  Color.AQUAMARINE = Object.freeze(Color.fromCssColorString('#7FFFD4'));
 
   /**
    * An immutable Color instance initialized to CSS color #F0FFFF
@@ -979,7 +1021,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.AZURE = Object.freeze(Color.fromCssColorString("#F0FFFF"));
+  Color.AZURE = Object.freeze(Color.fromCssColorString('#F0FFFF'));
 
   /**
    * An immutable Color instance initialized to CSS color #F5F5DC
@@ -988,7 +1030,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.BEIGE = Object.freeze(Color.fromCssColorString("#F5F5DC"));
+  Color.BEIGE = Object.freeze(Color.fromCssColorString('#F5F5DC'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFE4C4
@@ -997,7 +1039,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.BISQUE = Object.freeze(Color.fromCssColorString("#FFE4C4"));
+  Color.BISQUE = Object.freeze(Color.fromCssColorString('#FFE4C4'));
 
   /**
    * An immutable Color instance initialized to CSS color #000000
@@ -1006,7 +1048,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.BLACK = Object.freeze(Color.fromCssColorString("#000000"));
+  Color.BLACK = Object.freeze(Color.fromCssColorString('#000000'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFEBCD
@@ -1015,7 +1057,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.BLANCHEDALMOND = Object.freeze(Color.fromCssColorString("#FFEBCD"));
+  Color.BLANCHEDALMOND = Object.freeze(Color.fromCssColorString('#FFEBCD'));
 
   /**
    * An immutable Color instance initialized to CSS color #0000FF
@@ -1024,7 +1066,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.BLUE = Object.freeze(Color.fromCssColorString("#0000FF"));
+  Color.BLUE = Object.freeze(Color.fromCssColorString('#0000FF'));
 
   /**
    * An immutable Color instance initialized to CSS color #8A2BE2
@@ -1033,7 +1075,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.BLUEVIOLET = Object.freeze(Color.fromCssColorString("#8A2BE2"));
+  Color.BLUEVIOLET = Object.freeze(Color.fromCssColorString('#8A2BE2'));
 
   /**
    * An immutable Color instance initialized to CSS color #A52A2A
@@ -1042,7 +1084,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.BROWN = Object.freeze(Color.fromCssColorString("#A52A2A"));
+  Color.BROWN = Object.freeze(Color.fromCssColorString('#A52A2A'));
 
   /**
    * An immutable Color instance initialized to CSS color #DEB887
@@ -1051,7 +1093,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.BURLYWOOD = Object.freeze(Color.fromCssColorString("#DEB887"));
+  Color.BURLYWOOD = Object.freeze(Color.fromCssColorString('#DEB887'));
 
   /**
    * An immutable Color instance initialized to CSS color #5F9EA0
@@ -1060,7 +1102,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.CADETBLUE = Object.freeze(Color.fromCssColorString("#5F9EA0"));
+  Color.CADETBLUE = Object.freeze(Color.fromCssColorString('#5F9EA0'));
   /**
    * An immutable Color instance initialized to CSS color #7FFF00
    * <span class="colorSwath" style="background: #7FFF00;"></span>
@@ -1068,7 +1110,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.CHARTREUSE = Object.freeze(Color.fromCssColorString("#7FFF00"));
+  Color.CHARTREUSE = Object.freeze(Color.fromCssColorString('#7FFF00'));
 
   /**
    * An immutable Color instance initialized to CSS color #D2691E
@@ -1077,7 +1119,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.CHOCOLATE = Object.freeze(Color.fromCssColorString("#D2691E"));
+  Color.CHOCOLATE = Object.freeze(Color.fromCssColorString('#D2691E'));
 
   /**
    * An immutable Color instance initialized to CSS color #FF7F50
@@ -1086,7 +1128,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.CORAL = Object.freeze(Color.fromCssColorString("#FF7F50"));
+  Color.CORAL = Object.freeze(Color.fromCssColorString('#FF7F50'));
 
   /**
    * An immutable Color instance initialized to CSS color #6495ED
@@ -1095,7 +1137,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.CORNFLOWERBLUE = Object.freeze(Color.fromCssColorString("#6495ED"));
+  Color.CORNFLOWERBLUE = Object.freeze(Color.fromCssColorString('#6495ED'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFF8DC
@@ -1104,7 +1146,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.CORNSILK = Object.freeze(Color.fromCssColorString("#FFF8DC"));
+  Color.CORNSILK = Object.freeze(Color.fromCssColorString('#FFF8DC'));
 
   /**
    * An immutable Color instance initialized to CSS color #DC143C
@@ -1113,7 +1155,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.CRIMSON = Object.freeze(Color.fromCssColorString("#DC143C"));
+  Color.CRIMSON = Object.freeze(Color.fromCssColorString('#DC143C'));
 
   /**
    * An immutable Color instance initialized to CSS color #00FFFF
@@ -1122,7 +1164,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.CYAN = Object.freeze(Color.fromCssColorString("#00FFFF"));
+  Color.CYAN = Object.freeze(Color.fromCssColorString('#00FFFF'));
 
   /**
    * An immutable Color instance initialized to CSS color #00008B
@@ -1131,7 +1173,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKBLUE = Object.freeze(Color.fromCssColorString("#00008B"));
+  Color.DARKBLUE = Object.freeze(Color.fromCssColorString('#00008B'));
 
   /**
    * An immutable Color instance initialized to CSS color #008B8B
@@ -1140,7 +1182,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKCYAN = Object.freeze(Color.fromCssColorString("#008B8B"));
+  Color.DARKCYAN = Object.freeze(Color.fromCssColorString('#008B8B'));
 
   /**
    * An immutable Color instance initialized to CSS color #B8860B
@@ -1149,7 +1191,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKGOLDENROD = Object.freeze(Color.fromCssColorString("#B8860B"));
+  Color.DARKGOLDENROD = Object.freeze(Color.fromCssColorString('#B8860B'));
 
   /**
    * An immutable Color instance initialized to CSS color #A9A9A9
@@ -1158,7 +1200,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKGRAY = Object.freeze(Color.fromCssColorString("#A9A9A9"));
+  Color.DARKGRAY = Object.freeze(Color.fromCssColorString('#A9A9A9'));
 
   /**
    * An immutable Color instance initialized to CSS color #006400
@@ -1167,7 +1209,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKGREEN = Object.freeze(Color.fromCssColorString("#006400"));
+  Color.DARKGREEN = Object.freeze(Color.fromCssColorString('#006400'));
 
   /**
    * An immutable Color instance initialized to CSS color #A9A9A9
@@ -1185,7 +1227,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKKHAKI = Object.freeze(Color.fromCssColorString("#BDB76B"));
+  Color.DARKKHAKI = Object.freeze(Color.fromCssColorString('#BDB76B'));
 
   /**
    * An immutable Color instance initialized to CSS color #8B008B
@@ -1194,7 +1236,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKMAGENTA = Object.freeze(Color.fromCssColorString("#8B008B"));
+  Color.DARKMAGENTA = Object.freeze(Color.fromCssColorString('#8B008B'));
 
   /**
    * An immutable Color instance initialized to CSS color #556B2F
@@ -1203,7 +1245,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKOLIVEGREEN = Object.freeze(Color.fromCssColorString("#556B2F"));
+  Color.DARKOLIVEGREEN = Object.freeze(Color.fromCssColorString('#556B2F'));
 
   /**
    * An immutable Color instance initialized to CSS color #FF8C00
@@ -1212,7 +1254,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKORANGE = Object.freeze(Color.fromCssColorString("#FF8C00"));
+  Color.DARKORANGE = Object.freeze(Color.fromCssColorString('#FF8C00'));
 
   /**
    * An immutable Color instance initialized to CSS color #9932CC
@@ -1221,7 +1263,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKORCHID = Object.freeze(Color.fromCssColorString("#9932CC"));
+  Color.DARKORCHID = Object.freeze(Color.fromCssColorString('#9932CC'));
 
   /**
    * An immutable Color instance initialized to CSS color #8B0000
@@ -1230,7 +1272,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKRED = Object.freeze(Color.fromCssColorString("#8B0000"));
+  Color.DARKRED = Object.freeze(Color.fromCssColorString('#8B0000'));
 
   /**
    * An immutable Color instance initialized to CSS color #E9967A
@@ -1239,7 +1281,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKSALMON = Object.freeze(Color.fromCssColorString("#E9967A"));
+  Color.DARKSALMON = Object.freeze(Color.fromCssColorString('#E9967A'));
 
   /**
    * An immutable Color instance initialized to CSS color #8FBC8F
@@ -1248,7 +1290,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKSEAGREEN = Object.freeze(Color.fromCssColorString("#8FBC8F"));
+  Color.DARKSEAGREEN = Object.freeze(Color.fromCssColorString('#8FBC8F'));
 
   /**
    * An immutable Color instance initialized to CSS color #483D8B
@@ -1257,7 +1299,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKSLATEBLUE = Object.freeze(Color.fromCssColorString("#483D8B"));
+  Color.DARKSLATEBLUE = Object.freeze(Color.fromCssColorString('#483D8B'));
 
   /**
    * An immutable Color instance initialized to CSS color #2F4F4F
@@ -1266,7 +1308,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKSLATEGRAY = Object.freeze(Color.fromCssColorString("#2F4F4F"));
+  Color.DARKSLATEGRAY = Object.freeze(Color.fromCssColorString('#2F4F4F'));
 
   /**
    * An immutable Color instance initialized to CSS color #2F4F4F
@@ -1284,7 +1326,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKTURQUOISE = Object.freeze(Color.fromCssColorString("#00CED1"));
+  Color.DARKTURQUOISE = Object.freeze(Color.fromCssColorString('#00CED1'));
 
   /**
    * An immutable Color instance initialized to CSS color #9400D3
@@ -1293,7 +1335,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DARKVIOLET = Object.freeze(Color.fromCssColorString("#9400D3"));
+  Color.DARKVIOLET = Object.freeze(Color.fromCssColorString('#9400D3'));
 
   /**
    * An immutable Color instance initialized to CSS color #FF1493
@@ -1302,7 +1344,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DEEPPINK = Object.freeze(Color.fromCssColorString("#FF1493"));
+  Color.DEEPPINK = Object.freeze(Color.fromCssColorString('#FF1493'));
 
   /**
    * An immutable Color instance initialized to CSS color #00BFFF
@@ -1311,7 +1353,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DEEPSKYBLUE = Object.freeze(Color.fromCssColorString("#00BFFF"));
+  Color.DEEPSKYBLUE = Object.freeze(Color.fromCssColorString('#00BFFF'));
 
   /**
    * An immutable Color instance initialized to CSS color #696969
@@ -1320,7 +1362,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DIMGRAY = Object.freeze(Color.fromCssColorString("#696969"));
+  Color.DIMGRAY = Object.freeze(Color.fromCssColorString('#696969'));
 
   /**
    * An immutable Color instance initialized to CSS color #696969
@@ -1338,7 +1380,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.DODGERBLUE = Object.freeze(Color.fromCssColorString("#1E90FF"));
+  Color.DODGERBLUE = Object.freeze(Color.fromCssColorString('#1E90FF'));
 
   /**
    * An immutable Color instance initialized to CSS color #B22222
@@ -1347,7 +1389,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.FIREBRICK = Object.freeze(Color.fromCssColorString("#B22222"));
+  Color.FIREBRICK = Object.freeze(Color.fromCssColorString('#B22222'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFFAF0
@@ -1356,7 +1398,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.FLORALWHITE = Object.freeze(Color.fromCssColorString("#FFFAF0"));
+  Color.FLORALWHITE = Object.freeze(Color.fromCssColorString('#FFFAF0'));
 
   /**
    * An immutable Color instance initialized to CSS color #228B22
@@ -1365,7 +1407,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.FORESTGREEN = Object.freeze(Color.fromCssColorString("#228B22"));
+  Color.FORESTGREEN = Object.freeze(Color.fromCssColorString('#228B22'));
 
   /**
    * An immutable Color instance initialized to CSS color #FF00FF
@@ -1374,7 +1416,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.FUCHSIA = Object.freeze(Color.fromCssColorString("#FF00FF"));
+  Color.FUCHSIA = Object.freeze(Color.fromCssColorString('#FF00FF'));
 
   /**
    * An immutable Color instance initialized to CSS color #DCDCDC
@@ -1383,7 +1425,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.GAINSBORO = Object.freeze(Color.fromCssColorString("#DCDCDC"));
+  Color.GAINSBORO = Object.freeze(Color.fromCssColorString('#DCDCDC'));
 
   /**
    * An immutable Color instance initialized to CSS color #F8F8FF
@@ -1392,7 +1434,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.GHOSTWHITE = Object.freeze(Color.fromCssColorString("#F8F8FF"));
+  Color.GHOSTWHITE = Object.freeze(Color.fromCssColorString('#F8F8FF'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFD700
@@ -1401,7 +1443,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.GOLD = Object.freeze(Color.fromCssColorString("#FFD700"));
+  Color.GOLD = Object.freeze(Color.fromCssColorString('#FFD700'));
 
   /**
    * An immutable Color instance initialized to CSS color #DAA520
@@ -1410,7 +1452,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.GOLDENROD = Object.freeze(Color.fromCssColorString("#DAA520"));
+  Color.GOLDENROD = Object.freeze(Color.fromCssColorString('#DAA520'));
 
   /**
    * An immutable Color instance initialized to CSS color #808080
@@ -1419,7 +1461,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.GRAY = Object.freeze(Color.fromCssColorString("#808080"));
+  Color.GRAY = Object.freeze(Color.fromCssColorString('#808080'));
 
   /**
    * An immutable Color instance initialized to CSS color #008000
@@ -1428,7 +1470,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.GREEN = Object.freeze(Color.fromCssColorString("#008000"));
+  Color.GREEN = Object.freeze(Color.fromCssColorString('#008000'));
 
   /**
    * An immutable Color instance initialized to CSS color #ADFF2F
@@ -1437,7 +1479,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.GREENYELLOW = Object.freeze(Color.fromCssColorString("#ADFF2F"));
+  Color.GREENYELLOW = Object.freeze(Color.fromCssColorString('#ADFF2F'));
 
   /**
    * An immutable Color instance initialized to CSS color #808080
@@ -1455,7 +1497,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.HONEYDEW = Object.freeze(Color.fromCssColorString("#F0FFF0"));
+  Color.HONEYDEW = Object.freeze(Color.fromCssColorString('#F0FFF0'));
 
   /**
    * An immutable Color instance initialized to CSS color #FF69B4
@@ -1464,7 +1506,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.HOTPINK = Object.freeze(Color.fromCssColorString("#FF69B4"));
+  Color.HOTPINK = Object.freeze(Color.fromCssColorString('#FF69B4'));
 
   /**
    * An immutable Color instance initialized to CSS color #CD5C5C
@@ -1473,7 +1515,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.INDIANRED = Object.freeze(Color.fromCssColorString("#CD5C5C"));
+  Color.INDIANRED = Object.freeze(Color.fromCssColorString('#CD5C5C'));
 
   /**
    * An immutable Color instance initialized to CSS color #4B0082
@@ -1482,7 +1524,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.INDIGO = Object.freeze(Color.fromCssColorString("#4B0082"));
+  Color.INDIGO = Object.freeze(Color.fromCssColorString('#4B0082'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFFFF0
@@ -1491,7 +1533,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.IVORY = Object.freeze(Color.fromCssColorString("#FFFFF0"));
+  Color.IVORY = Object.freeze(Color.fromCssColorString('#FFFFF0'));
 
   /**
    * An immutable Color instance initialized to CSS color #F0E68C
@@ -1500,7 +1542,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.KHAKI = Object.freeze(Color.fromCssColorString("#F0E68C"));
+  Color.KHAKI = Object.freeze(Color.fromCssColorString('#F0E68C'));
 
   /**
    * An immutable Color instance initialized to CSS color #E6E6FA
@@ -1509,7 +1551,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LAVENDER = Object.freeze(Color.fromCssColorString("#E6E6FA"));
+  Color.LAVENDER = Object.freeze(Color.fromCssColorString('#E6E6FA'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFF0F5
@@ -1518,7 +1560,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LAVENDAR_BLUSH = Object.freeze(Color.fromCssColorString("#FFF0F5"));
+  Color.LAVENDAR_BLUSH = Object.freeze(Color.fromCssColorString('#FFF0F5'));
 
   /**
    * An immutable Color instance initialized to CSS color #7CFC00
@@ -1527,7 +1569,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LAWNGREEN = Object.freeze(Color.fromCssColorString("#7CFC00"));
+  Color.LAWNGREEN = Object.freeze(Color.fromCssColorString('#7CFC00'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFFACD
@@ -1536,7 +1578,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LEMONCHIFFON = Object.freeze(Color.fromCssColorString("#FFFACD"));
+  Color.LEMONCHIFFON = Object.freeze(Color.fromCssColorString('#FFFACD'));
 
   /**
    * An immutable Color instance initialized to CSS color #ADD8E6
@@ -1545,7 +1587,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LIGHTBLUE = Object.freeze(Color.fromCssColorString("#ADD8E6"));
+  Color.LIGHTBLUE = Object.freeze(Color.fromCssColorString('#ADD8E6'));
 
   /**
    * An immutable Color instance initialized to CSS color #F08080
@@ -1554,7 +1596,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LIGHTCORAL = Object.freeze(Color.fromCssColorString("#F08080"));
+  Color.LIGHTCORAL = Object.freeze(Color.fromCssColorString('#F08080'));
 
   /**
    * An immutable Color instance initialized to CSS color #E0FFFF
@@ -1563,7 +1605,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LIGHTCYAN = Object.freeze(Color.fromCssColorString("#E0FFFF"));
+  Color.LIGHTCYAN = Object.freeze(Color.fromCssColorString('#E0FFFF'));
 
   /**
    * An immutable Color instance initialized to CSS color #FAFAD2
@@ -1572,7 +1614,9 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LIGHTGOLDENRODYELLOW = Object.freeze(Color.fromCssColorString("#FAFAD2"));
+  Color.LIGHTGOLDENRODYELLOW = Object.freeze(
+    Color.fromCssColorString('#FAFAD2')
+  );
 
   /**
    * An immutable Color instance initialized to CSS color #D3D3D3
@@ -1581,7 +1625,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LIGHTGRAY = Object.freeze(Color.fromCssColorString("#D3D3D3"));
+  Color.LIGHTGRAY = Object.freeze(Color.fromCssColorString('#D3D3D3'));
 
   /**
    * An immutable Color instance initialized to CSS color #90EE90
@@ -1590,7 +1634,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LIGHTGREEN = Object.freeze(Color.fromCssColorString("#90EE90"));
+  Color.LIGHTGREEN = Object.freeze(Color.fromCssColorString('#90EE90'));
 
   /**
    * An immutable Color instance initialized to CSS color #D3D3D3
@@ -1608,7 +1652,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LIGHTPINK = Object.freeze(Color.fromCssColorString("#FFB6C1"));
+  Color.LIGHTPINK = Object.freeze(Color.fromCssColorString('#FFB6C1'));
 
   /**
    * An immutable Color instance initialized to CSS color #20B2AA
@@ -1617,7 +1661,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LIGHTSEAGREEN = Object.freeze(Color.fromCssColorString("#20B2AA"));
+  Color.LIGHTSEAGREEN = Object.freeze(Color.fromCssColorString('#20B2AA'));
 
   /**
    * An immutable Color instance initialized to CSS color #87CEFA
@@ -1626,7 +1670,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LIGHTSKYBLUE = Object.freeze(Color.fromCssColorString("#87CEFA"));
+  Color.LIGHTSKYBLUE = Object.freeze(Color.fromCssColorString('#87CEFA'));
 
   /**
    * An immutable Color instance initialized to CSS color #778899
@@ -1635,7 +1679,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LIGHTSLATEGRAY = Object.freeze(Color.fromCssColorString("#778899"));
+  Color.LIGHTSLATEGRAY = Object.freeze(Color.fromCssColorString('#778899'));
 
   /**
    * An immutable Color instance initialized to CSS color #778899
@@ -1653,7 +1697,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LIGHTSTEELBLUE = Object.freeze(Color.fromCssColorString("#B0C4DE"));
+  Color.LIGHTSTEELBLUE = Object.freeze(Color.fromCssColorString('#B0C4DE'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFFFE0
@@ -1662,7 +1706,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LIGHTYELLOW = Object.freeze(Color.fromCssColorString("#FFFFE0"));
+  Color.LIGHTYELLOW = Object.freeze(Color.fromCssColorString('#FFFFE0'));
 
   /**
    * An immutable Color instance initialized to CSS color #00FF00
@@ -1671,7 +1715,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LIME = Object.freeze(Color.fromCssColorString("#00FF00"));
+  Color.LIME = Object.freeze(Color.fromCssColorString('#00FF00'));
 
   /**
    * An immutable Color instance initialized to CSS color #32CD32
@@ -1680,7 +1724,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LIMEGREEN = Object.freeze(Color.fromCssColorString("#32CD32"));
+  Color.LIMEGREEN = Object.freeze(Color.fromCssColorString('#32CD32'));
 
   /**
    * An immutable Color instance initialized to CSS color #FAF0E6
@@ -1689,7 +1733,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.LINEN = Object.freeze(Color.fromCssColorString("#FAF0E6"));
+  Color.LINEN = Object.freeze(Color.fromCssColorString('#FAF0E6'));
 
   /**
    * An immutable Color instance initialized to CSS color #FF00FF
@@ -1698,7 +1742,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.MAGENTA = Object.freeze(Color.fromCssColorString("#FF00FF"));
+  Color.MAGENTA = Object.freeze(Color.fromCssColorString('#FF00FF'));
 
   /**
    * An immutable Color instance initialized to CSS color #800000
@@ -1707,7 +1751,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.MAROON = Object.freeze(Color.fromCssColorString("#800000"));
+  Color.MAROON = Object.freeze(Color.fromCssColorString('#800000'));
 
   /**
    * An immutable Color instance initialized to CSS color #66CDAA
@@ -1716,7 +1760,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.MEDIUMAQUAMARINE = Object.freeze(Color.fromCssColorString("#66CDAA"));
+  Color.MEDIUMAQUAMARINE = Object.freeze(Color.fromCssColorString('#66CDAA'));
 
   /**
    * An immutable Color instance initialized to CSS color #0000CD
@@ -1725,7 +1769,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.MEDIUMBLUE = Object.freeze(Color.fromCssColorString("#0000CD"));
+  Color.MEDIUMBLUE = Object.freeze(Color.fromCssColorString('#0000CD'));
 
   /**
    * An immutable Color instance initialized to CSS color #BA55D3
@@ -1734,7 +1778,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.MEDIUMORCHID = Object.freeze(Color.fromCssColorString("#BA55D3"));
+  Color.MEDIUMORCHID = Object.freeze(Color.fromCssColorString('#BA55D3'));
 
   /**
    * An immutable Color instance initialized to CSS color #9370DB
@@ -1743,7 +1787,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.MEDIUMPURPLE = Object.freeze(Color.fromCssColorString("#9370DB"));
+  Color.MEDIUMPURPLE = Object.freeze(Color.fromCssColorString('#9370DB'));
 
   /**
    * An immutable Color instance initialized to CSS color #3CB371
@@ -1752,7 +1796,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.MEDIUMSEAGREEN = Object.freeze(Color.fromCssColorString("#3CB371"));
+  Color.MEDIUMSEAGREEN = Object.freeze(Color.fromCssColorString('#3CB371'));
 
   /**
    * An immutable Color instance initialized to CSS color #7B68EE
@@ -1761,7 +1805,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.MEDIUMSLATEBLUE = Object.freeze(Color.fromCssColorString("#7B68EE"));
+  Color.MEDIUMSLATEBLUE = Object.freeze(Color.fromCssColorString('#7B68EE'));
 
   /**
    * An immutable Color instance initialized to CSS color #00FA9A
@@ -1770,7 +1814,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.MEDIUMSPRINGGREEN = Object.freeze(Color.fromCssColorString("#00FA9A"));
+  Color.MEDIUMSPRINGGREEN = Object.freeze(Color.fromCssColorString('#00FA9A'));
 
   /**
    * An immutable Color instance initialized to CSS color #48D1CC
@@ -1779,7 +1823,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.MEDIUMTURQUOISE = Object.freeze(Color.fromCssColorString("#48D1CC"));
+  Color.MEDIUMTURQUOISE = Object.freeze(Color.fromCssColorString('#48D1CC'));
 
   /**
    * An immutable Color instance initialized to CSS color #C71585
@@ -1788,7 +1832,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.MEDIUMVIOLETRED = Object.freeze(Color.fromCssColorString("#C71585"));
+  Color.MEDIUMVIOLETRED = Object.freeze(Color.fromCssColorString('#C71585'));
 
   /**
    * An immutable Color instance initialized to CSS color #191970
@@ -1797,7 +1841,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.MIDNIGHTBLUE = Object.freeze(Color.fromCssColorString("#191970"));
+  Color.MIDNIGHTBLUE = Object.freeze(Color.fromCssColorString('#191970'));
 
   /**
    * An immutable Color instance initialized to CSS color #F5FFFA
@@ -1806,7 +1850,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.MINTCREAM = Object.freeze(Color.fromCssColorString("#F5FFFA"));
+  Color.MINTCREAM = Object.freeze(Color.fromCssColorString('#F5FFFA'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFE4E1
@@ -1815,7 +1859,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.MISTYROSE = Object.freeze(Color.fromCssColorString("#FFE4E1"));
+  Color.MISTYROSE = Object.freeze(Color.fromCssColorString('#FFE4E1'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFE4B5
@@ -1824,7 +1868,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.MOCCASIN = Object.freeze(Color.fromCssColorString("#FFE4B5"));
+  Color.MOCCASIN = Object.freeze(Color.fromCssColorString('#FFE4B5'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFDEAD
@@ -1833,7 +1877,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.NAVAJOWHITE = Object.freeze(Color.fromCssColorString("#FFDEAD"));
+  Color.NAVAJOWHITE = Object.freeze(Color.fromCssColorString('#FFDEAD'));
 
   /**
    * An immutable Color instance initialized to CSS color #000080
@@ -1842,7 +1886,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.NAVY = Object.freeze(Color.fromCssColorString("#000080"));
+  Color.NAVY = Object.freeze(Color.fromCssColorString('#000080'));
 
   /**
    * An immutable Color instance initialized to CSS color #FDF5E6
@@ -1851,7 +1895,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.OLDLACE = Object.freeze(Color.fromCssColorString("#FDF5E6"));
+  Color.OLDLACE = Object.freeze(Color.fromCssColorString('#FDF5E6'));
 
   /**
    * An immutable Color instance initialized to CSS color #808000
@@ -1860,7 +1904,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.OLIVE = Object.freeze(Color.fromCssColorString("#808000"));
+  Color.OLIVE = Object.freeze(Color.fromCssColorString('#808000'));
 
   /**
    * An immutable Color instance initialized to CSS color #6B8E23
@@ -1869,7 +1913,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.OLIVEDRAB = Object.freeze(Color.fromCssColorString("#6B8E23"));
+  Color.OLIVEDRAB = Object.freeze(Color.fromCssColorString('#6B8E23'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFA500
@@ -1878,7 +1922,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.ORANGE = Object.freeze(Color.fromCssColorString("#FFA500"));
+  Color.ORANGE = Object.freeze(Color.fromCssColorString('#FFA500'));
 
   /**
    * An immutable Color instance initialized to CSS color #FF4500
@@ -1887,7 +1931,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.ORANGERED = Object.freeze(Color.fromCssColorString("#FF4500"));
+  Color.ORANGERED = Object.freeze(Color.fromCssColorString('#FF4500'));
 
   /**
    * An immutable Color instance initialized to CSS color #DA70D6
@@ -1896,7 +1940,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.ORCHID = Object.freeze(Color.fromCssColorString("#DA70D6"));
+  Color.ORCHID = Object.freeze(Color.fromCssColorString('#DA70D6'));
 
   /**
    * An immutable Color instance initialized to CSS color #EEE8AA
@@ -1905,7 +1949,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.PALEGOLDENROD = Object.freeze(Color.fromCssColorString("#EEE8AA"));
+  Color.PALEGOLDENROD = Object.freeze(Color.fromCssColorString('#EEE8AA'));
 
   /**
    * An immutable Color instance initialized to CSS color #98FB98
@@ -1914,7 +1958,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.PALEGREEN = Object.freeze(Color.fromCssColorString("#98FB98"));
+  Color.PALEGREEN = Object.freeze(Color.fromCssColorString('#98FB98'));
 
   /**
    * An immutable Color instance initialized to CSS color #AFEEEE
@@ -1923,7 +1967,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.PALETURQUOISE = Object.freeze(Color.fromCssColorString("#AFEEEE"));
+  Color.PALETURQUOISE = Object.freeze(Color.fromCssColorString('#AFEEEE'));
 
   /**
    * An immutable Color instance initialized to CSS color #DB7093
@@ -1932,7 +1976,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.PALEVIOLETRED = Object.freeze(Color.fromCssColorString("#DB7093"));
+  Color.PALEVIOLETRED = Object.freeze(Color.fromCssColorString('#DB7093'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFEFD5
@@ -1941,7 +1985,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.PAPAYAWHIP = Object.freeze(Color.fromCssColorString("#FFEFD5"));
+  Color.PAPAYAWHIP = Object.freeze(Color.fromCssColorString('#FFEFD5'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFDAB9
@@ -1950,7 +1994,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.PEACHPUFF = Object.freeze(Color.fromCssColorString("#FFDAB9"));
+  Color.PEACHPUFF = Object.freeze(Color.fromCssColorString('#FFDAB9'));
 
   /**
    * An immutable Color instance initialized to CSS color #CD853F
@@ -1959,7 +2003,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.PERU = Object.freeze(Color.fromCssColorString("#CD853F"));
+  Color.PERU = Object.freeze(Color.fromCssColorString('#CD853F'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFC0CB
@@ -1968,7 +2012,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.PINK = Object.freeze(Color.fromCssColorString("#FFC0CB"));
+  Color.PINK = Object.freeze(Color.fromCssColorString('#FFC0CB'));
 
   /**
    * An immutable Color instance initialized to CSS color #DDA0DD
@@ -1977,7 +2021,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.PLUM = Object.freeze(Color.fromCssColorString("#DDA0DD"));
+  Color.PLUM = Object.freeze(Color.fromCssColorString('#DDA0DD'));
 
   /**
    * An immutable Color instance initialized to CSS color #B0E0E6
@@ -1986,7 +2030,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.POWDERBLUE = Object.freeze(Color.fromCssColorString("#B0E0E6"));
+  Color.POWDERBLUE = Object.freeze(Color.fromCssColorString('#B0E0E6'));
 
   /**
    * An immutable Color instance initialized to CSS color #800080
@@ -1995,7 +2039,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.PURPLE = Object.freeze(Color.fromCssColorString("#800080"));
+  Color.PURPLE = Object.freeze(Color.fromCssColorString('#800080'));
 
   /**
    * An immutable Color instance initialized to CSS color #FF0000
@@ -2004,7 +2048,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.RED = Object.freeze(Color.fromCssColorString("#FF0000"));
+  Color.RED = Object.freeze(Color.fromCssColorString('#FF0000'));
 
   /**
    * An immutable Color instance initialized to CSS color #BC8F8F
@@ -2013,7 +2057,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.ROSYBROWN = Object.freeze(Color.fromCssColorString("#BC8F8F"));
+  Color.ROSYBROWN = Object.freeze(Color.fromCssColorString('#BC8F8F'));
 
   /**
    * An immutable Color instance initialized to CSS color #4169E1
@@ -2022,7 +2066,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.ROYALBLUE = Object.freeze(Color.fromCssColorString("#4169E1"));
+  Color.ROYALBLUE = Object.freeze(Color.fromCssColorString('#4169E1'));
 
   /**
    * An immutable Color instance initialized to CSS color #8B4513
@@ -2031,7 +2075,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.SADDLEBROWN = Object.freeze(Color.fromCssColorString("#8B4513"));
+  Color.SADDLEBROWN = Object.freeze(Color.fromCssColorString('#8B4513'));
 
   /**
    * An immutable Color instance initialized to CSS color #FA8072
@@ -2040,7 +2084,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.SALMON = Object.freeze(Color.fromCssColorString("#FA8072"));
+  Color.SALMON = Object.freeze(Color.fromCssColorString('#FA8072'));
 
   /**
    * An immutable Color instance initialized to CSS color #F4A460
@@ -2049,7 +2093,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.SANDYBROWN = Object.freeze(Color.fromCssColorString("#F4A460"));
+  Color.SANDYBROWN = Object.freeze(Color.fromCssColorString('#F4A460'));
 
   /**
    * An immutable Color instance initialized to CSS color #2E8B57
@@ -2058,7 +2102,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.SEAGREEN = Object.freeze(Color.fromCssColorString("#2E8B57"));
+  Color.SEAGREEN = Object.freeze(Color.fromCssColorString('#2E8B57'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFF5EE
@@ -2067,7 +2111,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.SEASHELL = Object.freeze(Color.fromCssColorString("#FFF5EE"));
+  Color.SEASHELL = Object.freeze(Color.fromCssColorString('#FFF5EE'));
 
   /**
    * An immutable Color instance initialized to CSS color #A0522D
@@ -2076,7 +2120,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.SIENNA = Object.freeze(Color.fromCssColorString("#A0522D"));
+  Color.SIENNA = Object.freeze(Color.fromCssColorString('#A0522D'));
 
   /**
    * An immutable Color instance initialized to CSS color #C0C0C0
@@ -2085,7 +2129,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.SILVER = Object.freeze(Color.fromCssColorString("#C0C0C0"));
+  Color.SILVER = Object.freeze(Color.fromCssColorString('#C0C0C0'));
 
   /**
    * An immutable Color instance initialized to CSS color #87CEEB
@@ -2094,7 +2138,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.SKYBLUE = Object.freeze(Color.fromCssColorString("#87CEEB"));
+  Color.SKYBLUE = Object.freeze(Color.fromCssColorString('#87CEEB'));
 
   /**
    * An immutable Color instance initialized to CSS color #6A5ACD
@@ -2103,7 +2147,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.SLATEBLUE = Object.freeze(Color.fromCssColorString("#6A5ACD"));
+  Color.SLATEBLUE = Object.freeze(Color.fromCssColorString('#6A5ACD'));
 
   /**
    * An immutable Color instance initialized to CSS color #708090
@@ -2112,7 +2156,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.SLATEGRAY = Object.freeze(Color.fromCssColorString("#708090"));
+  Color.SLATEGRAY = Object.freeze(Color.fromCssColorString('#708090'));
 
   /**
    * An immutable Color instance initialized to CSS color #708090
@@ -2130,7 +2174,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.SNOW = Object.freeze(Color.fromCssColorString("#FFFAFA"));
+  Color.SNOW = Object.freeze(Color.fromCssColorString('#FFFAFA'));
 
   /**
    * An immutable Color instance initialized to CSS color #00FF7F
@@ -2139,7 +2183,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.SPRINGGREEN = Object.freeze(Color.fromCssColorString("#00FF7F"));
+  Color.SPRINGGREEN = Object.freeze(Color.fromCssColorString('#00FF7F'));
 
   /**
    * An immutable Color instance initialized to CSS color #4682B4
@@ -2148,7 +2192,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.STEELBLUE = Object.freeze(Color.fromCssColorString("#4682B4"));
+  Color.STEELBLUE = Object.freeze(Color.fromCssColorString('#4682B4'));
 
   /**
    * An immutable Color instance initialized to CSS color #D2B48C
@@ -2157,7 +2201,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.TAN = Object.freeze(Color.fromCssColorString("#D2B48C"));
+  Color.TAN = Object.freeze(Color.fromCssColorString('#D2B48C'));
 
   /**
    * An immutable Color instance initialized to CSS color #008080
@@ -2166,7 +2210,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.TEAL = Object.freeze(Color.fromCssColorString("#008080"));
+  Color.TEAL = Object.freeze(Color.fromCssColorString('#008080'));
 
   /**
    * An immutable Color instance initialized to CSS color #D8BFD8
@@ -2175,7 +2219,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.THISTLE = Object.freeze(Color.fromCssColorString("#D8BFD8"));
+  Color.THISTLE = Object.freeze(Color.fromCssColorString('#D8BFD8'));
 
   /**
    * An immutable Color instance initialized to CSS color #FF6347
@@ -2184,7 +2228,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.TOMATO = Object.freeze(Color.fromCssColorString("#FF6347"));
+  Color.TOMATO = Object.freeze(Color.fromCssColorString('#FF6347'));
 
   /**
    * An immutable Color instance initialized to CSS color #40E0D0
@@ -2193,7 +2237,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.TURQUOISE = Object.freeze(Color.fromCssColorString("#40E0D0"));
+  Color.TURQUOISE = Object.freeze(Color.fromCssColorString('#40E0D0'));
 
   /**
    * An immutable Color instance initialized to CSS color #EE82EE
@@ -2202,7 +2246,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.VIOLET = Object.freeze(Color.fromCssColorString("#EE82EE"));
+  Color.VIOLET = Object.freeze(Color.fromCssColorString('#EE82EE'));
 
   /**
    * An immutable Color instance initialized to CSS color #F5DEB3
@@ -2211,7 +2255,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.WHEAT = Object.freeze(Color.fromCssColorString("#F5DEB3"));
+  Color.WHEAT = Object.freeze(Color.fromCssColorString('#F5DEB3'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFFFFF
@@ -2220,7 +2264,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.WHITE = Object.freeze(Color.fromCssColorString("#FFFFFF"));
+  Color.WHITE = Object.freeze(Color.fromCssColorString('#FFFFFF'));
 
   /**
    * An immutable Color instance initialized to CSS color #F5F5F5
@@ -2229,7 +2273,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.WHITESMOKE = Object.freeze(Color.fromCssColorString("#F5F5F5"));
+  Color.WHITESMOKE = Object.freeze(Color.fromCssColorString('#F5F5F5'));
 
   /**
    * An immutable Color instance initialized to CSS color #FFFF00
@@ -2238,7 +2282,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.YELLOW = Object.freeze(Color.fromCssColorString("#FFFF00"));
+  Color.YELLOW = Object.freeze(Color.fromCssColorString('#FFFF00'));
 
   /**
    * An immutable Color instance initialized to CSS color #9ACD32
@@ -2247,7 +2291,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
    * @constant
    * @type {Color}
    */
-  Color.YELLOWGREEN = Object.freeze(Color.fromCssColorString("#9ACD32"));
+  Color.YELLOWGREEN = Object.freeze(Color.fromCssColorString('#9ACD32'));
 
   /**
    * An immutable Color instance initialized to CSS transparent.
@@ -2259,5 +2303,4 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Tran
   Color.TRANSPARENT = Object.freeze(new Color(0, 0, 0, 0));
 
   exports.Color = Color;
-
-}));
+});

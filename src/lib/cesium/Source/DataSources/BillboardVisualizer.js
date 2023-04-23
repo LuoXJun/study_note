@@ -1,18 +1,18 @@
-import AssociativeArray from "../Core/AssociativeArray.js";
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DistanceDisplayCondition from "../Core/DistanceDisplayCondition.js";
-import NearFarScalar from "../Core/NearFarScalar.js";
-import HeightReference from "../Scene/HeightReference.js";
-import HorizontalOrigin from "../Scene/HorizontalOrigin.js";
-import VerticalOrigin from "../Scene/VerticalOrigin.js";
-import BoundingSphereState from "./BoundingSphereState.js";
-import Property from "./Property.js";
+import AssociativeArray from '../Core/AssociativeArray.js';
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DistanceDisplayCondition from '../Core/DistanceDisplayCondition.js';
+import NearFarScalar from '../Core/NearFarScalar.js';
+import HeightReference from '../Scene/HeightReference.js';
+import HorizontalOrigin from '../Scene/HorizontalOrigin.js';
+import VerticalOrigin from '../Scene/VerticalOrigin.js';
+import BoundingSphereState from './BoundingSphereState.js';
+import Property from './Property.js';
 
 const defaultColor = Color.WHITE;
 const defaultEyeOffset = Cartesian3.ZERO;
@@ -52,10 +52,10 @@ function EntityData(entity) {
 function BillboardVisualizer(entityCluster, entityCollection) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(entityCluster)) {
-    throw new DeveloperError("entityCluster is required.");
+    throw new DeveloperError('entityCluster is required.');
   }
   if (!defined(entityCollection)) {
-    throw new DeveloperError("entityCollection is required.");
+    throw new DeveloperError('entityCollection is required.');
   }
   //>>includeEnd('debug');
 
@@ -80,7 +80,7 @@ function BillboardVisualizer(entityCluster, entityCollection) {
 BillboardVisualizer.prototype.update = function (time) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required.");
+    throw new DeveloperError('time is required.');
   }
   //>>includeEnd('debug');
 
@@ -246,10 +246,10 @@ BillboardVisualizer.prototype.update = function (time) {
 BillboardVisualizer.prototype.getBoundingSphere = function (entity, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(entity)) {
-    throw new DeveloperError("entity is required.");
+    throw new DeveloperError('entity is required.');
   }
   if (!defined(result)) {
-    throw new DeveloperError("result is required.");
+    throw new DeveloperError('result is required.');
   }
   //>>includeEnd('debug');
 

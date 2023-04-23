@@ -1,4 +1,4 @@
-import WebGLConstants from "./WebGLConstants.js";
+import WebGLConstants from './WebGLConstants.js';
 
 /**
  * The type of a geometric primitive, i.e., points, lines, and triangles.
@@ -64,7 +64,7 @@ const PrimitiveType = {
    * @type {Number}
    * @constant
    */
-  TRIANGLE_FAN: WebGLConstants.TRIANGLE_FAN,
+  TRIANGLE_FAN: WebGLConstants.TRIANGLE_FAN
 };
 
 /**

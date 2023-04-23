@@ -29,6 +29,6 @@ const ExtrapolationType = {
    * @type {Number}
    * @constant
    */
-  EXTRAPOLATE: 2,
+  EXTRAPOLATE: 2
 };
 export default Object.freeze(ExtrapolationType);

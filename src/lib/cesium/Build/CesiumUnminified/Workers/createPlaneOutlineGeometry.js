@@ -23,7 +23,30 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-97284df2', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './ComponentDatatype-4eeb6d9b', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './WebGLConstants-6da700a2'], (function (defaultValue, Transforms, Matrix2, RuntimeError, ComponentDatatype, GeometryAttribute, GeometryAttributes, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
+define([
+  './defaultValue-97284df2',
+  './Transforms-273eeb44',
+  './Matrix2-9e1c22e2',
+  './RuntimeError-4f8ec8a2',
+  './ComponentDatatype-4eeb6d9b',
+  './GeometryAttribute-9be2d2e5',
+  './GeometryAttributes-734a3446',
+  './_commonjsHelpers-3aae1032-65601a27',
+  './combine-d11b1f00',
+  './WebGLConstants-6da700a2'
+], function (
+  defaultValue,
+  Transforms,
+  Matrix2,
+  RuntimeError,
+  ComponentDatatype,
+  GeometryAttribute,
+  GeometryAttributes,
+  _commonjsHelpers3aae1032,
+  combine,
+  WebGLConstants
+) {
+  'use strict';
 
   /**
    * Describes geometry representing the outline of a plane centered at the origin, with a unit width and length.
@@ -33,7 +56,7 @@ define(['./defaultValue-97284df2', './Transforms-273eeb44', './Matrix2-9e1c22e2'
    *
    */
   function PlaneOutlineGeometry() {
-    this._workerName = "createPlaneOutlineGeometry";
+    this._workerName = 'createPlaneOutlineGeometry';
   }
 
   /**
@@ -52,8 +75,8 @@ define(['./defaultValue-97284df2', './Transforms-273eeb44', './Matrix2-9e1c22e2'
    */
   PlaneOutlineGeometry.pack = function (value, array) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     return array;
@@ -69,7 +92,7 @@ define(['./defaultValue-97284df2', './Transforms-273eeb44', './Matrix2-9e1c22e2'
    */
   PlaneOutlineGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -108,7 +131,7 @@ define(['./defaultValue-97284df2', './Transforms-273eeb44', './Matrix2-9e1c22e2'
     attributes.position = new GeometryAttribute.GeometryAttribute({
       componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
       componentsPerAttribute: 3,
-      values: positions,
+      values: positions
     });
 
     indices[0] = 0;
@@ -124,7 +147,10 @@ define(['./defaultValue-97284df2', './Transforms-273eeb44', './Matrix2-9e1c22e2'
       attributes: attributes,
       indices: indices,
       primitiveType: GeometryAttribute.PrimitiveType.LINES,
-      boundingSphere: new Transforms.BoundingSphere(Matrix2.Cartesian3.ZERO, Math.sqrt(2.0)),
+      boundingSphere: new Transforms.BoundingSphere(
+        Matrix2.Cartesian3.ZERO,
+        Math.sqrt(2.0)
+      )
     });
   };
 
@@ -136,6 +162,5 @@ define(['./defaultValue-97284df2', './Transforms-273eeb44', './Matrix2-9e1c22e2'
   }
 
   return createPlaneOutlineGeometry;
-
-}));
+});
 //# sourceMappingURL=createPlaneOutlineGeometry.js.map

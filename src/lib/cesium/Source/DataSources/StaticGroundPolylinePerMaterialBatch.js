@@ -1,18 +1,18 @@
-import AssociativeArray from "../Core/AssociativeArray.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DistanceDisplayCondition from "../Core/DistanceDisplayCondition.js";
-import DistanceDisplayConditionGeometryInstanceAttribute from "../Core/DistanceDisplayConditionGeometryInstanceAttribute.js";
-import ShowGeometryInstanceAttribute from "../Core/ShowGeometryInstanceAttribute.js";
-import GroundPolylinePrimitive from "../Scene/GroundPolylinePrimitive.js";
-import PolylineColorAppearance from "../Scene/PolylineColorAppearance.js";
-import PolylineMaterialAppearance from "../Scene/PolylineMaterialAppearance.js";
-import BoundingSphereState from "./BoundingSphereState.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import MaterialProperty from "./MaterialProperty.js";
-import Property from "./Property.js";
+import AssociativeArray from '../Core/AssociativeArray.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DistanceDisplayCondition from '../Core/DistanceDisplayCondition.js';
+import DistanceDisplayConditionGeometryInstanceAttribute from '../Core/DistanceDisplayConditionGeometryInstanceAttribute.js';
+import ShowGeometryInstanceAttribute from '../Core/ShowGeometryInstanceAttribute.js';
+import GroundPolylinePrimitive from '../Scene/GroundPolylinePrimitive.js';
+import PolylineColorAppearance from '../Scene/PolylineColorAppearance.js';
+import PolylineMaterialAppearance from '../Scene/PolylineMaterialAppearance.js';
+import BoundingSphereState from './BoundingSphereState.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import MaterialProperty from './MaterialProperty.js';
+import Property from './Property.js';
 
 const scratchColor = new Color();
 const distanceDisplayConditionScratch = new DistanceDisplayCondition();
@@ -46,10 +46,11 @@ function Batch(
   this.updatersWithAttributes = new AssociativeArray();
   this.attributes = new AssociativeArray();
   this.invalidated = false;
-  this.removeMaterialSubscription = materialProperty.definitionChanged.addEventListener(
-    Batch.prototype.onMaterialChanged,
-    this
-  );
+  this.removeMaterialSubscription =
+    materialProperty.definitionChanged.addEventListener(
+      Batch.prototype.onMaterialChanged,
+      this
+    );
   this.subscriptions = new AssociativeArray();
   this.showsUpdated = new AssociativeArray();
   this.zIndex = zIndex;
@@ -98,7 +99,7 @@ Batch.prototype.add = function (time, updater, geometryInstance) {
         newValue,
         oldValue
       ) {
-        if (propertyName === "isShowing") {
+        if (propertyName === 'isShowing') {
           that.showsUpdated.set(updater.id, updater);
         }
       })
@@ -147,7 +148,7 @@ Batch.prototype.update = function (time) {
         asynchronous: this._asynchronous,
         geometryInstances: geometries.slice(),
         appearance: new this.appearanceType(),
-        classificationType: this.classificationType,
+        classificationType: this.classificationType
       });
 
       if (this.appearanceType === PolylineMaterialAppearance) {
@@ -249,14 +250,16 @@ Batch.prototype.update = function (time) {
             attributes._lastDistanceDisplayCondition
           )
         ) {
-          attributes._lastDistanceDisplayCondition = DistanceDisplayCondition.clone(
-            distanceDisplayCondition,
-            attributes._lastDistanceDisplayCondition
-          );
-          attributes.distanceDisplayCondition = DistanceDisplayConditionGeometryInstanceAttribute.toValue(
-            distanceDisplayCondition,
-            attributes.distanceDisplayCondition
-          );
+          attributes._lastDistanceDisplayCondition =
+            DistanceDisplayCondition.clone(
+              distanceDisplayCondition,
+              attributes._lastDistanceDisplayCondition
+            );
+          attributes.distanceDisplayCondition =
+            DistanceDisplayConditionGeometryInstanceAttribute.toValue(
+              distanceDisplayCondition,
+              attributes.distanceDisplayCondition
+            );
         }
       }
     }
@@ -423,12 +426,13 @@ StaticGroundPolylinePerMaterialBatch.prototype.getBoundingSphere = function (
   return BoundingSphereState.FAILED;
 };
 
-StaticGroundPolylinePerMaterialBatch.prototype.removeAllPrimitives = function () {
-  const items = this._items;
-  const length = items.length;
-  for (let i = 0; i < length; i++) {
-    items[i].destroy();
-  }
-  this._items.length = 0;
-};
+StaticGroundPolylinePerMaterialBatch.prototype.removeAllPrimitives =
+  function () {
+    const items = this._items;
+    const length = items.length;
+    for (let i = 0; i < length; i++) {
+      items[i].destroy();
+    }
+    this._items.length = 0;
+  };
 export default StaticGroundPolylinePerMaterialBatch;

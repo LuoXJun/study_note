@@ -1,15 +1,15 @@
-import combine from "../../Core/combine.js";
-import defined from "../../Core/defined.js";
-import oneTimeWarning from "../../Core/oneTimeWarning.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import Pass from "../../Renderer/Pass.js";
-import CustomShaderStageVS from "../../Shaders/ModelExperimental/CustomShaderStageVS.js";
-import CustomShaderStageFS from "../../Shaders/ModelExperimental/CustomShaderStageFS.js";
-import AlphaMode from "../AlphaMode.js";
-import CustomShaderMode from "./CustomShaderMode.js";
-import FeatureIdPipelineStage from "./FeatureIdPipelineStage.js";
-import MetadataPipelineStage from "./MetadataPipelineStage.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
+import combine from '../../Core/combine.js';
+import defined from '../../Core/defined.js';
+import oneTimeWarning from '../../Core/oneTimeWarning.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import Pass from '../../Renderer/Pass.js';
+import CustomShaderStageVS from '../../Shaders/ModelExperimental/CustomShaderStageVS.js';
+import CustomShaderStageFS from '../../Shaders/ModelExperimental/CustomShaderStageFS.js';
+import AlphaMode from '../AlphaMode.js';
+import CustomShaderMode from './CustomShaderMode.js';
+import FeatureIdPipelineStage from './FeatureIdPipelineStage.js';
+import MetadataPipelineStage from './MetadataPipelineStage.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
 
 /**
  * The custom shader pipeline stage takes GLSL callbacks from the
@@ -23,23 +23,23 @@ import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
  * @private
  */
 const CustomShaderPipelineStage = {};
-CustomShaderPipelineStage.name = "CustomShaderPipelineStage"; // Helps with debugging
+CustomShaderPipelineStage.name = 'CustomShaderPipelineStage'; // Helps with debugging
 
-CustomShaderPipelineStage.STRUCT_ID_ATTRIBUTES_VS = "AttributesVS";
-CustomShaderPipelineStage.STRUCT_ID_ATTRIBUTES_FS = "AttributesFS";
-CustomShaderPipelineStage.STRUCT_NAME_ATTRIBUTES = "Attributes";
-CustomShaderPipelineStage.STRUCT_ID_VERTEX_INPUT = "VertexInput";
-CustomShaderPipelineStage.STRUCT_NAME_VERTEX_INPUT = "VertexInput";
-CustomShaderPipelineStage.STRUCT_ID_FRAGMENT_INPUT = "FragmentInput";
-CustomShaderPipelineStage.STRUCT_NAME_FRAGMENT_INPUT = "FragmentInput";
+CustomShaderPipelineStage.STRUCT_ID_ATTRIBUTES_VS = 'AttributesVS';
+CustomShaderPipelineStage.STRUCT_ID_ATTRIBUTES_FS = 'AttributesFS';
+CustomShaderPipelineStage.STRUCT_NAME_ATTRIBUTES = 'Attributes';
+CustomShaderPipelineStage.STRUCT_ID_VERTEX_INPUT = 'VertexInput';
+CustomShaderPipelineStage.STRUCT_NAME_VERTEX_INPUT = 'VertexInput';
+CustomShaderPipelineStage.STRUCT_ID_FRAGMENT_INPUT = 'FragmentInput';
+CustomShaderPipelineStage.STRUCT_NAME_FRAGMENT_INPUT = 'FragmentInput';
 CustomShaderPipelineStage.FUNCTION_ID_INITIALIZE_INPUT_STRUCT_VS =
-  "initializeInputStructVS";
+  'initializeInputStructVS';
 CustomShaderPipelineStage.FUNCTION_SIGNATURE_INITIALIZE_INPUT_STRUCT_VS =
-  "void initializeInputStruct(out VertexInput vsInput, ProcessedAttributes attributes)";
+  'void initializeInputStruct(out VertexInput vsInput, ProcessedAttributes attributes)';
 CustomShaderPipelineStage.FUNCTION_ID_INITIALIZE_INPUT_STRUCT_FS =
-  "initializeInputStructFS";
+  'initializeInputStructFS';
 CustomShaderPipelineStage.FUNCTION_SIGNATURE_INITIALIZE_INPUT_STRUCT_FS =
-  "void initializeInputStruct(out FragmentInput fsInput, ProcessedAttributes attributes)";
+  'void initializeInputStruct(out FragmentInput fsInput, ProcessedAttributes attributes)';
 
 /**
  * Process a primitive. This modifies the following parts of the render
@@ -106,7 +106,7 @@ CustomShaderPipelineStage.process = function (
   // the input to the fragment shader may include a low-precision ECEF position
   if (generatedCode.shouldComputePositionWC) {
     shaderBuilder.addDefine(
-      "COMPUTE_POSITION_WC",
+      'COMPUTE_POSITION_WC',
       undefined,
       ShaderDestination.BOTH
     );
@@ -114,7 +114,7 @@ CustomShaderPipelineStage.process = function (
 
   if (defined(customShader.vertexShaderText)) {
     shaderBuilder.addDefine(
-      "HAS_CUSTOM_VERTEX_SHADER",
+      'HAS_CUSTOM_VERTEX_SHADER',
       undefined,
       ShaderDestination.VERTEX
     );
@@ -122,7 +122,7 @@ CustomShaderPipelineStage.process = function (
 
   if (defined(customShader.fragmentShaderText)) {
     shaderBuilder.addDefine(
-      "HAS_CUSTOM_FRAGMENT_SHADER",
+      'HAS_CUSTOM_FRAGMENT_SHADER',
       undefined,
       ShaderDestination.FRAGMENT
     );
@@ -171,33 +171,33 @@ function getAttributesByName(attributes) {
 
 // GLSL types of standard attribute types when uniquely defined
 const attributeTypeLUT = {
-  position: "vec3",
-  normal: "vec3",
-  tangent: "vec3",
-  bitangent: "vec3",
-  texCoord: "vec2",
-  color: "vec4",
-  joints: "ivec4",
-  weights: "vec4",
+  position: 'vec3',
+  normal: 'vec3',
+  tangent: 'vec3',
+  bitangent: 'vec3',
+  texCoord: 'vec2',
+  color: 'vec4',
+  joints: 'ivec4',
+  weights: 'vec4'
 };
 
 // Corresponding attribute values
 const attributeDefaultValueLUT = {
-  position: "vec3(0.0)",
-  normal: "vec3(0.0, 0.0, 1.0)",
-  tangent: "vec3(1.0, 0.0, 0.0)",
-  bitangent: "vec3(0.0, 1.0, 0.0)",
-  texCoord: "vec2(0.0)",
-  color: "vec4(1.0)",
-  joints: "ivec4(0)",
-  weights: "vec4(0.0)",
+  position: 'vec3(0.0)',
+  normal: 'vec3(0.0, 0.0, 1.0)',
+  tangent: 'vec3(1.0, 0.0, 0.0)',
+  bitangent: 'vec3(0.0, 1.0, 0.0)',
+  texCoord: 'vec2(0.0)',
+  color: 'vec4(1.0)',
+  joints: 'ivec4(0)',
+  weights: 'vec4(0.0)'
 };
 
 function inferAttributeDefaults(attributeName) {
   // remove trailing set indices. E.g. "texCoord_0" -> "texCoord"
-  let trimmed = attributeName.replace(/_[0-9]+$/, "");
+  let trimmed = attributeName.replace(/_[0-9]+$/, '');
   // also remove the MC/EC since they will have the same default value
-  trimmed = trimmed.replace(/(MC|EC)$/, "");
+  trimmed = trimmed.replace(/(MC|EC)$/, '');
 
   const glslType = attributeTypeLUT[trimmed];
   const value = attributeDefaultValueLUT[trimmed];
@@ -209,7 +209,7 @@ function inferAttributeDefaults(attributeName) {
 
   return {
     attributeField: [glslType, attributeName],
-    value: value,
+    value: value
   };
 }
 
@@ -249,7 +249,7 @@ function generateVertexShaderLines(
     const attributeDefaults = inferAttributeDefaults(variableName);
     if (!defined(attributeDefaults)) {
       CustomShaderPipelineStage._oneTimeWarning(
-        "CustomShaderPipelineStage.incompatiblePrimitiveVS",
+        'CustomShaderPipelineStage.incompatiblePrimitiveVS',
         `Primitive is missing attribute ${variableName}, disabling custom vertex shader`
       );
       // This primitive isn't compatible with the shader. Return early
@@ -277,24 +277,24 @@ function generatePositionBuiltins(customShader) {
 
   // World coordinates in ECEF coordinates. Note that this is
   // low precision (32-bit floats) on the GPU.
-  if (usedVariables.hasOwnProperty("positionWC")) {
-    attributeFields.push(["vec3", "positionWC"]);
+  if (usedVariables.hasOwnProperty('positionWC')) {
+    attributeFields.push(['vec3', 'positionWC']);
     initializationLines.push(
-      "fsInput.attributes.positionWC = attributes.positionWC;"
+      'fsInput.attributes.positionWC = attributes.positionWC;'
     );
   }
 
   // position in eye coordinates
-  if (usedVariables.hasOwnProperty("positionEC")) {
-    attributeFields.push(["vec3", "positionEC"]);
+  if (usedVariables.hasOwnProperty('positionEC')) {
+    attributeFields.push(['vec3', 'positionEC']);
     initializationLines.push(
-      "fsInput.attributes.positionEC = attributes.positionEC;"
+      'fsInput.attributes.positionEC = attributes.positionEC;'
     );
   }
 
   return {
     attributeFields: attributeFields,
-    initializationLines: initializationLines,
+    initializationLines: initializationLines
   };
 }
 
@@ -335,7 +335,7 @@ function generateFragmentShaderLines(
     const attributeDefaults = inferAttributeDefaults(variableName);
     if (!defined(attributeDefaults)) {
       CustomShaderPipelineStage._oneTimeWarning(
-        "CustomShaderPipelineStage.incompatiblePrimitiveFS",
+        'CustomShaderPipelineStage.incompatiblePrimitiveFS',
         `Primitive is missing attribute ${variableName}, disabling custom fragment shader.`
       );
 
@@ -356,16 +356,15 @@ function generateFragmentShaderLines(
   fragmentLines.attributeFields = attributeFields.concat(
     positionBuiltins.attributeFields
   );
-  fragmentLines.initializationLines = positionBuiltins.initializationLines.concat(
-    initializationLines
-  );
+  fragmentLines.initializationLines =
+    positionBuiltins.initializationLines.concat(initializationLines);
 }
 
 // These attributes are derived from positionMC, and are handled separately
 // from other attributes
 const builtinAttributes = {
   positionWC: true,
-  positionEC: true,
+  positionEC: true
 };
 
 function partitionAttributes(
@@ -394,10 +393,10 @@ function partitionAttributes(
       // normals and tangents are in model coordinates in the attributes but
       // in eye coordinates in the fragment shader.
       renamed = attributeName;
-      if (isFragmentShader && attributeName === "normalMC") {
-        renamed = "normalEC";
-      } else if (isFragmentShader && attributeName === "tangentMC") {
-        renamed = "tangentEC";
+      if (isFragmentShader && attributeName === 'normalMC') {
+        renamed = 'normalEC';
+      } else if (isFragmentShader && attributeName === 'tangentMC') {
+        renamed = 'tangentEC';
       }
 
       if (shaderAttributeSet.hasOwnProperty(renamed)) {
@@ -417,10 +416,10 @@ function partitionAttributes(
       // normals and tangents are in model coordinates in the attributes but
       // in eye coordinates in the fragment shader.
       renamed = attributeName;
-      if (isFragmentShader && attributeName === "normalEC") {
-        renamed = "normalMC";
-      } else if (isFragmentShader && attributeName === "tangentEC") {
-        renamed = "tangentMC";
+      if (isFragmentShader && attributeName === 'normalEC') {
+        renamed = 'normalMC';
+      } else if (isFragmentShader && attributeName === 'tangentEC') {
+        renamed = 'tangentMC';
       }
 
       if (!primitiveAttributes.hasOwnProperty(renamed)) {
@@ -431,17 +430,17 @@ function partitionAttributes(
 
   return {
     addToShader: addToShader,
-    missingAttributes: missingAttributes,
+    missingAttributes: missingAttributes
   };
 }
 
 function generateShaderLines(customShader, primitive) {
   // Assume shader code is disabled unless proven otherwise
   const vertexLines = {
-    enabled: false,
+    enabled: false
   };
   const fragmentLines = {
-    enabled: false,
+    enabled: false
   };
 
   // Attempt to generate vertex and fragment shader lines before adding any
@@ -461,7 +460,7 @@ function generateShaderLines(customShader, primitive) {
   // - or the fragment shader is disabled
   const attributeSetFS = customShader.usedVariablesFragment.attributeSet;
   const shouldComputePositionWC =
-    attributeSetFS.hasOwnProperty("positionWC") && fragmentLines.enabled;
+    attributeSetFS.hasOwnProperty('positionWC') && fragmentLines.enabled;
 
   // Return any generated shader code along with some flags to indicate which
   // defines should be added.
@@ -471,7 +470,7 @@ function generateShaderLines(customShader, primitive) {
     vertexLinesEnabled: vertexLines.enabled,
     fragmentLinesEnabled: fragmentLines.enabled,
     customShaderEnabled: vertexLines.enabled || fragmentLines.enabled,
-    shouldComputePositionWC: shouldComputePositionWC,
+    shouldComputePositionWC: shouldComputePositionWC
   };
 }
 
@@ -505,19 +504,19 @@ function addVertexLinesToShader(shaderBuilder, vertexLines) {
   shaderBuilder.addStructField(
     structId,
     CustomShaderPipelineStage.STRUCT_NAME_ATTRIBUTES,
-    "attributes"
+    'attributes'
   );
   // Add FeatureIds struct from the Feature ID stage
   shaderBuilder.addStructField(
     structId,
     FeatureIdPipelineStage.STRUCT_NAME_FEATURE_IDS,
-    "featureIds"
+    'featureIds'
   );
   // Add Metadata struct from the metadata stage
   shaderBuilder.addStructField(
     structId,
     MetadataPipelineStage.STRUCT_NAME_METADATA,
-    "metadata"
+    'metadata'
   );
 
   const functionId =
@@ -561,19 +560,19 @@ function addFragmentLinesToShader(shaderBuilder, fragmentLines) {
   shaderBuilder.addStructField(
     structId,
     CustomShaderPipelineStage.STRUCT_NAME_ATTRIBUTES,
-    "attributes"
+    'attributes'
   );
   // Add FeatureIds struct from the Feature ID stage
   shaderBuilder.addStructField(
     structId,
     FeatureIdPipelineStage.STRUCT_NAME_FEATURE_IDS,
-    "featureIds"
+    'featureIds'
   );
   // Add Metadata struct from the metadata stage
   shaderBuilder.addStructField(
     structId,
     MetadataPipelineStage.STRUCT_NAME_METADATA,
-    "metadata"
+    'metadata'
   );
 
   const functionId =
@@ -594,9 +593,9 @@ function addLinesToShader(shaderBuilder, customShader, generatedCode) {
     addVertexLinesToShader(shaderBuilder, vertexLines);
 
     shaderBuilder.addVertexLines([
-      "#line 0",
+      '#line 0',
       customShader.vertexShaderText,
-      CustomShaderStageVS,
+      CustomShaderStageVS
     ]);
   }
 
@@ -605,9 +604,9 @@ function addLinesToShader(shaderBuilder, customShader, generatedCode) {
     addFragmentLinesToShader(shaderBuilder, fragmentLines);
 
     shaderBuilder.addFragmentLines([
-      "#line 0",
+      '#line 0',
       customShader.fragmentShaderText,
-      CustomShaderStageFS,
+      CustomShaderStageFS
     ]);
   }
 }

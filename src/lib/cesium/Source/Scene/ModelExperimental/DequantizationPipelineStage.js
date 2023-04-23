@@ -1,7 +1,7 @@
-import defined from "../../Core/defined.js";
-import Cartesian4 from "../../Core/Cartesian4.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
+import defined from '../../Core/defined.js';
+import Cartesian4 from '../../Core/Cartesian4.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
 
 /**
  * The dequantization stage generates shader code to dequantize attributes
@@ -12,12 +12,12 @@ import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
  * @private
  */
 const DequantizationPipelineStage = {};
-DequantizationPipelineStage.name = "DequantizationPipelineStage"; // Helps with debugging
+DequantizationPipelineStage.name = 'DequantizationPipelineStage'; // Helps with debugging
 
 DequantizationPipelineStage.FUNCTION_ID_DEQUANTIZATION_STAGE_VS =
-  "dequantizationStage";
+  'dequantizationStage';
 DequantizationPipelineStage.FUNCTION_SIGNATURE_DEQUANTIZATION_STAGE_VS =
-  "void dequantizationStage(inout ProcessedAttributes attributes)";
+  'void dequantizationStage(inout ProcessedAttributes attributes)';
 
 /**
  * Process a primitive with quantized attributes. This stage modifies the
@@ -46,7 +46,7 @@ DequantizationPipelineStage.process = function (
   );
 
   shaderBuilder.addDefine(
-    "USE_DEQUANTIZATION",
+    'USE_DEQUANTIZATION',
     undefined,
     ShaderDestination.VERTEX
   );
@@ -75,7 +75,7 @@ function addDequantizationUniforms(renderResources, attributeInfo) {
   if (quantization.octEncoded) {
     const normalizationRange = `model_normalizationRange_${variableName}`;
     shaderBuilder.addUniform(
-      "float",
+      'float',
       normalizationRange,
       ShaderDestination.VERTEX
     );
@@ -144,7 +144,7 @@ function generateOctDecodeLine(variableName, quantization) {
 
   // Draco stores things as .zxy instead of xyz, so be explicit about the
   // swizzle to avoid confusion
-  const swizzle = quantization.octEncodedZXY ? ".zxy" : ".xyz";
+  const swizzle = quantization.octEncodedZXY ? '.zxy' : '.xyz';
 
   // This generates lines such as:
   // attributes.normal = czm_octDecode(a_quantized_normal, model_normalizationRange_normal).zxy;

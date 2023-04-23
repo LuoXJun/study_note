@@ -1,11 +1,11 @@
-import combine from "../../Core/combine.js";
-import defined from "../../Core/defined.js";
-import ImageBasedLightingStageFS from "../../Shaders/ModelExperimental/ImageBasedLightingStageFS.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import OctahedralProjectedCubeMap from "../OctahedralProjectedCubeMap.js";
+import combine from '../../Core/combine.js';
+import defined from '../../Core/defined.js';
+import ImageBasedLightingStageFS from '../../Shaders/ModelExperimental/ImageBasedLightingStageFS.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import OctahedralProjectedCubeMap from '../OctahedralProjectedCubeMap.js';
 
 const ImageBasedLightingPipelineStage = {};
-ImageBasedLightingPipelineStage.name = "ImageBasedLightingPipelineStage"; // Helps with debugging
+ImageBasedLightingPipelineStage.name = 'ImageBasedLightingPipelineStage'; // Helps with debugging
 
 ImageBasedLightingPipelineStage.process = function (
   renderResources,
@@ -16,13 +16,13 @@ ImageBasedLightingPipelineStage.process = function (
   const shaderBuilder = renderResources.shaderBuilder;
 
   shaderBuilder.addDefine(
-    "USE_IBL_LIGHTING",
+    'USE_IBL_LIGHTING',
     undefined,
     ShaderDestination.FRAGMENT
   );
   shaderBuilder.addUniform(
-    "vec2",
-    "model_iblFactor",
+    'vec2',
+    'model_iblFactor',
     ShaderDestination.FRAGMENT
   );
 
@@ -33,31 +33,31 @@ ImageBasedLightingPipelineStage.process = function (
       imageBasedLighting.enabled;
     if (addMatrix) {
       shaderBuilder.addUniform(
-        "mat3",
-        "model_iblReferenceFrameMatrix",
+        'mat3',
+        'model_iblReferenceFrameMatrix',
         ShaderDestination.FRAGMENT
       );
     }
 
     if (defined(imageBasedLighting.sphericalHarmonicCoefficients)) {
       shaderBuilder.addDefine(
-        "DIFFUSE_IBL",
+        'DIFFUSE_IBL',
         undefined,
         ShaderDestination.FRAGMENT
       );
       shaderBuilder.addDefine(
-        "CUSTOM_SPHERICAL_HARMONICS",
+        'CUSTOM_SPHERICAL_HARMONICS',
         undefined,
         ShaderDestination.FRAGMENT
       );
       shaderBuilder.addUniform(
-        "vec3",
-        "model_sphericalHarmonicCoefficients[9]",
+        'vec3',
+        'model_sphericalHarmonicCoefficients[9]',
         ShaderDestination.FRAGMENT
       );
     } else if (imageBasedLighting.useDefaultSphericalHarmonics) {
       shaderBuilder.addDefine(
-        "DIFFUSE_IBL",
+        'DIFFUSE_IBL',
         undefined,
         ShaderDestination.FRAGMENT
       );
@@ -68,33 +68,33 @@ ImageBasedLightingPipelineStage.process = function (
       imageBasedLighting.specularEnvironmentMapAtlas.ready
     ) {
       shaderBuilder.addDefine(
-        "SPECULAR_IBL",
+        'SPECULAR_IBL',
         undefined,
         ShaderDestination.FRAGMENT
       );
       shaderBuilder.addDefine(
-        "CUSTOM_SPECULAR_IBL",
+        'CUSTOM_SPECULAR_IBL',
         undefined,
         ShaderDestination.FRAGMENT
       );
       shaderBuilder.addUniform(
-        "sampler2D",
-        "model_specularEnvironmentMaps",
+        'sampler2D',
+        'model_specularEnvironmentMaps',
         ShaderDestination.FRAGMENT
       );
       shaderBuilder.addUniform(
-        "vec2",
-        "model_specularEnvironmentMapsSize",
+        'vec2',
+        'model_specularEnvironmentMapsSize',
         ShaderDestination.FRAGMENT
       );
       shaderBuilder.addUniform(
-        "float",
-        "model_specularEnvironmentMapsMaximumLOD",
+        'float',
+        'model_specularEnvironmentMapsMaximumLOD',
         ShaderDestination.FRAGMENT
       );
     } else if (model.useDefaultSpecularMaps) {
       shaderBuilder.addDefine(
-        "SPECULAR_IBL",
+        'SPECULAR_IBL',
         undefined,
         ShaderDestination.FRAGMENT
       );
@@ -103,13 +103,13 @@ ImageBasedLightingPipelineStage.process = function (
 
   if (defined(imageBasedLighting.luminanceAtZenith)) {
     shaderBuilder.addDefine(
-      "USE_SUN_LUMINANCE",
+      'USE_SUN_LUMINANCE',
       undefined,
       ShaderDestination.FRAGMENT
     );
     shaderBuilder.addUniform(
-      "float",
-      "model_luminanceAtZenith",
+      'float',
+      'model_luminanceAtZenith',
       ShaderDestination.FRAGMENT
     );
   }
@@ -137,7 +137,7 @@ ImageBasedLightingPipelineStage.process = function (
     },
     model_specularEnvironmentMapsMaximumLOD: function () {
       return imageBasedLighting.specularEnvironmentMapAtlas.maximumMipmapLevel;
-    },
+    }
   };
 
   renderResources.uniformMap = combine(uniformMap, renderResources.uniformMap);

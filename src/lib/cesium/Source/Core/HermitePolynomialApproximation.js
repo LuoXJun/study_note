@@ -1,7 +1,7 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import CesiumMath from "./Math.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import CesiumMath from './Math.js';
 
 const factorial = CesiumMath.factorial;
 
@@ -67,7 +67,7 @@ function calculateCoefficientTerm(
  * @namespace HermitePolynomialApproximation
  */
 const HermitePolynomialApproximation = {
-  type: "Hermite",
+  type: 'Hermite'
 };
 
 /**
@@ -87,13 +87,13 @@ HermitePolynomialApproximation.getRequiredDataPoints = function (
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(degree)) {
-    throw new DeveloperError("degree is required.");
+    throw new DeveloperError('degree is required.');
   }
   if (degree < 0) {
-    throw new DeveloperError("degree must be 0 or greater.");
+    throw new DeveloperError('degree must be 0 or greater.');
   }
   if (inputOrder < 0) {
-    throw new DeveloperError("inputOrder must be 0 or greater.");
+    throw new DeveloperError('inputOrder must be 0 or greater.');
   }
   //>>includeEnd('debug');
 

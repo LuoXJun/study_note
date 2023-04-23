@@ -1,4 +1,4 @@
-import defined from "./defined.js";
+import defined from './defined.js';
 
 /**
  * Constructs an exception object that is thrown due to a developer error, e.g., invalid argument,
@@ -24,7 +24,7 @@ function DeveloperError(message) {
    * @type {String}
    * @readonly
    */
-  this.name = "DeveloperError";
+  this.name = 'DeveloperError';
 
   /**
    * The explanation for why this exception was thrown.
@@ -69,7 +69,7 @@ DeveloperError.prototype.toString = function () {
  */
 DeveloperError.throwInstantiationError = function () {
   throw new DeveloperError(
-    "This function defines an interface and should not be called directly."
+    'This function defines an interface and should not be called directly.'
   );
 };
 export default DeveloperError;

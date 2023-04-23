@@ -1,10 +1,10 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import VertexFormat from "../Core/VertexFormat.js";
-import EllipsoidSurfaceAppearanceFS from "../Shaders/Appearances/EllipsoidSurfaceAppearanceFS.js";
-import EllipsoidSurfaceAppearanceVS from "../Shaders/Appearances/EllipsoidSurfaceAppearanceVS.js";
-import Appearance from "./Appearance.js";
-import Material from "./Material.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import VertexFormat from '../Core/VertexFormat.js';
+import EllipsoidSurfaceAppearanceFS from '../Shaders/Appearances/EllipsoidSurfaceAppearanceFS.js';
+import EllipsoidSurfaceAppearanceVS from '../Shaders/Appearances/EllipsoidSurfaceAppearanceVS.js';
+import Appearance from './Appearance.js';
+import Material from './Material.js';
 
 /**
  * An appearance for geometry on the surface of the ellipsoid like {@link PolygonGeometry}
@@ -104,7 +104,7 @@ Object.defineProperties(EllipsoidSurfaceAppearance.prototype, {
   vertexShaderSource: {
     get: function () {
       return this._vertexShaderSource;
-    },
+    }
   },
 
   /**
@@ -121,7 +121,7 @@ Object.defineProperties(EllipsoidSurfaceAppearance.prototype, {
   fragmentShaderSource: {
     get: function () {
       return this._fragmentShaderSource;
-    },
+    }
   },
 
   /**
@@ -140,7 +140,7 @@ Object.defineProperties(EllipsoidSurfaceAppearance.prototype, {
   renderState: {
     get: function () {
       return this._renderState;
-    },
+    }
   },
 
   /**
@@ -158,7 +158,7 @@ Object.defineProperties(EllipsoidSurfaceAppearance.prototype, {
   closed: {
     get: function () {
       return this._closed;
-    },
+    }
   },
 
   /**
@@ -176,7 +176,7 @@ Object.defineProperties(EllipsoidSurfaceAppearance.prototype, {
   vertexFormat: {
     get: function () {
       return EllipsoidSurfaceAppearance.VERTEX_FORMAT;
-    },
+    }
   },
 
   /**
@@ -193,7 +193,7 @@ Object.defineProperties(EllipsoidSurfaceAppearance.prototype, {
   flat: {
     get: function () {
       return this._flat;
-    },
+    }
   },
 
   /**
@@ -212,7 +212,7 @@ Object.defineProperties(EllipsoidSurfaceAppearance.prototype, {
   faceForward: {
     get: function () {
       return this._faceForward;
-    },
+    }
   },
 
   /**
@@ -231,8 +231,8 @@ Object.defineProperties(EllipsoidSurfaceAppearance.prototype, {
   aboveGround: {
     get: function () {
       return this._aboveGround;
-    },
-  },
+    }
+  }
 });
 
 /**

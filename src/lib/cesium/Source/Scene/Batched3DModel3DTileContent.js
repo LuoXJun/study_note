@@ -1,21 +1,21 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Color from "../Core/Color.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defined from "../Core/defined.js";
-import deprecationWarning from "../Core/deprecationWarning.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Matrix4 from "../Core/Matrix4.js";
-import RequestType from "../Core/RequestType.js";
-import Pass from "../Renderer/Pass.js";
-import B3dmParser from "./B3dmParser.js";
-import Cesium3DTileBatchTable from "./Cesium3DTileBatchTable.js";
-import Cesium3DTileFeature from "./Cesium3DTileFeature.js";
-import Cesium3DTileFeatureTable from "./Cesium3DTileFeatureTable.js";
-import ClassificationModel from "./ClassificationModel.js";
-import Model from "./Model.js";
-import ModelAnimationLoop from "./ModelAnimationLoop.js";
-import ModelUtility from "./ModelUtility.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Color from '../Core/Color.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defined from '../Core/defined.js';
+import deprecationWarning from '../Core/deprecationWarning.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Matrix4 from '../Core/Matrix4.js';
+import RequestType from '../Core/RequestType.js';
+import Pass from '../Renderer/Pass.js';
+import B3dmParser from './B3dmParser.js';
+import Cesium3DTileBatchTable from './Cesium3DTileBatchTable.js';
+import Cesium3DTileFeature from './Cesium3DTileFeature.js';
+import Cesium3DTileFeatureTable from './Cesium3DTileFeatureTable.js';
+import ClassificationModel from './ClassificationModel.js';
+import Model from './Model.js';
+import ModelAnimationLoop from './ModelAnimationLoop.js';
+import ModelUtility from './ModelUtility.js';
 
 /**
  * Represents the contents of a
@@ -70,67 +70,67 @@ Object.defineProperties(Batched3DModel3DTileContent.prototype, {
   featuresLength: {
     get: function () {
       return this.batchTable.featuresLength;
-    },
+    }
   },
 
   pointsLength: {
     get: function () {
       return this._model.pointsLength;
-    },
+    }
   },
 
   trianglesLength: {
     get: function () {
       return this._model.trianglesLength;
-    },
+    }
   },
 
   geometryByteLength: {
     get: function () {
       return this._model.geometryByteLength;
-    },
+    }
   },
 
   texturesByteLength: {
     get: function () {
       return this._model.texturesByteLength;
-    },
+    }
   },
 
   batchTableByteLength: {
     get: function () {
       return this.batchTable.batchTableByteLength;
-    },
+    }
   },
 
   innerContents: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   readyPromise: {
     get: function () {
       return this._model.readyPromise;
-    },
+    }
   },
 
   tileset: {
     get: function () {
       return this._tileset;
-    },
+    }
   },
 
   tile: {
     get: function () {
       return this._tile;
-    },
+    }
   },
 
   url: {
     get: function () {
       return this._resource.getUrlComponent(true);
-    },
+    }
   },
 
   metadata: {
@@ -139,13 +139,13 @@ Object.defineProperties(Batched3DModel3DTileContent.prototype, {
     },
     set: function (value) {
       this._metadata = value;
-    },
+    }
   },
 
   batchTable: {
     get: function () {
       return this._batchTable;
-    },
+    }
   },
 
   group: {
@@ -154,24 +154,24 @@ Object.defineProperties(Batched3DModel3DTileContent.prototype, {
     },
     set: function (value) {
       this._group = value;
-    },
-  },
+    }
+  }
 });
 
 function getBatchIdAttributeName(gltf) {
   let batchIdAttributeName = ModelUtility.getAttributeOrUniformBySemantic(
     gltf,
-    "_BATCHID"
+    '_BATCHID'
   );
   if (!defined(batchIdAttributeName)) {
     batchIdAttributeName = ModelUtility.getAttributeOrUniformBySemantic(
       gltf,
-      "BATCHID"
+      'BATCHID'
     );
     if (defined(batchIdAttributeName)) {
       Batched3DModel3DTileContent._deprecationWarning(
-        "b3dm-legacy-batchid",
-        "The glTF in this b3dm uses the semantic `BATCHID`. Application-specific semantics should be prefixed with an underscore: `_BATCHID`."
+        'b3dm-legacy-batchid',
+        'The glTF in this b3dm uses the semantic `BATCHID`. Application-specific semantics should be prefixed with an underscore: `_BATCHID`.'
       );
     }
   }
@@ -186,9 +186,8 @@ function getVertexShaderCallback(content) {
     const gltf = content._model.gltfInternal;
     if (defined(gltf)) {
       content._batchIdAttributeName = getBatchIdAttributeName(gltf);
-      content._diffuseAttributeOrUniformName[
-        programId
-      ] = ModelUtility.getDiffuseAttributeOrUniform(gltf, programId);
+      content._diffuseAttributeOrUniformName[programId] =
+        ModelUtility.getDiffuseAttributeOrUniform(gltf, programId);
     }
 
     const callback = batchTable.getVertexShaderCallback(
@@ -207,9 +206,8 @@ function getFragmentShaderCallback(content) {
 
     const gltf = content._model.gltfInternal;
     if (defined(gltf)) {
-      content._diffuseAttributeOrUniformName[
-        programId
-      ] = ModelUtility.getDiffuseAttributeOrUniform(gltf, programId);
+      content._diffuseAttributeOrUniformName[programId] =
+        ModelUtility.getDiffuseAttributeOrUniform(gltf, programId);
     }
     const callback = batchTable.getFragmentShaderCallback(
       handleTranslucent,
@@ -256,7 +254,7 @@ function initialize(content, arrayBuffer, byteOffset) {
     featureTableBinary
   );
 
-  batchLength = featureTable.getGlobalProperty("BATCH_LENGTH");
+  batchLength = featureTable.getGlobalProperty('BATCH_LENGTH');
   featureTable.featuresLength = batchLength;
 
   const batchTableJson = b3dm.batchTableJson;
@@ -280,12 +278,12 @@ function initialize(content, arrayBuffer, byteOffset) {
 
   const pickObject = {
     content: content,
-    primitive: tileset,
+    primitive: tileset
   };
 
   content._rtcCenterTransform = Matrix4.IDENTITY;
   const rtcCenter = featureTable.getGlobalProperty(
-    "RTC_CENTER",
+    'RTC_CENTER',
     ComponentDatatype.FLOAT,
     3
   );
@@ -327,11 +325,11 @@ function initialize(content, arrayBuffer, byteOffset) {
       imageBasedLighting: tileset.imageBasedLighting,
       backFaceCulling: tileset.backFaceCulling,
       showOutline: tileset.showOutline,
-      showCreditsOnScreen: tileset.showCreditsOnScreen,
+      showCreditsOnScreen: tileset.showCreditsOnScreen
     });
     content._model.readyPromise.then(function (model) {
       model.activeAnimations.addAll({
-        loop: ModelAnimationLoop.REPEAT,
+        loop: ModelAnimationLoop.REPEAT
       });
     });
   } else {
@@ -347,13 +345,12 @@ function initialize(content, arrayBuffer, byteOffset) {
       forwardAxis: tileset._modelForwardAxis,
       debugWireframe: tileset.debugWireframe,
       vertexShaderLoaded: getVertexShaderCallback(content),
-      classificationShaderLoaded: getClassificationFragmentShaderCallback(
-        content
-      ),
+      classificationShaderLoaded:
+        getClassificationFragmentShaderCallback(content),
       uniformMapLoaded: batchTable.getUniformMapCallback(),
       pickIdLoaded: getPickIdCallback(content),
       classificationType: content._classificationType,
-      batchTable: batchTable,
+      batchTable: batchTable
     });
   }
 }

@@ -1,18 +1,18 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
-import PrimitiveType from "./PrimitiveType.js";
-import VertexFormat from "./VertexFormat.js";
-import WallGeometryLibrary from "./WallGeometryLibrary.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
+import PrimitiveType from './PrimitiveType.js';
+import VertexFormat from './VertexFormat.js';
+import WallGeometryLibrary from './WallGeometryLibrary.js';
 
 const scratchCartesian3Position1 = new Cartesian3();
 const scratchCartesian3Position2 = new Cartesian3();
@@ -70,14 +70,14 @@ function WallGeometry(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(wallPositions)) {
-    throw new DeveloperError("options.positions is required.");
+    throw new DeveloperError('options.positions is required.');
   }
   if (
     defined(maximumHeights) &&
     maximumHeights.length !== wallPositions.length
   ) {
     throw new DeveloperError(
-      "options.positions and options.maximumHeights must have the same length."
+      'options.positions and options.maximumHeights must have the same length.'
     );
   }
   if (
@@ -85,7 +85,7 @@ function WallGeometry(options) {
     minimumHeights.length !== wallPositions.length
   ) {
     throw new DeveloperError(
-      "options.positions and options.minimumHeights must have the same length."
+      'options.positions and options.minimumHeights must have the same length.'
     );
   }
   //>>includeEnd('debug');
@@ -103,7 +103,7 @@ function WallGeometry(options) {
   this._vertexFormat = VertexFormat.clone(vertexFormat);
   this._granularity = granularity;
   this._ellipsoid = Ellipsoid.clone(ellipsoid);
-  this._workerName = "createWallGeometry";
+  this._workerName = 'createWallGeometry';
 
   let numComponents = 1 + wallPositions.length * Cartesian3.packedLength + 2;
   if (defined(minimumHeights)) {
@@ -133,10 +133,10 @@ function WallGeometry(options) {
 WallGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(value)) {
-    throw new DeveloperError("value is required");
+    throw new DeveloperError('value is required');
   }
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -191,7 +191,7 @@ const scratchOptions = {
   maximumHeights: undefined,
   ellipsoid: scratchEllipsoid,
   vertexFormat: scratchVertexFormat,
-  granularity: undefined,
+  granularity: undefined
 };
 
 /**
@@ -205,7 +205,7 @@ const scratchOptions = {
 WallGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -308,7 +308,7 @@ WallGeometry.fromConstantHeights = function (options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(positions)) {
-    throw new DeveloperError("options.positions is required.");
+    throw new DeveloperError('options.positions is required.');
   }
   //>>includeEnd('debug');
 
@@ -341,7 +341,7 @@ WallGeometry.fromConstantHeights = function (options) {
     maximumHeights: maxHeights,
     minimumHeights: minHeights,
     ellipsoid: options.ellipsoid,
-    vertexFormat: options.vertexFormat,
+    vertexFormat: options.vertexFormat
   };
   return new WallGeometry(newOptions);
 };
@@ -534,7 +534,7 @@ WallGeometry.createGeometry = function (wallGeometry) {
     attributes.position = new GeometryAttribute({
       componentDatatype: ComponentDatatype.DOUBLE,
       componentsPerAttribute: 3,
-      values: positions,
+      values: positions
     });
   }
 
@@ -542,7 +542,7 @@ WallGeometry.createGeometry = function (wallGeometry) {
     attributes.normal = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: normals,
+      values: normals
     });
   }
 
@@ -550,7 +550,7 @@ WallGeometry.createGeometry = function (wallGeometry) {
     attributes.tangent = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: tangents,
+      values: tangents
     });
   }
 
@@ -558,7 +558,7 @@ WallGeometry.createGeometry = function (wallGeometry) {
     attributes.bitangent = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: bitangents,
+      values: bitangents
     });
   }
 
@@ -566,7 +566,7 @@ WallGeometry.createGeometry = function (wallGeometry) {
     attributes.st = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 2,
-      values: textureCoordinates,
+      values: textureCoordinates
     });
   }
 
@@ -620,7 +620,7 @@ WallGeometry.createGeometry = function (wallGeometry) {
     attributes: attributes,
     indices: indices,
     primitiveType: PrimitiveType.TRIANGLES,
-    boundingSphere: new BoundingSphere.fromVertices(positions),
+    boundingSphere: new BoundingSphere.fromVertices(positions)
   });
 };
 export default WallGeometry;

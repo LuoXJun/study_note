@@ -1,8 +1,8 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import PrimitiveCollection from "./PrimitiveCollection.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import PrimitiveCollection from './PrimitiveCollection.js';
 
 /**
  * A primitive collection for helping maintain the order or ground primitives based on a z-index
@@ -29,8 +29,8 @@ Object.defineProperties(OrderedGroundPrimitiveCollection.prototype, {
   length: {
     get: function () {
       return this._length;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -42,9 +42,9 @@ Object.defineProperties(OrderedGroundPrimitiveCollection.prototype, {
  */
 OrderedGroundPrimitiveCollection.prototype.add = function (primitive, zIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("primitive", primitive);
+  Check.defined('primitive', primitive);
   if (defined(zIndex)) {
-    Check.typeOf.number("zIndex", zIndex);
+    Check.typeOf.number('zIndex', zIndex);
   }
   //>>includeEnd('debug');
 
@@ -76,8 +76,8 @@ OrderedGroundPrimitiveCollection.prototype.add = function (primitive, zIndex) {
  */
 OrderedGroundPrimitiveCollection.prototype.set = function (primitive, zIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("primitive", primitive);
-  Check.typeOf.number("zIndex", zIndex);
+  Check.defined('primitive', primitive);
+  Check.typeOf.number('zIndex', zIndex);
   //>>includeEnd('debug');
 
   if (zIndex === primitive._zIndex) {

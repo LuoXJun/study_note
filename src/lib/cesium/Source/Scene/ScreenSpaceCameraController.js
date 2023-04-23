@@ -1,30 +1,30 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Cartographic from "../Core/Cartographic.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import HeadingPitchRoll from "../Core/HeadingPitchRoll.js";
-import IntersectionTests from "../Core/IntersectionTests.js";
-import KeyboardEventModifier from "../Core/KeyboardEventModifier.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
-import OrthographicFrustum from "../Core/OrthographicFrustum.js";
-import Plane from "../Core/Plane.js";
-import Quaternion from "../Core/Quaternion.js";
-import Ray from "../Core/Ray.js";
-import TerrainExaggeration from "../Core/TerrainExaggeration.js";
-import Transforms from "../Core/Transforms.js";
-import CameraEventAggregator from "./CameraEventAggregator.js";
-import CameraEventType from "./CameraEventType.js";
-import MapMode2D from "./MapMode2D.js";
-import SceneMode from "./SceneMode.js";
-import SceneTransforms from "./SceneTransforms.js";
-import TweenCollection from "./TweenCollection.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Cartographic from '../Core/Cartographic.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import HeadingPitchRoll from '../Core/HeadingPitchRoll.js';
+import IntersectionTests from '../Core/IntersectionTests.js';
+import KeyboardEventModifier from '../Core/KeyboardEventModifier.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
+import OrthographicFrustum from '../Core/OrthographicFrustum.js';
+import Plane from '../Core/Plane.js';
+import Quaternion from '../Core/Quaternion.js';
+import Ray from '../Core/Ray.js';
+import TerrainExaggeration from '../Core/TerrainExaggeration.js';
+import Transforms from '../Core/Transforms.js';
+import CameraEventAggregator from './CameraEventAggregator.js';
+import CameraEventType from './CameraEventType.js';
+import MapMode2D from './MapMode2D.js';
+import SceneMode from './SceneMode.js';
+import SceneTransforms from './SceneTransforms.js';
+import TweenCollection from './TweenCollection.js';
 
 /**
  * Modifies the camera position and orientation based on mouse input to a canvas.
@@ -36,7 +36,7 @@ import TweenCollection from "./TweenCollection.js";
 function ScreenSpaceCameraController(scene) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required.");
+    throw new DeveloperError('scene is required.');
   }
   //>>includeEnd('debug');
 
@@ -161,7 +161,7 @@ function ScreenSpaceCameraController(scene) {
   this.zoomEventTypes = [
     CameraEventType.RIGHT_DRAG,
     CameraEventType.WHEEL,
-    CameraEventType.PINCH,
+    CameraEventType.PINCH
   ];
   /**
    * The input that allows the user to rotate around the globe or another object. This only applies in 3D and Columbus view modes.
@@ -195,12 +195,12 @@ function ScreenSpaceCameraController(scene) {
     CameraEventType.PINCH,
     {
       eventType: CameraEventType.LEFT_DRAG,
-      modifier: KeyboardEventModifier.CTRL,
+      modifier: KeyboardEventModifier.CTRL
     },
     {
       eventType: CameraEventType.RIGHT_DRAG,
-      modifier: KeyboardEventModifier.CTRL,
-    },
+      modifier: KeyboardEventModifier.CTRL
+    }
   ];
   /**
    * The input that allows the user to change the direction the camera is viewing. This only applies in 3D and Columbus view modes.
@@ -214,7 +214,7 @@ function ScreenSpaceCameraController(scene) {
    */
   this.lookEventTypes = {
     eventType: CameraEventType.LEFT_DRAG,
-    modifier: KeyboardEventModifier.SHIFT,
+    modifier: KeyboardEventModifier.SHIFT
   };
   /**
    * The minimum height the camera must be before picking the terrain instead of the ellipsoid.
@@ -260,14 +260,14 @@ function ScreenSpaceCameraController(scene) {
   // Tilt disables spin and translate inertia
   this._inertiaDisablers = {
     _lastInertiaZoomMovement: [
-      "_lastInertiaSpinMovement",
-      "_lastInertiaTranslateMovement",
-      "_lastInertiaTiltMovement",
+      '_lastInertiaSpinMovement',
+      '_lastInertiaTranslateMovement',
+      '_lastInertiaTiltMovement'
     ],
     _lastInertiaTiltMovement: [
-      "_lastInertiaSpinMovement",
-      "_lastInertiaTranslateMovement",
-    ],
+      '_lastInertiaSpinMovement',
+      '_lastInertiaTranslateMovement'
+    ]
   };
 
   this._tweens = new TweenCollection();
@@ -350,7 +350,7 @@ function maintainInertia(
       startPosition: new Cartesian2(),
       endPosition: new Cartesian2(),
       motion: new Cartesian2(),
-      inertiaEnabled: true,
+      inertiaEnabled: true
     };
   }
 
@@ -512,7 +512,7 @@ const scratchCartesian = new Cartesian3();
 const scratchCartesianTwo = new Cartesian3();
 const scratchCartesianThree = new Cartesian3();
 const scratchZoomViewOptions = {
-  orientation: new HeadingPitchRoll(),
+  orientation: new HeadingPitchRoll()
 };
 
 function handleZoom(
@@ -607,8 +607,10 @@ function handleZoom(
 
     if (defined(object._globe)) {
       if (mode === SceneMode.SCENE2D) {
-        pickedPosition = camera.getPickRay(startPosition, scratchZoomPickRay)
-          .origin;
+        pickedPosition = camera.getPickRay(
+          startPosition,
+          scratchZoomPickRay
+        ).origin;
         pickedPosition = Cartesian3.fromElements(
           pickedPosition.y,
           pickedPosition.z,
@@ -671,8 +673,10 @@ function handleZoom(
           (camera.position.x < 0.0 && savedX > 0.0) ||
           (camera.position.x > 0.0 && savedX < 0.0)
         ) {
-          pickedPosition = camera.getPickRay(startPosition, scratchZoomPickRay)
-            .origin;
+          pickedPosition = camera.getPickRay(
+            startPosition,
+            scratchZoomPickRay
+          ).origin;
           pickedPosition = Cartesian3.fromElements(
             pickedPosition.y,
             pickedPosition.z,
@@ -761,9 +765,8 @@ function handleZoom(
             const cameraDistance = Cartesian3.magnitude(cameraPosition);
             const targetDistance = Cartesian3.magnitude(target);
             const remainingDistance = cameraDistance - distance;
-            const positionToTargetDistance = Cartesian3.magnitude(
-              positionToTarget
-            );
+            const positionToTargetDistance =
+              Cartesian3.magnitude(positionToTarget);
 
             const gamma = Math.asin(
               CesiumMath.clamp(
@@ -950,8 +953,10 @@ const scratchTranslateP0 = new Cartesian3();
 function translate2D(controller, startPosition, movement) {
   const scene = controller._scene;
   const camera = scene.camera;
-  let start = camera.getPickRay(movement.startPosition, translate2DStart)
-    .origin;
+  let start = camera.getPickRay(
+    movement.startPosition,
+    translate2DStart
+  ).origin;
   let end = camera.getPickRay(movement.endPosition, translate2DEnd).origin;
 
   start = Cartesian3.fromElements(start.y, start.z, start.x, start);
@@ -1055,7 +1060,7 @@ function update2D(controller) {
       controller.zoomEventTypes,
       zoom2D,
       controller.inertiaZoom,
-      "_lastInertiaZoomMovement"
+      '_lastInertiaZoomMovement'
     );
     if (rotatable2D) {
       reactToInput(
@@ -1064,7 +1069,7 @@ function update2D(controller) {
         controller.translateEventTypes,
         twist2D,
         controller.inertiaSpin,
-        "_lastInertiaSpinMovement"
+        '_lastInertiaSpinMovement'
       );
     }
   } else {
@@ -1074,7 +1079,7 @@ function update2D(controller) {
       controller.translateEventTypes,
       translate2D,
       controller.inertiaTranslate,
-      "_lastInertiaTranslateMovement"
+      '_lastInertiaTranslateMovement'
     );
     reactToInput(
       controller,
@@ -1082,7 +1087,7 @@ function update2D(controller) {
       controller.zoomEventTypes,
       zoom2D,
       controller.inertiaZoom,
-      "_lastInertiaZoomMovement"
+      '_lastInertiaZoomMovement'
     );
     if (rotatable2D) {
       reactToInput(
@@ -1091,7 +1096,7 @@ function update2D(controller) {
         controller.tiltEventTypes,
         twist2D,
         controller.inertiaSpin,
-        "_lastInertiaTiltMovement"
+        '_lastInertiaTiltMovement'
       );
     }
   }
@@ -1752,7 +1757,7 @@ function updateCV(controller) {
       controller.rotateEventTypes,
       rotate3D,
       controller.inertiaSpin,
-      "_lastInertiaSpinMovement"
+      '_lastInertiaSpinMovement'
     );
     reactToInput(
       controller,
@@ -1760,7 +1765,7 @@ function updateCV(controller) {
       controller.zoomEventTypes,
       zoom3D,
       controller.inertiaZoom,
-      "_lastInertiaZoomMovement"
+      '_lastInertiaZoomMovement'
     );
   } else {
     const tweens = controller._tweens;
@@ -1775,7 +1780,7 @@ function updateCV(controller) {
       controller.tiltEventTypes,
       rotateCV,
       controller.inertiaSpin,
-      "_lastInertiaTiltMovement"
+      '_lastInertiaTiltMovement'
     );
     reactToInput(
       controller,
@@ -1783,7 +1788,7 @@ function updateCV(controller) {
       controller.translateEventTypes,
       translateCV,
       controller.inertiaTranslate,
-      "_lastInertiaTranslateMovement"
+      '_lastInertiaTranslateMovement'
     );
     reactToInput(
       controller,
@@ -1791,7 +1796,7 @@ function updateCV(controller) {
       controller.zoomEventTypes,
       zoomCV,
       controller.inertiaZoom,
-      "_lastInertiaZoomMovement"
+      '_lastInertiaZoomMovement'
     );
     reactToInput(
       controller,
@@ -2698,7 +2703,7 @@ function update3D(controller) {
     controller.rotateEventTypes,
     spin3D,
     controller.inertiaSpin,
-    "_lastInertiaSpinMovement"
+    '_lastInertiaSpinMovement'
   );
   reactToInput(
     controller,
@@ -2706,7 +2711,7 @@ function update3D(controller) {
     controller.zoomEventTypes,
     zoom3D,
     controller.inertiaZoom,
-    "_lastInertiaZoomMovement"
+    '_lastInertiaZoomMovement'
   );
   reactToInput(
     controller,
@@ -2714,7 +2719,7 @@ function update3D(controller) {
     controller.tiltEventTypes,
     tilt3D,
     controller.inertiaSpin,
-    "_lastInertiaTiltMovement"
+    '_lastInertiaTiltMovement'
   );
   reactToInput(
     controller,

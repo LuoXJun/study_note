@@ -1,5 +1,5 @@
-import Check from "../../Core/Check.js";
-import DeveloperError from "../../Core/DeveloperError.js";
+import Check from '../../Core/Check.js';
+import DeveloperError from '../../Core/DeveloperError.js';
 
 /**
  * An enum to distinguish the different uses for {@link ModelExperimental},
@@ -21,7 +21,7 @@ const ModelExperimentalType = {
    * @type {String}
    * @constant
    */
-  GLTF: "GLTF",
+  GLTF: 'GLTF',
   /**
    * A glTF model used as tile content in a 3D Tileset via
    * <code>3DTILES_content_gltf</code>.
@@ -33,28 +33,28 @@ const ModelExperimentalType = {
    * @type {String}
    * @constant
    */
-  TILE_GLTF: "TILE_GLTF",
+  TILE_GLTF: 'TILE_GLTF',
   /**
    * A 3D Tiles 1.0 Batched 3D Model
    *
    * @type {String}
    * @constant
    */
-  TILE_B3DM: "B3DM",
+  TILE_B3DM: 'B3DM',
   /**
    * A 3D Tiles 1.0 Instanced 3D Model
    *
    * @type {String}
    * @constant
    */
-  TILE_I3DM: "I3DM",
+  TILE_I3DM: 'I3DM',
   /**
    * A 3D Tiles 1.0 Point Cloud
    *
    * @type {String}
    * @constant
    */
-  TILE_PNTS: "PNTS",
+  TILE_PNTS: 'PNTS',
 
   /**
    * GeoJSON content for <code>MAXAR_content_geojson</code> extension
@@ -62,7 +62,7 @@ const ModelExperimentalType = {
    * @type {String}
    * @constant
    */
-  TILE_GEOJSON: "TILE_GEOJSON",
+  TILE_GEOJSON: 'TILE_GEOJSON'
 };
 
 /**
@@ -72,7 +72,7 @@ const ModelExperimentalType = {
  */
 ModelExperimentalType.is3DTiles = function (modelType) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("modelType", modelType);
+  Check.typeOf.string('modelType', modelType);
   //>>includeEnd('debug');
 
   switch (modelType) {
@@ -86,7 +86,7 @@ ModelExperimentalType.is3DTiles = function (modelType) {
       return false;
     //>>includeStart('debug', pragmas.debug);
     default:
-      throw new DeveloperError("modelType is not a valid value.");
+      throw new DeveloperError('modelType is not a valid value.');
     //>>includeEnd('debug');
   }
 };

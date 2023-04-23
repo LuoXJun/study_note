@@ -1,9 +1,9 @@
-import Color from "../Core/Color.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Resource from "../Core/Resource.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
-import ImageMaterialProperty from "./ImageMaterialProperty.js";
+import Color from '../Core/Color.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Resource from '../Core/Resource.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
+import ImageMaterialProperty from './ImageMaterialProperty.js';
 
 function createMaterialProperty(value) {
   if (value instanceof Color) {
@@ -11,7 +11,7 @@ function createMaterialProperty(value) {
   }
 
   if (
-    typeof value === "string" ||
+    typeof value === 'string' ||
     value instanceof Resource ||
     value instanceof HTMLCanvasElement ||
     value instanceof HTMLVideoElement

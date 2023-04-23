@@ -722,12 +722,12 @@
 - Cesium now creates a WebGL context with a `powerPreference` value of `high-performance`. Some browsers use this setting to enable a second, more powerful, GPU. You can set it back to `default`, or opt-in to `low-power` mode, by passing the context option when creating a `Viewer` or `CesiumWidget` instance:
 
 ```js
-var viewer = new Viewer("cesiumContainer", {
+var viewer = new Viewer('cesiumContainer', {
   contextOptions: {
     webgl: {
-      powerPreference: "default",
-    },
-  },
+      powerPreference: 'default'
+    }
+  }
 });
 ```
 
@@ -1414,15 +1414,15 @@ _This is an npm-only release to fix a publishing issue_.
 - `BingMapsGeocoderService` is no longer the default geocoding service.
 - If you wish to continue to use your own Bing API key for imagery and geocoding, you can go back to the old default behavior by constructing the Viewer as follows:
   ```javascript
-  Cesium.BingMapsApi.defaultKey = "yourBingKey";
-  var viewer = new Cesium.Viewer("cesiumContainer", {
+  Cesium.BingMapsApi.defaultKey = 'yourBingKey';
+  var viewer = new Cesium.Viewer('cesiumContainer', {
     imageryProvider: new Cesium.BingMapsImageryProvider({
-      url: "https://dev.virtualearth.net",
+      url: 'https://dev.virtualearth.net'
     }),
     geocoder: [
       new Cesium.CartographicGeocoderService(),
-      new Cesium.BingMapsGeocoderService(),
-    ],
+      new Cesium.BingMapsGeocoderService()
+    ]
   });
   ```
 

@@ -1,16 +1,16 @@
-import BoundingSphere from "./BoundingSphere.js";
-import buildModuleUrl from "./buildModuleUrl.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import GeographicTilingScheme from "./GeographicTilingScheme.js";
-import Rectangle from "./Rectangle.js";
-import Resource from "./Resource.js";
+import BoundingSphere from './BoundingSphere.js';
+import buildModuleUrl from './buildModuleUrl.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import GeographicTilingScheme from './GeographicTilingScheme.js';
+import Rectangle from './Rectangle.js';
+import Resource from './Resource.js';
 
 const scratchDiagonalCartesianNE = new Cartesian3();
 const scratchDiagonalCartesianSW = new Cartesian3();
@@ -24,7 +24,7 @@ const scratchCorners = [
   new Cartographic(),
   new Cartographic(),
   new Cartographic(),
-  new Cartographic(),
+  new Cartographic()
 ];
 const scratchTileXY = new Cartesian2();
 
@@ -45,7 +45,7 @@ ApproximateTerrainHeights.initialize = function () {
   }
 
   initPromise = Resource.fetchJson(
-    buildModuleUrl("Assets/approximateTerrainHeights.json")
+    buildModuleUrl('Assets/approximateTerrainHeights.json')
   ).then(function (json) {
     ApproximateTerrainHeights._terrainHeights = json;
   });
@@ -65,10 +65,10 @@ ApproximateTerrainHeights.getMinimumMaximumHeights = function (
   ellipsoid
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("rectangle", rectangle);
+  Check.defined('rectangle', rectangle);
   if (!defined(ApproximateTerrainHeights._terrainHeights)) {
     throw new DeveloperError(
-      "You must call ApproximateTerrainHeights.initialize and wait for the promise to resolve before using this function"
+      'You must call ApproximateTerrainHeights.initialize and wait for the promise to resolve before using this function'
     );
   }
   //>>includeEnd('debug');
@@ -124,7 +124,7 @@ ApproximateTerrainHeights.getMinimumMaximumHeights = function (
 
   return {
     minimumTerrainHeight: minTerrainHeight,
-    maximumTerrainHeight: maxTerrainHeight,
+    maximumTerrainHeight: maxTerrainHeight
   };
 };
 
@@ -136,10 +136,10 @@ ApproximateTerrainHeights.getMinimumMaximumHeights = function (
  */
 ApproximateTerrainHeights.getBoundingSphere = function (rectangle, ellipsoid) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("rectangle", rectangle);
+  Check.defined('rectangle', rectangle);
   if (!defined(ApproximateTerrainHeights._terrainHeights)) {
     throw new DeveloperError(
-      "You must call ApproximateTerrainHeights.initialize and wait for the promise to resolve before using this function"
+      'You must call ApproximateTerrainHeights.initialize and wait for the promise to resolve before using this function'
     );
   }
   //>>includeEnd('debug');
@@ -230,7 +230,7 @@ function getTileXYLevel(rectangle) {
   return {
     x: lastLevelX,
     y: lastLevelY,
-    level: i > maxLevel ? maxLevel : i - 1,
+    level: i > maxLevel ? maxLevel : i - 1
   };
 }
 
@@ -251,7 +251,7 @@ Object.defineProperties(ApproximateTerrainHeights, {
   initialized: {
     get: function () {
       return defined(ApproximateTerrainHeights._terrainHeights);
-    },
-  },
+    }
+  }
 });
 export default ApproximateTerrainHeights;

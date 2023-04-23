@@ -1,8 +1,8 @@
-import Check from "../Core/Check.js";
-import clone from "../Core/clone.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import MetadataEntity from "./MetadataEntity.js";
+import Check from '../Core/Check.js';
+import clone from '../Core/clone.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import MetadataEntity from './MetadataEntity.js';
 
 /**
  * A table for storing free-form JSON metadata, as in the 3D Tiles batch table.
@@ -22,8 +22,8 @@ const emptyClass = {};
 
 export default function JsonMetadataTable(options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number.greaterThan("options.count", options.count, 0);
-  Check.typeOf.object("options.properties", options.properties);
+  Check.typeOf.number.greaterThan('options.count', options.count, 0);
+  Check.typeOf.object('options.properties', options.properties);
   //>>includeEnd('debug');
 
   this._count = options.count;
@@ -64,8 +64,8 @@ JsonMetadataTable.prototype.getPropertyIds = function (results) {
  */
 JsonMetadataTable.prototype.getProperty = function (index, propertyId) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("index", index);
-  Check.typeOf.string("propertyId", propertyId);
+  Check.typeOf.number('index', index);
+  Check.typeOf.string('propertyId', propertyId);
 
   if (index < 0 || index >= this._count) {
     throw new DeveloperError(`index must be in the range [0, ${this._count})`);
@@ -93,8 +93,8 @@ JsonMetadataTable.prototype.getProperty = function (index, propertyId) {
  */
 JsonMetadataTable.prototype.setProperty = function (index, propertyId, value) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("index", index);
-  Check.typeOf.string("propertyId", propertyId);
+  Check.typeOf.number('index', index);
+  Check.typeOf.string('propertyId', propertyId);
 
   if (index < 0 || index >= this._count) {
     throw new DeveloperError(`index must be in the range [0, ${this._count})`);

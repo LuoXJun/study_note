@@ -1,8 +1,8 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import Cesium3DTileOptimizationHint from "./Cesium3DTileOptimizationHint.js";
-import TileBoundingRegion from "./TileBoundingRegion.js";
-import TileOrientedBoundingBox from "./TileOrientedBoundingBox.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import Cesium3DTileOptimizationHint from './Cesium3DTileOptimizationHint.js';
+import TileBoundingRegion from './TileBoundingRegion.js';
+import TileOrientedBoundingBox from './TileOrientedBoundingBox.js';
 
 /**
  * Utility functions for computing optimization hints for a {@link Cesium3DTileset}.
@@ -29,7 +29,7 @@ const scratchAxis = new Cartesian3();
  */
 Cesium3DTileOptimizations.checkChildrenWithinParent = function (tile) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("tile", tile);
+  Check.typeOf.object('tile', tile);
   //>>includeEnd('debug');
 
   const children = tile.children;

@@ -1,10 +1,10 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import hasExtension from "./hasExtension.js";
-import MeshoptDecoder from "../ThirdParty/meshoptimizer.js";
-import ResourceLoader from "./ResourceLoader.js";
-import ResourceLoaderState from "./ResourceLoaderState.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import hasExtension from './hasExtension.js';
+import MeshoptDecoder from '../ThirdParty/meshoptimizer.js';
+import ResourceLoader from './ResourceLoader.js';
+import ResourceLoaderState from './ResourceLoaderState.js';
 
 /**
  * Loads a glTF buffer view.
@@ -36,11 +36,11 @@ export default function GltfBufferViewLoader(options) {
   const cacheKey = options.cacheKey;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.func("options.resourceCache", resourceCache);
-  Check.typeOf.object("options.gltf", gltf);
-  Check.typeOf.number("options.bufferViewId", bufferViewId);
-  Check.typeOf.object("options.gltfResource", gltfResource);
-  Check.typeOf.object("options.baseResource", baseResource);
+  Check.typeOf.func('options.resourceCache', resourceCache);
+  Check.typeOf.object('options.gltf', gltf);
+  Check.typeOf.number('options.bufferViewId', bufferViewId);
+  Check.typeOf.object('options.gltfResource', gltfResource);
+  Check.typeOf.object('options.baseResource', baseResource);
   //>>includeEnd('debug');
 
   const bufferView = gltf.bufferViews[bufferViewId];
@@ -54,7 +54,7 @@ export default function GltfBufferViewLoader(options) {
   let meshoptMode;
   let meshoptFilter;
 
-  if (hasExtension(bufferView, "EXT_meshopt_compression")) {
+  if (hasExtension(bufferView, 'EXT_meshopt_compression')) {
     const meshopt = bufferView.extensions.EXT_meshopt_compression;
     bufferId = meshopt.buffer;
     byteOffset = defaultValue(meshopt.byteOffset, 0);
@@ -64,7 +64,7 @@ export default function GltfBufferViewLoader(options) {
     meshoptByteStride = meshopt.byteStride;
     meshoptCount = meshopt.count;
     meshoptMode = meshopt.mode;
-    meshoptFilter = defaultValue(meshopt.filter, "NONE");
+    meshoptFilter = defaultValue(meshopt.filter, 'NONE');
   }
 
   const buffer = gltf.buffers[bufferId];
@@ -108,7 +108,7 @@ Object.defineProperties(GltfBufferViewLoader.prototype, {
   promise: {
     get: function () {
       return this._promise;
-    },
+    }
   },
   /**
    * The cache key of the resource.
@@ -122,7 +122,7 @@ Object.defineProperties(GltfBufferViewLoader.prototype, {
   cacheKey: {
     get: function () {
       return this._cacheKey;
-    },
+    }
   },
   /**
    * The typed array containing buffer view data.
@@ -136,8 +136,8 @@ Object.defineProperties(GltfBufferViewLoader.prototype, {
   typedArray: {
     get: function () {
       return this._typedArray;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -213,7 +213,7 @@ GltfBufferViewLoader.prototype.load = function () {
       }
       that.unload();
       that._state = ResourceLoaderState.FAILED;
-      const errorMessage = "Failed to load buffer view";
+      const errorMessage = 'Failed to load buffer view';
       return Promise.reject(that.getError(errorMessage, error));
     });
 
@@ -226,15 +226,15 @@ function getBufferLoader(bufferViewLoader) {
   if (defined(buffer.uri)) {
     const baseResource = bufferViewLoader._baseResource;
     const resource = baseResource.getDerivedResource({
-      url: buffer.uri,
+      url: buffer.uri
     });
     return resourceCache.loadExternalBuffer({
-      resource: resource,
+      resource: resource
     });
   }
   return resourceCache.loadEmbeddedBuffer({
     parentResource: bufferViewLoader._gltfResource,
-    bufferId: bufferViewLoader._bufferId,
+    bufferId: bufferViewLoader._bufferId
   });
 }
 
@@ -246,7 +246,7 @@ function getBufferLoader(bufferViewLoader) {
  */
 GltfBufferViewLoader.prototype.process = function (frameState) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("frameState", frameState);
+  Check.typeOf.object('frameState', frameState);
   //>>includeEnd('debug');
 
   return this._process(this, frameState);

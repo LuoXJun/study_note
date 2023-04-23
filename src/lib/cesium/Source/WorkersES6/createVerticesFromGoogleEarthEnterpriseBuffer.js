@@ -1,21 +1,21 @@
-import AxisAlignedBoundingBox from "../Core/AxisAlignedBoundingBox.js";
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import EllipsoidalOccluder from "../Core/EllipsoidalOccluder.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import OrientedBoundingBox from "../Core/OrientedBoundingBox.js";
-import Rectangle from "../Core/Rectangle.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import TerrainEncoding from "../Core/TerrainEncoding.js";
-import Transforms from "../Core/Transforms.js";
-import WebMercatorProjection from "../Core/WebMercatorProjection.js";
-import createTaskProcessorWorker from "./createTaskProcessorWorker.js";
+import AxisAlignedBoundingBox from '../Core/AxisAlignedBoundingBox.js';
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import EllipsoidalOccluder from '../Core/EllipsoidalOccluder.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import OrientedBoundingBox from '../Core/OrientedBoundingBox.js';
+import Rectangle from '../Core/Rectangle.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import TerrainEncoding from '../Core/TerrainEncoding.js';
+import Transforms from '../Core/Transforms.js';
+import WebMercatorProjection from '../Core/WebMercatorProjection.js';
+import createTaskProcessorWorker from './createTaskProcessorWorker.js';
 
 const sizeOfUint16 = Uint16Array.BYTES_PER_ELEMENT;
 const sizeOfInt32 = Int32Array.BYTES_PER_ELEMENT;
@@ -75,7 +75,7 @@ function createVerticesFromGoogleEarthEnterpriseBuffer(
     westIndicesSouthToNorth: statistics.westIndicesSouthToNorth,
     southIndicesEastToWest: statistics.southIndicesEastToWest,
     eastIndicesNorthToSouth: statistics.eastIndicesNorthToSouth,
-    northIndicesWestToEast: statistics.northIndicesWestToEast,
+    northIndicesWestToEast: statistics.northIndicesWestToEast
   };
 }
 
@@ -133,9 +133,8 @@ function processBuffer(
   let southMercatorY;
   let oneOverMercatorHeight;
   if (includeWebMercatorT) {
-    southMercatorY = WebMercatorProjection.geodeticLatitudeToMercatorAngle(
-      geographicSouth
-    );
+    southMercatorY =
+      WebMercatorProjection.geodeticLatitudeToMercatorAngle(geographicSouth);
     oneOverMercatorHeight =
       1.0 /
       (WebMercatorProjection.geodeticLatitudeToMercatorAngle(geographicNorth) -
@@ -294,22 +293,22 @@ function processBuffer(
       if (Math.abs(longitude - geographicWest) < halfStepX) {
         westBorder.push({
           index: pointOffset,
-          cartographic: Cartographic.clone(scratchCartographic),
+          cartographic: Cartographic.clone(scratchCartographic)
         });
       } else if (Math.abs(longitude - geographicEast) < halfStepX) {
         eastBorder.push({
           index: pointOffset,
-          cartographic: Cartographic.clone(scratchCartographic),
+          cartographic: Cartographic.clone(scratchCartographic)
         });
       } else if (Math.abs(latitude - geographicSouth) < halfStepY) {
         southBorder.push({
           index: pointOffset,
-          cartographic: Cartographic.clone(scratchCartographic),
+          cartographic: Cartographic.clone(scratchCartographic)
         });
       } else if (Math.abs(latitude - geographicNorth) < halfStepY) {
         northBorder.push({
           index: pointOffset,
-          cartographic: Cartographic.clone(scratchCartographic),
+          cartographic: Cartographic.clone(scratchCartographic)
         });
       }
 
@@ -354,7 +353,7 @@ function processBuffer(
     }
 
     if (quadSize !== offset - startQuad) {
-      throw new RuntimeError("Invalid terrain tile.");
+      throw new RuntimeError('Invalid terrain tile.');
     }
   }
 
@@ -379,7 +378,7 @@ function processBuffer(
     toENU: toENU,
     ellipsoid: ellipsoid,
     minimum: minimum,
-    maximum: maximum,
+    maximum: maximum
   };
 
   // Sort counter clockwise from NW corner
@@ -481,11 +480,12 @@ function processBuffer(
   }
 
   const occluder = new EllipsoidalOccluder(ellipsoid);
-  const occludeePointInScaledSpace = occluder.computeHorizonCullingPointPossiblyUnderEllipsoid(
-    relativeToCenter,
-    positions,
-    minHeight
-  );
+  const occludeePointInScaledSpace =
+    occluder.computeHorizonCullingPointPossiblyUnderEllipsoid(
+      relativeToCenter,
+      positions,
+      minHeight
+    );
 
   const aaBox = new AxisAlignedBoundingBox(minimum, maximum, relativeToCenter);
   const encoding = new TerrainEncoding(
@@ -561,7 +561,7 @@ function processBuffer(
     westIndicesSouthToNorth: westIndicesSouthToNorth,
     southIndicesEastToWest: southIndicesEastToWest,
     eastIndicesNorthToSouth: eastIndicesNorthToSouth,
-    northIndicesWestToEast: northIndicesWestToEast,
+    northIndicesWestToEast: northIndicesWestToEast
   };
 }
 
@@ -612,9 +612,8 @@ function addSkirt(
       scratchCartographic.latitude -= cornerFudge;
     }
 
-    const pos = skirtOptions.ellipsoid.cartographicToCartesian(
-      scratchCartographic
-    );
+    const pos =
+      skirtOptions.ellipsoid.cartographicToCartesian(scratchCartographic);
     positions.push(pos);
     heights.push(height);
     uvs.push(Cartesian2.clone(uvs[borderIndex])); // Copy UVs from border point

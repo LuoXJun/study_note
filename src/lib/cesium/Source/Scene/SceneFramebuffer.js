@@ -1,8 +1,8 @@
-import Color from "../Core/Color.js";
-import destroyObject from "../Core/destroyObject.js";
-import ClearCommand from "../Renderer/ClearCommand.js";
-import FramebufferManager from "../Renderer/FramebufferManager.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
+import Color from '../Core/Color.js';
+import destroyObject from '../Core/destroyObject.js';
+import ClearCommand from '../Renderer/ClearCommand.js';
+import FramebufferManager from '../Renderer/FramebufferManager.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
 
 /**
  * @private
@@ -11,11 +11,11 @@ function SceneFramebuffer() {
   this._numSamples = 1;
   this._colorFramebuffer = new FramebufferManager({
     depthStencil: true,
-    supportsDepthTexture: true,
+    supportsDepthTexture: true
   });
   this._idFramebuffer = new FramebufferManager({
     depthStencil: true,
-    supportsDepthTexture: true,
+    supportsDepthTexture: true
   });
 
   this._idClearColor = new Color(0.0, 0.0, 0.0, 0.0);
@@ -23,7 +23,7 @@ function SceneFramebuffer() {
   this._clearCommand = new ClearCommand({
     color: new Color(0.0, 0.0, 0.0, 0.0),
     depth: 1.0,
-    owner: this,
+    owner: this
   });
 }
 
@@ -36,18 +36,18 @@ Object.defineProperties(SceneFramebuffer.prototype, {
   framebuffer: {
     get: function () {
       return this._colorFramebuffer.framebuffer;
-    },
+    }
   },
   idFramebuffer: {
     get: function () {
       return this._idFramebuffer.framebuffer;
-    },
+    }
   },
   depthStencilTexture: {
     get: function () {
       return this._colorFramebuffer.getDepthStencilTexture();
-    },
-  },
+    }
+  }
 });
 
 SceneFramebuffer.prototype.update = function (

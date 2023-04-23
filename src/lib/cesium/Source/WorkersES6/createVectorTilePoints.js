@@ -1,10 +1,10 @@
-import AttributeCompression from "../Core/AttributeCompression.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import CesiumMath from "../Core/Math.js";
-import Rectangle from "../Core/Rectangle.js";
-import createTaskProcessorWorker from "./createTaskProcessorWorker.js";
+import AttributeCompression from '../Core/AttributeCompression.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import CesiumMath from '../Core/Math.js';
+import Rectangle from '../Core/Rectangle.js';
+import createTaskProcessorWorker from './createTaskProcessorWorker.js';
 
 const maxShort = 32767;
 
@@ -15,7 +15,7 @@ const scratchRectangle = new Rectangle();
 const scratchEllipsoid = new Ellipsoid();
 const scratchMinMaxHeights = {
   min: undefined,
-  max: undefined,
+  max: undefined
 };
 
 function unpackBuffer(packedBuffer) {
@@ -75,7 +75,7 @@ function createVectorTilePoints(parameters, transferableObjects) {
   transferableObjects.push(decoded.buffer);
 
   return {
-    positions: decoded.buffer,
+    positions: decoded.buffer
   };
 }
 export default createTaskProcessorWorker(createVectorTilePoints);

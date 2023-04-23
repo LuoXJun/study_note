@@ -50,6 +50,6 @@ const RequestState = {
    * @type Number
    * @constant
    */
-  FAILED: 5,
+  FAILED: 5
 };
 export default Object.freeze(RequestState);

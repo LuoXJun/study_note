@@ -1,7 +1,7 @@
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
-import MetadataClass from "./MetadataClass.js";
-import MetadataEnum from "./MetadataEnum.js";
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
+import MetadataClass from './MetadataClass.js';
+import MetadataEnum from './MetadataEnum.js';
 
 /**
  * A schema containing classes and enums.
@@ -18,7 +18,7 @@ import MetadataEnum from "./MetadataEnum.js";
  */
 function MetadataSchema(schema) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("schema", schema);
+  Check.typeOf.object('schema', schema);
   //>>includeEnd('debug');
 
   const enums = {};
@@ -27,7 +27,7 @@ function MetadataSchema(schema) {
       if (schema.enums.hasOwnProperty(enumId)) {
         enums[enumId] = new MetadataEnum({
           id: enumId,
-          enum: schema.enums[enumId],
+          enum: schema.enums[enumId]
         });
       }
     }
@@ -40,7 +40,7 @@ function MetadataSchema(schema) {
         classes[classId] = new MetadataClass({
           id: classId,
           class: schema.classes[classId],
-          enums: enums,
+          enums: enums
         });
       }
     }
@@ -68,7 +68,7 @@ Object.defineProperties(MetadataSchema.prototype, {
   classes: {
     get: function () {
       return this._classes;
-    },
+    }
   },
 
   /**
@@ -82,7 +82,7 @@ Object.defineProperties(MetadataSchema.prototype, {
   enums: {
     get: function () {
       return this._enums;
-    },
+    }
   },
 
   /**
@@ -96,7 +96,7 @@ Object.defineProperties(MetadataSchema.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
 
   /**
@@ -110,7 +110,7 @@ Object.defineProperties(MetadataSchema.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
 
   /**
@@ -124,7 +124,7 @@ Object.defineProperties(MetadataSchema.prototype, {
   description: {
     get: function () {
       return this._description;
-    },
+    }
   },
 
   /**
@@ -138,7 +138,7 @@ Object.defineProperties(MetadataSchema.prototype, {
   version: {
     get: function () {
       return this._version;
-    },
+    }
   },
 
   /**
@@ -152,7 +152,7 @@ Object.defineProperties(MetadataSchema.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -166,8 +166,8 @@ Object.defineProperties(MetadataSchema.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
-  },
+    }
+  }
 });
 
 export default MetadataSchema;

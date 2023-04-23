@@ -1,14 +1,14 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Pass from "../Renderer/Pass.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import ViewportQuadFS from "../Shaders/ViewportQuadFS.js";
-import BlendingState from "./BlendingState.js";
-import Material from "./Material.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Pass from '../Renderer/Pass.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import ViewportQuadFS from '../Shaders/ViewportQuadFS.js';
+import BlendingState from './BlendingState.js';
+import Material from './Material.js';
 
 /**
  * A viewport aligned quad.
@@ -48,7 +48,7 @@ function ViewportQuad(rectangle, material) {
 
   if (!defined(material)) {
     material = Material.fromType(Material.ColorType, {
-      color: new Color(1.0, 1.0, 1.0, 1.0),
+      color: new Color(1.0, 1.0, 1.0, 1.0)
     });
   }
 
@@ -95,10 +95,10 @@ ViewportQuad.prototype.update = function (frameState) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(this.material)) {
-    throw new DeveloperError("this.material must be defined.");
+    throw new DeveloperError('this.material must be defined.');
   }
   if (!defined(this.rectangle)) {
-    throw new DeveloperError("this.rectangle must be defined.");
+    throw new DeveloperError('this.rectangle must be defined.');
   }
   //>>includeEnd('debug');
 
@@ -106,7 +106,7 @@ ViewportQuad.prototype.update = function (frameState) {
   if (!defined(rs) || !BoundingRectangle.equals(rs.viewport, this.rectangle)) {
     this._rs = RenderState.fromCache({
       blending: BlendingState.ALPHA_BLEND,
-      viewport: this.rectangle,
+      viewport: this.rectangle
     });
   }
 
@@ -123,12 +123,12 @@ ViewportQuad.prototype.update = function (frameState) {
       }
 
       const fs = new ShaderSource({
-        sources: [this._material.shaderSource, ViewportQuadFS],
+        sources: [this._material.shaderSource, ViewportQuadFS]
       });
       this._overlayCommand = context.createViewportQuadCommand(fs, {
         renderState: this._rs,
         uniformMap: this._material._uniforms,
-        owner: this,
+        owner: this
       });
       this._overlayCommand.pass = Pass.OVERLAY;
     }

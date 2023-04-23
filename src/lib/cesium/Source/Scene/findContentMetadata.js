@@ -1,8 +1,8 @@
-import ContentMetadata from "./ContentMetadata.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import hasExtension from "./hasExtension.js";
-import oneTimeWarning from "../Core/oneTimeWarning.js";
+import ContentMetadata from './ContentMetadata.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import hasExtension from './hasExtension.js';
+import oneTimeWarning from '../Core/oneTimeWarning.js';
 
 /**
  * Check if a content has metadata, either defined in its metadata field (3D Tiles 1.1) or in
@@ -18,8 +18,8 @@ import oneTimeWarning from "../Core/oneTimeWarning.js";
  * @experimental This feature is using part of the 3D Tiles spec that is not final and is subject to change without Cesium's standard deprecation policy.
  */
 function findContentMetadata(tileset, contentHeader) {
-  const metadataJson = hasExtension(contentHeader, "3DTILES_metadata")
-    ? contentHeader.extensions["3DTILES_metadata"]
+  const metadataJson = hasExtension(contentHeader, '3DTILES_metadata')
+    ? contentHeader.extensions['3DTILES_metadata']
     : contentHeader.metadata;
 
   if (!defined(metadataJson)) {
@@ -28,8 +28,8 @@ function findContentMetadata(tileset, contentHeader) {
 
   if (!defined(tileset.schema)) {
     findContentMetadata._oneTimeWarning(
-      "findContentMetadata-missing-root-schema",
-      "Could not find a metadata schema for content metadata. For tilesets that contain external tilesets, make sure the schema is added to the root tileset.json."
+      'findContentMetadata-missing-root-schema',
+      'Could not find a metadata schema for content metadata. For tilesets that contain external tilesets, make sure the schema is added to the root tileset.json.'
     );
     return undefined;
   }
@@ -42,7 +42,7 @@ function findContentMetadata(tileset, contentHeader) {
     const contentClass = classes[metadataJson.class];
     return new ContentMetadata({
       content: metadataJson,
-      class: contentClass,
+      class: contentClass
     });
   }
 

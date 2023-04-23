@@ -1,7 +1,7 @@
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import JulianDate from "../Core/JulianDate.js";
-import CesiumMath from "../Core/Math.js";
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import JulianDate from '../Core/JulianDate.js';
+import CesiumMath from '../Core/Math.js';
 
 /**
  * A heatmap colorizer in a {@link Cesium3DTileset}. A tileset can colorize its visible tiles in a heatmap style.
@@ -39,7 +39,7 @@ function Cesium3DTilesetHeatmap(tilePropertyName) {
  */
 function getHeatmapValue(tileValue, tilePropertyName) {
   let value;
-  if (tilePropertyName === "_loadTimestamp") {
+  if (tilePropertyName === '_loadTimestamp') {
     value = JulianDate.toDate(tileValue).getTime();
   } else {
     value = tileValue;
@@ -92,7 +92,7 @@ const heatmapColors = [
   new Color(0.827, 0.231, 0.49, 1), // Pink
   new Color(0.827, 0.188, 0.22, 1), // Red
   new Color(1.0, 0.592, 0.259, 1), // Orange
-  new Color(1.0, 0.843, 0.0, 1),
+  new Color(1.0, 0.843, 0.0, 1)
 ]; // Yellow
 /**
  * Colorize the tile in heat map style based on where it lies within the minimum maximum window.

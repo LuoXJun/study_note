@@ -1,16 +1,16 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import GeometryOffsetAttribute from "./GeometryOffsetAttribute.js";
-import PrimitiveType from "./PrimitiveType.js";
-import VertexFormat from "./VertexFormat.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import GeometryOffsetAttribute from './GeometryOffsetAttribute.js';
+import PrimitiveType from './PrimitiveType.js';
+import VertexFormat from './VertexFormat.js';
 
 const diffScratch = new Cartesian3();
 
@@ -46,14 +46,14 @@ function BoxGeometry(options) {
   const max = options.maximum;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("min", min);
-  Check.typeOf.object("max", max);
+  Check.typeOf.object('min', min);
+  Check.typeOf.object('max', max);
   if (
     defined(options.offsetAttribute) &&
     options.offsetAttribute === GeometryOffsetAttribute.TOP
   ) {
     throw new DeveloperError(
-      "GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry."
+      'GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -64,7 +64,7 @@ function BoxGeometry(options) {
   this._maximum = Cartesian3.clone(max);
   this._vertexFormat = vertexFormat;
   this._offsetAttribute = options.offsetAttribute;
-  this._workerName = "createBoxGeometry";
+  this._workerName = 'createBoxGeometry';
 }
 
 /**
@@ -92,10 +92,10 @@ BoxGeometry.fromDimensions = function (options) {
   const dimensions = options.dimensions;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("dimensions", dimensions);
-  Check.typeOf.number.greaterThanOrEquals("dimensions.x", dimensions.x, 0);
-  Check.typeOf.number.greaterThanOrEquals("dimensions.y", dimensions.y, 0);
-  Check.typeOf.number.greaterThanOrEquals("dimensions.z", dimensions.z, 0);
+  Check.typeOf.object('dimensions', dimensions);
+  Check.typeOf.number.greaterThanOrEquals('dimensions.x', dimensions.x, 0);
+  Check.typeOf.number.greaterThanOrEquals('dimensions.y', dimensions.y, 0);
+  Check.typeOf.number.greaterThanOrEquals('dimensions.z', dimensions.z, 0);
   //>>includeEnd('debug');
 
   const corner = Cartesian3.multiplyByScalar(dimensions, 0.5, new Cartesian3());
@@ -104,7 +104,7 @@ BoxGeometry.fromDimensions = function (options) {
     minimum: Cartesian3.negate(corner, new Cartesian3()),
     maximum: corner,
     vertexFormat: options.vertexFormat,
-    offsetAttribute: options.offsetAttribute,
+    offsetAttribute: options.offsetAttribute
   });
 };
 
@@ -130,12 +130,12 @@ BoxGeometry.fromDimensions = function (options) {
  */
 BoxGeometry.fromAxisAlignedBoundingBox = function (boundingBox) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("boundingBox", boundingBox);
+  Check.typeOf.object('boundingBox', boundingBox);
   //>>includeEnd('debug');
 
   return new BoxGeometry({
     minimum: boundingBox.minimum,
-    maximum: boundingBox.maximum,
+    maximum: boundingBox.maximum
   });
 };
 
@@ -157,8 +157,8 @@ BoxGeometry.packedLength =
  */
 BoxGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -188,7 +188,7 @@ const scratchOptions = {
   minimum: scratchMin,
   maximum: scratchMax,
   vertexFormat: scratchVertexFormat,
-  offsetAttribute: undefined,
+  offsetAttribute: undefined
 };
 
 /**
@@ -201,7 +201,7 @@ const scratchOptions = {
  */
 BoxGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -354,7 +354,7 @@ BoxGeometry.createGeometry = function (boxGeometry) {
       attributes.position = new GeometryAttribute({
         componentDatatype: ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: positions,
+        values: positions
       });
     }
 
@@ -448,7 +448,7 @@ BoxGeometry.createGeometry = function (boxGeometry) {
       attributes.normal = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: normals,
+        values: normals
       });
     }
 
@@ -518,7 +518,7 @@ BoxGeometry.createGeometry = function (boxGeometry) {
       attributes.st = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 2,
-        values: texCoords,
+        values: texCoords
       });
     }
 
@@ -612,7 +612,7 @@ BoxGeometry.createGeometry = function (boxGeometry) {
       attributes.tangent = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: tangents,
+        values: tangents
       });
     }
 
@@ -706,7 +706,7 @@ BoxGeometry.createGeometry = function (boxGeometry) {
       attributes.bitangent = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: bitangents,
+        values: bitangents
       });
     }
 
@@ -792,7 +792,7 @@ BoxGeometry.createGeometry = function (boxGeometry) {
     attributes.position = new GeometryAttribute({
       componentDatatype: ComponentDatatype.DOUBLE,
       componentsPerAttribute: 3,
-      values: positions,
+      values: positions
     });
 
     // 12 triangles:  6 faces, 2 triangles each.
@@ -858,7 +858,7 @@ BoxGeometry.createGeometry = function (boxGeometry) {
     attributes.applyOffset = new GeometryAttribute({
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 1,
-      values: applyOffset,
+      values: applyOffset
     });
   }
 
@@ -867,7 +867,7 @@ BoxGeometry.createGeometry = function (boxGeometry) {
     indices: indices,
     primitiveType: PrimitiveType.TRIANGLES,
     boundingSphere: new BoundingSphere(Cartesian3.ZERO, radius),
-    offsetAttribute: boxGeometry._offsetAttribute,
+    offsetAttribute: boxGeometry._offsetAttribute
   });
 };
 
@@ -884,7 +884,7 @@ BoxGeometry.getUnitBox = function () {
     unitBoxGeometry = BoxGeometry.createGeometry(
       BoxGeometry.fromDimensions({
         dimensions: new Cartesian3(1.0, 1.0, 1.0),
-        vertexFormat: VertexFormat.POSITION_ONLY,
+        vertexFormat: VertexFormat.POSITION_ONLY
       })
     );
   }

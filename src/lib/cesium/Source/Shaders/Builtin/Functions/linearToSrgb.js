@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "/**\n\
+export default '/**\n\
  * Converts a linear RGB color to an sRGB color.\n\
  *\n\
  * @param {vec3|vec4} linearIn The color in linear color space.\n\
@@ -15,4 +15,4 @@ vec4 czm_linearToSrgb(vec4 linearIn) \n\
     vec3 srgbOut = pow(linearIn.rgb, vec3(1.0/2.2));\n\
     return vec4(srgbOut, linearIn.a);\n\
 }\n\
-";
+';

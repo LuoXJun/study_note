@@ -1,38 +1,38 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import clone from "../Core/clone.js";
-import Color from "../Core/Color.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defer from "../Core/defer.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import ImageBasedLighting from "./ImageBasedLighting.js";
-import Matrix4 from "../Core/Matrix4.js";
-import PrimitiveType from "../Core/PrimitiveType.js";
-import Resource from "../Core/Resource.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import Transforms from "../Core/Transforms.js";
-import Buffer from "../Renderer/Buffer.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import Pass from "../Renderer/Pass.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import ForEach from "./GltfPipeline/ForEach.js";
-import Model from "./Model.js";
-import ModelInstance from "./ModelInstance.js";
-import ModelUtility from "./ModelUtility.js";
-import SceneMode from "./SceneMode.js";
-import ShadowMode from "./ShadowMode.js";
-import SplitDirection from "./SplitDirection.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import clone from '../Core/clone.js';
+import Color from '../Core/Color.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defer from '../Core/defer.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import ImageBasedLighting from './ImageBasedLighting.js';
+import Matrix4 from '../Core/Matrix4.js';
+import PrimitiveType from '../Core/PrimitiveType.js';
+import Resource from '../Core/Resource.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import Transforms from '../Core/Transforms.js';
+import Buffer from '../Renderer/Buffer.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import Pass from '../Renderer/Pass.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import ForEach from './GltfPipeline/ForEach.js';
+import Model from './Model.js';
+import ModelInstance from './ModelInstance.js';
+import ModelUtility from './ModelUtility.js';
+import SceneMode from './SceneMode.js';
+import ShadowMode from './ShadowMode.js';
+import SplitDirection from './SplitDirection.js';
 
 const LoadState = {
   NEEDS_LOAD: 0,
   LOADING: 1,
   LOADED: 2,
-  FAILED: 3,
+  FAILED: 3
 };
 
 /**
@@ -75,12 +75,12 @@ function ModelInstanceCollection(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.gltf) && !defined(options.url)) {
-    throw new DeveloperError("Either options.gltf or options.url is required.");
+    throw new DeveloperError('Either options.gltf or options.url is required.');
   }
 
   if (defined(options.gltf) && defined(options.url)) {
     throw new DeveloperError(
-      "Cannot pass in both options.gltf and options.url."
+      'Cannot pass in both options.gltf and options.url.'
     );
   }
   //>>includeEnd('debug');
@@ -179,27 +179,27 @@ Object.defineProperties(ModelInstanceCollection.prototype, {
   allowPicking: {
     get: function () {
       return this._allowPicking;
-    },
+    }
   },
   length: {
     get: function () {
       return this._instances.length;
-    },
+    }
   },
   activeAnimations: {
     get: function () {
       return this._model.activeAnimations;
-    },
+    }
   },
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
   readyPromise: {
     get: function () {
       return this._readyPromise.promise;
-    },
+    }
   },
   imageBasedLighting: {
     get: function () {
@@ -216,8 +216,8 @@ Object.defineProperties(ModelInstanceCollection.prototype, {
         this._imageBasedLighting = value;
         this._shouldDestroyImageBasedLighting = false;
       }
-    },
-  },
+    }
+  }
 });
 
 function createInstances(collection, instancesOptions) {
@@ -277,7 +277,7 @@ function getCheckUniformSemanticFunction(
       } else {
         throw new RuntimeError(
           `${
-            "Shader program cannot be optimized for instancing. " + 'Uniform "'
+            'Shader program cannot be optimized for instancing. ' + 'Uniform "'
           }${uniformName}" in program "${programId}" uses unsupported semantic "${semantic}"`
         );
       }
@@ -295,21 +295,21 @@ function getInstancedUniforms(collection, programId) {
 
   // When using CESIUM_RTC_MODELVIEW the CESIUM_RTC center is ignored. Instances are always rendered relative-to-center.
   const modelSemantics = [
-    "MODEL",
-    "MODELVIEW",
-    "CESIUM_RTC_MODELVIEW",
-    "MODELVIEWPROJECTION",
-    "MODELINVERSE",
-    "MODELVIEWINVERSE",
-    "MODELVIEWPROJECTIONINVERSE",
-    "MODELINVERSETRANSPOSE",
-    "MODELVIEWINVERSETRANSPOSE",
+    'MODEL',
+    'MODELVIEW',
+    'CESIUM_RTC_MODELVIEW',
+    'MODELVIEWPROJECTION',
+    'MODELINVERSE',
+    'MODELVIEWINVERSE',
+    'MODELVIEWPROJECTIONINVERSE',
+    'MODELINVERSETRANSPOSE',
+    'MODELVIEWINVERSETRANSPOSE'
   ];
   const supportedSemantics = [
-    "MODELVIEW",
-    "CESIUM_RTC_MODELVIEW",
-    "MODELVIEWPROJECTION",
-    "MODELVIEWINVERSETRANSPOSE",
+    'MODELVIEW',
+    'CESIUM_RTC_MODELVIEW',
+    'MODELVIEWPROJECTION',
+    'MODELVIEWINVERSETRANSPOSE'
   ];
 
   const techniques = collection._model._sourceTechniques;
@@ -344,34 +344,34 @@ function getVertexShaderCallback(collection) {
     const instancedUniforms = getInstancedUniforms(collection, programId);
     const usesBatchTable = defined(collection._batchTable);
 
-    let renamedSource = ShaderSource.replaceMain(vs, "czm_instancing_main");
+    let renamedSource = ShaderSource.replaceMain(vs, 'czm_instancing_main');
 
-    let globalVarsHeader = "";
-    let globalVarsMain = "";
+    let globalVarsHeader = '';
+    let globalVarsMain = '';
     for (const uniform in instancedUniforms) {
       if (instancedUniforms.hasOwnProperty(uniform)) {
         const semantic = instancedUniforms[uniform];
         let varName;
-        if (semantic === "MODELVIEW" || semantic === "CESIUM_RTC_MODELVIEW") {
-          varName = "czm_instanced_modelView";
-        } else if (semantic === "MODELVIEWPROJECTION") {
-          varName = "czm_instanced_modelViewProjection";
-          globalVarsHeader += "mat4 czm_instanced_modelViewProjection;\n";
+        if (semantic === 'MODELVIEW' || semantic === 'CESIUM_RTC_MODELVIEW') {
+          varName = 'czm_instanced_modelView';
+        } else if (semantic === 'MODELVIEWPROJECTION') {
+          varName = 'czm_instanced_modelViewProjection';
+          globalVarsHeader += 'mat4 czm_instanced_modelViewProjection;\n';
           globalVarsMain +=
-            "czm_instanced_modelViewProjection = czm_projection * czm_instanced_modelView;\n";
-        } else if (semantic === "MODELVIEWINVERSETRANSPOSE") {
-          varName = "czm_instanced_modelViewInverseTranspose";
-          globalVarsHeader += "mat3 czm_instanced_modelViewInverseTranspose;\n";
+            'czm_instanced_modelViewProjection = czm_projection * czm_instanced_modelView;\n';
+        } else if (semantic === 'MODELVIEWINVERSETRANSPOSE') {
+          varName = 'czm_instanced_modelViewInverseTranspose';
+          globalVarsHeader += 'mat3 czm_instanced_modelViewInverseTranspose;\n';
           globalVarsMain +=
-            "czm_instanced_modelViewInverseTranspose = mat3(czm_instanced_modelView);\n";
+            'czm_instanced_modelViewInverseTranspose = mat3(czm_instanced_modelView);\n';
         }
 
         // Remove the uniform declaration
         let regex = new RegExp(`uniform.*${uniform}.*`);
-        renamedSource = renamedSource.replace(regex, "");
+        renamedSource = renamedSource.replace(regex, '');
 
         // Replace all occurrences of the uniform with the global variable
-        regex = new RegExp(`${uniform}\\b`, "g");
+        regex = new RegExp(`${uniform}\\b`, 'g');
         renamedSource = renamedSource.replace(regex, varName);
       }
     }
@@ -380,22 +380,22 @@ function getVertexShaderCallback(collection) {
     // czm_instanced_modifiedModelView is the transform from the center to view
     // czm_instanced_nodeTransform is the local offset of the node within the model
     const uniforms =
-      "uniform mat4 czm_instanced_modifiedModelView;\n" +
-      "uniform mat4 czm_instanced_nodeTransform;\n";
+      'uniform mat4 czm_instanced_modifiedModelView;\n' +
+      'uniform mat4 czm_instanced_nodeTransform;\n';
 
     let batchIdAttribute;
     let pickAttribute;
     let pickVarying;
 
     if (usesBatchTable) {
-      batchIdAttribute = "attribute float a_batchId;\n";
-      pickAttribute = "";
-      pickVarying = "";
+      batchIdAttribute = 'attribute float a_batchId;\n';
+      pickAttribute = '';
+      pickVarying = '';
     } else {
-      batchIdAttribute = "";
+      batchIdAttribute = '';
       pickAttribute =
-        "attribute vec4 pickColor;\n" + "varying vec4 v_pickColor;\n";
-      pickVarying = "    v_pickColor = pickColor;\n";
+        'attribute vec4 pickColor;\n' + 'varying vec4 v_pickColor;\n';
+      pickVarying = '    v_pickColor = pickColor;\n';
     }
 
     let instancedSource =
@@ -409,13 +409,11 @@ function getVertexShaderCallback(collection) {
 
     if (usesBatchTable) {
       const gltf = collection._model.gltfInternal;
-      const diffuseAttributeOrUniformName = ModelUtility.getDiffuseAttributeOrUniform(
-        gltf,
-        programId
-      );
+      const diffuseAttributeOrUniformName =
+        ModelUtility.getDiffuseAttributeOrUniform(gltf, programId);
       instancedSource = collection._batchTable.getVertexShaderCallback(
         true,
-        "a_batchId",
+        'a_batchId',
         diffuseAttributeOrUniformName
       )(instancedSource);
     }
@@ -429,10 +427,8 @@ function getFragmentShaderCallback(collection) {
     const batchTable = collection._batchTable;
     if (defined(batchTable)) {
       const gltf = collection._model.gltfInternal;
-      const diffuseAttributeOrUniformName = ModelUtility.getDiffuseAttributeOrUniform(
-        gltf,
-        programId
-      );
+      const diffuseAttributeOrUniformName =
+        ModelUtility.getDiffuseAttributeOrUniform(gltf, programId);
       fs = batchTable.getFragmentShaderCallback(
         true,
         diffuseAttributeOrUniformName,
@@ -490,13 +486,11 @@ function getVertexShaderNonInstancedCallback(collection) {
   return function (vs, programId) {
     if (defined(collection._batchTable)) {
       const gltf = collection._model.gltfInternal;
-      const diffuseAttributeOrUniformName = ModelUtility.getDiffuseAttributeOrUniform(
-        gltf,
-        programId
-      );
+      const diffuseAttributeOrUniformName =
+        ModelUtility.getDiffuseAttributeOrUniform(gltf, programId);
       vs = collection._batchTable.getVertexShaderCallback(
         true,
-        "a_batchId",
+        'a_batchId',
         diffuseAttributeOrUniformName
       )(vs);
       // Treat a_batchId as a uniform rather than a vertex attribute
@@ -511,10 +505,8 @@ function getFragmentShaderNonInstancedCallback(collection) {
     const batchTable = collection._batchTable;
     if (defined(batchTable)) {
       const gltf = collection._model.gltfInternal;
-      const diffuseAttributeOrUniformName = ModelUtility.getDiffuseAttributeOrUniform(
-        gltf,
-        programId
-      );
+      const diffuseAttributeOrUniformName =
+        ModelUtility.getDiffuseAttributeOrUniform(gltf, programId);
       fs = batchTable.getFragmentShaderCallback(
         true,
         diffuseAttributeOrUniformName,
@@ -596,7 +588,7 @@ function createVertexBuffer(collection, context) {
     collection._batchIdBuffer = Buffer.createVertexBuffer({
       context: context,
       typedArray: batchIdBufferData,
-      usage: BufferUsage.STATIC_DRAW,
+      usage: BufferUsage.STATIC_DRAW
     });
   }
 
@@ -614,7 +606,7 @@ function createVertexBuffer(collection, context) {
     collection._pickIdBuffer = Buffer.createVertexBuffer({
       context: context,
       typedArray: pickIdBuffer,
-      usage: BufferUsage.STATIC_DRAW,
+      usage: BufferUsage.STATIC_DRAW
     });
   }
 
@@ -622,7 +614,7 @@ function createVertexBuffer(collection, context) {
   collection._vertexBuffer = Buffer.createVertexBuffer({
     context: context,
     typedArray: vertexBufferTypedArray,
-    usage: dynamic ? BufferUsage.STREAM_DRAW : BufferUsage.STATIC_DRAW,
+    usage: dynamic ? BufferUsage.STREAM_DRAW : BufferUsage.STATIC_DRAW
   });
 }
 
@@ -671,7 +663,7 @@ function createModel(collection, context) {
     opaquePass: collection._opaquePass,
     imageBasedLighting: collection._imageBasedLighting,
     showOutline: collection.showOutline,
-    showCreditsOnScreen: collection.showCreditsOnScreen,
+    showCreditsOnScreen: collection.showCreditsOnScreen
   };
 
   if (!usesBatchTable) {
@@ -695,7 +687,7 @@ function createModel(collection, context) {
         normalize: false,
         offsetInBytes: 0,
         strideInBytes: componentSizeInBytes * vertexSizeInFloats,
-        instanceDivisor: 1,
+        instanceDivisor: 1
       },
       czm_modelMatrixRow1: {
         index: 0, // updated in Model
@@ -705,7 +697,7 @@ function createModel(collection, context) {
         normalize: false,
         offsetInBytes: componentSizeInBytes * 4,
         strideInBytes: componentSizeInBytes * vertexSizeInFloats,
-        instanceDivisor: 1,
+        instanceDivisor: 1
       },
       czm_modelMatrixRow2: {
         index: 0, // updated in Model
@@ -715,8 +707,8 @@ function createModel(collection, context) {
         normalize: false,
         offsetInBytes: componentSizeInBytes * 8,
         strideInBytes: componentSizeInBytes * vertexSizeInFloats,
-        instanceDivisor: 1,
-      },
+        instanceDivisor: 1
+      }
     };
 
     // When using a batch table, add a batch id attribute
@@ -729,7 +721,7 @@ function createModel(collection, context) {
         normalize: false,
         offsetInBytes: 0,
         strideInBytes: 0,
-        instanceDivisor: 1,
+        instanceDivisor: 1
       };
     }
 
@@ -742,7 +734,7 @@ function createModel(collection, context) {
         normalize: true,
         offsetInBytes: 0,
         strideInBytes: 0,
-        instanceDivisor: 1,
+        instanceDivisor: 1
       };
     }
 
@@ -755,12 +747,10 @@ function createModel(collection, context) {
       modelOptions.cacheKey = `${collection._url.getUrlComponent()}#instanced`;
     }
   } else {
-    modelOptions.vertexShaderLoaded = getVertexShaderNonInstancedCallback(
-      collection
-    );
-    modelOptions.fragmentShaderLoaded = getFragmentShaderNonInstancedCallback(
-      collection
-    );
+    modelOptions.vertexShaderLoaded =
+      getVertexShaderNonInstancedCallback(collection);
+    modelOptions.fragmentShaderLoaded =
+      getFragmentShaderNonInstancedCallback(collection);
     modelOptions.uniformMapLoaded = getUniformMapNonInstancedCallback(
       collection,
       context
@@ -854,7 +844,7 @@ function createCommands(collection, drawCommands) {
     if (defined(collection._batchTable)) {
       drawCommand.pickId = collection._batchTable.getPickId();
     } else {
-      drawCommand.pickId = "v_pickColor";
+      drawCommand.pickId = 'v_pickColor';
     }
     collection._drawCommands.push(drawCommand);
   }

@@ -14,6 +14,6 @@ const StripeOrientation = {
    * Vertical orientation.
    * @type {Number}
    */
-  VERTICAL: 1,
+  VERTICAL: 1
 };
 export default Object.freeze(StripeOrientation);

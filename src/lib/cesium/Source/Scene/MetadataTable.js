@@ -1,9 +1,9 @@
-import Check from "../Core/Check.js";
-import clone from "../Core/clone.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import MetadataEntity from "./MetadataEntity.js";
-import MetadataTableProperty from "./MetadataTableProperty.js";
+import Check from '../Core/Check.js';
+import clone from '../Core/clone.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import MetadataEntity from './MetadataEntity.js';
+import MetadataTableProperty from './MetadataTableProperty.js';
 
 /**
  * A table containing binary metadata for a collection of entities. This is
@@ -31,8 +31,8 @@ function MetadataTable(options) {
   const metadataClass = options.class;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number.greaterThan("options.count", count, 0);
-  Check.typeOf.object("options.class", metadataClass);
+  Check.typeOf.number.greaterThan('options.count', count, 0);
+  Check.typeOf.object('options.class', metadataClass);
   //>>includeEnd('debug');
 
   let byteLength = 0;
@@ -44,7 +44,7 @@ function MetadataTable(options) {
           count: count,
           property: options.properties[propertyId],
           classProperty: metadataClass.properties[propertyId],
-          bufferViews: options.bufferViews,
+          bufferViews: options.bufferViews
         });
         properties[propertyId] = property;
         byteLength += property.byteLength;
@@ -70,7 +70,7 @@ Object.defineProperties(MetadataTable.prototype, {
   count: {
     get: function () {
       return this._count;
-    },
+    }
   },
 
   /**
@@ -84,7 +84,7 @@ Object.defineProperties(MetadataTable.prototype, {
   class: {
     get: function () {
       return this._class;
-    },
+    }
   },
 
   /**
@@ -98,8 +98,8 @@ Object.defineProperties(MetadataTable.prototype, {
   byteLength: {
     get: function () {
       return this._byteLength;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -166,7 +166,7 @@ MetadataTable.prototype.getPropertyIds = function (results) {
  */
 MetadataTable.prototype.getProperty = function (index, propertyId) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("propertyId", propertyId);
+  Check.typeOf.string('propertyId', propertyId);
   //>>includeEnd('debug');
 
   const property = this._properties[propertyId];
@@ -213,7 +213,7 @@ MetadataTable.prototype.getProperty = function (index, propertyId) {
  */
 MetadataTable.prototype.setProperty = function (index, propertyId, value) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("propertyId", propertyId);
+  Check.typeOf.string('propertyId', propertyId);
   //>>includeEnd('debug');
 
   const property = this._properties[propertyId];
@@ -237,7 +237,7 @@ MetadataTable.prototype.setProperty = function (index, propertyId, value) {
  */
 MetadataTable.prototype.getPropertyBySemantic = function (index, semantic) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("semantic", semantic);
+  Check.typeOf.string('semantic', semantic);
   //>>includeEnd('debug');
 
   let property;
@@ -273,7 +273,7 @@ MetadataTable.prototype.setPropertyBySemantic = function (
   value
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("semantic", semantic);
+  Check.typeOf.string('semantic', semantic);
   //>>includeEnd('debug');
 
   let property;
@@ -299,7 +299,7 @@ MetadataTable.prototype.setPropertyBySemantic = function (
  */
 MetadataTable.prototype.getPropertyTypedArray = function (propertyId) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("propertyId", propertyId);
+  Check.typeOf.string('propertyId', propertyId);
   //>>includeEnd('debug');
 
   const property = this._properties[propertyId];
@@ -321,7 +321,7 @@ MetadataTable.prototype.getPropertyTypedArray = function (propertyId) {
  */
 MetadataTable.prototype.getPropertyTypedArrayBySemantic = function (semantic) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("semantic", semantic);
+  Check.typeOf.string('semantic', semantic);
   //>>includeEnd('debug');
 
   let property;

@@ -29,6 +29,6 @@ const SplitDirection = {
    * @type {Number}
    * @constant
    */
-  RIGHT: 1.0,
+  RIGHT: 1.0
 };
 export default Object.freeze(SplitDirection);

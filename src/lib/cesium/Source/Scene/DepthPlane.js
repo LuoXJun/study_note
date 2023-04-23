@@ -1,24 +1,24 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defined from "../Core/defined.js";
-import FeatureDetection from "../Core/FeatureDetection.js";
-import Geometry from "../Core/Geometry.js";
-import GeometryAttribute from "../Core/GeometryAttribute.js";
-import OrthographicFrustum from "../Core/OrthographicFrustum.js";
-import PrimitiveType from "../Core/PrimitiveType.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import Pass from "../Renderer/Pass.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import VertexArray from "../Renderer/VertexArray.js";
-import DepthPlaneFS from "../Shaders/DepthPlaneFS.js";
-import DepthPlaneVS from "../Shaders/DepthPlaneVS.js";
-import SceneMode from "./SceneMode.js";
-import defaultValue from "../Core/defaultValue.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defined from '../Core/defined.js';
+import FeatureDetection from '../Core/FeatureDetection.js';
+import Geometry from '../Core/Geometry.js';
+import GeometryAttribute from '../Core/GeometryAttribute.js';
+import OrthographicFrustum from '../Core/OrthographicFrustum.js';
+import PrimitiveType from '../Core/PrimitiveType.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import Pass from '../Renderer/Pass.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import VertexArray from '../Renderer/VertexArray.js';
+import DepthPlaneFS from '../Shaders/DepthPlaneFS.js';
+import DepthPlaneVS from '../Shaders/DepthPlaneVS.js';
+import SceneMode from './SceneMode.js';
+import defaultValue from '../Core/defaultValue.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
 
 /**
  * @private
@@ -139,17 +139,17 @@ DepthPlane.prototype.update = function (frameState) {
     this._rs = RenderState.fromCache({
       // Write depth, not color
       cull: {
-        enabled: true,
+        enabled: true
       },
       depthTest: {
-        enabled: true,
+        enabled: true
       },
       colorMask: {
         red: false,
         green: false,
         blue: false,
-        alpha: false,
-      },
+        alpha: false
+      }
     });
 
     this._command = new DrawCommand({
@@ -159,7 +159,7 @@ DepthPlane.prototype.update = function (frameState) {
         ellipsoid.maximumRadius
       ),
       pass: Pass.OPAQUE,
-      owner: this,
+      owner: this
     });
   }
 
@@ -167,20 +167,20 @@ DepthPlane.prototype.update = function (frameState) {
     this._useLogDepth = useLogDepth;
 
     const vs = new ShaderSource({
-      sources: [DepthPlaneVS],
+      sources: [DepthPlaneVS]
     });
     const fs = new ShaderSource({
-      sources: [DepthPlaneFS],
+      sources: [DepthPlaneFS]
     });
     if (useLogDepth) {
       const extension =
-        "#ifdef GL_EXT_frag_depth \n" +
-        "#extension GL_EXT_frag_depth : enable \n" +
-        "#endif \n\n";
+        '#ifdef GL_EXT_frag_depth \n' +
+        '#extension GL_EXT_frag_depth : enable \n' +
+        '#endif \n\n';
 
       fs.sources.push(extension);
-      fs.defines.push("LOG_DEPTH");
-      vs.defines.push("LOG_DEPTH");
+      fs.defines.push('LOG_DEPTH');
+      vs.defines.push('LOG_DEPTH');
     }
 
     this._sp = ShaderProgram.replaceCache({
@@ -189,8 +189,8 @@ DepthPlane.prototype.update = function (frameState) {
       vertexShaderSource: vs,
       fragmentShaderSource: fs,
       attributeLocations: {
-        position: 0,
-      },
+        position: 0
+      }
     });
 
     this._command.shaderProgram = this._sp;
@@ -206,20 +206,20 @@ DepthPlane.prototype.update = function (frameState) {
         position: new GeometryAttribute({
           componentDatatype: ComponentDatatype.FLOAT,
           componentsPerAttribute: 3,
-          values: depthQuad,
-        }),
+          values: depthQuad
+        })
       },
       indices: [0, 1, 2, 2, 1, 3],
-      primitiveType: PrimitiveType.TRIANGLES,
+      primitiveType: PrimitiveType.TRIANGLES
     });
 
     this._va = VertexArray.fromGeometry({
       context: context,
       geometry: geometry,
       attributeLocations: {
-        position: 0,
+        position: 0
       },
-      bufferUsage: BufferUsage.DYNAMIC_DRAW,
+      bufferUsage: BufferUsage.DYNAMIC_DRAW
     });
 
     this._command.vertexArray = this._va;

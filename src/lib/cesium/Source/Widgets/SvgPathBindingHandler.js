@@ -1,5 +1,5 @@
-const svgNS = "http://www.w3.org/2000/svg";
-const svgClassName = "cesium-svgPath-svg";
+const svgNS = 'http://www.w3.org/2000/svg';
+const svgClassName = 'cesium-svgPath-svg';
 
 /**
  * A Knockout binding handler that creates a DOM element for a single SVG path.
@@ -35,10 +35,10 @@ const SvgPathBindingHandler = {
   register: function (knockout) {
     knockout.bindingHandlers.cesiumSvgPath = {
       init: function (element, valueAccessor) {
-        const svg = document.createElementNS(svgNS, "svg:svg");
-        svg.setAttribute("class", svgClassName);
+        const svg = document.createElementNS(svgNS, 'svg:svg');
+        svg.setAttribute('class', svgClassName);
 
-        const pathElement = document.createElementNS(svgNS, "path");
+        const pathElement = document.createElementNS(svgNS, 'path');
         svg.appendChild(pathElement);
 
         knockout.virtualElements.setDomNodeChildren(element, [svg]);
@@ -47,32 +47,32 @@ const SvgPathBindingHandler = {
           read: function () {
             const value = knockout.unwrap(valueAccessor());
 
-            pathElement.setAttribute("d", knockout.unwrap(value.path));
+            pathElement.setAttribute('d', knockout.unwrap(value.path));
 
             const pathWidth = knockout.unwrap(value.width);
             const pathHeight = knockout.unwrap(value.height);
 
-            svg.setAttribute("width", pathWidth);
-            svg.setAttribute("height", pathHeight);
-            svg.setAttribute("viewBox", `0 0 ${pathWidth} ${pathHeight}`);
+            svg.setAttribute('width', pathWidth);
+            svg.setAttribute('height', pathHeight);
+            svg.setAttribute('viewBox', `0 0 ${pathWidth} ${pathHeight}`);
 
             if (value.css) {
               svg.setAttribute(
-                "class",
+                'class',
                 `${svgClassName} ${knockout.unwrap(value.css)}`
               );
             }
           },
-          disposeWhenNodeIsRemoved: element,
+          disposeWhenNodeIsRemoved: element
         });
 
         return {
-          controlsDescendantBindings: true,
+          controlsDescendantBindings: true
         };
-      },
+      }
     };
 
     knockout.virtualElements.allowedBindings.cesiumSvgPath = true;
-  },
+  }
 };
 export default SvgPathBindingHandler;

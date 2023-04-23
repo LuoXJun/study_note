@@ -1,4 +1,4 @@
-import WebGLConstants from "../Core/WebGLConstants.js";
+import WebGLConstants from '../Core/WebGLConstants.js';
 
 /**
  * @private
@@ -14,6 +14,6 @@ const MipmapHint = {
       mipmapHint === MipmapHint.FASTEST ||
       mipmapHint === MipmapHint.NICEST
     );
-  },
+  }
 };
 export default Object.freeze(MipmapHint);

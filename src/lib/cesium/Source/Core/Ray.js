@@ -1,7 +1,7 @@
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
 
 /**
  * Represents a ray that extends infinitely from the provided origin in the provided direction.
@@ -66,8 +66,8 @@ Ray.clone = function (ray, result) {
  */
 Ray.getPoint = function (ray, t, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("ray", ray);
-  Check.typeOf.number("t", t);
+  Check.typeOf.object('ray', ray);
+  Check.typeOf.number('t', t);
   //>>includeEnd('debug');
 
   if (!defined(result)) {

@@ -8,6 +8,6 @@ const TerrainState = {
   RECEIVED: 3,
   TRANSFORMING: 4,
   TRANSFORMED: 5,
-  READY: 6,
+  READY: 6
 };
 export default Object.freeze(TerrainState);

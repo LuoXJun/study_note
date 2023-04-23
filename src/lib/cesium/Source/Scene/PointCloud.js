@@ -1,46 +1,46 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Check from "../Core/Check.js";
-import clone from "../Core/clone.js";
-import Color from "../Core/Color.js";
-import combine from "../Core/combine.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import oneTimeWarning from "../Core/oneTimeWarning.js";
-import OrthographicFrustum from "../Core/OrthographicFrustum.js";
-import PrimitiveType from "../Core/PrimitiveType.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import Transforms from "../Core/Transforms.js";
-import Buffer from "../Renderer/Buffer.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import Pass from "../Renderer/Pass.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import VertexArray from "../Renderer/VertexArray.js";
-import MersenneTwister from "../ThirdParty/mersenne-twister.js";
-import BlendingState from "./BlendingState.js";
-import Cesium3DTileBatchTable from "./Cesium3DTileBatchTable.js";
-import DracoLoader from "./DracoLoader.js";
-import getClipAndStyleCode from "./getClipAndStyleCode.js";
-import getClippingFunction from "./getClippingFunction.js";
-import PntsParser from "./PntsParser.js";
-import SceneMode from "./SceneMode.js";
-import ShadowMode from "./ShadowMode.js";
-import SplitDirection from "./SplitDirection.js";
-import Splitter from "./Splitter.js";
-import StencilConstants from "./StencilConstants.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Check from '../Core/Check.js';
+import clone from '../Core/clone.js';
+import Color from '../Core/Color.js';
+import combine from '../Core/combine.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import oneTimeWarning from '../Core/oneTimeWarning.js';
+import OrthographicFrustum from '../Core/OrthographicFrustum.js';
+import PrimitiveType from '../Core/PrimitiveType.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import Transforms from '../Core/Transforms.js';
+import Buffer from '../Renderer/Buffer.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import Pass from '../Renderer/Pass.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import VertexArray from '../Renderer/VertexArray.js';
+import MersenneTwister from '../ThirdParty/mersenne-twister.js';
+import BlendingState from './BlendingState.js';
+import Cesium3DTileBatchTable from './Cesium3DTileBatchTable.js';
+import DracoLoader from './DracoLoader.js';
+import getClipAndStyleCode from './getClipAndStyleCode.js';
+import getClippingFunction from './getClippingFunction.js';
+import PntsParser from './PntsParser.js';
+import SceneMode from './SceneMode.js';
+import ShadowMode from './ShadowMode.js';
+import SplitDirection from './SplitDirection.js';
+import Splitter from './Splitter.js';
+import StencilConstants from './StencilConstants.js';
 
 const DecodingState = {
   NEEDS_DECODE: 0,
   DECODING: 1,
   READY: 2,
-  FAILED: 3,
+  FAILED: 3
 };
 
 /**
@@ -58,8 +58,8 @@ const DecodingState = {
  */
 function PointCloud(options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options", options);
-  Check.typeOf.object("options.arrayBuffer", options.arrayBuffer);
+  Check.typeOf.object('options', options);
+  Check.typeOf.object('options.arrayBuffer', options.arrayBuffer);
   //>>includeEnd('debug');
 
   // Hold onto the payload until the render resources are created
@@ -166,25 +166,25 @@ Object.defineProperties(PointCloud.prototype, {
   pointsLength: {
     get: function () {
       return this._pointsLength;
-    },
+    }
   },
 
   geometryByteLength: {
     get: function () {
       return this._geometryByteLength;
-    },
+    }
   },
 
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   color: {
@@ -193,7 +193,7 @@ Object.defineProperties(PointCloud.prototype, {
     },
     set: function (value) {
       this._highlightColor = Color.clone(value, this._highlightColor);
-    },
+    }
   },
 
   boundingSphere: {
@@ -205,8 +205,8 @@ Object.defineProperties(PointCloud.prototype, {
     },
     set: function (value) {
       this._boundingSphere = BoundingSphere.clone(value, this._boundingSphere);
-    },
-  },
+    }
+  }
 });
 
 function initialize(pointCloud, options) {
@@ -224,11 +224,12 @@ function initialize(pointCloud, options) {
   // If points are not batched and there are per-point properties, use the
   // properties as metadata for styling purposes.
   if (!parsedContent.hasBatchIds && defined(parsedContent.batchTableBinary)) {
-    parsedContent.styleableProperties = Cesium3DTileBatchTable.getBinaryProperties(
-      parsedContent.pointsLength,
-      parsedContent.batchTableJson,
-      parsedContent.batchTableBinary
-    );
+    parsedContent.styleableProperties =
+      Cesium3DTileBatchTable.getBinaryProperties(
+        parsedContent.pointsLength,
+        parsedContent.batchTableJson,
+        parsedContent.batchTableBinary
+      );
   }
 
   if (defined(parsedContent.draco)) {
@@ -270,8 +271,8 @@ function initialize(pointCloud, options) {
   // confusion when debugging.
   const batchIds = parsedContent.batchIds;
   if (defined(parsedContent.batchIds)) {
-    batchIds.name = "BATCH_ID";
-    batchIds.semantic = "BATCH_ID";
+    batchIds.name = 'BATCH_ID';
+    batchIds.semantic = 'BATCH_ID';
     batchIds.setIndex = undefined;
   }
 
@@ -347,7 +348,7 @@ function prepareVertexAttribute(typedArray, name) {
     componentDatatype === ComponentDatatype.DOUBLE
   ) {
     oneTimeWarning(
-      "Cast pnts property to floats",
+      'Cast pnts property to floats',
       `Point cloud property "${name}" will be casted to a float array because INT, UNSIGNED_INT, and DOUBLE are not valid WebGL vertex attribute types. Some precision may be lost.`
     );
     return new Float32Array(typedArray);
@@ -355,7 +356,8 @@ function prepareVertexAttribute(typedArray, name) {
   return typedArray;
 }
 
-const scratchPointSizeAndTimeAndGeometricErrorAndDepthMultiplier = new Cartesian4();
+const scratchPointSizeAndTimeAndGeometricErrorAndDepthMultiplier =
+  new Cartesian4();
 const scratchQuantizedVolumeScaleAndOctEncodedRange = new Cartesian4();
 const scratchColor = new Color();
 
@@ -410,7 +412,7 @@ function createResources(pointCloud, frameState) {
         const vertexBuffer = Buffer.createVertexBuffer({
           context: context,
           typedArray: typedArray,
-          usage: BufferUsage.STATIC_DRAW,
+          usage: BufferUsage.STATIC_DRAW
         });
 
         pointCloud._geometryByteLength += vertexBuffer.sizeInBytes;
@@ -422,13 +424,13 @@ function createResources(pointCloud, frameState) {
           componentDatatype: componentDatatype,
           normalize: false,
           offsetInBytes: 0,
-          strideInBytes: 0,
+          strideInBytes: 0
         };
 
         styleableVertexAttributes.push(vertexAttribute);
         styleableShaderAttributes[name] = {
           location: attributeLocation,
-          componentCount: componentsPerAttribute,
+          componentCount: componentsPerAttribute
         };
         ++attributeLocation;
       }
@@ -438,7 +440,7 @@ function createResources(pointCloud, frameState) {
   const positionsVertexBuffer = Buffer.createVertexBuffer({
     context: context,
     typedArray: positions.typedArray,
-    usage: BufferUsage.STATIC_DRAW,
+    usage: BufferUsage.STATIC_DRAW
   });
   pointCloud._geometryByteLength += positionsVertexBuffer.sizeInBytes;
 
@@ -447,7 +449,7 @@ function createResources(pointCloud, frameState) {
     colorsVertexBuffer = Buffer.createVertexBuffer({
       context: context,
       typedArray: colors.typedArray,
-      usage: BufferUsage.STATIC_DRAW,
+      usage: BufferUsage.STATIC_DRAW
     });
     pointCloud._geometryByteLength += colorsVertexBuffer.sizeInBytes;
   }
@@ -457,7 +459,7 @@ function createResources(pointCloud, frameState) {
     normalsVertexBuffer = Buffer.createVertexBuffer({
       context: context,
       typedArray: normals.typedArray,
-      usage: BufferUsage.STATIC_DRAW,
+      usage: BufferUsage.STATIC_DRAW
     });
     pointCloud._geometryByteLength += normalsVertexBuffer.sizeInBytes;
   }
@@ -466,12 +468,12 @@ function createResources(pointCloud, frameState) {
   if (hasBatchIds) {
     batchIds.typedArray = prepareVertexAttribute(
       batchIds.typedArray,
-      "batchIds"
+      'batchIds'
     );
     batchIdsVertexBuffer = Buffer.createVertexBuffer({
       context: context,
       typedArray: batchIds.typedArray,
-      usage: BufferUsage.STATIC_DRAW,
+      usage: BufferUsage.STATIC_DRAW
     });
     pointCloud._geometryByteLength += batchIdsVertexBuffer.sizeInBytes;
   }
@@ -496,7 +498,7 @@ function createResources(pointCloud, frameState) {
     componentDatatype: componentDatatype,
     normalize: false,
     offsetInBytes: 0,
-    strideInBytes: 0,
+    strideInBytes: 0
   });
 
   if (pointCloud._cull) {
@@ -506,9 +508,8 @@ function createResources(pointCloud, frameState) {
         pointCloud._quantizedVolumeScale
       );
     } else {
-      pointCloud._boundingSphere = computeApproximateBoundingSphereFromPositions(
-        positions.typedArray
-      );
+      pointCloud._boundingSphere =
+        computeApproximateBoundingSphereFromPositions(positions.typedArray);
     }
   }
 
@@ -521,7 +522,7 @@ function createResources(pointCloud, frameState) {
         componentDatatype: ComponentDatatype.UNSIGNED_SHORT,
         normalize: false,
         offsetInBytes: 0,
-        strideInBytes: 0,
+        strideInBytes: 0
       });
     } else {
       const colorComponentsPerAttribute = isTranslucent ? 4 : 3;
@@ -532,7 +533,7 @@ function createResources(pointCloud, frameState) {
         componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
         normalize: true,
         offsetInBytes: 0,
-        strideInBytes: 0,
+        strideInBytes: 0
       });
     }
   }
@@ -558,7 +559,7 @@ function createResources(pointCloud, frameState) {
       componentDatatype: componentDatatype,
       normalize: false,
       offsetInBytes: 0,
-      strideInBytes: 0,
+      strideInBytes: 0
     });
   }
 
@@ -570,7 +571,7 @@ function createResources(pointCloud, frameState) {
       componentDatatype: ComponentDatatype.fromTypedArray(batchIds.typedArray),
       normalize: false,
       offsetInBytes: 0,
-      strideInBytes: 0,
+      strideInBytes: 0
     });
   }
 
@@ -580,21 +581,21 @@ function createResources(pointCloud, frameState) {
 
   const vertexArray = new VertexArray({
     context: context,
-    attributes: attributes,
+    attributes: attributes
   });
 
   const opaqueRenderState = {
     depthTest: {
-      enabled: true,
-    },
+      enabled: true
+    }
   };
 
   const translucentRenderState = {
     depthTest: {
-      enabled: true,
+      enabled: true
     },
     depthMask: false,
-    blending: BlendingState.ALPHA_BLEND,
+    blending: BlendingState.ALPHA_BLEND
   };
 
   if (pointCloud._opaquePass === Pass.CESIUM_3D_TILE) {
@@ -625,7 +626,7 @@ function createResources(pointCloud, frameState) {
     owner: pointCloud,
     castShadows: false,
     receiveShadows: false,
-    pickId: pointCloud._pickIdLoaded(),
+    pickId: pointCloud._pickIdLoaded()
   });
 }
 
@@ -637,7 +638,8 @@ function createUniformMap(pointCloud, frameState) {
 
   let uniformMap = {
     u_pointSizeAndTimeAndGeometricErrorAndDepthMultiplier: function () {
-      const scratch = scratchPointSizeAndTimeAndGeometricErrorAndDepthMultiplier;
+      const scratch =
+        scratchPointSizeAndTimeAndGeometricErrorAndDepthMultiplier;
       scratch.x = pointCloud._attenuation
         ? pointCloud.maximumAttenuation
         : pointCloud._pointSize;
@@ -712,7 +714,7 @@ function createUniformMap(pointCloud, frameState) {
         transform,
         scratchInverseTransposeClippingPlanesMatrix
       );
-    },
+    }
   };
 
   Splitter.addUniforms(pointCloud, uniformMap);
@@ -730,7 +732,7 @@ function createUniformMap(pointCloud, frameState) {
         }
         scratch.w = pointCloud._octEncodedRange;
         return scratch;
-      },
+      }
     });
   }
 
@@ -756,7 +758,7 @@ function getStyleablePropertyIds(source, propertyIds) {
 
 function getBuiltinPropertyNames(source, propertyNames) {
   // Get all the builtin property names used by this style, ignoring the function signature
-  source = source.slice(source.indexOf("\n"));
+  source = source.slice(source.indexOf('\n'));
   const regex = /czm_3dtiles_builtin_property_(\w+)/g;
   let matches = regex.exec(source);
   while (matches !== null) {
@@ -779,10 +781,10 @@ function getVertexAttribute(vertexArray, index) {
 }
 
 const builtinVariableSubstitutionMap = {
-  POSITION: "czm_3dtiles_builtin_property_POSITION",
-  POSITION_ABSOLUTE: "czm_3dtiles_builtin_property_POSITION_ABSOLUTE",
-  COLOR: "czm_3dtiles_builtin_property_COLOR",
-  NORMAL: "czm_3dtiles_builtin_property_NORMAL",
+  POSITION: 'czm_3dtiles_builtin_property_POSITION',
+  POSITION_ABSOLUTE: 'czm_3dtiles_builtin_property_POSITION_ABSOLUTE',
+  COLOR: 'czm_3dtiles_builtin_property_COLOR',
+  NORMAL: 'czm_3dtiles_builtin_property_NORMAL'
 };
 
 function createShaders(pointCloud, frameState, style) {
@@ -827,15 +829,15 @@ function createShaders(pointCloud, frameState, style) {
 
   if (hasStyle) {
     const shaderState = {
-      translucent: false,
+      translucent: false
     };
     const parameterList =
-      "(" +
-      "vec3 czm_3dtiles_builtin_property_POSITION, " +
-      "vec3 czm_3dtiles_builtin_property_POSITION_ABSOLUTE, " +
-      "vec4 czm_3dtiles_builtin_property_COLOR, " +
-      "vec3 czm_3dtiles_builtin_property_NORMAL" +
-      ")";
+      '(' +
+      'vec3 czm_3dtiles_builtin_property_POSITION, ' +
+      'vec3 czm_3dtiles_builtin_property_POSITION_ABSOLUTE, ' +
+      'vec4 czm_3dtiles_builtin_property_COLOR, ' +
+      'vec3 czm_3dtiles_builtin_property_NORMAL' +
+      ')';
     colorStyleFunction = style.getColorShaderFunction(
       `getColorFromStyle${parameterList}`,
       variableSubstitutionMap,
@@ -880,12 +882,12 @@ function createShaders(pointCloud, frameState, style) {
     getBuiltinPropertyNames(pointSizeStyleFunction, builtinPropertyNames);
   }
 
-  const usesColorSemantic = builtinPropertyNames.indexOf("COLOR") >= 0;
-  const usesNormalSemantic = builtinPropertyNames.indexOf("NORMAL") >= 0;
+  const usesColorSemantic = builtinPropertyNames.indexOf('COLOR') >= 0;
+  const usesNormalSemantic = builtinPropertyNames.indexOf('NORMAL') >= 0;
 
   if (usesNormalSemantic && !hasNormals) {
     throw new RuntimeError(
-      "Style references the NORMAL semantic but the point cloud does not have normals"
+      'Style references the NORMAL semantic but the point cloud does not have normals'
     );
   }
 
@@ -921,7 +923,7 @@ function createShaders(pointCloud, frameState, style) {
   }
 
   const attributeLocations = {
-    a_position: positionLocation,
+    a_position: positionLocation
   };
   if (usesColors) {
     attributeLocations.a_color = colorLocation;
@@ -933,7 +935,7 @@ function createShaders(pointCloud, frameState, style) {
     attributeLocations.a_batchId = batchIdLocation;
   }
 
-  let attributeDeclarations = "";
+  let attributeDeclarations = '';
 
   const length = styleablePropertyIds.length;
   for (i = 0; i < length; ++i) {
@@ -943,7 +945,7 @@ function createShaders(pointCloud, frameState, style) {
     const attributeName = `czm_3dtiles_property_${propertyId}`;
     let attributeType;
     if (componentCount === 1) {
-      attributeType = "float";
+      attributeType = 'float';
     } else {
       attributeType = `vec${componentCount}`;
     }
@@ -955,49 +957,49 @@ function createShaders(pointCloud, frameState, style) {
   createUniformMap(pointCloud, frameState);
 
   let vs =
-    "attribute vec3 a_position; \n" +
-    "varying vec4 v_color; \n" +
-    "uniform vec4 u_pointSizeAndTimeAndGeometricErrorAndDepthMultiplier; \n" +
-    "uniform vec4 u_constantColor; \n" +
-    "uniform vec4 u_highlightColor; \n";
-  vs += "float u_pointSize; \n" + "float u_time; \n";
+    'attribute vec3 a_position; \n' +
+    'varying vec4 v_color; \n' +
+    'uniform vec4 u_pointSizeAndTimeAndGeometricErrorAndDepthMultiplier; \n' +
+    'uniform vec4 u_constantColor; \n' +
+    'uniform vec4 u_highlightColor; \n';
+  vs += 'float u_pointSize; \n' + 'float u_time; \n';
 
   if (attenuation) {
-    vs += "float u_geometricError; \n" + "float u_depthMultiplier; \n";
+    vs += 'float u_geometricError; \n' + 'float u_depthMultiplier; \n';
   }
 
   vs += attributeDeclarations;
 
   if (usesColors) {
     if (isTranslucent) {
-      vs += "attribute vec4 a_color; \n";
+      vs += 'attribute vec4 a_color; \n';
     } else if (isRGB565) {
       vs +=
-        "attribute float a_color; \n" +
-        "const float SHIFT_RIGHT_11 = 1.0 / 2048.0; \n" +
-        "const float SHIFT_RIGHT_5 = 1.0 / 32.0; \n" +
-        "const float SHIFT_LEFT_11 = 2048.0; \n" +
-        "const float SHIFT_LEFT_5 = 32.0; \n" +
-        "const float NORMALIZE_6 = 1.0 / 64.0; \n" +
-        "const float NORMALIZE_5 = 1.0 / 32.0; \n";
+        'attribute float a_color; \n' +
+        'const float SHIFT_RIGHT_11 = 1.0 / 2048.0; \n' +
+        'const float SHIFT_RIGHT_5 = 1.0 / 32.0; \n' +
+        'const float SHIFT_LEFT_11 = 2048.0; \n' +
+        'const float SHIFT_LEFT_5 = 32.0; \n' +
+        'const float NORMALIZE_6 = 1.0 / 64.0; \n' +
+        'const float NORMALIZE_5 = 1.0 / 32.0; \n';
     } else {
-      vs += "attribute vec3 a_color; \n";
+      vs += 'attribute vec3 a_color; \n';
     }
   }
   if (usesNormals) {
     if (isOctEncoded16P || isOctEncodedDraco) {
-      vs += "attribute vec2 a_normal; \n";
+      vs += 'attribute vec2 a_normal; \n';
     } else {
-      vs += "attribute vec3 a_normal; \n";
+      vs += 'attribute vec3 a_normal; \n';
     }
   }
 
   if (hasBatchIds) {
-    vs += "attribute float a_batchId; \n";
+    vs += 'attribute float a_batchId; \n';
   }
 
   if (isQuantized || isQuantizedDraco || isOctEncodedDraco) {
-    vs += "uniform vec4 u_quantizedVolumeScaleAndOctEncodedRange; \n";
+    vs += 'uniform vec4 u_quantizedVolumeScaleAndOctEncodedRange; \n';
   }
 
   if (hasColorStyle) {
@@ -1013,138 +1015,138 @@ function createShaders(pointCloud, frameState, style) {
   }
 
   vs +=
-    "void main() \n" +
-    "{ \n" +
-    "    u_pointSize = u_pointSizeAndTimeAndGeometricErrorAndDepthMultiplier.x; \n" +
-    "    u_time = u_pointSizeAndTimeAndGeometricErrorAndDepthMultiplier.y; \n";
+    'void main() \n' +
+    '{ \n' +
+    '    u_pointSize = u_pointSizeAndTimeAndGeometricErrorAndDepthMultiplier.x; \n' +
+    '    u_time = u_pointSizeAndTimeAndGeometricErrorAndDepthMultiplier.y; \n';
 
   if (attenuation) {
     vs +=
-      "    u_geometricError = u_pointSizeAndTimeAndGeometricErrorAndDepthMultiplier.z; \n" +
-      "    u_depthMultiplier = u_pointSizeAndTimeAndGeometricErrorAndDepthMultiplier.w; \n";
+      '    u_geometricError = u_pointSizeAndTimeAndGeometricErrorAndDepthMultiplier.z; \n' +
+      '    u_depthMultiplier = u_pointSizeAndTimeAndGeometricErrorAndDepthMultiplier.w; \n';
   }
 
   if (usesColors) {
     if (isTranslucent) {
-      vs += "    vec4 color = a_color; \n";
+      vs += '    vec4 color = a_color; \n';
     } else if (isRGB565) {
       vs +=
-        "    float compressed = a_color; \n" +
-        "    float r = floor(compressed * SHIFT_RIGHT_11); \n" +
-        "    compressed -= r * SHIFT_LEFT_11; \n" +
-        "    float g = floor(compressed * SHIFT_RIGHT_5); \n" +
-        "    compressed -= g * SHIFT_LEFT_5; \n" +
-        "    float b = compressed; \n" +
-        "    vec3 rgb = vec3(r * NORMALIZE_5, g * NORMALIZE_6, b * NORMALIZE_5); \n" +
-        "    vec4 color = vec4(rgb, 1.0); \n";
+        '    float compressed = a_color; \n' +
+        '    float r = floor(compressed * SHIFT_RIGHT_11); \n' +
+        '    compressed -= r * SHIFT_LEFT_11; \n' +
+        '    float g = floor(compressed * SHIFT_RIGHT_5); \n' +
+        '    compressed -= g * SHIFT_LEFT_5; \n' +
+        '    float b = compressed; \n' +
+        '    vec3 rgb = vec3(r * NORMALIZE_5, g * NORMALIZE_6, b * NORMALIZE_5); \n' +
+        '    vec4 color = vec4(rgb, 1.0); \n';
     } else {
-      vs += "    vec4 color = vec4(a_color, 1.0); \n";
+      vs += '    vec4 color = vec4(a_color, 1.0); \n';
     }
   } else {
-    vs += "    vec4 color = u_constantColor; \n";
+    vs += '    vec4 color = u_constantColor; \n';
   }
 
   if (isQuantized || isQuantizedDraco) {
     vs +=
-      "    vec3 position = a_position * u_quantizedVolumeScaleAndOctEncodedRange.xyz; \n";
+      '    vec3 position = a_position * u_quantizedVolumeScaleAndOctEncodedRange.xyz; \n';
   } else {
-    vs += "    vec3 position = a_position; \n";
+    vs += '    vec3 position = a_position; \n';
   }
   vs +=
-    "    vec3 position_absolute = vec3(czm_model * vec4(position, 1.0)); \n";
+    '    vec3 position_absolute = vec3(czm_model * vec4(position, 1.0)); \n';
 
   if (usesNormals) {
     if (isOctEncoded16P) {
-      vs += "    vec3 normal = czm_octDecode(a_normal); \n";
+      vs += '    vec3 normal = czm_octDecode(a_normal); \n';
     } else if (isOctEncodedDraco) {
       // Draco oct-encoding decodes to zxy order
       vs +=
-        "    vec3 normal = czm_octDecode(a_normal, u_quantizedVolumeScaleAndOctEncodedRange.w).zxy; \n";
+        '    vec3 normal = czm_octDecode(a_normal, u_quantizedVolumeScaleAndOctEncodedRange.w).zxy; \n';
     } else {
-      vs += "    vec3 normal = a_normal; \n";
+      vs += '    vec3 normal = a_normal; \n';
     }
-    vs += "    vec3 normalEC = czm_normal * normal; \n";
+    vs += '    vec3 normalEC = czm_normal * normal; \n';
   } else {
-    vs += "    vec3 normal = vec3(1.0); \n";
+    vs += '    vec3 normal = vec3(1.0); \n';
   }
 
   if (hasColorStyle) {
     vs +=
-      "    color = getColorFromStyle(position, position_absolute, color, normal); \n";
+      '    color = getColorFromStyle(position, position_absolute, color, normal); \n';
   }
 
   if (hasShowStyle) {
     vs +=
-      "    float show = float(getShowFromStyle(position, position_absolute, color, normal)); \n";
+      '    float show = float(getShowFromStyle(position, position_absolute, color, normal)); \n';
   }
 
   if (hasPointSizeStyle) {
     vs +=
-      "    gl_PointSize = getPointSizeFromStyle(position, position_absolute, color, normal) * czm_pixelRatio; \n";
+      '    gl_PointSize = getPointSizeFromStyle(position, position_absolute, color, normal) * czm_pixelRatio; \n';
   } else if (attenuation) {
     vs +=
-      "    vec4 positionEC = czm_modelView * vec4(position, 1.0); \n" +
-      "    float depth = -positionEC.z; \n" +
+      '    vec4 positionEC = czm_modelView * vec4(position, 1.0); \n' +
+      '    float depth = -positionEC.z; \n' +
       // compute SSE for this point
-      "    gl_PointSize = min((u_geometricError / depth) * u_depthMultiplier, u_pointSize); \n";
+      '    gl_PointSize = min((u_geometricError / depth) * u_depthMultiplier, u_pointSize); \n';
   } else {
-    vs += "    gl_PointSize = u_pointSize; \n";
+    vs += '    gl_PointSize = u_pointSize; \n';
   }
 
-  vs += "    color = color * u_highlightColor; \n";
+  vs += '    color = color * u_highlightColor; \n';
 
   if (usesNormals && normalShading) {
     vs +=
-      "    float diffuseStrength = czm_getLambertDiffuse(czm_lightDirectionEC, normalEC); \n" +
-      "    diffuseStrength = max(diffuseStrength, 0.4); \n" + // Apply some ambient lighting
-      "    color.xyz *= diffuseStrength * czm_lightColor; \n";
+      '    float diffuseStrength = czm_getLambertDiffuse(czm_lightDirectionEC, normalEC); \n' +
+      '    diffuseStrength = max(diffuseStrength, 0.4); \n' + // Apply some ambient lighting
+      '    color.xyz *= diffuseStrength * czm_lightColor; \n';
   }
 
   vs +=
-    "    v_color = color; \n" +
-    "    gl_Position = czm_modelViewProjection * vec4(position, 1.0); \n";
+    '    v_color = color; \n' +
+    '    gl_Position = czm_modelViewProjection * vec4(position, 1.0); \n';
 
   if (usesNormals && backFaceCulling) {
     vs +=
-      "    float visible = step(-normalEC.z, 0.0); \n" +
-      "    gl_Position *= visible; \n" +
-      "    gl_PointSize *= visible; \n";
+      '    float visible = step(-normalEC.z, 0.0); \n' +
+      '    gl_Position *= visible; \n' +
+      '    gl_PointSize *= visible; \n';
   }
 
   if (hasShowStyle) {
     vs +=
-      "    gl_Position.w *= float(show); \n" +
-      "    gl_PointSize *= float(show); \n";
+      '    gl_Position.w *= float(show); \n' +
+      '    gl_PointSize *= float(show); \n';
   }
 
-  vs += "} \n";
+  vs += '} \n';
 
-  let fs = "varying vec4 v_color; \n";
+  let fs = 'varying vec4 v_color; \n';
 
   if (hasClippedContent) {
     fs +=
-      "uniform highp sampler2D u_clippingPlanes; \n" +
-      "uniform mat4 u_clippingPlanesMatrix; \n" +
-      "uniform vec4 u_clippingPlanesEdgeStyle; \n";
-    fs += "\n";
+      'uniform highp sampler2D u_clippingPlanes; \n' +
+      'uniform mat4 u_clippingPlanesMatrix; \n' +
+      'uniform vec4 u_clippingPlanesEdgeStyle; \n';
+    fs += '\n';
     fs += getClippingFunction(clippingPlanes, context);
-    fs += "\n";
+    fs += '\n';
   }
 
   fs +=
-    "void main() \n" +
-    "{ \n" +
-    "    gl_FragColor = czm_gammaCorrect(v_color); \n";
+    'void main() \n' +
+    '{ \n' +
+    '    gl_FragColor = czm_gammaCorrect(v_color); \n';
 
   if (hasClippedContent) {
     fs += getClipAndStyleCode(
-      "u_clippingPlanes",
-      "u_clippingPlanesMatrix",
-      "u_clippingPlanesEdgeStyle"
+      'u_clippingPlanes',
+      'u_clippingPlanesMatrix',
+      'u_clippingPlanesEdgeStyle'
     );
   }
 
-  fs += "} \n";
+  fs += '} \n';
 
   if (pointCloud.splitDirection !== SplitDirection.NONE) {
     fs = Splitter.modifyFragmentShader(fs);
@@ -1167,7 +1169,7 @@ function createShaders(pointCloud, frameState, style) {
     context: context,
     vertexShaderSource: vs,
     fragmentShaderSource: fs,
-    attributeLocations: attributeLocations,
+    attributeLocations: attributeLocations
   });
 
   try {
@@ -1176,7 +1178,7 @@ function createShaders(pointCloud, frameState, style) {
   } catch (error) {
     // Rephrase the error.
     throw new RuntimeError(
-      "Error generating style shader: this may be caused by a type mismatch, index out-of-bounds, or other syntax error."
+      'Error generating style shader: this may be caused by a type mismatch, index out-of-bounds, or other syntax error.'
     );
   }
 }
@@ -1244,33 +1246,33 @@ function decodeDraco(pointCloud, context) {
               }
               styleableProperties[name] = {
                 typedArray: property.array,
-                componentCount: property.data.componentsPerAttribute,
+                componentCount: property.data.componentsPerAttribute
               };
             }
           }
 
           if (defined(decodedPositions)) {
             parsedContent.positions = {
-              typedArray: decodedPositions,
+              typedArray: decodedPositions
             };
           }
 
           const decodedColors = defaultValue(decodedRgba, decodedRgb);
           if (defined(decodedColors)) {
             parsedContent.colors = {
-              typedArray: decodedColors,
+              typedArray: decodedColors
             };
           }
 
           if (defined(decodedNormals)) {
             parsedContent.normals = {
-              typedArray: decodedNormals,
+              typedArray: decodedNormals
             };
           }
 
           if (defined(decodedBatchIds)) {
             parsedContent.batchIds = {
-              typedArray: decodedBatchIds,
+              typedArray: decodedBatchIds
             };
           }
 

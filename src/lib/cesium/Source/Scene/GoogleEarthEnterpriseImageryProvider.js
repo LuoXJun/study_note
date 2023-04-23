@@ -1,19 +1,19 @@
-import Credit from "../Core/Credit.js";
-import decodeGoogleEarthEnterpriseData from "../Core/decodeGoogleEarthEnterpriseData.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import GeographicTilingScheme from "../Core/GeographicTilingScheme.js";
-import GoogleEarthEnterpriseMetadata from "../Core/GoogleEarthEnterpriseMetadata.js";
-import loadImageFromTypedArray from "../Core/loadImageFromTypedArray.js";
-import CesiumMath from "../Core/Math.js";
-import Rectangle from "../Core/Rectangle.js";
-import Request from "../Core/Request.js";
-import Resource from "../Core/Resource.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import TileProviderError from "../Core/TileProviderError.js";
-import protobuf from "../ThirdParty/protobufjs.js";
+import Credit from '../Core/Credit.js';
+import decodeGoogleEarthEnterpriseData from '../Core/decodeGoogleEarthEnterpriseData.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import GeographicTilingScheme from '../Core/GeographicTilingScheme.js';
+import GoogleEarthEnterpriseMetadata from '../Core/GoogleEarthEnterpriseMetadata.js';
+import loadImageFromTypedArray from '../Core/loadImageFromTypedArray.js';
+import CesiumMath from '../Core/Math.js';
+import Rectangle from '../Core/Rectangle.js';
+import Request from '../Core/Request.js';
+import Resource from '../Core/Resource.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import TileProviderError from '../Core/TileProviderError.js';
+import protobuf from '../ThirdParty/protobufjs.js';
 
 /**
  * @private
@@ -91,7 +91,7 @@ function GoogleEarthEnterpriseImageryProvider(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!(defined(options.url) || defined(options.metadata))) {
-    throw new DeveloperError("options.url or options.metadata is required.");
+    throw new DeveloperError('options.url or options.metadata is required.');
   }
   //>>includeEnd('debug');
 
@@ -200,11 +200,11 @@ function GoogleEarthEnterpriseImageryProvider(options) {
       CesiumMath.PI,
       CesiumMath.PI
     ),
-    ellipsoid: options.ellipsoid,
+    ellipsoid: options.ellipsoid
   });
 
   let credit = options.credit;
-  if (typeof credit === "string") {
+  if (typeof credit === 'string') {
     credit = new Credit(credit);
   }
   this._credit = credit;
@@ -271,7 +271,7 @@ Object.defineProperties(GoogleEarthEnterpriseImageryProvider.prototype, {
   url: {
     get: function () {
       return this._metadata.url;
-    },
+    }
   },
 
   /**
@@ -283,7 +283,7 @@ Object.defineProperties(GoogleEarthEnterpriseImageryProvider.prototype, {
   proxy: {
     get: function () {
       return this._metadata.proxy;
-    },
+    }
   },
 
   /**
@@ -298,13 +298,13 @@ Object.defineProperties(GoogleEarthEnterpriseImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileWidth must not be called before the imagery provider is ready."
+          'tileWidth must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tileWidth;
-    },
+    }
   },
 
   /**
@@ -319,13 +319,13 @@ Object.defineProperties(GoogleEarthEnterpriseImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileHeight must not be called before the imagery provider is ready."
+          'tileHeight must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tileHeight;
-    },
+    }
   },
 
   /**
@@ -340,13 +340,13 @@ Object.defineProperties(GoogleEarthEnterpriseImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "maximumLevel must not be called before the imagery provider is ready."
+          'maximumLevel must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._maximumLevel;
-    },
+    }
   },
 
   /**
@@ -361,13 +361,13 @@ Object.defineProperties(GoogleEarthEnterpriseImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "minimumLevel must not be called before the imagery provider is ready."
+          'minimumLevel must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return 0;
-    },
+    }
   },
 
   /**
@@ -382,13 +382,13 @@ Object.defineProperties(GoogleEarthEnterpriseImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tilingScheme must not be called before the imagery provider is ready."
+          'tilingScheme must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tilingScheme;
-    },
+    }
   },
 
   /**
@@ -403,13 +403,13 @@ Object.defineProperties(GoogleEarthEnterpriseImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "rectangle must not be called before the imagery provider is ready."
+          'rectangle must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tilingScheme.rectangle;
-    },
+    }
   },
 
   /**
@@ -426,13 +426,13 @@ Object.defineProperties(GoogleEarthEnterpriseImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileDiscardPolicy must not be called before the imagery provider is ready."
+          'tileDiscardPolicy must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tileDiscardPolicy;
-    },
+    }
   },
 
   /**
@@ -446,7 +446,7 @@ Object.defineProperties(GoogleEarthEnterpriseImageryProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._errorEvent;
-    },
+    }
   },
 
   /**
@@ -458,7 +458,7 @@ Object.defineProperties(GoogleEarthEnterpriseImageryProvider.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -470,7 +470,7 @@ Object.defineProperties(GoogleEarthEnterpriseImageryProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   /**
@@ -483,7 +483,7 @@ Object.defineProperties(GoogleEarthEnterpriseImageryProvider.prototype, {
   credit: {
     get: function () {
       return this._credit;
-    },
+    }
   },
 
   /**
@@ -499,8 +499,8 @@ Object.defineProperties(GoogleEarthEnterpriseImageryProvider.prototype, {
   hasAlphaChannel: {
     get: function () {
       return false;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -521,7 +521,7 @@ GoogleEarthEnterpriseImageryProvider.prototype.getTileCredits = function (
   //>>includeStart('debug', pragmas.debug);
   if (!this._ready) {
     throw new DeveloperError(
-      "getTileCredits must not be called before the imagery provider is ready."
+      'getTileCredits must not be called before the imagery provider is ready.'
     );
   }
   //>>includeEnd('debug');
@@ -560,7 +560,7 @@ GoogleEarthEnterpriseImageryProvider.prototype.requestImage = function (
   //>>includeStart('debug', pragmas.debug);
   if (!this._ready) {
     throw new DeveloperError(
-      "requestImage must not be called before the imagery provider is ready."
+      'requestImage must not be called before the imagery provider is ready.'
     );
   }
   //>>includeEnd('debug');
@@ -575,7 +575,7 @@ GoogleEarthEnterpriseImageryProvider.prototype.requestImage = function (
         throttle: request.throttle,
         throttleByServer: request.throttleByServer,
         type: request.type,
-        priorityFunction: request.priorityFunction,
+        priorityFunction: request.priorityFunction
       });
       metadata.populateSubtree(x, y, level, metadataRequest);
       return undefined; // No metadata so return undefined so we can be loaded later
@@ -622,7 +622,7 @@ GoogleEarthEnterpriseImageryProvider.prototype.requestImage = function (
     return loadImageFromTypedArray({
       uint8Array: a,
       format: type,
-      flipY: true,
+      flipY: true
     });
   });
 };
@@ -658,29 +658,29 @@ function buildImageResource(imageryProvider, info, x, y, level, request) {
 
   return imageryProvider._metadata.resource.getDerivedResource({
     url: `flatfile?f1-0${quadKey}-i.${version.toString()}`,
-    request: request,
+    request: request
   });
 }
 
 // Detects if a Uint8Array is a JPEG or PNG
 function getImageType(image) {
-  const jpeg = "JFIF";
+  const jpeg = 'JFIF';
   if (
     image[6] === jpeg.charCodeAt(0) &&
     image[7] === jpeg.charCodeAt(1) &&
     image[8] === jpeg.charCodeAt(2) &&
     image[9] === jpeg.charCodeAt(3)
   ) {
-    return "image/jpeg";
+    return 'image/jpeg';
   }
 
-  const png = "PNG";
+  const png = 'PNG';
   if (
     image[1] === png.charCodeAt(0) &&
     image[2] === png.charCodeAt(1) &&
     image[3] === png.charCodeAt(2)
   ) {
-    return "image/png";
+    return 'image/png';
   }
 
   return undefined;
@@ -732,14 +732,14 @@ function decodeEarthImageryPacket(data) {
   if (defined(imageType)) {
     switch (imageType) {
       case 0:
-        message.imageType = "image/jpeg";
+        message.imageType = 'image/jpeg';
         break;
       case 4:
-        message.imageType = "image/png";
+        message.imageType = 'image/png';
         break;
       default:
         throw new RuntimeError(
-          "GoogleEarthEnterpriseImageryProvider: Unsupported image type."
+          'GoogleEarthEnterpriseImageryProvider: Unsupported image type.'
         );
     }
   }
@@ -747,7 +747,7 @@ function decodeEarthImageryPacket(data) {
   const alphaType = message.alphaType;
   if (defined(alphaType) && alphaType !== 0) {
     console.log(
-      "GoogleEarthEnterpriseImageryProvider: External alpha not supported."
+      'GoogleEarthEnterpriseImageryProvider: External alpha not supported.'
     );
     delete message.alphaType;
     delete message.imageAlpha;

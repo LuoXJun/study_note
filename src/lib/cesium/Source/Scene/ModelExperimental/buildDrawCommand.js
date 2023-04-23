@@ -1,19 +1,19 @@
-import BoundingSphere from "../../Core/BoundingSphere.js";
-import clone from "../../Core/clone.js";
-import defined from "../../Core/defined.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import DrawCommand from "../../Renderer/DrawCommand.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import ModelExperimentalDrawCommand from "./ModelExperimentalDrawCommand.js";
-import ModelExperimentalFS from "../../Shaders/ModelExperimental/ModelExperimentalFS.js";
-import ModelExperimentalVS from "../../Shaders/ModelExperimental/ModelExperimentalVS.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
-import Pass from "../../Renderer/Pass.js";
-import RenderState from "../../Renderer/RenderState.js";
-import SceneMode from "../SceneMode.js";
-import ShadowMode from "../ShadowMode.js";
-import StencilConstants from "../StencilConstants.js";
-import VertexArray from "../../Renderer/VertexArray.js";
+import BoundingSphere from '../../Core/BoundingSphere.js';
+import clone from '../../Core/clone.js';
+import defined from '../../Core/defined.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import DrawCommand from '../../Renderer/DrawCommand.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import ModelExperimentalDrawCommand from './ModelExperimentalDrawCommand.js';
+import ModelExperimentalFS from '../../Shaders/ModelExperimental/ModelExperimentalFS.js';
+import ModelExperimentalVS from '../../Shaders/ModelExperimental/ModelExperimentalVS.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
+import Pass from '../../Renderer/Pass.js';
+import RenderState from '../../Renderer/RenderState.js';
+import SceneMode from '../SceneMode.js';
+import ShadowMode from '../ShadowMode.js';
+import StencilConstants from '../StencilConstants.js';
+import VertexArray from '../../Renderer/VertexArray.js';
 
 /**
  * Builds the {@link ModelExperimentalDrawCommand} for a {@link ModelExperimentalPrimitive}
@@ -39,7 +39,7 @@ export default function buildDrawCommand(primitiveRenderResources, frameState) {
   const vertexArray = new VertexArray({
     context: context,
     indexBuffer: indexBuffer,
-    attributes: primitiveRenderResources.attributes,
+    attributes: primitiveRenderResources.attributes
   });
 
   model._pipelineResources.push(vertexArray);
@@ -107,7 +107,7 @@ export default function buildDrawCommand(primitiveRenderResources, frameState) {
     primitiveType: primitiveRenderResources.primitiveType,
     debugShowBoundingVolume: model.debugShowBoundingVolume,
     castShadows: ShadowMode.castShadows(model.shadows),
-    receiveShadows: ShadowMode.receiveShadows(model.shadows),
+    receiveShadows: ShadowMode.receiveShadows(model.shadows)
   });
 
   const useSilhouetteCommands = model.hasSilhouette(frameState);
@@ -115,7 +115,7 @@ export default function buildDrawCommand(primitiveRenderResources, frameState) {
   return new ModelExperimentalDrawCommand({
     primitiveRenderResources: primitiveRenderResources,
     command: command,
-    useSilhouetteCommands: useSilhouetteCommands,
+    useSilhouetteCommands: useSilhouetteCommands
   });
 }
 
@@ -135,7 +135,7 @@ function getIndexBuffer(primitiveRenderResources, frameState) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(indices.buffer)) {
-    throw new DeveloperError("Indices must be provided as a Buffer");
+    throw new DeveloperError('Indices must be provided as a Buffer');
   }
   //>>includeEnd('debug');
 

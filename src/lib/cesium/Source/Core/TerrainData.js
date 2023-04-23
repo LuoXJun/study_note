@@ -1,4 +1,4 @@
-import DeveloperError from "./DeveloperError.js";
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Terrain data for a single tile.  This type describes an
@@ -22,7 +22,7 @@ Object.defineProperties(TerrainData.prototype, {
    * @type {Credit[]}
    */
   credits: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
   /**
    * The water mask included in this terrain data, if any.  A water mask is a rectangular
@@ -32,8 +32,8 @@ Object.defineProperties(TerrainData.prototype, {
    * @type {Uint8Array|HTMLImageElement|HTMLCanvasElement}
    */
   waterMask: {
-    get: DeveloperError.throwInstantiationError,
-  },
+    get: DeveloperError.throwInstantiationError
+  }
 });
 
 /**

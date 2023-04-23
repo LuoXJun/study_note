@@ -1,9 +1,9 @@
-import buildModuleUrl from "./buildModuleUrl.js";
-import Color from "./Color.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Resource from "./Resource.js";
-import writeTextToCanvas from "./writeTextToCanvas.js";
+import buildModuleUrl from './buildModuleUrl.js';
+import Color from './Color.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Resource from './Resource.js';
+import writeTextToCanvas from './writeTextToCanvas.js';
 
 /**
  * A utility class for generating custom map pins as canvas elements.
@@ -32,10 +32,10 @@ function PinBuilder() {
 PinBuilder.prototype.fromColor = function (color, size) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(color)) {
-    throw new DeveloperError("color is required");
+    throw new DeveloperError('color is required');
   }
   if (!defined(size)) {
-    throw new DeveloperError("size is required");
+    throw new DeveloperError('size is required');
   }
   //>>includeEnd('debug');
   return createPin(undefined, undefined, color, size, this._cache);
@@ -52,13 +52,13 @@ PinBuilder.prototype.fromColor = function (color, size) {
 PinBuilder.prototype.fromUrl = function (url, color, size) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(url)) {
-    throw new DeveloperError("url is required");
+    throw new DeveloperError('url is required');
   }
   if (!defined(color)) {
-    throw new DeveloperError("color is required");
+    throw new DeveloperError('color is required');
   }
   if (!defined(size)) {
-    throw new DeveloperError("size is required");
+    throw new DeveloperError('size is required');
   }
   //>>includeEnd('debug');
   return createPin(url, undefined, color, size, this._cache);
@@ -75,13 +75,13 @@ PinBuilder.prototype.fromUrl = function (url, color, size) {
 PinBuilder.prototype.fromMakiIconId = function (id, color, size) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(id)) {
-    throw new DeveloperError("id is required");
+    throw new DeveloperError('id is required');
   }
   if (!defined(color)) {
-    throw new DeveloperError("color is required");
+    throw new DeveloperError('color is required');
   }
   if (!defined(size)) {
-    throw new DeveloperError("size is required");
+    throw new DeveloperError('size is required');
   }
   //>>includeEnd('debug');
   return createPin(
@@ -105,13 +105,13 @@ PinBuilder.prototype.fromMakiIconId = function (id, color, size) {
 PinBuilder.prototype.fromText = function (text, color, size) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(text)) {
-    throw new DeveloperError("text is required");
+    throw new DeveloperError('text is required');
   }
   if (!defined(color)) {
-    throw new DeveloperError("color is required");
+    throw new DeveloperError('color is required');
   }
   if (!defined(size)) {
-    throw new DeveloperError("size is required");
+    throw new DeveloperError('size is required');
   }
   //>>includeEnd('debug');
 
@@ -170,20 +170,20 @@ function drawIcon(context2D, image, size) {
   const x = Math.round((size - sizeX) / 2);
   const y = Math.round((7 / 24) * size - sizeY / 2);
 
-  context2D.globalCompositeOperation = "destination-out";
+  context2D.globalCompositeOperation = 'destination-out';
   context2D.drawImage(image, x - 1, y, sizeX, sizeY);
   context2D.drawImage(image, x, y - 1, sizeX, sizeY);
   context2D.drawImage(image, x + 1, y, sizeX, sizeY);
   context2D.drawImage(image, x, y + 1, sizeX, sizeY);
 
-  context2D.globalCompositeOperation = "destination-over";
+  context2D.globalCompositeOperation = 'destination-over';
   context2D.fillStyle = Color.BLACK.toCssColorString();
   context2D.fillRect(x - 1, y - 1, sizeX + 2, sizeY + 2);
 
-  context2D.globalCompositeOperation = "destination-out";
+  context2D.globalCompositeOperation = 'destination-out';
   context2D.drawImage(image, x, y, sizeX, sizeY);
 
-  context2D.globalCompositeOperation = "destination-over";
+  context2D.globalCompositeOperation = 'destination-over';
   context2D.fillStyle = Color.WHITE.toCssColorString();
   context2D.fillRect(x - 1, y - 2, sizeX + 2, sizeY + 2);
 }
@@ -202,11 +202,11 @@ function createPin(url, label, color, size, cache) {
     return item;
   }
 
-  const canvas = document.createElement("canvas");
+  const canvas = document.createElement('canvas');
   canvas.width = size;
   canvas.height = size;
 
-  const context2D = canvas.getContext("2d");
+  const context2D = canvas.getContext('2d');
   drawPin(context2D, color, size);
 
   if (defined(url)) {
@@ -223,7 +223,7 @@ function createPin(url, label, color, size, cache) {
   } else if (defined(label)) {
     //If we have a label, write it to a canvas and then stamp the pin.
     const image = writeTextToCanvas(label, {
-      font: `bold ${size}px sans-serif`,
+      font: `bold ${size}px sans-serif`
     });
     drawIcon(context2D, image, size);
   }

@@ -1,10 +1,10 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Event from "../Core/Event.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
-import Property from "./Property.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Event from '../Core/Event.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
+import Property from './Property.js';
 
 const defaultRepeat = new Cartesian2(1, 1);
 const defaultTransparent = false;
@@ -54,7 +54,7 @@ Object.defineProperties(ImageMaterialProperty.prototype, {
       return (
         Property.isConstant(this._image) && Property.isConstant(this._repeat)
       );
-    },
+    }
   },
 
   /**
@@ -69,7 +69,7 @@ Object.defineProperties(ImageMaterialProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -77,7 +77,7 @@ Object.defineProperties(ImageMaterialProperty.prototype, {
    * @memberof ImageMaterialProperty.prototype
    * @type {Property|undefined}
    */
-  image: createPropertyDescriptor("image"),
+  image: createPropertyDescriptor('image'),
 
   /**
    * Gets or sets the {@link Cartesian2} Property specifying the number of times the image repeats in each direction.
@@ -85,7 +85,7 @@ Object.defineProperties(ImageMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default new Cartesian2(1, 1)
    */
-  repeat: createPropertyDescriptor("repeat"),
+  repeat: createPropertyDescriptor('repeat'),
 
   /**
    * Gets or sets the Color Property specifying the desired color applied to the image.
@@ -93,7 +93,7 @@ Object.defineProperties(ImageMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default 1.0
    */
-  color: createPropertyDescriptor("color"),
+  color: createPropertyDescriptor('color'),
 
   /**
    * Gets or sets the Boolean Property specifying whether the image has transparency
@@ -101,7 +101,7 @@ Object.defineProperties(ImageMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default 1.0
    */
-  transparent: createPropertyDescriptor("transparent"),
+  transparent: createPropertyDescriptor('transparent')
 });
 
 /**
@@ -111,7 +111,7 @@ Object.defineProperties(ImageMaterialProperty.prototype, {
  * @returns {String} The type of material.
  */
 ImageMaterialProperty.prototype.getType = function (time) {
-  return "Image";
+  return 'Image';
 };
 
 /**

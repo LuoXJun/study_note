@@ -44,6 +44,6 @@ const VerticalOrigin = {
    * @type {Number}
    * @constant
    */
-  TOP: -1,
+  TOP: -1
 };
 export default Object.freeze(VerticalOrigin);

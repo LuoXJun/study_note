@@ -28,6 +28,6 @@ const ModelAnimationLoop = {
    * @type {Number}
    * @constant
    */
-  MIRRORED_REPEAT: 2,
+  MIRRORED_REPEAT: 2
 };
 export default Object.freeze(ModelAnimationLoop);

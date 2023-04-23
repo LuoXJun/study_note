@@ -1,5 +1,5 @@
-import defaultValue from "../../Core/defaultValue.js";
-import LightingModel from "./LightingModel.js";
+import defaultValue from '../../Core/defaultValue.js';
+import LightingModel from './LightingModel.js';
 
 /**
  * Options for configuring the {@link LightingPipelineStage}

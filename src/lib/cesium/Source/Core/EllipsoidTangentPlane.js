@@ -1,17 +1,17 @@
-import AxisAlignedBoundingBox from "./AxisAlignedBoundingBox.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartesian4 from "./Cartesian4.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import IntersectionTests from "./IntersectionTests.js";
-import Matrix4 from "./Matrix4.js";
-import Plane from "./Plane.js";
-import Ray from "./Ray.js";
-import Transforms from "./Transforms.js";
+import AxisAlignedBoundingBox from './AxisAlignedBoundingBox.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartesian4 from './Cartesian4.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import IntersectionTests from './IntersectionTests.js';
+import Matrix4 from './Matrix4.js';
+import Plane from './Plane.js';
+import Ray from './Ray.js';
+import Transforms from './Transforms.js';
 
 const scratchCart4 = new Cartesian4();
 /**
@@ -28,7 +28,7 @@ const scratchCart4 = new Cartesian4();
  */
 function EllipsoidTangentPlane(origin, ellipsoid) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("origin", origin);
+  Check.defined('origin', origin);
   //>>includeEnd('debug');
 
   ellipsoid = defaultValue(ellipsoid, Ellipsoid.WGS84);
@@ -37,7 +37,7 @@ function EllipsoidTangentPlane(origin, ellipsoid) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(origin)) {
     throw new DeveloperError(
-      "origin must not be at the center of the ellipsoid."
+      'origin must not be at the center of the ellipsoid.'
     );
   }
   //>>includeEnd('debug');
@@ -67,7 +67,7 @@ Object.defineProperties(EllipsoidTangentPlane.prototype, {
   ellipsoid: {
     get: function () {
       return this._ellipsoid;
-    },
+    }
   },
 
   /**
@@ -78,7 +78,7 @@ Object.defineProperties(EllipsoidTangentPlane.prototype, {
   origin: {
     get: function () {
       return this._origin;
-    },
+    }
   },
 
   /**
@@ -90,7 +90,7 @@ Object.defineProperties(EllipsoidTangentPlane.prototype, {
   plane: {
     get: function () {
       return this._plane;
-    },
+    }
   },
 
   /**
@@ -102,7 +102,7 @@ Object.defineProperties(EllipsoidTangentPlane.prototype, {
   xAxis: {
     get: function () {
       return this._xAxis;
-    },
+    }
   },
 
   /**
@@ -114,7 +114,7 @@ Object.defineProperties(EllipsoidTangentPlane.prototype, {
   yAxis: {
     get: function () {
       return this._yAxis;
-    },
+    }
   },
 
   /**
@@ -126,8 +126,8 @@ Object.defineProperties(EllipsoidTangentPlane.prototype, {
   zAxis: {
     get: function () {
       return this._plane.normal;
-    },
-  },
+    }
+  }
 });
 
 const tmp = new AxisAlignedBoundingBox();
@@ -141,7 +141,7 @@ const tmp = new AxisAlignedBoundingBox();
  */
 EllipsoidTangentPlane.fromPoints = function (cartesians, ellipsoid) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("cartesians", cartesians);
+  Check.defined('cartesians', cartesians);
   //>>includeEnd('debug');
 
   const box = AxisAlignedBoundingBox.fromPoints(cartesians, tmp);
@@ -163,7 +163,7 @@ EllipsoidTangentPlane.prototype.projectPointOntoPlane = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("cartesian", cartesian);
+  Check.defined('cartesian', cartesian);
   //>>includeEnd('debug');
 
   const ray = scratchProjectPointOntoPlaneRay;
@@ -218,7 +218,7 @@ EllipsoidTangentPlane.prototype.projectPointsOntoPlane = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("cartesians", cartesians);
+  Check.defined('cartesians', cartesians);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -250,7 +250,7 @@ EllipsoidTangentPlane.prototype.projectPointToNearestOnPlane = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("cartesian", cartesian);
+  Check.defined('cartesian', cartesian);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -302,7 +302,7 @@ EllipsoidTangentPlane.prototype.projectPointsToNearestOnPlane = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("cartesians", cartesians);
+  Check.defined('cartesians', cartesians);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -330,7 +330,7 @@ EllipsoidTangentPlane.prototype.projectPointOntoEllipsoid = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("cartesian", cartesian);
+  Check.defined('cartesian', cartesian);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -364,7 +364,7 @@ EllipsoidTangentPlane.prototype.projectPointsOntoEllipsoid = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("cartesians", cartesians);
+  Check.defined('cartesians', cartesians);
   //>>includeEnd('debug');
 
   const length = cartesians.length;

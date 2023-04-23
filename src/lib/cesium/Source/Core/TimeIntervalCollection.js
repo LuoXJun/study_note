@@ -1,13 +1,13 @@
-import binarySearch from "./binarySearch.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Event from "./Event.js";
-import GregorianDate from "./GregorianDate.js";
-import isLeapYear from "./isLeapYear.js";
-import Iso8601 from "./Iso8601.js";
-import JulianDate from "./JulianDate.js";
-import TimeInterval from "./TimeInterval.js";
+import binarySearch from './binarySearch.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Event from './Event.js';
+import GregorianDate from './GregorianDate.js';
+import isLeapYear from './isLeapYear.js';
+import Iso8601 from './Iso8601.js';
+import JulianDate from './JulianDate.js';
+import TimeInterval from './TimeInterval.js';
 
 function compareIntervalStartTimes(left, right) {
   return JulianDate.compare(left.start, right.start);
@@ -42,7 +42,7 @@ Object.defineProperties(TimeIntervalCollection.prototype, {
   changedEvent: {
     get: function () {
       return this._changedEvent;
-    },
+    }
   },
 
   /**
@@ -55,7 +55,7 @@ Object.defineProperties(TimeIntervalCollection.prototype, {
     get: function () {
       const intervals = this._intervals;
       return intervals.length === 0 ? undefined : intervals[0].start;
-    },
+    }
   },
 
   /**
@@ -68,7 +68,7 @@ Object.defineProperties(TimeIntervalCollection.prototype, {
     get: function () {
       const intervals = this._intervals;
       return intervals.length === 0 ? false : intervals[0].isStartIncluded;
-    },
+    }
   },
 
   /**
@@ -82,7 +82,7 @@ Object.defineProperties(TimeIntervalCollection.prototype, {
       const intervals = this._intervals;
       const length = intervals.length;
       return length === 0 ? undefined : intervals[length - 1].stop;
-    },
+    }
   },
 
   /**
@@ -96,7 +96,7 @@ Object.defineProperties(TimeIntervalCollection.prototype, {
       const intervals = this._intervals;
       const length = intervals.length;
       return length === 0 ? false : intervals[length - 1].isStopIncluded;
-    },
+    }
   },
 
   /**
@@ -108,7 +108,7 @@ Object.defineProperties(TimeIntervalCollection.prototype, {
   length: {
     get: function () {
       return this._intervals.length;
-    },
+    }
   },
 
   /**
@@ -120,8 +120,8 @@ Object.defineProperties(TimeIntervalCollection.prototype, {
   isEmpty: {
     get: function () {
       return this._intervals.length === 0;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -162,7 +162,7 @@ TimeIntervalCollection.prototype.equals = function (right, dataComparer) {
 TimeIntervalCollection.prototype.get = function (index) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(index)) {
-    throw new DeveloperError("index is required.");
+    throw new DeveloperError('index is required.');
   }
   //>>includeEnd('debug');
 
@@ -227,7 +227,7 @@ const indexOfScratch = new TimeInterval();
 TimeIntervalCollection.prototype.indexOf = function (date) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(date)) {
-    throw new DeveloperError("date is required");
+    throw new DeveloperError('date is required');
   }
   //>>includeEnd('debug');
 
@@ -313,7 +313,7 @@ TimeIntervalCollection.prototype.addInterval = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(interval)) {
-    throw new DeveloperError("interval is required");
+    throw new DeveloperError('interval is required');
   }
   //>>includeEnd('debug');
 
@@ -386,7 +386,7 @@ TimeIntervalCollection.prototype.addInterval = function (
             stop: interval.stop,
             isStartIncluded: intervals[index - 1].isStartIncluded,
             isStopIncluded: interval.isStopIncluded,
-            data: interval.data,
+            data: interval.data
           });
         } else {
           interval = new TimeInterval({
@@ -397,7 +397,7 @@ TimeIntervalCollection.prototype.addInterval = function (
               intervals[index - 1].isStopIncluded ||
               (interval.stop.equals(intervals[index - 1].stop) &&
                 interval.isStopIncluded),
-            data: interval.data,
+            data: interval.data
           });
         }
         intervals.splice(index - 1, 1);
@@ -425,7 +425,7 @@ TimeIntervalCollection.prototype.addInterval = function (
               stop: intervals[index - 1].stop,
               isStartIncluded: !interval.isStopIncluded,
               isStopIncluded: intervals[index - 1].isStopIncluded,
-              data: intervals[index - 1].data,
+              data: intervals[index - 1].data
             })
           );
         }
@@ -434,7 +434,7 @@ TimeIntervalCollection.prototype.addInterval = function (
           stop: interval.start,
           isStartIncluded: intervals[index - 1].isStartIncluded,
           isStopIncluded: !interval.isStartIncluded,
-          data: intervals[index - 1].data,
+          data: intervals[index - 1].data
         });
       }
     }
@@ -467,7 +467,7 @@ TimeIntervalCollection.prototype.addInterval = function (
           )
             ? intervals[index].isStopIncluded
             : interval.isStopIncluded,
-          data: interval.data,
+          data: interval.data
         });
         intervals.splice(index, 1);
       } else {
@@ -478,7 +478,7 @@ TimeIntervalCollection.prototype.addInterval = function (
           stop: intervals[index].stop,
           isStartIncluded: !interval.isStopIncluded,
           isStopIncluded: intervals[index].isStopIncluded,
-          data: intervals[index].data,
+          data: intervals[index].data
         });
 
         if (intervals[index].isEmpty) {
@@ -510,7 +510,7 @@ TimeIntervalCollection.prototype.addInterval = function (
 TimeIntervalCollection.prototype.removeInterval = function (interval) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(interval)) {
-    throw new DeveloperError("interval is required");
+    throw new DeveloperError('interval is required');
   }
   //>>includeEnd('debug');
 
@@ -552,7 +552,7 @@ TimeIntervalCollection.prototype.removeInterval = function (interval) {
           stop: intervals[index - 1].stop,
           isStartIncluded: !interval.isStopIncluded,
           isStopIncluded: intervals[index - 1].isStopIncluded,
-          data: intervals[index - 1].data,
+          data: intervals[index - 1].data
         })
       );
     }
@@ -561,7 +561,7 @@ TimeIntervalCollection.prototype.removeInterval = function (interval) {
       stop: interval.start,
       isStartIncluded: intervals[index - 1].isStartIncluded,
       isStopIncluded: !interval.isStartIncluded,
-      data: intervals[index - 1].data,
+      data: intervals[index - 1].data
     });
   }
 
@@ -583,7 +583,7 @@ TimeIntervalCollection.prototype.removeInterval = function (interval) {
         stop: intervals[index].start,
         isStartIncluded: true,
         isStopIncluded: true,
-        data: intervals[index].data,
+        data: intervals[index].data
       })
     );
     ++index;
@@ -618,7 +618,7 @@ TimeIntervalCollection.prototype.removeInterval = function (interval) {
           stop: intervals[index].stop,
           isStartIncluded: true,
           isStopIncluded: intervals[index].isStopIncluded,
-          data: intervals[index].data,
+          data: intervals[index].data
         });
       } else {
         intervals[index] = new TimeInterval({
@@ -626,7 +626,7 @@ TimeIntervalCollection.prototype.removeInterval = function (interval) {
           stop: interval.stop,
           isStartIncluded: true,
           isStopIncluded: true,
-          data: intervals[index].data,
+          data: intervals[index].data
         });
       }
     } else {
@@ -649,7 +649,7 @@ TimeIntervalCollection.prototype.removeInterval = function (interval) {
       stop: intervals[index].stop,
       isStartIncluded: !interval.isStopIncluded,
       isStopIncluded: intervals[index].isStopIncluded,
-      data: intervals[index].data,
+      data: intervals[index].data
     });
   }
 
@@ -675,7 +675,7 @@ TimeIntervalCollection.prototype.intersect = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(other)) {
-    throw new DeveloperError("other is required.");
+    throw new DeveloperError('other is required.');
   }
   //>>includeEnd('debug');
 
@@ -744,10 +744,10 @@ TimeIntervalCollection.prototype.intersect = function (
 TimeIntervalCollection.fromJulianDateArray = function (options, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options)) {
-    throw new DeveloperError("options is required.");
+    throw new DeveloperError('options is required.');
   }
   if (!defined(options.julianDates)) {
-    throw new DeveloperError("options.iso8601Array is required.");
+    throw new DeveloperError('options.iso8601Array is required.');
   }
   //>>includeEnd('debug');
 
@@ -773,7 +773,7 @@ TimeIntervalCollection.fromJulianDateArray = function (options, result) {
       start: Iso8601.MINIMUM_VALUE,
       stop: julianDates[0],
       isStartIncluded: true,
-      isStopIncluded: !isStartIncluded,
+      isStopIncluded: !isStartIncluded
     });
     interval.data = defined(dataCallback)
       ? dataCallback(interval, result.length)
@@ -789,7 +789,7 @@ TimeIntervalCollection.fromJulianDateArray = function (options, result) {
       start: startDate,
       stop: endDate,
       isStartIncluded: result.length === startIndex ? isStartIncluded : true,
-      isStopIncluded: i === length - 2 ? isStopIncluded : false,
+      isStopIncluded: i === length - 2 ? isStopIncluded : false
     });
     interval.data = defined(dataCallback)
       ? dataCallback(interval, result.length)
@@ -804,7 +804,7 @@ TimeIntervalCollection.fromJulianDateArray = function (options, result) {
       start: julianDates[length - 1],
       stop: Iso8601.MAXIMUM_VALUE,
       isStartIncluded: !isStopIncluded,
-      isStopIncluded: true,
+      isStopIncluded: true
     });
     interval.data = defined(dataCallback)
       ? dataCallback(interval, result.length)
@@ -893,7 +893,8 @@ function addToDate(julianDate, duration, result) {
 }
 
 const scratchJulianDate = new JulianDate();
-const durationRegex = /P(?:([\d.,]+)Y)?(?:([\d.,]+)M)?(?:([\d.,]+)W)?(?:([\d.,]+)D)?(?:T(?:([\d.,]+)H)?(?:([\d.,]+)M)?(?:([\d.,]+)S)?)?/;
+const durationRegex =
+  /P(?:([\d.,]+)Y)?(?:([\d.,]+)M)?(?:([\d.,]+)W)?(?:([\d.,]+)D)?(?:T(?:([\d.,]+)H)?(?:([\d.,]+)M)?(?:([\d.,]+)S)?)?/;
 
 /**
  * Parses ISO8601 duration string
@@ -918,46 +919,46 @@ function parseDuration(iso8601, result) {
   result.second = 0;
   result.millisecond = 0;
 
-  if (iso8601[0] === "P") {
+  if (iso8601[0] === 'P') {
     const matches = iso8601.match(durationRegex);
     if (!defined(matches)) {
       return false;
     }
     if (defined(matches[1])) {
       // Years
-      result.year = Number(matches[1].replace(",", "."));
+      result.year = Number(matches[1].replace(',', '.'));
     }
     if (defined(matches[2])) {
       // Months
-      result.month = Number(matches[2].replace(",", "."));
+      result.month = Number(matches[2].replace(',', '.'));
     }
     if (defined(matches[3])) {
       // Weeks
-      result.day = Number(matches[3].replace(",", ".")) * 7;
+      result.day = Number(matches[3].replace(',', '.')) * 7;
     }
     if (defined(matches[4])) {
       // Days
-      result.day += Number(matches[4].replace(",", "."));
+      result.day += Number(matches[4].replace(',', '.'));
     }
     if (defined(matches[5])) {
       // Hours
-      result.hour = Number(matches[5].replace(",", "."));
+      result.hour = Number(matches[5].replace(',', '.'));
     }
     if (defined(matches[6])) {
       // Weeks
-      result.minute = Number(matches[6].replace(",", "."));
+      result.minute = Number(matches[6].replace(',', '.'));
     }
     if (defined(matches[7])) {
       // Seconds
-      const seconds = Number(matches[7].replace(",", "."));
+      const seconds = Number(matches[7].replace(',', '.'));
       result.second = Math.floor(seconds);
       result.millisecond = (seconds % 1) * 1000;
     }
   } else {
     // They can technically specify the duration as a normal date with some caveats. Try our best to load it.
-    if (iso8601[iso8601.length - 1] !== "Z") {
+    if (iso8601[iso8601.length - 1] !== 'Z') {
       // It's not a date, its a duration, so it always has to be UTC
-      iso8601 += "Z";
+      iso8601 += 'Z';
     }
     JulianDate.toGregorianDate(
       JulianDate.fromIso8601(iso8601, scratchJulianDate),
@@ -994,14 +995,14 @@ const scratchDuration = new GregorianDate();
 TimeIntervalCollection.fromIso8601 = function (options, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options)) {
-    throw new DeveloperError("options is required.");
+    throw new DeveloperError('options is required.');
   }
   if (!defined(options.iso8601)) {
-    throw new DeveloperError("options.iso8601 is required.");
+    throw new DeveloperError('options.iso8601 is required.');
   }
   //>>includeEnd('debug');
 
-  const dates = options.iso8601.split("/");
+  const dates = options.iso8601.split('/');
   const start = JulianDate.fromIso8601(dates[0]);
   const stop = JulianDate.fromIso8601(dates[1]);
   const julianDates = [];
@@ -1029,7 +1030,7 @@ TimeIntervalCollection.fromIso8601 = function (options, result) {
       isStopIncluded: options.isStopIncluded,
       leadingInterval: options.leadingInterval,
       trailingInterval: options.trailingInterval,
-      dataCallback: options.dataCallback,
+      dataCallback: options.dataCallback
     },
     result
   );
@@ -1051,10 +1052,10 @@ TimeIntervalCollection.fromIso8601 = function (options, result) {
 TimeIntervalCollection.fromIso8601DateArray = function (options, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options)) {
-    throw new DeveloperError("options is required.");
+    throw new DeveloperError('options is required.');
   }
   if (!defined(options.iso8601Dates)) {
-    throw new DeveloperError("options.iso8601Dates is required.");
+    throw new DeveloperError('options.iso8601Dates is required.');
   }
   //>>includeEnd('debug');
 
@@ -1067,7 +1068,7 @@ TimeIntervalCollection.fromIso8601DateArray = function (options, result) {
       isStopIncluded: options.isStopIncluded,
       leadingInterval: options.leadingInterval,
       trailingInterval: options.trailingInterval,
-      dataCallback: options.dataCallback,
+      dataCallback: options.dataCallback
     },
     result
   );
@@ -1091,13 +1092,13 @@ TimeIntervalCollection.fromIso8601DateArray = function (options, result) {
 TimeIntervalCollection.fromIso8601DurationArray = function (options, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options)) {
-    throw new DeveloperError("options is required.");
+    throw new DeveloperError('options is required.');
   }
   if (!defined(options.epoch)) {
-    throw new DeveloperError("options.epoch is required.");
+    throw new DeveloperError('options.epoch is required.');
   }
   if (!defined(options.iso8601Durations)) {
-    throw new DeveloperError("options.iso8601Durations is required.");
+    throw new DeveloperError('options.iso8601Durations is required.');
   }
   //>>includeEnd('debug');
 
@@ -1128,7 +1129,7 @@ TimeIntervalCollection.fromIso8601DurationArray = function (options, result) {
       isStopIncluded: options.isStopIncluded,
       leadingInterval: options.leadingInterval,
       trailingInterval: options.trailingInterval,
-      dataCallback: options.dataCallback,
+      dataCallback: options.dataCallback
     },
     result
   );

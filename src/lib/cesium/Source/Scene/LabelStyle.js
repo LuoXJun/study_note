@@ -28,6 +28,6 @@ const LabelStyle = {
    * @type {Number}
    * @constant
    */
-  FILL_AND_OUTLINE: 2,
+  FILL_AND_OUTLINE: 2
 };
 export default Object.freeze(LabelStyle);

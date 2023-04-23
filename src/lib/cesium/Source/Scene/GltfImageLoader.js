@@ -1,11 +1,11 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import loadImageFromTypedArray from "../Core/loadImageFromTypedArray.js";
-import loadKTX2 from "../Core/loadKTX2.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import ResourceLoader from "./ResourceLoader.js";
-import ResourceLoaderState from "./ResourceLoaderState.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import loadImageFromTypedArray from '../Core/loadImageFromTypedArray.js';
+import loadKTX2 from '../Core/loadKTX2.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import ResourceLoader from './ResourceLoader.js';
+import ResourceLoaderState from './ResourceLoaderState.js';
 
 /**
  * Loads a glTF image.
@@ -37,11 +37,11 @@ export default function GltfImageLoader(options) {
   const cacheKey = options.cacheKey;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.func("options.resourceCache", resourceCache);
-  Check.typeOf.object("options.gltf", gltf);
-  Check.typeOf.number("options.imageId", imageId);
-  Check.typeOf.object("options.gltfResource", gltfResource);
-  Check.typeOf.object("options.baseResource", baseResource);
+  Check.typeOf.func('options.resourceCache', resourceCache);
+  Check.typeOf.object('options.gltf', gltf);
+  Check.typeOf.number('options.imageId', imageId);
+  Check.typeOf.object('options.gltfResource', gltfResource);
+  Check.typeOf.object('options.baseResource', baseResource);
   //>>includeEnd('debug');
 
   const image = gltf.images[imageId];
@@ -80,7 +80,7 @@ Object.defineProperties(GltfImageLoader.prototype, {
   promise: {
     get: function () {
       return this._promise;
-    },
+    }
   },
   /**
    * The cache key of the resource.
@@ -94,7 +94,7 @@ Object.defineProperties(GltfImageLoader.prototype, {
   cacheKey: {
     get: function () {
       return this._cacheKey;
-    },
+    }
   },
   /**
    * The image.
@@ -108,7 +108,7 @@ Object.defineProperties(GltfImageLoader.prototype, {
   image: {
     get: function () {
       return this._image;
-    },
+    }
   },
   /**
    * The mip levels. Only defined for KTX2 files containing mip levels.
@@ -122,8 +122,8 @@ Object.defineProperties(GltfImageLoader.prototype, {
   mipLevels: {
     get: function () {
       return this._mipLevels;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -154,7 +154,7 @@ function getImageAndMipLevels(image) {
   }
   return {
     image: image,
-    mipLevels: mipLevels,
+    mipLevels: mipLevels
   };
 }
 
@@ -164,7 +164,7 @@ function loadFromBufferView(imageLoader) {
     gltf: imageLoader._gltf,
     bufferViewId: imageLoader._bufferViewId,
     gltfResource: imageLoader._gltfResource,
-    baseResource: imageLoader._baseResource,
+    baseResource: imageLoader._baseResource
   });
 
   imageLoader._bufferViewLoader = bufferViewLoader;
@@ -197,7 +197,7 @@ function loadFromBufferView(imageLoader) {
       if (imageLoader.isDestroyed()) {
         return;
       }
-      return handleError(imageLoader, error, "Failed to load embedded image");
+      return handleError(imageLoader, error, 'Failed to load embedded image');
     });
 }
 
@@ -205,7 +205,7 @@ function loadFromUri(imageLoader) {
   const baseResource = imageLoader._baseResource;
   const uri = imageLoader._uri;
   const resource = baseResource.getDerivedResource({
-    url: uri,
+    url: uri
   });
   imageLoader._state = ResourceLoaderState.LOADING;
   return loadImageFromUri(resource)
@@ -245,13 +245,13 @@ function getMimeTypeFromTypedArray(typedArray) {
 
   if (header[0] === 0xff && header[1] === 0xd8) {
     // See https://en.wikipedia.org/wiki/JPEG_File_Interchange_Format
-    return "image/jpeg";
+    return 'image/jpeg';
   } else if (header[0] === 0x89 && header[1] === 0x50) {
     // See http://www.libpng.org/pub/png/spec/1.2/PNG-Structure.html
-    return "image/png";
+    return 'image/png';
   } else if (header[0] === 0xab && header[1] === 0x4b) {
     // See http://github.khronos.org/KTX-Specification/#_identifier
-    return "image/ktx2";
+    return 'image/ktx2';
   } else if (
     // See https://developers.google.com/speed/webp/docs/riff_container#webp_file_header
     webpHeaderRIFFChars[0] === 0x52 &&
@@ -263,15 +263,15 @@ function getMimeTypeFromTypedArray(typedArray) {
     webpHeaderWEBPChars[2] === 0x42 &&
     webpHeaderWEBPChars[3] === 0x50
   ) {
-    return "image/webp";
+    return 'image/webp';
   }
 
-  throw new RuntimeError("Image format is not recognized");
+  throw new RuntimeError('Image format is not recognized');
 }
 
 function loadImageFromBufferTypedArray(typedArray) {
   const mimeType = getMimeTypeFromTypedArray(typedArray);
-  if (mimeType === "image/ktx2") {
+  if (mimeType === 'image/ktx2') {
     // Need to make a copy of the embedded KTX2 buffer otherwise the underlying
     // ArrayBuffer may be accessed on both the worker and the main thread and
     // throw an error like "Cannot perform Construct on a detached ArrayBuffer".
@@ -286,7 +286,7 @@ function loadImageFromBufferTypedArray(typedArray) {
     uint8Array: typedArray,
     format: mimeType,
     flipY: false,
-    skipColorSpaceConversion: true,
+    skipColorSpaceConversion: true
   });
 }
 
@@ -301,7 +301,7 @@ function loadImageFromUri(resource) {
   // Resolves to an ImageBitmap or Image
   return resource.fetchImage({
     skipColorSpaceConversion: true,
-    preferImageBitmap: true,
+    preferImageBitmap: true
   });
 }
 

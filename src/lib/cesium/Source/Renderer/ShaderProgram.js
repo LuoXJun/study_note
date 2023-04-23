@@ -1,13 +1,13 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import AutomaticUniforms from "./AutomaticUniforms.js";
-import ContextLimits from "./ContextLimits.js";
-import createUniform from "./createUniform.js";
-import createUniformArray from "./createUniformArray.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import AutomaticUniforms from './AutomaticUniforms.js';
+import ContextLimits from './ContextLimits.js';
+import createUniform from './createUniform.js';
+import createUniformArray from './createUniformArray.js';
 
 let nextShaderProgramId = 0;
 
@@ -18,12 +18,12 @@ function ShaderProgram(options) {
   let vertexShaderText = options.vertexShaderText;
   let fragmentShaderText = options.fragmentShaderText;
 
-  if (typeof spector !== "undefined") {
+  if (typeof spector !== 'undefined') {
     // The #line statements common in Cesium shaders interfere with the ability of the
     // SpectorJS to show errors on the correct line. So remove them when SpectorJS
     // is active.
-    vertexShaderText = vertexShaderText.replace(/^#line/gm, "//#line");
-    fragmentShaderText = fragmentShaderText.replace(/^#line/gm, "//#line");
+    vertexShaderText = vertexShaderText.replace(/^#line/gm, '//#line');
+    fragmentShaderText = fragmentShaderText.replace(/^#line/gm, '//#line');
   }
 
   const modifiedFS = handleUniformPrecisionMismatches(
@@ -66,7 +66,7 @@ ShaderProgram.fromCache = function (options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.context", options.context);
+  Check.defined('options.context', options.context);
   //>>includeEnd('debug');
 
   return options.context.shaderCache.getShaderProgram(options);
@@ -76,7 +76,7 @@ ShaderProgram.replaceCache = function (options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.context", options.context);
+  Check.defined('options.context', options.context);
   //>>includeEnd('debug');
 
   return options.context.shaderCache.replaceShaderProgram(options);
@@ -93,7 +93,7 @@ Object.defineProperties(ShaderProgram.prototype, {
   vertexShaderSource: {
     get: function () {
       return this._vertexShaderSource;
-    },
+    }
   },
   /**
    * GLSL source for the shader program's fragment shader.
@@ -105,26 +105,26 @@ Object.defineProperties(ShaderProgram.prototype, {
   fragmentShaderSource: {
     get: function () {
       return this._fragmentShaderSource;
-    },
+    }
   },
   vertexAttributes: {
     get: function () {
       initialize(this);
       return this._vertexAttributes;
-    },
+    }
   },
   numberOfVertexAttributes: {
     get: function () {
       initialize(this);
       return this._numberOfVertexAttributes;
-    },
+    }
   },
   allUniforms: {
     get: function () {
       initialize(this);
       return this._uniformsByName;
-    },
-  },
+    }
+  }
 });
 
 function extractUniforms(shaderText) {
@@ -134,7 +134,7 @@ function extractUniforms(shaderText) {
     const len = uniformLines.length;
     for (let i = 0; i < len; i++) {
       const line = uniformLines[i].trim();
-      const name = line.slice(line.lastIndexOf(" ") + 1);
+      const name = line.slice(line.lastIndexOf(' ') + 1);
       uniformNames.push(name);
     }
   }
@@ -165,7 +165,7 @@ function handleUniformPrecisionMismatches(
           uniformName = vertexShaderUniforms[i];
           duplicateName = `czm_mediump_${uniformName}`;
           // Update fragmentShaderText with renamed uniforms
-          const re = new RegExp(`${uniformName}\\b`, "g");
+          const re = new RegExp(`${uniformName}\\b`, 'g');
           fragmentShaderText = fragmentShaderText.replace(re, duplicateName);
           duplicateUniformNames[duplicateName] = uniformName;
         }
@@ -175,11 +175,11 @@ function handleUniformPrecisionMismatches(
 
   return {
     fragmentShaderText: fragmentShaderText,
-    duplicateUniformNames: duplicateUniformNames,
+    duplicateUniformNames: duplicateUniformNames
   };
 }
 
-const consolePrefix = "[Cesium WebGL] ";
+const consolePrefix = '[Cesium WebGL] ';
 
 function createAndLinkProgram(gl, shader) {
   const vsSource = shader._vertexShaderText;
@@ -224,10 +224,9 @@ function createAndLinkProgram(gl, shader) {
       log = gl.getShaderInfoLog(fragmentShader);
       console.error(`${consolePrefix}Fragment shader compile log: ${log}`);
       if (defined(debugShaders)) {
-        const fragmentSourceTranslation = debugShaders.getTranslatedShaderSource(
-          fragmentShader
-        );
-        if (fragmentSourceTranslation !== "") {
+        const fragmentSourceTranslation =
+          debugShaders.getTranslatedShaderSource(fragmentShader);
+        if (fragmentSourceTranslation !== '') {
           console.error(
             `${consolePrefix}Translated fragment shader source:\n${fragmentSourceTranslation}`
           );
@@ -246,10 +245,9 @@ function createAndLinkProgram(gl, shader) {
       log = gl.getShaderInfoLog(vertexShader);
       console.error(`${consolePrefix}Vertex shader compile log: ${log}`);
       if (defined(debugShaders)) {
-        const vertexSourceTranslation = debugShaders.getTranslatedShaderSource(
-          vertexShader
-        );
-        if (vertexSourceTranslation !== "") {
+        const vertexSourceTranslation =
+          debugShaders.getTranslatedShaderSource(vertexShader);
+        if (vertexSourceTranslation !== '') {
           console.error(
             `${consolePrefix}Translated vertex shader source:\n${vertexSourceTranslation}`
           );
@@ -318,7 +316,7 @@ function findVertexAttributes(gl, program, numberOfAttributes) {
     attributes[attr.name] = {
       name: attr.name,
       type: attr.type,
-      index: location,
+      index: location
     };
   }
 
@@ -334,7 +332,7 @@ function findUniforms(gl, program) {
 
   for (let i = 0; i < numberOfUniforms; ++i) {
     const activeUniform = gl.getActiveUniform(program, i);
-    const suffix = "[0]";
+    const suffix = '[0]';
     const uniformName =
       activeUniform.name.indexOf(
         suffix,
@@ -344,8 +342,8 @@ function findUniforms(gl, program) {
         : activeUniform.name;
 
     // Ignore GLSL built-in uniforms returned in Firefox.
-    if (uniformName.indexOf("gl_") !== 0) {
-      if (activeUniform.name.indexOf("[") < 0) {
+    if (uniformName.indexOf('gl_') !== 0) {
+      if (activeUniform.name.indexOf('[') < 0) {
         // Single uniform
         const location = gl.getUniformLocation(program, uniformName);
 
@@ -377,7 +375,7 @@ function findUniforms(gl, program) {
 
         // On some platforms - Nexus 4 in Firefox for one - an array of sampler2D ends up being represented
         // as separate uniforms, one for each array element.  Check for and handle that case.
-        const indexOfBracket = uniformName.indexOf("[");
+        const indexOfBracket = uniformName.indexOf('[');
         if (indexOfBracket >= 0) {
           // We're assuming the array elements show up in numerical order - it seems to be true.
           uniformArray = uniformsByName[uniformName.slice(0, indexOfBracket)];
@@ -434,7 +432,7 @@ function findUniforms(gl, program) {
   return {
     uniformsByName: uniformsByName,
     uniforms: uniforms,
-    samplerUniforms: samplerUniforms,
+    samplerUniforms: samplerUniforms
   };
 }
 
@@ -456,7 +454,7 @@ function partitionUniforms(shader, uniforms) {
       if (defined(automaticUniform)) {
         automaticUniforms.push({
           uniform: uniformObject,
-          automaticUniform: automaticUniform,
+          automaticUniform: automaticUniform
         });
       } else {
         manualUniforms.push(uniformObject);
@@ -466,7 +464,7 @@ function partitionUniforms(shader, uniforms) {
 
   return {
     automaticUniforms: automaticUniforms,
-    manualUniforms: manualUniforms,
+    manualUniforms: manualUniforms
   };
 }
 
@@ -531,7 +529,7 @@ function reinitialize(shader) {
 
   // If SpectorJS is active, add the hook to make the shader editor work.
   // https://github.com/BabylonJS/Spector.js/blob/master/documentation/extension.md#shader-editor
-  if (typeof spector !== "undefined") {
+  if (typeof spector !== 'undefined') {
     shader._program.__SPECTOR_rebuildProgram = function (
       vertexSourceCode, // The new vertex shader source
       fragmentSourceCode, // The new fragment shader source
@@ -544,8 +542,8 @@ function reinitialize(shader) {
       // SpectorJS likes to replace `!=` with `! =` for unknown reasons,
       // and that causes glsl compile failures. So fix that up.
       const regex = / ! = /g;
-      shader._vertexShaderText = vertexSourceCode.replace(regex, " != ");
-      shader._fragmentShaderText = fragmentSourceCode.replace(regex, " != ");
+      shader._vertexShaderText = vertexSourceCode.replace(regex, ' != ');
+      shader._fragmentShaderText = fragmentSourceCode.replace(regex, ' != ');
 
       try {
         reinitialize(shader);

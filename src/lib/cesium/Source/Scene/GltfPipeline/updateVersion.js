@@ -1,27 +1,27 @@
-import addExtensionsUsed from "./addExtensionsUsed.js";
-import addToArray from "./addToArray.js";
-import findAccessorMinMax from "./findAccessorMinMax.js";
-import ForEach from "./ForEach.js";
-import getAccessorByteStride from "./getAccessorByteStride.js";
-import numberOfComponentsForType from "./numberOfComponentsForType.js";
-import moveTechniqueRenderStates from "./moveTechniqueRenderStates.js";
-import moveTechniquesToExtension from "./moveTechniquesToExtension.js";
-import removeUnusedElements from "./removeUnusedElements.js";
-import updateAccessorComponentTypes from "./updateAccessorComponentTypes.js";
-import Cartesian3 from "../../Core/Cartesian3.js";
-import Cartesian4 from "../../Core/Cartesian4.js";
-import clone from "../../Core/clone.js";
-import ComponentDatatype from "../../Core/ComponentDatatype.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import Quaternion from "../../Core/Quaternion.js";
-import WebGLConstants from "../../Core/WebGLConstants.js";
+import addExtensionsUsed from './addExtensionsUsed.js';
+import addToArray from './addToArray.js';
+import findAccessorMinMax from './findAccessorMinMax.js';
+import ForEach from './ForEach.js';
+import getAccessorByteStride from './getAccessorByteStride.js';
+import numberOfComponentsForType from './numberOfComponentsForType.js';
+import moveTechniqueRenderStates from './moveTechniqueRenderStates.js';
+import moveTechniquesToExtension from './moveTechniquesToExtension.js';
+import removeUnusedElements from './removeUnusedElements.js';
+import updateAccessorComponentTypes from './updateAccessorComponentTypes.js';
+import Cartesian3 from '../../Core/Cartesian3.js';
+import Cartesian4 from '../../Core/Cartesian4.js';
+import clone from '../../Core/clone.js';
+import ComponentDatatype from '../../Core/ComponentDatatype.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import Quaternion from '../../Core/Quaternion.js';
+import WebGLConstants from '../../Core/WebGLConstants.js';
 
 const updateFunctions = {
   0.8: glTF08to10,
-  "1.0": glTF10to20,
-  "2.0": undefined,
+  '1.0': glTF10to20,
+  '2.0': undefined
 };
 
 /**
@@ -42,10 +42,10 @@ function updateVersion(gltf, options) {
   let version = gltf.version;
 
   gltf.asset = defaultValue(gltf.asset, {
-    version: "1.0",
+    version: '1.0'
   });
 
-  gltf.asset.version = defaultValue(gltf.asset.version, "1.0");
+  gltf.asset.version = defaultValue(gltf.asset.version, '1.0');
   version = defaultValue(version, gltf.asset.version).toString();
 
   // Invalid version
@@ -56,7 +56,7 @@ function updateVersion(gltf, options) {
     }
     // Default to 1.0 if it cannot be determined
     if (!Object.prototype.hasOwnProperty.call(updateFunctions, version)) {
-      version = "1.0";
+      version = '1.0';
     }
   }
 
@@ -152,7 +152,7 @@ function updateAnimations(gltf) {
         const channelsLength = channels.length;
         for (let i = 0; i < channelsLength; ++i) {
           const channel = channels[i];
-          if (channel.target.path === "rotation") {
+          if (channel.target.path === 'rotation') {
             const accessorId = parameters[samplers[channel.sampler].output];
             if (defined(updatedAccessors[accessorId])) {
               continue;
@@ -196,7 +196,7 @@ function removeTechniquePasses(gltf) {
       const technique = techniques[techniqueId];
       const passes = technique.passes;
       if (defined(passes)) {
-        const passName = defaultValue(technique.pass, "defaultPass");
+        const passName = defaultValue(technique.pass, 'defaultPass');
         if (Object.prototype.hasOwnProperty.call(passes, passName)) {
           const pass = passes[passName];
           const instanceProgram = pass.instanceProgram;
@@ -226,13 +226,13 @@ function glTF08to10(gltf) {
     gltf.asset = {};
   }
   const asset = gltf.asset;
-  asset.version = "1.0";
+  asset.version = '1.0';
   // Profile should be an object, not a string
-  if (typeof asset.profile === "string") {
-    const split = asset.profile.split(" ");
+  if (typeof asset.profile === 'string') {
+    const split = asset.profile.split(' ');
     asset.profile = {
       api: split[0],
-      version: split[1],
+      version: split[1]
     };
   } else {
     asset.profile = {};
@@ -266,7 +266,7 @@ function glTF08to10(gltf) {
     extensions.KHR_materials_common = materialsCommon;
     materialsCommon.lights = gltf.lights;
     delete gltf.lights;
-    addExtensionsUsed(gltf, "KHR_materials_common");
+    addExtensionsUsed(gltf, 'KHR_materials_common');
   }
 }
 
@@ -324,7 +324,7 @@ function objectsToArrays(gltf) {
     shaders: {},
     skins: {},
     textures: {},
-    techniques: {},
+    techniques: {}
   };
 
   // Map joint names to id names
@@ -404,9 +404,9 @@ function objectsToArrays(gltf) {
         parameter.node = globalMapping.nodes[parameter.node];
       }
       const value = parameter.value;
-      if (typeof value === "string") {
+      if (typeof value === 'string') {
         parameter.value = {
-          index: globalMapping.textures[value],
+          index: globalMapping.textures[value]
         };
       }
     });
@@ -443,7 +443,7 @@ function objectsToArrays(gltf) {
         node.mesh = globalMapping.meshes[meshes[0]];
         for (i = 1; i < meshesLength; ++i) {
           const meshNode = {
-            mesh: globalMapping.meshes[meshes[i]],
+            mesh: globalMapping.meshes[meshes[i]]
           };
           const meshNodeId = addToArray(gltf.nodes, meshNode);
           if (!defined(children)) {
@@ -521,9 +521,9 @@ function objectsToArrays(gltf) {
       material.technique = globalMapping.techniques[material.technique];
     }
     ForEach.materialValue(material, function (value, name) {
-      if (typeof value === "string") {
+      if (typeof value === 'string') {
         material.values[name] = {
-          index: globalMapping.textures[value],
+          index: globalMapping.textures[value]
         };
       }
     });
@@ -532,9 +532,9 @@ function objectsToArrays(gltf) {
       const materialsCommon = extensions.KHR_materials_common;
       if (defined(materialsCommon)) {
         ForEach.materialValue(materialsCommon, function (value, name) {
-          if (typeof value === "string") {
+          if (typeof value === 'string') {
             materialsCommon.values[name] = {
-              index: globalMapping.textures[value],
+              index: globalMapping.textures[value]
             };
           }
         });
@@ -598,7 +598,7 @@ function stripAsset(gltf) {
 const knownExtensions = {
   CESIUM_RTC: true,
   KHR_materials_common: true,
-  WEB3D_quantized_attributes: true,
+  WEB3D_quantized_attributes: true
 };
 function requireKnownExtensions(gltf) {
   const extensionsUsed = gltf.extensionsUsed;
@@ -635,9 +635,9 @@ function requireAttributeSetIndex(gltf) {
       ForEach.meshPrimitiveAttribute(
         primitive,
         function (accessorId, semantic) {
-          if (semantic === "TEXCOORD") {
+          if (semantic === 'TEXCOORD') {
             primitive.attributes.TEXCOORD_0 = accessorId;
-          } else if (semantic === "COLOR") {
+          } else if (semantic === 'COLOR') {
             primitive.attributes.COLOR_0 = accessorId;
           }
         }
@@ -650,10 +650,10 @@ function requireAttributeSetIndex(gltf) {
     ForEach.techniqueParameter(technique, function (parameter) {
       const semantic = parameter.semantic;
       if (defined(semantic)) {
-        if (semantic === "TEXCOORD") {
-          parameter.semantic = "TEXCOORD_0";
-        } else if (semantic === "COLOR") {
-          parameter.semantic = "COLOR_0";
+        if (semantic === 'TEXCOORD') {
+          parameter.semantic = 'TEXCOORD_0';
+        } else if (semantic === 'COLOR') {
+          parameter.semantic = 'COLOR_0';
         }
       }
     });
@@ -663,15 +663,15 @@ function requireAttributeSetIndex(gltf) {
 const knownSemantics = {
   POSITION: true,
   NORMAL: true,
-  TANGENT: true,
+  TANGENT: true
 };
 const indexedSemantics = {
-  COLOR: "COLOR",
-  JOINT: "JOINTS",
-  JOINTS: "JOINTS",
-  TEXCOORD: "TEXCOORD",
-  WEIGHT: "WEIGHTS",
-  WEIGHTS: "WEIGHTS",
+  COLOR: 'COLOR',
+  JOINT: 'JOINTS',
+  JOINTS: 'JOINTS',
+  TEXCOORD: 'TEXCOORD',
+  WEIGHT: 'WEIGHTS',
+  WEIGHTS: 'WEIGHTS'
 };
 function underscoreApplicationSpecificSemantics(gltf) {
   const mappedSemantics = {};
@@ -681,10 +681,10 @@ function underscoreApplicationSpecificSemantics(gltf) {
       ForEach.meshPrimitiveAttribute(
         primitive,
         function (accessorId, semantic) {
-          if (semantic.charAt(0) !== "_") {
+          if (semantic.charAt(0) !== '_') {
             const setIndex = semantic.search(/_[0-9]+/g);
             let strippedSemantic = semantic;
-            let suffix = "_0";
+            let suffix = '_0';
             if (setIndex >= 0) {
               strippedSemantic = semantic.substring(0, setIndex);
               suffix = semantic.substring(setIndex);
@@ -695,7 +695,7 @@ function underscoreApplicationSpecificSemantics(gltf) {
               newSemantic = indexedSemantic + suffix;
               mappedSemantics[semantic] = newSemantic;
             } else if (!defined(knownSemantics[strippedSemantic])) {
-              newSemantic = "_" + semantic;
+              newSemantic = '_' + semantic;
               mappedSemantics[semantic] = newSemantic;
             }
           }
@@ -839,11 +839,11 @@ function moveByteStrideToBufferView(gltf) {
   }
 
   // Remove unused buffer views
-  removeUnusedElements(gltf, ["accessor", "bufferView", "buffer"]);
+  removeUnusedElements(gltf, ['accessor', 'bufferView', 'buffer']);
 }
 
 function requirePositionAccessorMinMax(gltf) {
-  ForEach.accessorWithSemantic(gltf, "POSITION", function (accessorId) {
+  ForEach.accessorWithSemantic(gltf, 'POSITION', function (accessorId) {
     const accessor = gltf.accessors[accessorId];
     if (!defined(accessor.min) || !defined(accessor.max)) {
       const minMax = findAccessorMinMax(gltf, accessor);
@@ -933,7 +933,7 @@ function requireAnimationAccessorMinMax(gltf) {
 
 function glTF10to20(gltf) {
   gltf.asset = defaultValue(gltf.asset, {});
-  gltf.asset.version = "2.0";
+  gltf.asset.version = '2.0';
   // material.instanceTechnique properties should be directly on the material. instanceTechnique is a gltf 0.8 property but is seen in some 1.0 models.
   updateInstanceTechniques(gltf);
   // animation.samplers now refers directly to accessors and animation.parameters should be removed

@@ -1,10 +1,10 @@
-import Cartesian3 from "./Cartesian3.js";
-import defined from "./defined.js";
-import Iau2000Orientation from "./Iau2000Orientation.js";
-import JulianDate from "./JulianDate.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
-import Quaternion from "./Quaternion.js";
+import Cartesian3 from './Cartesian3.js';
+import defined from './defined.js';
+import Iau2000Orientation from './Iau2000Orientation.js';
+import JulianDate from './JulianDate.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
+import Quaternion from './Quaternion.js';
 
 /**
  * The Axes representing the orientation of a Globe as represented by the data
@@ -19,7 +19,7 @@ import Quaternion from "./Quaternion.js";
  * @private
  */
 function IauOrientationAxes(computeFunction) {
-  if (!defined(computeFunction) || typeof computeFunction !== "function") {
+  if (!defined(computeFunction) || typeof computeFunction !== 'function') {
     computeFunction = Iau2000Orientation.ComputeMoon;
   }
 

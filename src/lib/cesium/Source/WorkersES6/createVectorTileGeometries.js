@@ -1,14 +1,14 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import BoxGeometry from "../Core/BoxGeometry.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Color from "../Core/Color.js";
-import CylinderGeometry from "../Core/CylinderGeometry.js";
-import defined from "../Core/defined.js";
-import EllipsoidGeometry from "../Core/EllipsoidGeometry.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import Matrix4 from "../Core/Matrix4.js";
-import Vector3DTileBatch from "../Scene/Vector3DTileBatch.js";
-import createTaskProcessorWorker from "./createTaskProcessorWorker.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import BoxGeometry from '../Core/BoxGeometry.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Color from '../Core/Color.js';
+import CylinderGeometry from '../Core/CylinderGeometry.js';
+import defined from '../Core/defined.js';
+import EllipsoidGeometry from '../Core/EllipsoidGeometry.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import Matrix4 from '../Core/Matrix4.js';
+import Vector3DTileBatch from '../Scene/Vector3DTileBatch.js';
+import createTaskProcessorWorker from './createTaskProcessorWorker.js';
 
 const scratchCartesian = new Cartesian3();
 
@@ -19,7 +19,7 @@ const packedSphereLength = Cartesian3.packedLength + 1;
 
 const scratchModelMatrixAndBV = {
   modelMatrix: new Matrix4(),
-  boundingVolume: new BoundingSphere(),
+  boundingVolume: new BoundingSphere()
 };
 
 function boxModelMatrixAndBoundingVolume(boxes, index) {
@@ -181,7 +181,7 @@ function createPrimitive(
       offset: indexOffset,
       count: indicesLength,
       color: Color.fromRgba(batchTableColors[batchId]),
-      batchIds: [batchId],
+      batchIds: [batchId]
     });
     batchIds[offset] = batchId;
     indexOffsets[offset] = indexOffset;
@@ -352,7 +352,7 @@ function createVectorTileGeometries(parameters, transferableObjects) {
     indexOffset: 0,
     batchedIndicesOffset: 0,
     modelMatrix: scratchMatrix4,
-    center: scratchCenter,
+    center: scratchCenter
   };
 
   createPrimitive(
@@ -408,7 +408,7 @@ function createVectorTileGeometries(parameters, transferableObjects) {
     indexOffsets: indexOffsets.buffer,
     indexCounts: indexCounts.buffer,
     batchIds: batchIds.buffer,
-    packedBuffer: packedBuffer.buffer,
+    packedBuffer: packedBuffer.buffer
   };
 }
 export default createTaskProcessorWorker(createVectorTileGeometries);

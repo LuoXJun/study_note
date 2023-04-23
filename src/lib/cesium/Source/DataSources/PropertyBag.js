@@ -1,10 +1,10 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import ConstantProperty from "./ConstantProperty.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
-import Property from "./Property.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import ConstantProperty from './ConstantProperty.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
+import Property from './Property.js';
 
 /**
  * A {@link Property} whose value is a key-value mapping of property names to the computed value of other properties.
@@ -34,7 +34,7 @@ Object.defineProperties(PropertyBag.prototype, {
   propertyNames: {
     get: function () {
       return this._propertyNames;
-    },
+    }
   },
   /**
    * Gets a value indicating if this property is constant.  This property
@@ -53,7 +53,7 @@ Object.defineProperties(PropertyBag.prototype, {
         }
       }
       return true;
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the set of properties contained in this
@@ -67,8 +67,8 @@ Object.defineProperties(PropertyBag.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -104,7 +104,7 @@ PropertyBag.prototype.addProperty = function (
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(propertyName)) {
-    throw new DeveloperError("propertyName is required.");
+    throw new DeveloperError('propertyName is required.');
   }
   if (propertyNames.indexOf(propertyName) !== -1) {
     throw new DeveloperError(
@@ -144,7 +144,7 @@ PropertyBag.prototype.removeProperty = function (propertyName) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(propertyName)) {
-    throw new DeveloperError("propertyName is required.");
+    throw new DeveloperError('propertyName is required.');
   }
   if (index === -1) {
     throw new DeveloperError(`${propertyName} is not a registered property.`);
@@ -169,7 +169,7 @@ PropertyBag.prototype.removeProperty = function (propertyName) {
 PropertyBag.prototype.getValue = function (time, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required.");
+    throw new DeveloperError('time is required.');
   }
   //>>includeEnd('debug');
 
@@ -199,7 +199,7 @@ PropertyBag.prototype.getValue = function (time, result) {
 PropertyBag.prototype.merge = function (source, createPropertyCallback) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
-    throw new DeveloperError("source is required.");
+    throw new DeveloperError('source is required.');
   }
   //>>includeEnd('debug');
 

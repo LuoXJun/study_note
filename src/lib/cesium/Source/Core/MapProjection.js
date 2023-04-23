@@ -1,4 +1,4 @@
-import DeveloperError from "./DeveloperError.js";
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Defines how geodetic ellipsoid coordinates ({@link Cartographic}) project to a
@@ -25,8 +25,8 @@ Object.defineProperties(MapProjection.prototype, {
    * @readonly
    */
   ellipsoid: {
-    get: DeveloperError.throwInstantiationError,
-  },
+    get: DeveloperError.throwInstantiationError
+  }
 });
 
 /**

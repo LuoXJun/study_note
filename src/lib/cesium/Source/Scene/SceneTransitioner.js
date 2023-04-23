@@ -1,27 +1,27 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import EasingFunction from "../Core/EasingFunction.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import OrthographicFrustum from "../Core/OrthographicFrustum.js";
-import OrthographicOffCenterFrustum from "../Core/OrthographicOffCenterFrustum.js";
-import PerspectiveFrustum from "../Core/PerspectiveFrustum.js";
-import Ray from "../Core/Ray.js";
-import ScreenSpaceEventHandler from "../Core/ScreenSpaceEventHandler.js";
-import ScreenSpaceEventType from "../Core/ScreenSpaceEventType.js";
-import Transforms from "../Core/Transforms.js";
-import Camera from "./Camera.js";
-import SceneMode from "./SceneMode.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import EasingFunction from '../Core/EasingFunction.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import OrthographicFrustum from '../Core/OrthographicFrustum.js';
+import OrthographicOffCenterFrustum from '../Core/OrthographicOffCenterFrustum.js';
+import PerspectiveFrustum from '../Core/PerspectiveFrustum.js';
+import Ray from '../Core/Ray.js';
+import ScreenSpaceEventHandler from '../Core/ScreenSpaceEventHandler.js';
+import ScreenSpaceEventType from '../Core/ScreenSpaceEventType.js';
+import Transforms from '../Core/Transforms.js';
+import Camera from './Camera.js';
+import SceneMode from './SceneMode.js';
 
 /**
  * @private
  */
 function SceneTransitioner(scene) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("scene", scene);
+  Check.typeOf.object('scene', scene);
   //>>includeEnd('debug');
 
   this._scene = scene;
@@ -93,7 +93,7 @@ const scratchToCVCamera = {
   position2D: undefined,
   direction2D: undefined,
   up2D: undefined,
-  frustum: undefined,
+  frustum: undefined
 };
 
 SceneTransitioner.prototype.morphToColumbusView = function (
@@ -222,7 +222,7 @@ const scratchCVTo3DCamera = {
   position: new Cartesian3(),
   direction: new Cartesian3(),
   up: new Cartesian3(),
-  frustum: undefined,
+  frustum: undefined
 };
 const scratch2DTo3DFrustumPersp = new PerspectiveFrustum();
 
@@ -446,15 +446,15 @@ function morphFromColumbusViewTo3D(
     duration: duration,
     easingFunction: EasingFunction.QUARTIC_OUT,
     startObject: {
-      time: 0.0,
+      time: 0.0
     },
     stopObject: {
-      time: 1.0,
+      time: 1.0
     },
     update: update,
     complete: function () {
       addMorphTimeAnimations(transitioner, scene, 0.0, 1.0, duration, complete);
-    },
+    }
   });
   transitioner._currentTweens.push(tween);
 }
@@ -540,7 +540,7 @@ function morphFrom2DTo3D(transitioner, duration, ellipsoid) {
       complete: function () {
         scene._mode = SceneMode.MORPHING;
         morph();
-      },
+      }
     });
   } else {
     morph();
@@ -580,16 +580,16 @@ function morphPerspectiveToOrthographic(
     duration: duration,
     easingFunction: EasingFunction.QUARTIC_OUT,
     startObject: {
-      time: 0.0,
+      time: 0.0
     },
     stopObject: {
-      time: 1.0,
+      time: 1.0
     },
     update: update,
     complete: function () {
       camera.frustum = endCamera.frustum.clone();
       complete(transitioner);
-    },
+    }
   });
   transitioner._currentTweens.push(tween);
 }
@@ -607,7 +607,7 @@ const scratchCVTo2DCamera = {
   position: undefined,
   direction: undefined,
   up: undefined,
-  frustum: undefined,
+  frustum: undefined
 };
 
 function morphFromColumbusViewTo2D(transitioner, duration) {
@@ -687,10 +687,10 @@ function morphFromColumbusViewTo2D(transitioner, duration) {
     duration: duration,
     easingFunction: EasingFunction.QUARTIC_OUT,
     startObject: {
-      time: 0.0,
+      time: 0.0
     },
     stopObject: {
-      time: 1.0,
+      time: 1.0
     },
     update: updateCV,
     complete: function () {
@@ -701,7 +701,7 @@ function morphFromColumbusViewTo2D(transitioner, duration) {
         updateHeight,
         complete
       );
-    },
+    }
   });
   transitioner._currentTweens.push(tween);
 }
@@ -714,13 +714,13 @@ const scratch3DTo2DCamera = {
   position2D: new Cartesian3(),
   direction2D: new Cartesian3(),
   up2D: new Cartesian3(),
-  frustum: new OrthographicOffCenterFrustum(),
+  frustum: new OrthographicOffCenterFrustum()
 };
 const scratch3DTo2DEndCamera = {
   position: new Cartesian3(),
   direction: new Cartesian3(),
   up: new Cartesian3(),
-  frustum: undefined,
+  frustum: undefined
 };
 const scratch3DTo2DPickPosition = new Cartesian3();
 const scratch3DTo2DRay = new Ray();
@@ -863,15 +863,15 @@ function morphOrthographicToPerspective(
     duration: duration,
     easingFunction: EasingFunction.QUARTIC_OUT,
     startObject: {
-      time: 0.0,
+      time: 0.0
     },
     stopObject: {
-      time: 1.0,
+      time: 1.0
     },
     update: update,
     complete: function () {
       complete(transitioner);
-    },
+    }
   });
   transitioner._currentTweens.push(tween);
 }
@@ -907,15 +907,15 @@ function morphFrom2DToColumbusView(transitioner, duration, cameraCV, complete) {
       duration: duration,
       easingFunction: EasingFunction.QUARTIC_OUT,
       startObject: {
-        time: 0.0,
+        time: 0.0
       },
       stopObject: {
-        time: 1.0,
+        time: 1.0
       },
       update: update,
       complete: function () {
         complete(transitioner);
-      },
+      }
     });
     transitioner._currentTweens.push(tween);
   }
@@ -956,15 +956,15 @@ function morphFrom3DToColumbusView(
     duration: duration,
     easingFunction: EasingFunction.QUARTIC_OUT,
     startObject: {
-      time: 0.0,
+      time: 0.0
     },
     stopObject: {
-      time: 1.0,
+      time: 1.0
     },
     update: update,
     complete: function () {
       addMorphTimeAnimations(transitioner, scene, 1.0, 0.0, duration, complete);
-    },
+    }
   });
   transitioner._currentTweens.push(tween);
 }
@@ -980,11 +980,11 @@ function addMorphTimeAnimations(
   // Later, this will be linear and each object will adjust, if desired, in its vertex shader.
   const options = {
     object: scene,
-    property: "morphTime",
+    property: 'morphTime',
     startValue: start,
     stopValue: stop,
     duration: duration,
-    easingFunction: EasingFunction.QUARTIC_OUT,
+    easingFunction: EasingFunction.QUARTIC_OUT
   };
 
   if (defined(complete)) {

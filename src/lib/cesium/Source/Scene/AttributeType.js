@@ -1,11 +1,11 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Check from "../Core/Check.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Matrix2 from "../Core/Matrix2.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Check from '../Core/Check.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Matrix2 from '../Core/Matrix2.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
 
 /**
  * An enum describing the attribute type for glTF and 3D Tiles.
@@ -21,7 +21,7 @@ const AttributeType = {
    * @type {String}
    * @constant
    */
-  SCALAR: "SCALAR",
+  SCALAR: 'SCALAR',
 
   /**
    * The attribute is a two-component vector.
@@ -29,7 +29,7 @@ const AttributeType = {
    * @type {String}
    * @constant
    */
-  VEC2: "VEC2",
+  VEC2: 'VEC2',
 
   /**
    * The attribute is a three-component vector.
@@ -37,7 +37,7 @@ const AttributeType = {
    * @type {String}
    * @constant
    */
-  VEC3: "VEC3",
+  VEC3: 'VEC3',
 
   /**
    * The attribute is a four-component vector.
@@ -45,7 +45,7 @@ const AttributeType = {
    * @type {String}
    * @constant
    */
-  VEC4: "VEC4",
+  VEC4: 'VEC4',
 
   /**
    * The attribute is a 2x2 matrix.
@@ -53,7 +53,7 @@ const AttributeType = {
    * @type {String}
    * @constant
    */
-  MAT2: "MAT2",
+  MAT2: 'MAT2',
 
   /**
    * The attribute is a 3x3 matrix.
@@ -61,7 +61,7 @@ const AttributeType = {
    * @type {String}
    * @constant
    */
-  MAT3: "MAT3",
+  MAT3: 'MAT3',
 
   /**
    * The attribute is a 4x4 matrix.
@@ -69,7 +69,7 @@ const AttributeType = {
    * @type {String}
    * @constant
    */
-  MAT4: "MAT4",
+  MAT4: 'MAT4'
 };
 
 /**
@@ -98,7 +98,7 @@ AttributeType.getMathType = function (attributeType) {
       return Matrix4;
     //>>includeStart('debug', pragmas.debug);
     default:
-      throw new DeveloperError("attributeType is not a valid value.");
+      throw new DeveloperError('attributeType is not a valid value.');
     //>>includeEnd('debug');
   }
 };
@@ -128,7 +128,7 @@ AttributeType.getNumberOfComponents = function (attributeType) {
       return 16;
     //>>includeStart('debug', pragmas.debug);
     default:
-      throw new DeveloperError("attributeType is not a valid value.");
+      throw new DeveloperError('attributeType is not a valid value.');
     //>>includeEnd('debug');
   }
 };
@@ -157,7 +157,7 @@ AttributeType.getAttributeLocationCount = function (attributeType) {
       return 4;
     //>>includeStart('debug', pragmas.debug);
     default:
-      throw new DeveloperError("attributeType is not a valid value.");
+      throw new DeveloperError('attributeType is not a valid value.');
     //>>includeEnd('debug');
   }
 };
@@ -172,27 +172,27 @@ AttributeType.getAttributeLocationCount = function (attributeType) {
  */
 AttributeType.getGlslType = function (attributeType) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("attributeType", attributeType);
+  Check.typeOf.string('attributeType', attributeType);
   //>>includeEnd('debug');
 
   switch (attributeType) {
     case AttributeType.SCALAR:
-      return "float";
+      return 'float';
     case AttributeType.VEC2:
-      return "vec2";
+      return 'vec2';
     case AttributeType.VEC3:
-      return "vec3";
+      return 'vec3';
     case AttributeType.VEC4:
-      return "vec4";
+      return 'vec4';
     case AttributeType.MAT2:
-      return "mat2";
+      return 'mat2';
     case AttributeType.MAT3:
-      return "mat3";
+      return 'mat3';
     case AttributeType.MAT4:
-      return "mat4";
+      return 'mat4';
     //>>includeStart('debug', pragmas.debug);
     default:
-      throw new DeveloperError("attributeType is not a valid value.");
+      throw new DeveloperError('attributeType is not a valid value.');
     //>>includeEnd('debug');
   }
 };

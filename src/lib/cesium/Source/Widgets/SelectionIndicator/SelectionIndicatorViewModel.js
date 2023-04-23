@@ -1,13 +1,13 @@
-import Cartesian2 from "../../Core/Cartesian2.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import EasingFunction from "../../Core/EasingFunction.js";
-import SceneTransforms from "../../Scene/SceneTransforms.js";
-import knockout from "../../ThirdParty/knockout.js";
+import Cartesian2 from '../../Core/Cartesian2.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import EasingFunction from '../../Core/EasingFunction.js';
+import SceneTransforms from '../../Scene/SceneTransforms.js';
+import knockout from '../../ThirdParty/knockout.js';
 
 const screenSpacePos = new Cartesian2();
-const offScreen = "-1000px";
+const offScreen = '-1000px';
 
 /**
  * The view model for {@link SelectionIndicator}.
@@ -25,15 +25,15 @@ function SelectionIndicatorViewModel(
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required.");
+    throw new DeveloperError('scene is required.');
   }
 
   if (!defined(selectionIndicatorElement)) {
-    throw new DeveloperError("selectionIndicatorElement is required.");
+    throw new DeveloperError('selectionIndicatorElement is required.');
   }
 
   if (!defined(container)) {
-    throw new DeveloperError("container is required.");
+    throw new DeveloperError('container is required.');
   }
   //>>includeEnd('debug')
 
@@ -58,11 +58,11 @@ function SelectionIndicatorViewModel(
   this.showSelection = false;
 
   knockout.track(this, [
-    "position",
-    "_screenPositionX",
-    "_screenPositionY",
-    "_scale",
-    "showSelection",
+    'position',
+    '_screenPositionX',
+    '_screenPositionY',
+    '_scale',
+    'showSelection'
   ]);
 
   /**
@@ -71,16 +71,16 @@ function SelectionIndicatorViewModel(
    * @type {Boolean}
    */
   this.isVisible = undefined;
-  knockout.defineProperty(this, "isVisible", {
+  knockout.defineProperty(this, 'isVisible', {
     get: function () {
       return this.showSelection && defined(this.position);
-    },
+    }
   });
 
-  knockout.defineProperty(this, "_transform", {
+  knockout.defineProperty(this, '_transform', {
     get: function () {
       return `scale(${this._scale})`;
-    },
+    }
   });
 
   /**
@@ -143,11 +143,11 @@ SelectionIndicatorViewModel.prototype.update = function () {
 SelectionIndicatorViewModel.prototype.animateAppear = function () {
   this._tweens.addProperty({
     object: this,
-    property: "_scale",
+    property: '_scale',
     startValue: 2,
     stopValue: 1,
     duration: 0.8,
-    easingFunction: EasingFunction.EXPONENTIAL_OUT,
+    easingFunction: EasingFunction.EXPONENTIAL_OUT
   });
 };
 
@@ -157,11 +157,11 @@ SelectionIndicatorViewModel.prototype.animateAppear = function () {
 SelectionIndicatorViewModel.prototype.animateDepart = function () {
   this._tweens.addProperty({
     object: this,
-    property: "_scale",
+    property: '_scale',
     startValue: this._scale,
     stopValue: 1.5,
     duration: 0.8,
-    easingFunction: EasingFunction.EXPONENTIAL_OUT,
+    easingFunction: EasingFunction.EXPONENTIAL_OUT
   });
 };
 
@@ -175,7 +175,7 @@ Object.defineProperties(SelectionIndicatorViewModel.prototype, {
   container: {
     get: function () {
       return this._container;
-    },
+    }
   },
 
   /**
@@ -187,7 +187,7 @@ Object.defineProperties(SelectionIndicatorViewModel.prototype, {
   selectionIndicatorElement: {
     get: function () {
       return this._selectionIndicatorElement;
-    },
+    }
   },
 
   /**
@@ -199,8 +199,8 @@ Object.defineProperties(SelectionIndicatorViewModel.prototype, {
   scene: {
     get: function () {
       return this._scene;
-    },
-  },
+    }
+  }
 });
 
 /**

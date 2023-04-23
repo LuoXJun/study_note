@@ -1,5 +1,9 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './ComponentDatatype-4a60b8d6'], (function (exports, ComponentDatatype) { 'use strict';
+define(['exports', './ComponentDatatype-4a60b8d6'], function (
+  exports,
+  ComponentDatatype
+) {
+  'use strict';
 
   /**
    * @private
@@ -59,5 +63,4 @@ define(['exports', './ComponentDatatype-4a60b8d6'], (function (exports, Componen
   };
 
   exports.CylinderGeometryLibrary = CylinderGeometryLibrary;
-
-}));
+});

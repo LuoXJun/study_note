@@ -1,17 +1,17 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import getJsonFromTypedArray from "../Core/getJsonFromTypedArray.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import hasExtension from "./hasExtension.js";
-import ImplicitAvailabilityBitstream from "./ImplicitAvailabilityBitstream.js";
-import ImplicitMetadataView from "./ImplicitMetadataView.js";
-import ImplicitSubdivisionScheme from "./ImplicitSubdivisionScheme.js";
-import ImplicitSubtreeMetadata from "./ImplicitSubtreeMetadata.js";
-import MetadataTable from "./MetadataTable.js";
-import ResourceCache from "./ResourceCache.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import getJsonFromTypedArray from '../Core/getJsonFromTypedArray.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import hasExtension from './hasExtension.js';
+import ImplicitAvailabilityBitstream from './ImplicitAvailabilityBitstream.js';
+import ImplicitMetadataView from './ImplicitMetadataView.js';
+import ImplicitSubdivisionScheme from './ImplicitSubdivisionScheme.js';
+import ImplicitSubtreeMetadata from './ImplicitSubtreeMetadata.js';
+import MetadataTable from './MetadataTable.js';
+import ResourceCache from './ResourceCache.js';
 
 /**
  * An object representing a single subtree in an implicit tileset
@@ -46,12 +46,12 @@ export default function ImplicitSubtree(
   implicitCoordinates
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("resource", resource);
+  Check.typeOf.object('resource', resource);
   if (defined(json) === defined(subtreeView)) {
-    throw new DeveloperError("One of json and subtreeView must be defined.");
+    throw new DeveloperError('One of json and subtreeView must be defined.');
   }
-  Check.typeOf.object("implicitTileset", implicitTileset);
-  Check.typeOf.object("implicitCoordinates", implicitCoordinates);
+  Check.typeOf.object('implicitTileset', implicitTileset);
+  Check.typeOf.object('implicitCoordinates', implicitCoordinates);
   //>>includeEnd('debug');
 
   this._resource = resource;
@@ -92,7 +92,7 @@ Object.defineProperties(ImplicitSubtree.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   /**
@@ -105,7 +105,7 @@ Object.defineProperties(ImplicitSubtree.prototype, {
   metadata: {
     get: function () {
       return this._metadata;
-    },
+    }
   },
 
   /**
@@ -119,7 +119,7 @@ Object.defineProperties(ImplicitSubtree.prototype, {
   tileMetadataTable: {
     get: function () {
       return this._tileMetadataTable;
-    },
+    }
   },
 
   /**
@@ -134,7 +134,7 @@ Object.defineProperties(ImplicitSubtree.prototype, {
   tilePropertyTableJson: {
     get: function () {
       return this._tilePropertyTableJson;
-    },
+    }
   },
 
   /**
@@ -148,7 +148,7 @@ Object.defineProperties(ImplicitSubtree.prototype, {
   contentMetadataTables: {
     get: function () {
       return this._contentMetadataTables;
-    },
+    }
   },
 
   /**
@@ -163,7 +163,7 @@ Object.defineProperties(ImplicitSubtree.prototype, {
   contentPropertyTableJsons: {
     get: function () {
       return this._contentPropertyTableJsons;
-    },
+    }
   },
 
   /**
@@ -176,8 +176,8 @@ Object.defineProperties(ImplicitSubtree.prototype, {
   implicitCoordinates: {
     get: function () {
       return this._implicitCoordinates;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -223,7 +223,7 @@ ImplicitSubtree.prototype.contentIsAvailableAtIndex = function (
     contentIndex < 0 ||
     contentIndex >= this._contentAvailabilityBitstreams.length
   ) {
-    throw new DeveloperError("contentIndex out of bounds.");
+    throw new DeveloperError('contentIndex out of bounds.');
   }
   //>>includeEnd('debug');
 
@@ -323,7 +323,7 @@ function initialize(subtree, json, subtreeView, implicitTileset) {
   if (defined(json)) {
     chunks = {
       json: json,
-      binary: undefined,
+      binary: undefined
     };
   } else {
     chunks = parseSubtreeChunks(subtreeView);
@@ -333,8 +333,8 @@ function initialize(subtree, json, subtreeView, implicitTileset) {
   subtree._subtreeJson = subtreeJson;
 
   let tilePropertyTableJson;
-  if (hasExtension(subtreeJson, "3DTILES_metadata")) {
-    tilePropertyTableJson = subtreeJson.extensions["3DTILES_metadata"];
+  if (hasExtension(subtreeJson, '3DTILES_metadata')) {
+    tilePropertyTableJson = subtreeJson.extensions['3DTILES_metadata'];
   } else if (defined(subtreeJson.tileMetadata)) {
     const propertyTableIndex = subtreeJson.tileMetadata;
     tilePropertyTableJson = subtreeJson.propertyTables[propertyTableIndex];
@@ -359,7 +359,7 @@ function initialize(subtree, json, subtreeView, implicitTileset) {
     const subtreeMetadataClass = schema.classes[metadataClass];
     metadata = new ImplicitSubtreeMetadata({
       subtreeMetadata: subtreeMetadata,
-      class: subtreeMetadataClass,
+      class: subtreeMetadataClass
     });
   }
 
@@ -370,7 +370,7 @@ function initialize(subtree, json, subtreeView, implicitTileset) {
   // if no contentAvailability is specified, no tile in the subtree has
   // content
   const defaultContentAvailability = {
-    constant: 0,
+    constant: 0
   };
 
   // In 3D Tiles 1.1, content availability is provided in an array in the subtree JSON
@@ -380,9 +380,9 @@ function initialize(subtree, json, subtreeView, implicitTileset) {
   //
   // After identifying how availability is stored, put the results in this new array for consistent processing later
   subtreeJson.contentAvailabilityHeaders = [];
-  if (hasExtension(subtreeJson, "3DTILES_multiple_contents")) {
+  if (hasExtension(subtreeJson, '3DTILES_multiple_contents')) {
     subtreeJson.contentAvailabilityHeaders =
-      subtreeJson.extensions["3DTILES_multiple_contents"].contentAvailability;
+      subtreeJson.extensions['3DTILES_multiple_contents'].contentAvailability;
   } else if (Array.isArray(subtreeJson.contentAvailability)) {
     subtreeJson.contentAvailabilityHeaders = subtreeJson.contentAvailability;
   } else {
@@ -477,7 +477,7 @@ function parseSubtreeChunks(subtreeView) {
 
   return {
     json: subtreeJson,
-    binary: subtreeBinary,
+    binary: subtreeBinary
   };
 }
 
@@ -711,11 +711,11 @@ function requestActiveBuffers(subtree, bufferHeaders, internalBuffer) {
 function requestExternalBuffer(subtree, bufferHeader) {
   const baseResource = subtree._resource;
   const bufferResource = baseResource.getDerivedResource({
-    url: bufferHeader.uri,
+    url: bufferHeader.uri
   });
 
   const bufferLoader = ResourceCache.loadExternalBuffer({
-    resource: bufferResource,
+    resource: bufferResource
   });
   subtree._bufferLoader = bufferLoader;
 
@@ -774,7 +774,7 @@ function parseAvailability(
 
   // availableCount is only needed for the metadata jump buffer, which
   // corresponds to the tile availability bitstream.
-  const hasMetadataExtension = hasExtension(subtreeJson, "3DTILES_metadata");
+  const hasMetadataExtension = hasExtension(subtreeJson, '3DTILES_metadata');
   const hasTileMetadata = defined(subtree._tilePropertyTableJson);
   let computeAvailableCountEnabled = hasMetadataExtension || hasTileMetadata;
 
@@ -829,7 +829,7 @@ function parseAvailabilityBitstream(
     return new ImplicitAvailabilityBitstream({
       constant: Boolean(availabilityJson.constant),
       lengthBits: lengthBits,
-      availableCount: availabilityJson.availableCount,
+      availableCount: availabilityJson.availableCount
     });
   }
 
@@ -847,7 +847,7 @@ function parseAvailabilityBitstream(
     bitstream: bufferView,
     lengthBits: lengthBits,
     availableCount: availabilityJson.availableCount,
-    computeAvailableCountEnabled: computeAvailableCountEnabled,
+    computeAvailableCountEnabled: computeAvailableCountEnabled
   });
 }
 
@@ -872,7 +872,7 @@ function parseTileMetadataTable(subtree, implicitTileset, bufferViewsU8) {
     class: tileMetadataClass,
     count: tileCount,
     properties: tilePropertyTableJson.properties,
-    bufferViews: bufferViewsU8,
+    bufferViews: bufferViewsU8
   });
 }
 
@@ -904,7 +904,7 @@ function parseContentMetadataTables(subtree, implicitTileset, bufferViewsU8) {
       class: contentMetadataClass,
       count: contentCount,
       properties: contentPropertyTableJson.properties,
-      bufferViews: bufferViewsU8,
+      bufferViews: bufferViewsU8
     });
 
     contentMetadataTables.push(metadataTable);
@@ -986,13 +986,12 @@ ImplicitSubtree.prototype.getTileIndex = function (implicitCoordinates) {
   const localLevel =
     implicitCoordinates.level - this._implicitCoordinates.level;
   if (localLevel < 0 || this._subtreeLevels <= localLevel) {
-    throw new RuntimeError("level is out of bounds for this subtree");
+    throw new RuntimeError('level is out of bounds for this subtree');
   }
 
   const subtreeCoordinates = implicitCoordinates.getSubtreeCoordinates();
-  const offsetCoordinates = subtreeCoordinates.getOffsetCoordinates(
-    implicitCoordinates
-  );
+  const offsetCoordinates =
+    subtreeCoordinates.getOffsetCoordinates(implicitCoordinates);
   const index = offsetCoordinates.tileIndex;
   return index;
 };
@@ -1010,16 +1009,16 @@ ImplicitSubtree.prototype.getChildSubtreeIndex = function (
   const localLevel =
     implicitCoordinates.level - this._implicitCoordinates.level;
   if (localLevel !== this._implicitCoordinates.subtreeLevels) {
-    throw new RuntimeError("level is out of bounds for this subtree");
+    throw new RuntimeError('level is out of bounds for this subtree');
   }
 
   // Call getParentSubtreeCoordinates instead of getSubtreeCoordinates because the
   // child subtree is by definition the root of its own subtree, so we need to find
   // the parent subtree.
-  const parentSubtreeCoordinates = implicitCoordinates.getParentSubtreeCoordinates();
-  const offsetCoordinates = parentSubtreeCoordinates.getOffsetCoordinates(
-    implicitCoordinates
-  );
+  const parentSubtreeCoordinates =
+    implicitCoordinates.getParentSubtreeCoordinates();
+  const offsetCoordinates =
+    parentSubtreeCoordinates.getOffsetCoordinates(implicitCoordinates);
   const index = offsetCoordinates.mortonIndex;
   return index;
 };
@@ -1093,7 +1092,7 @@ ImplicitSubtree.prototype.getTileMetadataView = function (implicitCoordinates) {
     class: metadataTable.class,
     metadataTable: metadataTable,
     entityId: entityId,
-    propertyTableJson: this._tilePropertyTableJson,
+    propertyTableJson: this._tilePropertyTableJson
   });
 };
 
@@ -1121,7 +1120,7 @@ ImplicitSubtree.prototype.getContentMetadataView = function (
     metadataTable: metadataTable,
     entityId: entityId,
     contentIndex: contentIndex,
-    propertyTableJson: propertyTableJson,
+    propertyTableJson: propertyTableJson
   });
 };
 

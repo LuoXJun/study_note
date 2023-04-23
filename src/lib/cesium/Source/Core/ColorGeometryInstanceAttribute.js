@@ -1,8 +1,8 @@
-import Color from "./Color.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import Color from './Color.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Value and type information for per-instance geometry color.
@@ -49,7 +49,7 @@ function ColorGeometryInstanceAttribute(red, green, blue, alpha) {
     Color.floatToByte(red),
     Color.floatToByte(green),
     Color.floatToByte(blue),
-    Color.floatToByte(alpha),
+    Color.floatToByte(alpha)
   ]);
 }
 
@@ -68,7 +68,7 @@ Object.defineProperties(ColorGeometryInstanceAttribute.prototype, {
   componentDatatype: {
     get: function () {
       return ComponentDatatype.UNSIGNED_BYTE;
-    },
+    }
   },
 
   /**
@@ -84,7 +84,7 @@ Object.defineProperties(ColorGeometryInstanceAttribute.prototype, {
   componentsPerAttribute: {
     get: function () {
       return 4;
-    },
+    }
   },
 
   /**
@@ -102,8 +102,8 @@ Object.defineProperties(ColorGeometryInstanceAttribute.prototype, {
   normalize: {
     get: function () {
       return true;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -123,7 +123,7 @@ Object.defineProperties(ColorGeometryInstanceAttribute.prototype, {
 ColorGeometryInstanceAttribute.fromColor = function (color) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(color)) {
-    throw new DeveloperError("color is required.");
+    throw new DeveloperError('color is required.');
   }
   //>>includeEnd('debug');
 
@@ -150,7 +150,7 @@ ColorGeometryInstanceAttribute.fromColor = function (color) {
 ColorGeometryInstanceAttribute.toValue = function (color, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(color)) {
-    throw new DeveloperError("color is required.");
+    throw new DeveloperError('color is required.');
   }
   //>>includeEnd('debug');
 

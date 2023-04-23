@@ -1,6 +1,6 @@
-import ApproximateTerrainHeights from "../Core/ApproximateTerrainHeights.js";
-import defined from "../Core/defined.js";
-import GroundPolylineGeometry from "../Core/GroundPolylineGeometry.js";
+import ApproximateTerrainHeights from '../Core/ApproximateTerrainHeights.js';
+import defined from '../Core/defined.js';
+import GroundPolylineGeometry from '../Core/GroundPolylineGeometry.js';
 
 function createGroundPolylineGeometry(groundPolylineGeometry, offset) {
   return ApproximateTerrainHeights.initialize().then(function () {

@@ -29,6 +29,6 @@ const Visibility = {
    * @type {Number}
    * @constant
    */
-  FULL: 1,
+  FULL: 1
 };
 export default Object.freeze(Visibility);

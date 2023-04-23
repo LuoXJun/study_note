@@ -1,10 +1,10 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import EventHelper from "../Core/EventHelper.js";
-import ReferenceFrame from "../Core/ReferenceFrame.js";
-import Property from "./Property.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import EventHelper from '../Core/EventHelper.js';
+import ReferenceFrame from '../Core/ReferenceFrame.js';
+import Property from './Property.js';
 
 /**
  * A {@link Property} whose value is an array whose items are the computed value
@@ -47,7 +47,7 @@ Object.defineProperties(PositionPropertyArray.prototype, {
         }
       }
       return true;
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -61,7 +61,7 @@ Object.defineProperties(PositionPropertyArray.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   /**
    * Gets the reference frame in which the position is defined.
@@ -72,8 +72,8 @@ Object.defineProperties(PositionPropertyArray.prototype, {
   referenceFrame: {
     get: function () {
       return this._referenceFrame;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -102,10 +102,10 @@ PositionPropertyArray.prototype.getValueInReferenceFrame = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required.");
+    throw new DeveloperError('time is required.');
   }
   if (!defined(referenceFrame)) {
-    throw new DeveloperError("referenceFrame is required.");
+    throw new DeveloperError('referenceFrame is required.');
   }
   //>>includeEnd('debug');
 

@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "void geometryStage(out ProcessedAttributes attributes)\n\
+export default 'void geometryStage(out ProcessedAttributes attributes)\n\
 {\n\
   attributes.positionMC = v_positionMC;\n\
   attributes.positionEC = v_positionEC;\n\
@@ -24,4 +24,4 @@ export default "void geometryStage(out ProcessedAttributes attributes)\n\
   // Everything else is dynamically generated in GeometryPipelineStage\n\
   setDynamicVaryings(attributes);\n\
 }\n\
-";
+';

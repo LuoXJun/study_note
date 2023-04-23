@@ -1,9 +1,9 @@
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import CesiumMath from "./Math.js";
-import OrthographicOffCenterFrustum from "./OrthographicOffCenterFrustum.js";
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import CesiumMath from './Math.js';
+import OrthographicOffCenterFrustum from './OrthographicOffCenterFrustum.js';
 
 /**
  * The viewing frustum is defined by 6 planes.
@@ -82,8 +82,8 @@ OrthographicFrustum.packedLength = 4;
  */
 OrthographicFrustum.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -106,7 +106,7 @@ OrthographicFrustum.pack = function (value, array, startingIndex) {
  */
 OrthographicFrustum.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -132,7 +132,7 @@ function update(frustum) {
     !defined(frustum.far)
   ) {
     throw new DeveloperError(
-      "width, aspectRatio, near, or far parameters are not set."
+      'width, aspectRatio, near, or far parameters are not set.'
     );
   }
   //>>includeEnd('debug');
@@ -147,11 +147,11 @@ function update(frustum) {
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (frustum.aspectRatio < 0) {
-      throw new DeveloperError("aspectRatio must be positive.");
+      throw new DeveloperError('aspectRatio must be positive.');
     }
     if (frustum.near < 0 || frustum.near > frustum.far) {
       throw new DeveloperError(
-        "near must be greater than zero and less than far."
+        'near must be greater than zero and less than far.'
       );
     }
     //>>includeEnd('debug');
@@ -182,8 +182,8 @@ Object.defineProperties(OrthographicFrustum.prototype, {
     get: function () {
       update(this);
       return this._offCenterFrustum.projectionMatrix;
-    },
-  },
+    }
+  }
 });
 
 /**

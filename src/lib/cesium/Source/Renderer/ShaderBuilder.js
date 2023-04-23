@@ -1,13 +1,13 @@
-import Check from "../Core/Check.js";
-import clone from "../Core/clone.js";
-import defined from "../Core/defined.js";
-import defaultValue from "../Core/defaultValue.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import ShaderDestination from "./ShaderDestination.js";
-import ShaderProgram from "./ShaderProgram.js";
-import ShaderSource from "./ShaderSource.js";
-import ShaderStruct from "./ShaderStruct.js";
-import ShaderFunction from "./ShaderFunction.js";
+import Check from '../Core/Check.js';
+import clone from '../Core/clone.js';
+import defined from '../Core/defined.js';
+import defaultValue from '../Core/defaultValue.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import ShaderDestination from './ShaderDestination.js';
+import ShaderProgram from './ShaderProgram.js';
+import ShaderSource from './ShaderSource.js';
+import ShaderStruct from './ShaderStruct.js';
+import ShaderFunction from './ShaderFunction.js';
 
 /**
  * An object that makes it easier to build the text of a {@link ShaderProgram}. This tracks GLSL code for both the vertex shader and the fragment shader.
@@ -73,7 +73,7 @@ export default function ShaderBuilder() {
     varyingLines: [],
     // identifiers of structs/functions to include, listed in insertion order
     structIds: [],
-    functionIds: [],
+    functionIds: []
   };
   this._fragmentShaderParts = {
     defineLines: [],
@@ -82,7 +82,7 @@ export default function ShaderBuilder() {
     varyingLines: [],
     // identifiers of structs/functions to include, listed in insertion order
     structIds: [],
-    functionIds: [],
+    functionIds: []
   };
 }
 
@@ -99,8 +99,8 @@ Object.defineProperties(ShaderBuilder.prototype, {
   attributeLocations: {
     get: function () {
       return this._attributeLocations;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -119,7 +119,7 @@ Object.defineProperties(ShaderBuilder.prototype, {
  */
 ShaderBuilder.prototype.addDefine = function (identifier, value, destination) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("identifier", identifier);
+  Check.typeOf.string('identifier', identifier);
   //>>includeEnd('debug');
 
   destination = defaultValue(destination, ShaderDestination.BOTH);
@@ -158,9 +158,9 @@ ShaderBuilder.prototype.addStruct = function (
   destination
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("structId", structId);
-  Check.typeOf.string("structName", structName);
-  Check.typeOf.number("destination", destination);
+  Check.typeOf.string('structId', structId);
+  Check.typeOf.string('structName', structName);
+  Check.typeOf.number('destination', destination);
   //>>includeEnd('debug');
   this._structs[structId] = new ShaderStruct(structName);
   if (ShaderDestination.includesVertexShader(destination)) {
@@ -191,9 +191,9 @@ ShaderBuilder.prototype.addStruct = function (
  */
 ShaderBuilder.prototype.addStructField = function (structId, type, identifier) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("structId", structId);
-  Check.typeOf.string("type", type);
-  Check.typeOf.string("identifier", identifier);
+  Check.typeOf.string('structId', structId);
+  Check.typeOf.string('type', type);
+  Check.typeOf.string('identifier', identifier);
   //>>includeEnd('debug');
   this._structs[structId].addField(type, identifier);
 };
@@ -216,9 +216,9 @@ ShaderBuilder.prototype.addFunction = function (
   destination
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("functionName", functionName);
-  Check.typeOf.string("signature", signature);
-  Check.typeOf.number("destination", destination);
+  Check.typeOf.string('functionName', functionName);
+  Check.typeOf.string('signature', signature);
+  Check.typeOf.number('destination', destination);
   //>>includeEnd('debug');
   this._functions[functionName] = new ShaderFunction(signature);
 
@@ -251,8 +251,8 @@ ShaderBuilder.prototype.addFunction = function (
  */
 ShaderBuilder.prototype.addFunctionLines = function (functionName, lines) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("functionName", functionName);
-  Check.typeOf.object("lines", lines);
+  Check.typeOf.string('functionName', functionName);
+  Check.typeOf.object('lines', lines);
   //>>includeEnd('debug');
   this._functions[functionName].addLines(lines);
 };
@@ -273,8 +273,8 @@ ShaderBuilder.prototype.addFunctionLines = function (functionName, lines) {
  */
 ShaderBuilder.prototype.addUniform = function (type, identifier, destination) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("type", type);
-  Check.typeOf.string("identifier", identifier);
+  Check.typeOf.string('type', type);
+  Check.typeOf.string('identifier', identifier);
   //>>includeEnd('debug');
 
   destination = defaultValue(destination, ShaderDestination.BOTH);
@@ -308,12 +308,12 @@ ShaderBuilder.prototype.addUniform = function (type, identifier, destination) {
  */
 ShaderBuilder.prototype.setPositionAttribute = function (type, identifier) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("type", type);
-  Check.typeOf.string("identifier", identifier);
+  Check.typeOf.string('type', type);
+  Check.typeOf.string('identifier', identifier);
 
   if (defined(this._positionAttributeLine)) {
     throw new DeveloperError(
-      "setPositionAttribute() must be called exactly once for the attribute used for gl_Position. For other attributes, use addAttribute()"
+      'setPositionAttribute() must be called exactly once for the attribute used for gl_Position. For other attributes, use addAttribute()'
     );
   }
   //>>includeEnd('debug');
@@ -344,8 +344,8 @@ ShaderBuilder.prototype.setPositionAttribute = function (type, identifier) {
  */
 ShaderBuilder.prototype.addAttribute = function (type, identifier) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("type", type);
-  Check.typeOf.string("identifier", identifier);
+  Check.typeOf.string('type', type);
+  Check.typeOf.string('identifier', identifier);
   //>>includeEnd('debug');
 
   const line = `attribute ${type} ${identifier};`;
@@ -372,8 +372,8 @@ ShaderBuilder.prototype.addAttribute = function (type, identifier) {
  */
 ShaderBuilder.prototype.addVarying = function (type, identifier) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("type", type);
-  Check.typeOf.string("identifier", identifier);
+  Check.typeOf.string('type', type);
+  Check.typeOf.string('identifier', identifier);
   //>>includeEnd('debug');
 
   const line = `varying ${type} ${identifier};`;
@@ -397,7 +397,7 @@ ShaderBuilder.prototype.addVarying = function (type, identifier) {
  */
 ShaderBuilder.prototype.addVertexLines = function (lines) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("lines", lines);
+  Check.typeOf.object('lines', lines);
   //>>includeEnd('debug');
 
   Array.prototype.push.apply(this._vertexShaderParts.shaderLines, lines);
@@ -422,7 +422,7 @@ ShaderBuilder.prototype.addVertexLines = function (lines) {
  */
 ShaderBuilder.prototype.addFragmentLines = function (lines) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("lines", lines);
+  Check.typeOf.object('lines', lines);
   //>>includeEnd('debug');
   Array.prototype.push.apply(this._fragmentShaderParts.shaderLines, lines);
 };
@@ -440,7 +440,7 @@ ShaderBuilder.prototype.addFragmentLines = function (lines) {
  */
 ShaderBuilder.prototype.buildShaderProgram = function (context) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("context", context);
+  Check.typeOf.object('context', context);
   //>>includeEnd('debug');
 
   const positionAttribute = defined(this._positionAttributeLine)
@@ -461,10 +461,10 @@ ShaderBuilder.prototype.buildShaderProgram = function (context) {
       functionLines.vertexLines,
       this._vertexShaderParts.shaderLines
     )
-    .join("\n");
+    .join('\n');
   const vertexShaderSource = new ShaderSource({
     defines: this._vertexShaderParts.defineLines,
-    sources: [vertexLines],
+    sources: [vertexLines]
   });
 
   const fragmentLines = this._fragmentShaderParts.uniformLines
@@ -474,17 +474,17 @@ ShaderBuilder.prototype.buildShaderProgram = function (context) {
       functionLines.fragmentLines,
       this._fragmentShaderParts.shaderLines
     )
-    .join("\n");
+    .join('\n');
   const fragmentShaderSource = new ShaderSource({
     defines: this._fragmentShaderParts.defineLines,
-    sources: [fragmentLines],
+    sources: [fragmentLines]
   });
 
   return ShaderProgram.fromCache({
     context: context,
     vertexShaderSource: vertexShaderSource,
     fragmentShaderSource: fragmentShaderSource,
-    attributeLocations: this._attributeLocations,
+    attributeLocations: this._attributeLocations
   });
 };
 
@@ -518,17 +518,17 @@ function generateStructLines(shaderBuilder) {
 
   return {
     vertexLines: vertexLines,
-    fragmentLines: fragmentLines,
+    fragmentLines: fragmentLines
   };
 }
 
 function getAttributeLocationCount(glslType) {
   switch (glslType) {
-    case "mat2":
+    case 'mat2':
       return 2;
-    case "mat3":
+    case 'mat3':
       return 3;
-    case "mat4":
+    case 'mat4':
       return 4;
     default:
       return 1;
@@ -561,6 +561,6 @@ function generateFunctionLines(shaderBuilder) {
 
   return {
     vertexLines: vertexLines,
-    fragmentLines: fragmentLines,
+    fragmentLines: fragmentLines
   };
 }

@@ -1,7 +1,7 @@
-import Cartesian2 from "./Cartesian2.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import sampleTerrain from "./sampleTerrain.js";
+import Cartesian2 from './Cartesian2.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import sampleTerrain from './sampleTerrain.js';
 
 const scratchCartesian2 = new Cartesian2();
 
@@ -31,10 +31,10 @@ const scratchCartesian2 = new Cartesian2();
 function sampleTerrainMostDetailed(terrainProvider, positions) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(terrainProvider)) {
-    throw new DeveloperError("terrainProvider is required.");
+    throw new DeveloperError('terrainProvider is required.');
   }
   if (!defined(positions)) {
-    throw new DeveloperError("positions is required.");
+    throw new DeveloperError('positions is required.');
   }
   //>>includeEnd('debug');
 
@@ -47,7 +47,7 @@ function sampleTerrainMostDetailed(terrainProvider, positions) {
     //>>includeStart('debug', pragmas.debug);
     if (!defined(availability)) {
       throw new DeveloperError(
-        "sampleTerrainMostDetailed requires a terrain provider that has tile availability."
+        'sampleTerrainMostDetailed requires a terrain provider that has tile availability.'
       );
     }
     //>>includeEnd('debug');

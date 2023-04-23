@@ -1,19 +1,19 @@
-import ForEach from "./ForEach.js";
-import forEachTextureInMaterial from "./forEachTextureInMaterial.js";
-import usesExtension from "./usesExtension.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
+import ForEach from './ForEach.js';
+import forEachTextureInMaterial from './forEachTextureInMaterial.js';
+import usesExtension from './usesExtension.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
 
 const allElementTypes = [
-  "mesh",
-  "node",
-  "material",
-  "accessor",
-  "bufferView",
-  "buffer",
-  "texture",
-  "sampler",
-  "image",
+  'mesh',
+  'node',
+  'material',
+  'accessor',
+  'bufferView',
+  'buffer',
+  'texture',
+  'sampler',
+  'image'
 ];
 
 /**
@@ -35,15 +35,15 @@ function removeUnusedElements(gltf, elementTypes) {
 }
 
 const TypeToGltfElementName = {
-  accessor: "accessors",
-  buffer: "buffers",
-  bufferView: "bufferViews",
-  image: "images",
-  node: "nodes",
-  material: "materials",
-  mesh: "meshes",
-  sampler: "samplers",
-  texture: "textures",
+  accessor: 'accessors',
+  buffer: 'buffers',
+  bufferView: 'bufferViews',
+  image: 'images',
+  node: 'nodes',
+  material: 'materials',
+  mesh: 'meshes',
+  sampler: 'samplers',
+  texture: 'textures'
 };
 
 function removeUnusedElementsByType(gltf, type) {
@@ -172,7 +172,7 @@ Remove.bufferView = function (gltf, bufferViewId) {
     }
   });
 
-  if (usesExtension(gltf, "KHR_draco_mesh_compression")) {
+  if (usesExtension(gltf, 'KHR_draco_mesh_compression')) {
     ForEach.mesh(gltf, function (mesh) {
       ForEach.meshPrimitive(mesh, function (primitive) {
         if (
@@ -190,7 +190,7 @@ Remove.bufferView = function (gltf, bufferViewId) {
     });
   }
 
-  if (usesExtension(gltf, "EXT_feature_metadata")) {
+  if (usesExtension(gltf, 'EXT_feature_metadata')) {
     const extension = gltf.extensions.EXT_feature_metadata;
     const featureTables = extension.featureTables;
     for (const featureTableId in featureTables) {
@@ -365,7 +365,7 @@ Remove.texture = function (gltf, textureId) {
     });
   });
 
-  if (usesExtension(gltf, "EXT_feature_metadata")) {
+  if (usesExtension(gltf, 'EXT_feature_metadata')) {
     ForEach.mesh(gltf, function (mesh) {
       ForEach.meshPrimitive(mesh, function (primitive) {
         const extensions = primitive.extensions;
@@ -454,7 +454,7 @@ getListOfElementsIdsInUse.accessor = function (gltf) {
     });
   });
 
-  if (usesExtension(gltf, "EXT_mesh_gpu_instancing")) {
+  if (usesExtension(gltf, 'EXT_mesh_gpu_instancing')) {
     ForEach.node(gltf, function (node) {
       if (
         defined(node.extensions) &&
@@ -517,7 +517,7 @@ getListOfElementsIdsInUse.bufferView = function (gltf) {
     }
   });
 
-  if (usesExtension(gltf, "KHR_draco_mesh_compression")) {
+  if (usesExtension(gltf, 'KHR_draco_mesh_compression')) {
     ForEach.mesh(gltf, function (mesh) {
       ForEach.meshPrimitive(mesh, function (primitive) {
         if (
@@ -532,7 +532,7 @@ getListOfElementsIdsInUse.bufferView = function (gltf) {
     });
   }
 
-  if (usesExtension(gltf, "EXT_feature_metadata")) {
+  if (usesExtension(gltf, 'EXT_feature_metadata')) {
     const extension = gltf.extensions.EXT_feature_metadata;
     const featureTables = extension.featureTables;
     for (const featureTableId in featureTables) {
@@ -685,7 +685,7 @@ getListOfElementsIdsInUse.texture = function (gltf) {
     });
   });
 
-  if (usesExtension(gltf, "EXT_feature_metadata")) {
+  if (usesExtension(gltf, 'EXT_feature_metadata')) {
     ForEach.mesh(gltf, function (mesh) {
       ForEach.meshPrimitive(mesh, function (primitive) {
         const extensions = primitive.extensions;

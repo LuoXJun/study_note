@@ -1,4 +1,4 @@
-import SceneMode from "./SceneMode.js";
+import SceneMode from './SceneMode.js';
 
 /**
  * State information about the current frame.  An instance of this class
@@ -210,7 +210,7 @@ function FrameState(context, creditDisplay, jobScheduler) {
     /**
      * @default false
      */
-    offscreen: false,
+    offscreen: false
   };
 
   /**
@@ -267,7 +267,7 @@ function FrameState(context, creditDisplay, jobScheduler) {
     enabled: false,
     density: undefined,
     sse: undefined,
-    minimumBrightness: undefined,
+    minimumBrightness: undefined
   };
 
   /**
@@ -328,7 +328,7 @@ function FrameState(context, creditDisplay, jobScheduler) {
     /**
      * @default true
      */
-    outOfView: true,
+    outOfView: true
   };
 
   /**

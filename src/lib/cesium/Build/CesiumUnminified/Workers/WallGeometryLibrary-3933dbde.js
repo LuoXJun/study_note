@@ -23,7 +23,22 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './arrayRemoveDuplicates-1af79ba4', './Matrix2-9e1c22e2', './defaultValue-97284df2', './ComponentDatatype-4eeb6d9b', './PolylinePipeline-e67c0760'], (function (exports, arrayRemoveDuplicates, Matrix2, defaultValue, ComponentDatatype, PolylinePipeline) { 'use strict';
+define([
+  'exports',
+  './arrayRemoveDuplicates-1af79ba4',
+  './Matrix2-9e1c22e2',
+  './defaultValue-97284df2',
+  './ComponentDatatype-4eeb6d9b',
+  './PolylinePipeline-e67c0760'
+], function (
+  exports,
+  arrayRemoveDuplicates,
+  Matrix2,
+  defaultValue,
+  ComponentDatatype,
+  PolylinePipeline
+) {
+  'use strict';
 
   /**
    * @private
@@ -32,15 +47,26 @@ define(['exports', './arrayRemoveDuplicates-1af79ba4', './Matrix2-9e1c22e2', './
 
   function latLonEquals(c0, c1) {
     return (
-      ComponentDatatype.CesiumMath.equalsEpsilon(c0.latitude, c1.latitude, ComponentDatatype.CesiumMath.EPSILON10) &&
-      ComponentDatatype.CesiumMath.equalsEpsilon(c0.longitude, c1.longitude, ComponentDatatype.CesiumMath.EPSILON10)
+      ComponentDatatype.CesiumMath.equalsEpsilon(
+        c0.latitude,
+        c1.latitude,
+        ComponentDatatype.CesiumMath.EPSILON10
+      ) &&
+      ComponentDatatype.CesiumMath.equalsEpsilon(
+        c0.longitude,
+        c1.longitude,
+        ComponentDatatype.CesiumMath.EPSILON10
+      )
     );
   }
 
   const scratchCartographic1 = new Matrix2.Cartographic();
   const scratchCartographic2 = new Matrix2.Cartographic();
   function removeDuplicates(ellipsoid, positions, topHeights, bottomHeights) {
-    positions = arrayRemoveDuplicates.arrayRemoveDuplicates(positions, Matrix2.Cartesian3.equalsEpsilon);
+    positions = arrayRemoveDuplicates.arrayRemoveDuplicates(
+      positions,
+      Matrix2.Cartesian3.equalsEpsilon
+    );
 
     const length = positions.length;
     if (length < 2) {
@@ -115,7 +141,7 @@ define(['exports', './arrayRemoveDuplicates-1af79ba4', './Matrix2-9e1c22e2', './
     return {
       positions: cleanedPositions,
       topHeights: cleanedTopHeights,
-      bottomHeights: cleanedBottomHeights,
+      bottomHeights: cleanedBottomHeights
     };
   }
 
@@ -125,7 +151,7 @@ define(['exports', './arrayRemoveDuplicates-1af79ba4', './Matrix2-9e1c22e2', './
     positions: undefined,
     height: undefined,
     granularity: undefined,
-    ellipsoid: undefined,
+    ellipsoid: undefined
   };
 
   /**
@@ -197,7 +223,8 @@ define(['exports', './arrayRemoveDuplicates-1af79ba4', './Matrix2-9e1c22e2', './
         generateArcHeights[0] = maximumHeights[i];
         generateArcHeights[1] = maximumHeights[i + 1];
 
-        const pos = PolylinePipeline.PolylinePipeline.generateArc(generateArcOptions);
+        const pos =
+          PolylinePipeline.PolylinePipeline.generateArc(generateArcOptions);
         topPositions.set(pos, offset);
 
         generateArcHeights[0] = minimumHeights[i];
@@ -226,11 +253,10 @@ define(['exports', './arrayRemoveDuplicates-1af79ba4', './Matrix2-9e1c22e2', './
     return {
       bottomPositions: bottomPositions,
       topPositions: topPositions,
-      numCorners: numCorners,
+      numCorners: numCorners
     };
   };
 
   exports.WallGeometryLibrary = WallGeometryLibrary;
-
-}));
+});
 //# sourceMappingURL=WallGeometryLibrary-3933dbde.js.map

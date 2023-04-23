@@ -1,18 +1,18 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import IndexDatatype from "./IndexDatatype.js";
-import Intersections2D from "./Intersections2D.js";
-import CesiumMath from "./Math.js";
-import OrientedBoundingBox from "./OrientedBoundingBox.js";
-import TaskProcessor from "./TaskProcessor.js";
-import TerrainData from "./TerrainData.js";
-import TerrainEncoding from "./TerrainEncoding.js";
-import TerrainMesh from "./TerrainMesh.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import IndexDatatype from './IndexDatatype.js';
+import Intersections2D from './Intersections2D.js';
+import CesiumMath from './Math.js';
+import OrientedBoundingBox from './OrientedBoundingBox.js';
+import TaskProcessor from './TaskProcessor.js';
+import TerrainData from './TerrainData.js';
+import TerrainEncoding from './TerrainEncoding.js';
+import TerrainMesh from './TerrainMesh.js';
 
 /**
  * Terrain data for a single tile where the terrain data is represented as a quantized mesh.  A quantized
@@ -94,49 +94,49 @@ import TerrainMesh from "./TerrainMesh.js";
 function QuantizedMeshTerrainData(options) {
   //>>includeStart('debug', pragmas.debug)
   if (!defined(options) || !defined(options.quantizedVertices)) {
-    throw new DeveloperError("options.quantizedVertices is required.");
+    throw new DeveloperError('options.quantizedVertices is required.');
   }
   if (!defined(options.indices)) {
-    throw new DeveloperError("options.indices is required.");
+    throw new DeveloperError('options.indices is required.');
   }
   if (!defined(options.minimumHeight)) {
-    throw new DeveloperError("options.minimumHeight is required.");
+    throw new DeveloperError('options.minimumHeight is required.');
   }
   if (!defined(options.maximumHeight)) {
-    throw new DeveloperError("options.maximumHeight is required.");
+    throw new DeveloperError('options.maximumHeight is required.');
   }
   if (!defined(options.maximumHeight)) {
-    throw new DeveloperError("options.maximumHeight is required.");
+    throw new DeveloperError('options.maximumHeight is required.');
   }
   if (!defined(options.boundingSphere)) {
-    throw new DeveloperError("options.boundingSphere is required.");
+    throw new DeveloperError('options.boundingSphere is required.');
   }
   if (!defined(options.horizonOcclusionPoint)) {
-    throw new DeveloperError("options.horizonOcclusionPoint is required.");
+    throw new DeveloperError('options.horizonOcclusionPoint is required.');
   }
   if (!defined(options.westIndices)) {
-    throw new DeveloperError("options.westIndices is required.");
+    throw new DeveloperError('options.westIndices is required.');
   }
   if (!defined(options.southIndices)) {
-    throw new DeveloperError("options.southIndices is required.");
+    throw new DeveloperError('options.southIndices is required.');
   }
   if (!defined(options.eastIndices)) {
-    throw new DeveloperError("options.eastIndices is required.");
+    throw new DeveloperError('options.eastIndices is required.');
   }
   if (!defined(options.northIndices)) {
-    throw new DeveloperError("options.northIndices is required.");
+    throw new DeveloperError('options.northIndices is required.');
   }
   if (!defined(options.westSkirtHeight)) {
-    throw new DeveloperError("options.westSkirtHeight is required.");
+    throw new DeveloperError('options.westSkirtHeight is required.');
   }
   if (!defined(options.southSkirtHeight)) {
-    throw new DeveloperError("options.southSkirtHeight is required.");
+    throw new DeveloperError('options.southSkirtHeight is required.');
   }
   if (!defined(options.eastSkirtHeight)) {
-    throw new DeveloperError("options.eastSkirtHeight is required.");
+    throw new DeveloperError('options.eastSkirtHeight is required.');
   }
   if (!defined(options.northSkirtHeight)) {
-    throw new DeveloperError("options.northSkirtHeight is required.");
+    throw new DeveloperError('options.northSkirtHeight is required.');
   }
   //>>includeEnd('debug');
 
@@ -216,7 +216,7 @@ Object.defineProperties(QuantizedMeshTerrainData.prototype, {
   credits: {
     get: function () {
       return this._credits;
-    },
+    }
   },
   /**
    * The water mask included in this terrain data, if any.  A water mask is a rectangular
@@ -228,20 +228,20 @@ Object.defineProperties(QuantizedMeshTerrainData.prototype, {
   waterMask: {
     get: function () {
       return this._waterMask;
-    },
+    }
   },
 
   childTileMask: {
     get: function () {
       return this._childTileMask;
-    },
+    }
   },
 
   canUpsample: {
     get: function () {
       return defined(this._mesh);
-    },
-  },
+    }
+  }
 });
 
 const arrayScratch = [];
@@ -263,7 +263,7 @@ function sortIndicesIfNecessary(indices, sortFunction, vertexCount) {
   return indices;
 }
 
-const createMeshTaskName = "createVerticesFromQuantizedTerrainMesh";
+const createMeshTaskName = 'createVerticesFromQuantizedTerrainMesh';
 const createMeshTaskProcessorNoThrottle = new TaskProcessor(createMeshTaskName);
 const createMeshTaskProcessorThrottle = new TaskProcessor(
   createMeshTaskName,
@@ -291,10 +291,10 @@ QuantizedMeshTerrainData.prototype.createMesh = function (options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.tilingScheme", options.tilingScheme);
-  Check.typeOf.number("options.x", options.x);
-  Check.typeOf.number("options.y", options.y);
-  Check.typeOf.number("options.level", options.level);
+  Check.typeOf.object('options.tilingScheme', options.tilingScheme);
+  Check.typeOf.number('options.x', options.x);
+  Check.typeOf.number('options.y', options.y);
+  Check.typeOf.number('options.level', options.level);
   //>>includeEnd('debug');
 
   const tilingScheme = options.tilingScheme;
@@ -334,7 +334,7 @@ QuantizedMeshTerrainData.prototype.createMesh = function (options) {
     relativeToCenter: this._boundingSphere.center,
     ellipsoid: ellipsoid,
     exaggeration: exaggeration,
-    exaggerationRelativeHeight: exaggerationRelativeHeight,
+    exaggerationRelativeHeight: exaggerationRelativeHeight
   });
 
   if (!defined(verticesPromise)) {
@@ -409,7 +409,7 @@ QuantizedMeshTerrainData.prototype.createMesh = function (options) {
 };
 
 const upsampleTaskProcessor = new TaskProcessor(
-  "upsampleQuantizedTerrainMesh",
+  'upsampleQuantizedTerrainMesh',
   TerrainData.maximumAsynchronousTasks
 );
 
@@ -439,30 +439,30 @@ QuantizedMeshTerrainData.prototype.upsample = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(tilingScheme)) {
-    throw new DeveloperError("tilingScheme is required.");
+    throw new DeveloperError('tilingScheme is required.');
   }
   if (!defined(thisX)) {
-    throw new DeveloperError("thisX is required.");
+    throw new DeveloperError('thisX is required.');
   }
   if (!defined(thisY)) {
-    throw new DeveloperError("thisY is required.");
+    throw new DeveloperError('thisY is required.');
   }
   if (!defined(thisLevel)) {
-    throw new DeveloperError("thisLevel is required.");
+    throw new DeveloperError('thisLevel is required.');
   }
   if (!defined(descendantX)) {
-    throw new DeveloperError("descendantX is required.");
+    throw new DeveloperError('descendantX is required.');
   }
   if (!defined(descendantY)) {
-    throw new DeveloperError("descendantY is required.");
+    throw new DeveloperError('descendantY is required.');
   }
   if (!defined(descendantLevel)) {
-    throw new DeveloperError("descendantLevel is required.");
+    throw new DeveloperError('descendantLevel is required.');
   }
   const levelDifference = descendantLevel - thisLevel;
   if (levelDifference > 1) {
     throw new DeveloperError(
-      "Upsampling through more than one level at a time is not currently supported."
+      'Upsampling through more than one level at a time is not currently supported.'
     );
   }
   //>>includeEnd('debug');
@@ -493,7 +493,7 @@ QuantizedMeshTerrainData.prototype.upsample = function (
     isEastChild: isEastChild,
     isNorthChild: isNorthChild,
     childRectangle: childRectangle,
-    ellipsoid: ellipsoid,
+    ellipsoid: ellipsoid
   });
 
   if (!defined(upsamplePromise)) {
@@ -551,7 +551,7 @@ QuantizedMeshTerrainData.prototype.upsample = function (
       northSkirtHeight: northSkirtHeight,
       childTileMask: 0,
       credits: credits,
-      createdByUpsampling: true,
+      createdByUpsampling: true
     });
   });
 };
@@ -734,16 +734,16 @@ QuantizedMeshTerrainData.prototype.isChildAvailable = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(thisX)) {
-    throw new DeveloperError("thisX is required.");
+    throw new DeveloperError('thisX is required.');
   }
   if (!defined(thisY)) {
-    throw new DeveloperError("thisY is required.");
+    throw new DeveloperError('thisY is required.');
   }
   if (!defined(childX)) {
-    throw new DeveloperError("childX is required.");
+    throw new DeveloperError('childX is required.');
   }
   if (!defined(childY)) {
-    throw new DeveloperError("childY is required.");
+    throw new DeveloperError('childY is required.');
   }
   //>>includeEnd('debug');
 

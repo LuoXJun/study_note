@@ -1,4 +1,4 @@
-import defaultValue from "./defaultValue.js";
+import defaultValue from './defaultValue.js';
 
 /**
  * A mesh plus related metadata for a single tile of terrain.  Instances of this type are

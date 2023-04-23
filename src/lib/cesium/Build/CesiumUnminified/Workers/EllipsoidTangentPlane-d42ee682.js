@@ -23,7 +23,26 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './IntersectionTests-ea138127', './Plane-76b84425', './Transforms-273eeb44'], (function (exports, AxisAlignedBoundingBox, Matrix2, RuntimeError, defaultValue, IntersectionTests, Plane, Transforms) { 'use strict';
+define([
+  'exports',
+  './AxisAlignedBoundingBox-1aaf78c2',
+  './Matrix2-9e1c22e2',
+  './RuntimeError-4f8ec8a2',
+  './defaultValue-97284df2',
+  './IntersectionTests-ea138127',
+  './Plane-76b84425',
+  './Transforms-273eeb44'
+], function (
+  exports,
+  AxisAlignedBoundingBox,
+  Matrix2,
+  RuntimeError,
+  defaultValue,
+  IntersectionTests,
+  Plane,
+  Transforms
+) {
+  'use strict';
 
   const scratchCart4 = new Matrix2.Cartesian4();
   /**
@@ -40,7 +59,7 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
    */
   function EllipsoidTangentPlane(origin, ellipsoid) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("origin", origin);
+    RuntimeError.Check.defined('origin', origin);
     //>>includeEnd('debug');
 
     ellipsoid = defaultValue.defaultValue(ellipsoid, Matrix2.Ellipsoid.WGS84);
@@ -49,12 +68,15 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(origin)) {
       throw new RuntimeError.DeveloperError(
-        "origin must not be at the center of the ellipsoid."
+        'origin must not be at the center of the ellipsoid.'
       );
     }
     //>>includeEnd('debug');
 
-    const eastNorthUp = Transforms.Transforms.eastNorthUpToFixedFrame(origin, ellipsoid);
+    const eastNorthUp = Transforms.Transforms.eastNorthUpToFixedFrame(
+      origin,
+      ellipsoid
+    );
     this._ellipsoid = ellipsoid;
     this._origin = origin;
     this._xAxis = Matrix2.Cartesian3.fromCartesian4(
@@ -79,7 +101,7 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
     ellipsoid: {
       get: function () {
         return this._ellipsoid;
-      },
+      }
     },
 
     /**
@@ -90,7 +112,7 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
     origin: {
       get: function () {
         return this._origin;
-      },
+      }
     },
 
     /**
@@ -102,7 +124,7 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
     plane: {
       get: function () {
         return this._plane;
-      },
+      }
     },
 
     /**
@@ -114,7 +136,7 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
     xAxis: {
       get: function () {
         return this._xAxis;
-      },
+      }
     },
 
     /**
@@ -126,7 +148,7 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
     yAxis: {
       get: function () {
         return this._yAxis;
-      },
+      }
     },
 
     /**
@@ -138,8 +160,8 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
     zAxis: {
       get: function () {
         return this._plane.normal;
-      },
-    },
+      }
+    }
   });
 
   const tmp = new AxisAlignedBoundingBox.AxisAlignedBoundingBox();
@@ -153,10 +175,13 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
    */
   EllipsoidTangentPlane.fromPoints = function (cartesians, ellipsoid) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("cartesians", cartesians);
+    RuntimeError.Check.defined('cartesians', cartesians);
     //>>includeEnd('debug');
 
-    const box = AxisAlignedBoundingBox.AxisAlignedBoundingBox.fromPoints(cartesians, tmp);
+    const box = AxisAlignedBoundingBox.AxisAlignedBoundingBox.fromPoints(
+      cartesians,
+      tmp
+    );
     return new EllipsoidTangentPlane(box.center, ellipsoid);
   };
 
@@ -175,7 +200,7 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("cartesian", cartesian);
+    RuntimeError.Check.defined('cartesian', cartesian);
     //>>includeEnd('debug');
 
     const ray = scratchProjectPointOntoPlaneRay;
@@ -230,7 +255,7 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("cartesians", cartesians);
+    RuntimeError.Check.defined('cartesians', cartesians);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -262,7 +287,7 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("cartesian", cartesian);
+    RuntimeError.Check.defined('cartesian', cartesian);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -314,7 +339,7 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("cartesians", cartesians);
+    RuntimeError.Check.defined('cartesians', cartesians);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -342,7 +367,7 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("cartesian", cartesian);
+    RuntimeError.Check.defined('cartesian', cartesian);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -376,7 +401,7 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("cartesians", cartesians);
+    RuntimeError.Check.defined('cartesians', cartesians);
     //>>includeEnd('debug');
 
     const length = cartesians.length;
@@ -394,6 +419,5 @@ define(['exports', './AxisAlignedBoundingBox-1aaf78c2', './Matrix2-9e1c22e2', '.
   };
 
   exports.EllipsoidTangentPlane = EllipsoidTangentPlane;
-
-}));
+});
 //# sourceMappingURL=EllipsoidTangentPlane-d42ee682.js.map

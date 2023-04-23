@@ -1,22 +1,22 @@
-import ArcType from "./ArcType.js";
-import arrayRemoveDuplicates from "./arrayRemoveDuplicates.js";
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import Color from "./Color.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import GeometryType from "./GeometryType.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
-import PolylinePipeline from "./PolylinePipeline.js";
-import PrimitiveType from "./PrimitiveType.js";
-import VertexFormat from "./VertexFormat.js";
+import ArcType from './ArcType.js';
+import arrayRemoveDuplicates from './arrayRemoveDuplicates.js';
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import Color from './Color.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import GeometryType from './GeometryType.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
+import PolylinePipeline from './PolylinePipeline.js';
+import PrimitiveType from './PrimitiveType.js';
+import VertexFormat from './VertexFormat.js';
 
 const scratchInterpolateColorsArray = [];
 
@@ -106,17 +106,17 @@ function PolylineGeometry(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(positions) || positions.length < 2) {
-    throw new DeveloperError("At least two positions are required.");
+    throw new DeveloperError('At least two positions are required.');
   }
-  if (typeof width !== "number") {
-    throw new DeveloperError("width must be a number");
+  if (typeof width !== 'number') {
+    throw new DeveloperError('width must be a number');
   }
   if (
     defined(colors) &&
     ((colorsPerVertex && colors.length < positions.length) ||
       (!colorsPerVertex && colors.length < positions.length - 1))
   ) {
-    throw new DeveloperError("colors has an invalid length.");
+    throw new DeveloperError('colors has an invalid length.');
   }
   //>>includeEnd('debug');
 
@@ -136,7 +136,7 @@ function PolylineGeometry(options) {
   this._ellipsoid = Ellipsoid.clone(
     defaultValue(options.ellipsoid, Ellipsoid.WGS84)
   );
-  this._workerName = "createPolylineGeometry";
+  this._workerName = 'createPolylineGeometry';
 
   let numComponents = 1 + positions.length * Cartesian3.packedLength;
   numComponents += defined(colors) ? 1 + colors.length * Color.packedLength : 1;
@@ -161,10 +161,10 @@ function PolylineGeometry(options) {
 PolylineGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(value)) {
-    throw new DeveloperError("value is required");
+    throw new DeveloperError('value is required');
   }
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -212,7 +212,7 @@ const scratchOptions = {
   width: undefined,
   colorsPerVertex: undefined,
   arcType: undefined,
-  granularity: undefined,
+  granularity: undefined
 };
 
 /**
@@ -226,7 +226,7 @@ const scratchOptions = {
 PolylineGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -412,14 +412,14 @@ PolylineGeometry.createGeometry = function (polylineGeometry) {
         positions: positions,
         minDistance: subdivisionSize,
         ellipsoid: ellipsoid,
-        height: heights,
+        height: heights
       });
     } else {
       positions = PolylinePipeline.generateCartesianRhumbArc({
         positions: positions,
         granularity: subdivisionSize,
         ellipsoid: ellipsoid,
-        height: heights,
+        height: heights
       });
     }
   }
@@ -513,32 +513,32 @@ PolylineGeometry.createGeometry = function (polylineGeometry) {
   attributes.position = new GeometryAttribute({
     componentDatatype: ComponentDatatype.DOUBLE,
     componentsPerAttribute: 3,
-    values: finalPositions,
+    values: finalPositions
   });
 
   attributes.prevPosition = new GeometryAttribute({
     componentDatatype: ComponentDatatype.DOUBLE,
     componentsPerAttribute: 3,
-    values: prevPositions,
+    values: prevPositions
   });
 
   attributes.nextPosition = new GeometryAttribute({
     componentDatatype: ComponentDatatype.DOUBLE,
     componentsPerAttribute: 3,
-    values: nextPositions,
+    values: nextPositions
   });
 
   attributes.expandAndWidth = new GeometryAttribute({
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: 2,
-    values: expandAndWidth,
+    values: expandAndWidth
   });
 
   if (vertexFormat.st) {
     attributes.st = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 2,
-      values: st,
+      values: st
     });
   }
 
@@ -547,7 +547,7 @@ PolylineGeometry.createGeometry = function (polylineGeometry) {
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 4,
       values: finalColors,
-      normalize: true,
+      normalize: true
     });
   }
 
@@ -572,7 +572,7 @@ PolylineGeometry.createGeometry = function (polylineGeometry) {
     indices: indices,
     primitiveType: PrimitiveType.TRIANGLES,
     boundingSphere: BoundingSphere.fromPoints(positions),
-    geometryType: GeometryType.POLYLINES,
+    geometryType: GeometryType.POLYLINES
   });
 };
 export default PolylineGeometry;

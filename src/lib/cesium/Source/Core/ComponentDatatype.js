@@ -1,7 +1,7 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import WebGLConstants from "./WebGLConstants.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import WebGLConstants from './WebGLConstants.js';
 
 /**
  * WebGL component datatypes.  Components are intrinsics,
@@ -88,7 +88,7 @@ const ComponentDatatype = {
    * @constant
    * @default 0x140A
    */
-  DOUBLE: WebGLConstants.DOUBLE,
+  DOUBLE: WebGLConstants.DOUBLE
 };
 
 /**
@@ -106,7 +106,7 @@ const ComponentDatatype = {
 ComponentDatatype.getSizeInBytes = function (componentDatatype) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(componentDatatype)) {
-    throw new DeveloperError("value is required.");
+    throw new DeveloperError('value is required.');
   }
   //>>includeEnd('debug');
 
@@ -129,7 +129,7 @@ ComponentDatatype.getSizeInBytes = function (componentDatatype) {
       return Float64Array.BYTES_PER_ELEMENT;
     //>>includeStart('debug', pragmas.debug);
     default:
-      throw new DeveloperError("componentDatatype is not a valid value.");
+      throw new DeveloperError('componentDatatype is not a valid value.');
     //>>includeEnd('debug');
   }
 };
@@ -168,7 +168,7 @@ ComponentDatatype.fromTypedArray = function (array) {
 
   //>>includeStart('debug', pragmas.debug);
   throw new DeveloperError(
-    "array must be an Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, Float32Array, or Float64Array."
+    'array must be an Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, Float32Array, or Float64Array.'
   );
   //>>includeEnd('debug');
 };
@@ -217,10 +217,10 @@ ComponentDatatype.createTypedArray = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(componentDatatype)) {
-    throw new DeveloperError("componentDatatype is required.");
+    throw new DeveloperError('componentDatatype is required.');
   }
   if (!defined(valuesOrLength)) {
-    throw new DeveloperError("valuesOrLength is required.");
+    throw new DeveloperError('valuesOrLength is required.');
   }
   //>>includeEnd('debug');
 
@@ -243,7 +243,7 @@ ComponentDatatype.createTypedArray = function (
       return new Float64Array(valuesOrLength);
     //>>includeStart('debug', pragmas.debug);
     default:
-      throw new DeveloperError("componentDatatype is not a valid value.");
+      throw new DeveloperError('componentDatatype is not a valid value.');
     //>>includeEnd('debug');
   }
 };
@@ -267,10 +267,10 @@ ComponentDatatype.createArrayBufferView = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(componentDatatype)) {
-    throw new DeveloperError("componentDatatype is required.");
+    throw new DeveloperError('componentDatatype is required.');
   }
   if (!defined(buffer)) {
-    throw new DeveloperError("buffer is required.");
+    throw new DeveloperError('buffer is required.');
   }
   //>>includeEnd('debug');
 
@@ -300,7 +300,7 @@ ComponentDatatype.createArrayBufferView = function (
       return new Float64Array(buffer, byteOffset, length);
     //>>includeStart('debug', pragmas.debug);
     default:
-      throw new DeveloperError("componentDatatype is not a valid value.");
+      throw new DeveloperError('componentDatatype is not a valid value.');
     //>>includeEnd('debug');
   }
 };
@@ -315,25 +315,25 @@ ComponentDatatype.createArrayBufferView = function (
  */
 ComponentDatatype.fromName = function (name) {
   switch (name) {
-    case "BYTE":
+    case 'BYTE':
       return ComponentDatatype.BYTE;
-    case "UNSIGNED_BYTE":
+    case 'UNSIGNED_BYTE':
       return ComponentDatatype.UNSIGNED_BYTE;
-    case "SHORT":
+    case 'SHORT':
       return ComponentDatatype.SHORT;
-    case "UNSIGNED_SHORT":
+    case 'UNSIGNED_SHORT':
       return ComponentDatatype.UNSIGNED_SHORT;
-    case "INT":
+    case 'INT':
       return ComponentDatatype.INT;
-    case "UNSIGNED_INT":
+    case 'UNSIGNED_INT':
       return ComponentDatatype.UNSIGNED_INT;
-    case "FLOAT":
+    case 'FLOAT':
       return ComponentDatatype.FLOAT;
-    case "DOUBLE":
+    case 'DOUBLE':
       return ComponentDatatype.DOUBLE;
     //>>includeStart('debug', pragmas.debug);
     default:
-      throw new DeveloperError("name is not a valid value.");
+      throw new DeveloperError('name is not a valid value.');
     //>>includeEnd('debug');
   }
 };

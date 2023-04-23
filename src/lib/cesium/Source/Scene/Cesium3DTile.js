@@ -1,47 +1,47 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import CullingVolume from "../Core/CullingVolume.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import deprecationWarning from "../Core/deprecationWarning.js";
-import destroyObject from "../Core/destroyObject.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import Intersect from "../Core/Intersect.js";
-import JulianDate from "../Core/JulianDate.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
-import OrientedBoundingBox from "../Core/OrientedBoundingBox.js";
-import OrthographicFrustum from "../Core/OrthographicFrustum.js";
-import Rectangle from "../Core/Rectangle.js";
-import Request from "../Core/Request.js";
-import RequestScheduler from "../Core/RequestScheduler.js";
-import RequestState from "../Core/RequestState.js";
-import RequestType from "../Core/RequestType.js";
-import Resource from "../Core/Resource.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import Cesium3DContentGroup from "./Cesium3DContentGroup.js";
-import Cesium3DTileContentFactory from "./Cesium3DTileContentFactory.js";
-import Cesium3DTileContentState from "./Cesium3DTileContentState.js";
-import Cesium3DTileContentType from "./Cesium3DTileContentType.js";
-import Cesium3DTileOptimizationHint from "./Cesium3DTileOptimizationHint.js";
-import Cesium3DTilePass from "./Cesium3DTilePass.js";
-import Cesium3DTileRefine from "./Cesium3DTileRefine.js";
-import Empty3DTileContent from "./Empty3DTileContent.js";
-import findContentMetadata from "./findContentMetadata.js";
-import findGroupMetadata from "./findGroupMetadata.js";
-import findTileMetadata from "./findTileMetadata.js";
-import hasExtension from "./hasExtension.js";
-import Multiple3DTileContent from "./Multiple3DTileContent.js";
-import preprocess3DTileContent from "./preprocess3DTileContent.js";
-import SceneMode from "./SceneMode.js";
-import TileBoundingRegion from "./TileBoundingRegion.js";
-import TileBoundingS2Cell from "./TileBoundingS2Cell.js";
-import TileBoundingSphere from "./TileBoundingSphere.js";
-import TileOrientedBoundingBox from "./TileOrientedBoundingBox.js";
-import Pass from "../Renderer/Pass.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import CullingVolume from '../Core/CullingVolume.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import deprecationWarning from '../Core/deprecationWarning.js';
+import destroyObject from '../Core/destroyObject.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import Intersect from '../Core/Intersect.js';
+import JulianDate from '../Core/JulianDate.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
+import OrientedBoundingBox from '../Core/OrientedBoundingBox.js';
+import OrthographicFrustum from '../Core/OrthographicFrustum.js';
+import Rectangle from '../Core/Rectangle.js';
+import Request from '../Core/Request.js';
+import RequestScheduler from '../Core/RequestScheduler.js';
+import RequestState from '../Core/RequestState.js';
+import RequestType from '../Core/RequestType.js';
+import Resource from '../Core/Resource.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import Cesium3DContentGroup from './Cesium3DContentGroup.js';
+import Cesium3DTileContentFactory from './Cesium3DTileContentFactory.js';
+import Cesium3DTileContentState from './Cesium3DTileContentState.js';
+import Cesium3DTileContentType from './Cesium3DTileContentType.js';
+import Cesium3DTileOptimizationHint from './Cesium3DTileOptimizationHint.js';
+import Cesium3DTilePass from './Cesium3DTilePass.js';
+import Cesium3DTileRefine from './Cesium3DTileRefine.js';
+import Empty3DTileContent from './Empty3DTileContent.js';
+import findContentMetadata from './findContentMetadata.js';
+import findGroupMetadata from './findGroupMetadata.js';
+import findTileMetadata from './findTileMetadata.js';
+import hasExtension from './hasExtension.js';
+import Multiple3DTileContent from './Multiple3DTileContent.js';
+import preprocess3DTileContent from './preprocess3DTileContent.js';
+import SceneMode from './SceneMode.js';
+import TileBoundingRegion from './TileBoundingRegion.js';
+import TileBoundingS2Cell from './TileBoundingS2Cell.js';
+import TileBoundingSphere from './TileBoundingSphere.js';
+import TileOrientedBoundingBox from './TileOrientedBoundingBox.js';
+import Pass from '../Renderer/Pass.js';
 
 /**
  * A tile in a {@link Cesium3DTileset}.  When a tile is first created, its content is not loaded;
@@ -60,7 +60,7 @@ function Cesium3DTile(tileset, baseResource, header, parent) {
   const hasContentsArray = defined(header.contents);
   const hasMultipleContents =
     (hasContentsArray && header.contents.length > 1) ||
-    hasExtension(header, "3DTILES_multiple_contents");
+    hasExtension(header, '3DTILES_multiple_contents');
 
   // In the 1.0 schema, content is stored in tile.content instead of tile.contents
   const contentHeader =
@@ -149,7 +149,7 @@ function Cesium3DTile(tileset, baseResource, header, parent) {
       ? parent.geometricError
       : tileset._geometricError;
     Cesium3DTile._deprecationWarning(
-      "geometricErrorUndefined",
+      'geometricErrorUndefined',
       "Required property geometricError is undefined for this tile. Using parent's geometric error instead."
     );
   }
@@ -158,16 +158,16 @@ function Cesium3DTile(tileset, baseResource, header, parent) {
 
   let refine;
   if (defined(header.refine)) {
-    if (header.refine === "replace" || header.refine === "add") {
+    if (header.refine === 'replace' || header.refine === 'add') {
       Cesium3DTile._deprecationWarning(
-        "lowercase-refine",
+        'lowercase-refine',
         `This tile uses a lowercase refine "${
           header.refine
         }". Instead use "${header.refine.toUpperCase()}".`
       );
     }
     refine =
-      header.refine.toUpperCase() === "REPLACE"
+      header.refine.toUpperCase() === 'REPLACE'
         ? Cesium3DTileRefine.REPLACE
         : Cesium3DTileRefine.ADD;
   } else if (defined(parent)) {
@@ -224,15 +224,15 @@ function Cesium3DTile(tileset, baseResource, header, parent) {
     let contentHeaderUri = contentHeader.uri;
     if (defined(contentHeader.url)) {
       Cesium3DTile._deprecationWarning(
-        "contentUrl",
+        'contentUrl',
         'This tileset JSON uses the "content.url" property which has been deprecated. Use "content.uri" instead.'
       );
       contentHeaderUri = contentHeader.url;
     }
-    if (contentHeaderUri === "") {
+    if (contentHeaderUri === '') {
       Cesium3DTile._deprecationWarning(
-        "contentUriEmpty",
-        "content.uri property is an empty string, which creates a circular dependency, making this tileset invalid. Omit the content property instead"
+        'contentUriEmpty',
+        'content.uri property is an empty string, which creates a circular dependency, making this tileset invalid. Omit the content property instead'
       );
       content = new Empty3DTileContent(tileset, this);
       hasEmptyContent = true;
@@ -240,7 +240,7 @@ function Cesium3DTile(tileset, baseResource, header, parent) {
     } else {
       contentState = Cesium3DTileContentState.UNLOADED;
       contentResource = baseResource.getDerivedResource({
-        url: contentHeaderUri,
+        url: contentHeaderUri
       });
       serverKey = RequestScheduler.getServerKey(
         contentResource.getUrlComponent()
@@ -510,7 +510,7 @@ Object.defineProperties(Cesium3DTile.prototype, {
   tileset: {
     get: function () {
       return this._tileset;
-    },
+    }
   },
 
   /**
@@ -525,7 +525,7 @@ Object.defineProperties(Cesium3DTile.prototype, {
   content: {
     get: function () {
       return this._content;
-    },
+    }
   },
 
   /**
@@ -540,7 +540,7 @@ Object.defineProperties(Cesium3DTile.prototype, {
   boundingVolume: {
     get: function () {
       return this._boundingVolume;
-    },
+    }
   },
 
   /**
@@ -557,7 +557,7 @@ Object.defineProperties(Cesium3DTile.prototype, {
   contentBoundingVolume: {
     get: function () {
       return defaultValue(this._contentBoundingVolume, this._boundingVolume);
-    },
+    }
   },
 
   /**
@@ -571,7 +571,7 @@ Object.defineProperties(Cesium3DTile.prototype, {
   boundingSphere: {
     get: function () {
       return this._boundingVolume.boundingSphere;
-    },
+    }
   },
 
   /**
@@ -587,7 +587,7 @@ Object.defineProperties(Cesium3DTile.prototype, {
   extras: {
     get: function () {
       return this._header.extras;
-    },
+    }
   },
 
   /**
@@ -611,7 +611,7 @@ Object.defineProperties(Cesium3DTile.prototype, {
     set: function (value) {
       this._color = Color.clone(value, this._color);
       this._colorDirty = true;
-    },
+    }
   },
 
   /**
@@ -635,7 +635,7 @@ Object.defineProperties(Cesium3DTile.prototype, {
           !this.hasImplicitContent) ||
         (defined(this._expiredContent) && !this.contentFailed)
       );
-    },
+    }
   },
 
   /**
@@ -652,7 +652,7 @@ Object.defineProperties(Cesium3DTile.prototype, {
   contentReady: {
     get: function () {
       return this._contentState === Cesium3DTileContentState.READY;
-    },
+    }
   },
 
   /**
@@ -669,7 +669,7 @@ Object.defineProperties(Cesium3DTile.prototype, {
   contentUnloaded: {
     get: function () {
       return this._contentState === Cesium3DTileContentState.UNLOADED;
-    },
+    }
   },
 
   /**
@@ -686,7 +686,7 @@ Object.defineProperties(Cesium3DTile.prototype, {
   contentExpired: {
     get: function () {
       return this._contentState === Cesium3DTileContentState.EXPIRED;
-    },
+    }
   },
 
   /**
@@ -703,7 +703,7 @@ Object.defineProperties(Cesium3DTile.prototype, {
   contentFailed: {
     get: function () {
       return this._contentState === Cesium3DTileContentState.FAILED;
-    },
+    }
   },
 
   /**
@@ -722,7 +722,7 @@ Object.defineProperties(Cesium3DTile.prototype, {
   contentReadyToProcessPromise: {
     get: function () {
       return this._contentReadyToProcessPromise;
-    },
+    }
   },
 
   /**
@@ -739,7 +739,7 @@ Object.defineProperties(Cesium3DTile.prototype, {
   contentReadyPromise: {
     get: function () {
       return this._contentReadyPromise;
-    },
+    }
   },
 
   /**
@@ -752,8 +752,8 @@ Object.defineProperties(Cesium3DTile.prototype, {
   commandsLength: {
     get: function () {
       return this._commandsLength;
-    },
-  },
+    }
+  }
 });
 
 const scratchCartesian = new Cartesian3();
@@ -1084,8 +1084,8 @@ function requestMultipleContents(tile) {
   if (!defined(multipleContents)) {
     // Create the content object immediately, it will handle scheduling
     // requests for inner contents.
-    const contentsJson = hasExtension(tile._header, "3DTILES_multiple_contents")
-      ? tile._header.extensions["3DTILES_multiple_contents"]
+    const contentsJson = hasExtension(tile._header, '3DTILES_multiple_contents')
+      ? tile._header.extensions['3DTILES_multiple_contents']
       : tile._header;
 
     multipleContents = new Multiple3DTileContent(
@@ -1103,8 +1103,8 @@ function requestMultipleContents(tile) {
   }
 
   tile._contentState = Cesium3DTileContentState.LOADING;
-  const contentReadyToProcessPromise = multipleContents.contentsFetchedPromise.then(
-    function () {
+  const contentReadyToProcessPromise =
+    multipleContents.contentsFetchedPromise.then(function () {
       if (tile._contentState !== Cesium3DTileContentState.LOADING) {
         // tile was canceled, short circuit.
         return;
@@ -1114,15 +1114,14 @@ function requestMultipleContents(tile) {
         multipleContentFailed(
           tile,
           tileset,
-          "Tile was unloaded while content was loading"
+          'Tile was unloaded while content was loading'
         );
         return;
       }
 
       tile._contentState = Cesium3DTileContentState.PROCESSING;
       return multipleContents;
-    }
-  );
+    });
   tile._contentReadyToProcessPromise = contentReadyToProcessPromise;
   tile._contentReadyPromise = contentReadyToProcessPromise
     .then(function (content) {
@@ -1143,7 +1142,7 @@ function requestMultipleContents(tile) {
         multipleContentFailed(
           tile,
           tileset,
-          "Tile was unloaded while content was processing"
+          'Tile was unloaded while content was processing'
         );
         return;
       }
@@ -1181,7 +1180,7 @@ function requestSingleContent(tile) {
   if (expired) {
     // Append a query parameter of the tile expiration date to prevent caching
     resource.setQueryParameters({
-      expired: tile.expireDate.toString(),
+      expired: tile.expireDate.toString()
     });
   }
 
@@ -1190,7 +1189,7 @@ function requestSingleContent(tile) {
     throttleByServer: true,
     type: RequestType.TILES3D,
     priorityFunction: createPriorityFunction(tile),
-    serverKey: tile._serverKey,
+    serverKey: tile._serverKey
   });
 
   tile._request = request;
@@ -1258,7 +1257,7 @@ function requestSingleContent(tile) {
         tile._contentState = previousState;
         --tileset.statistics.numberOfPendingRequests;
         ++tileset.statistics.numberOfAttemptedRequests;
-        return Promise.reject("Cancelled");
+        return Promise.reject('Cancelled');
       }
       singleContentFailed(tile, tileset);
       return Promise.reject(error);
@@ -1341,7 +1340,7 @@ function makeContent(tile, arrayBuffer) {
   const groupMetadata = findGroupMetadata(tileset, contentHeader);
   if (defined(groupMetadata)) {
     content.group = new Cesium3DContentGroup({
-      metadata: groupMetadata,
+      metadata: groupMetadata
     });
   }
 
@@ -1654,7 +1653,7 @@ function createRegion(region, transform, initialTransform, result) {
   return new TileBoundingRegion({
     rectangle: rectangleRegion,
     minimumHeight: region[4],
-    maximumHeight: region[5],
+    maximumHeight: region[5]
   });
 }
 
@@ -1697,12 +1696,12 @@ Cesium3DTile.prototype.createBoundingVolume = function (
   result
 ) {
   if (!defined(boundingVolumeHeader)) {
-    throw new RuntimeError("boundingVolume must be defined");
+    throw new RuntimeError('boundingVolume must be defined');
   }
 
-  if (hasExtension(boundingVolumeHeader, "3DTILES_bounding_volume_S2")) {
+  if (hasExtension(boundingVolumeHeader, '3DTILES_bounding_volume_S2')) {
     return new TileBoundingS2Cell(
-      boundingVolumeHeader.extensions["3DTILES_bounding_volume_S2"]
+      boundingVolumeHeader.extensions['3DTILES_bounding_volume_S2']
     );
   }
 
@@ -1721,7 +1720,7 @@ Cesium3DTile.prototype.createBoundingVolume = function (
     return createSphere(boundingVolumeHeader.sphere, transform, result);
   }
   throw new RuntimeError(
-    "boundingVolume must contain a sphere, region, or box"
+    'boundingVolume must contain a sphere, region, or box'
   );
 };
 
@@ -1815,9 +1814,8 @@ function applyDebugSettings(tile, tileset, frameState, passOptions) {
       tile._debugBoundingVolume = tile._boundingVolume.createDebugVolume(color);
     }
     tile._debugBoundingVolume.update(frameState);
-    const attributes = tile._debugBoundingVolume.getGeometryInstanceAttributes(
-      "outline"
-    );
+    const attributes =
+      tile._debugBoundingVolume.getGeometryInstanceAttributes('outline');
     attributes.color = ColorGeometryInstanceAttribute.toValue(
       color,
       attributes.color
@@ -1828,16 +1826,16 @@ function applyDebugSettings(tile, tileset, frameState, passOptions) {
 
   if (tileset.debugShowContentBoundingVolume && hasContentBoundingVolume) {
     if (!defined(tile._debugContentBoundingVolume)) {
-      tile._debugContentBoundingVolume = tile._contentBoundingVolume.createDebugVolume(
-        Color.BLUE
-      );
+      tile._debugContentBoundingVolume =
+        tile._contentBoundingVolume.createDebugVolume(Color.BLUE);
     }
     tile._debugContentBoundingVolume.update(frameState);
   } else if (
     !tileset.debugShowContentBoundingVolume &&
     defined(tile._debugContentBoundingVolume)
   ) {
-    tile._debugContentBoundingVolume = tile._debugContentBoundingVolume.destroy();
+    tile._debugContentBoundingVolume =
+      tile._debugContentBoundingVolume.destroy();
   }
 
   if (
@@ -1845,9 +1843,8 @@ function applyDebugSettings(tile, tileset, frameState, passOptions) {
     defined(tile._viewerRequestVolume)
   ) {
     if (!defined(tile._debugViewerRequestVolume)) {
-      tile._debugViewerRequestVolume = tile._viewerRequestVolume.createDebugVolume(
-        Color.YELLOW
-      );
+      tile._debugViewerRequestVolume =
+        tile._viewerRequestVolume.createDebugVolume(Color.YELLOW);
     }
     tile._debugViewerRequestVolume.update(frameState);
   } else if (

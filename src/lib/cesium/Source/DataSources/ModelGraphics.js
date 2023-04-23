@@ -1,10 +1,10 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
-import NodeTransformationProperty from "./NodeTransformationProperty.js";
-import PropertyBag from "./PropertyBag.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
+import NodeTransformationProperty from './NodeTransformationProperty.js';
+import PropertyBag from './PropertyBag.js';
 
 function createNodeTransformationProperty(value) {
   return new NodeTransformationProperty(value);
@@ -119,7 +119,7 @@ Object.defineProperties(ModelGraphics.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -128,14 +128,14 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  show: createPropertyDescriptor("show"),
+  show: createPropertyDescriptor('show'),
 
   /**
    * Gets or sets the string Property specifying the URI of the glTF asset.
    * @memberof ModelGraphics.prototype
    * @type {Property|undefined}
    */
-  uri: createPropertyDescriptor("uri"),
+  uri: createPropertyDescriptor('uri'),
 
   /**
    * Gets or sets the numeric Property specifying a uniform linear scale
@@ -145,7 +145,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {Property|undefined}
    * @default 1.0
    */
-  scale: createPropertyDescriptor("scale"),
+  scale: createPropertyDescriptor('scale'),
 
   /**
    * Gets or sets the numeric Property specifying the approximate minimum
@@ -156,7 +156,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {Property|undefined}
    * @default 0.0
    */
-  minimumPixelSize: createPropertyDescriptor("minimumPixelSize"),
+  minimumPixelSize: createPropertyDescriptor('minimumPixelSize'),
 
   /**
    * Gets or sets the numeric Property specifying the maximum scale
@@ -165,7 +165,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @memberof ModelGraphics.prototype
    * @type {Property|undefined}
    */
-  maximumScale: createPropertyDescriptor("maximumScale"),
+  maximumScale: createPropertyDescriptor('maximumScale'),
 
   /**
    * Get or sets the boolean Property specifying whether textures
@@ -174,7 +174,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {Property|undefined}
    */
   incrementallyLoadTextures: createPropertyDescriptor(
-    "incrementallyLoadTextures"
+    'incrementallyLoadTextures'
   ),
 
   /**
@@ -183,7 +183,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  runAnimations: createPropertyDescriptor("runAnimations"),
+  runAnimations: createPropertyDescriptor('runAnimations'),
 
   /**
    * Gets or sets the boolean Property specifying if glTF animations should hold the last pose for time durations with no keyframes.
@@ -191,7 +191,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  clampAnimations: createPropertyDescriptor("clampAnimations"),
+  clampAnimations: createPropertyDescriptor('clampAnimations'),
 
   /**
    * Get or sets the enum Property specifying whether the model
@@ -200,7 +200,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {Property|undefined}
    * @default ShadowMode.ENABLED
    */
-  shadows: createPropertyDescriptor("shadows"),
+  shadows: createPropertyDescriptor('shadows'),
 
   /**
    * Gets or sets the Property specifying the {@link HeightReference}.
@@ -208,7 +208,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {Property|undefined}
    * @default HeightReference.NONE
    */
-  heightReference: createPropertyDescriptor("heightReference"),
+  heightReference: createPropertyDescriptor('heightReference'),
 
   /**
    * Gets or sets the Property specifying the {@link Color} of the silhouette.
@@ -216,7 +216,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {Property|undefined}
    * @default Color.RED
    */
-  silhouetteColor: createPropertyDescriptor("silhouetteColor"),
+  silhouetteColor: createPropertyDescriptor('silhouetteColor'),
 
   /**
    * Gets or sets the numeric Property specifying the size of the silhouette in pixels.
@@ -224,7 +224,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {Property|undefined}
    * @default 0.0
    */
-  silhouetteSize: createPropertyDescriptor("silhouetteSize"),
+  silhouetteSize: createPropertyDescriptor('silhouetteSize'),
 
   /**
    * Gets or sets the Property specifying the {@link Color} that blends with the model's rendered color.
@@ -232,7 +232,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {Property|undefined}
    * @default Color.WHITE
    */
-  color: createPropertyDescriptor("color"),
+  color: createPropertyDescriptor('color'),
 
   /**
    * Gets or sets the enum Property specifying how the color blends with the model.
@@ -240,7 +240,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {Property|undefined}
    * @default ColorBlendMode.HIGHLIGHT
    */
-  colorBlendMode: createPropertyDescriptor("colorBlendMode"),
+  colorBlendMode: createPropertyDescriptor('colorBlendMode'),
 
   /**
    * A numeric Property specifying the color strength when the <code>colorBlendMode</code> is MIX.
@@ -250,7 +250,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {Property|undefined}
    * @default 0.5
    */
-  colorBlendAmount: createPropertyDescriptor("colorBlendAmount"),
+  colorBlendAmount: createPropertyDescriptor('colorBlendAmount'),
 
   /**
    * A property specifying the {@link Cartesian2} used to scale the diffuse and specular image-based lighting contribution to the final color.
@@ -258,7 +258,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {Property|undefined}
    */
   imageBasedLightingFactor: createPropertyDescriptor(
-    "imageBasedLightingFactor"
+    'imageBasedLightingFactor'
   ),
 
   /**
@@ -266,7 +266,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @memberOf ModelGraphics.prototype
    * @type {Property|undefined}
    */
-  lightColor: createPropertyDescriptor("lightColor"),
+  lightColor: createPropertyDescriptor('lightColor'),
 
   /**
    * Gets or sets the {@link DistanceDisplayCondition} Property specifying at what distance from the camera that this model will be displayed.
@@ -274,7 +274,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {Property|undefined}
    */
   distanceDisplayCondition: createPropertyDescriptor(
-    "distanceDisplayCondition"
+    'distanceDisplayCondition'
   ),
 
   /**
@@ -285,7 +285,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {PropertyBag}
    */
   nodeTransformations: createPropertyDescriptor(
-    "nodeTransformations",
+    'nodeTransformations',
     undefined,
     createNodeTransformationPropertyBag
   ),
@@ -297,7 +297,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @type {PropertyBag}
    */
   articulations: createPropertyDescriptor(
-    "articulations",
+    'articulations',
     undefined,
     createArticulationStagePropertyBag
   ),
@@ -307,7 +307,7 @@ Object.defineProperties(ModelGraphics.prototype, {
    * @memberof ModelGraphics.prototype
    * @type {Property|undefined}
    */
-  clippingPlanes: createPropertyDescriptor("clippingPlanes"),
+  clippingPlanes: createPropertyDescriptor('clippingPlanes')
 });
 
 /**
@@ -352,7 +352,7 @@ ModelGraphics.prototype.clone = function (result) {
 ModelGraphics.prototype.merge = function (source) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
-    throw new DeveloperError("source is required.");
+    throw new DeveloperError('source is required.');
   }
   //>>includeEnd('debug');
 

@@ -1,5 +1,30 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './ComponentDatatype-4a60b8d6', './GeometryAttribute-a441ff32', './GeometryAttributes-7df9bef6', './VertexFormat-e46f29d6', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './WebGLConstants-7dccdc96'], (function (defaultValue, Transforms, Matrix2, RuntimeError, ComponentDatatype, GeometryAttribute, GeometryAttributes, VertexFormat, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
+define([
+  './defaultValue-94c3e563',
+  './Transforms-3ac41eb6',
+  './Matrix2-fc7e9822',
+  './RuntimeError-c581ca93',
+  './ComponentDatatype-4a60b8d6',
+  './GeometryAttribute-a441ff32',
+  './GeometryAttributes-7df9bef6',
+  './VertexFormat-e46f29d6',
+  './_commonjsHelpers-3aae1032-f55dc0c4',
+  './combine-761d9c3f',
+  './WebGLConstants-7dccdc96'
+], function (
+  defaultValue,
+  Transforms,
+  Matrix2,
+  RuntimeError,
+  ComponentDatatype,
+  GeometryAttribute,
+  GeometryAttributes,
+  VertexFormat,
+  _commonjsHelpers3aae1032,
+  combine,
+  WebGLConstants
+) {
+  'use strict';
 
   /**
    * Describes geometry representing a plane centered at the origin, with a unit width and length.
@@ -16,12 +41,18 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
    * });
    */
   function PlaneGeometry(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
-    const vertexFormat = defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
+    const vertexFormat = defaultValue.defaultValue(
+      options.vertexFormat,
+      VertexFormat.VertexFormat.DEFAULT
+    );
 
     this._vertexFormat = vertexFormat;
-    this._workerName = "createPlaneGeometry";
+    this._workerName = 'createPlaneGeometry';
   }
 
   /**
@@ -41,8 +72,8 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
    */
   PlaneGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -54,7 +85,7 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
 
   const scratchVertexFormat = new VertexFormat.VertexFormat();
   const scratchOptions = {
-    vertexFormat: scratchVertexFormat,
+    vertexFormat: scratchVertexFormat
   };
 
   /**
@@ -67,7 +98,7 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
    */
   PlaneGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -82,7 +113,10 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
       return new PlaneGeometry(scratchOptions);
     }
 
-    result._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat, result._vertexFormat);
+    result._vertexFormat = VertexFormat.VertexFormat.clone(
+      vertexFormat,
+      result._vertexFormat
+    );
 
     return result;
   };
@@ -124,7 +158,7 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
       attributes.position = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: positions,
+        values: positions
       });
 
       if (vertexFormat.normal) {
@@ -147,7 +181,7 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
         attributes.normal = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 3,
-          values: normals,
+          values: normals
         });
       }
 
@@ -167,7 +201,7 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
         attributes.st = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 2,
-          values: texCoords,
+          values: texCoords
         });
       }
 
@@ -191,7 +225,7 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
         attributes.tangent = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 3,
-          values: tangents,
+          values: tangents
         });
       }
 
@@ -215,7 +249,7 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
         attributes.bitangent = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 3,
-          values: bitangents,
+          values: bitangents
         });
       }
 
@@ -235,7 +269,10 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
       attributes: attributes,
       indices: indices,
       primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES,
-      boundingSphere: new Transforms.BoundingSphere(Matrix2.Cartesian3.ZERO, Math.sqrt(2.0)),
+      boundingSphere: new Transforms.BoundingSphere(
+        Matrix2.Cartesian3.ZERO,
+        Math.sqrt(2.0)
+      )
     });
   };
 
@@ -247,5 +284,4 @@ define(['./defaultValue-94c3e563', './Transforms-3ac41eb6', './Matrix2-fc7e9822'
   }
 
   return createPlaneGeometry;
-
-}));
+});

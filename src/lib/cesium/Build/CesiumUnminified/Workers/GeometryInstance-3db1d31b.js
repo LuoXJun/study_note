@@ -23,7 +23,13 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './defaultValue-97284df2', './RuntimeError-4f8ec8a2', './Matrix2-9e1c22e2'], (function (exports, defaultValue, RuntimeError, Matrix2) { 'use strict';
+define([
+  'exports',
+  './defaultValue-97284df2',
+  './RuntimeError-4f8ec8a2',
+  './Matrix2-9e1c22e2'
+], function (exports, defaultValue, RuntimeError, Matrix2) {
+  'use strict';
 
   /**
    * Geometry instancing allows one {@link Geometry} object to be positions in several
@@ -71,11 +77,14 @@ define(['exports', './defaultValue-97284df2', './RuntimeError-4f8ec8a2', './Matr
    * @see Geometry
    */
   function GeometryInstance(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(options.geometry)) {
-      throw new RuntimeError.DeveloperError("options.geometry is required.");
+      throw new RuntimeError.DeveloperError('options.geometry is required.');
     }
     //>>includeEnd('debug');
 
@@ -142,6 +151,5 @@ define(['exports', './defaultValue-97284df2', './RuntimeError-4f8ec8a2', './Matr
   }
 
   exports.GeometryInstance = GeometryInstance;
-
-}));
+});
 //# sourceMappingURL=GeometryInstance-3db1d31b.js.map

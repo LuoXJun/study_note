@@ -1,52 +1,52 @@
-import BoundingSphere from "../../Core/BoundingSphere.js";
-import Cartesian3 from "../../Core/Cartesian3.js";
-import Cartographic from "../../Core/Cartographic.js";
-import Clock from "../../Core/Clock.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defer from "../../Core/defer.js";
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import Event from "../../Core/Event.js";
-import EventHelper from "../../Core/EventHelper.js";
-import HeadingPitchRange from "../../Core/HeadingPitchRange.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import ScreenSpaceEventType from "../../Core/ScreenSpaceEventType.js";
-import BoundingSphereState from "../../DataSources/BoundingSphereState.js";
-import ConstantPositionProperty from "../../DataSources/ConstantPositionProperty.js";
-import DataSourceCollection from "../../DataSources/DataSourceCollection.js";
-import DataSourceDisplay from "../../DataSources/DataSourceDisplay.js";
-import Entity from "../../DataSources/Entity.js";
-import EntityView from "../../DataSources/EntityView.js";
-import Property from "../../DataSources/Property.js";
-import Cesium3DTileset from "../../Scene/Cesium3DTileset.js";
-import computeFlyToLocationForRectangle from "../../Scene/computeFlyToLocationForRectangle.js";
-import ImageryLayer from "../../Scene/ImageryLayer.js";
-import SceneMode from "../../Scene/SceneMode.js";
-import TimeDynamicPointCloud from "../../Scene/TimeDynamicPointCloud.js";
-import knockout from "../../ThirdParty/knockout.js";
-import Animation from "../Animation/Animation.js";
-import AnimationViewModel from "../Animation/AnimationViewModel.js";
-import BaseLayerPicker from "../BaseLayerPicker/BaseLayerPicker.js";
-import createDefaultImageryProviderViewModels from "../BaseLayerPicker/createDefaultImageryProviderViewModels.js";
-import createDefaultTerrainProviderViewModels from "../BaseLayerPicker/createDefaultTerrainProviderViewModels.js";
-import CesiumWidget from "../CesiumWidget/CesiumWidget.js";
-import ClockViewModel from "../ClockViewModel.js";
-import FullscreenButton from "../FullscreenButton/FullscreenButton.js";
-import Geocoder from "../Geocoder/Geocoder.js";
-import getElement from "../getElement.js";
-import HomeButton from "../HomeButton/HomeButton.js";
-import InfoBox from "../InfoBox/InfoBox.js";
-import NavigationHelpButton from "../NavigationHelpButton/NavigationHelpButton.js";
-import ProjectionPicker from "../ProjectionPicker/ProjectionPicker.js";
-import SceneModePicker from "../SceneModePicker/SceneModePicker.js";
-import SelectionIndicator from "../SelectionIndicator/SelectionIndicator.js";
-import subscribeAndEvaluate from "../subscribeAndEvaluate.js";
-import Timeline from "../Timeline/Timeline.js";
-import VRButton from "../VRButton/VRButton.js";
-import Cesium3DTileFeature from "../../Scene/Cesium3DTileFeature.js";
-import JulianDate from "../../Core/JulianDate.js";
-import CesiumMath from "../../Core/Math.js";
+import BoundingSphere from '../../Core/BoundingSphere.js';
+import Cartesian3 from '../../Core/Cartesian3.js';
+import Cartographic from '../../Core/Cartographic.js';
+import Clock from '../../Core/Clock.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defer from '../../Core/defer.js';
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import Event from '../../Core/Event.js';
+import EventHelper from '../../Core/EventHelper.js';
+import HeadingPitchRange from '../../Core/HeadingPitchRange.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import ScreenSpaceEventType from '../../Core/ScreenSpaceEventType.js';
+import BoundingSphereState from '../../DataSources/BoundingSphereState.js';
+import ConstantPositionProperty from '../../DataSources/ConstantPositionProperty.js';
+import DataSourceCollection from '../../DataSources/DataSourceCollection.js';
+import DataSourceDisplay from '../../DataSources/DataSourceDisplay.js';
+import Entity from '../../DataSources/Entity.js';
+import EntityView from '../../DataSources/EntityView.js';
+import Property from '../../DataSources/Property.js';
+import Cesium3DTileset from '../../Scene/Cesium3DTileset.js';
+import computeFlyToLocationForRectangle from '../../Scene/computeFlyToLocationForRectangle.js';
+import ImageryLayer from '../../Scene/ImageryLayer.js';
+import SceneMode from '../../Scene/SceneMode.js';
+import TimeDynamicPointCloud from '../../Scene/TimeDynamicPointCloud.js';
+import knockout from '../../ThirdParty/knockout.js';
+import Animation from '../Animation/Animation.js';
+import AnimationViewModel from '../Animation/AnimationViewModel.js';
+import BaseLayerPicker from '../BaseLayerPicker/BaseLayerPicker.js';
+import createDefaultImageryProviderViewModels from '../BaseLayerPicker/createDefaultImageryProviderViewModels.js';
+import createDefaultTerrainProviderViewModels from '../BaseLayerPicker/createDefaultTerrainProviderViewModels.js';
+import CesiumWidget from '../CesiumWidget/CesiumWidget.js';
+import ClockViewModel from '../ClockViewModel.js';
+import FullscreenButton from '../FullscreenButton/FullscreenButton.js';
+import Geocoder from '../Geocoder/Geocoder.js';
+import getElement from '../getElement.js';
+import HomeButton from '../HomeButton/HomeButton.js';
+import InfoBox from '../InfoBox/InfoBox.js';
+import NavigationHelpButton from '../NavigationHelpButton/NavigationHelpButton.js';
+import ProjectionPicker from '../ProjectionPicker/ProjectionPicker.js';
+import SceneModePicker from '../SceneModePicker/SceneModePicker.js';
+import SelectionIndicator from '../SelectionIndicator/SelectionIndicator.js';
+import subscribeAndEvaluate from '../subscribeAndEvaluate.js';
+import Timeline from '../Timeline/Timeline.js';
+import VRButton from '../VRButton/VRButton.js';
+import Cesium3DTileFeature from '../../Scene/Cesium3DTileFeature.js';
+import JulianDate from '../../Core/JulianDate.js';
+import CesiumMath from '../../Core/Math.js';
 
 const boundingSphereScratch = new BoundingSphere();
 
@@ -59,7 +59,7 @@ function onTimelineScrubfunction(e) {
 function getCesium3DTileFeatureDescription(feature) {
   const propertyIds = feature.getPropertyIds();
 
-  let html = "";
+  let html = '';
   propertyIds.forEach(function (propertyId) {
     const value = feature.getProperty(propertyId);
     if (defined(value)) {
@@ -104,11 +104,11 @@ function getCesium3DTileFeatureName(feature) {
   const length = possibleIds.length;
   for (i = 0; i < length; i++) {
     const item = possibleIds[i];
-    if (defined(item) && item !== "") {
+    if (defined(item) && item !== '') {
       return item;
     }
   }
-  return "Unnamed Feature";
+  return 'Unnamed Feature';
 }
 
 function pickEntity(viewer, e) {
@@ -123,7 +123,7 @@ function pickEntity(viewer, e) {
       return new Entity({
         name: getCesium3DTileFeatureName(picked),
         description: getCesium3DTileFeatureDescription(picked),
-        feature: picked,
+        feature: picked
       });
     }
   }
@@ -165,18 +165,16 @@ const cartesian3Scratch = new Cartesian3();
 function pickImageryLayerFeature(viewer, windowPosition) {
   const scene = viewer.scene;
   const pickRay = scene.camera.getPickRay(windowPosition);
-  const imageryLayerFeaturePromise = scene.imageryLayers.pickImageryLayerFeatures(
-    pickRay,
-    scene
-  );
+  const imageryLayerFeaturePromise =
+    scene.imageryLayers.pickImageryLayerFeatures(pickRay, scene);
   if (!defined(imageryLayerFeaturePromise)) {
     return;
   }
 
   // Imagery layer feature picking is asynchronous, so put up a message while loading.
   const loadingMessage = new Entity({
-    id: "Loading...",
-    description: "Loading feature information...",
+    id: 'Loading...',
+    description: 'Loading feature information...'
   });
 
   imageryLayerFeaturePromise.then(
@@ -196,14 +194,15 @@ function pickImageryLayerFeature(viewer, windowPosition) {
 
       const entity = new Entity({
         id: feature.name,
-        description: feature.description,
+        description: feature.description
       });
 
       if (defined(feature.position)) {
-        const ecfPosition = viewer.scene.globe.ellipsoid.cartographicToCartesian(
-          feature.position,
-          cartesian3Scratch
-        );
+        const ecfPosition =
+          viewer.scene.globe.ellipsoid.cartographicToCartesian(
+            feature.position,
+            cartesian3Scratch
+          );
         entity.position = new ConstantPositionProperty(ecfPosition);
       }
 
@@ -223,8 +222,8 @@ function pickImageryLayerFeature(viewer, windowPosition) {
 
 function createNoFeaturesEntity() {
   return new Entity({
-    id: "None",
-    description: "No features found.",
+    id: 'None',
+    description: 'No features found.'
   });
 }
 
@@ -240,7 +239,7 @@ function enableVRUI(viewer, enabled) {
   const infoBox = viewer._infoBox;
   const selectionIndicator = viewer._selectionIndicator;
 
-  const visibility = enabled ? "hidden" : "visible";
+  const visibility = enabled ? 'hidden' : 'visible';
 
   if (defined(geocoder)) {
     geocoder.container.style.visibility = visibility;
@@ -404,7 +403,7 @@ function enableVRUI(viewer, enabled) {
 function Viewer(container, options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(container)) {
-    throw new DeveloperError("container is required.");
+    throw new DeveloperError('container is required.');
   }
   //>>includeEnd('debug');
 
@@ -422,8 +421,8 @@ function Viewer(container, options) {
     defined(options.selectedImageryProviderViewModel)
   ) {
     throw new DeveloperError(
-      "options.selectedImageryProviderViewModel is not available when not using the BaseLayerPicker widget. \
-Either specify options.imageryProvider instead or set options.baseLayerPicker to true."
+      'options.selectedImageryProviderViewModel is not available when not using the BaseLayerPicker widget. \
+Either specify options.imageryProvider instead or set options.baseLayerPicker to true.'
     );
   }
 
@@ -433,26 +432,26 @@ Either specify options.imageryProvider instead or set options.baseLayerPicker to
     defined(options.selectedTerrainProviderViewModel)
   ) {
     throw new DeveloperError(
-      "options.selectedTerrainProviderViewModel is not available when not using the BaseLayerPicker widget. \
-Either specify options.terrainProvider instead or set options.baseLayerPicker to true."
+      'options.selectedTerrainProviderViewModel is not available when not using the BaseLayerPicker widget. \
+Either specify options.terrainProvider instead or set options.baseLayerPicker to true.'
     );
   }
   //>>includeEnd('debug')
 
   const that = this;
 
-  const viewerContainer = document.createElement("div");
-  viewerContainer.className = "cesium-viewer";
+  const viewerContainer = document.createElement('div');
+  viewerContainer.className = 'cesium-viewer';
   container.appendChild(viewerContainer);
 
   // Cesium widget container
-  const cesiumWidgetContainer = document.createElement("div");
-  cesiumWidgetContainer.className = "cesium-viewer-cesiumWidgetContainer";
+  const cesiumWidgetContainer = document.createElement('div');
+  cesiumWidgetContainer.className = 'cesium-viewer-cesiumWidgetContainer';
   viewerContainer.appendChild(cesiumWidgetContainer);
 
   // Bottom container
-  const bottomContainer = document.createElement("div");
-  bottomContainer.className = "cesium-viewer-bottom";
+  const bottomContainer = document.createElement('div');
+  bottomContainer.className = 'cesium-viewer-bottom';
 
   viewerContainer.appendChild(bottomContainer);
 
@@ -503,7 +502,7 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
     requestRenderMode: options.requestRenderMode,
     maximumRenderTimeChange: options.maximumRenderTimeChange,
     depthPlaneEllipsoidOffset: options.depthPlaneEllipsoidOffset,
-    msaaSamples: options.msaaSamples,
+    msaaSamples: options.msaaSamples
   });
 
   let dataSourceCollection = options.dataSources;
@@ -517,7 +516,7 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
 
   const dataSourceDisplay = new DataSourceDisplay({
     scene: scene,
-    dataSourceCollection: dataSourceCollection,
+    dataSourceCollection: dataSourceCollection
   });
 
   const eventHelper = new EventHelper();
@@ -531,9 +530,9 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
     !defined(options.selectionIndicator) ||
     options.selectionIndicator !== false
   ) {
-    const selectionIndicatorContainer = document.createElement("div");
+    const selectionIndicatorContainer = document.createElement('div');
     selectionIndicatorContainer.className =
-      "cesium-viewer-selectionIndicatorContainer";
+      'cesium-viewer-selectionIndicatorContainer';
     viewerContainer.appendChild(selectionIndicatorContainer);
     selectionIndicator = new SelectionIndicator(
       selectionIndicatorContainer,
@@ -544,8 +543,8 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
   // Info Box
   let infoBox;
   if (!defined(options.infoBox) || options.infoBox !== false) {
-    const infoBoxContainer = document.createElement("div");
-    infoBoxContainer.className = "cesium-viewer-infoBoxContainer";
+    const infoBoxContainer = document.createElement('div');
+    infoBoxContainer.className = 'cesium-viewer-infoBoxContainer';
     viewerContainer.appendChild(infoBoxContainer);
     infoBox = new InfoBox(infoBoxContainer);
 
@@ -563,18 +562,18 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
   }
 
   // Main Toolbar
-  const toolbar = document.createElement("div");
-  toolbar.className = "cesium-viewer-toolbar";
+  const toolbar = document.createElement('div');
+  toolbar.className = 'cesium-viewer-toolbar';
   viewerContainer.appendChild(toolbar);
 
   // Geocoder
   let geocoder;
   if (!defined(options.geocoder) || options.geocoder !== false) {
-    const geocoderContainer = document.createElement("div");
-    geocoderContainer.className = "cesium-viewer-geocoderContainer";
+    const geocoderContainer = document.createElement('div');
+    geocoderContainer.className = 'cesium-viewer-geocoderContainer';
     toolbar.appendChild(geocoderContainer);
     let geocoderService;
-    if (defined(options.geocoder) && typeof options.geocoder !== "boolean") {
+    if (defined(options.geocoder) && typeof options.geocoder !== 'boolean') {
       geocoderService = Array.isArray(options.geocoder)
         ? options.geocoder
         : [options.geocoder];
@@ -582,7 +581,7 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
     geocoder = new Geocoder({
       container: geocoderContainer,
       geocoderServices: geocoderService,
-      scene: scene,
+      scene: scene
     });
     // Subscribe to search so that we can clear the trackedEntity when it is clicked.
     eventHelper.add(
@@ -599,7 +598,7 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
     if (defined(geocoder)) {
       eventHelper.add(homeButton.viewModel.command.afterExecute, function () {
         const viewModel = geocoder.viewModel;
-        viewModel.searchText = "";
+        viewModel.searchText = '';
         if (viewModel.isSearchInProgress) {
           viewModel.search();
         }
@@ -619,7 +618,7 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
   //>>includeStart('debug', pragmas.debug);
   if (options.sceneModePicker === true && scene3DOnly) {
     throw new DeveloperError(
-      "options.sceneModePicker is not available when options.scene3DOnly is set to true."
+      'options.sceneModePicker is not available when options.scene3DOnly is set to true.'
     );
   }
   //>>includeEnd('debug');
@@ -656,13 +655,12 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
       selectedImageryProviderViewModel:
         options.selectedImageryProviderViewModel,
       terrainProviderViewModels: terrainProviderViewModels,
-      selectedTerrainProviderViewModel:
-        options.selectedTerrainProviderViewModel,
+      selectedTerrainProviderViewModel: options.selectedTerrainProviderViewModel
     });
 
     //Grab the dropdown for resize code.
     const elements = toolbar.getElementsByClassName(
-      "cesium-baseLayerPicker-dropDown"
+      'cesium-baseLayerPicker-dropDown'
     );
     baseLayerPickerDropDown = elements[0];
   }
@@ -693,12 +691,12 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
       //window.localStorage is null if disabled in Firefox or undefined in browsers with implementation
       if (defined(window.localStorage)) {
         const hasSeenNavHelp = window.localStorage.getItem(
-          "cesium-hasSeenNavHelp"
+          'cesium-hasSeenNavHelp'
         );
         if (defined(hasSeenNavHelp) && Boolean(hasSeenNavHelp)) {
           showNavHelp = false;
         } else {
-          window.localStorage.setItem("cesium-hasSeenNavHelp", "true");
+          window.localStorage.setItem('cesium-hasSeenNavHelp', 'true');
         }
       }
     } catch (e) {
@@ -710,15 +708,15 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
       instructionsInitiallyVisible: defaultValue(
         options.navigationInstructionsInitiallyVisible,
         showNavHelp
-      ),
+      )
     });
   }
 
   // Animation
   let animation;
   if (!defined(options.animation) || options.animation !== false) {
-    const animationContainer = document.createElement("div");
-    animationContainer.className = "cesium-viewer-animationContainer";
+    const animationContainer = document.createElement('div');
+    animationContainer.className = 'cesium-viewer-animationContainer';
     viewerContainer.appendChild(animationContainer);
     animation = new Animation(
       animationContainer,
@@ -729,11 +727,11 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
   // Timeline
   let timeline;
   if (!defined(options.timeline) || options.timeline !== false) {
-    const timelineContainer = document.createElement("div");
-    timelineContainer.className = "cesium-viewer-timelineContainer";
+    const timelineContainer = document.createElement('div');
+    timelineContainer.className = 'cesium-viewer-timelineContainer';
     viewerContainer.appendChild(timelineContainer);
     timeline = new Timeline(timelineContainer, clock);
-    timeline.addEventListener("settime", onTimelineScrubfunction, false);
+    timeline.addEventListener('settime', onTimelineScrubfunction, false);
     timeline.zoomTo(clock.startTime, clock.stopTime);
   }
 
@@ -745,8 +743,8 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
     !defined(options.fullscreenButton) ||
     options.fullscreenButton !== false
   ) {
-    fullscreenContainer = document.createElement("div");
-    fullscreenContainer.className = "cesium-viewer-fullscreenContainer";
+    fullscreenContainer = document.createElement('div');
+    fullscreenContainer.className = 'cesium-viewer-fullscreenContainer';
     viewerContainer.appendChild(fullscreenContainer);
     fullscreenButton = new FullscreenButton(
       fullscreenContainer,
@@ -757,11 +755,11 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
     //that we can hide/show the button as well as size the timeline.
     fullscreenSubscription = subscribeAndEvaluate(
       fullscreenButton.viewModel,
-      "isFullscreenEnabled",
+      'isFullscreenEnabled',
       function (isFullscreenEnabled) {
         fullscreenContainer.style.display = isFullscreenEnabled
-          ? "block"
-          : "none";
+          ? 'block'
+          : 'none';
         if (defined(timeline)) {
           timeline.container.style.right = `${fullscreenContainer.clientWidth}px`;
           timeline.resize();
@@ -775,16 +773,16 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
   let vrSubscription;
   let vrModeSubscription;
   if (options.vrButton) {
-    const vrContainer = document.createElement("div");
-    vrContainer.className = "cesium-viewer-vrContainer";
+    const vrContainer = document.createElement('div');
+    vrContainer.className = 'cesium-viewer-vrContainer';
     viewerContainer.appendChild(vrContainer);
     vrButton = new VRButton(vrContainer, scene, options.fullScreenElement);
 
     vrSubscription = subscribeAndEvaluate(
       vrButton.viewModel,
-      "isVREnabled",
+      'isVREnabled',
       function (isVREnabled) {
-        vrContainer.style.display = isVREnabled ? "block" : "none";
+        vrContainer.style.display = isVREnabled ? 'block' : 'none';
         if (defined(fullscreenButton)) {
           vrContainer.style.right = `${fullscreenContainer.clientWidth}px`;
         }
@@ -797,7 +795,7 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
 
     vrModeSubscription = subscribeAndEvaluate(
       vrButton.viewModel,
-      "isVRMode",
+      'isVRMode',
       function (isVRMode) {
         enableVRUI(that, isVRMode);
       }
@@ -855,9 +853,9 @@ Either specify options.terrainProvider instead or set options.baseLayerPicker to
   this._trackedEntityChanged = new Event();
 
   knockout.track(this, [
-    "_trackedEntity",
-    "_selectedEntity",
-    "_clockTrackedDataSource",
+    '_trackedEntity',
+    '_selectedEntity',
+    '_clockTrackedDataSource'
   ]);
 
   //Listen to data source events in order to track clock changes.
@@ -938,7 +936,7 @@ Object.defineProperties(Viewer.prototype, {
   container: {
     get: function () {
       return this._container;
-    },
+    }
   },
 
   /**
@@ -951,7 +949,7 @@ Object.defineProperties(Viewer.prototype, {
   bottomContainer: {
     get: function () {
       return this._bottomContainer;
-    },
+    }
   },
 
   /**
@@ -963,7 +961,7 @@ Object.defineProperties(Viewer.prototype, {
   cesiumWidget: {
     get: function () {
       return this._cesiumWidget;
-    },
+    }
   },
 
   /**
@@ -975,7 +973,7 @@ Object.defineProperties(Viewer.prototype, {
   selectionIndicator: {
     get: function () {
       return this._selectionIndicator;
-    },
+    }
   },
 
   /**
@@ -987,7 +985,7 @@ Object.defineProperties(Viewer.prototype, {
   infoBox: {
     get: function () {
       return this._infoBox;
-    },
+    }
   },
 
   /**
@@ -999,7 +997,7 @@ Object.defineProperties(Viewer.prototype, {
   geocoder: {
     get: function () {
       return this._geocoder;
-    },
+    }
   },
 
   /**
@@ -1011,7 +1009,7 @@ Object.defineProperties(Viewer.prototype, {
   homeButton: {
     get: function () {
       return this._homeButton;
-    },
+    }
   },
 
   /**
@@ -1023,7 +1021,7 @@ Object.defineProperties(Viewer.prototype, {
   sceneModePicker: {
     get: function () {
       return this._sceneModePicker;
-    },
+    }
   },
 
   /**
@@ -1035,7 +1033,7 @@ Object.defineProperties(Viewer.prototype, {
   projectionPicker: {
     get: function () {
       return this._projectionPicker;
-    },
+    }
   },
 
   /**
@@ -1047,7 +1045,7 @@ Object.defineProperties(Viewer.prototype, {
   baseLayerPicker: {
     get: function () {
       return this._baseLayerPicker;
-    },
+    }
   },
 
   /**
@@ -1059,7 +1057,7 @@ Object.defineProperties(Viewer.prototype, {
   navigationHelpButton: {
     get: function () {
       return this._navigationHelpButton;
-    },
+    }
   },
 
   /**
@@ -1071,7 +1069,7 @@ Object.defineProperties(Viewer.prototype, {
   animation: {
     get: function () {
       return this._animation;
-    },
+    }
   },
 
   /**
@@ -1083,7 +1081,7 @@ Object.defineProperties(Viewer.prototype, {
   timeline: {
     get: function () {
       return this._timeline;
-    },
+    }
   },
 
   /**
@@ -1095,7 +1093,7 @@ Object.defineProperties(Viewer.prototype, {
   fullscreenButton: {
     get: function () {
       return this._fullscreenButton;
-    },
+    }
   },
 
   /**
@@ -1107,7 +1105,7 @@ Object.defineProperties(Viewer.prototype, {
   vrButton: {
     get: function () {
       return this._vrButton;
-    },
+    }
   },
 
   /**
@@ -1119,7 +1117,7 @@ Object.defineProperties(Viewer.prototype, {
   dataSourceDisplay: {
     get: function () {
       return this._dataSourceDisplay;
-    },
+    }
   },
 
   /**
@@ -1132,7 +1130,7 @@ Object.defineProperties(Viewer.prototype, {
   entities: {
     get: function () {
       return this._dataSourceDisplay.defaultDataSource.entities;
-    },
+    }
   },
 
   /**
@@ -1144,7 +1142,7 @@ Object.defineProperties(Viewer.prototype, {
   dataSources: {
     get: function () {
       return this._dataSourceCollection;
-    },
+    }
   },
 
   /**
@@ -1156,7 +1154,7 @@ Object.defineProperties(Viewer.prototype, {
   canvas: {
     get: function () {
       return this._cesiumWidget.canvas;
-    },
+    }
   },
 
   /**
@@ -1168,7 +1166,7 @@ Object.defineProperties(Viewer.prototype, {
   scene: {
     get: function () {
       return this._cesiumWidget.scene;
-    },
+    }
   },
 
   /**
@@ -1182,7 +1180,7 @@ Object.defineProperties(Viewer.prototype, {
     },
     set: function (value) {
       this.scene.shadowMap.enabled = value;
-    },
+    }
   },
 
   /**
@@ -1196,7 +1194,7 @@ Object.defineProperties(Viewer.prototype, {
     },
     set: function (value) {
       this.scene.globe.shadows = value;
-    },
+    }
   },
 
   /**
@@ -1208,7 +1206,7 @@ Object.defineProperties(Viewer.prototype, {
   shadowMap: {
     get: function () {
       return this.scene.shadowMap;
-    },
+    }
   },
 
   /**
@@ -1221,7 +1219,7 @@ Object.defineProperties(Viewer.prototype, {
   imageryLayers: {
     get: function () {
       return this.scene.imageryLayers;
-    },
+    }
   },
 
   /**
@@ -1236,7 +1234,7 @@ Object.defineProperties(Viewer.prototype, {
     },
     set: function (terrainProvider) {
       this.scene.terrainProvider = terrainProvider;
-    },
+    }
   },
 
   /**
@@ -1249,7 +1247,7 @@ Object.defineProperties(Viewer.prototype, {
   camera: {
     get: function () {
       return this.scene.camera;
-    },
+    }
   },
 
   /**
@@ -1262,7 +1260,7 @@ Object.defineProperties(Viewer.prototype, {
   postProcessStages: {
     get: function () {
       return this.scene.postProcessStages;
-    },
+    }
   },
 
   /**
@@ -1274,7 +1272,7 @@ Object.defineProperties(Viewer.prototype, {
   clock: {
     get: function () {
       return this._clockViewModel.clock;
-    },
+    }
   },
 
   /**
@@ -1286,7 +1284,7 @@ Object.defineProperties(Viewer.prototype, {
   clockViewModel: {
     get: function () {
       return this._clockViewModel;
-    },
+    }
   },
 
   /**
@@ -1298,7 +1296,7 @@ Object.defineProperties(Viewer.prototype, {
   screenSpaceEventHandler: {
     get: function () {
       return this._cesiumWidget.screenSpaceEventHandler;
-    },
+    }
   },
 
   /**
@@ -1316,7 +1314,7 @@ Object.defineProperties(Viewer.prototype, {
     },
     set: function (value) {
       this._cesiumWidget.targetFrameRate = value;
-    },
+    }
   },
 
   /**
@@ -1339,7 +1337,7 @@ Object.defineProperties(Viewer.prototype, {
     },
     set: function (value) {
       this._cesiumWidget.useDefaultRenderLoop = value;
-    },
+    }
   },
 
   /**
@@ -1360,7 +1358,7 @@ Object.defineProperties(Viewer.prototype, {
     },
     set: function (value) {
       this._cesiumWidget.resolutionScale = value;
-    },
+    }
   },
 
   /**
@@ -1381,7 +1379,7 @@ Object.defineProperties(Viewer.prototype, {
     },
     set: function (value) {
       this._cesiumWidget.useBrowserRecommendedResolution = value;
-    },
+    }
   },
 
   /**
@@ -1400,7 +1398,7 @@ Object.defineProperties(Viewer.prototype, {
     },
     set: function (value) {
       this._allowDataSourcesToSuspendAnimation = value;
-    },
+    }
   },
 
   /**
@@ -1450,7 +1448,7 @@ Object.defineProperties(Viewer.prototype, {
         this._trackedEntityChanged.raiseEvent(value);
         this.scene.requestRender();
       }
-    },
+    }
   },
   /**
    * Gets or sets the object instance for which to display a selection indicator.
@@ -1481,7 +1479,7 @@ Object.defineProperties(Viewer.prototype, {
         }
         this._selectedEntityChanged.raiseEvent(value);
       }
-    },
+    }
   },
   /**
    * Gets the event that is raised when the selected entity changes.
@@ -1492,7 +1490,7 @@ Object.defineProperties(Viewer.prototype, {
   selectedEntityChanged: {
     get: function () {
       return this._selectedEntityChanged;
-    },
+    }
   },
   /**
    * Gets the event that is raised when the tracked entity changes.
@@ -1503,7 +1501,7 @@ Object.defineProperties(Viewer.prototype, {
   trackedEntityChanged: {
     get: function () {
       return this._trackedEntityChanged;
-    },
+    }
   },
   /**
    * Gets or sets the data source to track with the viewer's clock.
@@ -1519,8 +1517,8 @@ Object.defineProperties(Viewer.prototype, {
         this._clockTrackedDataSource = value;
         trackDataSourceClock(this._timeline, this.clock, value);
       }
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -1536,7 +1534,7 @@ Object.defineProperties(Viewer.prototype, {
 Viewer.prototype.extend = function (mixin, options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(mixin)) {
-    throw new DeveloperError("mixin is required.");
+    throw new DeveloperError('mixin is required.');
   }
   //>>includeEnd('debug')
 
@@ -1586,29 +1584,29 @@ Viewer.prototype.resize = function () {
 
   if (
     animationExists &&
-    window.getComputedStyle(this._animation.container).visibility !== "hidden"
+    window.getComputedStyle(this._animation.container).visibility !== 'hidden'
   ) {
     const lastWidth = this._lastWidth;
     animationContainer = this._animation.container;
     if (width > 900) {
       animationWidth = 169;
       if (lastWidth <= 900) {
-        animationContainer.style.width = "169px";
-        animationContainer.style.height = "112px";
+        animationContainer.style.width = '169px';
+        animationContainer.style.height = '112px';
         this._animation.resize();
       }
     } else if (width >= 600) {
       animationWidth = 136;
       if (lastWidth < 600 || lastWidth > 900) {
-        animationContainer.style.width = "136px";
-        animationContainer.style.height = "90px";
+        animationContainer.style.width = '136px';
+        animationContainer.style.height = '90px';
         this._animation.resize();
       }
     } else {
       animationWidth = 106;
       if (lastWidth > 600 || lastWidth === 0) {
-        animationContainer.style.width = "106px";
-        animationContainer.style.height = "70px";
+        animationContainer.style.width = '106px';
+        animationContainer.style.height = '70px';
         this._animation.resize();
       }
     }
@@ -1617,7 +1615,7 @@ Viewer.prototype.resize = function () {
 
   if (
     timelineExists &&
-    window.getComputedStyle(this._timeline.container).visibility !== "hidden"
+    window.getComputedStyle(this._timeline.container).visibility !== 'hidden'
   ) {
     const fullscreenButton = this._fullscreenButton;
     const vrButton = this._vrButton;
@@ -1724,7 +1722,7 @@ Viewer.prototype.destroy = function () {
 
   if (defined(this._timeline)) {
     this._timeline.removeEventListener(
-      "settime",
+      'settime',
       onTimelineScrubfunction,
       false
     );
@@ -1888,11 +1886,11 @@ Viewer.prototype._onTick = function (clock) {
       infoBoxViewModel.description = Property.getValueOrDefault(
         selectedEntity.description,
         time,
-        ""
+        ''
       );
     } else {
-      infoBoxViewModel.titleText = "";
-      infoBoxViewModel.description = "";
+      infoBoxViewModel.titleText = '';
+      infoBoxViewModel.description = '';
     }
   }
 };
@@ -2031,7 +2029,7 @@ Viewer.prototype._onDataSourceRemoved = function (
  */
 Viewer.prototype.zoomTo = function (target, offset) {
   const options = {
-    offset: offset,
+    offset: offset
   };
   return zoomToOrFly(this, target, options, false);
 };
@@ -2065,7 +2063,7 @@ Viewer.prototype.flyTo = function (target, options) {
 function zoomToOrFly(that, zoomTarget, options, isFlight) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(zoomTarget)) {
-    throw new DeveloperError("zoomTarget is required.");
+    throw new DeveloperError('zoomTarget is required.');
   }
   //>>includeEnd('debug');
 
@@ -2210,7 +2208,7 @@ function updateZoomTarget(viewer) {
         },
         cancel: function () {
           zoomPromise.resolve(false);
-        },
+        }
       };
 
       if (viewer._zoomIsFlight) {
@@ -2249,7 +2247,7 @@ function updateZoomTarget(viewer) {
         },
         cancel: function () {
           zoomPromise.resolve(false);
-        },
+        }
       };
 
       if (viewer._zoomIsFlight) {
@@ -2269,9 +2267,8 @@ function updateZoomTarget(viewer) {
   // If zoomTarget was an ImageryLayer
   if (target instanceof Cartographic) {
     options = {
-      destination: scene.mapProjection.ellipsoid.cartographicToCartesian(
-        target
-      ),
+      destination:
+        scene.mapProjection.ellipsoid.cartographicToCartesian(target),
       duration: zoomOptions.duration,
       maximumHeight: zoomOptions.maximumHeight,
       complete: function () {
@@ -2279,7 +2276,7 @@ function updateZoomTarget(viewer) {
       },
       cancel: function () {
         zoomPromise.resolve(false);
-      },
+      }
     };
 
     if (viewer._zoomIsFlight) {
@@ -2335,7 +2332,7 @@ function updateZoomTarget(viewer) {
       cancel: function () {
         zoomPromise.resolve(false);
       },
-      offset: zoomOptions.offset,
+      offset: zoomOptions.offset
     });
   }
 }

@@ -1,5 +1,5 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
 
 /**
  * Simple abstraction for a group. This class exists to make the metadata API
@@ -18,7 +18,7 @@ import defaultValue from "../Core/defaultValue.js";
 export default function Cesium3DContentGroup(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.metadata", options.metadata);
+  Check.typeOf.object('options.metadata', options.metadata);
   //>>includeEnd('debug');
 
   this._metadata = options.metadata;
@@ -37,6 +37,6 @@ Object.defineProperties(Cesium3DContentGroup.prototype, {
   metadata: {
     get: function () {
       return this._metadata;
-    },
-  },
+    }
+  }
 });

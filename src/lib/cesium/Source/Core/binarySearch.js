@@ -1,4 +1,4 @@
-import Check from "./Check.js";
+import Check from './Check.js';
 
 /**
  * Finds an item in a sorted array.
@@ -23,9 +23,9 @@ import Check from "./Check.js";
  */
 function binarySearch(array, itemToFind, comparator) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
-  Check.defined("itemToFind", itemToFind);
-  Check.defined("comparator", comparator);
+  Check.defined('array', array);
+  Check.defined('itemToFind', itemToFind);
+  Check.defined('comparator', comparator);
   //>>includeEnd('debug');
 
   let low = 0;

@@ -1,31 +1,31 @@
-import ArcType from "./ArcType.js";
-import BoundingRectangle from "./BoundingRectangle.js";
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import EllipsoidGeodesic from "./EllipsoidGeodesic.js";
-import EllipsoidTangentPlane from "./EllipsoidTangentPlane.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryInstance from "./GeometryInstance.js";
-import GeometryOffsetAttribute from "./GeometryOffsetAttribute.js";
-import GeometryPipeline from "./GeometryPipeline.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
-import PolygonGeometryLibrary from "./PolygonGeometryLibrary.js";
-import PolygonPipeline from "./PolygonPipeline.js";
-import Quaternion from "./Quaternion.js";
-import Rectangle from "./Rectangle.js";
-import VertexFormat from "./VertexFormat.js";
-import WindingOrder from "./WindingOrder.js";
+import ArcType from './ArcType.js';
+import BoundingRectangle from './BoundingRectangle.js';
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import EllipsoidGeodesic from './EllipsoidGeodesic.js';
+import EllipsoidTangentPlane from './EllipsoidTangentPlane.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryInstance from './GeometryInstance.js';
+import GeometryOffsetAttribute from './GeometryOffsetAttribute.js';
+import GeometryPipeline from './GeometryPipeline.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
+import PolygonGeometryLibrary from './PolygonGeometryLibrary.js';
+import PolygonPipeline from './PolygonPipeline.js';
+import Quaternion from './Quaternion.js';
+import Rectangle from './Rectangle.js';
+import VertexFormat from './VertexFormat.js';
+import WindingOrder from './WindingOrder.js';
 
 const scratchCarto1 = new Cartographic();
 const scratchCarto2 = new Cartographic();
@@ -362,7 +362,7 @@ function computeAttributes(options) {
       geometry.attributes.st = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 2,
-        values: textureCoordinates,
+        values: textureCoordinates
       });
     }
 
@@ -370,7 +370,7 @@ function computeAttributes(options) {
       geometry.attributes.normal = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: normals,
+        values: normals
       });
     }
 
@@ -378,7 +378,7 @@ function computeAttributes(options) {
       geometry.attributes.tangent = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: tangents,
+        values: tangents
       });
     }
 
@@ -386,7 +386,7 @@ function computeAttributes(options) {
       geometry.attributes.bitangent = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: bitangents,
+        values: bitangents
       });
     }
 
@@ -394,7 +394,7 @@ function computeAttributes(options) {
       geometry.attributes.extrudeDirection = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: extrudeNormals,
+        values: extrudeNormals
       });
     }
   }
@@ -418,7 +418,7 @@ function computeAttributes(options) {
     geometry.attributes.applyOffset = new GeometryAttribute({
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 1,
-      values: offsetAttribute,
+      values: offsetAttribute
     });
   }
 
@@ -429,7 +429,7 @@ const startCartographicScratch = new Cartographic();
 const endCartographicScratch = new Cartographic();
 const idlCross = {
   westOverIDL: 0.0,
-  eastOverIDL: 0.0,
+  eastOverIDL: 0.0
 };
 let ellipsoidGeodesic = new EllipsoidGeodesic();
 function computeRectangle(positions, ellipsoid, arcType, granularity, result) {
@@ -522,10 +522,11 @@ function interpolateAndGrowRectangle(
   let interpolationDistance = 0.0;
 
   for (let i = 0; i < numPoints; i++) {
-    const interpolatedCartographic = ellipsoidGeodesic.interpolateUsingSurfaceDistance(
-      interpolationDistance,
-      interpolatedCartographicScratch
-    );
+    const interpolatedCartographic =
+      ellipsoidGeodesic.interpolateUsingSurfaceDistance(
+        interpolationDistance,
+        interpolatedCartographicScratch
+      );
     interpolationDistance += subsegmentDistance;
     const longitude = interpolatedCartographic.longitude;
     const latitude = interpolatedCartographic.latitude;
@@ -557,7 +558,7 @@ function createGeometryFromPositionsExtruded(
   arcType
 ) {
   const geos = {
-    walls: [],
+    walls: []
   };
   let i;
 
@@ -631,7 +632,7 @@ function createGeometryFromPositionsExtruded(
     }
 
     geos.topAndBottom = new GeometryInstance({
-      geometry: topGeo,
+      geometry: topGeo
     });
   }
 
@@ -657,7 +658,7 @@ function createGeometryFromPositionsExtruded(
   );
   geos.walls.push(
     new GeometryInstance({
-      geometry: wallGeo,
+      geometry: wallGeo
     })
   );
 
@@ -686,7 +687,7 @@ function createGeometryFromPositionsExtruded(
     );
     geos.walls.push(
       new GeometryInstance({
-        geometry: wallGeo,
+        geometry: wallGeo
       })
     );
   }
@@ -788,15 +789,15 @@ function createGeometryFromPositionsExtruded(
  */
 function PolygonGeometry(options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options", options);
-  Check.typeOf.object("options.polygonHierarchy", options.polygonHierarchy);
+  Check.typeOf.object('options', options);
+  Check.typeOf.object('options.polygonHierarchy', options.polygonHierarchy);
   if (
     defined(options.perPositionHeight) &&
     options.perPositionHeight &&
     defined(options.height)
   ) {
     throw new DeveloperError(
-      "Cannot use both options.perPositionHeight and options.height"
+      'Cannot use both options.perPositionHeight and options.height'
     );
   }
   if (
@@ -805,7 +806,7 @@ function PolygonGeometry(options) {
     options.arcType !== ArcType.RHUMB
   ) {
     throw new DeveloperError(
-      "Invalid arcType. Valid options are ArcType.GEODESIC and ArcType.RHUMB."
+      'Invalid arcType. Valid options are ArcType.GEODESIC and ArcType.RHUMB.'
     );
   }
   //>>includeEnd('debug');
@@ -843,7 +844,7 @@ function PolygonGeometry(options) {
   this._perPositionHeight = perPositionHeight;
   this._perPositionHeightExtrude = perPositionHeightExtrude;
   this._shadowVolume = defaultValue(options.shadowVolume, false);
-  this._workerName = "createPolygonGeometry";
+  this._workerName = 'createPolygonGeometry';
   this._offsetAttribute = options.offsetAttribute;
   this._arcType = defaultValue(options.arcType, ArcType.GEODESIC);
 
@@ -908,12 +909,12 @@ PolygonGeometry.fromPositions = function (options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.positions", options.positions);
+  Check.defined('options.positions', options.positions);
   //>>includeEnd('debug');
 
   const newOptions = {
     polygonHierarchy: {
-      positions: options.positions,
+      positions: options.positions
     },
     height: options.height,
     extrudedHeight: options.extrudedHeight,
@@ -926,7 +927,7 @@ PolygonGeometry.fromPositions = function (options) {
     closeBottom: options.closeBottom,
     offsetAttribute: options.offsetAttribute,
     arcType: options.arcType,
-    textureCoordinates: options.textureCoordinates,
+    textureCoordinates: options.textureCoordinates
   };
   return new PolygonGeometry(newOptions);
 };
@@ -942,8 +943,8 @@ PolygonGeometry.fromPositions = function (options) {
  */
 PolygonGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -991,7 +992,7 @@ const scratchVertexFormat = new VertexFormat();
 
 //Only used to avoid inability to default construct.
 const dummyOptions = {
-  polygonHierarchy: {},
+  polygonHierarchy: {}
 };
 
 /**
@@ -1003,7 +1004,7 @@ const dummyOptions = {
  */
 PolygonGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -1092,8 +1093,8 @@ PolygonGeometry.unpack = function (array, startingIndex, result) {
  */
 PolygonGeometry.computeRectangle = function (options, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options", options);
-  Check.typeOf.object("options.polygonHierarchy", options.polygonHierarchy);
+  Check.typeOf.object('options', options);
+  Check.typeOf.object('options.polygonHierarchy', options.polygonHierarchy);
   //>>includeEnd('debug');
 
   const granularity = defaultValue(
@@ -1104,7 +1105,7 @@ PolygonGeometry.computeRectangle = function (options, result) {
   //>>includeStart('debug', pragmas.debug);
   if (arcType !== ArcType.GEODESIC && arcType !== ArcType.RHUMB) {
     throw new DeveloperError(
-      "Invalid arcType. Valid options are ArcType.GEODESIC and ArcType.RHUMB."
+      'Invalid arcType. Valid options are ArcType.GEODESIC and ArcType.RHUMB.'
     );
   }
   //>>includeEnd('debug');
@@ -1209,7 +1210,7 @@ PolygonGeometry.createGeometry = function (polygonGeometry) {
     top: true,
     wall: false,
     extrude: false,
-    arcType: arcType,
+    arcType: arcType
   };
 
   let i;
@@ -1246,21 +1247,23 @@ PolygonGeometry.createGeometry = function (polygonGeometry) {
         );
       } else if (closeTop) {
         topAndBottom = splitGeometry.topAndBottom;
-        topAndBottom.geometry.attributes.position.values = PolygonPipeline.scaleToGeodeticHeight(
-          topAndBottom.geometry.attributes.position.values,
-          height,
-          ellipsoid,
-          !perPositionHeight
-        );
+        topAndBottom.geometry.attributes.position.values =
+          PolygonPipeline.scaleToGeodeticHeight(
+            topAndBottom.geometry.attributes.position.values,
+            height,
+            ellipsoid,
+            !perPositionHeight
+          );
         options.geometry = topAndBottom.geometry;
       } else if (closeBottom) {
         topAndBottom = splitGeometry.topAndBottom;
-        topAndBottom.geometry.attributes.position.values = PolygonPipeline.scaleToGeodeticHeight(
-          topAndBottom.geometry.attributes.position.values,
-          extrudedHeight,
-          ellipsoid,
-          true
-        );
+        topAndBottom.geometry.attributes.position.values =
+          PolygonPipeline.scaleToGeodeticHeight(
+            topAndBottom.geometry.attributes.position.values,
+            extrudedHeight,
+            ellipsoid,
+            true
+          );
         options.geometry = topAndBottom.geometry;
       }
       if (closeTop || closeBottom) {
@@ -1295,14 +1298,15 @@ PolygonGeometry.createGeometry = function (polygonGeometry) {
           perPositionHeight,
           vertexFormat,
           arcType
-        ),
+        )
       });
-      geometryInstance.geometry.attributes.position.values = PolygonPipeline.scaleToGeodeticHeight(
-        geometryInstance.geometry.attributes.position.values,
-        height,
-        ellipsoid,
-        !perPositionHeight
-      );
+      geometryInstance.geometry.attributes.position.values =
+        PolygonPipeline.scaleToGeodeticHeight(
+          geometryInstance.geometry.attributes.position.values,
+          height,
+          ellipsoid,
+          !perPositionHeight
+        );
       options.geometry = geometryInstance.geometry;
 
       geometryInstance.geometry = computeAttributes(options);
@@ -1315,13 +1319,12 @@ PolygonGeometry.createGeometry = function (polygonGeometry) {
             ? 0
             : 1;
         const applyOffset = new Uint8Array(length / 3).fill(offsetValue);
-        geometryInstance.geometry.attributes.applyOffset = new GeometryAttribute(
-          {
+        geometryInstance.geometry.attributes.applyOffset =
+          new GeometryAttribute({
             componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
             componentsPerAttribute: 1,
-            values: applyOffset,
-          }
-        );
+            values: applyOffset
+          });
       }
 
       geometries.push(geometryInstance);
@@ -1351,7 +1354,7 @@ PolygonGeometry.createGeometry = function (polygonGeometry) {
     indices: geometry.indices,
     primitiveType: geometry.primitiveType,
     boundingSphere: boundingSphere,
-    offsetAttribute: polygonGeometry._offsetAttribute,
+    offsetAttribute: polygonGeometry._offsetAttribute
   });
 };
 
@@ -1379,7 +1382,7 @@ PolygonGeometry.createShadowVolume = function (
     height: maxHeight,
     vertexFormat: VertexFormat.POSITION_ONLY,
     shadowVolume: true,
-    arcType: polygonGeometry._arcType,
+    arcType: polygonGeometry._arcType
   });
 };
 
@@ -1416,7 +1419,7 @@ Object.defineProperties(PolygonGeometry.prototype, {
       }
 
       return this._rectangle;
-    },
+    }
   },
   /**
    * For remapping texture coordinates when rendering PolygonGeometries as GroundPrimitives.
@@ -1425,12 +1428,11 @@ Object.defineProperties(PolygonGeometry.prototype, {
   textureCoordinateRotationPoints: {
     get: function () {
       if (!defined(this._textureCoordinateRotationPoints)) {
-        this._textureCoordinateRotationPoints = textureCoordinateRotationPoints(
-          this
-        );
+        this._textureCoordinateRotationPoints =
+          textureCoordinateRotationPoints(this);
       }
       return this._textureCoordinateRotationPoints;
-    },
-  },
+    }
+  }
 });
 export default PolygonGeometry;

@@ -1,20 +1,20 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import GeographicProjection from "./GeographicProjection.js";
-import HeightmapEncoding from "./HeightmapEncoding.js";
-import HeightmapTessellator from "./HeightmapTessellator.js";
-import CesiumMath from "./Math.js";
-import OrientedBoundingBox from "./OrientedBoundingBox.js";
-import Rectangle from "./Rectangle.js";
-import TaskProcessor from "./TaskProcessor.js";
-import TerrainData from "./TerrainData.js";
-import TerrainEncoding from "./TerrainEncoding.js";
-import TerrainMesh from "./TerrainMesh.js";
-import TerrainProvider from "./TerrainProvider.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import GeographicProjection from './GeographicProjection.js';
+import HeightmapEncoding from './HeightmapEncoding.js';
+import HeightmapTessellator from './HeightmapTessellator.js';
+import CesiumMath from './Math.js';
+import OrientedBoundingBox from './OrientedBoundingBox.js';
+import Rectangle from './Rectangle.js';
+import TaskProcessor from './TaskProcessor.js';
+import TerrainData from './TerrainData.js';
+import TerrainEncoding from './TerrainEncoding.js';
+import TerrainMesh from './TerrainMesh.js';
+import TerrainProvider from './TerrainProvider.js';
 
 /**
  * Terrain data for a single tile where the terrain data is represented as a heightmap.  A heightmap
@@ -96,13 +96,13 @@ import TerrainProvider from "./TerrainProvider.js";
 function HeightmapTerrainData(options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options) || !defined(options.buffer)) {
-    throw new DeveloperError("options.buffer is required.");
+    throw new DeveloperError('options.buffer is required.');
   }
   if (!defined(options.width)) {
-    throw new DeveloperError("options.width is required.");
+    throw new DeveloperError('options.width is required.');
   }
   if (!defined(options.height)) {
-    throw new DeveloperError("options.height is required.");
+    throw new DeveloperError('options.height is required.');
   }
   //>>includeEnd('debug');
 
@@ -161,7 +161,7 @@ Object.defineProperties(HeightmapTerrainData.prototype, {
   credits: {
     get: function () {
       return undefined;
-    },
+    }
   },
   /**
    * The water mask included in this terrain data, if any.  A water mask is a square
@@ -173,17 +173,17 @@ Object.defineProperties(HeightmapTerrainData.prototype, {
   waterMask: {
     get: function () {
       return this._waterMask;
-    },
+    }
   },
 
   childTileMask: {
     get: function () {
       return this._childTileMask;
-    },
-  },
+    }
+  }
 });
 
-const createMeshTaskName = "createVerticesFromHeightmap";
+const createMeshTaskName = 'createVerticesFromHeightmap';
 const createMeshTaskProcessorNoThrottle = new TaskProcessor(createMeshTaskName);
 const createMeshTaskProcessorThrottle = new TaskProcessor(
   createMeshTaskName,
@@ -211,10 +211,10 @@ HeightmapTerrainData.prototype.createMesh = function (options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.tilingScheme", options.tilingScheme);
-  Check.typeOf.number("options.x", options.x);
-  Check.typeOf.number("options.y", options.y);
-  Check.typeOf.number("options.level", options.level);
+  Check.typeOf.object('options.tilingScheme', options.tilingScheme);
+  Check.typeOf.number('options.x', options.x);
+  Check.typeOf.number('options.y', options.y);
+  Check.typeOf.number('options.level', options.level);
   //>>includeEnd('debug');
 
   const tilingScheme = options.tilingScheme;
@@ -237,11 +237,12 @@ HeightmapTerrainData.prototype.createMesh = function (options) {
 
   const structure = this._structure;
 
-  const levelZeroMaxError = TerrainProvider.getEstimatedLevelZeroGeometricErrorForAHeightmap(
-    ellipsoid,
-    this._width,
-    tilingScheme.getNumberOfXTilesAtLevel(0)
-  );
+  const levelZeroMaxError =
+    TerrainProvider.getEstimatedLevelZeroGeometricErrorForAHeightmap(
+      ellipsoid,
+      this._width,
+      tilingScheme.getNumberOfXTilesAtLevel(0)
+    );
   const thisLevelMaxError = levelZeroMaxError / (1 << level);
   this._skirtHeight = Math.min(thisLevelMaxError * 4.0, 1000.0);
 
@@ -263,7 +264,7 @@ HeightmapTerrainData.prototype.createMesh = function (options) {
     isGeographic: tilingScheme.projection instanceof GeographicProjection,
     exaggeration: exaggeration,
     exaggerationRelativeHeight: exaggerationRelativeHeight,
-    encoding: this._encoding,
+    encoding: this._encoding
   });
 
   if (!defined(verticesPromise)) {
@@ -275,10 +276,11 @@ HeightmapTerrainData.prototype.createMesh = function (options) {
   return Promise.resolve(verticesPromise).then(function (result) {
     let indicesAndEdges;
     if (that._skirtHeight > 0.0) {
-      indicesAndEdges = TerrainProvider.getRegularGridAndSkirtIndicesAndEdgeIndices(
-        result.gridWidth,
-        result.gridHeight
-      );
+      indicesAndEdges =
+        TerrainProvider.getRegularGridAndSkirtIndicesAndEdgeIndices(
+          result.gridWidth,
+          result.gridHeight
+        );
     } else {
       indicesAndEdges = TerrainProvider.getRegularGridIndicesAndEdgeIndices(
         result.gridWidth,
@@ -328,10 +330,10 @@ HeightmapTerrainData.prototype.createMesh = function (options) {
  */
 HeightmapTerrainData.prototype._createMeshSync = function (options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.tilingScheme", options.tilingScheme);
-  Check.typeOf.number("options.x", options.x);
-  Check.typeOf.number("options.y", options.y);
-  Check.typeOf.number("options.level", options.level);
+  Check.typeOf.object('options.tilingScheme', options.tilingScheme);
+  Check.typeOf.number('options.x', options.x);
+  Check.typeOf.number('options.y', options.y);
+  Check.typeOf.number('options.level', options.level);
   //>>includeEnd('debug');
 
   const tilingScheme = options.tilingScheme;
@@ -353,11 +355,12 @@ HeightmapTerrainData.prototype._createMeshSync = function (options) {
 
   const structure = this._structure;
 
-  const levelZeroMaxError = TerrainProvider.getEstimatedLevelZeroGeometricErrorForAHeightmap(
-    ellipsoid,
-    this._width,
-    tilingScheme.getNumberOfXTilesAtLevel(0)
-  );
+  const levelZeroMaxError =
+    TerrainProvider.getEstimatedLevelZeroGeometricErrorForAHeightmap(
+      ellipsoid,
+      this._width,
+      tilingScheme.getNumberOfXTilesAtLevel(0)
+    );
   const thisLevelMaxError = levelZeroMaxError / (1 << level);
   this._skirtHeight = Math.min(thisLevelMaxError * 4.0, 1000.0);
 
@@ -374,7 +377,7 @@ HeightmapTerrainData.prototype._createMeshSync = function (options) {
     skirtHeight: this._skirtHeight,
     isGeographic: tilingScheme.projection instanceof GeographicProjection,
     exaggeration: exaggeration,
-    exaggerationRelativeHeight: exaggerationRelativeHeight,
+    exaggerationRelativeHeight: exaggerationRelativeHeight
   });
 
   // Free memory received from server after mesh is created.
@@ -382,10 +385,11 @@ HeightmapTerrainData.prototype._createMeshSync = function (options) {
 
   let indicesAndEdges;
   if (this._skirtHeight > 0.0) {
-    indicesAndEdges = TerrainProvider.getRegularGridAndSkirtIndicesAndEdgeIndices(
-      this._width,
-      this._height
-    );
+    indicesAndEdges =
+      TerrainProvider.getRegularGridAndSkirtIndicesAndEdgeIndices(
+        this._width,
+        this._height
+      );
   } else {
     indicesAndEdges = TerrainProvider.getRegularGridIndicesAndEdgeIndices(
       this._width,
@@ -514,30 +518,30 @@ HeightmapTerrainData.prototype.upsample = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(tilingScheme)) {
-    throw new DeveloperError("tilingScheme is required.");
+    throw new DeveloperError('tilingScheme is required.');
   }
   if (!defined(thisX)) {
-    throw new DeveloperError("thisX is required.");
+    throw new DeveloperError('thisX is required.');
   }
   if (!defined(thisY)) {
-    throw new DeveloperError("thisY is required.");
+    throw new DeveloperError('thisY is required.');
   }
   if (!defined(thisLevel)) {
-    throw new DeveloperError("thisLevel is required.");
+    throw new DeveloperError('thisLevel is required.');
   }
   if (!defined(descendantX)) {
-    throw new DeveloperError("descendantX is required.");
+    throw new DeveloperError('descendantX is required.');
   }
   if (!defined(descendantY)) {
-    throw new DeveloperError("descendantY is required.");
+    throw new DeveloperError('descendantY is required.');
   }
   if (!defined(descendantLevel)) {
-    throw new DeveloperError("descendantLevel is required.");
+    throw new DeveloperError('descendantLevel is required.');
   }
   const levelDifference = descendantLevel - thisLevel;
   if (levelDifference > 1) {
     throw new DeveloperError(
-      "Upsampling through more than one level at a time is not currently supported."
+      'Upsampling through more than one level at a time is not currently supported.'
     );
   }
   //>>includeEnd('debug');
@@ -633,7 +637,7 @@ HeightmapTerrainData.prototype.upsample = function (
       height: height,
       childTileMask: 0,
       structure: this._structure,
-      createdByUpsampling: true,
+      createdByUpsampling: true
     })
   );
 };
@@ -658,16 +662,16 @@ HeightmapTerrainData.prototype.isChildAvailable = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(thisX)) {
-    throw new DeveloperError("thisX is required.");
+    throw new DeveloperError('thisX is required.');
   }
   if (!defined(thisY)) {
-    throw new DeveloperError("thisY is required.");
+    throw new DeveloperError('thisY is required.');
   }
   if (!defined(childX)) {
-    throw new DeveloperError("childX is required.");
+    throw new DeveloperError('childX is required.');
   }
   if (!defined(childY)) {
-    throw new DeveloperError("childY is required.");
+    throw new DeveloperError('childY is required.');
   }
   //>>includeEnd('debug');
 

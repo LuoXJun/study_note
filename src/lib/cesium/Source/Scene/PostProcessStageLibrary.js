@@ -1,31 +1,31 @@
-import buildModuleUrl from "../Core/buildModuleUrl.js";
-import Color from "../Core/Color.js";
-import createGuid from "../Core/createGuid.js";
-import defined from "../Core/defined.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import AcesTonemapping from "../Shaders/PostProcessStages/AcesTonemappingStage.js";
-import AmbientOcclusionGenerate from "../Shaders/PostProcessStages/AmbientOcclusionGenerate.js";
-import AmbientOcclusionModulate from "../Shaders/PostProcessStages/AmbientOcclusionModulate.js";
-import BlackAndWhite from "../Shaders/PostProcessStages/BlackAndWhite.js";
-import BloomComposite from "../Shaders/PostProcessStages/BloomComposite.js";
-import Brightness from "../Shaders/PostProcessStages/Brightness.js";
-import ContrastBias from "../Shaders/PostProcessStages/ContrastBias.js";
-import DepthOfField from "../Shaders/PostProcessStages/DepthOfField.js";
-import DepthView from "../Shaders/PostProcessStages/DepthView.js";
-import EdgeDetection from "../Shaders/PostProcessStages/EdgeDetection.js";
-import FilmicTonemapping from "../Shaders/PostProcessStages/FilmicTonemapping.js";
-import FXAA from "../Shaders/PostProcessStages/FXAA.js";
-import GaussianBlur1D from "../Shaders/PostProcessStages/GaussianBlur1D.js";
-import LensFlare from "../Shaders/PostProcessStages/LensFlare.js";
-import ModifiedReinhardTonemapping from "../Shaders/PostProcessStages/ModifiedReinhardTonemapping.js";
-import NightVision from "../Shaders/PostProcessStages/NightVision.js";
-import ReinhardTonemapping from "../Shaders/PostProcessStages/ReinhardTonemapping.js";
-import Silhouette from "../Shaders/PostProcessStages/Silhouette.js";
-import FXAA3_11 from "../Shaders/FXAA3_11.js";
-import AutoExposure from "./AutoExposure.js";
-import PostProcessStage from "./PostProcessStage.js";
-import PostProcessStageComposite from "./PostProcessStageComposite.js";
-import PostProcessStageSampleMode from "./PostProcessStageSampleMode.js";
+import buildModuleUrl from '../Core/buildModuleUrl.js';
+import Color from '../Core/Color.js';
+import createGuid from '../Core/createGuid.js';
+import defined from '../Core/defined.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import AcesTonemapping from '../Shaders/PostProcessStages/AcesTonemappingStage.js';
+import AmbientOcclusionGenerate from '../Shaders/PostProcessStages/AmbientOcclusionGenerate.js';
+import AmbientOcclusionModulate from '../Shaders/PostProcessStages/AmbientOcclusionModulate.js';
+import BlackAndWhite from '../Shaders/PostProcessStages/BlackAndWhite.js';
+import BloomComposite from '../Shaders/PostProcessStages/BloomComposite.js';
+import Brightness from '../Shaders/PostProcessStages/Brightness.js';
+import ContrastBias from '../Shaders/PostProcessStages/ContrastBias.js';
+import DepthOfField from '../Shaders/PostProcessStages/DepthOfField.js';
+import DepthView from '../Shaders/PostProcessStages/DepthView.js';
+import EdgeDetection from '../Shaders/PostProcessStages/EdgeDetection.js';
+import FilmicTonemapping from '../Shaders/PostProcessStages/FilmicTonemapping.js';
+import FXAA from '../Shaders/PostProcessStages/FXAA.js';
+import GaussianBlur1D from '../Shaders/PostProcessStages/GaussianBlur1D.js';
+import LensFlare from '../Shaders/PostProcessStages/LensFlare.js';
+import ModifiedReinhardTonemapping from '../Shaders/PostProcessStages/ModifiedReinhardTonemapping.js';
+import NightVision from '../Shaders/PostProcessStages/NightVision.js';
+import ReinhardTonemapping from '../Shaders/PostProcessStages/ReinhardTonemapping.js';
+import Silhouette from '../Shaders/PostProcessStages/Silhouette.js';
+import FXAA3_11 from '../Shaders/FXAA3_11.js';
+import AutoExposure from './AutoExposure.js';
+import PostProcessStage from './PostProcessStage.js';
+import PostProcessStageComposite from './PostProcessStageComposite.js';
+import PostProcessStageSampleMode from './PostProcessStageSampleMode.js';
 
 /**
  * Contains functions for creating common post-process stages.
@@ -47,9 +47,9 @@ function createBlur(name) {
       delta: delta,
       sigma: sigma,
       stepSize: stepSize,
-      direction: 0.0,
+      direction: 0.0
     },
-    sampleMode: PostProcessStageSampleMode.LINEAR,
+    sampleMode: PostProcessStageSampleMode.LINEAR
   });
   const blurY = new PostProcessStage({
     name: `${name}_y_direction`,
@@ -58,9 +58,9 @@ function createBlur(name) {
       delta: delta,
       sigma: sigma,
       stepSize: stepSize,
-      direction: 1.0,
+      direction: 1.0
     },
-    sampleMode: PostProcessStageSampleMode.LINEAR,
+    sampleMode: PostProcessStageSampleMode.LINEAR
   });
 
   const uniforms = {};
@@ -73,7 +73,7 @@ function createBlur(name) {
         const blurXUniforms = blurX.uniforms;
         const blurYUniforms = blurY.uniforms;
         blurXUniforms.delta = blurYUniforms.delta = value;
-      },
+      }
     },
     sigma: {
       get: function () {
@@ -83,7 +83,7 @@ function createBlur(name) {
         const blurXUniforms = blurX.uniforms;
         const blurYUniforms = blurY.uniforms;
         blurXUniforms.sigma = blurYUniforms.sigma = value;
-      },
+      }
     },
     stepSize: {
       get: function () {
@@ -93,13 +93,13 @@ function createBlur(name) {
         const blurXUniforms = blurX.uniforms;
         const blurYUniforms = blurY.uniforms;
         blurXUniforms.stepSize = blurYUniforms.stepSize = value;
-      },
-    },
+      }
+    }
   });
   return new PostProcessStageComposite({
     name: name,
     stages: [blurX, blurY],
-    uniforms: uniforms,
+    uniforms: uniforms
   });
 }
 
@@ -116,7 +116,7 @@ function createBlur(name) {
  * @return {PostProcessStageComposite} A post-process stage that applies a Gaussian blur to the input texture.
  */
 PostProcessStageLibrary.createBlurStage = function () {
-  return createBlur("czm_blur");
+  return createBlur('czm_blur');
 };
 
 /**
@@ -138,14 +138,14 @@ PostProcessStageLibrary.createBlurStage = function () {
  * @return {PostProcessStageComposite} A post-process stage that applies a depth of field effect.
  */
 PostProcessStageLibrary.createDepthOfFieldStage = function () {
-  const blur = createBlur("czm_depth_of_field_blur");
+  const blur = createBlur('czm_depth_of_field_blur');
   const dof = new PostProcessStage({
-    name: "czm_depth_of_field_composite",
+    name: 'czm_depth_of_field_composite',
     fragmentShader: DepthOfField,
     uniforms: {
       focalDistance: 5.0,
-      blurTexture: blur.name,
-    },
+      blurTexture: blur.name
+    }
   });
 
   const uniforms = {};
@@ -156,7 +156,7 @@ PostProcessStageLibrary.createDepthOfFieldStage = function () {
       },
       set: function (value) {
         dof.uniforms.focalDistance = value;
-      },
+      }
     },
     delta: {
       get: function () {
@@ -164,7 +164,7 @@ PostProcessStageLibrary.createDepthOfFieldStage = function () {
       },
       set: function (value) {
         blur.uniforms.delta = value;
-      },
+      }
     },
     sigma: {
       get: function () {
@@ -172,7 +172,7 @@ PostProcessStageLibrary.createDepthOfFieldStage = function () {
       },
       set: function (value) {
         blur.uniforms.sigma = value;
-      },
+      }
     },
     stepSize: {
       get: function () {
@@ -180,14 +180,14 @@ PostProcessStageLibrary.createDepthOfFieldStage = function () {
       },
       set: function (value) {
         blur.uniforms.stepSize = value;
-      },
-    },
+      }
+    }
   });
   return new PostProcessStageComposite({
-    name: "czm_depth_of_field",
+    name: 'czm_depth_of_field',
     stages: [blur, dof],
     inputPreviousStageTexture: false,
-    uniforms: uniforms,
+    uniforms: uniforms
   });
 };
 
@@ -245,8 +245,8 @@ PostProcessStageLibrary.createEdgeDetectionStage = function () {
     fragmentShader: EdgeDetection,
     uniforms: {
       length: 0.25,
-      color: Color.clone(Color.BLACK),
-    },
+      color: Color.clone(Color.BLACK)
+    }
   });
 };
 
@@ -272,14 +272,14 @@ function getSilhouetteEdgeDetection(edgeDetectionStages) {
   }
 
   const edgeDetection = new PostProcessStageComposite({
-    name: "czm_edge_detection_multiple",
+    name: 'czm_edge_detection_multiple',
     stages: edgeDetectionStages,
-    inputPreviousStageTexture: false,
+    inputPreviousStageTexture: false
   });
 
   const compositeUniforms = {};
-  let fsDecl = "";
-  let fsLoop = "";
+  let fsDecl = '';
+  let fsLoop = '';
   for (let i = 0; i < edgeDetectionStages.length; ++i) {
     fsDecl += `uniform sampler2D edgeTexture${i}; \n`;
     fsLoop +=
@@ -302,13 +302,13 @@ function getSilhouetteEdgeDetection(edgeDetectionStages) {
     `} \n`;
 
   const edgeComposite = new PostProcessStage({
-    name: "czm_edge_detection_combine",
+    name: 'czm_edge_detection_combine',
     fragmentShader: fs,
-    uniforms: compositeUniforms,
+    uniforms: compositeUniforms
   });
   return new PostProcessStageComposite({
-    name: "czm_edge_detection_composite",
-    stages: [edgeDetection, edgeComposite],
+    name: 'czm_edge_detection_composite',
+    stages: [edgeDetection, edgeComposite]
   });
 }
 
@@ -330,18 +330,18 @@ function getSilhouetteEdgeDetection(edgeDetectionStages) {
 PostProcessStageLibrary.createSilhouetteStage = function (edgeDetectionStages) {
   const edgeDetection = getSilhouetteEdgeDetection(edgeDetectionStages);
   const silhouetteProcess = new PostProcessStage({
-    name: "czm_silhouette_color_edges",
+    name: 'czm_silhouette_color_edges',
     fragmentShader: Silhouette,
     uniforms: {
-      silhouetteTexture: edgeDetection.name,
-    },
+      silhouetteTexture: edgeDetection.name
+    }
   });
 
   return new PostProcessStageComposite({
-    name: "czm_silhouette",
+    name: 'czm_silhouette',
     stages: [edgeDetection, silhouetteProcess],
     inputPreviousStageTexture: false,
-    uniforms: edgeDetection.uniforms,
+    uniforms: edgeDetection.uniforms
   });
 };
 
@@ -386,26 +386,26 @@ PostProcessStageLibrary.isSilhouetteSupported = function (scene) {
  */
 PostProcessStageLibrary.createBloomStage = function () {
   const contrastBias = new PostProcessStage({
-    name: "czm_bloom_contrast_bias",
+    name: 'czm_bloom_contrast_bias',
     fragmentShader: ContrastBias,
     uniforms: {
       contrast: 128.0,
-      brightness: -0.3,
-    },
+      brightness: -0.3
+    }
   });
-  const blur = createBlur("czm_bloom_blur");
+  const blur = createBlur('czm_bloom_blur');
   const generateComposite = new PostProcessStageComposite({
-    name: "czm_bloom_contrast_bias_blur",
-    stages: [contrastBias, blur],
+    name: 'czm_bloom_contrast_bias_blur',
+    stages: [contrastBias, blur]
   });
 
   const bloomComposite = new PostProcessStage({
-    name: "czm_bloom_generate_composite",
+    name: 'czm_bloom_generate_composite',
     fragmentShader: BloomComposite,
     uniforms: {
       glowOnly: false,
-      bloomTexture: generateComposite.name,
-    },
+      bloomTexture: generateComposite.name
+    }
   });
 
   const uniforms = {};
@@ -416,7 +416,7 @@ PostProcessStageLibrary.createBloomStage = function () {
       },
       set: function (value) {
         bloomComposite.uniforms.glowOnly = value;
-      },
+      }
     },
     contrast: {
       get: function () {
@@ -424,7 +424,7 @@ PostProcessStageLibrary.createBloomStage = function () {
       },
       set: function (value) {
         contrastBias.uniforms.contrast = value;
-      },
+      }
     },
     brightness: {
       get: function () {
@@ -432,7 +432,7 @@ PostProcessStageLibrary.createBloomStage = function () {
       },
       set: function (value) {
         contrastBias.uniforms.brightness = value;
-      },
+      }
     },
     delta: {
       get: function () {
@@ -440,7 +440,7 @@ PostProcessStageLibrary.createBloomStage = function () {
       },
       set: function (value) {
         blur.uniforms.delta = value;
-      },
+      }
     },
     sigma: {
       get: function () {
@@ -448,7 +448,7 @@ PostProcessStageLibrary.createBloomStage = function () {
       },
       set: function (value) {
         blur.uniforms.sigma = value;
-      },
+      }
     },
     stepSize: {
       get: function () {
@@ -456,15 +456,15 @@ PostProcessStageLibrary.createBloomStage = function () {
       },
       set: function (value) {
         blur.uniforms.stepSize = value;
-      },
-    },
+      }
+    }
   });
 
   return new PostProcessStageComposite({
-    name: "czm_bloom",
+    name: 'czm_bloom',
     stages: [generateComposite, bloomComposite],
     inputPreviousStageTexture: false,
-    uniforms: uniforms,
+    uniforms: uniforms
   });
 };
 
@@ -502,7 +502,7 @@ PostProcessStageLibrary.createBloomStage = function () {
  */
 PostProcessStageLibrary.createAmbientOcclusionStage = function () {
   const generate = new PostProcessStage({
-    name: "czm_ambient_occlusion_generate",
+    name: 'czm_ambient_occlusion_generate',
     fragmentShader: AmbientOcclusionGenerate,
     uniforms: {
       intensity: 3.0,
@@ -510,23 +510,23 @@ PostProcessStageLibrary.createAmbientOcclusionStage = function () {
       lengthCap: 0.26,
       stepSize: 1.95,
       frustumLength: 1000.0,
-      randomTexture: undefined,
-    },
+      randomTexture: undefined
+    }
   });
-  const blur = createBlur("czm_ambient_occlusion_blur");
+  const blur = createBlur('czm_ambient_occlusion_blur');
   blur.uniforms.stepSize = 0.86;
   const generateAndBlur = new PostProcessStageComposite({
-    name: "czm_ambient_occlusion_generate_blur",
-    stages: [generate, blur],
+    name: 'czm_ambient_occlusion_generate_blur',
+    stages: [generate, blur]
   });
 
   const ambientOcclusionModulate = new PostProcessStage({
-    name: "czm_ambient_occlusion_composite",
+    name: 'czm_ambient_occlusion_composite',
     fragmentShader: AmbientOcclusionModulate,
     uniforms: {
       ambientOcclusionOnly: false,
-      ambientOcclusionTexture: generateAndBlur.name,
-    },
+      ambientOcclusionTexture: generateAndBlur.name
+    }
   });
 
   const uniforms = {};
@@ -537,7 +537,7 @@ PostProcessStageLibrary.createAmbientOcclusionStage = function () {
       },
       set: function (value) {
         generate.uniforms.intensity = value;
-      },
+      }
     },
     bias: {
       get: function () {
@@ -545,7 +545,7 @@ PostProcessStageLibrary.createAmbientOcclusionStage = function () {
       },
       set: function (value) {
         generate.uniforms.bias = value;
-      },
+      }
     },
     lengthCap: {
       get: function () {
@@ -553,7 +553,7 @@ PostProcessStageLibrary.createAmbientOcclusionStage = function () {
       },
       set: function (value) {
         generate.uniforms.lengthCap = value;
-      },
+      }
     },
     stepSize: {
       get: function () {
@@ -561,7 +561,7 @@ PostProcessStageLibrary.createAmbientOcclusionStage = function () {
       },
       set: function (value) {
         generate.uniforms.stepSize = value;
-      },
+      }
     },
     frustumLength: {
       get: function () {
@@ -569,7 +569,7 @@ PostProcessStageLibrary.createAmbientOcclusionStage = function () {
       },
       set: function (value) {
         generate.uniforms.frustumLength = value;
-      },
+      }
     },
     randomTexture: {
       get: function () {
@@ -577,7 +577,7 @@ PostProcessStageLibrary.createAmbientOcclusionStage = function () {
       },
       set: function (value) {
         generate.uniforms.randomTexture = value;
-      },
+      }
     },
     delta: {
       get: function () {
@@ -585,7 +585,7 @@ PostProcessStageLibrary.createAmbientOcclusionStage = function () {
       },
       set: function (value) {
         blur.uniforms.delta = value;
-      },
+      }
     },
     sigma: {
       get: function () {
@@ -593,7 +593,7 @@ PostProcessStageLibrary.createAmbientOcclusionStage = function () {
       },
       set: function (value) {
         blur.uniforms.sigma = value;
-      },
+      }
     },
     blurStepSize: {
       get: function () {
@@ -601,7 +601,7 @@ PostProcessStageLibrary.createAmbientOcclusionStage = function () {
       },
       set: function (value) {
         blur.uniforms.stepSize = value;
-      },
+      }
     },
     ambientOcclusionOnly: {
       get: function () {
@@ -609,15 +609,15 @@ PostProcessStageLibrary.createAmbientOcclusionStage = function () {
       },
       set: function (value) {
         ambientOcclusionModulate.uniforms.ambientOcclusionOnly = value;
-      },
-    },
+      }
+    }
   });
 
   return new PostProcessStageComposite({
-    name: "czm_ambient_occlusion",
+    name: 'czm_ambient_occlusion',
     stages: [generateAndBlur, ambientOcclusionModulate],
     inputPreviousStageTexture: false,
-    uniforms: uniforms,
+    uniforms: uniforms
   });
 };
 
@@ -647,9 +647,9 @@ const fxaaFS = `#define FXAA_QUALITY_PRESET 39 \n${FXAA3_11}\n${FXAA}`;
  */
 PostProcessStageLibrary.createFXAAStage = function () {
   return new PostProcessStage({
-    name: "czm_FXAA",
+    name: 'czm_FXAA',
     fragmentShader: fxaaFS,
-    sampleMode: PostProcessStageSampleMode.LINEAR,
+    sampleMode: PostProcessStageSampleMode.LINEAR
   });
 };
 
@@ -662,14 +662,14 @@ PostProcessStageLibrary.createFXAAStage = function () {
 PostProcessStageLibrary.createAcesTonemappingStage = function (
   useAutoExposure
 ) {
-  let fs = useAutoExposure ? "#define AUTO_EXPOSURE\n" : "";
+  let fs = useAutoExposure ? '#define AUTO_EXPOSURE\n' : '';
   fs += AcesTonemapping;
   return new PostProcessStage({
-    name: "czm_aces",
+    name: 'czm_aces',
     fragmentShader: fs,
     uniforms: {
-      autoExposure: undefined,
-    },
+      autoExposure: undefined
+    }
   });
 };
 
@@ -682,14 +682,14 @@ PostProcessStageLibrary.createAcesTonemappingStage = function (
 PostProcessStageLibrary.createFilmicTonemappingStage = function (
   useAutoExposure
 ) {
-  let fs = useAutoExposure ? "#define AUTO_EXPOSURE\n" : "";
+  let fs = useAutoExposure ? '#define AUTO_EXPOSURE\n' : '';
   fs += FilmicTonemapping;
   return new PostProcessStage({
-    name: "czm_filmic",
+    name: 'czm_filmic',
     fragmentShader: fs,
     uniforms: {
-      autoExposure: undefined,
-    },
+      autoExposure: undefined
+    }
   });
 };
 
@@ -702,14 +702,14 @@ PostProcessStageLibrary.createFilmicTonemappingStage = function (
 PostProcessStageLibrary.createReinhardTonemappingStage = function (
   useAutoExposure
 ) {
-  let fs = useAutoExposure ? "#define AUTO_EXPOSURE\n" : "";
+  let fs = useAutoExposure ? '#define AUTO_EXPOSURE\n' : '';
   fs += ReinhardTonemapping;
   return new PostProcessStage({
-    name: "czm_reinhard",
+    name: 'czm_reinhard',
     fragmentShader: fs,
     uniforms: {
-      autoExposure: undefined,
-    },
+      autoExposure: undefined
+    }
   });
 };
 
@@ -722,15 +722,15 @@ PostProcessStageLibrary.createReinhardTonemappingStage = function (
 PostProcessStageLibrary.createModifiedReinhardTonemappingStage = function (
   useAutoExposure
 ) {
-  let fs = useAutoExposure ? "#define AUTO_EXPOSURE\n" : "";
+  let fs = useAutoExposure ? '#define AUTO_EXPOSURE\n' : '';
   fs += ModifiedReinhardTonemapping;
   return new PostProcessStage({
-    name: "czm_modified_reinhard",
+    name: 'czm_modified_reinhard',
     fragmentShader: fs,
     uniforms: {
       white: Color.WHITE,
-      autoExposure: undefined,
-    },
+      autoExposure: undefined
+    }
   });
 };
 
@@ -752,11 +752,11 @@ PostProcessStageLibrary.createAutoExposureStage = function () {
  */
 PostProcessStageLibrary.createBlackAndWhiteStage = function () {
   return new PostProcessStage({
-    name: "czm_black_and_white",
+    name: 'czm_black_and_white',
     fragmentShader: BlackAndWhite,
     uniforms: {
-      gradations: 5.0,
-    },
+      gradations: 5.0
+    }
   });
 };
 
@@ -769,11 +769,11 @@ PostProcessStageLibrary.createBlackAndWhiteStage = function () {
  */
 PostProcessStageLibrary.createBrightnessStage = function () {
   return new PostProcessStage({
-    name: "czm_brightness",
+    name: 'czm_brightness',
     fragmentShader: Brightness,
     uniforms: {
-      brightness: 0.5,
-    },
+      brightness: 0.5
+    }
   });
 };
 
@@ -783,8 +783,8 @@ PostProcessStageLibrary.createBrightnessStage = function () {
  */
 PostProcessStageLibrary.createNightVisionStage = function () {
   return new PostProcessStage({
-    name: "czm_night_vision",
-    fragmentShader: NightVision,
+    name: 'czm_night_vision',
+    fragmentShader: NightVision
   });
 };
 
@@ -796,8 +796,8 @@ PostProcessStageLibrary.createNightVisionStage = function () {
  */
 PostProcessStageLibrary.createDepthViewStage = function () {
   return new PostProcessStage({
-    name: "czm_depth_view",
-    fragmentShader: DepthView,
+    name: 'czm_depth_view',
+    fragmentShader: DepthView
   });
 };
 
@@ -821,18 +821,18 @@ PostProcessStageLibrary.createDepthViewStage = function () {
  */
 PostProcessStageLibrary.createLensFlareStage = function () {
   return new PostProcessStage({
-    name: "czm_lens_flare",
+    name: 'czm_lens_flare',
     fragmentShader: LensFlare,
     uniforms: {
-      dirtTexture: buildModuleUrl("Assets/Textures/LensFlare/DirtMask.jpg"),
-      starTexture: buildModuleUrl("Assets/Textures/LensFlare/StarBurst.jpg"),
+      dirtTexture: buildModuleUrl('Assets/Textures/LensFlare/DirtMask.jpg'),
+      starTexture: buildModuleUrl('Assets/Textures/LensFlare/StarBurst.jpg'),
       intensity: 2.0,
       distortion: 10.0,
       ghostDispersal: 0.4,
       haloWidth: 0.4,
       dirtAmount: 0.4,
-      earthRadius: Ellipsoid.WGS84.maximumRadius,
-    },
+      earthRadius: Ellipsoid.WGS84.maximumRadius
+    }
   });
 };
 export default PostProcessStageLibrary;

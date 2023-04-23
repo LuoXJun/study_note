@@ -1,4 +1,4 @@
-import DeveloperError from "../Core/DeveloperError.js";
+import DeveloperError from '../Core/DeveloperError.js';
 
 /**
  * The subdivision scheme for an implicit tileset.
@@ -15,7 +15,7 @@ const ImplicitSubdivisionScheme = {
    * @constant
    * @private
    */
-  QUADTREE: "QUADTREE",
+  QUADTREE: 'QUADTREE',
   /**
    * An octree divides a parent tile into eight children, split at the midpoint
    * of the x, y, and z dimensions of the bounding box.
@@ -23,7 +23,7 @@ const ImplicitSubdivisionScheme = {
    * @constant
    * @private
    */
-  OCTREE: "OCTREE",
+  OCTREE: 'OCTREE'
 };
 
 /**
@@ -40,7 +40,7 @@ ImplicitSubdivisionScheme.getBranchingFactor = function (subdivisionScheme) {
       return 4;
     //>>includeStart('debug', pragmas.debug);
     default:
-      throw new DeveloperError("subdivisionScheme is not a valid value.");
+      throw new DeveloperError('subdivisionScheme is not a valid value.');
     //>>includeEnd('debug');
   }
 };

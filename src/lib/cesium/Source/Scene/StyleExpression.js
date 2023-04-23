@@ -1,4 +1,4 @@
-import DeveloperError from "../Core/DeveloperError.js";
+import DeveloperError from '../Core/DeveloperError.js';
 
 /**
  * An expression for a style applied to a {@link Cesium3DTileset}.

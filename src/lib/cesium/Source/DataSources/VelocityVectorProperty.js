@@ -1,10 +1,10 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import JulianDate from "../Core/JulianDate.js";
-import Property from "./Property.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import JulianDate from '../Core/JulianDate.js';
+import Property from './Property.js';
 
 /**
  * A {@link Property} which evaluates to a {@link Cartesian3} vector
@@ -48,7 +48,7 @@ Object.defineProperties(VelocityVectorProperty.prototype, {
   isConstant: {
     get: function () {
       return Property.isConstant(this._position);
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -60,7 +60,7 @@ Object.defineProperties(VelocityVectorProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   /**
    * Gets or sets the position property used to compute the velocity vector.
@@ -92,7 +92,7 @@ Object.defineProperties(VelocityVectorProperty.prototype, {
 
         this._definitionChanged.raiseEvent(this);
       }
-    },
+    }
   },
   /**
    * Gets or sets whether the vector produced by this property
@@ -112,8 +112,8 @@ Object.defineProperties(VelocityVectorProperty.prototype, {
 
       this._normalize = value;
       this._definitionChanged.raiseEvent(this);
-    },
-  },
+    }
+  }
 });
 
 const position1Scratch = new Cartesian3();
@@ -142,7 +142,7 @@ VelocityVectorProperty.prototype._getValue = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required");
+    throw new DeveloperError('time is required');
   }
   //>>includeEnd('debug');
 

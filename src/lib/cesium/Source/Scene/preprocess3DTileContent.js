@@ -1,8 +1,8 @@
-import defined from "../Core/defined.js";
-import getJsonFromTypedArray from "../Core/getJsonFromTypedArray.js";
-import getMagic from "../Core/getMagic.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import Cesium3DTileContentType from "./Cesium3DTileContentType.js";
+import defined from '../Core/defined.js';
+import getJsonFromTypedArray from '../Core/getJsonFromTypedArray.js';
+import getMagic from '../Core/getMagic.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import Cesium3DTileContentType from './Cesium3DTileContentType.js';
 
 /**
  * Results of the preprocess3DTileContent() function. This includes the
@@ -30,15 +30,15 @@ export default function preprocess3DTileContent(arrayBuffer) {
 
   // We use glTF for JSON glTF files. For binary glTF, we rename this
   // to glb to disambiguate
-  if (contentType === "glTF") {
-    contentType = "glb";
+  if (contentType === 'glTF') {
+    contentType = 'glb';
   }
 
   if (Cesium3DTileContentType.isBinaryFormat(contentType)) {
     return {
       // For binary files, the enum value is the magic number
       contentType: contentType,
-      binaryPayload: uint8Array,
+      binaryPayload: uint8Array
     };
   }
 
@@ -47,7 +47,7 @@ export default function preprocess3DTileContent(arrayBuffer) {
     // Most likely a tileset JSON
     return {
       contentType: Cesium3DTileContentType.EXTERNAL_TILESET,
-      jsonPayload: json,
+      jsonPayload: json
     };
   }
 
@@ -56,7 +56,7 @@ export default function preprocess3DTileContent(arrayBuffer) {
     // so this check needs to happen second
     return {
       contentType: Cesium3DTileContentType.GLTF,
-      jsonPayload: json,
+      jsonPayload: json
     };
   }
 
@@ -64,7 +64,7 @@ export default function preprocess3DTileContent(arrayBuffer) {
     // Most likely a subtree JSON.
     return {
       contentType: Cesium3DTileContentType.IMPLICIT_SUBTREE_JSON,
-      jsonPayload: json,
+      jsonPayload: json
     };
   }
 
@@ -72,11 +72,11 @@ export default function preprocess3DTileContent(arrayBuffer) {
     // Most likely a GeoJSON
     return {
       contentType: Cesium3DTileContentType.GEOJSON,
-      jsonPayload: json,
+      jsonPayload: json
     };
   }
 
-  throw new RuntimeError("Invalid tile content.");
+  throw new RuntimeError('Invalid tile content.');
 }
 
 function getJsonContent(uint8Array) {
@@ -85,7 +85,7 @@ function getJsonContent(uint8Array) {
   try {
     json = getJsonFromTypedArray(uint8Array);
   } catch (error) {
-    throw new RuntimeError("Invalid tile content.");
+    throw new RuntimeError('Invalid tile content.');
   }
 
   return json;

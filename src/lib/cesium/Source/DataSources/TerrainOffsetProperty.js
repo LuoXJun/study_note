@@ -1,14 +1,14 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import Event from "../Core/Event.js";
-import Iso8601 from "../Core/Iso8601.js";
-import CesiumMath from "../Core/Math.js";
-import HeightReference from "../Scene/HeightReference.js";
-import SceneMode from "../Scene/SceneMode.js";
-import Property from "./Property.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import Event from '../Core/Event.js';
+import Iso8601 from '../Core/Iso8601.js';
+import CesiumMath from '../Core/Math.js';
+import HeightReference from '../Scene/HeightReference.js';
+import SceneMode from '../Scene/SceneMode.js';
+import Property from './Property.js';
 
 const scratchPosition = new Cartesian3();
 const scratchCarto = new Cartographic();
@@ -23,8 +23,8 @@ function TerrainOffsetProperty(
   extrudedHeightReferenceProperty
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("scene", scene);
-  Check.defined("positionProperty", positionProperty);
+  Check.defined('scene', scene);
+  Check.defined('positionProperty', positionProperty);
   //>>includeEnd('debug');
 
   this._scene = scene;
@@ -90,7 +90,7 @@ Object.defineProperties(TerrainOffsetProperty.prototype, {
   isConstant: {
     get: function () {
       return false;
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -102,8 +102,8 @@ Object.defineProperties(TerrainOffsetProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
-  },
+    }
+  }
 });
 
 /**

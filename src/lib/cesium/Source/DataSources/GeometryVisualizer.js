@@ -1,34 +1,34 @@
-import AssociativeArray from "../Core/AssociativeArray.js";
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import Event from "../Core/Event.js";
-import EventHelper from "../Core/EventHelper.js";
-import ClassificationType from "../Scene/ClassificationType.js";
-import MaterialAppearance from "../Scene/MaterialAppearance.js";
-import PerInstanceColorAppearance from "../Scene/PerInstanceColorAppearance.js";
-import ShadowMode from "../Scene/ShadowMode.js";
-import BoundingSphereState from "./BoundingSphereState.js";
-import BoxGeometryUpdater from "./BoxGeometryUpdater.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import CorridorGeometryUpdater from "./CorridorGeometryUpdater.js";
-import CylinderGeometryUpdater from "./CylinderGeometryUpdater.js";
-import DynamicGeometryBatch from "./DynamicGeometryBatch.js";
-import EllipseGeometryUpdater from "./EllipseGeometryUpdater.js";
-import EllipsoidGeometryUpdater from "./EllipsoidGeometryUpdater.js";
-import Entity from "./Entity.js";
-import PlaneGeometryUpdater from "./PlaneGeometryUpdater.js";
-import PolygonGeometryUpdater from "./PolygonGeometryUpdater.js";
-import PolylineVolumeGeometryUpdater from "./PolylineVolumeGeometryUpdater.js";
-import RectangleGeometryUpdater from "./RectangleGeometryUpdater.js";
-import StaticGeometryColorBatch from "./StaticGeometryColorBatch.js";
-import StaticGeometryPerMaterialBatch from "./StaticGeometryPerMaterialBatch.js";
-import StaticGroundGeometryColorBatch from "./StaticGroundGeometryColorBatch.js";
-import StaticGroundGeometryPerMaterialBatch from "./StaticGroundGeometryPerMaterialBatch.js";
-import StaticOutlineGeometryBatch from "./StaticOutlineGeometryBatch.js";
-import WallGeometryUpdater from "./WallGeometryUpdater.js";
+import AssociativeArray from '../Core/AssociativeArray.js';
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import Event from '../Core/Event.js';
+import EventHelper from '../Core/EventHelper.js';
+import ClassificationType from '../Scene/ClassificationType.js';
+import MaterialAppearance from '../Scene/MaterialAppearance.js';
+import PerInstanceColorAppearance from '../Scene/PerInstanceColorAppearance.js';
+import ShadowMode from '../Scene/ShadowMode.js';
+import BoundingSphereState from './BoundingSphereState.js';
+import BoxGeometryUpdater from './BoxGeometryUpdater.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import CorridorGeometryUpdater from './CorridorGeometryUpdater.js';
+import CylinderGeometryUpdater from './CylinderGeometryUpdater.js';
+import DynamicGeometryBatch from './DynamicGeometryBatch.js';
+import EllipseGeometryUpdater from './EllipseGeometryUpdater.js';
+import EllipsoidGeometryUpdater from './EllipsoidGeometryUpdater.js';
+import Entity from './Entity.js';
+import PlaneGeometryUpdater from './PlaneGeometryUpdater.js';
+import PolygonGeometryUpdater from './PolygonGeometryUpdater.js';
+import PolylineVolumeGeometryUpdater from './PolylineVolumeGeometryUpdater.js';
+import RectangleGeometryUpdater from './RectangleGeometryUpdater.js';
+import StaticGeometryColorBatch from './StaticGeometryColorBatch.js';
+import StaticGeometryPerMaterialBatch from './StaticGeometryPerMaterialBatch.js';
+import StaticGroundGeometryColorBatch from './StaticGroundGeometryColorBatch.js';
+import StaticGroundGeometryPerMaterialBatch from './StaticGroundGeometryPerMaterialBatch.js';
+import StaticOutlineGeometryBatch from './StaticOutlineGeometryBatch.js';
+import WallGeometryUpdater from './WallGeometryUpdater.js';
 
 const emptyArray = [];
 
@@ -42,7 +42,7 @@ const geometryUpdaters = [
   PolygonGeometryUpdater,
   PolylineVolumeGeometryUpdater,
   RectangleGeometryUpdater,
-  WallGeometryUpdater,
+  WallGeometryUpdater
 ];
 
 function GeometryUpdaterSet(entity, scene) {
@@ -120,8 +120,8 @@ function GeometryVisualizer(
   groundPrimitives
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("scene", scene);
-  Check.defined("entityCollection", entityCollection);
+  Check.defined('scene', scene);
+  Check.defined('entityCollection', entityCollection);
   //>>includeEnd('debug');
 
   primitives = defaultValue(primitives, scene.primitives);
@@ -142,10 +142,10 @@ function GeometryVisualizer(
   this._openColorBatches = new Array(numberOfShadowModes * 2);
   this._openMaterialBatches = new Array(numberOfShadowModes * 2);
 
-  const supportsMaterialsforEntitiesOnTerrain = Entity.supportsMaterialsforEntitiesOnTerrain(
-    scene
-  );
-  this._supportsMaterialsforEntitiesOnTerrain = supportsMaterialsforEntitiesOnTerrain;
+  const supportsMaterialsforEntitiesOnTerrain =
+    Entity.supportsMaterialsforEntitiesOnTerrain(scene);
+  this._supportsMaterialsforEntitiesOnTerrain =
+    supportsMaterialsforEntitiesOnTerrain;
 
   let i;
   for (i = 0; i < numberOfShadowModes; ++i) {
@@ -155,9 +155,8 @@ function GeometryVisualizer(
       i,
       false
     );
-    this._outlineBatches[
-      numberOfShadowModes + i
-    ] = new StaticOutlineGeometryBatch(primitives, scene, i, true);
+    this._outlineBatches[numberOfShadowModes + i] =
+      new StaticOutlineGeometryBatch(primitives, scene, i, true);
 
     this._closedColorBatches[i] = new StaticGeometryColorBatch(
       primitives,
@@ -167,16 +166,15 @@ function GeometryVisualizer(
       i,
       true
     );
-    this._closedColorBatches[
-      numberOfShadowModes + i
-    ] = new StaticGeometryColorBatch(
-      primitives,
-      PerInstanceColorAppearance,
-      undefined,
-      true,
-      i,
-      false
-    );
+    this._closedColorBatches[numberOfShadowModes + i] =
+      new StaticGeometryColorBatch(
+        primitives,
+        PerInstanceColorAppearance,
+        undefined,
+        true,
+        i,
+        false
+      );
 
     this._closedMaterialBatches[i] = new StaticGeometryPerMaterialBatch(
       primitives,
@@ -186,16 +184,15 @@ function GeometryVisualizer(
       i,
       true
     );
-    this._closedMaterialBatches[
-      numberOfShadowModes + i
-    ] = new StaticGeometryPerMaterialBatch(
-      primitives,
-      MaterialAppearance,
-      undefined,
-      true,
-      i,
-      false
-    );
+    this._closedMaterialBatches[numberOfShadowModes + i] =
+      new StaticGeometryPerMaterialBatch(
+        primitives,
+        MaterialAppearance,
+        undefined,
+        true,
+        i,
+        false
+      );
 
     this._openColorBatches[i] = new StaticGeometryColorBatch(
       primitives,
@@ -205,16 +202,15 @@ function GeometryVisualizer(
       i,
       true
     );
-    this._openColorBatches[
-      numberOfShadowModes + i
-    ] = new StaticGeometryColorBatch(
-      primitives,
-      PerInstanceColorAppearance,
-      undefined,
-      false,
-      i,
-      false
-    );
+    this._openColorBatches[numberOfShadowModes + i] =
+      new StaticGeometryColorBatch(
+        primitives,
+        PerInstanceColorAppearance,
+        undefined,
+        false,
+        i,
+        false
+      );
 
     this._openMaterialBatches[i] = new StaticGeometryPerMaterialBatch(
       primitives,
@@ -224,16 +220,15 @@ function GeometryVisualizer(
       i,
       true
     );
-    this._openMaterialBatches[
-      numberOfShadowModes + i
-    ] = new StaticGeometryPerMaterialBatch(
-      primitives,
-      MaterialAppearance,
-      undefined,
-      false,
-      i,
-      false
-    );
+    this._openMaterialBatches[numberOfShadowModes + i] =
+      new StaticGeometryPerMaterialBatch(
+        primitives,
+        MaterialAppearance,
+        undefined,
+        false,
+        i,
+        false
+      );
   }
 
   const numberOfClassificationTypes =
@@ -303,7 +298,7 @@ function GeometryVisualizer(
  */
 GeometryVisualizer.prototype.update = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
   //>>includeEnd('debug');
 
   const addedObjects = this._addedObjects;
@@ -398,8 +393,8 @@ const getBoundingSphereBoundingSphereScratch = new BoundingSphere();
  */
 GeometryVisualizer.prototype.getBoundingSphere = function (entity, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("entity", entity);
-  Check.defined("result", result);
+  Check.defined('entity', entity);
+  Check.defined('result', result);
   //>>includeEnd('debug');
 
   const boundingSpheres = getBoundingSphereArrayScratch;
@@ -521,9 +516,8 @@ GeometryVisualizer.prototype._insertUpdaterIntoBatch = function (
 
   if (updater.fillEnabled) {
     if (updater.onTerrain) {
-      const classificationType = updater.classificationTypeProperty.getValue(
-        time
-      );
+      const classificationType =
+        updater.classificationTypeProperty.getValue(time);
       if (updater.fillMaterialProperty instanceof ColorMaterialProperty) {
         this._groundColorBatches[classificationType].add(time, updater);
       } else {

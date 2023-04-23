@@ -1,16 +1,16 @@
-import BoundingSphere from "../../Core/BoundingSphere.js";
-import Buffer from "../../Renderer/Buffer.js";
-import BufferUsage from "../../Renderer/BufferUsage.js";
-import Cartesian3 from "../../Core/Cartesian3.js";
-import clone from "../../Core/clone.js";
-import combine from "../../Core/combine.js";
-import defined from "../../Core/defined.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
-import SceneMode from "../SceneMode.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import VertexAttributeSemantic from "../VertexAttributeSemantic.js";
-import SceneTransforms from "../SceneTransforms.js";
+import BoundingSphere from '../../Core/BoundingSphere.js';
+import Buffer from '../../Renderer/Buffer.js';
+import BufferUsage from '../../Renderer/BufferUsage.js';
+import Cartesian3 from '../../Core/Cartesian3.js';
+import clone from '../../Core/clone.js';
+import combine from '../../Core/combine.js';
+import defined from '../../Core/defined.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
+import SceneMode from '../SceneMode.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import VertexAttributeSemantic from '../VertexAttributeSemantic.js';
+import SceneTransforms from '../SceneTransforms.js';
 
 const scratchModelMatrix = new Matrix4();
 const scratchModelView2D = new Matrix4();
@@ -23,7 +23,7 @@ const scratchModelView2D = new Matrix4();
  * @private
  */
 const SceneMode2DPipelineStage = {};
-SceneMode2DPipelineStage.name = "SceneMode2DPipelineStage"; // Helps with debugging
+SceneMode2DPipelineStage.name = 'SceneMode2DPipelineStage'; // Helps with debugging
 
 /**
  * This pipeline stage processes the position attribute of a primitive and adds the relevant
@@ -107,12 +107,12 @@ SceneMode2DPipelineStage.process = function (
   }
 
   shaderBuilder.addDefine(
-    "USE_2D_POSITIONS",
+    'USE_2D_POSITIONS',
     undefined,
     ShaderDestination.VERTEX
   );
 
-  shaderBuilder.addUniform("mat4", "u_modelView2D", ShaderDestination.VERTEX);
+  shaderBuilder.addUniform('mat4', 'u_modelView2D', ShaderDestination.VERTEX);
 
   const modelMatrix2D = Matrix4.fromTranslation(
     boundingSphere2D.center,
@@ -127,7 +127,7 @@ SceneMode2DPipelineStage.process = function (
         modelMatrix2D,
         scratchModelView2D
       );
-    },
+    }
   };
 
   renderResources.uniformMap = combine(uniformMap, renderResources.uniformMap);
@@ -295,7 +295,7 @@ function createPositionBufferFor2D(
   const buffer = Buffer.createVertexBuffer({
     context: frameState.context,
     typedArray: projectedPositions,
-    usage: BufferUsage.STATIC_DRAW,
+    usage: BufferUsage.STATIC_DRAW
   });
   buffer.vertexArrayDestroyable = false;
 

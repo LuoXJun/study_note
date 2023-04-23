@@ -1,13 +1,13 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import Framebuffer from "../Renderer/Framebuffer.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import RenderState from "../Renderer/RenderState.js";
-import Sampler from "../Renderer/Sampler.js";
-import Texture from "../Renderer/Texture.js";
-import BrdfLutGeneratorFS from "../Shaders/BrdfLutGeneratorFS.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import Framebuffer from '../Renderer/Framebuffer.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import RenderState from '../Renderer/RenderState.js';
+import Sampler from '../Renderer/Sampler.js';
+import Texture from '../Renderer/Texture.js';
+import BrdfLutGeneratorFS from '../Shaders/BrdfLutGeneratorFS.js';
 
 /**
  * @private
@@ -21,16 +21,16 @@ Object.defineProperties(BrdfLutGenerator.prototype, {
   colorTexture: {
     get: function () {
       return this._colorTexture;
-    },
-  },
+    }
+  }
 });
 
 function createCommand(generator, context, framebuffer) {
   const drawCommand = context.createViewportQuadCommand(BrdfLutGeneratorFS, {
     framebuffer: framebuffer,
     renderState: RenderState.fromCache({
-      viewport: new BoundingRectangle(0.0, 0.0, 256.0, 256.0),
-    }),
+      viewport: new BoundingRectangle(0.0, 0.0, 256.0, 256.0)
+    })
   });
 
   generator._drawCommand = drawCommand;
@@ -45,14 +45,14 @@ BrdfLutGenerator.prototype.update = function (frameState) {
       height: 256,
       pixelFormat: PixelFormat.RGBA,
       pixelDatatype: PixelDatatype.UNSIGNED_BYTE,
-      sampler: Sampler.NEAREST,
+      sampler: Sampler.NEAREST
     });
 
     this._colorTexture = colorTexture;
     const framebuffer = new Framebuffer({
       context: context,
       colorTextures: [colorTexture],
-      destroyAttachments: false,
+      destroyAttachments: false
     });
 
     createCommand(this, context, framebuffer);

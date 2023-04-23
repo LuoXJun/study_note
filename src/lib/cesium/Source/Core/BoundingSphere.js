@@ -1,16 +1,16 @@
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Ellipsoid from "./Ellipsoid.js";
-import GeographicProjection from "./GeographicProjection.js";
-import Intersect from "./Intersect.js";
-import Interval from "./Interval.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
-import Matrix4 from "./Matrix4.js";
-import Rectangle from "./Rectangle.js";
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Ellipsoid from './Ellipsoid.js';
+import GeographicProjection from './GeographicProjection.js';
+import Intersect from './Intersect.js';
+import Interval from './Interval.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
+import Matrix4 from './Matrix4.js';
+import Rectangle from './Rectangle.js';
 
 /**
  * A bounding sphere with a center and a radius.
@@ -392,7 +392,7 @@ BoundingSphere.fromVertices = function (positions, center, stride, result) {
   stride = defaultValue(stride, 3);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number.greaterThanOrEquals("stride", stride, 3);
+  Check.typeOf.number.greaterThanOrEquals('stride', stride, 3);
   //>>includeEnd('debug');
 
   const currentPos = fromPointsCurrentPos;
@@ -753,8 +753,8 @@ BoundingSphere.fromEncodedCartesianVertices = function (
  */
 BoundingSphere.fromCornerPoints = function (corner, oppositeCorner, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("corner", corner);
-  Check.typeOf.object("oppositeCorner", oppositeCorner);
+  Check.typeOf.object('corner', corner);
+  Check.typeOf.object('oppositeCorner', oppositeCorner);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -778,7 +778,7 @@ BoundingSphere.fromCornerPoints = function (corner, oppositeCorner, result) {
  */
 BoundingSphere.fromEllipsoid = function (ellipsoid, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("ellipsoid", ellipsoid);
+  Check.typeOf.object('ellipsoid', ellipsoid);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -858,7 +858,7 @@ BoundingSphere.fromOrientedBoundingBox = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("orientedBoundingBox", orientedBoundingBox);
+  Check.defined('orientedBoundingBox', orientedBoundingBox);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -891,7 +891,7 @@ const scratchFromTransformationScale = new Cartesian3();
  */
 BoundingSphere.fromTransformation = function (transformation, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("transformation", transformation);
+  Check.typeOf.object('transformation', transformation);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -951,8 +951,8 @@ BoundingSphere.packedLength = 4;
  */
 BoundingSphere.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -976,7 +976,7 @@ BoundingSphere.pack = function (value, array, startingIndex) {
  */
 BoundingSphere.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -1005,8 +1005,8 @@ const unionScratchCenter = new Cartesian3();
  */
 BoundingSphere.union = function (left, right, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("left", left);
-  Check.typeOf.object("right", right);
+  Check.typeOf.object('left', left);
+  Check.typeOf.object('right', right);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -1065,8 +1065,8 @@ const expandScratch = new Cartesian3();
  */
 BoundingSphere.expand = function (sphere, point, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("sphere", sphere);
-  Check.typeOf.object("point", point);
+  Check.typeOf.object('sphere', sphere);
+  Check.typeOf.object('point', point);
   //>>includeEnd('debug');
 
   result = BoundingSphere.clone(sphere, result);
@@ -1093,8 +1093,8 @@ BoundingSphere.expand = function (sphere, point, result) {
  */
 BoundingSphere.intersectPlane = function (sphere, plane) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("sphere", sphere);
-  Check.typeOf.object("plane", plane);
+  Check.typeOf.object('sphere', sphere);
+  Check.typeOf.object('plane', plane);
   //>>includeEnd('debug');
 
   const center = sphere.center;
@@ -1122,8 +1122,8 @@ BoundingSphere.intersectPlane = function (sphere, plane) {
  */
 BoundingSphere.transform = function (sphere, transform, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("sphere", sphere);
-  Check.typeOf.object("transform", transform);
+  Check.typeOf.object('sphere', sphere);
+  Check.typeOf.object('transform', transform);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -1157,8 +1157,8 @@ const distanceSquaredToScratch = new Cartesian3();
  */
 BoundingSphere.distanceSquaredTo = function (sphere, cartesian) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("sphere", sphere);
-  Check.typeOf.object("cartesian", cartesian);
+  Check.typeOf.object('sphere', sphere);
+  Check.typeOf.object('cartesian', cartesian);
   //>>includeEnd('debug');
 
   const diff = Cartesian3.subtract(
@@ -1192,8 +1192,8 @@ BoundingSphere.distanceSquaredTo = function (sphere, cartesian) {
  */
 BoundingSphere.transformWithoutScale = function (sphere, transform, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("sphere", sphere);
-  Check.typeOf.object("transform", transform);
+  Check.typeOf.object('sphere', sphere);
+  Check.typeOf.object('transform', transform);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -1231,9 +1231,9 @@ BoundingSphere.computePlaneDistances = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("sphere", sphere);
-  Check.typeOf.object("position", position);
-  Check.typeOf.object("direction", direction);
+  Check.typeOf.object('sphere', sphere);
+  Check.typeOf.object('position', position);
+  Check.typeOf.object('direction', direction);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -1274,7 +1274,7 @@ const projectTo2DProjection = new GeographicProjection();
  */
 BoundingSphere.projectTo2D = function (sphere, projection, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("sphere", sphere);
+  Check.typeOf.object('sphere', sphere);
   //>>includeEnd('debug');
 
   projection = defaultValue(projection, projectTo2DProjection);
@@ -1385,8 +1385,8 @@ BoundingSphere.projectTo2D = function (sphere, projection, result) {
  */
 BoundingSphere.isOccluded = function (sphere, occluder) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("sphere", sphere);
-  Check.typeOf.object("occluder", occluder);
+  Check.typeOf.object('sphere', sphere);
+  Check.typeOf.object('occluder', occluder);
   //>>includeEnd('debug');
   return !occluder.isBoundingSphereVisible(sphere);
 };

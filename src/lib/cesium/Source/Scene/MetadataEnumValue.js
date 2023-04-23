@@ -1,4 +1,4 @@
-import Check from "../Core/Check.js";
+import Check from '../Core/Check.js';
 
 /**
  * A metadata enum value.
@@ -12,7 +12,7 @@ import Check from "../Core/Check.js";
  */
 function MetadataEnumValue(value) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
+  Check.typeOf.object('value', value);
   //>>includeEnd('debug');
 
   this._value = value.value;
@@ -34,7 +34,7 @@ Object.defineProperties(MetadataEnumValue.prototype, {
   value: {
     get: function () {
       return this._value;
-    },
+    }
   },
 
   /**
@@ -48,7 +48,7 @@ Object.defineProperties(MetadataEnumValue.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
 
   /**
@@ -62,7 +62,7 @@ Object.defineProperties(MetadataEnumValue.prototype, {
   description: {
     get: function () {
       return this._description;
-    },
+    }
   },
 
   /**
@@ -76,7 +76,7 @@ Object.defineProperties(MetadataEnumValue.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -90,8 +90,8 @@ Object.defineProperties(MetadataEnumValue.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
-  },
+    }
+  }
 });
 
 export default MetadataEnumValue;

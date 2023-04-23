@@ -1,9 +1,9 @@
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import knockout from "../../ThirdParty/knockout.js";
-import getElement from "../getElement.js";
-import HomeButtonViewModel from "./HomeButtonViewModel.js";
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import knockout from '../../ThirdParty/knockout.js';
+import getElement from '../getElement.js';
+import HomeButtonViewModel from './HomeButtonViewModel.js';
 
 /**
  * A single button widget for returning to the default camera view of the current scene.
@@ -18,7 +18,7 @@ import HomeButtonViewModel from "./HomeButtonViewModel.js";
 function HomeButton(container, scene, duration) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(container)) {
-    throw new DeveloperError("container is required.");
+    throw new DeveloperError('container is required.');
   }
   //>>includeEnd('debug');
 
@@ -27,17 +27,17 @@ function HomeButton(container, scene, duration) {
   const viewModel = new HomeButtonViewModel(scene, duration);
 
   viewModel._svgPath =
-    "M14,4l-10,8.75h20l-4.25-3.7188v-4.6562h-2.812v2.1875l-2.938-2.5625zm-7.0938,9.906v10.094h14.094v-10.094h-14.094zm2.1876,2.313h3.3122v4.25h-3.3122v-4.25zm5.8442,1.281h3.406v6.438h-3.406v-6.438z";
+    'M14,4l-10,8.75h20l-4.25-3.7188v-4.6562h-2.812v2.1875l-2.938-2.5625zm-7.0938,9.906v10.094h14.094v-10.094h-14.094zm2.1876,2.313h3.3122v4.25h-3.3122v-4.25zm5.8442,1.281h3.406v6.438h-3.406v-6.438z';
 
-  const element = document.createElement("button");
-  element.type = "button";
-  element.className = "cesium-button cesium-toolbar-button cesium-home-button";
+  const element = document.createElement('button');
+  element.type = 'button';
+  element.className = 'cesium-button cesium-toolbar-button cesium-home-button';
   element.setAttribute(
-    "data-bind",
-    "\
+    'data-bind',
+    '\
 attr: { title: tooltip },\
 click: command,\
-cesiumSvgPath: { path: _svgPath, width: 28, height: 28 }"
+cesiumSvgPath: { path: _svgPath, width: 28, height: 28 }'
   );
 
   container.appendChild(element);
@@ -59,7 +59,7 @@ Object.defineProperties(HomeButton.prototype, {
   container: {
     get: function () {
       return this._container;
-    },
+    }
   },
 
   /**
@@ -71,8 +71,8 @@ Object.defineProperties(HomeButton.prototype, {
   viewModel: {
     get: function () {
       return this._viewModel;
-    },
-  },
+    }
+  }
 });
 
 /**

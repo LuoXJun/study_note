@@ -9,6 +9,6 @@ const TileEdge = {
   NORTHWEST: 4,
   NORTHEAST: 5,
   SOUTHWEST: 6,
-  SOUTHEAST: 7,
+  SOUTHEAST: 7
 };
 export default TileEdge;

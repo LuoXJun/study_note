@@ -1,7 +1,7 @@
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import Property from "./Property.js";
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import Property from './Property.js';
 
 function resolve(that) {
   let targetProperty = that._targetProperty;
@@ -89,18 +89,18 @@ function resolve(that) {
 function ReferenceProperty(targetCollection, targetId, targetPropertyNames) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(targetCollection)) {
-    throw new DeveloperError("targetCollection is required.");
+    throw new DeveloperError('targetCollection is required.');
   }
-  if (!defined(targetId) || targetId === "") {
-    throw new DeveloperError("targetId is required.");
+  if (!defined(targetId) || targetId === '') {
+    throw new DeveloperError('targetId is required.');
   }
   if (!defined(targetPropertyNames) || targetPropertyNames.length === 0) {
-    throw new DeveloperError("targetPropertyNames is required.");
+    throw new DeveloperError('targetPropertyNames is required.');
   }
   for (let i = 0; i < targetPropertyNames.length; i++) {
     const item = targetPropertyNames[i];
-    if (!defined(item) || item === "") {
-      throw new DeveloperError("reference contains invalid properties.");
+    if (!defined(item) || item === '') {
+      throw new DeveloperError('reference contains invalid properties.');
     }
   }
   //>>includeEnd('debug');
@@ -128,7 +128,7 @@ Object.defineProperties(ReferenceProperty.prototype, {
   isConstant: {
     get: function () {
       return Property.isConstant(resolve(this));
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -140,7 +140,7 @@ Object.defineProperties(ReferenceProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   /**
    * Gets the reference frame that the position is defined in.
@@ -153,7 +153,7 @@ Object.defineProperties(ReferenceProperty.prototype, {
     get: function () {
       const target = resolve(this);
       return defined(target) ? target.referenceFrame : undefined;
-    },
+    }
   },
   /**
    * Gets the id of the entity being referenced.
@@ -164,7 +164,7 @@ Object.defineProperties(ReferenceProperty.prototype, {
   targetId: {
     get: function () {
       return this._targetId;
-    },
+    }
   },
   /**
    * Gets the collection containing the entity being referenced.
@@ -175,7 +175,7 @@ Object.defineProperties(ReferenceProperty.prototype, {
   targetCollection: {
     get: function () {
       return this._targetCollection;
-    },
+    }
   },
   /**
    * Gets the array of property names used to retrieve the referenced property.
@@ -186,7 +186,7 @@ Object.defineProperties(ReferenceProperty.prototype, {
   targetPropertyNames: {
     get: function () {
       return this._targetPropertyNames;
-    },
+    }
   },
   /**
    * Gets the resolved instance of the underlying referenced property.
@@ -197,8 +197,8 @@ Object.defineProperties(ReferenceProperty.prototype, {
   resolvedProperty: {
     get: function () {
       return resolve(this);
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -217,10 +217,10 @@ Object.defineProperties(ReferenceProperty.prototype, {
 ReferenceProperty.fromString = function (targetCollection, referenceString) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(targetCollection)) {
-    throw new DeveloperError("targetCollection is required.");
+    throw new DeveloperError('targetCollection is required.');
   }
   if (!defined(referenceString)) {
-    throw new DeveloperError("referenceString is required.");
+    throw new DeveloperError('referenceString is required.');
   }
   //>>includeEnd('debug');
 
@@ -229,22 +229,22 @@ ReferenceProperty.fromString = function (targetCollection, referenceString) {
 
   let inIdentifier = true;
   let isEscaped = false;
-  let token = "";
+  let token = '';
   for (let i = 0; i < referenceString.length; ++i) {
     const c = referenceString.charAt(i);
 
     if (isEscaped) {
       token += c;
       isEscaped = false;
-    } else if (c === "\\") {
+    } else if (c === '\\') {
       isEscaped = true;
-    } else if (inIdentifier && c === "#") {
+    } else if (inIdentifier && c === '#') {
       identifier = token;
       inIdentifier = false;
-      token = "";
-    } else if (!inIdentifier && c === ".") {
+      token = '';
+    } else if (!inIdentifier && c === '.') {
       values.push(token);
-      token = "";
+      token = '';
     } else {
       token += c;
     }

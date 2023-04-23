@@ -23,7 +23,8 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports'], (function (exports) { 'use strict';
+define(['exports'], function (exports) {
+  'use strict';
 
   /**
    * Enum containing WebGL Constant values by name.
@@ -636,11 +637,10 @@ define(['exports'], (function (exports) { 'use strict';
     TEXTURE_IMMUTABLE_LEVELS: 0x82df,
 
     // Extensions
-    MAX_TEXTURE_MAX_ANISOTROPY_EXT: 0x84ff,
+    MAX_TEXTURE_MAX_ANISOTROPY_EXT: 0x84ff
   };
   var WebGLConstants$1 = Object.freeze(WebGLConstants);
 
   exports.WebGLConstants = WebGLConstants$1;
-
-}));
+});
 //# sourceMappingURL=WebGLConstants-6da700a2.js.map

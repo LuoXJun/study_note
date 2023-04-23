@@ -1,27 +1,27 @@
-import AttributeCompression from "../Core/AttributeCompression.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Color from "../Core/Color.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defined from "../Core/defined.js";
-import deprecationWarning from "../Core/deprecationWarning.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import getStringFromTypedArray from "../Core/getStringFromTypedArray.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
-import Quaternion from "../Core/Quaternion.js";
-import RequestType from "../Core/RequestType.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import Transforms from "../Core/Transforms.js";
-import TranslationRotationScale from "../Core/TranslationRotationScale.js";
-import Pass from "../Renderer/Pass.js";
-import Cesium3DTileBatchTable from "./Cesium3DTileBatchTable.js";
-import Cesium3DTileFeature from "./Cesium3DTileFeature.js";
-import Cesium3DTileFeatureTable from "./Cesium3DTileFeatureTable.js";
-import I3dmParser from "./I3dmParser.js";
-import ModelInstanceCollection from "./ModelInstanceCollection.js";
-import ModelAnimationLoop from "./ModelAnimationLoop.js";
+import AttributeCompression from '../Core/AttributeCompression.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Color from '../Core/Color.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defined from '../Core/defined.js';
+import deprecationWarning from '../Core/deprecationWarning.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import getStringFromTypedArray from '../Core/getStringFromTypedArray.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
+import Quaternion from '../Core/Quaternion.js';
+import RequestType from '../Core/RequestType.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import Transforms from '../Core/Transforms.js';
+import TranslationRotationScale from '../Core/TranslationRotationScale.js';
+import Pass from '../Renderer/Pass.js';
+import Cesium3DTileBatchTable from './Cesium3DTileBatchTable.js';
+import Cesium3DTileFeature from './Cesium3DTileFeature.js';
+import Cesium3DTileFeatureTable from './Cesium3DTileFeatureTable.js';
+import I3dmParser from './I3dmParser.js';
+import ModelInstanceCollection from './ModelInstanceCollection.js';
+import ModelAnimationLoop from './ModelAnimationLoop.js';
 
 /**
  * Represents the contents of a
@@ -66,13 +66,13 @@ Object.defineProperties(Instanced3DModel3DTileContent.prototype, {
   featuresLength: {
     get: function () {
       return this._batchTable.featuresLength;
-    },
+    }
   },
 
   pointsLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   trianglesLength: {
@@ -82,7 +82,7 @@ Object.defineProperties(Instanced3DModel3DTileContent.prototype, {
         return model.trianglesLength;
       }
       return 0;
-    },
+    }
   },
 
   geometryByteLength: {
@@ -92,7 +92,7 @@ Object.defineProperties(Instanced3DModel3DTileContent.prototype, {
         return model.geometryByteLength;
       }
       return 0;
-    },
+    }
   },
 
   texturesByteLength: {
@@ -102,43 +102,43 @@ Object.defineProperties(Instanced3DModel3DTileContent.prototype, {
         return model.texturesByteLength;
       }
       return 0;
-    },
+    }
   },
 
   batchTableByteLength: {
     get: function () {
       return this._batchTable.batchTableByteLength;
-    },
+    }
   },
 
   innerContents: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   readyPromise: {
     get: function () {
       return this._modelInstanceCollection.readyPromise;
-    },
+    }
   },
 
   tileset: {
     get: function () {
       return this._tileset;
-    },
+    }
   },
 
   tile: {
     get: function () {
       return this._tile;
-    },
+    }
   },
 
   url: {
     get: function () {
       return this._resource.getUrlComponent(true);
-    },
+    }
   },
 
   metadata: {
@@ -147,13 +147,13 @@ Object.defineProperties(Instanced3DModel3DTileContent.prototype, {
     },
     set: function (value) {
       this._metadata = value;
-    },
+    }
   },
 
   batchTable: {
     get: function () {
       return this._batchTable;
-    },
+    }
   },
 
   group: {
@@ -162,8 +162,8 @@ Object.defineProperties(Instanced3DModel3DTileContent.prototype, {
     },
     set: function (value) {
       this._group = value;
-    },
-  },
+    }
+  }
 });
 
 function getPickIdCallback(content) {
@@ -189,12 +189,12 @@ function initialize(content, arrayBuffer, byteOffset) {
     featureTableJson,
     featureTableBinary
   );
-  const instancesLength = featureTable.getGlobalProperty("INSTANCES_LENGTH");
+  const instancesLength = featureTable.getGlobalProperty('INSTANCES_LENGTH');
   featureTable.featuresLength = instancesLength;
 
   if (!defined(instancesLength)) {
     throw new RuntimeError(
-      "Feature table global property: INSTANCES_LENGTH must be defined"
+      'Feature table global property: INSTANCES_LENGTH must be defined'
     );
   }
 
@@ -224,7 +224,7 @@ function initialize(content, arrayBuffer, byteOffset) {
     imageBasedLighting: tileset.imageBasedLighting,
     backFaceCulling: tileset.backFaceCulling,
     showOutline: tileset.showOutline,
-    showCreditsOnScreen: tileset.showCreditsOnScreen,
+    showCreditsOnScreen: tileset.showCreditsOnScreen
   };
 
   if (gltfFormat === 0) {
@@ -232,20 +232,20 @@ function initialize(content, arrayBuffer, byteOffset) {
 
     // We need to remove padding from the end of the model URL in case this tile was part of a composite tile.
     // This removes all white space and null characters from the end of the string.
-    gltfUrl = gltfUrl.replace(/[\s\0]+$/, "");
+    gltfUrl = gltfUrl.replace(/[\s\0]+$/, '');
     collectionOptions.url = content._resource.getDerivedResource({
-      url: gltfUrl,
+      url: gltfUrl
     });
   } else {
     collectionOptions.gltf = gltfView;
     collectionOptions.basePath = content._resource.clone();
   }
 
-  const eastNorthUp = featureTable.getGlobalProperty("EAST_NORTH_UP");
+  const eastNorthUp = featureTable.getGlobalProperty('EAST_NORTH_UP');
 
   let rtcCenter;
   const rtcCenterArray = featureTable.getGlobalProperty(
-    "RTC_CENTER",
+    'RTC_CENTER',
     ComponentDatatype.FLOAT,
     3
   );
@@ -267,7 +267,7 @@ function initialize(content, arrayBuffer, byteOffset) {
   for (let i = 0; i < instancesLength; i++) {
     // Get the instance position
     let position = featureTable.getProperty(
-      "POSITION",
+      'POSITION',
       ComponentDatatype.FLOAT,
       3,
       i,
@@ -276,7 +276,7 @@ function initialize(content, arrayBuffer, byteOffset) {
     if (!defined(position)) {
       position = instancePositionArray;
       const positionQuantized = featureTable.getProperty(
-        "POSITION_QUANTIZED",
+        'POSITION_QUANTIZED',
         ComponentDatatype.UNSIGNED_SHORT,
         3,
         i,
@@ -284,27 +284,27 @@ function initialize(content, arrayBuffer, byteOffset) {
       );
       if (!defined(positionQuantized)) {
         throw new RuntimeError(
-          "Either POSITION or POSITION_QUANTIZED must be defined for each instance."
+          'Either POSITION or POSITION_QUANTIZED must be defined for each instance.'
         );
       }
       const quantizedVolumeOffset = featureTable.getGlobalProperty(
-        "QUANTIZED_VOLUME_OFFSET",
+        'QUANTIZED_VOLUME_OFFSET',
         ComponentDatatype.FLOAT,
         3
       );
       if (!defined(quantizedVolumeOffset)) {
         throw new RuntimeError(
-          "Global property: QUANTIZED_VOLUME_OFFSET must be defined for quantized positions."
+          'Global property: QUANTIZED_VOLUME_OFFSET must be defined for quantized positions.'
         );
       }
       const quantizedVolumeScale = featureTable.getGlobalProperty(
-        "QUANTIZED_VOLUME_SCALE",
+        'QUANTIZED_VOLUME_SCALE',
         ComponentDatatype.FLOAT,
         3
       );
       if (!defined(quantizedVolumeScale)) {
         throw new RuntimeError(
-          "Global property: QUANTIZED_VOLUME_SCALE must be defined for quantized positions."
+          'Global property: QUANTIZED_VOLUME_SCALE must be defined for quantized positions.'
         );
       }
       for (let j = 0; j < 3; j++) {
@@ -321,14 +321,14 @@ function initialize(content, arrayBuffer, byteOffset) {
 
     // Get the instance rotation
     const normalUp = featureTable.getProperty(
-      "NORMAL_UP",
+      'NORMAL_UP',
       ComponentDatatype.FLOAT,
       3,
       i,
       propertyScratch1
     );
     const normalRight = featureTable.getProperty(
-      "NORMAL_RIGHT",
+      'NORMAL_RIGHT',
       ComponentDatatype.FLOAT,
       3,
       i,
@@ -338,7 +338,7 @@ function initialize(content, arrayBuffer, byteOffset) {
     if (defined(normalUp)) {
       if (!defined(normalRight)) {
         throw new RuntimeError(
-          "To define a custom orientation, both NORMAL_UP and NORMAL_RIGHT must be defined."
+          'To define a custom orientation, both NORMAL_UP and NORMAL_RIGHT must be defined.'
         );
       }
       Cartesian3.unpack(normalUp, 0, instanceNormalUp);
@@ -346,14 +346,14 @@ function initialize(content, arrayBuffer, byteOffset) {
       hasCustomOrientation = true;
     } else {
       const octNormalUp = featureTable.getProperty(
-        "NORMAL_UP_OCT32P",
+        'NORMAL_UP_OCT32P',
         ComponentDatatype.UNSIGNED_SHORT,
         2,
         i,
         propertyScratch1
       );
       const octNormalRight = featureTable.getProperty(
-        "NORMAL_RIGHT_OCT32P",
+        'NORMAL_RIGHT_OCT32P',
         ComponentDatatype.UNSIGNED_SHORT,
         2,
         i,
@@ -362,7 +362,7 @@ function initialize(content, arrayBuffer, byteOffset) {
       if (defined(octNormalUp)) {
         if (!defined(octNormalRight)) {
           throw new RuntimeError(
-            "To define a custom orientation with oct-encoded vectors, both NORMAL_UP_OCT32P and NORMAL_RIGHT_OCT32P must be defined."
+            'To define a custom orientation with oct-encoded vectors, both NORMAL_UP_OCT32P and NORMAL_RIGHT_OCT32P must be defined.'
           );
         }
         AttributeCompression.octDecodeInRange(
@@ -421,7 +421,7 @@ function initialize(content, arrayBuffer, byteOffset) {
     // Get the instance scale
     instanceScale = Cartesian3.fromElements(1.0, 1.0, 1.0, instanceScale);
     const scale = featureTable.getProperty(
-      "SCALE",
+      'SCALE',
       ComponentDatatype.FLOAT,
       1,
       i
@@ -430,7 +430,7 @@ function initialize(content, arrayBuffer, byteOffset) {
       Cartesian3.multiplyByScalar(instanceScale, scale, instanceScale);
     }
     const nonUniformScale = featureTable.getProperty(
-      "SCALE_NON_UNIFORM",
+      'SCALE_NON_UNIFORM',
       ComponentDatatype.FLOAT,
       3,
       i,
@@ -445,7 +445,7 @@ function initialize(content, arrayBuffer, byteOffset) {
 
     // Get the batchId
     let batchId = featureTable.getProperty(
-      "BATCH_ID",
+      'BATCH_ID',
       ComponentDatatype.UNSIGNED_SHORT,
       1,
       i
@@ -463,7 +463,7 @@ function initialize(content, arrayBuffer, byteOffset) {
     const modelMatrix = instanceTransform.clone();
     instances[i] = {
       modelMatrix: modelMatrix,
-      batchId: batchId,
+      batchId: batchId
     };
   }
 
@@ -477,7 +477,7 @@ function initialize(content, arrayBuffer, byteOffset) {
     .then(function (collection) {
       if (content._modelInstanceCollection.ready) {
         collection.activeAnimations.addAll({
-          loop: ModelAnimationLoop.REPEAT,
+          loop: ModelAnimationLoop.REPEAT
         });
       }
     });
@@ -539,10 +539,12 @@ Instanced3DModel3DTileContent.prototype.update = function (
   this._modelInstanceCollection.modelMatrix = this._tile.computedTransform;
   this._modelInstanceCollection.shadows = this._tileset.shadows;
   this._modelInstanceCollection.lightColor = this._tileset.lightColor;
-  this._modelInstanceCollection.imageBasedLighting = this._tileset.imageBasedLighting;
+  this._modelInstanceCollection.imageBasedLighting =
+    this._tileset.imageBasedLighting;
   this._modelInstanceCollection.backFaceCulling = this._tileset.backFaceCulling;
   this._modelInstanceCollection.debugWireframe = this._tileset.debugWireframe;
-  this._modelInstanceCollection.showCreditsOnScreen = this._tileset.showCreditsOnScreen;
+  this._modelInstanceCollection.showCreditsOnScreen =
+    this._tileset.showCreditsOnScreen;
   this._modelInstanceCollection.splitDirection = this._tileset.splitDirection;
 
   const model = this._modelInstanceCollection._model;

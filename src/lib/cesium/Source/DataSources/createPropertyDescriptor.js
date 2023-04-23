@@ -1,6 +1,6 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import ConstantProperty from "./ConstantProperty.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import ConstantProperty from './ConstantProperty.js';
 
 function createProperty(
   name,
@@ -44,7 +44,7 @@ function createProperty(
           this
         );
       }
-    },
+    }
   };
 }
 

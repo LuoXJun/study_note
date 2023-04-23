@@ -1,13 +1,13 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import Event from "../Core/Event.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Quaternion from "../Core/Quaternion.js";
-import Transforms from "../Core/Transforms.js";
-import Property from "./Property.js";
-import VelocityVectorProperty from "./VelocityVectorProperty.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import Event from '../Core/Event.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Quaternion from '../Core/Quaternion.js';
+import Transforms from '../Core/Transforms.js';
+import Property from './Property.js';
+import VelocityVectorProperty from './VelocityVectorProperty.js';
 
 /**
  * A {@link Property} which evaluates to a {@link Quaternion} rotation
@@ -53,7 +53,7 @@ Object.defineProperties(VelocityOrientationProperty.prototype, {
   isConstant: {
     get: function () {
       return Property.isConstant(this._velocityVectorProperty);
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -65,7 +65,7 @@ Object.defineProperties(VelocityOrientationProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   /**
    * Gets or sets the position property used to compute orientation.
@@ -79,7 +79,7 @@ Object.defineProperties(VelocityOrientationProperty.prototype, {
     },
     set: function (value) {
       this._velocityVectorProperty.position = value;
-    },
+    }
   },
   /**
    * Gets or sets the ellipsoid used to determine which way is up.
@@ -97,8 +97,8 @@ Object.defineProperties(VelocityOrientationProperty.prototype, {
         this._ellipsoid = value;
         this._definitionChanged.raiseEvent(this);
       }
-    },
-  },
+    }
+  }
 });
 
 const positionScratch = new Cartesian3();

@@ -1,6 +1,6 @@
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import deprecationWarning from "../Core/deprecationWarning.js";
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import deprecationWarning from '../Core/deprecationWarning.js';
 
 /**
  * A feature of a {@link Cesium3DTileset}.
@@ -60,7 +60,7 @@ Object.defineProperties(Cesium3DTileFeature.prototype, {
     },
     set: function (value) {
       this._content.batchTable.setShow(this._batchId, value);
-    },
+    }
   },
 
   /**
@@ -83,7 +83,7 @@ Object.defineProperties(Cesium3DTileFeature.prototype, {
     },
     set: function (value) {
       this._content.batchTable.setColor(this._batchId, value);
-    },
+    }
   },
 
   /**
@@ -104,7 +104,7 @@ Object.defineProperties(Cesium3DTileFeature.prototype, {
       }
 
       return this._content.getPolylinePositions(this._batchId);
-    },
+    }
   },
 
   /**
@@ -120,7 +120,7 @@ Object.defineProperties(Cesium3DTileFeature.prototype, {
   content: {
     get: function () {
       return this._content;
-    },
+    }
   },
 
   /**
@@ -135,7 +135,7 @@ Object.defineProperties(Cesium3DTileFeature.prototype, {
   tileset: {
     get: function () {
       return this._content.tileset;
-    },
+    }
   },
 
   /**
@@ -151,7 +151,7 @@ Object.defineProperties(Cesium3DTileFeature.prototype, {
   primitive: {
     get: function () {
       return this._content.tileset;
-    },
+    }
   },
 
   /**
@@ -169,7 +169,7 @@ Object.defineProperties(Cesium3DTileFeature.prototype, {
   featureId: {
     get: function () {
       return this._batchId;
-    },
+    }
   },
 
   /**
@@ -178,8 +178,8 @@ Object.defineProperties(Cesium3DTileFeature.prototype, {
   pickId: {
     get: function () {
       return this._content.batchTable.getPickColor(this._batchId);
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -208,8 +208,8 @@ Cesium3DTileFeature.prototype.hasProperty = function (name) {
  */
 Cesium3DTileFeature.prototype.getPropertyNames = function (results) {
   deprecationWarning(
-    "Cesium3DTileFeature.getPropertyNames",
-    "Cesium3DTileFeature.getPropertyNames was deprecated in CesiumJS 1.95 and will be removed in 1.98. Use Cesium3DTileFeature.getPropertyIds instead"
+    'Cesium3DTileFeature.getPropertyNames',
+    'Cesium3DTileFeature.getPropertyNames was deprecated in CesiumJS 1.95 and will be removed in 1.98. Use Cesium3DTileFeature.getPropertyIds instead'
   );
   return this._content.batchTable.getPropertyIds(this._batchId, results);
 };

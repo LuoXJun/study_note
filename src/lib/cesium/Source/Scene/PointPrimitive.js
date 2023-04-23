@@ -1,16 +1,16 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DistanceDisplayCondition from "../Core/DistanceDisplayCondition.js";
-import Matrix4 from "../Core/Matrix4.js";
-import NearFarScalar from "../Core/NearFarScalar.js";
-import SceneMode from "./SceneMode.js";
-import SceneTransforms from "./SceneTransforms.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DistanceDisplayCondition from '../Core/DistanceDisplayCondition.js';
+import Matrix4 from '../Core/Matrix4.js';
+import NearFarScalar from '../Core/NearFarScalar.js';
+import SceneMode from './SceneMode.js';
+import SceneTransforms from './SceneTransforms.js';
 
 /**
  * A graphical point positioned in the 3D scene, that is created
@@ -47,7 +47,7 @@ function PointPrimitive(options, pointPrimitiveCollection) {
     options.disableDepthTestDistance < 0.0
   ) {
     throw new DeveloperError(
-      "disableDepthTestDistance must be greater than or equal to 0.0."
+      'disableDepthTestDistance must be greater than or equal to 0.0.'
     );
   }
   //>>includeEnd('debug');
@@ -59,7 +59,7 @@ function PointPrimitive(options, pointPrimitiveCollection) {
     //>>includeStart('debug', pragmas.debug);
     if (translucencyByDistance.far <= translucencyByDistance.near) {
       throw new DeveloperError(
-        "translucencyByDistance.far must be greater than translucencyByDistance.near."
+        'translucencyByDistance.far must be greater than translucencyByDistance.near.'
       );
     }
     //>>includeEnd('debug');
@@ -69,7 +69,7 @@ function PointPrimitive(options, pointPrimitiveCollection) {
     //>>includeStart('debug', pragmas.debug);
     if (scaleByDistance.far <= scaleByDistance.near) {
       throw new DeveloperError(
-        "scaleByDistance.far must be greater than scaleByDistance.near."
+        'scaleByDistance.far must be greater than scaleByDistance.near.'
       );
     }
     //>>includeEnd('debug');
@@ -79,7 +79,7 @@ function PointPrimitive(options, pointPrimitiveCollection) {
     //>>includeStart('debug', pragmas.debug);
     if (distanceDisplayCondition.far <= distanceDisplayCondition.near) {
       throw new DeveloperError(
-        "distanceDisplayCondition.far must be greater than distanceDisplayCondition.near."
+        'distanceDisplayCondition.far must be greater than distanceDisplayCondition.near.'
       );
     }
     //>>includeEnd('debug');
@@ -124,9 +124,12 @@ const OUTLINE_COLOR_INDEX = (PointPrimitive.OUTLINE_COLOR_INDEX = 3);
 const OUTLINE_WIDTH_INDEX = (PointPrimitive.OUTLINE_WIDTH_INDEX = 4);
 const PIXEL_SIZE_INDEX = (PointPrimitive.PIXEL_SIZE_INDEX = 5);
 const SCALE_BY_DISTANCE_INDEX = (PointPrimitive.SCALE_BY_DISTANCE_INDEX = 6);
-const TRANSLUCENCY_BY_DISTANCE_INDEX = (PointPrimitive.TRANSLUCENCY_BY_DISTANCE_INDEX = 7);
-const DISTANCE_DISPLAY_CONDITION_INDEX = (PointPrimitive.DISTANCE_DISPLAY_CONDITION_INDEX = 8);
-const DISABLE_DEPTH_DISTANCE_INDEX = (PointPrimitive.DISABLE_DEPTH_DISTANCE_INDEX = 9);
+const TRANSLUCENCY_BY_DISTANCE_INDEX =
+  (PointPrimitive.TRANSLUCENCY_BY_DISTANCE_INDEX = 7);
+const DISTANCE_DISPLAY_CONDITION_INDEX =
+  (PointPrimitive.DISTANCE_DISPLAY_CONDITION_INDEX = 8);
+const DISABLE_DEPTH_DISTANCE_INDEX =
+  (PointPrimitive.DISABLE_DEPTH_DISTANCE_INDEX = 9);
 PointPrimitive.NUMBER_OF_PROPERTIES = 10;
 
 function makeDirty(pointPrimitive, propertyChanged) {
@@ -154,7 +157,7 @@ Object.defineProperties(PointPrimitive.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(value)) {
-        throw new DeveloperError("value is required.");
+        throw new DeveloperError('value is required.');
       }
       //>>includeEnd('debug');
 
@@ -162,7 +165,7 @@ Object.defineProperties(PointPrimitive.prototype, {
         this._show = value;
         makeDirty(this, SHOW_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -177,7 +180,7 @@ Object.defineProperties(PointPrimitive.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug)
       if (!defined(value)) {
-        throw new DeveloperError("value is required.");
+        throw new DeveloperError('value is required.');
       }
       //>>includeEnd('debug');
 
@@ -188,7 +191,7 @@ Object.defineProperties(PointPrimitive.prototype, {
 
         makeDirty(this, POSITION_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -222,7 +225,7 @@ Object.defineProperties(PointPrimitive.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (defined(value) && value.far <= value.near) {
         throw new DeveloperError(
-          "far distance must be greater than near distance."
+          'far distance must be greater than near distance.'
         );
       }
       //>>includeEnd('debug');
@@ -232,7 +235,7 @@ Object.defineProperties(PointPrimitive.prototype, {
         this._scaleByDistance = NearFarScalar.clone(value, scaleByDistance);
         makeDirty(this, SCALE_BY_DISTANCE_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -265,7 +268,7 @@ Object.defineProperties(PointPrimitive.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (defined(value) && value.far <= value.near) {
         throw new DeveloperError(
-          "far distance must be greater than near distance."
+          'far distance must be greater than near distance.'
         );
       }
       //>>includeEnd('debug');
@@ -278,7 +281,7 @@ Object.defineProperties(PointPrimitive.prototype, {
         );
         makeDirty(this, TRANSLUCENCY_BY_DISTANCE_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -293,7 +296,7 @@ Object.defineProperties(PointPrimitive.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(value)) {
-        throw new DeveloperError("value is required.");
+        throw new DeveloperError('value is required.');
       }
       //>>includeEnd('debug');
 
@@ -301,7 +304,7 @@ Object.defineProperties(PointPrimitive.prototype, {
         this._pixelSize = value;
         makeDirty(this, PIXEL_SIZE_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -327,7 +330,7 @@ Object.defineProperties(PointPrimitive.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(value)) {
-        throw new DeveloperError("value is required.");
+        throw new DeveloperError('value is required.');
       }
       //>>includeEnd('debug');
 
@@ -336,7 +339,7 @@ Object.defineProperties(PointPrimitive.prototype, {
         Color.clone(value, color);
         makeDirty(this, COLOR_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -351,7 +354,7 @@ Object.defineProperties(PointPrimitive.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(value)) {
-        throw new DeveloperError("value is required.");
+        throw new DeveloperError('value is required.');
       }
       //>>includeEnd('debug');
 
@@ -360,7 +363,7 @@ Object.defineProperties(PointPrimitive.prototype, {
         Color.clone(value, outlineColor);
         makeDirty(this, OUTLINE_COLOR_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -376,7 +379,7 @@ Object.defineProperties(PointPrimitive.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(value)) {
-        throw new DeveloperError("value is required.");
+        throw new DeveloperError('value is required.');
       }
       //>>includeEnd('debug');
 
@@ -384,7 +387,7 @@ Object.defineProperties(PointPrimitive.prototype, {
         this._outlineWidth = value;
         makeDirty(this, OUTLINE_WIDTH_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -400,7 +403,7 @@ Object.defineProperties(PointPrimitive.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (defined(value) && value.far <= value.near) {
-        throw new DeveloperError("far must be greater than near");
+        throw new DeveloperError('far must be greater than near');
       }
       //>>includeEnd('debug');
       if (
@@ -412,7 +415,7 @@ Object.defineProperties(PointPrimitive.prototype, {
         );
         makeDirty(this, DISTANCE_DISPLAY_CONDITION_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -431,14 +434,14 @@ Object.defineProperties(PointPrimitive.prototype, {
         //>>includeStart('debug', pragmas.debug);
         if (!defined(value) || value < 0.0) {
           throw new DeveloperError(
-            "disableDepthTestDistance must be greater than or equal to 0.0."
+            'disableDepthTestDistance must be greater than or equal to 0.0.'
           );
         }
         //>>includeEnd('debug');
         this._disableDepthTestDistance = value;
         makeDirty(this, DISABLE_DEPTH_DISTANCE_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -455,7 +458,7 @@ Object.defineProperties(PointPrimitive.prototype, {
       if (defined(this._pickId)) {
         this._pickId.object.id = value;
       }
-    },
+    }
   },
 
   /**
@@ -464,7 +467,7 @@ Object.defineProperties(PointPrimitive.prototype, {
   pickId: {
     get: function () {
       return this._pickId;
-    },
+    }
   },
 
   /**
@@ -482,8 +485,8 @@ Object.defineProperties(PointPrimitive.prototype, {
         this._clusterShow = value;
         makeDirty(this, SHOW_INDEX);
       }
-    },
-  },
+    }
+  }
 });
 
 PointPrimitive.prototype.getPickId = function (context) {
@@ -491,7 +494,7 @@ PointPrimitive.prototype.getPickId = function (context) {
     this._pickId = context.createPickId({
       primitive: this,
       collection: this._collection,
-      id: this._id,
+      id: this._id
     });
   }
 
@@ -572,10 +575,10 @@ PointPrimitive.prototype.computeScreenSpacePosition = function (scene, result) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(pointPrimitiveCollection)) {
-    throw new DeveloperError("PointPrimitive must be in a collection.");
+    throw new DeveloperError('PointPrimitive must be in a collection.');
   }
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required.");
+    throw new DeveloperError('scene is required.');
   }
   //>>includeEnd('debug');
 

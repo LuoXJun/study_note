@@ -1,6 +1,6 @@
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
 
 /**
  * @private

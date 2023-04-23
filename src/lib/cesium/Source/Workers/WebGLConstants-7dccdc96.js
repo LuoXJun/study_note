@@ -1,5 +1,6 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports'], (function (exports) { 'use strict';
+define(['exports'], function (exports) {
+  'use strict';
 
   /**
    * Enum containing WebGL Constant values by name.
@@ -612,10 +613,9 @@ define(['exports'], (function (exports) { 'use strict';
     TEXTURE_IMMUTABLE_LEVELS: 0x82df,
 
     // Extensions
-    MAX_TEXTURE_MAX_ANISOTROPY_EXT: 0x84ff,
+    MAX_TEXTURE_MAX_ANISOTROPY_EXT: 0x84ff
   };
   var WebGLConstants$1 = Object.freeze(WebGLConstants);
 
   exports.WebGLConstants = WebGLConstants$1;
-
-}));
+});

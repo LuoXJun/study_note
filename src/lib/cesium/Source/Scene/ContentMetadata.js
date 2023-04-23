@@ -1,6 +1,6 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import MetadataEntity from "./MetadataEntity.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import MetadataEntity from './MetadataEntity.js';
 
 /**
  * Metadata about the content of a 3D Tile. This represents the content metadata JSON (3D Tiles 1.1)
@@ -24,8 +24,8 @@ export default function ContentMetadata(options) {
   const metadataClass = options.class;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.content", content);
-  Check.typeOf.object("options.class", metadataClass);
+  Check.typeOf.object('options.content', content);
+  Check.typeOf.object('options.class', metadataClass);
   //>>includeEnd('debug');
 
   this._class = metadataClass;
@@ -46,7 +46,7 @@ Object.defineProperties(ContentMetadata.prototype, {
   class: {
     get: function () {
       return this._class;
-    },
+    }
   },
 
   /**
@@ -60,7 +60,7 @@ Object.defineProperties(ContentMetadata.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -74,8 +74,8 @@ Object.defineProperties(ContentMetadata.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
-  },
+    }
+  }
 });
 
 /**

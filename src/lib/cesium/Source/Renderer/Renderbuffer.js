@@ -1,10 +1,10 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import ContextLimits from "./ContextLimits.js";
-import RenderbufferFormat from "./RenderbufferFormat.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import ContextLimits from './ContextLimits.js';
+import RenderbufferFormat from './RenderbufferFormat.js';
 
 /**
  * @private
@@ -13,7 +13,7 @@ function Renderbuffer(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.context", options.context);
+  Check.defined('options.context', options.context);
   //>>includeEnd('debug');
 
   const context = options.context;
@@ -29,10 +29,10 @@ function Renderbuffer(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!RenderbufferFormat.validate(format)) {
-    throw new DeveloperError("Invalid format.");
+    throw new DeveloperError('Invalid format.');
   }
 
-  Check.typeOf.number.greaterThan("width", width, 0);
+  Check.typeOf.number.greaterThan('width', width, 0);
 
   if (width > maximumRenderbufferSize) {
     throw new DeveloperError(
@@ -40,7 +40,7 @@ function Renderbuffer(options) {
     );
   }
 
-  Check.typeOf.number.greaterThan("height", height, 0);
+  Check.typeOf.number.greaterThan('height', height, 0);
 
   if (height > maximumRenderbufferSize) {
     throw new DeveloperError(
@@ -74,18 +74,18 @@ Object.defineProperties(Renderbuffer.prototype, {
   format: {
     get: function () {
       return this._format;
-    },
+    }
   },
   width: {
     get: function () {
       return this._width;
-    },
+    }
   },
   height: {
     get: function () {
       return this._height;
-    },
-  },
+    }
+  }
 });
 
 Renderbuffer.prototype._getRenderbuffer = function () {

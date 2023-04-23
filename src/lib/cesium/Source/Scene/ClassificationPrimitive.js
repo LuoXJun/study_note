@@ -1,28 +1,28 @@
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import combine from "../Core/combine.js";
-import defaultValue from "../Core/defaultValue.js";
-import defer from "../Core/defer.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import Pass from "../Renderer/Pass.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import ShadowVolumeAppearanceVS from "../Shaders/ShadowVolumeAppearanceVS.js";
-import ShadowVolumeFS from "../Shaders/ShadowVolumeFS.js";
-import BlendingState from "./BlendingState.js";
-import ClassificationType from "./ClassificationType.js";
-import DepthFunction from "./DepthFunction.js";
-import PerInstanceColorAppearance from "./PerInstanceColorAppearance.js";
-import Primitive from "./Primitive.js";
-import SceneMode from "./SceneMode.js";
-import ShadowVolumeAppearance from "./ShadowVolumeAppearance.js";
-import StencilConstants from "./StencilConstants.js";
-import StencilFunction from "./StencilFunction.js";
-import StencilOperation from "./StencilOperation.js";
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import combine from '../Core/combine.js';
+import defaultValue from '../Core/defaultValue.js';
+import defer from '../Core/defer.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import Pass from '../Renderer/Pass.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import ShadowVolumeAppearanceVS from '../Shaders/ShadowVolumeAppearanceVS.js';
+import ShadowVolumeFS from '../Shaders/ShadowVolumeFS.js';
+import BlendingState from './BlendingState.js';
+import ClassificationType from './ClassificationType.js';
+import DepthFunction from './DepthFunction.js';
+import PerInstanceColorAppearance from './PerInstanceColorAppearance.js';
+import Primitive from './Primitive.js';
+import SceneMode from './SceneMode.js';
+import ShadowVolumeAppearance from './ShadowVolumeAppearance.js';
+import StencilConstants from './StencilConstants.js';
+import StencilFunction from './StencilFunction.js';
+import StencilOperation from './StencilOperation.js';
 
 /**
  * A classification primitive represents a volume enclosing geometry in the {@link Scene} to be highlighted.
@@ -198,7 +198,7 @@ function ClassificationPrimitive(options) {
     _createShaderProgramFunction: undefined,
     _createCommandsFunction: undefined,
     _updateAndQueueCommandsFunction: undefined,
-    _createPickOffsets: true,
+    _createPickOffsets: true
   };
 }
 
@@ -216,7 +216,7 @@ Object.defineProperties(ClassificationPrimitive.prototype, {
   vertexCacheOptimize: {
     get: function () {
       return this._primitiveOptions.vertexCacheOptimize;
-    },
+    }
   },
 
   /**
@@ -232,7 +232,7 @@ Object.defineProperties(ClassificationPrimitive.prototype, {
   interleave: {
     get: function () {
       return this._primitiveOptions.interleave;
-    },
+    }
   },
 
   /**
@@ -248,7 +248,7 @@ Object.defineProperties(ClassificationPrimitive.prototype, {
   releaseGeometryInstances: {
     get: function () {
       return this._primitiveOptions.releaseGeometryInstances;
-    },
+    }
   },
 
   /**
@@ -264,7 +264,7 @@ Object.defineProperties(ClassificationPrimitive.prototype, {
   allowPicking: {
     get: function () {
       return this._primitiveOptions.allowPicking;
-    },
+    }
   },
 
   /**
@@ -280,7 +280,7 @@ Object.defineProperties(ClassificationPrimitive.prototype, {
   asynchronous: {
     get: function () {
       return this._primitiveOptions.asynchronous;
-    },
+    }
   },
 
   /**
@@ -296,7 +296,7 @@ Object.defineProperties(ClassificationPrimitive.prototype, {
   compressVertices: {
     get: function () {
       return this._primitiveOptions.compressVertices;
-    },
+    }
   },
 
   /**
@@ -312,7 +312,7 @@ Object.defineProperties(ClassificationPrimitive.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -324,7 +324,7 @@ Object.defineProperties(ClassificationPrimitive.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise.promise;
-    },
+    }
   },
 
   /**
@@ -341,8 +341,8 @@ Object.defineProperties(ClassificationPrimitive.prototype, {
       return (
         this._hasPlanarExtentsAttributes || this._hasSphericalExtentsAttribute
       );
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -364,7 +364,7 @@ function getStencilDepthRenderState(enableStencil, mask3DTiles) {
       red: false,
       green: false,
       blue: false,
-      alpha: false,
+      alpha: false
     },
     stencilTest: {
       enabled: enableStencil,
@@ -372,23 +372,23 @@ function getStencilDepthRenderState(enableStencil, mask3DTiles) {
       frontOperation: {
         fail: StencilOperation.KEEP,
         zFail: StencilOperation.DECREMENT_WRAP,
-        zPass: StencilOperation.KEEP,
+        zPass: StencilOperation.KEEP
       },
       backFunction: stencilFunction,
       backOperation: {
         fail: StencilOperation.KEEP,
         zFail: StencilOperation.INCREMENT_WRAP,
-        zPass: StencilOperation.KEEP,
+        zPass: StencilOperation.KEEP
       },
       reference: StencilConstants.CESIUM_3D_TILE_MASK,
-      mask: StencilConstants.CESIUM_3D_TILE_MASK,
+      mask: StencilConstants.CESIUM_3D_TILE_MASK
     },
     stencilMask: StencilConstants.CLASSIFICATION_MASK,
     depthTest: {
       enabled: true,
-      func: DepthFunction.LESS_OR_EQUAL,
+      func: DepthFunction.LESS_OR_EQUAL
     },
-    depthMask: false,
+    depthMask: false
   };
 }
 
@@ -400,23 +400,23 @@ function getColorRenderState(enableStencil) {
       frontOperation: {
         fail: StencilOperation.ZERO,
         zFail: StencilOperation.ZERO,
-        zPass: StencilOperation.ZERO,
+        zPass: StencilOperation.ZERO
       },
       backFunction: StencilFunction.NOT_EQUAL,
       backOperation: {
         fail: StencilOperation.ZERO,
         zFail: StencilOperation.ZERO,
-        zPass: StencilOperation.ZERO,
+        zPass: StencilOperation.ZERO
       },
       reference: 0,
-      mask: StencilConstants.CLASSIFICATION_MASK,
+      mask: StencilConstants.CLASSIFICATION_MASK
     },
     stencilMask: StencilConstants.CLASSIFICATION_MASK,
     depthTest: {
-      enabled: false,
+      enabled: false
     },
     depthMask: false,
-    blending: BlendingState.PRE_MULTIPLIED_ALPHA_BLEND,
+    blending: BlendingState.PRE_MULTIPLIED_ALPHA_BLEND
   };
 }
 
@@ -427,22 +427,22 @@ const pickRenderState = {
     frontOperation: {
       fail: StencilOperation.ZERO,
       zFail: StencilOperation.ZERO,
-      zPass: StencilOperation.ZERO,
+      zPass: StencilOperation.ZERO
     },
     backFunction: StencilFunction.NOT_EQUAL,
     backOperation: {
       fail: StencilOperation.ZERO,
       zFail: StencilOperation.ZERO,
-      zPass: StencilOperation.ZERO,
+      zPass: StencilOperation.ZERO
     },
     reference: 0,
-    mask: StencilConstants.CLASSIFICATION_MASK,
+    mask: StencilConstants.CLASSIFICATION_MASK
   },
   stencilMask: StencilConstants.CLASSIFICATION_MASK,
   depthTest: {
-    enabled: false,
+    enabled: false
   },
-  depthMask: false,
+  depthMask: false
 };
 
 function createRenderStates(
@@ -476,28 +476,28 @@ function modifyForEncodedNormals(primitive, vertexShaderSource) {
   if (
     vertexShaderSource.search(/attribute\s+vec3\s+extrudeDirection;/g) !== -1
   ) {
-    const attributeName = "compressedAttributes";
+    const attributeName = 'compressedAttributes';
 
     //only shadow volumes use extrudeDirection, and shadow volumes use vertexFormat: POSITION_ONLY so we don't need to check other attributes
     const attributeDecl = `attribute vec2 ${attributeName};`;
 
-    const globalDecl = "vec3 extrudeDirection;\n";
+    const globalDecl = 'vec3 extrudeDirection;\n';
     const decode = `    extrudeDirection = czm_octDecode(${attributeName}, 65535.0);\n`;
 
     let modifiedVS = vertexShaderSource;
     modifiedVS = modifiedVS.replace(
       /attribute\s+vec3\s+extrudeDirection;/g,
-      ""
+      ''
     );
     modifiedVS = ShaderSource.replaceMain(
       modifiedVS,
-      "czm_non_compressed_main"
+      'czm_non_compressed_main'
     );
     const compressedMain =
-      `${"void main() \n" + "{ \n"}${decode}    czm_non_compressed_main(); \n` +
+      `${'void main() \n' + '{ \n'}${decode}    czm_non_compressed_main(); \n` +
       `}`;
 
-    return [attributeDecl, globalDecl, modifiedVS, compressedMain].join("\n");
+    return [attributeDecl, globalDecl, modifiedVS, compressedMain].join('\n');
   }
 }
 
@@ -505,9 +505,10 @@ function createShaderProgram(classificationPrimitive, frameState) {
   const context = frameState.context;
   const primitive = classificationPrimitive._primitive;
   let vs = ShadowVolumeAppearanceVS;
-  vs = classificationPrimitive._primitive._batchTable.getVertexShaderCallback()(
-    vs
-  );
+  vs =
+    classificationPrimitive._primitive._batchTable.getVertexShaderCallback()(
+      vs
+    );
   vs = Primitive._appendDistanceDisplayConditionToShader(primitive, vs);
   vs = Primitive._modifyShaderPosition(
     classificationPrimitive,
@@ -525,15 +526,15 @@ function createShaderProgram(classificationPrimitive, frameState) {
   }
 
   const extrudedDefine = classificationPrimitive._extruded
-    ? "EXTRUDED_GEOMETRY"
-    : "";
+    ? 'EXTRUDED_GEOMETRY'
+    : '';
 
   let vsSource = new ShaderSource({
     defines: [extrudedDefine],
-    sources: [vs],
+    sources: [vs]
   });
   const fsSource = new ShaderSource({
-    sources: [ShadowVolumeFS],
+    sources: [ShadowVolumeFS]
   });
   const attributeLocations =
     classificationPrimitive._primitive._attributeLocations;
@@ -549,7 +550,7 @@ function createShaderProgram(classificationPrimitive, frameState) {
     shaderProgram: classificationPrimitive._spStencil,
     vertexShaderSource: vsSource,
     fragmentShaderSource: fsSource,
-    attributeLocations: attributeLocations,
+    attributeLocations: attributeLocations
   });
 
   if (classificationPrimitive._primitive.allowPicking) {
@@ -570,7 +571,7 @@ function createShaderProgram(classificationPrimitive, frameState) {
       shaderProgram: classificationPrimitive._spPick,
       vertexShaderSource: pickVS3D,
       fragmentShaderSource: pickFS3D,
-      attributeLocations: attributeLocations,
+      attributeLocations: attributeLocations
     });
 
     // Derive a 2D pick shader if the primitive uses texture coordinate-based fragment culling,
@@ -578,7 +579,7 @@ function createShaderProgram(classificationPrimitive, frameState) {
     if (cullFragmentsUsingExtents) {
       let pickProgram2D = context.shaderCache.getDerivedShaderProgram(
         classificationPrimitive._spPick,
-        "2dPick"
+        '2dPick'
       );
       if (!defined(pickProgram2D)) {
         const pickFS2D = shadowVolumeAppearance.createPickFragmentShader(true);
@@ -591,11 +592,11 @@ function createShaderProgram(classificationPrimitive, frameState) {
 
         pickProgram2D = context.shaderCache.createDerivedShaderProgram(
           classificationPrimitive._spPick,
-          "2dPick",
+          '2dPick',
           {
             vertexShaderSource: pickVS2D,
             fragmentShaderSource: pickFS2D,
-            attributeLocations: attributeLocations,
+            attributeLocations: attributeLocations
           }
         );
       }
@@ -606,14 +607,14 @@ function createShaderProgram(classificationPrimitive, frameState) {
       context: context,
       vertexShaderSource: vsSource,
       fragmentShaderSource: fsSource,
-      attributeLocations: attributeLocations,
+      attributeLocations: attributeLocations
     });
   }
 
   vs = Primitive._appendShowToShader(primitive, vs);
   vsSource = new ShaderSource({
     defines: [extrudedDefine],
-    sources: [vs],
+    sources: [vs]
   });
 
   classificationPrimitive._sp = ShaderProgram.replaceCache({
@@ -621,7 +622,7 @@ function createShaderProgram(classificationPrimitive, frameState) {
     shaderProgram: classificationPrimitive._sp,
     vertexShaderSource: vsSource,
     fragmentShaderSource: fsSource,
-    attributeLocations: attributeLocations,
+    attributeLocations: attributeLocations
   });
 
   // Create a fragment shader that computes only required material hookups using screen space techniques
@@ -638,7 +639,7 @@ function createShaderProgram(classificationPrimitive, frameState) {
     shaderProgram: classificationPrimitive._spColor,
     vertexShaderSource: vsColorSource,
     fragmentShaderSource: fsColorSource,
-    attributeLocations: attributeLocations,
+    attributeLocations: attributeLocations
   });
 
   // Derive a 2D shader if the primitive uses texture coordinate-based fragment culling,
@@ -647,7 +648,7 @@ function createShaderProgram(classificationPrimitive, frameState) {
   if (cullFragmentsUsingExtents) {
     let colorProgram2D = context.shaderCache.getDerivedShaderProgram(
       classificationPrimitive._spColor,
-      "2dColor"
+      '2dColor'
     );
     if (!defined(colorProgram2D)) {
       const fsColorSource2D = shadowVolumeAppearance.createFragmentShader(true);
@@ -660,11 +661,11 @@ function createShaderProgram(classificationPrimitive, frameState) {
 
       colorProgram2D = context.shaderCache.createDerivedShaderProgram(
         classificationPrimitive._spColor,
-        "2dColor",
+        '2dColor',
         {
           vertexShaderSource: vsColorSource2D,
           fragmentShaderSource: fsColorSource2D,
-          attributeLocations: attributeLocations,
+          attributeLocations: attributeLocations
         }
       );
     }
@@ -695,7 +696,7 @@ function createColorCommands(classificationPrimitive, colorCommands) {
     if (!defined(command)) {
       command = colorCommands[i] = new DrawCommand({
         owner: classificationPrimitive,
-        primitiveType: primitive._primitiveType,
+        primitiveType: primitive._primitiveType
       });
     }
 
@@ -719,7 +720,7 @@ function createColorCommands(classificationPrimitive, colorCommands) {
     if (!defined(command)) {
       command = colorCommands[i + 1] = new DrawCommand({
         owner: classificationPrimitive,
-        primitiveType: primitive._primitiveType,
+        primitiveType: primitive._primitiveType
       });
     }
 
@@ -821,7 +822,7 @@ function createPickCommands(classificationPrimitive, pickCommands) {
       command = pickCommands[j] = new DrawCommand({
         owner: classificationPrimitive,
         primitiveType: primitive._primitiveType,
-        pickOnly: true,
+        pickOnly: true
       });
     }
 
@@ -851,7 +852,7 @@ function createPickCommands(classificationPrimitive, pickCommands) {
       command = pickCommands[j + 1] = new DrawCommand({
         owner: classificationPrimitive,
         primitiveType: primitive._primitiveType,
-        pickOnly: true,
+        pickOnly: true
       });
     }
 
@@ -1100,12 +1101,12 @@ ClassificationPrimitive.prototype.update = function (frameState) {
       attributes = instances[0].attributes;
       // Not expecting these to be set by users, should only be set via GroundPrimitive.
       // So don't check for mismatch.
-      hasSphericalExtentsAttribute = ShadowVolumeAppearance.hasAttributesForSphericalExtents(
-        attributes
-      );
-      hasPlanarExtentsAttributes = ShadowVolumeAppearance.hasAttributesForTextureCoordinatePlanes(
-        attributes
-      );
+      hasSphericalExtentsAttribute =
+        ShadowVolumeAppearance.hasAttributesForSphericalExtents(attributes);
+      hasPlanarExtentsAttributes =
+        ShadowVolumeAppearance.hasAttributesForTextureCoordinatePlanes(
+          attributes
+        );
       firstColor = attributes.color;
     }
 
@@ -1118,7 +1119,7 @@ ClassificationPrimitive.prototype.update = function (frameState) {
       //>>includeStart('debug', pragmas.debug);
       else if (hasPerColorAttribute) {
         throw new DeveloperError(
-          "All GeometryInstances must have color attributes to use per-instance color."
+          'All GeometryInstances must have color attributes to use per-instance color.'
         );
       }
       //>>includeEnd('debug');
@@ -1137,14 +1138,14 @@ ClassificationPrimitive.prototype.update = function (frameState) {
       !hasPlanarExtentsAttributes
     ) {
       throw new DeveloperError(
-        "All GeometryInstances must have the same color attribute except via GroundPrimitives"
+        'All GeometryInstances must have the same color attribute except via GroundPrimitives'
       );
     }
 
     // default to a color appearance
     if (hasPerColorAttribute && !defined(appearance)) {
       appearance = new PerInstanceColorAppearance({
-        flat: true,
+        flat: true
       });
       this.appearance = appearance;
     }
@@ -1155,7 +1156,7 @@ ClassificationPrimitive.prototype.update = function (frameState) {
       appearance instanceof PerInstanceColorAppearance
     ) {
       throw new DeveloperError(
-        "PerInstanceColorAppearance requires color GeometryInstanceAttributes on all GeometryInstances"
+        'PerInstanceColorAppearance requires color GeometryInstanceAttributes on all GeometryInstances'
       );
     }
     if (
@@ -1164,7 +1165,7 @@ ClassificationPrimitive.prototype.update = function (frameState) {
       !hasPlanarExtentsAttributes
     ) {
       throw new DeveloperError(
-        "Materials on ClassificationPrimitives are not supported except via GroundPrimitives"
+        'Materials on ClassificationPrimitives are not supported except via GroundPrimitives'
       );
     }
     //>>includeEnd('debug');
@@ -1183,7 +1184,7 @@ ClassificationPrimitive.prototype.update = function (frameState) {
         attributes: instance.attributes,
         modelMatrix: instance.modelMatrix,
         id: instance.id,
-        pickPrimitive: defaultValue(this._pickPrimitive, that),
+        pickPrimitive: defaultValue(this._pickPrimitive, that)
       });
     }
 
@@ -1330,7 +1331,7 @@ ClassificationPrimitive.prototype.update = function (frameState) {
       defined(appearance.material)
     ) {
       throw new DeveloperError(
-        "Materials on ClassificationPrimitives are not supported except via GroundPrimitive"
+        'Materials on ClassificationPrimitives are not supported except via GroundPrimitive'
       );
     }
     if (
@@ -1338,7 +1339,7 @@ ClassificationPrimitive.prototype.update = function (frameState) {
       appearance instanceof PerInstanceColorAppearance
     ) {
       throw new DeveloperError(
-        "PerInstanceColorAppearance requires color GeometryInstanceAttribute"
+        'PerInstanceColorAppearance requires color GeometryInstanceAttribute'
       );
     }
     //>>includeEnd('debug');
@@ -1369,7 +1370,7 @@ ClassificationPrimitive.prototype.getGeometryInstanceAttributes = function (
   //>>includeStart('debug', pragmas.debug);
   if (!defined(this._primitive)) {
     throw new DeveloperError(
-      "must call update before calling getGeometryInstanceAttributes"
+      'must call update before calling getGeometryInstanceAttributes'
     );
   }
   //>>includeEnd('debug');

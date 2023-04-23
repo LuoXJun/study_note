@@ -1,7 +1,7 @@
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
 
 /**
  * Value and type information for per-instance geometry attribute that determines the geometry instance offset
@@ -46,7 +46,7 @@ Object.defineProperties(OffsetGeometryInstanceAttribute.prototype, {
   componentDatatype: {
     get: function () {
       return ComponentDatatype.FLOAT;
-    },
+    }
   },
 
   /**
@@ -62,7 +62,7 @@ Object.defineProperties(OffsetGeometryInstanceAttribute.prototype, {
   componentsPerAttribute: {
     get: function () {
       return 3;
-    },
+    }
   },
 
   /**
@@ -80,8 +80,8 @@ Object.defineProperties(OffsetGeometryInstanceAttribute.prototype, {
   normalize: {
     get: function () {
       return false;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -92,7 +92,7 @@ Object.defineProperties(OffsetGeometryInstanceAttribute.prototype, {
  */
 OffsetGeometryInstanceAttribute.fromCartesian3 = function (offset) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("offset", offset);
+  Check.defined('offset', offset);
   //>>includeEnd('debug');
 
   return new OffsetGeometryInstanceAttribute(offset.x, offset.y, offset.z);
@@ -111,7 +111,7 @@ OffsetGeometryInstanceAttribute.fromCartesian3 = function (offset) {
  */
 OffsetGeometryInstanceAttribute.toValue = function (offset, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("offset", offset);
+  Check.defined('offset', offset);
   //>>includeEnd('debug');
 
   if (!defined(result)) {

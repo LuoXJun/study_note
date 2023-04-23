@@ -1,5 +1,5 @@
-import RBush from "../ThirdParty/rbush.js";
-import Check from "./Check.js";
+import RBush from '../ThirdParty/rbush.js';
+import Check from './Check.js';
 
 /**
  * Wrapper around rbush for use with Rectangle types.
@@ -14,7 +14,7 @@ function RectangleWithId() {
   this.minY = 0.0;
   this.maxX = 0.0;
   this.maxY = 0.0;
-  this.id = "";
+  this.id = '';
 }
 
 RectangleWithId.fromRectangleAndId = function (id, rectangle, result) {
@@ -35,8 +35,8 @@ RectangleWithId.fromRectangleAndId = function (id, rectangle, result) {
  */
 RectangleCollisionChecker.prototype.insert = function (id, rectangle) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("id", id);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.string('id', id);
+  Check.typeOf.object('rectangle', rectangle);
   //>>includeEnd('debug');
 
   const withId = RectangleWithId.fromRectangleAndId(
@@ -61,8 +61,8 @@ const removalScratch = new RectangleWithId();
  */
 RectangleCollisionChecker.prototype.remove = function (id, rectangle) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("id", id);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.string('id', id);
+  Check.typeOf.object('rectangle', rectangle);
   //>>includeEnd('debug');
 
   const withId = RectangleWithId.fromRectangleAndId(
@@ -82,11 +82,11 @@ const collisionScratch = new RectangleWithId();
  */
 RectangleCollisionChecker.prototype.collides = function (rectangle) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.object('rectangle', rectangle);
   //>>includeEnd('debug');
 
   const withId = RectangleWithId.fromRectangleAndId(
-    "",
+    '',
     rectangle,
     collisionScratch
   );

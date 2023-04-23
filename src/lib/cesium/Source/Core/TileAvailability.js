@@ -1,7 +1,7 @@
-import binarySearch from "./binarySearch.js";
-import Cartographic from "./Cartographic.js";
-import defined from "./defined.js";
-import Rectangle from "./Rectangle.js";
+import binarySearch from './binarySearch.js';
+import Cartographic from './Cartographic.js';
+import defined from './defined.js';
+import Rectangle from './Rectangle.js';
 
 /**
  * Reports the availability of tiles in a {@link TilingScheme}.
@@ -269,7 +269,7 @@ Object.defineProperties(QuadtreeNode.prototype, {
         );
       }
       return this._nw;
-    },
+    }
   },
 
   ne: {
@@ -284,7 +284,7 @@ Object.defineProperties(QuadtreeNode.prototype, {
         );
       }
       return this._ne;
-    },
+    }
   },
 
   sw: {
@@ -299,7 +299,7 @@ Object.defineProperties(QuadtreeNode.prototype, {
         );
       }
       return this._sw;
-    },
+    }
   },
 
   se: {
@@ -314,8 +314,8 @@ Object.defineProperties(QuadtreeNode.prototype, {
         );
       }
       return this._se;
-    },
-  },
+    }
+  }
 });
 
 function RectangleWithLevel(level, west, south, east, north) {

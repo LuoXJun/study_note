@@ -1,15 +1,15 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import createGuid from "../Core/createGuid.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import Resource from "../Core/Resource.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import Framebuffer from "../Renderer/Framebuffer.js";
-import Texture from "../Renderer/Texture.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import createGuid from '../Core/createGuid.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import Resource from '../Core/Resource.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import Framebuffer from '../Renderer/Framebuffer.js';
+import Texture from '../Renderer/Texture.js';
 
 // The atlas is made up of regions of space called nodes that contain images or child nodes.
 function TextureAtlasNode(
@@ -56,15 +56,15 @@ function TextureAtlas(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.context)) {
-    throw new DeveloperError("context is required.");
+    throw new DeveloperError('context is required.');
   }
   if (borderWidthInPixels < 0) {
     throw new DeveloperError(
-      "borderWidthInPixels must be greater than or equal to zero."
+      'borderWidthInPixels must be greater than or equal to zero.'
     );
   }
   if (initialSize.x < 1 || initialSize.y < 1) {
-    throw new DeveloperError("initialSize must be greater than zero.");
+    throw new DeveloperError('initialSize must be greater than zero.');
   }
   //>>includeEnd('debug');
 
@@ -89,7 +89,7 @@ Object.defineProperties(TextureAtlas.prototype, {
   borderWidthInPixels: {
     get: function () {
       return this._borderWidthInPixels;
-    },
+    }
   },
 
   /**
@@ -102,7 +102,7 @@ Object.defineProperties(TextureAtlas.prototype, {
   textureCoordinates: {
     get: function () {
       return this._textureCoordinates;
-    },
+    }
   },
 
   /**
@@ -117,11 +117,11 @@ Object.defineProperties(TextureAtlas.prototype, {
           context: this._context,
           width: this._initialSize.x,
           height: this._initialSize.y,
-          pixelFormat: this._pixelFormat,
+          pixelFormat: this._pixelFormat
         });
       }
       return this._texture;
-    },
+    }
   },
 
   /**
@@ -135,7 +135,7 @@ Object.defineProperties(TextureAtlas.prototype, {
   numberOfImages: {
     get: function () {
       return this._textureCoordinates.length;
-    },
+    }
   },
 
   /**
@@ -149,8 +149,8 @@ Object.defineProperties(TextureAtlas.prototype, {
   guid: {
     get: function () {
       return this._guid;
-    },
-  },
+    }
+  }
 });
 
 // Builds a larger texture and copies the old texture into the new one.
@@ -207,13 +207,13 @@ function resizeAtlas(textureAtlas, image) {
       context: textureAtlas._context,
       width: atlasWidth,
       height: atlasHeight,
-      pixelFormat: textureAtlas._pixelFormat,
+      pixelFormat: textureAtlas._pixelFormat
     });
 
     const framebuffer = new Framebuffer({
       context: context,
       colorTextures: [textureAtlas._texture],
-      destroyAttachments: false,
+      destroyAttachments: false
     });
 
     framebuffer._bind();
@@ -241,7 +241,7 @@ function resizeAtlas(textureAtlas, image) {
       context: textureAtlas._context,
       width: initialWidth,
       height: initialHeight,
-      pixelFormat: textureAtlas._pixelFormat,
+      pixelFormat: textureAtlas._pixelFormat
     });
     textureAtlas._root = new TextureAtlasNode(
       new Cartesian2(borderWidthInPixels, borderWidthInPixels),
@@ -342,7 +342,7 @@ function addImage(textureAtlas, image, index) {
     textureAtlas._texture.copyFrom({
       source: image,
       xOffset: node.bottomLeft.x,
-      yOffset: node.bottomLeft.y,
+      yOffset: node.bottomLeft.y
     });
   } else {
     // No node found, must resize the texture atlas.
@@ -374,7 +374,7 @@ function getIndex(atlas, image) {
 TextureAtlas.prototype.getImageIndex = function (id) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(id)) {
-    throw new DeveloperError("id is required.");
+    throw new DeveloperError('id is required.');
   }
   //>>includeEnd('debug');
 
@@ -392,10 +392,10 @@ TextureAtlas.prototype.getImageIndex = function (id) {
 TextureAtlas.prototype.addImageSync = function (id, image) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(id)) {
-    throw new DeveloperError("id is required.");
+    throw new DeveloperError('id is required.');
   }
   if (!defined(image)) {
-    throw new DeveloperError("image is required.");
+    throw new DeveloperError('image is required.');
   }
   //>>includeEnd('debug');
 
@@ -425,10 +425,10 @@ TextureAtlas.prototype.addImageSync = function (id, image) {
 TextureAtlas.prototype.addImage = function (id, image) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(id)) {
-    throw new DeveloperError("id is required.");
+    throw new DeveloperError('id is required.');
   }
   if (!defined(image)) {
-    throw new DeveloperError("image is required.");
+    throw new DeveloperError('image is required.');
   }
   //>>includeEnd('debug');
 
@@ -440,15 +440,15 @@ TextureAtlas.prototype.addImage = function (id, image) {
 
   // not in atlas, create the promise for the index
 
-  if (typeof image === "function") {
+  if (typeof image === 'function') {
     // if image is a function, call it
     image = image(id);
     //>>includeStart('debug', pragmas.debug);
     if (!defined(image)) {
-      throw new DeveloperError("image is required.");
+      throw new DeveloperError('image is required.');
     }
     //>>includeEnd('debug');
-  } else if (typeof image === "string" || image instanceof Resource) {
+  } else if (typeof image === 'string' || image instanceof Resource) {
     // Get a resource
     const resource = Resource.createIfNeeded(image);
     image = resource.fetchImage();
@@ -478,10 +478,10 @@ TextureAtlas.prototype.addImage = function (id, image) {
 TextureAtlas.prototype.addSubRegion = function (id, subRegion) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(id)) {
-    throw new DeveloperError("id is required.");
+    throw new DeveloperError('id is required.');
   }
   if (!defined(subRegion)) {
-    throw new DeveloperError("subRegion is required.");
+    throw new DeveloperError('subRegion is required.');
   }
   //>>includeEnd('debug');
 

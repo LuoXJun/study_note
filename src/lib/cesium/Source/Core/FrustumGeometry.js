@@ -1,20 +1,20 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartesian4 from "./Cartesian4.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import Matrix3 from "./Matrix3.js";
-import Matrix4 from "./Matrix4.js";
-import OrthographicFrustum from "./OrthographicFrustum.js";
-import PerspectiveFrustum from "./PerspectiveFrustum.js";
-import PrimitiveType from "./PrimitiveType.js";
-import Quaternion from "./Quaternion.js";
-import VertexFormat from "./VertexFormat.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartesian4 from './Cartesian4.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import Matrix3 from './Matrix3.js';
+import Matrix4 from './Matrix4.js';
+import OrthographicFrustum from './OrthographicFrustum.js';
+import PerspectiveFrustum from './PerspectiveFrustum.js';
+import PrimitiveType from './PrimitiveType.js';
+import Quaternion from './Quaternion.js';
+import VertexFormat from './VertexFormat.js';
 
 const PERSPECTIVE = 0;
 const ORTHOGRAPHIC = 1;
@@ -33,10 +33,10 @@ const ORTHOGRAPHIC = 1;
  */
 function FrustumGeometry(options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options", options);
-  Check.typeOf.object("options.frustum", options.frustum);
-  Check.typeOf.object("options.origin", options.origin);
-  Check.typeOf.object("options.orientation", options.orientation);
+  Check.typeOf.object('options', options);
+  Check.typeOf.object('options.frustum', options.frustum);
+  Check.typeOf.object('options.origin', options.origin);
+  Check.typeOf.object('options.orientation', options.orientation);
   //>>includeEnd('debug');
 
   const frustum = options.frustum;
@@ -65,7 +65,7 @@ function FrustumGeometry(options) {
   this._orientation = Quaternion.clone(orientation);
   this._drawNearPlane = drawNearPlane;
   this._vertexFormat = vertexFormat;
-  this._workerName = "createFrustumGeometry";
+  this._workerName = 'createFrustumGeometry';
 
   /**
    * The number of elements used to pack the object into an array.
@@ -90,8 +90,8 @@ function FrustumGeometry(options) {
  */
 FrustumGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -135,7 +135,7 @@ const scratchVertexFormat = new VertexFormat();
  */
 FrustumGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -181,7 +181,7 @@ FrustumGeometry.unpack = function (array, startingIndex, result) {
       origin: origin,
       orientation: orientation,
       vertexFormat: vertexFormat,
-      _drawNearPlane: drawNearPlane,
+      _drawNearPlane: drawNearPlane
     });
   }
 
@@ -466,8 +466,8 @@ FrustumGeometry.createGeometry = function (frustumGeometry) {
     position: new GeometryAttribute({
       componentDatatype: ComponentDatatype.DOUBLE,
       componentsPerAttribute: 3,
-      values: positions,
-    }),
+      values: positions
+    })
   });
 
   if (
@@ -534,28 +534,28 @@ FrustumGeometry.createGeometry = function (frustumGeometry) {
       attributes.normal = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: normals,
+        values: normals
       });
     }
     if (defined(tangents)) {
       attributes.tangent = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: tangents,
+        values: tangents
       });
     }
     if (defined(bitangents)) {
       attributes.bitangent = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: bitangents,
+        values: bitangents
       });
     }
     if (defined(st)) {
       attributes.st = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 2,
-        values: st,
+        values: st
       });
     }
   }
@@ -577,7 +577,7 @@ FrustumGeometry.createGeometry = function (frustumGeometry) {
     attributes: attributes,
     indices: indices,
     primitiveType: PrimitiveType.TRIANGLES,
-    boundingSphere: BoundingSphere.fromVertices(positions),
+    boundingSphere: BoundingSphere.fromVertices(positions)
   });
 };
 export default FrustumGeometry;

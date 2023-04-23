@@ -1,7 +1,7 @@
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
 
 /**
  * Provides terrain or other geometry for the surface of an ellipsoid.  The surface geometry is
@@ -30,7 +30,7 @@ Object.defineProperties(TerrainProvider.prototype, {
    * @readonly
    */
   errorEvent: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -42,7 +42,7 @@ Object.defineProperties(TerrainProvider.prototype, {
    * @readonly
    */
   credit: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -53,7 +53,7 @@ Object.defineProperties(TerrainProvider.prototype, {
    * @readonly
    */
   tilingScheme: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -63,7 +63,7 @@ Object.defineProperties(TerrainProvider.prototype, {
    * @readonly
    */
   ready: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -73,7 +73,7 @@ Object.defineProperties(TerrainProvider.prototype, {
    * @readonly
    */
   readyPromise: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -86,7 +86,7 @@ Object.defineProperties(TerrainProvider.prototype, {
    * @readonly
    */
   hasWaterMask: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -97,7 +97,7 @@ Object.defineProperties(TerrainProvider.prototype, {
    * @readonly
    */
   hasVertexNormals: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -110,8 +110,8 @@ Object.defineProperties(TerrainProvider.prototype, {
    * @readonly
    */
   availability: {
-    get: DeveloperError.throwInstantiationError,
-  },
+    get: DeveloperError.throwInstantiationError
+  }
 });
 
 const regularGridIndicesCache = [];
@@ -130,7 +130,7 @@ TerrainProvider.getRegularGridIndices = function (width, height) {
   //>>includeStart('debug', pragmas.debug);
   if (width * height >= CesiumMath.FOUR_GIGABYTES) {
     throw new DeveloperError(
-      "The total number of vertices (width * height) must be less than 4,294,967,296."
+      'The total number of vertices (width * height) must be less than 4,294,967,296.'
     );
   }
   //>>includeEnd('debug');
@@ -166,7 +166,7 @@ TerrainProvider.getRegularGridIndicesAndEdgeIndices = function (width, height) {
   //>>includeStart('debug', pragmas.debug);
   if (width * height >= CesiumMath.FOUR_GIGABYTES) {
     throw new DeveloperError(
-      "The total number of vertices (width * height) must be less than 4,294,967,296."
+      'The total number of vertices (width * height) must be less than 4,294,967,296.'
     );
   }
   //>>includeEnd('debug');
@@ -191,7 +191,7 @@ TerrainProvider.getRegularGridIndicesAndEdgeIndices = function (width, height) {
       westIndicesSouthToNorth: westIndicesSouthToNorth,
       southIndicesEastToWest: southIndicesEastToWest,
       eastIndicesNorthToSouth: eastIndicesNorthToSouth,
-      northIndicesWestToEast: northIndicesWestToEast,
+      northIndicesWestToEast: northIndicesWestToEast
     };
   }
 
@@ -210,7 +210,7 @@ TerrainProvider.getRegularGridAndSkirtIndicesAndEdgeIndices = function (
   //>>includeStart('debug', pragmas.debug);
   if (width * height >= CesiumMath.FOUR_GIGABYTES) {
     throw new DeveloperError(
-      "The total number of vertices (width * height) must be less than 4,294,967,296."
+      'The total number of vertices (width * height) must be less than 4,294,967,296.'
     );
   }
   //>>includeEnd('debug');
@@ -253,7 +253,7 @@ TerrainProvider.getRegularGridAndSkirtIndicesAndEdgeIndices = function (
       southIndicesEastToWest: southIndicesEastToWest,
       eastIndicesNorthToSouth: eastIndicesNorthToSouth,
       northIndicesWestToEast: northIndicesWestToEast,
-      indexCountWithoutSkirts: gridIndexCount,
+      indexCountWithoutSkirts: gridIndexCount
     };
   }
 
@@ -318,7 +318,7 @@ function getEdgeIndices(width, height) {
     westIndicesSouthToNorth: westIndicesSouthToNorth,
     southIndicesEastToWest: southIndicesEastToWest,
     eastIndicesNorthToSouth: eastIndicesNorthToSouth,
-    northIndicesWestToEast: northIndicesWestToEast,
+    northIndicesWestToEast: northIndicesWestToEast
   };
 }
 

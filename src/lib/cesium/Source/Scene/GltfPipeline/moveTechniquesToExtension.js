@@ -1,8 +1,8 @@
-import addExtensionsUsed from "./addExtensionsUsed.js";
-import addExtensionsRequired from "./addExtensionsRequired.js";
-import addToArray from "./addToArray.js";
-import ForEach from "./ForEach.js";
-import defined from "../../Core/defined.js";
+import addExtensionsUsed from './addExtensionsUsed.js';
+import addExtensionsRequired from './addExtensionsRequired.js';
+import addToArray from './addToArray.js';
+import ForEach from './ForEach.js';
+import defined from '../../Core/defined.js';
 
 /**
  * Move glTF 1.0 material techniques to glTF 2.0 KHR_techniques_webgl extension.
@@ -21,7 +21,7 @@ function moveTechniquesToExtension(gltf) {
     const extension = {
       programs: [],
       shaders: [],
-      techniques: [],
+      techniques: []
     };
 
     // Some 1.1 models have a glExtensionsUsed property that can be transferred to program.glExtensions
@@ -33,7 +33,7 @@ function moveTechniquesToExtension(gltf) {
         name: techniqueLegacy.name,
         program: undefined,
         attributes: {},
-        uniforms: {},
+        uniforms: {}
       };
 
       let parameterLegacy;
@@ -42,7 +42,7 @@ function moveTechniquesToExtension(gltf) {
         function (parameterName, attributeName) {
           parameterLegacy = techniqueLegacy.parameters[parameterName];
           technique.attributes[attributeName] = {
-            semantic: parameterLegacy.semantic,
+            semantic: parameterLegacy.semantic
           };
         }
       );
@@ -56,7 +56,7 @@ function moveTechniquesToExtension(gltf) {
             node: parameterLegacy.node,
             type: parameterLegacy.type,
             semantic: parameterLegacy.semantic,
-            value: parameterLegacy.value,
+            value: parameterLegacy.value
           };
 
           // Store the name of the uniform to update material values.
@@ -74,7 +74,7 @@ function moveTechniquesToExtension(gltf) {
           name: programLegacy.name,
           fragmentShader: undefined,
           vertexShader: undefined,
-          glExtensions: glExtensions,
+          glExtensions: glExtensions
         };
 
         const fs = gltf.shaders[programLegacy.fragmentShader];
@@ -102,15 +102,15 @@ function moveTechniquesToExtension(gltf) {
       }
 
       gltf.extensions.KHR_techniques_webgl = extension;
-      addExtensionsUsed(gltf, "KHR_techniques_webgl");
-      addExtensionsRequired(gltf, "KHR_techniques_webgl");
+      addExtensionsUsed(gltf, 'KHR_techniques_webgl');
+      addExtensionsRequired(gltf, 'KHR_techniques_webgl');
     }
   }
 
   ForEach.material(gltf, function (material) {
     if (defined(material.technique)) {
       const materialExtension = {
-        technique: updatedTechniqueIndices[material.technique],
+        technique: updatedTechniqueIndices[material.technique]
       };
 
       ForEach.objectLegacy(material.values, function (value, parameterName) {

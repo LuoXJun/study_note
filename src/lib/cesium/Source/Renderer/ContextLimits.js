@@ -23,7 +23,7 @@ const ContextLimits = {
   _maximumColorAttachments: 0,
   _maximumSamples: 0,
   _highpFloatSupported: false,
-  _highpIntSupported: false,
+  _highpIntSupported: false
 };
 
 Object.defineProperties(ContextLimits, {
@@ -38,7 +38,7 @@ Object.defineProperties(ContextLimits, {
   maximumCombinedTextureImageUnits: {
     get: function () {
       return ContextLimits._maximumCombinedTextureImageUnits;
-    },
+    }
   },
 
   /**
@@ -51,7 +51,7 @@ Object.defineProperties(ContextLimits, {
   maximumCubeMapSize: {
     get: function () {
       return ContextLimits._maximumCubeMapSize;
-    },
+    }
   },
 
   /**
@@ -64,7 +64,7 @@ Object.defineProperties(ContextLimits, {
   maximumFragmentUniformVectors: {
     get: function () {
       return ContextLimits._maximumFragmentUniformVectors;
-    },
+    }
   },
 
   /**
@@ -76,7 +76,7 @@ Object.defineProperties(ContextLimits, {
   maximumTextureImageUnits: {
     get: function () {
       return ContextLimits._maximumTextureImageUnits;
-    },
+    }
   },
 
   /**
@@ -89,7 +89,7 @@ Object.defineProperties(ContextLimits, {
   maximumRenderbufferSize: {
     get: function () {
       return ContextLimits._maximumRenderbufferSize;
-    },
+    }
   },
 
   /**
@@ -102,7 +102,7 @@ Object.defineProperties(ContextLimits, {
   maximumTextureSize: {
     get: function () {
       return ContextLimits._maximumTextureSize;
-    },
+    }
   },
 
   /**
@@ -115,7 +115,7 @@ Object.defineProperties(ContextLimits, {
   maximumVaryingVectors: {
     get: function () {
       return ContextLimits._maximumVaryingVectors;
-    },
+    }
   },
 
   /**
@@ -127,7 +127,7 @@ Object.defineProperties(ContextLimits, {
   maximumVertexAttributes: {
     get: function () {
       return ContextLimits._maximumVertexAttributes;
-    },
+    }
   },
 
   /**
@@ -140,7 +140,7 @@ Object.defineProperties(ContextLimits, {
   maximumVertexTextureImageUnits: {
     get: function () {
       return ContextLimits._maximumVertexTextureImageUnits;
-    },
+    }
   },
 
   /**
@@ -153,7 +153,7 @@ Object.defineProperties(ContextLimits, {
   maximumVertexUniformVectors: {
     get: function () {
       return ContextLimits._maximumVertexUniformVectors;
-    },
+    }
   },
 
   /**
@@ -165,7 +165,7 @@ Object.defineProperties(ContextLimits, {
   minimumAliasedLineWidth: {
     get: function () {
       return ContextLimits._minimumAliasedLineWidth;
-    },
+    }
   },
 
   /**
@@ -177,7 +177,7 @@ Object.defineProperties(ContextLimits, {
   maximumAliasedLineWidth: {
     get: function () {
       return ContextLimits._maximumAliasedLineWidth;
-    },
+    }
   },
 
   /**
@@ -189,7 +189,7 @@ Object.defineProperties(ContextLimits, {
   minimumAliasedPointSize: {
     get: function () {
       return ContextLimits._minimumAliasedPointSize;
-    },
+    }
   },
 
   /**
@@ -201,7 +201,7 @@ Object.defineProperties(ContextLimits, {
   maximumAliasedPointSize: {
     get: function () {
       return ContextLimits._maximumAliasedPointSize;
-    },
+    }
   },
 
   /**
@@ -213,7 +213,7 @@ Object.defineProperties(ContextLimits, {
   maximumViewportWidth: {
     get: function () {
       return ContextLimits._maximumViewportWidth;
-    },
+    }
   },
 
   /**
@@ -225,7 +225,7 @@ Object.defineProperties(ContextLimits, {
   maximumViewportHeight: {
     get: function () {
       return ContextLimits._maximumViewportHeight;
-    },
+    }
   },
 
   /**
@@ -236,7 +236,7 @@ Object.defineProperties(ContextLimits, {
   maximumTextureFilterAnisotropy: {
     get: function () {
       return ContextLimits._maximumTextureFilterAnisotropy;
-    },
+    }
   },
 
   /**
@@ -247,7 +247,7 @@ Object.defineProperties(ContextLimits, {
   maximumDrawBuffers: {
     get: function () {
       return ContextLimits._maximumDrawBuffers;
-    },
+    }
   },
 
   /**
@@ -258,7 +258,7 @@ Object.defineProperties(ContextLimits, {
   maximumColorAttachments: {
     get: function () {
       return ContextLimits._maximumColorAttachments;
-    },
+    }
   },
 
   /**
@@ -269,7 +269,7 @@ Object.defineProperties(ContextLimits, {
   maximumSamples: {
     get: function () {
       return ContextLimits._maximumSamples;
-    },
+    }
   },
 
   /**
@@ -280,7 +280,7 @@ Object.defineProperties(ContextLimits, {
   highpFloatSupported: {
     get: function () {
       return ContextLimits._highpFloatSupported;
-    },
+    }
   },
 
   /**
@@ -291,7 +291,7 @@ Object.defineProperties(ContextLimits, {
   highpIntSupported: {
     get: function () {
       return ContextLimits._highpIntSupported;
-    },
-  },
+    }
+  }
 });
 export default ContextLimits;

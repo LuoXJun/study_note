@@ -1,6 +1,6 @@
-import Matrix4 from "../../Core/Matrix4.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
-import SceneMode from "../SceneMode.js";
+import Matrix4 from '../../Core/Matrix4.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
+import SceneMode from '../SceneMode.js';
 
 /**
  * The model matrix update stage is responsible for updating the model matrices and bounding volumes of the draw commands.
@@ -10,7 +10,7 @@ import SceneMode from "../SceneMode.js";
  * @private
  */
 const ModelMatrixUpdateStage = {};
-ModelMatrixUpdateStage.name = "ModelMatrixUpdateStage"; // Helps with debugging
+ModelMatrixUpdateStage.name = 'ModelMatrixUpdateStage'; // Helps with debugging
 
 /**
  * Processes a runtime node. This modifies the following parts of the scene graph and draw commands:

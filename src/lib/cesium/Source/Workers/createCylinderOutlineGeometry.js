@@ -1,5 +1,34 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './ComponentDatatype-4a60b8d6', './CylinderGeometryLibrary-7b029c87', './defaultValue-94c3e563', './GeometryAttribute-a441ff32', './GeometryAttributes-7df9bef6', './GeometryOffsetAttribute-ec11b721', './IndexDatatype-db156785', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './WebGLConstants-7dccdc96'], (function (Transforms, Matrix2, RuntimeError, ComponentDatatype, CylinderGeometryLibrary, defaultValue, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
+define([
+  './Transforms-3ac41eb6',
+  './Matrix2-fc7e9822',
+  './RuntimeError-c581ca93',
+  './ComponentDatatype-4a60b8d6',
+  './CylinderGeometryLibrary-7b029c87',
+  './defaultValue-94c3e563',
+  './GeometryAttribute-a441ff32',
+  './GeometryAttributes-7df9bef6',
+  './GeometryOffsetAttribute-ec11b721',
+  './IndexDatatype-db156785',
+  './_commonjsHelpers-3aae1032-f55dc0c4',
+  './combine-761d9c3f',
+  './WebGLConstants-7dccdc96'
+], function (
+  Transforms,
+  Matrix2,
+  RuntimeError,
+  ComponentDatatype,
+  CylinderGeometryLibrary,
+  defaultValue,
+  GeometryAttribute,
+  GeometryAttributes,
+  GeometryOffsetAttribute,
+  IndexDatatype,
+  _commonjsHelpers3aae1032,
+  combine,
+  WebGLConstants
+) {
+  'use strict';
 
   const radiusScratch = new Matrix2.Cartesian2();
 
@@ -34,7 +63,10 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
    * const geometry = Cesium.CylinderOutlineGeometry.createGeometry(cylinder);
    */
   function CylinderOutlineGeometry(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     const length = options.length;
     const topRadius = options.topRadius;
@@ -46,16 +78,21 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     );
 
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("options.positions", length);
-    RuntimeError.Check.typeOf.number("options.topRadius", topRadius);
-    RuntimeError.Check.typeOf.number("options.bottomRadius", bottomRadius);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("options.slices", slices, 3);
+    RuntimeError.Check.typeOf.number('options.positions', length);
+    RuntimeError.Check.typeOf.number('options.topRadius', topRadius);
+    RuntimeError.Check.typeOf.number('options.bottomRadius', bottomRadius);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'options.slices',
+      slices,
+      3
+    );
     if (
       defaultValue.defined(options.offsetAttribute) &&
-      options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP
+      options.offsetAttribute ===
+        GeometryOffsetAttribute.GeometryOffsetAttribute.TOP
     ) {
       throw new RuntimeError.DeveloperError(
-        "GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry."
+        'GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry.'
       );
     }
     //>>includeEnd('debug');
@@ -66,7 +103,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     this._slices = slices;
     this._numberOfVerticalLines = numberOfVerticalLines;
     this._offsetAttribute = options.offsetAttribute;
-    this._workerName = "createCylinderOutlineGeometry";
+    this._workerName = 'createCylinderOutlineGeometry';
   }
 
   /**
@@ -86,8 +123,8 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
    */
   CylinderOutlineGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -97,7 +134,10 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     array[startingIndex++] = value._bottomRadius;
     array[startingIndex++] = value._slices;
     array[startingIndex++] = value._numberOfVerticalLines;
-    array[startingIndex] = defaultValue.defaultValue(value._offsetAttribute, -1);
+    array[startingIndex] = defaultValue.defaultValue(
+      value._offsetAttribute,
+      -1
+    );
 
     return array;
   };
@@ -108,7 +148,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     bottomRadius: undefined,
     slices: undefined,
     numberOfVerticalLines: undefined,
-    offsetAttribute: undefined,
+    offsetAttribute: undefined
   };
 
   /**
@@ -121,7 +161,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
    */
   CylinderOutlineGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -179,13 +219,14 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
 
     const numVertices = slices * 2;
 
-    const positions = CylinderGeometryLibrary.CylinderGeometryLibrary.computePositions(
-      length,
-      topRadius,
-      bottomRadius,
-      slices,
-      false
-    );
+    const positions =
+      CylinderGeometryLibrary.CylinderGeometryLibrary.computePositions(
+        length,
+        topRadius,
+        bottomRadius,
+        slices,
+        false
+      );
     let numIndices = slices * 2;
     let numSide;
     if (numberOfVerticalLines > 0) {
@@ -194,7 +235,10 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       numIndices += numSideLines;
     }
 
-    const indices = IndexDatatype.IndexDatatype.createTypedArray(numVertices, numIndices * 2);
+    const indices = IndexDatatype.IndexDatatype.createTypedArray(
+      numVertices,
+      numIndices * 2
+    );
     let index = 0;
     let i;
     for (i = 0; i < slices - 1; i++) {
@@ -220,7 +264,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     attributes.position = new GeometryAttribute.GeometryAttribute({
       componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
       componentsPerAttribute: 3,
-      values: positions,
+      values: positions
     });
 
     radiusScratch.x = length * 0.5;
@@ -234,14 +278,15 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     if (defaultValue.defined(cylinderGeometry._offsetAttribute)) {
       length = positions.length;
       const offsetValue =
-        cylinderGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
+        cylinderGeometry._offsetAttribute ===
+        GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
           ? 0
           : 1;
       const applyOffset = new Uint8Array(length / 3).fill(offsetValue);
       attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,
-        values: applyOffset,
+        values: applyOffset
       });
     }
 
@@ -250,17 +295,19 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       indices: indices,
       primitiveType: GeometryAttribute.PrimitiveType.LINES,
       boundingSphere: boundingSphere,
-      offsetAttribute: cylinderGeometry._offsetAttribute,
+      offsetAttribute: cylinderGeometry._offsetAttribute
     });
   };
 
   function createCylinderOutlineGeometry(cylinderGeometry, offset) {
     if (defaultValue.defined(offset)) {
-      cylinderGeometry = CylinderOutlineGeometry.unpack(cylinderGeometry, offset);
+      cylinderGeometry = CylinderOutlineGeometry.unpack(
+        cylinderGeometry,
+        offset
+      );
     }
     return CylinderOutlineGeometry.createGeometry(cylinderGeometry);
   }
 
   return createCylinderOutlineGeometry;
-
-}));
+});

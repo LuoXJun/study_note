@@ -1,13 +1,13 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import ReferenceFrame from "../Core/ReferenceFrame.js";
-import PositionProperty from "./PositionProperty.js";
-import Property from "./Property.js";
-import SampledProperty from "./SampledProperty.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import ReferenceFrame from '../Core/ReferenceFrame.js';
+import PositionProperty from './PositionProperty.js';
+import Property from './Property.js';
+import SampledProperty from './SampledProperty.js';
 
 /**
  * A {@link SampledProperty} which is also a {@link PositionProperty}.
@@ -51,7 +51,7 @@ Object.defineProperties(SampledPositionProperty.prototype, {
   isConstant: {
     get: function () {
       return this._property.isConstant;
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -65,7 +65,7 @@ Object.defineProperties(SampledPositionProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   /**
    * Gets the reference frame in which the position is defined.
@@ -76,7 +76,7 @@ Object.defineProperties(SampledPositionProperty.prototype, {
   referenceFrame: {
     get: function () {
       return this._referenceFrame;
-    },
+    }
   },
   /**
    * Gets the degree of interpolation to perform when retrieving a value. Call <code>setInterpolationOptions</code> to set this.
@@ -89,7 +89,7 @@ Object.defineProperties(SampledPositionProperty.prototype, {
   interpolationDegree: {
     get: function () {
       return this._property.interpolationDegree;
-    },
+    }
   },
   /**
    * Gets the interpolation algorithm to use when retrieving a value. Call <code>setInterpolationOptions</code> to set this.
@@ -102,7 +102,7 @@ Object.defineProperties(SampledPositionProperty.prototype, {
   interpolationAlgorithm: {
     get: function () {
       return this._property.interpolationAlgorithm;
-    },
+    }
   },
   /**
    * The number of derivatives contained by this property; i.e. 0 for just position, 1 for velocity, etc.
@@ -114,7 +114,7 @@ Object.defineProperties(SampledPositionProperty.prototype, {
   numberOfDerivatives: {
     get: function () {
       return this._numberOfDerivatives;
-    },
+    }
   },
   /**
    * Gets or sets the type of extrapolation to perform when a value
@@ -129,7 +129,7 @@ Object.defineProperties(SampledPositionProperty.prototype, {
     },
     set: function (value) {
       this._property.forwardExtrapolationType = value;
-    },
+    }
   },
   /**
    * Gets or sets the amount of time to extrapolate forward before
@@ -144,7 +144,7 @@ Object.defineProperties(SampledPositionProperty.prototype, {
     },
     set: function (value) {
       this._property.forwardExtrapolationDuration = value;
-    },
+    }
   },
   /**
    * Gets or sets the type of extrapolation to perform when a value
@@ -159,7 +159,7 @@ Object.defineProperties(SampledPositionProperty.prototype, {
     },
     set: function (value) {
       this._property.backwardExtrapolationType = value;
-    },
+    }
   },
   /**
    * Gets or sets the amount of time to extrapolate backward
@@ -174,8 +174,8 @@ Object.defineProperties(SampledPositionProperty.prototype, {
     },
     set: function (value) {
       this._property.backwardExtrapolationDuration = value;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -203,8 +203,8 @@ SampledPositionProperty.prototype.getValueInReferenceFrame = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
-  Check.defined("referenceFrame", referenceFrame);
+  Check.defined('time', time);
+  Check.defined('referenceFrame', referenceFrame);
   //>>includeEnd('debug');
 
   result = this._property.getValue(time, result);
@@ -250,7 +250,7 @@ SampledPositionProperty.prototype.addSample = function (
     (!defined(derivatives) || derivatives.length !== numberOfDerivatives)
   ) {
     throw new DeveloperError(
-      "derivatives length must be equal to the number of derivatives."
+      'derivatives length must be equal to the number of derivatives.'
     );
   }
   //>>includeEnd('debug');

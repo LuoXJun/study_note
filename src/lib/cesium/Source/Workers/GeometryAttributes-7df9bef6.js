@@ -1,5 +1,9 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './defaultValue-94c3e563'], (function (exports, defaultValue) { 'use strict';
+define(['exports', './defaultValue-94c3e563'], function (
+  exports,
+  defaultValue
+) {
+  'use strict';
 
   /**
    * Attributes, which make up a geometry's vertices.  Each property in this object corresponds to a
@@ -12,7 +16,10 @@ define(['exports', './defaultValue-94c3e563'], (function (exports, defaultValue)
    * @constructor
    */
   function GeometryAttributes(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     /**
      * The 3D position attribute.
@@ -88,5 +95,4 @@ define(['exports', './defaultValue-94c3e563'], (function (exports, defaultValue)
   }
 
   exports.GeometryAttributes = GeometryAttributes;
-
-}));
+});

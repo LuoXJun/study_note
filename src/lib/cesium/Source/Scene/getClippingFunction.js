@@ -1,6 +1,6 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Check from "../Core/Check.js";
-import ClippingPlaneCollection from "./ClippingPlaneCollection.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Check from '../Core/Check.js';
+import ClippingPlaneCollection from './ClippingPlaneCollection.js';
 
 const textureResolutionScratch = new Cartesian2();
 /**
@@ -13,8 +13,8 @@ const textureResolutionScratch = new Cartesian2();
  */
 function getClippingFunction(clippingPlaneCollection, context) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("clippingPlaneCollection", clippingPlaneCollection);
-  Check.typeOf.object("context", context);
+  Check.typeOf.object('clippingPlaneCollection', clippingPlaneCollection);
+  Check.typeOf.object('context', context);
   //>>includeEnd('debug');
   const unionClippingRegions = clippingPlaneCollection.unionClippingRegions;
   const clippingPlanesLength = clippingPlaneCollection.length;
@@ -30,7 +30,7 @@ function getClippingFunction(clippingPlaneCollection, context) {
   let functions = usingFloatTexture
     ? getClippingPlaneFloat(width, height)
     : getClippingPlaneUint8(width, height);
-  functions += "\n";
+  functions += '\n';
   functions += unionClippingRegions
     ? clippingFunctionUnion(clippingPlanesLength)
     : clippingFunctionIntersect(clippingPlanesLength);
@@ -40,15 +40,15 @@ function getClippingFunction(clippingPlaneCollection, context) {
 function clippingFunctionUnion(clippingPlanesLength) {
   const functionString =
     `${
-      "float clip(vec4 fragCoord, sampler2D clippingPlanes, mat4 clippingPlanesMatrix)\n" +
-      "{\n" +
-      "    vec4 position = czm_windowToEyeCoordinates(fragCoord);\n" +
-      "    vec3 clipNormal = vec3(0.0);\n" +
-      "    vec3 clipPosition = vec3(0.0);\n" +
-      "    float clipAmount;\n" + // For union planes, we want to get the min distance. So we set the initial value to the first plane distance in the loop below.
-      "    float pixelWidth = czm_metersPerPixel(position);\n" +
-      "    bool breakAndDiscard = false;\n" +
-      "    for (int i = 0; i < "
+      'float clip(vec4 fragCoord, sampler2D clippingPlanes, mat4 clippingPlanesMatrix)\n' +
+      '{\n' +
+      '    vec4 position = czm_windowToEyeCoordinates(fragCoord);\n' +
+      '    vec3 clipNormal = vec3(0.0);\n' +
+      '    vec3 clipPosition = vec3(0.0);\n' +
+      '    float clipAmount;\n' + // For union planes, we want to get the min distance. So we set the initial value to the first plane distance in the loop below.
+      '    float pixelWidth = czm_metersPerPixel(position);\n' +
+      '    bool breakAndDiscard = false;\n' +
+      '    for (int i = 0; i < '
     }${clippingPlanesLength}; ++i)\n` +
     `    {\n` +
     `        vec4 clippingPlane = getClippingPlane(clippingPlanes, i, clippingPlanesMatrix);\n` +
@@ -73,15 +73,15 @@ function clippingFunctionUnion(clippingPlanesLength) {
 function clippingFunctionIntersect(clippingPlanesLength) {
   const functionString =
     `${
-      "float clip(vec4 fragCoord, sampler2D clippingPlanes, mat4 clippingPlanesMatrix)\n" +
-      "{\n" +
-      "    bool clipped = true;\n" +
-      "    vec4 position = czm_windowToEyeCoordinates(fragCoord);\n" +
-      "    vec3 clipNormal = vec3(0.0);\n" +
-      "    vec3 clipPosition = vec3(0.0);\n" +
-      "    float clipAmount = 0.0;\n" +
-      "    float pixelWidth = czm_metersPerPixel(position);\n" +
-      "    for (int i = 0; i < "
+      'float clip(vec4 fragCoord, sampler2D clippingPlanes, mat4 clippingPlanesMatrix)\n' +
+      '{\n' +
+      '    bool clipped = true;\n' +
+      '    vec4 position = czm_windowToEyeCoordinates(fragCoord);\n' +
+      '    vec3 clipNormal = vec3(0.0);\n' +
+      '    vec3 clipPosition = vec3(0.0);\n' +
+      '    float clipAmount = 0.0;\n' +
+      '    float pixelWidth = czm_metersPerPixel(position);\n' +
+      '    for (int i = 0; i < '
     }${clippingPlanesLength}; ++i)\n` +
     `    {\n` +
     `        vec4 clippingPlane = getClippingPlane(clippingPlanes, i, clippingPlanesMatrix);\n` +
@@ -105,19 +105,19 @@ function getClippingPlaneFloat(width, height) {
   const pixelHeight = 1.0 / height;
 
   let pixelWidthString = `${pixelWidth}`;
-  if (pixelWidthString.indexOf(".") === -1) {
-    pixelWidthString += ".0";
+  if (pixelWidthString.indexOf('.') === -1) {
+    pixelWidthString += '.0';
   }
   let pixelHeightString = `${pixelHeight}`;
-  if (pixelHeightString.indexOf(".") === -1) {
-    pixelHeightString += ".0";
+  if (pixelHeightString.indexOf('.') === -1) {
+    pixelHeightString += '.0';
   }
 
   const functionString =
     `${
-      "vec4 getClippingPlane(highp sampler2D packedClippingPlanes, int clippingPlaneNumber, mat4 transform)\n" +
-      "{\n" +
-      "    int pixY = clippingPlaneNumber / "
+      'vec4 getClippingPlane(highp sampler2D packedClippingPlanes, int clippingPlaneNumber, mat4 transform)\n' +
+      '{\n' +
+      '    int pixY = clippingPlaneNumber / '
     }${width};\n` +
     `    int pixX = clippingPlaneNumber - (pixY * ${width});\n` +
     `    float u = (float(pixX) + 0.5) * ${pixelWidthString};\n` + // sample from center of pixel
@@ -133,20 +133,20 @@ function getClippingPlaneUint8(width, height) {
   const pixelHeight = 1.0 / height;
 
   let pixelWidthString = `${pixelWidth}`;
-  if (pixelWidthString.indexOf(".") === -1) {
-    pixelWidthString += ".0";
+  if (pixelWidthString.indexOf('.') === -1) {
+    pixelWidthString += '.0';
   }
   let pixelHeightString = `${pixelHeight}`;
-  if (pixelHeightString.indexOf(".") === -1) {
-    pixelHeightString += ".0";
+  if (pixelHeightString.indexOf('.') === -1) {
+    pixelHeightString += '.0';
   }
 
   const functionString =
     `${
-      "vec4 getClippingPlane(highp sampler2D packedClippingPlanes, int clippingPlaneNumber, mat4 transform)\n" +
-      "{\n" +
-      "    int clippingPlaneStartIndex = clippingPlaneNumber * 2;\n" + // clipping planes are two pixels each
-      "    int pixY = clippingPlaneStartIndex / "
+      'vec4 getClippingPlane(highp sampler2D packedClippingPlanes, int clippingPlaneNumber, mat4 transform)\n' +
+      '{\n' +
+      '    int clippingPlaneStartIndex = clippingPlaneNumber * 2;\n' + // clipping planes are two pixels each
+      '    int pixY = clippingPlaneStartIndex / '
     }${width};\n` +
     `    int pixX = clippingPlaneStartIndex - (pixY * ${width});\n` +
     `    float u = (float(pixX) + 0.5) * ${pixelWidthString};\n` + // sample from center of pixel

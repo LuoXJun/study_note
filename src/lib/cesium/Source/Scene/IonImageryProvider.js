@@ -1,19 +1,19 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import IonResource from "../Core/IonResource.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import ArcGisMapServerImageryProvider from "./ArcGisMapServerImageryProvider.js";
-import BingMapsImageryProvider from "./BingMapsImageryProvider.js";
-import TileMapServiceImageryProvider from "./TileMapServiceImageryProvider.js";
-import GoogleEarthEnterpriseMapsProvider from "./GoogleEarthEnterpriseMapsProvider.js";
-import MapboxImageryProvider from "./MapboxImageryProvider.js";
-import SingleTileImageryProvider from "./SingleTileImageryProvider.js";
-import UrlTemplateImageryProvider from "./UrlTemplateImageryProvider.js";
-import WebMapServiceImageryProvider from "./WebMapServiceImageryProvider.js";
-import WebMapTileServiceImageryProvider from "./WebMapTileServiceImageryProvider.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import IonResource from '../Core/IonResource.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import ArcGisMapServerImageryProvider from './ArcGisMapServerImageryProvider.js';
+import BingMapsImageryProvider from './BingMapsImageryProvider.js';
+import TileMapServiceImageryProvider from './TileMapServiceImageryProvider.js';
+import GoogleEarthEnterpriseMapsProvider from './GoogleEarthEnterpriseMapsProvider.js';
+import MapboxImageryProvider from './MapboxImageryProvider.js';
+import SingleTileImageryProvider from './SingleTileImageryProvider.js';
+import UrlTemplateImageryProvider from './UrlTemplateImageryProvider.js';
+import WebMapServiceImageryProvider from './WebMapServiceImageryProvider.js';
+import WebMapTileServiceImageryProvider from './WebMapTileServiceImageryProvider.js';
 
 function createFactory(Type) {
   return function (options) {
@@ -32,7 +32,7 @@ const ImageryProviderMapping = {
   TMS: createFactory(TileMapServiceImageryProvider),
   URL_TEMPLATE: createFactory(UrlTemplateImageryProvider),
   WMS: createFactory(WebMapServiceImageryProvider),
-  WMTS: createFactory(WebMapTileServiceImageryProvider),
+  WMTS: createFactory(WebMapTileServiceImageryProvider)
 };
 
 /**
@@ -61,7 +61,7 @@ function IonImageryProvider(options) {
 
   const assetId = options.assetId;
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("options.assetId", assetId);
+  Check.typeOf.number('options.assetId', assetId);
   //>>includeEnd('debug');
 
   /**
@@ -173,7 +173,7 @@ function IonImageryProvider(options) {
   }
 
   this._readyPromise = promise.then(function (endpoint) {
-    if (endpoint.type !== "IMAGERY") {
+    if (endpoint.type !== 'IMAGERY') {
       return Promise.reject(
         new RuntimeError(`Cesium ion asset ${assetId} is not an imagery asset.`)
       );
@@ -183,7 +183,7 @@ function IonImageryProvider(options) {
     const externalType = endpoint.externalType;
     if (!defined(externalType)) {
       imageryProvider = new TileMapServiceImageryProvider({
-        url: new IonResource(endpoint, endpointResource),
+        url: new IonResource(endpoint, endpointResource)
       });
     } else {
       const factory = ImageryProviderMapping[externalType];
@@ -228,7 +228,7 @@ Object.defineProperties(IonImageryProvider.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -240,7 +240,7 @@ Object.defineProperties(IonImageryProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   /**
@@ -255,12 +255,12 @@ Object.defineProperties(IonImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileHeight must not be called before the imagery provider is ready."
+          'tileHeight must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._imageryProvider.rectangle;
-    },
+    }
   },
 
   /**
@@ -275,12 +275,12 @@ Object.defineProperties(IonImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileWidth must not be called before the imagery provider is ready."
+          'tileWidth must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._imageryProvider.tileWidth;
-    },
+    }
   },
 
   /**
@@ -295,12 +295,12 @@ Object.defineProperties(IonImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileHeight must not be called before the imagery provider is ready."
+          'tileHeight must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._imageryProvider.tileHeight;
-    },
+    }
   },
 
   /**
@@ -315,12 +315,12 @@ Object.defineProperties(IonImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "maximumLevel must not be called before the imagery provider is ready."
+          'maximumLevel must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._imageryProvider.maximumLevel;
-    },
+    }
   },
 
   /**
@@ -339,12 +339,12 @@ Object.defineProperties(IonImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "minimumLevel must not be called before the imagery provider is ready."
+          'minimumLevel must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._imageryProvider.minimumLevel;
-    },
+    }
   },
 
   /**
@@ -359,12 +359,12 @@ Object.defineProperties(IonImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tilingScheme must not be called before the imagery provider is ready."
+          'tilingScheme must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._imageryProvider.tilingScheme;
-    },
+    }
   },
 
   /**
@@ -381,12 +381,12 @@ Object.defineProperties(IonImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileDiscardPolicy must not be called before the imagery provider is ready."
+          'tileDiscardPolicy must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._imageryProvider.tileDiscardPolicy;
-    },
+    }
   },
 
   /**
@@ -400,7 +400,7 @@ Object.defineProperties(IonImageryProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._errorEvent;
-    },
+    }
   },
 
   /**
@@ -416,12 +416,12 @@ Object.defineProperties(IonImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "credit must not be called before the imagery provider is ready."
+          'credit must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._imageryProvider.credit;
-    },
+    }
   },
 
   /**
@@ -439,7 +439,7 @@ Object.defineProperties(IonImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "hasAlphaChannel must not be called before the imagery provider is ready."
+          'hasAlphaChannel must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
@@ -456,9 +456,9 @@ Object.defineProperties(IonImageryProvider.prototype, {
     proxy: {
       get: function () {
         return undefined;
-      },
-    },
-  },
+      }
+    }
+  }
 });
 
 /**
@@ -476,7 +476,7 @@ IonImageryProvider.prototype.getTileCredits = function (x, y, level) {
   //>>includeStart('debug', pragmas.debug);
   if (!this._ready) {
     throw new DeveloperError(
-      "getTileCredits must not be called before the imagery provider is ready."
+      'getTileCredits must not be called before the imagery provider is ready.'
     );
   }
   //>>includeEnd('debug');
@@ -507,7 +507,7 @@ IonImageryProvider.prototype.requestImage = function (x, y, level, request) {
   //>>includeStart('debug', pragmas.debug);
   if (!this._ready) {
     throw new DeveloperError(
-      "requestImage must not be called before the imagery provider is ready."
+      'requestImage must not be called before the imagery provider is ready.'
     );
   }
   //>>includeEnd('debug');
@@ -543,7 +543,7 @@ IonImageryProvider.prototype.pickFeatures = function (
   //>>includeStart('debug', pragmas.debug);
   if (!this._ready) {
     throw new DeveloperError(
-      "pickFeatures must not be called before the imagery provider is ready."
+      'pickFeatures must not be called before the imagery provider is ready.'
     );
   }
   //>>includeEnd('debug');

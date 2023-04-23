@@ -1,4 +1,4 @@
-import Check from "./Check.js";
+import Check from './Check.js';
 
 const blobUriRegex = /^blob:/i;
 
@@ -14,7 +14,7 @@ const blobUriRegex = /^blob:/i;
  */
 function isBlobUri(uri) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("uri", uri);
+  Check.typeOf.string('uri', uri);
   //>>includeEnd('debug');
 
   return blobUriRegex.test(uri);

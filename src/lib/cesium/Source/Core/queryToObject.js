@@ -1,5 +1,5 @@
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Parses a query string into an object, where the keys and values of the object are the
@@ -25,28 +25,28 @@ import DeveloperError from "./DeveloperError.js";
 function queryToObject(queryString) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(queryString)) {
-    throw new DeveloperError("queryString is required.");
+    throw new DeveloperError('queryString is required.');
   }
   //>>includeEnd('debug');
 
   const result = {};
-  if (queryString === "") {
+  if (queryString === '') {
     return result;
   }
-  const parts = queryString.replace(/\+/g, "%20").split(/[&;]/);
+  const parts = queryString.replace(/\+/g, '%20').split(/[&;]/);
   for (let i = 0, len = parts.length; i < len; ++i) {
-    const subparts = parts[i].split("=");
+    const subparts = parts[i].split('=');
 
     const name = decodeURIComponent(subparts[0]);
     let value = subparts[1];
     if (defined(value)) {
       value = decodeURIComponent(value);
     } else {
-      value = "";
+      value = '';
     }
 
     const resultValue = result[name];
-    if (typeof resultValue === "string") {
+    if (typeof resultValue === 'string') {
       // expand the single value to an array
       result[name] = [resultValue, value];
     } else if (Array.isArray(resultValue)) {

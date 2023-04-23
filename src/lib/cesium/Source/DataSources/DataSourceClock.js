@@ -1,10 +1,10 @@
-import Clock from "../Core/Clock.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import JulianDate from "../Core/JulianDate.js";
-import createRawPropertyDescriptor from "./createRawPropertyDescriptor.js";
+import Clock from '../Core/Clock.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import JulianDate from '../Core/JulianDate.js';
+import createRawPropertyDescriptor from './createRawPropertyDescriptor.js';
 
 /**
  * Represents desired clock settings for a particular {@link DataSource}.  These settings may be applied
@@ -34,7 +34,7 @@ Object.defineProperties(DataSourceClock.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -43,7 +43,7 @@ Object.defineProperties(DataSourceClock.prototype, {
    * @memberof DataSourceClock.prototype
    * @type {JulianDate}
    */
-  startTime: createRawPropertyDescriptor("startTime"),
+  startTime: createRawPropertyDescriptor('startTime'),
 
   /**
    * Gets or sets the desired stop time of the clock.
@@ -51,7 +51,7 @@ Object.defineProperties(DataSourceClock.prototype, {
    * @memberof DataSourceClock.prototype
    * @type {JulianDate}
    */
-  stopTime: createRawPropertyDescriptor("stopTime"),
+  stopTime: createRawPropertyDescriptor('stopTime'),
 
   /**
    * Gets or sets the desired current time when this data source is loaded.
@@ -59,7 +59,7 @@ Object.defineProperties(DataSourceClock.prototype, {
    * @memberof DataSourceClock.prototype
    * @type {JulianDate}
    */
-  currentTime: createRawPropertyDescriptor("currentTime"),
+  currentTime: createRawPropertyDescriptor('currentTime'),
 
   /**
    * Gets or sets the desired clock range setting.
@@ -67,7 +67,7 @@ Object.defineProperties(DataSourceClock.prototype, {
    * @memberof DataSourceClock.prototype
    * @type {ClockRange}
    */
-  clockRange: createRawPropertyDescriptor("clockRange"),
+  clockRange: createRawPropertyDescriptor('clockRange'),
 
   /**
    * Gets or sets the desired clock step setting.
@@ -75,7 +75,7 @@ Object.defineProperties(DataSourceClock.prototype, {
    * @memberof DataSourceClock.prototype
    * @type {ClockStep}
    */
-  clockStep: createRawPropertyDescriptor("clockStep"),
+  clockStep: createRawPropertyDescriptor('clockStep'),
 
   /**
    * Gets or sets the desired clock multiplier.
@@ -83,7 +83,7 @@ Object.defineProperties(DataSourceClock.prototype, {
    * @memberof DataSourceClock.prototype
    * @type {Number}
    */
-  multiplier: createRawPropertyDescriptor("multiplier"),
+  multiplier: createRawPropertyDescriptor('multiplier')
 });
 
 /**
@@ -133,7 +133,7 @@ DataSourceClock.prototype.equals = function (other) {
 DataSourceClock.prototype.merge = function (source) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
-    throw new DeveloperError("source is required.");
+    throw new DeveloperError('source is required.');
   }
   //>>includeEnd('debug');
 

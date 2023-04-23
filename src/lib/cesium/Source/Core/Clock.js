@@ -1,11 +1,11 @@
-import ClockRange from "./ClockRange.js";
-import ClockStep from "./ClockStep.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Event from "./Event.js";
-import getTimestamp from "./getTimestamp.js";
-import JulianDate from "./JulianDate.js";
+import ClockRange from './ClockRange.js';
+import ClockStep from './ClockStep.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Event from './Event.js';
+import getTimestamp from './getTimestamp.js';
+import JulianDate from './JulianDate.js';
 
 /**
  * A simple clock for keeping track of simulated time.
@@ -80,7 +80,7 @@ function Clock(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (JulianDate.greaterThan(startTime, stopTime)) {
-    throw new DeveloperError("startTime must come before stopTime.");
+    throw new DeveloperError('startTime must come before stopTime.');
   }
   //>>includeEnd('debug');
 
@@ -166,7 +166,7 @@ Object.defineProperties(Clock.prototype, {
       }
 
       this._currentTime = value;
-    },
+    }
   },
 
   /**
@@ -195,7 +195,7 @@ Object.defineProperties(Clock.prototype, {
       }
 
       this._multiplier = value;
-    },
+    }
   },
 
   /**
@@ -219,7 +219,7 @@ Object.defineProperties(Clock.prototype, {
       }
 
       this._clockStep = value;
-    },
+    }
   },
 
   /**
@@ -247,8 +247,8 @@ Object.defineProperties(Clock.prototype, {
       }
 
       this._shouldAnimate = value;
-    },
-  },
+    }
+  }
 });
 
 /**

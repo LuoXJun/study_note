@@ -1,14 +1,14 @@
-import defined from "./defined.js";
+import defined from './defined.js';
 
 let implementation;
-if (typeof cancelAnimationFrame !== "undefined") {
+if (typeof cancelAnimationFrame !== 'undefined') {
   implementation = cancelAnimationFrame;
 }
 
 (function () {
   // look for vendor prefixed function
-  if (!defined(implementation) && typeof window !== "undefined") {
-    const vendors = ["webkit", "moz", "ms", "o"];
+  if (!defined(implementation) && typeof window !== 'undefined') {
+    const vendors = ['webkit', 'moz', 'ms', 'o'];
     let i = 0;
     const len = vendors.length;
     while (i < len && !defined(implementation)) {

@@ -1,9 +1,9 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Framebuffer from "./Framebuffer.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Framebuffer from './Framebuffer.js';
 
 /**
  * Creates a multisampling wrapper around two framebuffers with optional initial
@@ -27,9 +27,9 @@ function MultisampleFramebuffer(options) {
   const width = options.width;
   const height = options.height;
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.context", context);
-  Check.defined("options.width", width);
-  Check.defined("options.height", height);
+  Check.defined('options.context', context);
+  Check.defined('options.width', width);
+  Check.defined('options.height', height);
   //>>includeEnd('debug');
   this._width = width;
   this._height = height;
@@ -38,7 +38,7 @@ function MultisampleFramebuffer(options) {
   const colorTextures = options.colorTextures;
   if (defined(colorRenderbuffers) !== defined(colorTextures)) {
     throw new DeveloperError(
-      "Both color renderbuffer and texture attachments must be provided."
+      'Both color renderbuffer and texture attachments must be provided.'
     );
   }
 
@@ -46,7 +46,7 @@ function MultisampleFramebuffer(options) {
   const depthStencilTexture = options.depthStencilTexture;
   if (defined(depthStencilRenderbuffer) !== defined(depthStencilTexture)) {
     throw new DeveloperError(
-      "Both depth-stencil renderbuffer and texture attachments must be provided."
+      'Both depth-stencil renderbuffer and texture attachments must be provided.'
     );
   }
 
@@ -54,13 +54,13 @@ function MultisampleFramebuffer(options) {
     context: context,
     colorRenderbuffers: colorRenderbuffers,
     depthStencilRenderbuffer: depthStencilRenderbuffer,
-    destroyAttachments: options.destroyAttachments,
+    destroyAttachments: options.destroyAttachments
   });
   this._colorFramebuffer = new Framebuffer({
     context: context,
     colorTextures: colorTextures,
     depthStencilTexture: depthStencilTexture,
-    destroyAttachments: options.destroyAttachments,
+    destroyAttachments: options.destroyAttachments
   });
 }
 

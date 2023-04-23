@@ -1,28 +1,28 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import EllipseGeometryLibrary from "./EllipseGeometryLibrary.js";
-import Ellipsoid from "./Ellipsoid.js";
-import GeographicProjection from "./GeographicProjection.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import GeometryInstance from "./GeometryInstance.js";
-import GeometryOffsetAttribute from "./GeometryOffsetAttribute.js";
-import GeometryPipeline from "./GeometryPipeline.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
-import PrimitiveType from "./PrimitiveType.js";
-import Quaternion from "./Quaternion.js";
-import Rectangle from "./Rectangle.js";
-import VertexFormat from "./VertexFormat.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import EllipseGeometryLibrary from './EllipseGeometryLibrary.js';
+import Ellipsoid from './Ellipsoid.js';
+import GeographicProjection from './GeographicProjection.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import GeometryInstance from './GeometryInstance.js';
+import GeometryOffsetAttribute from './GeometryOffsetAttribute.js';
+import GeometryPipeline from './GeometryPipeline.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
+import PrimitiveType from './PrimitiveType.js';
+import Quaternion from './Quaternion.js';
+import Rectangle from './Rectangle.js';
+import VertexFormat from './VertexFormat.js';
 
 const scratchCartesian1 = new Cartesian3();
 const scratchCartesian2 = new Cartesian3();
@@ -247,7 +247,7 @@ function computeTopBottomAttributes(positions, options, extrude) {
     attributes.position = new GeometryAttribute({
       componentDatatype: ComponentDatatype.DOUBLE,
       componentsPerAttribute: 3,
-      values: finalPositions,
+      values: finalPositions
     });
   }
 
@@ -255,7 +255,7 @@ function computeTopBottomAttributes(positions, options, extrude) {
     attributes.st = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 2,
-      values: textureCoordinates,
+      values: textureCoordinates
     });
   }
 
@@ -263,7 +263,7 @@ function computeTopBottomAttributes(positions, options, extrude) {
     attributes.normal = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: normals,
+      values: normals
     });
   }
 
@@ -271,7 +271,7 @@ function computeTopBottomAttributes(positions, options, extrude) {
     attributes.tangent = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: tangents,
+      values: tangents
     });
   }
 
@@ -279,7 +279,7 @@ function computeTopBottomAttributes(positions, options, extrude) {
     attributes.bitangent = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: bitangents,
+      values: bitangents
     });
   }
 
@@ -287,7 +287,7 @@ function computeTopBottomAttributes(positions, options, extrude) {
     attributes.extrudeDirection = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: extrudeNormals,
+      values: extrudeNormals
     });
   }
 
@@ -304,7 +304,7 @@ function computeTopBottomAttributes(positions, options, extrude) {
     attributes.applyOffset = new GeometryAttribute({
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 1,
-      values: offsetAttribute,
+      values: offsetAttribute
     });
   }
 
@@ -443,7 +443,7 @@ function computeEllipse(options) {
   return {
     boundingSphere: boundingSphere,
     attributes: attributes,
-    indices: indices,
+    indices: indices
   };
 }
 
@@ -657,7 +657,7 @@ function computeWallAttributes(positions, options) {
     attributes.position = new GeometryAttribute({
       componentDatatype: ComponentDatatype.DOUBLE,
       componentsPerAttribute: 3,
-      values: finalPositions,
+      values: finalPositions
     });
   }
 
@@ -665,7 +665,7 @@ function computeWallAttributes(positions, options) {
     attributes.st = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 2,
-      values: textureCoordinates,
+      values: textureCoordinates
     });
   }
 
@@ -673,7 +673,7 @@ function computeWallAttributes(positions, options) {
     attributes.normal = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: normals,
+      values: normals
     });
   }
 
@@ -681,7 +681,7 @@ function computeWallAttributes(positions, options) {
     attributes.tangent = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: tangents,
+      values: tangents
     });
   }
 
@@ -689,7 +689,7 @@ function computeWallAttributes(positions, options) {
     attributes.bitangent = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: bitangents,
+      values: bitangents
     });
   }
 
@@ -697,7 +697,7 @@ function computeWallAttributes(positions, options) {
     attributes.extrudeDirection = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: extrudeNormals,
+      values: extrudeNormals
     });
   }
 
@@ -713,7 +713,7 @@ function computeWallAttributes(positions, options) {
     attributes.applyOffset = new GeometryAttribute({
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 1,
-      values: offsetAttribute,
+      values: offsetAttribute
     });
   }
 
@@ -806,7 +806,7 @@ function computeExtrudedEllipse(options) {
   const topBottomGeo = new Geometry({
     attributes: topBottomAttributes,
     indices: topBottomIndices,
-    primitiveType: PrimitiveType.TRIANGLES,
+    primitiveType: PrimitiveType.TRIANGLES
   });
 
   const wallAttributes = computeWallAttributes(outerPositions, options);
@@ -819,22 +819,22 @@ function computeExtrudedEllipse(options) {
   const wallGeo = new Geometry({
     attributes: wallAttributes,
     indices: wallIndices,
-    primitiveType: PrimitiveType.TRIANGLES,
+    primitiveType: PrimitiveType.TRIANGLES
   });
 
   const geo = GeometryPipeline.combineInstances([
     new GeometryInstance({
-      geometry: topBottomGeo,
+      geometry: topBottomGeo
     }),
     new GeometryInstance({
-      geometry: wallGeo,
-    }),
+      geometry: wallGeo
+    })
   ]);
 
   return {
     boundingSphere: boundingSphere,
     attributes: geo[0].attributes,
-    indices: geo[0].indices,
+    indices: geo[0].indices
   };
 }
 
@@ -853,7 +853,7 @@ function computeRectangle(
       semiMajorAxis: semiMajorAxis,
       semiMinorAxis: semiMinorAxis,
       rotation: rotation,
-      granularity: granularity,
+      granularity: granularity
     },
     false,
     true
@@ -931,16 +931,16 @@ function EllipseGeometry(options) {
   const vertexFormat = defaultValue(options.vertexFormat, VertexFormat.DEFAULT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.center", center);
-  Check.typeOf.number("options.semiMajorAxis", semiMajorAxis);
-  Check.typeOf.number("options.semiMinorAxis", semiMinorAxis);
+  Check.defined('options.center', center);
+  Check.typeOf.number('options.semiMajorAxis', semiMajorAxis);
+  Check.typeOf.number('options.semiMinorAxis', semiMinorAxis);
   if (semiMajorAxis < semiMinorAxis) {
     throw new DeveloperError(
-      "semiMajorAxis must be greater than or equal to the semiMinorAxis."
+      'semiMajorAxis must be greater than or equal to the semiMinorAxis.'
     );
   }
   if (granularity <= 0.0) {
-    throw new DeveloperError("granularity must be greater than zero.");
+    throw new DeveloperError('granularity must be greater than zero.');
   }
   //>>includeEnd('debug');
 
@@ -958,7 +958,7 @@ function EllipseGeometry(options) {
   this._vertexFormat = VertexFormat.clone(vertexFormat);
   this._extrudedHeight = Math.min(extrudedHeight, height);
   this._shadowVolume = defaultValue(options.shadowVolume, false);
-  this._workerName = "createEllipseGeometry";
+  this._workerName = 'createEllipseGeometry';
   this._offsetAttribute = options.offsetAttribute;
 
   this._rectangle = undefined;
@@ -986,8 +986,8 @@ EllipseGeometry.packedLength =
  */
 EllipseGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("value", value);
-  Check.defined("array", array);
+  Check.defined('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -1029,7 +1029,7 @@ const scratchOptions = {
   granularity: undefined,
   extrudedHeight: undefined,
   shadowVolume: undefined,
-  offsetAttribute: undefined,
+  offsetAttribute: undefined
 };
 
 /**
@@ -1042,7 +1042,7 @@ const scratchOptions = {
  */
 EllipseGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -1130,16 +1130,16 @@ EllipseGeometry.computeRectangle = function (options, result) {
   const rotation = defaultValue(options.rotation, 0.0);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.center", center);
-  Check.typeOf.number("options.semiMajorAxis", semiMajorAxis);
-  Check.typeOf.number("options.semiMinorAxis", semiMinorAxis);
+  Check.defined('options.center', center);
+  Check.typeOf.number('options.semiMajorAxis', semiMajorAxis);
+  Check.typeOf.number('options.semiMinorAxis', semiMinorAxis);
   if (semiMajorAxis < semiMinorAxis) {
     throw new DeveloperError(
-      "semiMajorAxis must be greater than or equal to the semiMinorAxis."
+      'semiMajorAxis must be greater than or equal to the semiMinorAxis.'
     );
   }
   if (granularity <= 0.0) {
-    throw new DeveloperError("granularity must be greater than zero.");
+    throw new DeveloperError('granularity must be greater than zero.');
   }
   //>>includeEnd('debug');
 
@@ -1190,7 +1190,7 @@ EllipseGeometry.createGeometry = function (ellipseGeometry) {
     height: height,
     granularity: ellipseGeometry._granularity,
     vertexFormat: ellipseGeometry._vertexFormat,
-    stRotation: ellipseGeometry._stRotation,
+    stRotation: ellipseGeometry._stRotation
   };
   let geometry;
   if (extrude) {
@@ -1211,7 +1211,7 @@ EllipseGeometry.createGeometry = function (ellipseGeometry) {
       geometry.attributes.applyOffset = new GeometryAttribute({
         componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,
-        values: applyOffset,
+        values: applyOffset
       });
     }
   }
@@ -1221,7 +1221,7 @@ EllipseGeometry.createGeometry = function (ellipseGeometry) {
     indices: geometry.indices,
     primitiveType: PrimitiveType.TRIANGLES,
     boundingSphere: geometry.boundingSphere,
-    offsetAttribute: ellipseGeometry._offsetAttribute,
+    offsetAttribute: ellipseGeometry._offsetAttribute
   });
 };
 
@@ -1250,7 +1250,7 @@ EllipseGeometry.createShadowVolume = function (
     extrudedHeight: minHeight,
     height: maxHeight,
     vertexFormat: VertexFormat.POSITION_ONLY,
-    shadowVolume: true,
+    shadowVolume: true
   });
 };
 
@@ -1266,7 +1266,7 @@ function textureCoordinateRotationPoints(ellipseGeometry) {
       semiMajorAxis: ellipseGeometry._semiMajorAxis,
       semiMinorAxis: ellipseGeometry._semiMinorAxis,
       rotation: ellipseGeometry._rotation,
-      granularity: ellipseGeometry._granularity,
+      granularity: ellipseGeometry._granularity
     },
     false,
     true
@@ -1305,7 +1305,7 @@ Object.defineProperties(EllipseGeometry.prototype, {
         );
       }
       return this._rectangle;
-    },
+    }
   },
   /**
    * For remapping texture coordinates when rendering EllipseGeometries as GroundPrimitives.
@@ -1314,12 +1314,11 @@ Object.defineProperties(EllipseGeometry.prototype, {
   textureCoordinateRotationPoints: {
     get: function () {
       if (!defined(this._textureCoordinateRotationPoints)) {
-        this._textureCoordinateRotationPoints = textureCoordinateRotationPoints(
-          this
-        );
+        this._textureCoordinateRotationPoints =
+          textureCoordinateRotationPoints(this);
       }
       return this._textureCoordinateRotationPoints;
-    },
-  },
+    }
+  }
 });
 export default EllipseGeometry;

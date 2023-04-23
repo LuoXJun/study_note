@@ -1,18 +1,18 @@
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import Sampler from "../Renderer/Sampler.js";
-import Texture from "../Renderer/Texture.js";
-import TextureMagnificationFilter from "../Renderer/TextureMagnificationFilter.js";
-import TextureMinificationFilter from "../Renderer/TextureMinificationFilter.js";
-import TextureWrap from "../Renderer/TextureWrap.js";
-import PassThrough from "../Shaders/PostProcessStages/PassThrough.js";
-import PostProcessStageLibrary from "./PostProcessStageLibrary.js";
-import PostProcessStageTextureCache from "./PostProcessStageTextureCache.js";
-import Tonemapper from "./Tonemapper.js";
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import Sampler from '../Renderer/Sampler.js';
+import Texture from '../Renderer/Texture.js';
+import TextureMagnificationFilter from '../Renderer/TextureMagnificationFilter.js';
+import TextureMinificationFilter from '../Renderer/TextureMinificationFilter.js';
+import TextureWrap from '../Renderer/TextureWrap.js';
+import PassThrough from '../Shaders/PostProcessStages/PassThrough.js';
+import PostProcessStageLibrary from './PostProcessStageLibrary.js';
+import PostProcessStageTextureCache from './PostProcessStageTextureCache.js';
+import Tonemapper from './Tonemapper.js';
 
 const stackScratch = [];
 
@@ -130,7 +130,7 @@ Object.defineProperties(PostProcessStageCollection.prototype, {
         readyAndEnabled || (tonemapping.ready && tonemapping.enabled);
 
       return readyAndEnabled;
-    },
+    }
   },
   /**
    * A post-process stage for Fast Approximate Anti-aliasing.
@@ -145,7 +145,7 @@ Object.defineProperties(PostProcessStageCollection.prototype, {
   fxaa: {
     get: function () {
       return this._fxaa;
-    },
+    }
   },
   /**
    * A post-process stage that applies Horizon-based Ambient Occlusion (HBAO) to the input texture.
@@ -190,7 +190,7 @@ Object.defineProperties(PostProcessStageCollection.prototype, {
   ambientOcclusion: {
     get: function () {
       return this._ao;
-    },
+    }
   },
   /**
    * A post-process stage for a bloom effect.
@@ -225,7 +225,7 @@ Object.defineProperties(PostProcessStageCollection.prototype, {
   bloom: {
     get: function () {
       return this._bloom;
-    },
+    }
   },
   /**
    * The number of post-process stages in this collection.
@@ -238,7 +238,7 @@ Object.defineProperties(PostProcessStageCollection.prototype, {
     get: function () {
       removeStages(this);
       return this._stages.length;
-    },
+    }
   },
   /**
    * A reference to the last texture written to when executing the post-process stages in this collection.
@@ -280,7 +280,7 @@ Object.defineProperties(PostProcessStageCollection.prototype, {
       }
 
       return undefined;
-    },
+    }
   },
   /**
    * Whether the collection has a stage that has selected features.
@@ -309,7 +309,7 @@ Object.defineProperties(PostProcessStageCollection.prototype, {
         }
       }
       return false;
-    },
+    }
   },
 
   /**
@@ -329,7 +329,7 @@ Object.defineProperties(PostProcessStageCollection.prototype, {
       }
       //>>includeStart('debug', pragmas.debug);
       if (!Tonemapper.validate(value)) {
-        throw new DeveloperError("tonemapper was set to an invalid value.");
+        throw new DeveloperError('tonemapper was set to an invalid value.');
       }
       //>>includeEnd('debug');
 
@@ -343,24 +343,26 @@ Object.defineProperties(PostProcessStageCollection.prototype, {
 
       switch (value) {
         case Tonemapper.REINHARD:
-          tonemapper = PostProcessStageLibrary.createReinhardTonemappingStage(
-            useAutoExposure
-          );
+          tonemapper =
+            PostProcessStageLibrary.createReinhardTonemappingStage(
+              useAutoExposure
+            );
           break;
         case Tonemapper.MODIFIED_REINHARD:
-          tonemapper = PostProcessStageLibrary.createModifiedReinhardTonemappingStage(
-            useAutoExposure
-          );
+          tonemapper =
+            PostProcessStageLibrary.createModifiedReinhardTonemappingStage(
+              useAutoExposure
+            );
           break;
         case Tonemapper.FILMIC:
-          tonemapper = PostProcessStageLibrary.createFilmicTonemappingStage(
-            useAutoExposure
-          );
+          tonemapper =
+            PostProcessStageLibrary.createFilmicTonemappingStage(
+              useAutoExposure
+            );
           break;
         default:
-          tonemapper = PostProcessStageLibrary.createAcesTonemappingStage(
-            useAutoExposure
-          );
+          tonemapper =
+            PostProcessStageLibrary.createAcesTonemappingStage(useAutoExposure);
           break;
       }
 
@@ -380,8 +382,8 @@ Object.defineProperties(PostProcessStageCollection.prototype, {
       }
 
       this._textureCacheDirty = true;
-    },
-  },
+    }
+  }
 });
 
 function removeStages(collection) {
@@ -415,7 +417,7 @@ function removeStages(collection) {
  */
 PostProcessStageCollection.prototype.add = function (stage) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("stage", stage);
+  Check.typeOf.object('stage', stage);
   //>>includeEnd('debug');
 
   const stageNames = this._stageNames;
@@ -510,9 +512,9 @@ PostProcessStageCollection.prototype.get = function (index) {
   const stages = this._stages;
   //>>includeStart('debug', pragmas.debug);
   const length = stages.length;
-  Check.typeOf.number.greaterThanOrEquals("stages length", length, 0);
-  Check.typeOf.number.greaterThanOrEquals("index", index, 0);
-  Check.typeOf.number.lessThan("index", index, length);
+  Check.typeOf.number.greaterThanOrEquals('stages length', length, 0);
+  Check.typeOf.number.greaterThanOrEquals('index', index, 0);
+  Check.typeOf.number.lessThan('index', index, length);
   //>>includeEnd('debug');
   return stages[index];
 };
@@ -637,14 +639,14 @@ PostProcessStageCollection.prototype.update = function (
       source: {
         arrayBufferView: random,
         width: 256,
-        height: 256,
+        height: 256
       },
       sampler: new Sampler({
         wrapS: TextureWrap.REPEAT,
         wrapT: TextureWrap.REPEAT,
         minificationFilter: TextureMinificationFilter.NEAREST,
-        magnificationFilter: TextureMagnificationFilter.NEAREST,
-      }),
+        magnificationFilter: TextureMagnificationFilter.NEAREST
+      })
     });
   }
 
@@ -837,9 +839,9 @@ PostProcessStageCollection.prototype.copy = function (context, framebuffer) {
       uniformMap: {
         colorTexture: function () {
           return that.outputTexture;
-        },
+        }
       },
-      owner: this,
+      owner: this
     });
   }
 

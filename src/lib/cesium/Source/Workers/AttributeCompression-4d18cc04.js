@@ -1,5 +1,12 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './RuntimeError-c581ca93', './defaultValue-94c3e563'], (function (exports, Matrix2, ComponentDatatype, RuntimeError, defaultValue) { 'use strict';
+define([
+  'exports',
+  './Matrix2-fc7e9822',
+  './ComponentDatatype-4a60b8d6',
+  './RuntimeError-c581ca93',
+  './defaultValue-94c3e563'
+], function (exports, Matrix2, ComponentDatatype, RuntimeError, defaultValue) {
+  'use strict';
 
   /**
    * An enum describing the attribute type for glTF and 3D Tiles.
@@ -15,7 +22,7 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
      * @type {String}
      * @constant
      */
-    SCALAR: "SCALAR",
+    SCALAR: 'SCALAR',
 
     /**
      * The attribute is a two-component vector.
@@ -23,7 +30,7 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
      * @type {String}
      * @constant
      */
-    VEC2: "VEC2",
+    VEC2: 'VEC2',
 
     /**
      * The attribute is a three-component vector.
@@ -31,7 +38,7 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
      * @type {String}
      * @constant
      */
-    VEC3: "VEC3",
+    VEC3: 'VEC3',
 
     /**
      * The attribute is a four-component vector.
@@ -39,7 +46,7 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
      * @type {String}
      * @constant
      */
-    VEC4: "VEC4",
+    VEC4: 'VEC4',
 
     /**
      * The attribute is a 2x2 matrix.
@@ -47,7 +54,7 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
      * @type {String}
      * @constant
      */
-    MAT2: "MAT2",
+    MAT2: 'MAT2',
 
     /**
      * The attribute is a 3x3 matrix.
@@ -55,7 +62,7 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
      * @type {String}
      * @constant
      */
-    MAT3: "MAT3",
+    MAT3: 'MAT3',
 
     /**
      * The attribute is a 4x4 matrix.
@@ -63,7 +70,7 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
      * @type {String}
      * @constant
      */
-    MAT4: "MAT4",
+    MAT4: 'MAT4'
   };
 
   /**
@@ -92,7 +99,9 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
         return Matrix2.Matrix4;
       //>>includeStart('debug', pragmas.debug);
       default:
-        throw new RuntimeError.DeveloperError("attributeType is not a valid value.");
+        throw new RuntimeError.DeveloperError(
+          'attributeType is not a valid value.'
+        );
       //>>includeEnd('debug');
     }
   };
@@ -122,7 +131,9 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
         return 16;
       //>>includeStart('debug', pragmas.debug);
       default:
-        throw new RuntimeError.DeveloperError("attributeType is not a valid value.");
+        throw new RuntimeError.DeveloperError(
+          'attributeType is not a valid value.'
+        );
       //>>includeEnd('debug');
     }
   };
@@ -151,7 +162,9 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
         return 4;
       //>>includeStart('debug', pragmas.debug);
       default:
-        throw new RuntimeError.DeveloperError("attributeType is not a valid value.");
+        throw new RuntimeError.DeveloperError(
+          'attributeType is not a valid value.'
+        );
       //>>includeEnd('debug');
     }
   };
@@ -166,27 +179,29 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
    */
   AttributeType.getGlslType = function (attributeType) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.string("attributeType", attributeType);
+    RuntimeError.Check.typeOf.string('attributeType', attributeType);
     //>>includeEnd('debug');
 
     switch (attributeType) {
       case AttributeType.SCALAR:
-        return "float";
+        return 'float';
       case AttributeType.VEC2:
-        return "vec2";
+        return 'vec2';
       case AttributeType.VEC3:
-        return "vec3";
+        return 'vec3';
       case AttributeType.VEC4:
-        return "vec4";
+        return 'vec4';
       case AttributeType.MAT2:
-        return "mat2";
+        return 'mat2';
       case AttributeType.MAT3:
-        return "mat3";
+        return 'mat3';
       case AttributeType.MAT4:
-        return "mat4";
+        return 'mat4';
       //>>includeStart('debug', pragmas.debug);
       default:
-        throw new RuntimeError.DeveloperError("attributeType is not a valid value.");
+        throw new RuntimeError.DeveloperError(
+          'attributeType is not a valid value.'
+        );
       //>>includeEnd('debug');
     }
   };
@@ -223,11 +238,11 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
    */
   AttributeCompression.octEncodeInRange = function (vector, rangeMax, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("vector", vector);
-    RuntimeError.Check.defined("result", result);
+    RuntimeError.Check.defined('vector', vector);
+    RuntimeError.Check.defined('result', result);
     const magSquared = Matrix2.Cartesian3.magnitudeSquared(vector);
     if (Math.abs(magSquared - 1.0) > ComponentDatatype.CesiumMath.EPSILON6) {
-      throw new RuntimeError.DeveloperError("vector must be normalized.");
+      throw new RuntimeError.DeveloperError('vector must be normalized.');
     }
     //>>includeEnd('debug');
 
@@ -238,8 +253,10 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
     if (vector.z < 0) {
       const x = result.x;
       const y = result.y;
-      result.x = (1.0 - Math.abs(y)) * ComponentDatatype.CesiumMath.signNotZero(x);
-      result.y = (1.0 - Math.abs(x)) * ComponentDatatype.CesiumMath.signNotZero(y);
+      result.x =
+        (1.0 - Math.abs(y)) * ComponentDatatype.CesiumMath.signNotZero(x);
+      result.y =
+        (1.0 - Math.abs(x)) * ComponentDatatype.CesiumMath.signNotZero(y);
     }
 
     result.x = ComponentDatatype.CesiumMath.toSNorm(result.x, rangeMax);
@@ -304,7 +321,7 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
    */
   AttributeCompression.octDecodeInRange = function (x, y, rangeMax, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("result", result);
+    RuntimeError.Check.defined('result', result);
     if (x < 0 || x > rangeMax || y < 0 || y > rangeMax) {
       throw new RuntimeError.DeveloperError(
         `x and y must be unsigned normalized integers between 0 and ${rangeMax}`
@@ -318,8 +335,12 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
 
     if (result.z < 0.0) {
       const oldVX = result.x;
-      result.x = (1.0 - Math.abs(result.y)) * ComponentDatatype.CesiumMath.signNotZero(oldVX);
-      result.y = (1.0 - Math.abs(oldVX)) * ComponentDatatype.CesiumMath.signNotZero(result.y);
+      result.x =
+        (1.0 - Math.abs(result.y)) *
+        ComponentDatatype.CesiumMath.signNotZero(oldVX);
+      result.y =
+        (1.0 - Math.abs(oldVX)) *
+        ComponentDatatype.CesiumMath.signNotZero(result.y);
     }
 
     return Matrix2.Cartesian3.normalize(result, result);
@@ -355,8 +376,8 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
    */
   AttributeCompression.octDecodeFromCartesian4 = function (encoded, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("encoded", encoded);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('encoded', encoded);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
     const x = encoded.x;
     const y = encoded.y;
@@ -374,7 +395,7 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
       w > 255
     ) {
       throw new RuntimeError.DeveloperError(
-        "x, y, z, and w must be unsigned normalized integers between 0 and 255"
+        'x, y, z, and w must be unsigned normalized integers between 0 and 255'
       );
     }
     //>>includeEnd('debug');
@@ -393,7 +414,7 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
    */
   AttributeCompression.octPackFloat = function (encoded) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("encoded", encoded);
+    RuntimeError.Check.defined('encoded', encoded);
     //>>includeEnd('debug');
     return 256.0 * encoded.x + encoded.y;
   };
@@ -424,7 +445,7 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
    */
   AttributeCompression.octDecodeFloat = function (value, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("value", value);
+    RuntimeError.Check.defined('value', value);
     //>>includeEnd('debug');
 
     const temp = value / 256.0;
@@ -447,10 +468,10 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
    */
   AttributeCompression.octPack = function (v1, v2, v3, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("v1", v1);
-    RuntimeError.Check.defined("v2", v2);
-    RuntimeError.Check.defined("v3", v3);
-    RuntimeError.Check.defined("result", result);
+    RuntimeError.Check.defined('v1', v1);
+    RuntimeError.Check.defined('v2', v2);
+    RuntimeError.Check.defined('v3', v3);
+    RuntimeError.Check.defined('result', result);
     //>>includeEnd('debug');
 
     const encoded1 = AttributeCompression.octEncodeFloat(v1);
@@ -472,10 +493,10 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
    */
   AttributeCompression.octUnpack = function (packed, v1, v2, v3) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("packed", packed);
-    RuntimeError.Check.defined("v1", v1);
-    RuntimeError.Check.defined("v2", v2);
-    RuntimeError.Check.defined("v3", v3);
+    RuntimeError.Check.defined('packed', packed);
+    RuntimeError.Check.defined('v1', v1);
+    RuntimeError.Check.defined('v2', v2);
+    RuntimeError.Check.defined('v3', v3);
     //>>includeEnd('debug');
 
     let temp = packed.x / 65536.0;
@@ -502,7 +523,7 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
     textureCoordinates
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("textureCoordinates", textureCoordinates);
+    RuntimeError.Check.defined('textureCoordinates', textureCoordinates);
     //>>includeEnd('debug');
 
     // Move x and y to the range 0-4095;
@@ -524,8 +545,8 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("compressed", compressed);
-    RuntimeError.Check.defined("result", result);
+    RuntimeError.Check.defined('compressed', compressed);
+    RuntimeError.Check.defined('result', result);
     //>>includeEnd('debug');
 
     const temp = compressed / 4096.0;
@@ -554,18 +575,18 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
     heightBuffer
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("uBuffer", uBuffer);
-    RuntimeError.Check.defined("vBuffer", vBuffer);
+    RuntimeError.Check.defined('uBuffer', uBuffer);
+    RuntimeError.Check.defined('vBuffer', vBuffer);
     RuntimeError.Check.typeOf.number.equals(
-      "uBuffer.length",
-      "vBuffer.length",
+      'uBuffer.length',
+      'vBuffer.length',
       uBuffer.length,
       vBuffer.length
     );
     if (defaultValue.defined(heightBuffer)) {
       RuntimeError.Check.typeOf.number.equals(
-        "uBuffer.length",
-        "heightBuffer.length",
+        'uBuffer.length',
+        'heightBuffer.length',
         uBuffer.length,
         heightBuffer.length
       );
@@ -611,10 +632,10 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
     count
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("typedArray", typedArray);
-    RuntimeError.Check.defined("componentDatatype", componentDatatype);
-    RuntimeError.Check.defined("type", type);
-    RuntimeError.Check.defined("count", count);
+    RuntimeError.Check.defined('typedArray', typedArray);
+    RuntimeError.Check.defined('componentDatatype', componentDatatype);
+    RuntimeError.Check.defined('type', type);
+    RuntimeError.Check.defined('count', count);
     //>>includeEnd('debug');
 
     const componentsPerAttribute = AttributeType$1.getNumberOfComponents(type);
@@ -673,13 +694,13 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
    */
   AttributeCompression.decodeRGB565 = function (typedArray, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("typedArray", typedArray);
+    RuntimeError.Check.defined('typedArray', typedArray);
 
     const expectedLength = typedArray.length * 3;
     if (defaultValue.defined(result)) {
       RuntimeError.Check.typeOf.number.equals(
-        "result.length",
-        "typedArray.length * 3",
+        'result.length',
+        'typedArray.length * 3',
         result.length,
         expectedLength
       );
@@ -711,5 +732,4 @@ define(['exports', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './Runt
   };
 
   exports.AttributeCompression = AttributeCompression;
-
-}));
+});

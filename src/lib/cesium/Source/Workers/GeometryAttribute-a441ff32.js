@@ -1,5 +1,20 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultValue-94c3e563', './WebGLConstants-7dccdc96', './Transforms-3ac41eb6'], (function (exports, Matrix2, RuntimeError, defaultValue, WebGLConstants, Transforms) { 'use strict';
+define([
+  'exports',
+  './Matrix2-fc7e9822',
+  './RuntimeError-c581ca93',
+  './defaultValue-94c3e563',
+  './WebGLConstants-7dccdc96',
+  './Transforms-3ac41eb6'
+], function (
+  exports,
+  Matrix2,
+  RuntimeError,
+  defaultValue,
+  WebGLConstants,
+  Transforms
+) {
+  'use strict';
 
   /**
    * @private
@@ -8,7 +23,7 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
     NONE: 0,
     TRIANGLES: 1,
     LINES: 2,
-    POLYLINES: 3,
+    POLYLINES: 3
   };
   var GeometryType$1 = Object.freeze(GeometryType);
 
@@ -76,7 +91,7 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
      * @type {Number}
      * @constant
      */
-    TRIANGLE_FAN: WebGLConstants.WebGLConstants.TRIANGLE_FAN,
+    TRIANGLE_FAN: WebGLConstants.WebGLConstants.TRIANGLE_FAN
   };
 
   /**
@@ -169,10 +184,13 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    * });
    */
   function Geometry(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("options.attributes", options.attributes);
+    RuntimeError.Check.typeOf.object('options.attributes', options.attributes);
     //>>includeEnd('debug');
 
     /**
@@ -259,7 +277,10 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
     /**
      * @private
      */
-    this.geometryType = defaultValue.defaultValue(options.geometryType, GeometryType$1.NONE);
+    this.geometryType = defaultValue.defaultValue(
+      options.geometryType,
+      GeometryType$1.NONE
+    );
 
     /**
      * @private
@@ -285,7 +306,7 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    */
   Geometry.computeNumberOfVertices = function (geometry) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("geometry", geometry);
+    RuntimeError.Check.typeOf.object('geometry', geometry);
     //>>includeEnd('debug');
 
     let numberOfVertices = -1;
@@ -300,7 +321,7 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
         //>>includeStart('debug', pragmas.debug);
         if (numberOfVertices !== num && numberOfVertices !== -1) {
           throw new RuntimeError.DeveloperError(
-            "All attribute lists must have the same number of attributes."
+            'All attribute lists must have the same number of attributes.'
           );
         }
         //>>includeEnd('debug');
@@ -317,14 +338,18 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
   const boundingRectanglePointsCartographicScratch = [
     new Matrix2.Cartographic(),
     new Matrix2.Cartographic(),
-    new Matrix2.Cartographic(),
+    new Matrix2.Cartographic()
   ];
   const boundingRectanglePointsEnuScratch = [
     new Matrix2.Cartesian2(),
     new Matrix2.Cartesian2(),
-    new Matrix2.Cartesian2(),
+    new Matrix2.Cartesian2()
   ];
-  const points2DScratch = [new Matrix2.Cartesian2(), new Matrix2.Cartesian2(), new Matrix2.Cartesian2()];
+  const points2DScratch = [
+    new Matrix2.Cartesian2(),
+    new Matrix2.Cartesian2(),
+    new Matrix2.Cartesian2()
+  ];
   const pointEnuScratch = new Matrix2.Cartesian3();
   const enuRotationScratch = new Transforms.Quaternion();
   const enuRotationMatrixScratch = new Matrix2.Matrix4();
@@ -400,8 +425,16 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
     let posEnu = pointEnuScratch;
 
     for (i = 0; i < 3; i++) {
-      Matrix2.Cartographic.toCartesian(boundingPointsCarto[i], ellipsoid, posEnu);
-      posEnu = Matrix2.Matrix4.multiplyByPointAsVector(fixedFrameToEnu, posEnu, posEnu);
+      Matrix2.Cartographic.toCartesian(
+        boundingPointsCarto[i],
+        ellipsoid,
+        posEnu
+      );
+      posEnu = Matrix2.Matrix4.multiplyByPointAsVector(
+        fixedFrameToEnu,
+        posEnu,
+        posEnu
+      );
       boundingPointsEnu[i].x = posEnu.x;
       boundingPointsEnu[i].y = posEnu.y;
     }
@@ -514,25 +547,32 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    * @see Geometry
    */
   function GeometryAttribute(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(options.componentDatatype)) {
-      throw new RuntimeError.DeveloperError("options.componentDatatype is required.");
+      throw new RuntimeError.DeveloperError(
+        'options.componentDatatype is required.'
+      );
     }
     if (!defaultValue.defined(options.componentsPerAttribute)) {
-      throw new RuntimeError.DeveloperError("options.componentsPerAttribute is required.");
+      throw new RuntimeError.DeveloperError(
+        'options.componentsPerAttribute is required.'
+      );
     }
     if (
       options.componentsPerAttribute < 1 ||
       options.componentsPerAttribute > 4
     ) {
       throw new RuntimeError.DeveloperError(
-        "options.componentsPerAttribute must be between 1 and 4."
+        'options.componentsPerAttribute must be between 1 and 4.'
       );
     }
     if (!defaultValue.defined(options.values)) {
-      throw new RuntimeError.DeveloperError("options.values is required.");
+      throw new RuntimeError.DeveloperError('options.values is required.');
     }
     //>>includeEnd('debug');
 
@@ -616,5 +656,4 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
   exports.GeometryAttribute = GeometryAttribute;
   exports.GeometryType = GeometryType$1;
   exports.PrimitiveType = PrimitiveType$1;
-
-}));
+});

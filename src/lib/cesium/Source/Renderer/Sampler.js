@@ -1,10 +1,10 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import TextureMagnificationFilter from "./TextureMagnificationFilter.js";
-import TextureMinificationFilter from "./TextureMinificationFilter.js";
-import TextureWrap from "./TextureWrap.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import TextureMagnificationFilter from './TextureMagnificationFilter.js';
+import TextureMinificationFilter from './TextureMinificationFilter.js';
+import TextureWrap from './TextureWrap.js';
 
 /**
  * @private
@@ -28,23 +28,23 @@ function Sampler(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!TextureWrap.validate(wrapS)) {
-    throw new DeveloperError("Invalid sampler.wrapS.");
+    throw new DeveloperError('Invalid sampler.wrapS.');
   }
 
   if (!TextureWrap.validate(wrapT)) {
-    throw new DeveloperError("Invalid sampler.wrapT.");
+    throw new DeveloperError('Invalid sampler.wrapT.');
   }
 
   if (!TextureMinificationFilter.validate(minificationFilter)) {
-    throw new DeveloperError("Invalid sampler.minificationFilter.");
+    throw new DeveloperError('Invalid sampler.minificationFilter.');
   }
 
   if (!TextureMagnificationFilter.validate(magnificationFilter)) {
-    throw new DeveloperError("Invalid sampler.magnificationFilter.");
+    throw new DeveloperError('Invalid sampler.magnificationFilter.');
   }
 
   Check.typeOf.number.greaterThanOrEquals(
-    "maximumAnisotropy",
+    'maximumAnisotropy',
     maximumAnisotropy,
     1.0
   );
@@ -61,28 +61,28 @@ Object.defineProperties(Sampler.prototype, {
   wrapS: {
     get: function () {
       return this._wrapS;
-    },
+    }
   },
   wrapT: {
     get: function () {
       return this._wrapT;
-    },
+    }
   },
   minificationFilter: {
     get: function () {
       return this._minificationFilter;
-    },
+    }
   },
   magnificationFilter: {
     get: function () {
       return this._magnificationFilter;
-    },
+    }
   },
   maximumAnisotropy: {
     get: function () {
       return this._maximumAnisotropy;
-    },
-  },
+    }
+  }
 });
 
 Sampler.equals = function (left, right) {
@@ -103,7 +103,7 @@ Sampler.NEAREST = Object.freeze(
     wrapS: TextureWrap.CLAMP_TO_EDGE,
     wrapT: TextureWrap.CLAMP_TO_EDGE,
     minificationFilter: TextureMinificationFilter.NEAREST,
-    magnificationFilter: TextureMagnificationFilter.NEAREST,
+    magnificationFilter: TextureMagnificationFilter.NEAREST
   })
 );
 export default Sampler;

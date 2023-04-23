@@ -9,7 +9,7 @@
  *
  */
 function freezeRenderState(renderState) {
-  if (typeof renderState !== "object" || renderState === null) {
+  if (typeof renderState !== 'object' || renderState === null) {
     return renderState;
   }
 
@@ -20,7 +20,7 @@ function freezeRenderState(renderState) {
     propName = propNames[i];
     if (
       renderState.hasOwnProperty(propName) &&
-      propName !== "_applyFunctions"
+      propName !== '_applyFunctions'
     ) {
       renderState[propName] = freezeRenderState(renderState[propName]);
     }

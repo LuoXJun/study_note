@@ -1,21 +1,21 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import clone from "../Core/clone.js";
-import defined from "../Core/defined.js";
-import Matrix2 from "../Core/Matrix2.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
-import Quaternion from "../Core/Quaternion.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import WebGLConstants from "../Core/WebGLConstants.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import addToArray from "./GltfPipeline/addToArray.js";
-import ForEach from "./GltfPipeline/ForEach.js";
-import usesExtension from "./GltfPipeline/usesExtension.js";
-import AttributeType from "./AttributeType.js";
-import Axis from "./Axis.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import clone from '../Core/clone.js';
+import defined from '../Core/defined.js';
+import Matrix2 from '../Core/Matrix2.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
+import Quaternion from '../Core/Quaternion.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import WebGLConstants from '../Core/WebGLConstants.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import addToArray from './GltfPipeline/addToArray.js';
+import ForEach from './GltfPipeline/ForEach.js';
+import usesExtension from './GltfPipeline/usesExtension.js';
+import AttributeType from './AttributeType.js';
+import Axis from './Axis.js';
 
 /**
  * @private
@@ -31,8 +31,8 @@ ModelUtility.updateForwardAxis = function (model) {
   const cachedSourceVersion = model.gltfInternal.extras.sourceVersion;
 
   if (
-    (defined(cachedSourceVersion) && cachedSourceVersion !== "2.0") ||
-    ModelUtility.getAssetVersion(model.gltfInternal) !== "2.0"
+    (defined(cachedSourceVersion) && cachedSourceVersion !== '2.0') ||
+    ModelUtility.getAssetVersion(model.gltfInternal) !== '2.0'
   ) {
     model._gltfForwardAxis = Axis.X;
   }
@@ -47,7 +47,7 @@ ModelUtility.updateForwardAxis = function (model) {
 ModelUtility.getAssetVersion = function (gltf) {
   // In glTF 1.0 it was valid to omit the version number.
   if (!defined(gltf.asset) || !defined(gltf.asset.version)) {
-    return "1.0";
+    return '1.0';
   }
 
   return gltf.asset.version;
@@ -76,7 +76,7 @@ ModelUtility.splitIncompatibleMaterials = function (gltf) {
         componentType = jointAccessor.componentType;
         accessorType = jointAccessor.type;
       }
-      const isSkinned = defined(jointAccessorId) && accessorType === "VEC4";
+      const isSkinned = defined(jointAccessorId) && accessorType === 'VEC4';
       const hasVertexColors = defined(primitive.attributes.COLOR_0);
       const hasMorphTargets = defined(primitive.targets);
       const hasNormals = defined(primitive.attributes.NORMAL);
@@ -93,7 +93,7 @@ ModelUtility.splitIncompatibleMaterials = function (gltf) {
         primitiveInfoByMaterial[materialIndex] = {
           skinning: {
             skinned: isSkinned,
-            componentType: componentType,
+            componentType: componentType
           },
           hasVertexColors: hasVertexColors,
           hasMorphTargets: hasMorphTargets,
@@ -101,7 +101,7 @@ ModelUtility.splitIncompatibleMaterials = function (gltf) {
           hasTangents: hasTangents,
           hasTexCoords: hasTexCoords,
           hasTexCoord1: hasTexCoord1,
-          hasOutline: hasOutline,
+          hasOutline: hasOutline
         };
       } else if (
         primitiveInfo.skinning.skinned !== isSkinned ||
@@ -125,7 +125,7 @@ ModelUtility.splitIncompatibleMaterials = function (gltf) {
         primitiveInfoByMaterial[materialIndex] = {
           skinning: {
             skinned: isSkinned,
-            componentType: componentType,
+            componentType: componentType
           },
           hasVertexColors: hasVertexColors,
           hasMorphTargets: hasMorphTargets,
@@ -133,7 +133,7 @@ ModelUtility.splitIncompatibleMaterials = function (gltf) {
           hasTangents: hasTangents,
           hasTexCoords: hasTexCoords,
           hasTexCoord1: hasTexCoord1,
-          hasOutline: hasOutline,
+          hasOutline: hasOutline
         };
       }
     });
@@ -143,8 +143,8 @@ ModelUtility.splitIncompatibleMaterials = function (gltf) {
 };
 
 ModelUtility.getShaderVariable = function (type) {
-  if (type === "SCALAR") {
-    return "float";
+  if (type === 'SCALAR') {
+    return 'float';
   }
   return type.toLowerCase();
 };
@@ -153,7 +153,7 @@ ModelUtility.ModelState = {
   NEEDS_LOAD: 0,
   LOADING: 1,
   LOADED: 2, // Renderable, but textures can still be pending when incrementallyLoadTextures is true.
-  FAILED: 3,
+  FAILED: 3
 };
 
 ModelUtility.getFailedLoadFunction = function (model, type, path) {
@@ -175,7 +175,7 @@ ModelUtility.parseBuffers = function (model, bufferLoad) {
       loadResources.buffers[bufferViewId] = buffer.extras._pipeline.source;
     } else if (defined(bufferLoad)) {
       const bufferResource = model._resource.getDerivedResource({
-        url: buffer.uri,
+        url: buffer.uri
       });
       ++loadResources.pendingBufferLoads;
       bufferResource
@@ -184,7 +184,7 @@ ModelUtility.parseBuffers = function (model, bufferLoad) {
         .catch(
           ModelUtility.getFailedLoadFunction(
             model,
-            "buffer",
+            'buffer',
             bufferResource.url
           )
         );
@@ -293,14 +293,14 @@ ModelUtility.computeBoundingSphere = function (model) {
 };
 
 function techniqueAttributeForSemantic(technique, semantic) {
-  return ForEach.techniqueAttribute(technique, function (
-    attribute,
-    attributeName
-  ) {
-    if (attribute.semantic === semantic) {
-      return attributeName;
+  return ForEach.techniqueAttribute(
+    technique,
+    function (attribute, attributeName) {
+      if (attribute.semantic === semantic) {
+        return attributeName;
+      }
     }
-  });
+  );
 }
 
 function ensureSemanticExistenceForPrimitive(gltf, primitive) {
@@ -318,7 +318,7 @@ function ensureSemanticExistenceForPrimitive(gltf, primitive) {
     if (targets.hasOwnProperty(target)) {
       const targetAttributes = targets[target];
       for (const attribute in targetAttributes) {
-        if (attribute !== "extras") {
+        if (attribute !== 'extras') {
           attributes[`${attribute}_${target}`] = targetAttributes[attribute];
         }
       }
@@ -337,13 +337,13 @@ function ensureSemanticExistenceForPrimitive(gltf, primitive) {
         const accessorId = attributes[semantic];
         const accessor = accessors[accessorId];
         let lowerCase = semantic.toLowerCase();
-        if (lowerCase.charAt(0) === "_") {
+        if (lowerCase.charAt(0) === '_') {
           lowerCase = lowerCase.slice(1);
         }
         const attributeName = `a_${lowerCase}`;
         technique.attributes[attributeName] = {
           semantic: semantic,
-          type: accessor.componentType,
+          type: accessor.componentType
         };
         const pipelineExtras = vertexShader.extras._pipeline;
         let shaderText = pipelineExtras.source;
@@ -427,7 +427,7 @@ ModelUtility.getAccessorMinMax = function (gltf, accessorId) {
   }
   return {
     min: accessorMin,
-    max: accessorMax,
+    max: accessorMax
   };
 };
 
@@ -437,7 +437,7 @@ function getTechniqueAttributeOrUniformFunction(
   semantic,
   ignoreNodes
 ) {
-  if (usesExtension(gltf, "KHR_techniques_webgl")) {
+  if (usesExtension(gltf, 'KHR_techniques_webgl')) {
     return function (attributeOrUniform, attributeOrUniformName) {
       if (
         attributeOrUniform.semantic === semantic &&
@@ -499,13 +499,13 @@ ModelUtility.getAttributeOrUniformBySemantic = function (
 ModelUtility.getDiffuseAttributeOrUniform = function (gltf, programId) {
   let diffuseUniformName = ModelUtility.getAttributeOrUniformBySemantic(
     gltf,
-    "COLOR_0",
+    'COLOR_0',
     programId
   );
   if (!defined(diffuseUniformName)) {
     diffuseUniformName = ModelUtility.getAttributeOrUniformBySemantic(
       gltf,
-      "_3DTILESDIFFUSE",
+      '_3DTILESDIFFUSE',
       programId
     );
   }
@@ -571,7 +571,7 @@ ModelUtility.supportedExtensions = {
   KHR_materials_unlit: true,
   KHR_materials_pbrSpecularGlossiness: true,
   KHR_texture_transform: true,
-  WEB3D_quantized_attributes: true,
+  WEB3D_quantized_attributes: true
 };
 
 ModelUtility.checkSupportedExtensions = function (
@@ -584,9 +584,9 @@ ModelUtility.checkSupportedExtensions = function (
         throw new RuntimeError(`Unsupported glTF Extension: ${extension}`);
       }
 
-      if (extension === "EXT_texture_webp" && browserSupportsWebp === false) {
+      if (extension === 'EXT_texture_webp' && browserSupportsWebp === false) {
         throw new RuntimeError(
-          "Loaded model requires WebP but browser does not support it."
+          'Loaded model requires WebP but browser does not support it.'
         );
       }
     }
@@ -598,11 +598,11 @@ ModelUtility.checkSupportedGlExtensions = function (extensionsUsed, context) {
     const glExtensionsUsedLength = extensionsUsed.length;
     for (let i = 0; i < glExtensionsUsedLength; i++) {
       const extension = extensionsUsed[i];
-      if (extension !== "OES_element_index_uint") {
+      if (extension !== 'OES_element_index_uint') {
         throw new RuntimeError(`Unsupported WebGL Extension: ${extension}`);
       } else if (!context.elementIndexUint) {
         throw new RuntimeError(
-          "OES_element_index_uint WebGL extension is not enabled."
+          'OES_element_index_uint WebGL extension is not enabled.'
         );
       }
     }
@@ -611,8 +611,8 @@ ModelUtility.checkSupportedGlExtensions = function (extensionsUsed, context) {
 
 function replaceAllButFirstInString(string, find, replace) {
   // Limit search to strings that are not a subset of other tokens.
-  find += "(?!\\w)";
-  find = new RegExp(find, "g");
+  find += '(?!\\w)';
+  find = new RegExp(find, 'g');
 
   const index = string.search(find);
   return string.replace(find, function (match, offset) {
@@ -634,7 +634,7 @@ function getAttributeVariableName(gltf, primitive, attributeSemantic) {
   const material = gltf.materials[materialId];
 
   if (
-    !usesExtension(gltf, "KHR_techniques_webgl") ||
+    !usesExtension(gltf, 'KHR_techniques_webgl') ||
     !defined(material.extensions) ||
     !defined(material.extensions.KHR_techniques_webgl)
   ) {
@@ -644,15 +644,15 @@ function getAttributeVariableName(gltf, primitive, attributeSemantic) {
   const techniqueId = material.extensions.KHR_techniques_webgl.technique;
   const techniquesWebgl = gltf.extensions.KHR_techniques_webgl;
   const technique = techniquesWebgl.techniques[techniqueId];
-  return ForEach.techniqueAttribute(technique, function (
-    attribute,
-    attributeName
-  ) {
-    const semantic = attribute.semantic;
-    if (semantic === attributeSemantic) {
-      return attributeName;
+  return ForEach.techniqueAttribute(
+    technique,
+    function (attribute, attributeName) {
+      const semantic = attribute.semantic;
+      if (semantic === attributeSemantic) {
+        return attributeName;
+      }
     }
-  });
+  );
 }
 
 ModelUtility.modifyShaderForDracoQuantizedAttributes = function (
@@ -676,7 +676,7 @@ ModelUtility.modifyShaderForDracoQuantizedAttributes = function (
         attributeSemantic
       );
 
-      if (attributeSemantic.charAt(0) === "_") {
+      if (attributeSemantic.charAt(0) === '_') {
         attributeSemantic = attributeSemantic.substring(1);
       }
       const decodeUniformVarName = `gltf_u_dec_${attributeSemantic.toLowerCase()}`;
@@ -684,8 +684,8 @@ ModelUtility.modifyShaderForDracoQuantizedAttributes = function (
       if (!defined(quantizedUniforms[decodeUniformVarName])) {
         const newMain = `gltf_decoded_${attributeSemantic}`;
         const decodedAttributeVarName = attributeVarName.replace(
-          "a_",
-          "gltf_a_dec_"
+          'a_',
+          'gltf_a_dec_'
         );
         const size = attribute.componentsPerAttribute;
 
@@ -699,16 +699,16 @@ ModelUtility.modifyShaderForDracoQuantizedAttributes = function (
         // declare decoded attribute
         let variableType;
         if (quantization.octEncoded) {
-          variableType = "vec3";
+          variableType = 'vec3';
         } else if (size > 1) {
           variableType = `vec${size}`;
         } else {
-          variableType = "float";
+          variableType = 'float';
         }
         shader = `${variableType} ${decodedAttributeVarName};\n${shader}`;
 
         // The gltf 2.0 COLOR_0 vertex attribute can be VEC4 or VEC3
-        const vec3Color = size === 3 && attributeSemantic === "COLOR_0";
+        const vec3Color = size === 3 && attributeSemantic === 'COLOR_0';
         if (vec3Color) {
           shader = replaceAllButFirstInString(
             shader,
@@ -718,16 +718,16 @@ ModelUtility.modifyShaderForDracoQuantizedAttributes = function (
         }
 
         // splice decode function into the shader
-        let decode = "";
+        let decode = '';
         if (quantization.octEncoded) {
           const decodeUniformVarNameRangeConstant = `${decodeUniformVarName}_rangeConstant`;
           shader = `uniform float ${decodeUniformVarNameRangeConstant};\n${shader}`;
           decode =
             `${
-              "\n" +
-              "void main() {\n" +
+              '\n' +
+              'void main() {\n' +
               // Draco oct-encoding decodes to zxy order
-              "    "
+              '    '
             }${decodedAttributeVarName} = czm_octDecode(${attributeVarName}.xy, ${decodeUniformVarNameRangeConstant}).zxy;\n` +
             `    ${newMain}();\n` +
             `}\n`;
@@ -737,10 +737,10 @@ ModelUtility.modifyShaderForDracoQuantizedAttributes = function (
           shader =
             `uniform float ${decodeUniformVarNameNormConstant};\n` +
             `uniform ${variableType} ${decodeUniformVarNameMin};\n${shader}`;
-          const attributeVarAccess = vec3Color ? ".xyz" : "";
+          const attributeVarAccess = vec3Color ? '.xyz' : '';
           decode =
             `${
-              "\n" + "void main() {\n" + "    "
+              '\n' + 'void main() {\n' + '    '
             }${decodedAttributeVarName} = ${decodeUniformVarNameMin} + ${attributeVarName}${attributeVarAccess} * ${decodeUniformVarNameNormConstant};\n` +
             `    ${newMain}();\n` +
             `}\n`;
@@ -752,7 +752,7 @@ ModelUtility.modifyShaderForDracoQuantizedAttributes = function (
     }
   }
   return {
-    shader: shader,
+    shader: shader
   };
 };
 
@@ -772,7 +772,7 @@ ModelUtility.modifyShaderForQuantizedAttributes = function (
       );
       const accessorId = primitive.attributes[attributeSemantic];
 
-      if (attributeSemantic.charAt(0) === "_") {
+      if (attributeSemantic.charAt(0) === '_') {
         attributeSemantic = attributeSemantic.substring(1);
       }
       const decodeUniformVarName = `gltf_u_dec_${attributeSemantic.toLowerCase()}`;
@@ -788,8 +788,8 @@ ModelUtility.modifyShaderForQuantizedAttributes = function (
           const decodeMatrix = quantizedAttributes.decodeMatrix;
           const newMain = `gltf_decoded_${attributeSemantic}`;
           const decodedAttributeVarName = attributeVarName.replace(
-            "a_",
-            "gltf_a_dec_"
+            'a_',
+            'gltf_a_dec_'
           );
           const size = Math.floor(Math.sqrt(decodeMatrix.length));
 
@@ -804,19 +804,19 @@ ModelUtility.modifyShaderForQuantizedAttributes = function (
           if (size > 2) {
             variableType = `vec${size - 1}`;
           } else {
-            variableType = "float";
+            variableType = 'float';
           }
           shader = `${variableType} ${decodedAttributeVarName};\n${shader}`;
           // splice decode function into the shader - attributes are pre-multiplied with the decode matrix
           // uniform in the shader (32-bit floating point)
-          let decode = "";
+          let decode = '';
           if (size === 5) {
             // separate scale and translate since glsl doesn't have mat5
             shader = `uniform mat4 ${decodeUniformVarNameScale};\n${shader}`;
             shader = `uniform vec4 ${decodeUniformVarNameTranslate};\n${shader}`;
             decode =
               `${
-                "\n" + "void main() {\n" + "    "
+                '\n' + 'void main() {\n' + '    '
               }${decodedAttributeVarName} = ${decodeUniformVarNameScale} * ${attributeVarName} + ${decodeUniformVarNameTranslate};\n` +
               `    ${newMain}();\n` +
               `}\n`;
@@ -827,7 +827,7 @@ ModelUtility.modifyShaderForQuantizedAttributes = function (
             shader = `uniform mat${size} ${decodeUniformVarName};\n${shader}`;
             decode =
               `${
-                "\n" + "void main() {\n" + "    "
+                '\n' + 'void main() {\n' + '    '
               }${decodedAttributeVarName} = ${variableType}(${decodeUniformVarName} * vec${size}(${attributeVarName},1.0));\n` +
               `    ${newMain}();\n` +
               `}\n`;
@@ -842,7 +842,7 @@ ModelUtility.modifyShaderForQuantizedAttributes = function (
   }
   return {
     shader: shader,
-    uniforms: quantizedUniforms,
+    uniforms: quantizedUniforms
   };
 };
 
@@ -854,7 +854,7 @@ function getScalarUniformFunction(value) {
     },
     func: function () {
       return that.value;
-    },
+    }
   };
   return that;
 }
@@ -865,7 +865,7 @@ function getVec2UniformFunction(value) {
     clone: Cartesian2.clone,
     func: function () {
       return that.value;
-    },
+    }
   };
   return that;
 }
@@ -876,7 +876,7 @@ function getVec3UniformFunction(value) {
     clone: Cartesian3.clone,
     func: function () {
       return that.value;
-    },
+    }
   };
   return that;
 }
@@ -887,7 +887,7 @@ function getVec4UniformFunction(value) {
     clone: Cartesian4.clone,
     func: function () {
       return that.value;
-    },
+    }
   };
   return that;
 }
@@ -898,7 +898,7 @@ function getMat2UniformFunction(value) {
     clone: Matrix2.clone,
     func: function () {
       return that.value;
-    },
+    }
   };
   return that;
 }
@@ -909,7 +909,7 @@ function getMat3UniformFunction(value) {
     clone: Matrix3.clone,
     func: function () {
       return that.value;
-    },
+    }
   };
   return that;
 }
@@ -920,7 +920,7 @@ function getMat4UniformFunction(value) {
     clone: Matrix4.clone,
     func: function () {
       return that.value;
-    },
+    }
   };
   return that;
 }
@@ -951,8 +951,8 @@ Object.defineProperties(DelayLoadedTextureUniform.prototype, {
     },
     set: function (value) {
       this._value = value;
-    },
-  },
+    }
+  }
 });
 
 DelayLoadedTextureUniform.prototype.clone = function (source) {
@@ -1022,7 +1022,7 @@ function scaleFromMatrix5Array(matrix) {
     matrix[15],
     matrix[16],
     matrix[17],
-    matrix[18],
+    matrix[18]
   ];
 }
 
@@ -1043,7 +1043,7 @@ ModelUtility.createUniformsForDracoQuantizedAttributes = function (
         continue;
       }
 
-      if (attribute.charAt(0) === "_") {
+      if (attribute.charAt(0) === '_') {
         attribute = attribute.substring(1);
       }
 
@@ -1052,18 +1052,16 @@ ModelUtility.createUniformsForDracoQuantizedAttributes = function (
       if (quantization.octEncoded) {
         const uniformVarNameRangeConstant = `${uniformVarName}_rangeConstant`;
         const rangeConstant = (1 << quantization.quantizationBits) - 1.0;
-        uniformMap[uniformVarNameRangeConstant] = getScalarUniformFunction(
-          rangeConstant
-        ).func;
+        uniformMap[uniformVarNameRangeConstant] =
+          getScalarUniformFunction(rangeConstant).func;
         continue;
       }
 
       const uniformVarNameNormConstant = `${uniformVarName}_normConstant`;
       const normConstant =
         quantization.range / (1 << quantization.quantizationBits);
-      uniformMap[uniformVarNameNormConstant] = getScalarUniformFunction(
-        normConstant
-      ).func;
+      uniformMap[uniformVarNameNormConstant] =
+        getScalarUniformFunction(normConstant).func;
 
       const uniformVarNameMin = `${uniformVarName}_min`;
       switch (decodedData.componentsPerAttribute) {
@@ -1110,7 +1108,7 @@ ModelUtility.createUniformsForQuantizedAttributes = function (
       const a = accessors[accessorId];
       const extensions = a.extensions;
 
-      if (attribute.charAt(0) === "_") {
+      if (attribute.charAt(0) === '_') {
         attribute = attribute.substring(1);
       }
 
@@ -1123,21 +1121,18 @@ ModelUtility.createUniformsForQuantizedAttributes = function (
           let uniformVariableTranslate;
           switch (a.type) {
             case AttributeType.SCALAR:
-              uniformMap[uniformVariable] = getMat2UniformFunction(
-                decodeMatrix
-              ).func;
+              uniformMap[uniformVariable] =
+                getMat2UniformFunction(decodeMatrix).func;
               setUniforms[uniformVariable] = true;
               break;
             case AttributeType.VEC2:
-              uniformMap[uniformVariable] = getMat3UniformFunction(
-                decodeMatrix
-              ).func;
+              uniformMap[uniformVariable] =
+                getMat3UniformFunction(decodeMatrix).func;
               setUniforms[uniformVariable] = true;
               break;
             case AttributeType.VEC3:
-              uniformMap[uniformVariable] = getMat4UniformFunction(
-                decodeMatrix
-              ).func;
+              uniformMap[uniformVariable] =
+                getMat4UniformFunction(decodeMatrix).func;
               setUniforms[uniformVariable] = true;
               break;
             case AttributeType.VEC4:
@@ -1182,10 +1177,7 @@ ModelUtility.createUniformsForQuantizedAttributes = function (
         if (defined(properties.vec)) {
           if (properties.vec === 4) {
             uniformMap[quantizedUniform] = getVec4UniformFunction([
-              0,
-              0,
-              0,
-              0,
+              0, 0, 0, 0
             ]).func;
           }
         }
@@ -1287,7 +1279,7 @@ const gltfSemanticUniforms = {
     return function () {
       return uniformState.viewportCartesian4;
     };
-  },
+  }
   // JOINTMATRIX created in createCommand()
 };
 

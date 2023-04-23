@@ -1,15 +1,15 @@
-import defer from "./defer.js";
+import defer from './defer.js';
 
 /**
  * @private
  */
 function loadAndExecuteScript(url) {
   const deferred = defer();
-  const script = document.createElement("script");
+  const script = document.createElement('script');
   script.async = true;
   script.src = url;
 
-  const head = document.getElementsByTagName("head")[0];
+  const head = document.getElementsByTagName('head')[0];
   script.onload = function () {
     script.onload = undefined;
     head.removeChild(script);

@@ -1,12 +1,12 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import WebGLConstants from "../Core/WebGLConstants.js";
-import WindingOrder from "../Core/WindingOrder.js";
-import ContextLimits from "./ContextLimits.js";
-import freezeRenderState from "./freezeRenderState.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import WebGLConstants from '../Core/WebGLConstants.js';
+import WindingOrder from '../Core/WindingOrder.js';
+import ContextLimits from './ContextLimits.js';
+import freezeRenderState from './freezeRenderState.js';
 
 function validateBlendEquation(blendEquation) {
   return (
@@ -123,31 +123,31 @@ function RenderState(renderState) {
   this.frontFace = defaultValue(rs.frontFace, WindingOrder.COUNTER_CLOCKWISE);
   this.cull = {
     enabled: defaultValue(cull.enabled, false),
-    face: defaultValue(cull.face, WebGLConstants.BACK),
+    face: defaultValue(cull.face, WebGLConstants.BACK)
   };
   this.lineWidth = defaultValue(rs.lineWidth, 1.0);
   this.polygonOffset = {
     enabled: defaultValue(polygonOffset.enabled, false),
     factor: defaultValue(polygonOffset.factor, 0),
-    units: defaultValue(polygonOffset.units, 0),
+    units: defaultValue(polygonOffset.units, 0)
   };
   this.scissorTest = {
     enabled: defaultValue(scissorTest.enabled, false),
-    rectangle: BoundingRectangle.clone(scissorTestRectangle),
+    rectangle: BoundingRectangle.clone(scissorTestRectangle)
   };
   this.depthRange = {
     near: defaultValue(depthRange.near, 0),
-    far: defaultValue(depthRange.far, 1),
+    far: defaultValue(depthRange.far, 1)
   };
   this.depthTest = {
     enabled: defaultValue(depthTest.enabled, false),
-    func: defaultValue(depthTest.func, WebGLConstants.LESS), // func, because function is a JavaScript keyword
+    func: defaultValue(depthTest.func, WebGLConstants.LESS) // func, because function is a JavaScript keyword
   };
   this.colorMask = {
     red: defaultValue(colorMask.red, true),
     green: defaultValue(colorMask.green, true),
     blue: defaultValue(colorMask.blue, true),
-    alpha: defaultValue(colorMask.alpha, true),
+    alpha: defaultValue(colorMask.alpha, true)
   };
   this.depthMask = defaultValue(rs.depthMask, true);
   this.stencilMask = defaultValue(rs.stencilMask, ~0);
@@ -179,7 +179,7 @@ function RenderState(renderState) {
     functionDestinationAlpha: defaultValue(
       blending.functionDestinationAlpha,
       WebGLConstants.ZERO
-    ),
+    )
   };
   this.stencilTest = {
     enabled: defaultValue(stencilTest.enabled, false),
@@ -193,18 +193,18 @@ function RenderState(renderState) {
     frontOperation: {
       fail: defaultValue(stencilTestFrontOperation.fail, WebGLConstants.KEEP),
       zFail: defaultValue(stencilTestFrontOperation.zFail, WebGLConstants.KEEP),
-      zPass: defaultValue(stencilTestFrontOperation.zPass, WebGLConstants.KEEP),
+      zPass: defaultValue(stencilTestFrontOperation.zPass, WebGLConstants.KEEP)
     },
     backOperation: {
       fail: defaultValue(stencilTestBackOperation.fail, WebGLConstants.KEEP),
       zFail: defaultValue(stencilTestBackOperation.zFail, WebGLConstants.KEEP),
-      zPass: defaultValue(stencilTestBackOperation.zPass, WebGLConstants.KEEP),
-    },
+      zPass: defaultValue(stencilTestBackOperation.zPass, WebGLConstants.KEEP)
+    }
   };
   this.sampleCoverage = {
     enabled: defaultValue(sampleCoverage.enabled, false),
     value: defaultValue(sampleCoverage.value, 1.0),
-    invert: defaultValue(sampleCoverage.invert, false),
+    invert: defaultValue(sampleCoverage.invert, false)
   };
   this.viewport = defined(viewport)
     ? new BoundingRectangle(
@@ -221,43 +221,43 @@ function RenderState(renderState) {
     this.lineWidth > ContextLimits.maximumAliasedLineWidth
   ) {
     throw new DeveloperError(
-      "renderState.lineWidth is out of range.  Check minimumAliasedLineWidth and maximumAliasedLineWidth."
+      'renderState.lineWidth is out of range.  Check minimumAliasedLineWidth and maximumAliasedLineWidth.'
     );
   }
   if (!WindingOrder.validate(this.frontFace)) {
-    throw new DeveloperError("Invalid renderState.frontFace.");
+    throw new DeveloperError('Invalid renderState.frontFace.');
   }
   if (!validateCullFace(this.cull.face)) {
-    throw new DeveloperError("Invalid renderState.cull.face.");
+    throw new DeveloperError('Invalid renderState.cull.face.');
   }
   if (
     this.scissorTest.rectangle.width < 0 ||
     this.scissorTest.rectangle.height < 0
   ) {
     throw new DeveloperError(
-      "renderState.scissorTest.rectangle.width and renderState.scissorTest.rectangle.height must be greater than or equal to zero."
+      'renderState.scissorTest.rectangle.width and renderState.scissorTest.rectangle.height must be greater than or equal to zero.'
     );
   }
   if (this.depthRange.near > this.depthRange.far) {
     // WebGL specific - not an error in GL ES
     throw new DeveloperError(
-      "renderState.depthRange.near can not be greater than renderState.depthRange.far."
+      'renderState.depthRange.near can not be greater than renderState.depthRange.far.'
     );
   }
   if (this.depthRange.near < 0) {
     // Would be clamped by GL
     throw new DeveloperError(
-      "renderState.depthRange.near must be greater than or equal to zero."
+      'renderState.depthRange.near must be greater than or equal to zero.'
     );
   }
   if (this.depthRange.far > 1) {
     // Would be clamped by GL
     throw new DeveloperError(
-      "renderState.depthRange.far must be less than or equal to one."
+      'renderState.depthRange.far must be less than or equal to one.'
     );
   }
   if (!validateDepthFunction(this.depthTest.func)) {
-    throw new DeveloperError("Invalid renderState.depthTest.func.");
+    throw new DeveloperError('Invalid renderState.depthTest.func.');
   }
   if (
     this.blending.color.red < 0.0 ||
@@ -271,79 +271,79 @@ function RenderState(renderState) {
   ) {
     // Would be clamped by GL
     throw new DeveloperError(
-      "renderState.blending.color components must be greater than or equal to zero and less than or equal to one."
+      'renderState.blending.color components must be greater than or equal to zero and less than or equal to one.'
     );
   }
   if (!validateBlendEquation(this.blending.equationRgb)) {
-    throw new DeveloperError("Invalid renderState.blending.equationRgb.");
+    throw new DeveloperError('Invalid renderState.blending.equationRgb.');
   }
   if (!validateBlendEquation(this.blending.equationAlpha)) {
-    throw new DeveloperError("Invalid renderState.blending.equationAlpha.");
+    throw new DeveloperError('Invalid renderState.blending.equationAlpha.');
   }
   if (!validateBlendFunction(this.blending.functionSourceRgb)) {
-    throw new DeveloperError("Invalid renderState.blending.functionSourceRgb.");
+    throw new DeveloperError('Invalid renderState.blending.functionSourceRgb.');
   }
   if (!validateBlendFunction(this.blending.functionSourceAlpha)) {
     throw new DeveloperError(
-      "Invalid renderState.blending.functionSourceAlpha."
+      'Invalid renderState.blending.functionSourceAlpha.'
     );
   }
   if (!validateBlendFunction(this.blending.functionDestinationRgb)) {
     throw new DeveloperError(
-      "Invalid renderState.blending.functionDestinationRgb."
+      'Invalid renderState.blending.functionDestinationRgb.'
     );
   }
   if (!validateBlendFunction(this.blending.functionDestinationAlpha)) {
     throw new DeveloperError(
-      "Invalid renderState.blending.functionDestinationAlpha."
+      'Invalid renderState.blending.functionDestinationAlpha.'
     );
   }
   if (!validateStencilFunction(this.stencilTest.frontFunction)) {
-    throw new DeveloperError("Invalid renderState.stencilTest.frontFunction.");
+    throw new DeveloperError('Invalid renderState.stencilTest.frontFunction.');
   }
   if (!validateStencilFunction(this.stencilTest.backFunction)) {
-    throw new DeveloperError("Invalid renderState.stencilTest.backFunction.");
+    throw new DeveloperError('Invalid renderState.stencilTest.backFunction.');
   }
   if (!validateStencilOperation(this.stencilTest.frontOperation.fail)) {
     throw new DeveloperError(
-      "Invalid renderState.stencilTest.frontOperation.fail."
+      'Invalid renderState.stencilTest.frontOperation.fail.'
     );
   }
   if (!validateStencilOperation(this.stencilTest.frontOperation.zFail)) {
     throw new DeveloperError(
-      "Invalid renderState.stencilTest.frontOperation.zFail."
+      'Invalid renderState.stencilTest.frontOperation.zFail.'
     );
   }
   if (!validateStencilOperation(this.stencilTest.frontOperation.zPass)) {
     throw new DeveloperError(
-      "Invalid renderState.stencilTest.frontOperation.zPass."
+      'Invalid renderState.stencilTest.frontOperation.zPass.'
     );
   }
   if (!validateStencilOperation(this.stencilTest.backOperation.fail)) {
     throw new DeveloperError(
-      "Invalid renderState.stencilTest.backOperation.fail."
+      'Invalid renderState.stencilTest.backOperation.fail.'
     );
   }
   if (!validateStencilOperation(this.stencilTest.backOperation.zFail)) {
     throw new DeveloperError(
-      "Invalid renderState.stencilTest.backOperation.zFail."
+      'Invalid renderState.stencilTest.backOperation.zFail.'
     );
   }
   if (!validateStencilOperation(this.stencilTest.backOperation.zPass)) {
     throw new DeveloperError(
-      "Invalid renderState.stencilTest.backOperation.zPass."
+      'Invalid renderState.stencilTest.backOperation.zPass.'
     );
   }
 
   if (defined(this.viewport)) {
     if (this.viewport.width < 0) {
       throw new DeveloperError(
-        "renderState.viewport.width must be greater than or equal to zero."
+        'renderState.viewport.width must be greater than or equal to zero.'
       );
     }
     if (this.viewport.height < 0) {
       throw new DeveloperError(
-        "renderState.viewport.height must be greater than or equal to zero."
+        'renderState.viewport.height must be greater than or equal to zero.'
       );
     }
 
@@ -506,7 +506,7 @@ RenderState.fromCache = function (renderState) {
     //>>includeEnd('debug');
     cachedState = {
       referenceCount: 0,
-      state: states,
+      state: states
     };
 
     // Cache full render state.  Multiple partially defined render states may map to this.
@@ -518,7 +518,7 @@ RenderState.fromCache = function (renderState) {
   // Cache partial render state so we can skip validation on a cache hit for a partially defined render state
   renderStateCache[partialKey] = {
     referenceCount: 1,
-    state: cachedState.state,
+    state: cachedState.state
   };
 
   return cachedState.state;
@@ -920,7 +920,7 @@ RenderState.partialApply = function (
 RenderState.getState = function (renderState) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(renderState)) {
-    throw new DeveloperError("renderState is required.");
+    throw new DeveloperError('renderState is required.');
   }
   //>>includeEnd('debug');
 
@@ -928,31 +928,31 @@ RenderState.getState = function (renderState) {
     frontFace: renderState.frontFace,
     cull: {
       enabled: renderState.cull.enabled,
-      face: renderState.cull.face,
+      face: renderState.cull.face
     },
     lineWidth: renderState.lineWidth,
     polygonOffset: {
       enabled: renderState.polygonOffset.enabled,
       factor: renderState.polygonOffset.factor,
-      units: renderState.polygonOffset.units,
+      units: renderState.polygonOffset.units
     },
     scissorTest: {
       enabled: renderState.scissorTest.enabled,
-      rectangle: BoundingRectangle.clone(renderState.scissorTest.rectangle),
+      rectangle: BoundingRectangle.clone(renderState.scissorTest.rectangle)
     },
     depthRange: {
       near: renderState.depthRange.near,
-      far: renderState.depthRange.far,
+      far: renderState.depthRange.far
     },
     depthTest: {
       enabled: renderState.depthTest.enabled,
-      func: renderState.depthTest.func,
+      func: renderState.depthTest.func
     },
     colorMask: {
       red: renderState.colorMask.red,
       green: renderState.colorMask.green,
       blue: renderState.colorMask.blue,
-      alpha: renderState.colorMask.alpha,
+      alpha: renderState.colorMask.alpha
     },
     depthMask: renderState.depthMask,
     stencilMask: renderState.stencilMask,
@@ -964,7 +964,7 @@ RenderState.getState = function (renderState) {
       functionSourceRgb: renderState.blending.functionSourceRgb,
       functionSourceAlpha: renderState.blending.functionSourceAlpha,
       functionDestinationRgb: renderState.blending.functionDestinationRgb,
-      functionDestinationAlpha: renderState.blending.functionDestinationAlpha,
+      functionDestinationAlpha: renderState.blending.functionDestinationAlpha
     },
     stencilTest: {
       enabled: renderState.stencilTest.enabled,
@@ -975,22 +975,22 @@ RenderState.getState = function (renderState) {
       frontOperation: {
         fail: renderState.stencilTest.frontOperation.fail,
         zFail: renderState.stencilTest.frontOperation.zFail,
-        zPass: renderState.stencilTest.frontOperation.zPass,
+        zPass: renderState.stencilTest.frontOperation.zPass
       },
       backOperation: {
         fail: renderState.stencilTest.backOperation.fail,
         zFail: renderState.stencilTest.backOperation.zFail,
-        zPass: renderState.stencilTest.backOperation.zPass,
-      },
+        zPass: renderState.stencilTest.backOperation.zPass
+      }
     },
     sampleCoverage: {
       enabled: renderState.sampleCoverage.enabled,
       value: renderState.sampleCoverage.value,
-      invert: renderState.sampleCoverage.invert,
+      invert: renderState.sampleCoverage.invert
     },
     viewport: defined(renderState.viewport)
       ? BoundingRectangle.clone(renderState.viewport)
-      : undefined,
+      : undefined
   };
 };
 export default RenderState;

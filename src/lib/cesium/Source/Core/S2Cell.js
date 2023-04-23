@@ -1,13 +1,13 @@
 /* eslint-disable new-cap */
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import FeatureDetection from "./FeatureDetection.js";
-import RuntimeError from "./RuntimeError.js";
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import FeatureDetection from './FeatureDetection.js';
+import RuntimeError from './RuntimeError.js';
 
 /**
  * S2
@@ -130,7 +130,7 @@ const S2_POSITION_TO_IJ = [
   [0, 1, 3, 2], // 0: Normal order, no swap or invert
   [0, 2, 3, 1], // 1: Swap bit set, swap I and J bits
   [3, 2, 0, 1], // 2: Invert bit set, invert bits
-  [3, 1, 0, 2], // 3: Swap and invert bits set
+  [3, 1, 0, 2] // 3: Swap and invert bits set
 ];
 
 // Mask that specifies the swap orientation bit for the Hilbert curve
@@ -145,7 +145,7 @@ const S2_POSITION_TO_ORIENTATION_MASK = [
   S2_SWAP_MASK,
   0,
   0,
-  S2_SWAP_MASK | S2_INVERT_MASK,
+  S2_SWAP_MASK | S2_INVERT_MASK
 ];
 
 /**
@@ -159,14 +159,14 @@ const S2_POSITION_TO_ORIENTATION_MASK = [
  */
 function S2Cell(cellId) {
   if (!FeatureDetection.supportsBigInt()) {
-    throw new RuntimeError("S2 required BigInt support");
+    throw new RuntimeError('S2 required BigInt support');
   }
   //>>includeStart('debug', pragmas.debug);
   if (!defined(cellId)) {
-    throw new DeveloperError("cell ID is required.");
+    throw new DeveloperError('cell ID is required.');
   }
   if (!S2Cell.isValidId(cellId)) {
-    throw new DeveloperError("cell ID is invalid.");
+    throw new DeveloperError('cell ID is invalid.');
   }
   //>>includeEnd('debug');
 
@@ -183,9 +183,9 @@ function S2Cell(cellId) {
  */
 S2Cell.fromToken = function (token) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("token", token);
+  Check.typeOf.string('token', token);
   if (!S2Cell.isValidToken(token)) {
-    throw new DeveloperError("token is invalid.");
+    throw new DeveloperError('token is invalid.');
   }
   //>>includeEnd('debug');
 
@@ -201,7 +201,7 @@ S2Cell.fromToken = function (token) {
  */
 S2Cell.isValidId = function (cellId) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.bigint("cellId", cellId);
+  Check.typeOf.bigint('cellId', cellId);
   //>>includeEnd('debug');
 
   // Check if sentinel bit is missing.
@@ -219,7 +219,7 @@ S2Cell.isValidId = function (cellId) {
   // eslint-disable-next-line no-undef
   const lowestSetBit = cellId & (~cellId + BigInt(1));
   // eslint-disable-next-line
-  if (!(lowestSetBit & BigInt("0x1555555555555555"))) {
+  if (!(lowestSetBit & BigInt('0x1555555555555555'))) {
     return false;
   }
 
@@ -235,7 +235,7 @@ S2Cell.isValidId = function (cellId) {
  */
 S2Cell.isValidToken = function (token) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("token", token);
+  Check.typeOf.string('token', token);
   //>>includeEnd('debug');
 
   if (!/^[0-9a-fA-F]{1,16}$/.test(token)) {
@@ -254,10 +254,10 @@ S2Cell.isValidToken = function (token) {
  */
 S2Cell.getIdFromToken = function (token) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("token", token);
+  Check.typeOf.string('token', token);
   //>>includeEnd('debug');
 
-  return BigInt("0x" + token + "0".repeat(16 - token.length)); // eslint-disable-line
+  return BigInt('0x' + token + '0'.repeat(16 - token.length)); // eslint-disable-line
 };
 
 /**
@@ -269,14 +269,14 @@ S2Cell.getIdFromToken = function (token) {
  */
 S2Cell.getTokenFromId = function (cellId) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.bigint("cellId", cellId);
+  Check.typeOf.bigint('cellId', cellId);
   //>>includeEnd('debug');
 
   const trailingZeroHexChars = Math.floor(countTrailingZeroBits(cellId) / 4);
-  const hexString = cellId.toString(16).replace(/0*$/, "");
+  const hexString = cellId.toString(16).replace(/0*$/, '');
 
   const zeroString = Array(17 - trailingZeroHexChars - hexString.length).join(
-    "0"
+    '0'
   );
   return zeroString + hexString;
 };
@@ -290,7 +290,7 @@ S2Cell.getTokenFromId = function (cellId) {
  */
 S2Cell.getLevel = function (cellId) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.bigint("cellId", cellId);
+  Check.typeOf.bigint('cellId', cellId);
   if (!S2Cell.isValidId(cellId)) {
     throw new DeveloperError();
   }
@@ -320,12 +320,12 @@ S2Cell.getLevel = function (cellId) {
  */
 S2Cell.prototype.getChild = function (index) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("index", index);
+  Check.typeOf.number('index', index);
   if (index < 0 || index > 3) {
-    throw new DeveloperError("child index must be in the range [0-3].");
+    throw new DeveloperError('child index must be in the range [0-3].');
   }
   if (this._level === 30) {
-    throw new DeveloperError("cannot get child of leaf cell.");
+    throw new DeveloperError('cannot get child of leaf cell.');
   }
   //>>includeEnd('debug');
 
@@ -347,7 +347,7 @@ S2Cell.prototype.getChild = function (index) {
 S2Cell.prototype.getParent = function () {
   //>>includeStart('debug', pragmas.debug);
   if (this._level === 0) {
-    throw new DeveloperError("cannot get parent of root cell.");
+    throw new DeveloperError('cannot get parent of root cell.');
   }
   //>>includeEnd('debug');
   // Shift the sentinel bit 2 positions to the left.
@@ -367,7 +367,7 @@ S2Cell.prototype.getParent = function () {
 S2Cell.prototype.getParentAtLevel = function (level) {
   //>>includeStart('debug', pragmas.debug);
   if (this._level === 0 || level < 0 || this._level < level) {
-    throw new DeveloperError("cannot get parent at invalid level.");
+    throw new DeveloperError('cannot get parent at invalid level.');
   }
   //>>includeEnd('debug');
   const newLsb = lsbForLevel(level);
@@ -405,9 +405,9 @@ S2Cell.prototype.getCenter = function (ellipsoid) {
  */
 S2Cell.prototype.getVertex = function (index, ellipsoid) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("index", index);
+  Check.typeOf.number('index', index);
   if (index < 0 || index > 3) {
-    throw new DeveloperError("vertex index must be in the range [0-3].");
+    throw new DeveloperError('vertex index must be in the range [0-3].');
   }
   //>>includeEnd('debug');
 
@@ -435,26 +435,26 @@ S2Cell.prototype.getVertex = function (index, ellipsoid) {
  */
 S2Cell.fromFacePositionLevel = function (face, position, level) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.bigint("position", position);
+  Check.typeOf.bigint('position', position);
   if (face < 0 || face > 5) {
-    throw new DeveloperError("Invalid S2 Face (must be within 0-5)");
+    throw new DeveloperError('Invalid S2 Face (must be within 0-5)');
   }
 
   if (level < 0 || level > S2_MAX_LEVEL) {
-    throw new DeveloperError("Invalid level (must be within 0-30)");
+    throw new DeveloperError('Invalid level (must be within 0-30)');
   }
   if (position < 0 || position >= Math.pow(4, level)) {
-    throw new DeveloperError("Invalid Hilbert position for level");
+    throw new DeveloperError('Invalid Hilbert position for level');
   }
   //>>includeEnd('debug');
 
   const faceBitString =
-    (face < 4 ? "0" : "") + (face < 2 ? "0" : "") + face.toString(2);
+    (face < 4 ? '0' : '') + (face < 2 ? '0' : '') + face.toString(2);
   const positionBitString = position.toString(2);
   const positionPrefixPadding = Array(
     2 * level - positionBitString.length + 1
-  ).join("0");
-  const positionSuffixPadding = Array(S2_POSITION_BITS - 2 * level).join("0");
+  ).join('0');
+  const positionSuffixPadding = Array(S2_POSITION_BITS - 2 * level).join('0');
 
   // eslint-disable-next-line no-undef
   const cellId = BigInt(
@@ -728,74 +728,10 @@ function lsbForLevel(level) {
 // Lookup table for getting trailing zero bits.
 // https://graphics.stanford.edu/~seander/bithacks.html
 const Mod67BitPosition = [
-  64,
-  0,
-  1,
-  39,
-  2,
-  15,
-  40,
-  23,
-  3,
-  12,
-  16,
-  59,
-  41,
-  19,
-  24,
-  54,
-  4,
-  64,
-  13,
-  10,
-  17,
-  62,
-  60,
-  28,
-  42,
-  30,
-  20,
-  51,
-  25,
-  44,
-  55,
-  47,
-  5,
-  32,
-  65,
-  38,
-  14,
-  22,
-  11,
-  58,
-  18,
-  53,
-  63,
-  9,
-  61,
-  27,
-  29,
-  50,
-  43,
-  46,
-  31,
-  37,
-  21,
-  57,
-  52,
-  8,
-  26,
-  49,
-  45,
-  36,
-  56,
-  7,
-  48,
-  35,
-  6,
-  34,
-  33,
-  0,
+  64, 0, 1, 39, 2, 15, 40, 23, 3, 12, 16, 59, 41, 19, 24, 54, 4, 64, 13, 10, 17,
+  62, 60, 28, 42, 30, 20, 51, 25, 44, 55, 47, 5, 32, 65, 38, 14, 22, 11, 58, 18,
+  53, 63, 9, 61, 27, 29, 50, 43, 46, 31, 37, 21, 57, 52, 8, 26, 49, 45, 36, 56,
+  7, 48, 35, 6, 34, 33, 0
 ];
 
 /**

@@ -1,9 +1,9 @@
-import arrayRemoveDuplicates from "./arrayRemoveDuplicates.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import defined from "./defined.js";
-import CesiumMath from "./Math.js";
-import PolylinePipeline from "./PolylinePipeline.js";
+import arrayRemoveDuplicates from './arrayRemoveDuplicates.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import defined from './defined.js';
+import CesiumMath from './Math.js';
+import PolylinePipeline from './PolylinePipeline.js';
 
 /**
  * @private
@@ -95,7 +95,7 @@ function removeDuplicates(ellipsoid, positions, topHeights, bottomHeights) {
   return {
     positions: cleanedPositions,
     topHeights: cleanedTopHeights,
-    bottomHeights: cleanedBottomHeights,
+    bottomHeights: cleanedBottomHeights
   };
 }
 
@@ -105,7 +105,7 @@ const generateArcOptionsScratch = {
   positions: undefined,
   height: undefined,
   granularity: undefined,
-  ellipsoid: undefined,
+  ellipsoid: undefined
 };
 
 /**
@@ -206,7 +206,7 @@ WallGeometryLibrary.computePositions = function (
   return {
     bottomPositions: bottomPositions,
     topPositions: topPositions,
-    numCorners: numCorners,
+    numCorners: numCorners
   };
 };
 export default WallGeometryLibrary;

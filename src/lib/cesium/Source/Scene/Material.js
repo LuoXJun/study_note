@@ -1,40 +1,40 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import clone from "../Core/clone.js";
-import Color from "../Core/Color.js";
-import combine from "../Core/combine.js";
-import createGuid from "../Core/createGuid.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import loadKTX2 from "../Core/loadKTX2.js";
-import Matrix2 from "../Core/Matrix2.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
-import Resource from "../Core/Resource.js";
-import CubeMap from "../Renderer/CubeMap.js";
-import Texture from "../Renderer/Texture.js";
-import AspectRampMaterial from "../Shaders/Materials/AspectRampMaterial.js";
-import BumpMapMaterial from "../Shaders/Materials/BumpMapMaterial.js";
-import CheckerboardMaterial from "../Shaders/Materials/CheckerboardMaterial.js";
-import DotMaterial from "../Shaders/Materials/DotMaterial.js";
-import ElevationBandMaterial from "../Shaders/Materials/ElevationBandMaterial.js";
-import ElevationContourMaterial from "../Shaders/Materials/ElevationContourMaterial.js";
-import ElevationRampMaterial from "../Shaders/Materials/ElevationRampMaterial.js";
-import FadeMaterial from "../Shaders/Materials/FadeMaterial.js";
-import GridMaterial from "../Shaders/Materials/GridMaterial.js";
-import NormalMapMaterial from "../Shaders/Materials/NormalMapMaterial.js";
-import PolylineArrowMaterial from "../Shaders/Materials/PolylineArrowMaterial.js";
-import PolylineDashMaterial from "../Shaders/Materials/PolylineDashMaterial.js";
-import PolylineGlowMaterial from "../Shaders/Materials/PolylineGlowMaterial.js";
-import PolylineOutlineMaterial from "../Shaders/Materials/PolylineOutlineMaterial.js";
-import RimLightingMaterial from "../Shaders/Materials/RimLightingMaterial.js";
-import Sampler from "../Renderer/Sampler.js";
-import SlopeRampMaterial from "../Shaders/Materials/SlopeRampMaterial.js";
-import StripeMaterial from "../Shaders/Materials/StripeMaterial.js";
-import TextureMagnificationFilter from "../Renderer/TextureMagnificationFilter.js";
-import TextureMinificationFilter from "../Renderer/TextureMinificationFilter.js";
-import WaterMaterial from "../Shaders/Materials/Water.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import clone from '../Core/clone.js';
+import Color from '../Core/Color.js';
+import combine from '../Core/combine.js';
+import createGuid from '../Core/createGuid.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import loadKTX2 from '../Core/loadKTX2.js';
+import Matrix2 from '../Core/Matrix2.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
+import Resource from '../Core/Resource.js';
+import CubeMap from '../Renderer/CubeMap.js';
+import Texture from '../Renderer/Texture.js';
+import AspectRampMaterial from '../Shaders/Materials/AspectRampMaterial.js';
+import BumpMapMaterial from '../Shaders/Materials/BumpMapMaterial.js';
+import CheckerboardMaterial from '../Shaders/Materials/CheckerboardMaterial.js';
+import DotMaterial from '../Shaders/Materials/DotMaterial.js';
+import ElevationBandMaterial from '../Shaders/Materials/ElevationBandMaterial.js';
+import ElevationContourMaterial from '../Shaders/Materials/ElevationContourMaterial.js';
+import ElevationRampMaterial from '../Shaders/Materials/ElevationRampMaterial.js';
+import FadeMaterial from '../Shaders/Materials/FadeMaterial.js';
+import GridMaterial from '../Shaders/Materials/GridMaterial.js';
+import NormalMapMaterial from '../Shaders/Materials/NormalMapMaterial.js';
+import PolylineArrowMaterial from '../Shaders/Materials/PolylineArrowMaterial.js';
+import PolylineDashMaterial from '../Shaders/Materials/PolylineDashMaterial.js';
+import PolylineGlowMaterial from '../Shaders/Materials/PolylineGlowMaterial.js';
+import PolylineOutlineMaterial from '../Shaders/Materials/PolylineOutlineMaterial.js';
+import RimLightingMaterial from '../Shaders/Materials/RimLightingMaterial.js';
+import Sampler from '../Renderer/Sampler.js';
+import SlopeRampMaterial from '../Shaders/Materials/SlopeRampMaterial.js';
+import StripeMaterial from '../Shaders/Materials/StripeMaterial.js';
+import TextureMagnificationFilter from '../Renderer/TextureMagnificationFilter.js';
+import TextureMinificationFilter from '../Renderer/TextureMinificationFilter.js';
+import WaterMaterial from '../Shaders/Materials/Water.js';
 
 /**
  * A Material defines surface appearance through a combination of diffuse, specular,
@@ -331,8 +331,8 @@ function Material(options) {
   Object.defineProperties(this, {
     type: {
       value: this.type,
-      writable: false,
-    },
+      writable: false
+    }
   });
 
   if (!defined(Material._uniformList[this.type])) {
@@ -369,8 +369,8 @@ Material.fromType = function (type, uniforms) {
 
   const material = new Material({
     fabric: {
-      type: type,
-    },
+      type: type
+    }
   });
 
   if (defined(uniforms)) {
@@ -390,7 +390,7 @@ Material.fromType = function (type, uniforms) {
  */
 Material.prototype.isTranslucent = function () {
   if (defined(this.translucent)) {
-    if (typeof this.translucent === "function") {
+    if (typeof this.translucent === 'function') {
       return this.translucent();
     }
 
@@ -402,7 +402,7 @@ Material.prototype.isTranslucent = function () {
   const length = funcs.length;
   for (let i = 0; i < length; ++i) {
     const func = funcs[i];
-    if (typeof func === "function") {
+    if (typeof func === 'function') {
       translucent = translucent && func();
     } else {
       translucent = translucent && func;
@@ -444,7 +444,7 @@ Material.prototype.update = function (context) {
 
     const sampler = new Sampler({
       minificationFilter: this._minificationFilter,
-      magnificationFilter: this._magnificationFilter,
+      magnificationFilter: this._magnificationFilter
     });
 
     let texture;
@@ -456,15 +456,15 @@ Material.prototype.update = function (context) {
         height: image.height,
         source: {
           arrayBufferView: image.bufferView,
-          mipLevels: mipLevels,
+          mipLevels: mipLevels
         },
-        sampler: sampler,
+        sampler: sampler
       });
     } else {
       texture = new Texture({
         context: context,
         source: image,
-        sampler: sampler,
+        sampler: sampler
       });
     }
 
@@ -504,12 +504,12 @@ Material.prototype.update = function (context) {
         positiveY: images[2],
         negativeY: images[3],
         positiveZ: images[4],
-        negativeZ: images[5],
+        negativeZ: images[5]
       },
       sampler: new Sampler({
         minificationFilter: this._minificationFilter,
-        magnificationFilter: this._magnificationFilter,
-      }),
+        magnificationFilter: this._magnificationFilter
+      })
     });
 
     this._textures[uniformId] = cubeMap;
@@ -599,7 +599,7 @@ function initializeMaterial(options, result) {
     ? result._template.type
     : createGuid();
 
-  result.shaderSource = "";
+  result.shaderSource = '';
   result.materials = {};
   result.uniforms = {};
   result._uniforms = {};
@@ -633,7 +633,7 @@ function initializeMaterial(options, result) {
   translucent = defaultValue(options.translucent, translucent);
 
   if (defined(translucent)) {
-    if (typeof translucent === "function") {
+    if (typeof translucent === 'function') {
       const wrappedTranslucent = function () {
         return translucent(result);
       };
@@ -680,19 +680,19 @@ function duplicateNameError(property, properties) {
 }
 
 const templateProperties = [
-  "type",
-  "materials",
-  "uniforms",
-  "components",
-  "source",
+  'type',
+  'materials',
+  'uniforms',
+  'components',
+  'source'
 ];
 const componentProperties = [
-  "diffuse",
-  "specular",
-  "shininess",
-  "normal",
-  "emission",
-  "alpha",
+  'diffuse',
+  'specular',
+  'shininess',
+  'normal',
+  'emission',
+  'alpha'
 ];
 
 function checkForTemplateErrors(material) {
@@ -705,7 +705,7 @@ function checkForTemplateErrors(material) {
   //>>includeStart('debug', pragmas.debug);
   if (defined(components) && defined(template.source)) {
     throw new DeveloperError(
-      "fabric: cannot have source and components in the same template."
+      'fabric: cannot have source and components in the same template.'
     );
   }
   //>>includeEnd('debug');
@@ -750,15 +750,15 @@ function createMethodDefinition(material) {
     material.shaderSource += `${source}\n`;
   } else {
     material.shaderSource +=
-      "czm_material czm_getMaterial(czm_materialInput materialInput)\n{\n";
+      'czm_material czm_getMaterial(czm_materialInput materialInput)\n{\n';
     material.shaderSource +=
-      "czm_material material = czm_getDefaultMaterial(materialInput);\n";
+      'czm_material material = czm_getDefaultMaterial(materialInput);\n';
     if (defined(components)) {
       const isMultiMaterial =
         Object.keys(material._template.materials).length > 0;
       for (const component in components) {
         if (components.hasOwnProperty(component)) {
-          if (component === "diffuse" || component === "emission") {
+          if (component === 'diffuse' || component === 'emission') {
             const isFusion =
               isMultiMaterial &&
               isMaterialFused(components[component], material);
@@ -766,7 +766,7 @@ function createMethodDefinition(material) {
               ? components[component]
               : `czm_gammaCorrect(${components[component]})`;
             material.shaderSource += `material.${component} = ${componentSource}; \n`;
-          } else if (component === "alpha") {
+          } else if (component === 'alpha') {
             material.shaderSource += `material.alpha = ${components.alpha}; \n`;
           } else {
             material.shaderSource += `material.${component} = ${components[component]};\n`;
@@ -774,14 +774,14 @@ function createMethodDefinition(material) {
         }
       }
     }
-    material.shaderSource += "return material;\n}\n";
+    material.shaderSource += 'return material;\n}\n';
   }
 }
 
 const matrixMap = {
   mat2: Matrix2,
   mat3: Matrix3,
-  mat4: Matrix4,
+  mat4: Matrix4
 };
 
 const ktx2Regex = /\.ktx2$/i;
@@ -814,19 +814,19 @@ function createTexture2DUpdateFunction(uniformId) {
         if (!defined(texture) || texture === context.defaultTexture) {
           const sampler = new Sampler({
             minificationFilter: material._minificationFilter,
-            magnificationFilter: material._magnificationFilter,
+            magnificationFilter: material._magnificationFilter
           });
           texture = new Texture({
             context: context,
             source: uniformValue,
-            sampler: sampler,
+            sampler: sampler
           });
           material._textures[uniformId] = texture;
           return;
         }
 
         texture.copyFrom({
-          source: uniformValue,
+          source: uniformValue
         });
       } else if (!defined(texture)) {
         material._textures[uniformId] = context.defaultTexture;
@@ -889,7 +889,7 @@ function createTexture2DUpdateFunction(uniformId) {
         uniformValue.url !== material._texturePaths[uniformId].url) ||
       (!isResource && uniformValue !== material._texturePaths[uniformId])
     ) {
-      if (typeof uniformValue === "string" || isResource) {
+      if (typeof uniformValue === 'string' || isResource) {
         const resource = isResource
           ? uniformValue
           : Resource.createIfNeeded(uniformValue);
@@ -905,7 +905,7 @@ function createTexture2DUpdateFunction(uniformId) {
           .then(function (image) {
             material._loadedImages.push({
               id: uniformId,
-              image: image,
+              image: image
             });
           })
           .catch(function () {
@@ -920,7 +920,7 @@ function createTexture2DUpdateFunction(uniformId) {
       ) {
         material._loadedImages.push({
           id: uniformId,
-          image: uniformValue,
+          image: uniformValue
         });
       }
 
@@ -967,13 +967,13 @@ function createCubeMapUpdateFunction(uniformId) {
         Resource.createIfNeeded(uniformValue.positiveY).fetchImage(),
         Resource.createIfNeeded(uniformValue.negativeY).fetchImage(),
         Resource.createIfNeeded(uniformValue.positiveZ).fetchImage(),
-        Resource.createIfNeeded(uniformValue.negativeZ).fetchImage(),
+        Resource.createIfNeeded(uniformValue.negativeZ).fetchImage()
       ];
 
       Promise.all(promises).then(function (images) {
         material._loadedCubeMaps.push({
           id: uniformId,
-          images: images,
+          images: images
         });
       });
 
@@ -1008,7 +1008,7 @@ function createUniform(material, uniformId) {
   //>>includeEnd('debug');
 
   let replacedTokenCount;
-  if (uniformType === "channels") {
+  if (uniformType === 'channels') {
     replacedTokenCount = replaceToken(material, uniformId, uniformValue, false);
     //>>includeStart('debug', pragmas.debug);
     if (replacedTokenCount === 0 && strict) {
@@ -1020,13 +1020,13 @@ function createUniform(material, uniformId) {
   } else {
     // Since webgl doesn't allow texture dimension queries in glsl, create a uniform to do it.
     // Check if the shader source actually uses texture dimensions before creating the uniform.
-    if (uniformType === "sampler2D") {
+    if (uniformType === 'sampler2D') {
       const imageDimensionsUniformName = `${uniformId}Dimensions`;
       if (getNumberOfTokens(material, imageDimensionsUniformName) > 0) {
         materialUniforms[imageDimensionsUniformName] = {
-          type: "ivec3",
+          type: 'ivec3',
           x: 1,
-          y: 1,
+          y: 1
         };
         createUniform(material, imageDimensionsUniformName);
       }
@@ -1054,17 +1054,17 @@ function createUniform(material, uniformId) {
     // Set uniform value
     material.uniforms[uniformId] = uniformValue;
 
-    if (uniformType === "sampler2D") {
+    if (uniformType === 'sampler2D') {
       material._uniforms[newUniformId] = function () {
         return material._textures[uniformId];
       };
       material._updateFunctions.push(createTexture2DUpdateFunction(uniformId));
-    } else if (uniformType === "samplerCube") {
+    } else if (uniformType === 'samplerCube') {
       material._uniforms[newUniformId] = function () {
         return material._textures[uniformId];
       };
       material._updateFunctions.push(createCubeMapUpdateFunction(uniformId));
-    } else if (uniformType.indexOf("mat") !== -1) {
+    } else if (uniformType.indexOf('mat') !== -1) {
       const scratchMatrix = new matrixMap[uniformType]();
       material._uniforms[newUniformId] = function () {
         return matrixMap[uniformType].fromColumnMajorArray(
@@ -1085,24 +1085,24 @@ function getUniformType(uniformValue) {
   let uniformType = uniformValue.type;
   if (!defined(uniformType)) {
     const type = typeof uniformValue;
-    if (type === "number") {
-      uniformType = "float";
-    } else if (type === "boolean") {
-      uniformType = "bool";
+    if (type === 'number') {
+      uniformType = 'float';
+    } else if (type === 'boolean') {
+      uniformType = 'bool';
     } else if (
-      type === "string" ||
+      type === 'string' ||
       uniformValue instanceof Resource ||
       uniformValue instanceof HTMLCanvasElement ||
       uniformValue instanceof HTMLImageElement
     ) {
       if (/^([rgba]){1,4}$/i.test(uniformValue)) {
-        uniformType = "channels";
+        uniformType = 'channels';
       } else if (uniformValue === Material.DefaultCubeMapId) {
-        uniformType = "samplerCube";
+        uniformType = 'samplerCube';
       } else {
-        uniformType = "sampler2D";
+        uniformType = 'sampler2D';
       }
-    } else if (type === "object") {
+    } else if (type === 'object') {
       if (Array.isArray(uniformValue)) {
         if (
           uniformValue.length === 4 ||
@@ -1121,7 +1121,7 @@ function getUniformType(uniformValue) {
         if (numAttributes >= 2 && numAttributes <= 4) {
           uniformType = `vec${numAttributes}`;
         } else if (numAttributes === 6) {
-          uniformType = "samplerCube";
+          uniformType = 'samplerCube';
         }
       }
     }
@@ -1139,7 +1139,7 @@ function createSubMaterials(material) {
       const subMaterial = new Material({
         strict: strict,
         fabric: subMaterialTemplates[subMaterialId],
-        count: material._count,
+        count: material._count
       });
 
       material._count = subMaterial._count;
@@ -1154,7 +1154,7 @@ function createSubMaterials(material) {
       );
 
       // Make the material's czm_getMaterial unique by appending the sub-material type.
-      const originalMethodName = "czm_getMaterial";
+      const originalMethodName = 'czm_getMaterial';
       const newMethodName = `${originalMethodName}_${material._count++}`;
       replaceToken(subMaterial, originalMethodName, newMethodName);
       material.shaderSource = subMaterial.shaderSource + material.shaderSource;
@@ -1183,20 +1183,19 @@ function createSubMaterials(material) {
 function replaceToken(material, token, newToken, excludePeriod) {
   excludePeriod = defaultValue(excludePeriod, true);
   let count = 0;
-  const suffixChars = "([\\w])?";
-  const prefixChars = `([\\w${excludePeriod ? "." : ""}])?`;
-  const regExp = new RegExp(prefixChars + token + suffixChars, "g");
-  material.shaderSource = material.shaderSource.replace(regExp, function (
-    $0,
-    $1,
-    $2
-  ) {
-    if ($1 || $2) {
-      return $0;
+  const suffixChars = '([\\w])?';
+  const prefixChars = `([\\w${excludePeriod ? '.' : ''}])?`;
+  const regExp = new RegExp(prefixChars + token + suffixChars, 'g');
+  material.shaderSource = material.shaderSource.replace(
+    regExp,
+    function ($0, $1, $2) {
+      if ($1 || $2) {
+        return $0;
+      }
+      count += 1;
+      return newToken;
     }
-    count += 1;
-    return newToken;
-  });
+  );
   return count;
 }
 
@@ -1211,41 +1210,41 @@ Material._materialCache = {
   },
   getMaterial: function (type) {
     return this._materials[type];
-  },
+  }
 };
 
 /**
  * Gets or sets the default texture uniform value.
  * @type {String}
  */
-Material.DefaultImageId = "czm_defaultImage";
+Material.DefaultImageId = 'czm_defaultImage';
 
 /**
  * Gets or sets the default cube map texture uniform value.
  * @type {String}
  */
-Material.DefaultCubeMapId = "czm_defaultCubeMap";
+Material.DefaultCubeMapId = 'czm_defaultCubeMap';
 
 /**
  * Gets the name of the color material.
  * @type {String}
  * @readonly
  */
-Material.ColorType = "Color";
+Material.ColorType = 'Color';
 Material._materialCache.addMaterial(Material.ColorType, {
   fabric: {
     type: Material.ColorType,
     uniforms: {
-      color: new Color(1.0, 0.0, 0.0, 0.5),
+      color: new Color(1.0, 0.0, 0.0, 0.5)
     },
     components: {
-      diffuse: "color.rgb",
-      alpha: "color.a",
-    },
+      diffuse: 'color.rgb',
+      alpha: 'color.a'
+    }
   },
   translucent: function (material) {
     return material.uniforms.color.alpha < 1.0;
-  },
+  }
 });
 
 /**
@@ -1253,24 +1252,24 @@ Material._materialCache.addMaterial(Material.ColorType, {
  * @type {String}
  * @readonly
  */
-Material.ImageType = "Image";
+Material.ImageType = 'Image';
 Material._materialCache.addMaterial(Material.ImageType, {
   fabric: {
     type: Material.ImageType,
     uniforms: {
       image: Material.DefaultImageId,
       repeat: new Cartesian2(1.0, 1.0),
-      color: new Color(1.0, 1.0, 1.0, 1.0),
+      color: new Color(1.0, 1.0, 1.0, 1.0)
     },
     components: {
       diffuse:
-        "texture2D(image, fract(repeat * materialInput.st)).rgb * color.rgb",
-      alpha: "texture2D(image, fract(repeat * materialInput.st)).a * color.a",
-    },
+        'texture2D(image, fract(repeat * materialInput.st)).rgb * color.rgb',
+      alpha: 'texture2D(image, fract(repeat * materialInput.st)).a * color.a'
+    }
   },
   translucent: function (material) {
     return material.uniforms.color.alpha < 1.0;
-  },
+  }
 });
 
 /**
@@ -1278,20 +1277,20 @@ Material._materialCache.addMaterial(Material.ImageType, {
  * @type {String}
  * @readonly
  */
-Material.DiffuseMapType = "DiffuseMap";
+Material.DiffuseMapType = 'DiffuseMap';
 Material._materialCache.addMaterial(Material.DiffuseMapType, {
   fabric: {
     type: Material.DiffuseMapType,
     uniforms: {
       image: Material.DefaultImageId,
-      channels: "rgb",
-      repeat: new Cartesian2(1.0, 1.0),
+      channels: 'rgb',
+      repeat: new Cartesian2(1.0, 1.0)
     },
     components: {
-      diffuse: "texture2D(image, fract(repeat * materialInput.st)).channels",
-    },
+      diffuse: 'texture2D(image, fract(repeat * materialInput.st)).channels'
+    }
   },
-  translucent: false,
+  translucent: false
 });
 
 /**
@@ -1299,20 +1298,20 @@ Material._materialCache.addMaterial(Material.DiffuseMapType, {
  * @type {String}
  * @readonly
  */
-Material.AlphaMapType = "AlphaMap";
+Material.AlphaMapType = 'AlphaMap';
 Material._materialCache.addMaterial(Material.AlphaMapType, {
   fabric: {
     type: Material.AlphaMapType,
     uniforms: {
       image: Material.DefaultImageId,
-      channel: "a",
-      repeat: new Cartesian2(1.0, 1.0),
+      channel: 'a',
+      repeat: new Cartesian2(1.0, 1.0)
     },
     components: {
-      alpha: "texture2D(image, fract(repeat * materialInput.st)).channel",
-    },
+      alpha: 'texture2D(image, fract(repeat * materialInput.st)).channel'
+    }
   },
-  translucent: true,
+  translucent: true
 });
 
 /**
@@ -1320,20 +1319,20 @@ Material._materialCache.addMaterial(Material.AlphaMapType, {
  * @type {String}
  * @readonly
  */
-Material.SpecularMapType = "SpecularMap";
+Material.SpecularMapType = 'SpecularMap';
 Material._materialCache.addMaterial(Material.SpecularMapType, {
   fabric: {
     type: Material.SpecularMapType,
     uniforms: {
       image: Material.DefaultImageId,
-      channel: "r",
-      repeat: new Cartesian2(1.0, 1.0),
+      channel: 'r',
+      repeat: new Cartesian2(1.0, 1.0)
     },
     components: {
-      specular: "texture2D(image, fract(repeat * materialInput.st)).channel",
-    },
+      specular: 'texture2D(image, fract(repeat * materialInput.st)).channel'
+    }
   },
-  translucent: false,
+  translucent: false
 });
 
 /**
@@ -1341,20 +1340,20 @@ Material._materialCache.addMaterial(Material.SpecularMapType, {
  * @type {String}
  * @readonly
  */
-Material.EmissionMapType = "EmissionMap";
+Material.EmissionMapType = 'EmissionMap';
 Material._materialCache.addMaterial(Material.EmissionMapType, {
   fabric: {
     type: Material.EmissionMapType,
     uniforms: {
       image: Material.DefaultImageId,
-      channels: "rgb",
-      repeat: new Cartesian2(1.0, 1.0),
+      channels: 'rgb',
+      repeat: new Cartesian2(1.0, 1.0)
     },
     components: {
-      emission: "texture2D(image, fract(repeat * materialInput.st)).channels",
-    },
+      emission: 'texture2D(image, fract(repeat * materialInput.st)).channels'
+    }
   },
-  translucent: false,
+  translucent: false
 });
 
 /**
@@ -1362,19 +1361,19 @@ Material._materialCache.addMaterial(Material.EmissionMapType, {
  * @type {String}
  * @readonly
  */
-Material.BumpMapType = "BumpMap";
+Material.BumpMapType = 'BumpMap';
 Material._materialCache.addMaterial(Material.BumpMapType, {
   fabric: {
     type: Material.BumpMapType,
     uniforms: {
       image: Material.DefaultImageId,
-      channel: "r",
+      channel: 'r',
       strength: 0.8,
-      repeat: new Cartesian2(1.0, 1.0),
+      repeat: new Cartesian2(1.0, 1.0)
     },
-    source: BumpMapMaterial,
+    source: BumpMapMaterial
   },
-  translucent: false,
+  translucent: false
 });
 
 /**
@@ -1382,19 +1381,19 @@ Material._materialCache.addMaterial(Material.BumpMapType, {
  * @type {String}
  * @readonly
  */
-Material.NormalMapType = "NormalMap";
+Material.NormalMapType = 'NormalMap';
 Material._materialCache.addMaterial(Material.NormalMapType, {
   fabric: {
     type: Material.NormalMapType,
     uniforms: {
       image: Material.DefaultImageId,
-      channels: "rgb",
+      channels: 'rgb',
       strength: 0.8,
-      repeat: new Cartesian2(1.0, 1.0),
+      repeat: new Cartesian2(1.0, 1.0)
     },
-    source: NormalMapMaterial,
+    source: NormalMapMaterial
   },
-  translucent: false,
+  translucent: false
 });
 
 /**
@@ -1402,7 +1401,7 @@ Material._materialCache.addMaterial(Material.NormalMapType, {
  * @type {String}
  * @readonly
  */
-Material.GridType = "Grid";
+Material.GridType = 'Grid';
 Material._materialCache.addMaterial(Material.GridType, {
   fabric: {
     type: Material.GridType,
@@ -1411,14 +1410,14 @@ Material._materialCache.addMaterial(Material.GridType, {
       cellAlpha: 0.1,
       lineCount: new Cartesian2(8.0, 8.0),
       lineThickness: new Cartesian2(1.0, 1.0),
-      lineOffset: new Cartesian2(0.0, 0.0),
+      lineOffset: new Cartesian2(0.0, 0.0)
     },
-    source: GridMaterial,
+    source: GridMaterial
   },
   translucent: function (material) {
     const uniforms = material.uniforms;
     return uniforms.color.alpha < 1.0 || uniforms.cellAlpha < 1.0;
-  },
+  }
 });
 
 /**
@@ -1426,7 +1425,7 @@ Material._materialCache.addMaterial(Material.GridType, {
  * @type {String}
  * @readonly
  */
-Material.StripeType = "Stripe";
+Material.StripeType = 'Stripe';
 Material._materialCache.addMaterial(Material.StripeType, {
   fabric: {
     type: Material.StripeType,
@@ -1435,14 +1434,14 @@ Material._materialCache.addMaterial(Material.StripeType, {
       evenColor: new Color(1.0, 1.0, 1.0, 0.5),
       oddColor: new Color(0.0, 0.0, 1.0, 0.5),
       offset: 0.0,
-      repeat: 5.0,
+      repeat: 5.0
     },
-    source: StripeMaterial,
+    source: StripeMaterial
   },
   translucent: function (material) {
     const uniforms = material.uniforms;
     return uniforms.evenColor.alpha < 1.0 || uniforms.oddColor.alpha < 1.0;
-  },
+  }
 });
 
 /**
@@ -1450,21 +1449,21 @@ Material._materialCache.addMaterial(Material.StripeType, {
  * @type {String}
  * @readonly
  */
-Material.CheckerboardType = "Checkerboard";
+Material.CheckerboardType = 'Checkerboard';
 Material._materialCache.addMaterial(Material.CheckerboardType, {
   fabric: {
     type: Material.CheckerboardType,
     uniforms: {
       lightColor: new Color(1.0, 1.0, 1.0, 0.5),
       darkColor: new Color(0.0, 0.0, 0.0, 0.5),
-      repeat: new Cartesian2(5.0, 5.0),
+      repeat: new Cartesian2(5.0, 5.0)
     },
-    source: CheckerboardMaterial,
+    source: CheckerboardMaterial
   },
   translucent: function (material) {
     const uniforms = material.uniforms;
     return uniforms.lightColor.alpha < 1.0 || uniforms.darkColor.alpha < 1.0;
-  },
+  }
 });
 
 /**
@@ -1472,21 +1471,21 @@ Material._materialCache.addMaterial(Material.CheckerboardType, {
  * @type {String}
  * @readonly
  */
-Material.DotType = "Dot";
+Material.DotType = 'Dot';
 Material._materialCache.addMaterial(Material.DotType, {
   fabric: {
     type: Material.DotType,
     uniforms: {
       lightColor: new Color(1.0, 1.0, 0.0, 0.75),
       darkColor: new Color(0.0, 1.0, 1.0, 0.75),
-      repeat: new Cartesian2(5.0, 5.0),
+      repeat: new Cartesian2(5.0, 5.0)
     },
-    source: DotMaterial,
+    source: DotMaterial
   },
   translucent: function (material) {
     const uniforms = material.uniforms;
     return uniforms.lightColor.alpha < 1.0 || uniforms.darkColor.alpha < 1.0;
-  },
+  }
 });
 
 /**
@@ -1494,7 +1493,7 @@ Material._materialCache.addMaterial(Material.DotType, {
  * @type {String}
  * @readonly
  */
-Material.WaterType = "Water";
+Material.WaterType = 'Water';
 Material._materialCache.addMaterial(Material.WaterType, {
   fabric: {
     type: Material.WaterType,
@@ -1507,16 +1506,16 @@ Material._materialCache.addMaterial(Material.WaterType, {
       animationSpeed: 0.01,
       amplitude: 1.0,
       specularIntensity: 0.5,
-      fadeFactor: 1.0,
+      fadeFactor: 1.0
     },
-    source: WaterMaterial,
+    source: WaterMaterial
   },
   translucent: function (material) {
     const uniforms = material.uniforms;
     return (
       uniforms.baseWaterColor.alpha < 1.0 || uniforms.blendColor.alpha < 1.0
     );
-  },
+  }
 });
 
 /**
@@ -1524,21 +1523,21 @@ Material._materialCache.addMaterial(Material.WaterType, {
  * @type {String}
  * @readonly
  */
-Material.RimLightingType = "RimLighting";
+Material.RimLightingType = 'RimLighting';
 Material._materialCache.addMaterial(Material.RimLightingType, {
   fabric: {
     type: Material.RimLightingType,
     uniforms: {
       color: new Color(1.0, 0.0, 0.0, 0.7),
       rimColor: new Color(1.0, 1.0, 1.0, 0.4),
-      width: 0.3,
+      width: 0.3
     },
-    source: RimLightingMaterial,
+    source: RimLightingMaterial
   },
   translucent: function (material) {
     const uniforms = material.uniforms;
     return uniforms.color.alpha < 1.0 || uniforms.rimColor.alpha < 1.0;
-  },
+  }
 });
 
 /**
@@ -1546,7 +1545,7 @@ Material._materialCache.addMaterial(Material.RimLightingType, {
  * @type {String}
  * @readonly
  */
-Material.FadeType = "Fade";
+Material.FadeType = 'Fade';
 Material._materialCache.addMaterial(Material.FadeType, {
   fabric: {
     type: Material.FadeType,
@@ -1557,18 +1556,18 @@ Material._materialCache.addMaterial(Material.FadeType, {
       repeat: true,
       fadeDirection: {
         x: true,
-        y: true,
+        y: true
       },
-      time: new Cartesian2(0.5, 0.5),
+      time: new Cartesian2(0.5, 0.5)
     },
-    source: FadeMaterial,
+    source: FadeMaterial
   },
   translucent: function (material) {
     const uniforms = material.uniforms;
     return (
       uniforms.fadeInColor.alpha < 1.0 || uniforms.fadeOutColor.alpha < 1.0
     );
-  },
+  }
 });
 
 /**
@@ -1576,16 +1575,16 @@ Material._materialCache.addMaterial(Material.FadeType, {
  * @type {String}
  * @readonly
  */
-Material.PolylineArrowType = "PolylineArrow";
+Material.PolylineArrowType = 'PolylineArrow';
 Material._materialCache.addMaterial(Material.PolylineArrowType, {
   fabric: {
     type: Material.PolylineArrowType,
     uniforms: {
-      color: new Color(1.0, 1.0, 1.0, 1.0),
+      color: new Color(1.0, 1.0, 1.0, 1.0)
     },
-    source: PolylineArrowMaterial,
+    source: PolylineArrowMaterial
   },
-  translucent: true,
+  translucent: true
 });
 
 /**
@@ -1593,7 +1592,7 @@ Material._materialCache.addMaterial(Material.PolylineArrowType, {
  * @type {String}
  * @readonly
  */
-Material.PolylineDashType = "PolylineDash";
+Material.PolylineDashType = 'PolylineDash';
 Material._materialCache.addMaterial(Material.PolylineDashType, {
   fabric: {
     type: Material.PolylineDashType,
@@ -1601,11 +1600,11 @@ Material._materialCache.addMaterial(Material.PolylineDashType, {
       color: new Color(1.0, 0.0, 1.0, 1.0),
       gapColor: new Color(0.0, 0.0, 0.0, 0.0),
       dashLength: 16.0,
-      dashPattern: 255.0,
+      dashPattern: 255.0
     },
-    source: PolylineDashMaterial,
+    source: PolylineDashMaterial
   },
-  translucent: true,
+  translucent: true
 });
 
 /**
@@ -1613,18 +1612,18 @@ Material._materialCache.addMaterial(Material.PolylineDashType, {
  * @type {String}
  * @readonly
  */
-Material.PolylineGlowType = "PolylineGlow";
+Material.PolylineGlowType = 'PolylineGlow';
 Material._materialCache.addMaterial(Material.PolylineGlowType, {
   fabric: {
     type: Material.PolylineGlowType,
     uniforms: {
       color: new Color(0.0, 0.5, 1.0, 1.0),
       glowPower: 0.25,
-      taperPower: 1.0,
+      taperPower: 1.0
     },
-    source: PolylineGlowMaterial,
+    source: PolylineGlowMaterial
   },
-  translucent: true,
+  translucent: true
 });
 
 /**
@@ -1632,21 +1631,21 @@ Material._materialCache.addMaterial(Material.PolylineGlowType, {
  * @type {String}
  * @readonly
  */
-Material.PolylineOutlineType = "PolylineOutline";
+Material.PolylineOutlineType = 'PolylineOutline';
 Material._materialCache.addMaterial(Material.PolylineOutlineType, {
   fabric: {
     type: Material.PolylineOutlineType,
     uniforms: {
       color: new Color(1.0, 1.0, 1.0, 1.0),
       outlineColor: new Color(1.0, 0.0, 0.0, 1.0),
-      outlineWidth: 1.0,
+      outlineWidth: 1.0
     },
-    source: PolylineOutlineMaterial,
+    source: PolylineOutlineMaterial
   },
   translucent: function (material) {
     const uniforms = material.uniforms;
     return uniforms.color.alpha < 1.0 || uniforms.outlineColor.alpha < 1.0;
-  },
+  }
 });
 
 /**
@@ -1654,18 +1653,18 @@ Material._materialCache.addMaterial(Material.PolylineOutlineType, {
  * @type {String}
  * @readonly
  */
-Material.ElevationContourType = "ElevationContour";
+Material.ElevationContourType = 'ElevationContour';
 Material._materialCache.addMaterial(Material.ElevationContourType, {
   fabric: {
     type: Material.ElevationContourType,
     uniforms: {
       spacing: 100.0,
       color: new Color(1.0, 0.0, 0.0, 1.0),
-      width: 1.0,
+      width: 1.0
     },
-    source: ElevationContourMaterial,
+    source: ElevationContourMaterial
   },
-  translucent: false,
+  translucent: false
 });
 
 /**
@@ -1673,18 +1672,18 @@ Material._materialCache.addMaterial(Material.ElevationContourType, {
  * @type {String}
  * @readonly
  */
-Material.ElevationRampType = "ElevationRamp";
+Material.ElevationRampType = 'ElevationRamp';
 Material._materialCache.addMaterial(Material.ElevationRampType, {
   fabric: {
     type: Material.ElevationRampType,
     uniforms: {
       image: Material.DefaultImageId,
       minimumHeight: 0.0,
-      maximumHeight: 10000.0,
+      maximumHeight: 10000.0
     },
-    source: ElevationRampMaterial,
+    source: ElevationRampMaterial
   },
-  translucent: false,
+  translucent: false
 });
 
 /**
@@ -1692,16 +1691,16 @@ Material._materialCache.addMaterial(Material.ElevationRampType, {
  * @type {String}
  * @readonly
  */
-Material.SlopeRampMaterialType = "SlopeRamp";
+Material.SlopeRampMaterialType = 'SlopeRamp';
 Material._materialCache.addMaterial(Material.SlopeRampMaterialType, {
   fabric: {
     type: Material.SlopeRampMaterialType,
     uniforms: {
-      image: Material.DefaultImageId,
+      image: Material.DefaultImageId
     },
-    source: SlopeRampMaterial,
+    source: SlopeRampMaterial
   },
-  translucent: false,
+  translucent: false
 });
 
 /**
@@ -1709,16 +1708,16 @@ Material._materialCache.addMaterial(Material.SlopeRampMaterialType, {
  * @type {String}
  * @readonly
  */
-Material.AspectRampMaterialType = "AspectRamp";
+Material.AspectRampMaterialType = 'AspectRamp';
 Material._materialCache.addMaterial(Material.AspectRampMaterialType, {
   fabric: {
     type: Material.AspectRampMaterialType,
     uniforms: {
-      image: Material.DefaultImageId,
+      image: Material.DefaultImageId
     },
-    source: AspectRampMaterial,
+    source: AspectRampMaterial
   },
-  translucent: false,
+  translucent: false
 });
 
 /**
@@ -1726,17 +1725,17 @@ Material._materialCache.addMaterial(Material.AspectRampMaterialType, {
  * @type {String}
  * @readonly
  */
-Material.ElevationBandType = "ElevationBand";
+Material.ElevationBandType = 'ElevationBand';
 Material._materialCache.addMaterial(Material.ElevationBandType, {
   fabric: {
     type: Material.ElevationBandType,
     uniforms: {
       heights: Material.DefaultImageId,
-      colors: Material.DefaultImageId,
+      colors: Material.DefaultImageId
     },
-    source: ElevationBandMaterial,
+    source: ElevationBandMaterial
   },
-  translucent: true,
+  translucent: true
 });
 
 export default Material;

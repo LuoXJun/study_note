@@ -1,5 +1,5 @@
-import defaultValue from "./defaultValue.js";
-import DeveloperError from "./DeveloperError.js";
+import defaultValue from './defaultValue.js';
+import DeveloperError from './DeveloperError.js';
 
 function returnTrue() {
   return true;
@@ -35,7 +35,7 @@ function returnTrue() {
 function destroyObject(object, message) {
   message = defaultValue(
     message,
-    "This object was destroyed, i.e., destroy() was called."
+    'This object was destroyed, i.e., destroy() was called.'
   );
 
   function throwOnDestroyed() {
@@ -45,7 +45,7 @@ function destroyObject(object, message) {
   }
 
   for (const key in object) {
-    if (typeof object[key] === "function") {
+    if (typeof object[key] === 'function') {
       object[key] = throwOnDestroyed;
     }
   }

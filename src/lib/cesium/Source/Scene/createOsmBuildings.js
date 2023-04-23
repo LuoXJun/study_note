@@ -1,10 +1,10 @@
-import Color from "../Core/Color.js";
-import combine from "../Core/combine.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import IonResource from "../Core/IonResource.js";
-import Cesium3DTileset from "./Cesium3DTileset.js";
-import Cesium3DTileStyle from "./Cesium3DTileStyle.js";
+import Color from '../Core/Color.js';
+import combine from '../Core/combine.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import IonResource from '../Core/IonResource.js';
+import Cesium3DTileset from './Cesium3DTileset.js';
+import Cesium3DTileStyle from './Cesium3DTileStyle.js';
 
 /**
  * Creates a {@link Cesium3DTileset} instance for the
@@ -49,7 +49,7 @@ import Cesium3DTileStyle from "./Cesium3DTileStyle.js";
  */
 function createOsmBuildings(options) {
   options = combine(options, {
-    url: IonResource.fromAssetId(96188),
+    url: IonResource.fromAssetId(96188)
   });
 
   const tileset = new Cesium3DTileset(options);
@@ -62,7 +62,7 @@ function createOsmBuildings(options) {
       Color.WHITE
     ).toCssColorString();
     style = new Cesium3DTileStyle({
-      color: `Boolean(\${feature['cesium#color']}) ? color(\${feature['cesium#color']}) : ${color}`,
+      color: `Boolean(\${feature['cesium#color']}) ? color(\${feature['cesium#color']}) : ${color}`
     });
   }
 

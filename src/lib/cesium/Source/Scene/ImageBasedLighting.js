@@ -1,10 +1,10 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
-import defaultValue from "../Core/defaultValue.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import OctahedralProjectedCubeMap from "./OctahedralProjectedCubeMap.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
+import defaultValue from '../Core/defaultValue.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import OctahedralProjectedCubeMap from './OctahedralProjectedCubeMap.js';
 
 /**
  * Properties for managing image-based lighting on tilesets and models.
@@ -32,26 +32,26 @@ export default function ImageBasedLighting(options) {
 
   //>>includeStart('debug', pragmas.debug);
   Check.typeOf.object(
-    "options.imageBasedLightingFactor",
+    'options.imageBasedLightingFactor',
     imageBasedLightingFactor
   );
   Check.typeOf.number.greaterThanOrEquals(
-    "options.imageBasedLightingFactor.x",
+    'options.imageBasedLightingFactor.x',
     imageBasedLightingFactor.x,
     0.0
   );
   Check.typeOf.number.lessThanOrEquals(
-    "options.imageBasedLightingFactor.x",
+    'options.imageBasedLightingFactor.x',
     imageBasedLightingFactor.x,
     1.0
   );
   Check.typeOf.number.greaterThanOrEquals(
-    "options.imageBasedLightingFactor.y",
+    'options.imageBasedLightingFactor.y',
     imageBasedLightingFactor.y,
     0.0
   );
   Check.typeOf.number.lessThanOrEquals(
-    "options.imageBasedLightingFactor.y",
+    'options.imageBasedLightingFactor.y',
     imageBasedLightingFactor.y,
     1.0
   );
@@ -62,7 +62,7 @@ export default function ImageBasedLighting(options) {
   const luminanceAtZenith = defaultValue(options.luminanceAtZenith, 0.2);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("options.luminanceAtZenith", luminanceAtZenith);
+  Check.typeOf.number('options.luminanceAtZenith', luminanceAtZenith);
   //>>includeEnd('debug');
 
   this._luminanceAtZenith = luminanceAtZenith;
@@ -76,7 +76,7 @@ export default function ImageBasedLighting(options) {
       sphericalHarmonicCoefficients.length !== 9)
   ) {
     throw new DeveloperError(
-      "options.sphericalHarmonicCoefficients must be an array of 9 Cartesian3 values."
+      'options.sphericalHarmonicCoefficients must be an array of 9 Cartesian3 values.'
     );
   }
   //>>includeEnd('debug');
@@ -122,24 +122,24 @@ Object.defineProperties(ImageBasedLighting.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.object("imageBasedLightingFactor", value);
+      Check.typeOf.object('imageBasedLightingFactor', value);
       Check.typeOf.number.greaterThanOrEquals(
-        "imageBasedLightingFactor.x",
+        'imageBasedLightingFactor.x',
         value.x,
         0.0
       );
       Check.typeOf.number.lessThanOrEquals(
-        "imageBasedLightingFactor.x",
+        'imageBasedLightingFactor.x',
         value.x,
         1.0
       );
       Check.typeOf.number.greaterThanOrEquals(
-        "imageBasedLightingFactor.y",
+        'imageBasedLightingFactor.y',
         value.y,
         0.0
       );
       Check.typeOf.number.lessThanOrEquals(
-        "imageBasedLightingFactor.y",
+        'imageBasedLightingFactor.y',
         value.y,
         1.0
       );
@@ -152,7 +152,7 @@ Object.defineProperties(ImageBasedLighting.prototype, {
         value,
         this._imageBasedLightingFactor
       );
-    },
+    }
   },
 
   /**
@@ -173,7 +173,7 @@ Object.defineProperties(ImageBasedLighting.prototype, {
     set: function (value) {
       this._previousLuminanceAtZenith = this._luminanceAtZenith;
       this._luminanceAtZenith = value;
-    },
+    }
   },
 
   /**
@@ -202,13 +202,14 @@ Object.defineProperties(ImageBasedLighting.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (defined(value) && (!Array.isArray(value) || value.length !== 9)) {
         throw new DeveloperError(
-          "sphericalHarmonicCoefficients must be an array of 9 Cartesian3 values."
+          'sphericalHarmonicCoefficients must be an array of 9 Cartesian3 values.'
         );
       }
       //>>includeEnd('debug');
-      this._previousSphericalHarmonicCoefficients = this._sphericalHarmonicCoefficients;
+      this._previousSphericalHarmonicCoefficients =
+        this._sphericalHarmonicCoefficients;
       this._sphericalHarmonicCoefficients = value;
-    },
+    }
   },
 
   /**
@@ -231,7 +232,7 @@ Object.defineProperties(ImageBasedLighting.prototype, {
         this._specularEnvironmentMapLoaded = false;
       }
       this._specularEnvironmentMaps = value;
-    },
+    }
   },
 
   /**
@@ -248,7 +249,7 @@ Object.defineProperties(ImageBasedLighting.prototype, {
         this._imageBasedLightingFactor.x > 0.0 ||
         this._imageBasedLightingFactor.y > 0.0
       );
-    },
+    }
   },
 
   /**
@@ -263,7 +264,7 @@ Object.defineProperties(ImageBasedLighting.prototype, {
   shouldRegenerateShaders: {
     get: function () {
       return this._shouldRegenerateShaders;
-    },
+    }
   },
 
   /**
@@ -277,7 +278,7 @@ Object.defineProperties(ImageBasedLighting.prototype, {
   useDefaultSphericalHarmonics: {
     get: function () {
       return this._useDefaultSphericalHarmonics;
-    },
+    }
   },
 
   /**
@@ -294,7 +295,7 @@ Object.defineProperties(ImageBasedLighting.prototype, {
         defined(this._sphericalHarmonicCoefficients) ||
         this._useDefaultSphericalHarmonics
       );
-    },
+    }
   },
 
   /**
@@ -308,7 +309,7 @@ Object.defineProperties(ImageBasedLighting.prototype, {
   specularEnvironmentMapAtlas: {
     get: function () {
       return this._specularEnvironmentMapAtlas;
-    },
+    }
   },
 
   /**
@@ -322,7 +323,7 @@ Object.defineProperties(ImageBasedLighting.prototype, {
   useDefaultSpecularMaps: {
     get: function () {
       return this._useDefaultSpecularMaps;
-    },
+    }
   },
 
   /**
@@ -340,8 +341,8 @@ Object.defineProperties(ImageBasedLighting.prototype, {
           this._specularEnvironmentMapAtlas.ready) ||
         this._useDefaultSpecularMaps
       );
-    },
-  },
+    }
+  }
 });
 
 function createSpecularEnvironmentMapAtlas(imageBasedLighting, context) {
@@ -419,7 +420,8 @@ ImageBasedLighting.prototype.update = function (frameState) {
       defined(this._previousSphericalHarmonicCoefficients) !==
         defined(this._sphericalHarmonicCoefficients);
 
-    this._previousSphericalHarmonicCoefficients = this._sphericalHarmonicCoefficients;
+    this._previousSphericalHarmonicCoefficients =
+      this._sphericalHarmonicCoefficients;
   }
 
   this._shouldRegenerateShaders =
@@ -427,7 +429,8 @@ ImageBasedLighting.prototype.update = function (frameState) {
     this._previousSpecularEnvironmentMapLoaded !==
       this._specularEnvironmentMapLoaded;
 
-  this._previousSpecularEnvironmentMapLoaded = this._specularEnvironmentMapLoaded;
+  this._previousSpecularEnvironmentMapLoaded =
+    this._specularEnvironmentMapLoaded;
 
   if (this._specularEnvironmentMapAtlasDirty) {
     createSpecularEnvironmentMapAtlas(this, context);

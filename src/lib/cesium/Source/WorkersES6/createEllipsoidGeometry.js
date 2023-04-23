@@ -1,5 +1,5 @@
-import defined from "../Core/defined.js";
-import EllipsoidGeometry from "../Core/EllipsoidGeometry.js";
+import defined from '../Core/defined.js';
+import EllipsoidGeometry from '../Core/EllipsoidGeometry.js';
 
 function createEllipsoidGeometry(ellipsoidGeometry, offset) {
   if (defined(offset)) {

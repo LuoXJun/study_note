@@ -1,37 +1,37 @@
-import ApproximateTerrainHeights from "../Core/ApproximateTerrainHeights.js";
-import ArcType from "../Core/ArcType.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import CoplanarPolygonGeometry from "../Core/CoplanarPolygonGeometry.js";
-import CoplanarPolygonOutlineGeometry from "../Core/CoplanarPolygonOutlineGeometry.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DistanceDisplayConditionGeometryInstanceAttribute from "../Core/DistanceDisplayConditionGeometryInstanceAttribute.js";
-import EllipsoidTangentPlane from "../Core/EllipsoidTangentPlane.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import Iso8601 from "../Core/Iso8601.js";
-import OffsetGeometryInstanceAttribute from "../Core/OffsetGeometryInstanceAttribute.js";
-import oneTimeWarning from "../Core/oneTimeWarning.js";
-import PolygonGeometry from "../Core/PolygonGeometry.js";
-import PolygonOutlineGeometry from "../Core/PolygonOutlineGeometry.js";
-import Rectangle from "../Core/Rectangle.js";
-import ShowGeometryInstanceAttribute from "../Core/ShowGeometryInstanceAttribute.js";
-import HeightReference from "../Scene/HeightReference.js";
-import MaterialAppearance from "../Scene/MaterialAppearance.js";
-import PerInstanceColorAppearance from "../Scene/PerInstanceColorAppearance.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import DynamicGeometryUpdater from "./DynamicGeometryUpdater.js";
-import GeometryUpdater from "./GeometryUpdater.js";
-import GroundGeometryUpdater from "./GroundGeometryUpdater.js";
-import Property from "./Property.js";
+import ApproximateTerrainHeights from '../Core/ApproximateTerrainHeights.js';
+import ArcType from '../Core/ArcType.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import CoplanarPolygonGeometry from '../Core/CoplanarPolygonGeometry.js';
+import CoplanarPolygonOutlineGeometry from '../Core/CoplanarPolygonOutlineGeometry.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DistanceDisplayConditionGeometryInstanceAttribute from '../Core/DistanceDisplayConditionGeometryInstanceAttribute.js';
+import EllipsoidTangentPlane from '../Core/EllipsoidTangentPlane.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import Iso8601 from '../Core/Iso8601.js';
+import OffsetGeometryInstanceAttribute from '../Core/OffsetGeometryInstanceAttribute.js';
+import oneTimeWarning from '../Core/oneTimeWarning.js';
+import PolygonGeometry from '../Core/PolygonGeometry.js';
+import PolygonOutlineGeometry from '../Core/PolygonOutlineGeometry.js';
+import Rectangle from '../Core/Rectangle.js';
+import ShowGeometryInstanceAttribute from '../Core/ShowGeometryInstanceAttribute.js';
+import HeightReference from '../Scene/HeightReference.js';
+import MaterialAppearance from '../Scene/MaterialAppearance.js';
+import PerInstanceColorAppearance from '../Scene/PerInstanceColorAppearance.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import DynamicGeometryUpdater from './DynamicGeometryUpdater.js';
+import GeometryUpdater from './GeometryUpdater.js';
+import GroundGeometryUpdater from './GroundGeometryUpdater.js';
+import Property from './Property.js';
 
 const heightAndPerPositionHeightWarning =
-  "Entity polygons cannot have both height and perPositionHeight.  height will be ignored";
+  'Entity polygons cannot have both height and perPositionHeight.  height will be ignored';
 const heightReferenceAndPerPositionHeightWarning =
-  "heightReference is not supported for entity polygons with perPositionHeight. heightReference will be ignored";
+  'heightReference is not supported for entity polygons with perPositionHeight. heightReference will be ignored';
 
 const scratchColor = new Color();
 const defaultOffset = Cartesian3.ZERO;
@@ -70,11 +70,11 @@ function PolygonGeometryUpdater(entity, scene) {
     entity: entity,
     scene: scene,
     geometryOptions: new PolygonGeometryOptions(entity),
-    geometryPropertyName: "polygon",
-    observedPropertyNames: ["availability", "polygon"],
+    geometryPropertyName: 'polygon',
+    observedPropertyNames: ['availability', 'polygon']
   });
 
-  this._onEntityPropertyChanged(entity, "polygon", entity.polygon, undefined);
+  this._onEntityPropertyChanged(entity, 'polygon', entity.polygon, undefined);
 }
 
 if (defined(Object.create)) {
@@ -94,11 +94,11 @@ if (defined(Object.create)) {
  */
 PolygonGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
 
   if (!this._fillEnabled) {
     throw new DeveloperError(
-      "This instance does not represent a filled geometry."
+      'This instance does not represent a filled geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -114,11 +114,12 @@ PolygonGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
         this._showProperty.getValue(time) &&
         this._fillProperty.getValue(time)
     ),
-    distanceDisplayCondition: DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-      this._distanceDisplayConditionProperty.getValue(time)
-    ),
+    distanceDisplayCondition:
+      DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+        this._distanceDisplayConditionProperty.getValue(time)
+      ),
     offset: undefined,
-    color: undefined,
+    color: undefined
   };
 
   if (this._materialProperty instanceof ColorMaterialProperty) {
@@ -155,7 +156,7 @@ PolygonGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
   return new GeometryInstance({
     id: entity,
     geometry: geometry,
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -171,11 +172,11 @@ PolygonGeometryUpdater.prototype.createOutlineGeometryInstance = function (
   time
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
 
   if (!this._outlineEnabled) {
     throw new DeveloperError(
-      "This instance does not represent an outlined geometry."
+      'This instance does not represent an outlined geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -189,9 +190,8 @@ PolygonGeometryUpdater.prototype.createOutlineGeometryInstance = function (
     Color.BLACK,
     scratchColor
   );
-  const distanceDisplayCondition = this._distanceDisplayConditionProperty.getValue(
-    time
-  );
+  const distanceDisplayCondition =
+    this._distanceDisplayConditionProperty.getValue(time);
 
   const attributes = {
     show: new ShowGeometryInstanceAttribute(
@@ -201,10 +201,11 @@ PolygonGeometryUpdater.prototype.createOutlineGeometryInstance = function (
         this._showOutlineProperty.getValue(time)
     ),
     color: ColorGeometryInstanceAttribute.fromColor(outlineColor),
-    distanceDisplayCondition: DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-      distanceDisplayCondition
-    ),
-    offset: undefined,
+    distanceDisplayCondition:
+      DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+        distanceDisplayCondition
+      ),
+    offset: undefined
   };
 
   if (defined(options.offsetAttribute)) {
@@ -227,7 +228,7 @@ PolygonGeometryUpdater.prototype.createOutlineGeometryInstance = function (
   return new GeometryInstance({
     id: entity,
     geometry: geometry,
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -459,7 +460,8 @@ if (defined(Object.create)) {
   DyanmicPolygonGeometryUpdater.prototype = Object.create(
     DynamicGeometryUpdater.prototype
   );
-  DyanmicPolygonGeometryUpdater.prototype.constructor = DyanmicPolygonGeometryUpdater;
+  DyanmicPolygonGeometryUpdater.prototype.constructor =
+    DyanmicPolygonGeometryUpdater;
 }
 
 DyanmicPolygonGeometryUpdater.prototype._isHidden = function (

@@ -1,10 +1,10 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import getAbsoluteUri from "../Core/getAbsoluteUri.js";
-import GltfLoaderUtil from "./GltfLoaderUtil.js";
-import hasExtension from "./hasExtension.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import getAbsoluteUri from '../Core/getAbsoluteUri.js';
+import GltfLoaderUtil from './GltfLoaderUtil.js';
+import hasExtension from './hasExtension.js';
 
 /**
  * Compute cache keys for resources in {@link ResourceCache}.
@@ -23,7 +23,7 @@ function getBufferViewCacheKey(bufferView) {
   let byteOffset = bufferView.byteOffset;
   let byteLength = bufferView.byteLength;
 
-  if (hasExtension(bufferView, "EXT_meshopt_compression")) {
+  if (hasExtension(bufferView, 'EXT_meshopt_compression')) {
     const meshopt = bufferView.extensions.EXT_meshopt_compression;
     byteOffset = defaultValue(meshopt.byteOffset, 0);
     byteLength = meshopt.byteLength;
@@ -52,7 +52,7 @@ function getEmbeddedBufferCacheKey(parentResource, bufferId) {
 function getBufferCacheKey(buffer, bufferId, gltfResource, baseResource) {
   if (defined(buffer.uri)) {
     const resource = baseResource.getDerivedResource({
-      url: buffer.uri,
+      url: buffer.uri
     });
     return getExternalBufferCacheKey(resource);
   }
@@ -85,7 +85,7 @@ function getImageCacheKey(gltf, imageId, gltfResource, baseResource) {
 
   if (defined(uri)) {
     const resource = baseResource.getDerivedResource({
-      url: uri,
+      url: uri
     });
     return getExternalResourceCacheKey(resource);
   }
@@ -109,7 +109,7 @@ function getImageCacheKey(gltf, imageId, gltfResource, baseResource) {
 function getSamplerCacheKey(gltf, textureInfo) {
   const sampler = GltfLoaderUtil.createSampler({
     gltf: gltf,
-    textureInfo: textureInfo,
+    textureInfo: textureInfo
   });
 
   return `${sampler.wrapS}-${sampler.wrapT}-${sampler.minificationFilter}-${sampler.magnificationFilter}`;
@@ -134,7 +134,7 @@ ResourceCacheKey.getSchemaCacheKey = function (options) {
   //>>includeStart('debug', pragmas.debug);
   if (defined(schema) === defined(resource)) {
     throw new DeveloperError(
-      "One of options.schema and options.resource must be defined."
+      'One of options.schema and options.resource must be defined.'
     );
   }
   //>>includeEnd('debug');
@@ -160,7 +160,7 @@ ResourceCacheKey.getExternalBufferCacheKey = function (options) {
   const resource = options.resource;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.resource", resource);
+  Check.typeOf.object('options.resource', resource);
   //>>includeEnd('debug');
 
   return `external-buffer:${getExternalBufferCacheKey(resource)}`;
@@ -182,8 +182,8 @@ ResourceCacheKey.getEmbeddedBufferCacheKey = function (options) {
   const bufferId = options.bufferId;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.parentResource", parentResource);
-  Check.typeOf.number("options.bufferId", bufferId);
+  Check.typeOf.object('options.parentResource', parentResource);
+  Check.typeOf.number('options.bufferId', bufferId);
   //>>includeEnd('debug');
 
   return `embedded-buffer:${getEmbeddedBufferCacheKey(
@@ -206,7 +206,7 @@ ResourceCacheKey.getGltfCacheKey = function (options) {
   const gltfResource = options.gltfResource;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.gltfResource", gltfResource);
+  Check.typeOf.object('options.gltfResource', gltfResource);
   //>>includeEnd('debug');
 
   return `gltf:${getExternalResourceCacheKey(gltfResource)}`;
@@ -232,16 +232,16 @@ ResourceCacheKey.getBufferViewCacheKey = function (options) {
   const baseResource = options.baseResource;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.gltf", gltf);
-  Check.typeOf.number("options.bufferViewId", bufferViewId);
-  Check.typeOf.object("options.gltfResource", gltfResource);
-  Check.typeOf.object("options.baseResource", baseResource);
+  Check.typeOf.object('options.gltf', gltf);
+  Check.typeOf.number('options.bufferViewId', bufferViewId);
+  Check.typeOf.object('options.gltfResource', gltfResource);
+  Check.typeOf.object('options.baseResource', baseResource);
   //>>includeEnd('debug');
 
   const bufferView = gltf.bufferViews[bufferViewId];
   let bufferId = bufferView.buffer;
   const buffer = gltf.buffers[bufferId];
-  if (hasExtension(bufferView, "EXT_meshopt_compression")) {
+  if (hasExtension(bufferView, 'EXT_meshopt_compression')) {
     const meshopt = bufferView.extensions.EXT_meshopt_compression;
     bufferId = meshopt.buffer;
   }
@@ -278,10 +278,10 @@ ResourceCacheKey.getDracoCacheKey = function (options) {
   const baseResource = options.baseResource;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.gltf", gltf);
-  Check.typeOf.object("options.draco", draco);
-  Check.typeOf.object("options.gltfResource", gltfResource);
-  Check.typeOf.object("options.baseResource", baseResource);
+  Check.typeOf.object('options.gltf', gltf);
+  Check.typeOf.object('options.draco', draco);
+  Check.typeOf.object('options.gltfResource', gltfResource);
+  Check.typeOf.object('options.baseResource', baseResource);
   //>>includeEnd('debug');
 
   return `draco:${getDracoCacheKey(gltf, draco, gltfResource, baseResource)}`;
@@ -319,9 +319,9 @@ ResourceCacheKey.getVertexBufferCacheKey = function (options) {
   const loadTypedArray = defaultValue(options.loadTypedArray, false);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.gltf", gltf);
-  Check.typeOf.object("options.gltfResource", gltfResource);
-  Check.typeOf.object("options.baseResource", baseResource);
+  Check.typeOf.object('options.gltf', gltf);
+  Check.typeOf.object('options.gltfResource', gltfResource);
+  Check.typeOf.object('options.baseResource', baseResource);
 
   const hasBufferViewId = defined(bufferViewId);
   const hasDraco = defined(draco);
@@ -329,39 +329,39 @@ ResourceCacheKey.getVertexBufferCacheKey = function (options) {
 
   if (hasBufferViewId === hasDraco) {
     throw new DeveloperError(
-      "One of options.bufferViewId and options.draco must be defined."
+      'One of options.bufferViewId and options.draco must be defined.'
     );
   }
 
   if (hasDraco && !hasAttributeSemantic) {
     throw new DeveloperError(
-      "When options.draco is defined options.attributeSemantic must also be defined."
+      'When options.draco is defined options.attributeSemantic must also be defined.'
     );
   }
 
   if (hasDraco) {
-    Check.typeOf.object("options.draco", draco);
-    Check.typeOf.string("options.attributeSemantic", attributeSemantic);
+    Check.typeOf.object('options.draco', draco);
+    Check.typeOf.string('options.attributeSemantic', attributeSemantic);
   }
 
   if (!loadBuffer && !loadTypedArray) {
     throw new DeveloperError(
-      "At least one of loadBuffer and loadTypedArray must be true."
+      'At least one of loadBuffer and loadTypedArray must be true.'
     );
   }
   //>>includeEnd('debug');
 
-  let cacheKeySuffix = "";
+  let cacheKeySuffix = '';
   if (dequantize) {
-    cacheKeySuffix += "-dequantize";
+    cacheKeySuffix += '-dequantize';
   }
 
   if (loadBuffer) {
-    cacheKeySuffix += "-buffer";
+    cacheKeySuffix += '-buffer';
   }
 
   if (loadTypedArray) {
-    cacheKeySuffix += "-typed-array";
+    cacheKeySuffix += '-typed-array';
   }
 
   if (defined(draco)) {
@@ -416,24 +416,24 @@ ResourceCacheKey.getIndexBufferCacheKey = function (options) {
   const loadTypedArray = defaultValue(options.loadTypedArray, false);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.gltf", gltf);
-  Check.typeOf.number("options.accessorId", accessorId);
-  Check.typeOf.object("options.gltfResource", gltfResource);
-  Check.typeOf.object("options.baseResource", baseResource);
+  Check.typeOf.object('options.gltf', gltf);
+  Check.typeOf.number('options.accessorId', accessorId);
+  Check.typeOf.object('options.gltfResource', gltfResource);
+  Check.typeOf.object('options.baseResource', baseResource);
   if (!loadBuffer && !loadTypedArray) {
     throw new DeveloperError(
-      "At least one of loadBuffer and loadTypedArray must be true."
+      'At least one of loadBuffer and loadTypedArray must be true.'
     );
   }
   //>>includeEnd('debug');
 
-  let cacheKeySuffix = "";
+  let cacheKeySuffix = '';
   if (loadBuffer) {
-    cacheKeySuffix += "-buffer";
+    cacheKeySuffix += '-buffer';
   }
 
   if (loadTypedArray) {
-    cacheKeySuffix += "-typed-array";
+    cacheKeySuffix += '-typed-array';
   }
 
   if (defined(draco)) {
@@ -484,10 +484,10 @@ ResourceCacheKey.getImageCacheKey = function (options) {
   const baseResource = options.baseResource;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.gltf", gltf);
-  Check.typeOf.number("options.imageId", imageId);
-  Check.typeOf.object("options.gltfResource", gltfResource);
-  Check.typeOf.object("options.baseResource", baseResource);
+  Check.typeOf.object('options.gltf', gltf);
+  Check.typeOf.number('options.imageId', imageId);
+  Check.typeOf.object('options.gltfResource', gltfResource);
+  Check.typeOf.object('options.baseResource', baseResource);
   //>>includeEnd('debug');
 
   const imageCacheKey = getImageCacheKey(
@@ -522,11 +522,11 @@ ResourceCacheKey.getTextureCacheKey = function (options) {
   const supportedImageFormats = options.supportedImageFormats;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.gltf", gltf);
-  Check.typeOf.object("options.textureInfo", textureInfo);
-  Check.typeOf.object("options.gltfResource", gltfResource);
-  Check.typeOf.object("options.baseResource", baseResource);
-  Check.typeOf.object("options.supportedImageFormats", supportedImageFormats);
+  Check.typeOf.object('options.gltf', gltf);
+  Check.typeOf.object('options.textureInfo', textureInfo);
+  Check.typeOf.object('options.gltfResource', gltfResource);
+  Check.typeOf.object('options.baseResource', baseResource);
+  Check.typeOf.object('options.supportedImageFormats', supportedImageFormats);
   //>>includeEnd('debug');
 
   const textureId = textureInfo.index;
@@ -534,7 +534,7 @@ ResourceCacheKey.getTextureCacheKey = function (options) {
   const imageId = GltfLoaderUtil.getImageIdFromTexture({
     gltf: gltf,
     textureId: textureId,
-    supportedImageFormats: supportedImageFormats,
+    supportedImageFormats: supportedImageFormats
   });
 
   const imageCacheKey = getImageCacheKey(

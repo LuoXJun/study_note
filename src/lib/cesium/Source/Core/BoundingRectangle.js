@@ -1,11 +1,11 @@
-import Cartesian2 from "./Cartesian2.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import GeographicProjection from "./GeographicProjection.js";
-import Intersect from "./Intersect.js";
-import Rectangle from "./Rectangle.js";
+import Cartesian2 from './Cartesian2.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import GeographicProjection from './GeographicProjection.js';
+import Intersect from './Intersect.js';
+import Rectangle from './Rectangle.js';
 
 /**
  * A bounding rectangle given by a corner, width and height.
@@ -67,8 +67,8 @@ BoundingRectangle.packedLength = 4;
  */
 BoundingRectangle.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -91,7 +91,7 @@ BoundingRectangle.pack = function (value, array, startingIndex) {
  */
 BoundingRectangle.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -233,8 +233,8 @@ BoundingRectangle.clone = function (rectangle, result) {
  */
 BoundingRectangle.union = function (left, right, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("left", left);
-  Check.typeOf.object("right", right);
+  Check.typeOf.object('left', left);
+  Check.typeOf.object('right', right);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -263,8 +263,8 @@ BoundingRectangle.union = function (left, right, result) {
  */
 BoundingRectangle.expand = function (rectangle, point, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
-  Check.typeOf.object("point", point);
+  Check.typeOf.object('rectangle', rectangle);
+  Check.typeOf.object('point', point);
   //>>includeEnd('debug');
 
   result = BoundingRectangle.clone(rectangle, result);
@@ -298,8 +298,8 @@ BoundingRectangle.expand = function (rectangle, point, result) {
  */
 BoundingRectangle.intersect = function (left, right) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("left", left);
-  Check.typeOf.object("right", right);
+  Check.typeOf.object('left', left);
+  Check.typeOf.object('right', right);
   //>>includeEnd('debug');
 
   const leftX = left.x;

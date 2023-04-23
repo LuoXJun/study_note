@@ -1,8 +1,8 @@
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import loadKTX2 from "../Core/loadKTX2.js";
-import Resource from "../Core/Resource.js";
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import loadKTX2 from '../Core/loadKTX2.js';
+import Resource from '../Core/Resource.js';
 
 /**
  * @typedef {HTMLImageElement|HTMLCanvasElement|ImageBitmap} ImageryTypes
@@ -140,7 +140,7 @@ Object.defineProperties(ImageryProvider.prototype, {
    * @readonly
    */
   ready: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -150,7 +150,7 @@ Object.defineProperties(ImageryProvider.prototype, {
    * @readonly
    */
   readyPromise: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -161,7 +161,7 @@ Object.defineProperties(ImageryProvider.prototype, {
    * @readonly
    */
   rectangle: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -172,7 +172,7 @@ Object.defineProperties(ImageryProvider.prototype, {
    * @readonly
    */
   tileWidth: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -183,7 +183,7 @@ Object.defineProperties(ImageryProvider.prototype, {
    * @readonly
    */
   tileHeight: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -194,7 +194,7 @@ Object.defineProperties(ImageryProvider.prototype, {
    * @readonly
    */
   maximumLevel: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -209,7 +209,7 @@ Object.defineProperties(ImageryProvider.prototype, {
    * @readonly
    */
   minimumLevel: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -220,7 +220,7 @@ Object.defineProperties(ImageryProvider.prototype, {
    * @readonly
    */
   tilingScheme: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -233,7 +233,7 @@ Object.defineProperties(ImageryProvider.prototype, {
    * @readonly
    */
   tileDiscardPolicy: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -245,7 +245,7 @@ Object.defineProperties(ImageryProvider.prototype, {
    * @readonly
    */
   errorEvent: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -257,7 +257,7 @@ Object.defineProperties(ImageryProvider.prototype, {
    * @readonly
    */
   credit: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -267,7 +267,7 @@ Object.defineProperties(ImageryProvider.prototype, {
    * @readonly
    */
   proxy: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -281,8 +281,8 @@ Object.defineProperties(ImageryProvider.prototype, {
    * @readonly
    */
   hasAlphaChannel: {
-    get: DeveloperError.throwInstantiationError,
-  },
+    get: DeveloperError.throwInstantiationError
+  }
 });
 
 /**
@@ -359,7 +359,7 @@ const ktx2Regex = /\.ktx2$/i;
  */
 ImageryProvider.loadImage = function (imageryProvider, url) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("url", url);
+  Check.defined('url', url);
   //>>includeEnd('debug');
 
   const resource = Resource.createIfNeeded(url);
@@ -375,13 +375,13 @@ ImageryProvider.loadImage = function (imageryProvider, url) {
     return resource.fetchImage({
       preferBlob: true,
       preferImageBitmap: true,
-      flipY: true,
+      flipY: true
     });
   }
 
   return resource.fetchImage({
     preferImageBitmap: true,
-    flipY: true,
+    flipY: true
   });
 };
 export default ImageryProvider;

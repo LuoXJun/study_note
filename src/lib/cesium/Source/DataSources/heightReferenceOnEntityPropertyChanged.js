@@ -1,7 +1,7 @@
-import defined from "../Core/defined.js";
-import CallbackProperty from "./CallbackProperty.js";
-import GeometryUpdater from "./GeometryUpdater.js";
-import TerrainOffsetProperty from "./TerrainOffsetProperty.js";
+import defined from '../Core/defined.js';
+import CallbackProperty from './CallbackProperty.js';
+import GeometryUpdater from './GeometryUpdater.js';
+import TerrainOffsetProperty from './TerrainOffsetProperty.js';
 
 function heightReferenceOnEntityPropertyChanged(
   entity,

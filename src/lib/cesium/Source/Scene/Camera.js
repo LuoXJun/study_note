@@ -1,33 +1,33 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Cartographic from "../Core/Cartographic.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import EasingFunction from "../Core/EasingFunction.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import EllipsoidGeodesic from "../Core/EllipsoidGeodesic.js";
-import Event from "../Core/Event.js";
-import getTimestamp from "../Core/getTimestamp.js";
-import HeadingPitchRange from "../Core/HeadingPitchRange.js";
-import HeadingPitchRoll from "../Core/HeadingPitchRoll.js";
-import Intersect from "../Core/Intersect.js";
-import IntersectionTests from "../Core/IntersectionTests.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
-import OrthographicFrustum from "../Core/OrthographicFrustum.js";
-import OrthographicOffCenterFrustum from "../Core/OrthographicOffCenterFrustum.js";
-import PerspectiveFrustum from "../Core/PerspectiveFrustum.js";
-import Quaternion from "../Core/Quaternion.js";
-import Ray from "../Core/Ray.js";
-import Rectangle from "../Core/Rectangle.js";
-import Transforms from "../Core/Transforms.js";
-import CameraFlightPath from "./CameraFlightPath.js";
-import MapMode2D from "./MapMode2D.js";
-import SceneMode from "./SceneMode.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Cartographic from '../Core/Cartographic.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import EasingFunction from '../Core/EasingFunction.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import EllipsoidGeodesic from '../Core/EllipsoidGeodesic.js';
+import Event from '../Core/Event.js';
+import getTimestamp from '../Core/getTimestamp.js';
+import HeadingPitchRange from '../Core/HeadingPitchRange.js';
+import HeadingPitchRoll from '../Core/HeadingPitchRoll.js';
+import Intersect from '../Core/Intersect.js';
+import IntersectionTests from '../Core/IntersectionTests.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
+import OrthographicFrustum from '../Core/OrthographicFrustum.js';
+import OrthographicOffCenterFrustum from '../Core/OrthographicOffCenterFrustum.js';
+import PerspectiveFrustum from '../Core/PerspectiveFrustum.js';
+import Quaternion from '../Core/Quaternion.js';
+import Ray from '../Core/Ray.js';
+import Rectangle from '../Core/Rectangle.js';
+import Transforms from '../Core/Transforms.js';
+import CameraFlightPath from './CameraFlightPath.js';
+import MapMode2D from './MapMode2D.js';
+import SceneMode from './SceneMode.js';
 
 /**
  * @typedef {Object} DirectionUp
@@ -81,7 +81,7 @@ import SceneMode from "./SceneMode.js";
 function Camera(scene) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required.");
+    throw new DeveloperError('scene is required.');
   }
   //>>includeEnd('debug');
   this._scene = scene;
@@ -700,10 +700,11 @@ function updateMembers(camera) {
 
     // Compute the Cartographic position of the camera.
     if (mode === SceneMode.SCENE3D || mode === SceneMode.MORPHING) {
-      camera._positionCartographic = camera._projection.ellipsoid.cartesianToCartographic(
-        camera._positionWC,
-        camera._positionCartographic
-      );
+      camera._positionCartographic =
+        camera._projection.ellipsoid.cartesianToCartographic(
+          camera._positionWC,
+          camera._positionCartographic
+        );
     } else {
       // The camera position is expressed in the 2D coordinate system where the Y axis is to the East,
       // the Z axis is to the North, and the X axis is out of the map.  Express them instead in the ENU axes where
@@ -827,7 +828,7 @@ Object.defineProperties(Camera.prototype, {
   transform: {
     get: function () {
       return this._transform;
-    },
+    }
   },
 
   /**
@@ -843,7 +844,7 @@ Object.defineProperties(Camera.prototype, {
     get: function () {
       updateMembers(this);
       return this._invTransform;
-    },
+    }
   },
 
   /**
@@ -859,7 +860,7 @@ Object.defineProperties(Camera.prototype, {
     get: function () {
       updateMembers(this);
       return this._viewMatrix;
-    },
+    }
   },
 
   /**
@@ -875,7 +876,7 @@ Object.defineProperties(Camera.prototype, {
     get: function () {
       updateMembers(this);
       return this._invViewMatrix;
-    },
+    }
   },
 
   /**
@@ -892,7 +893,7 @@ Object.defineProperties(Camera.prototype, {
     get: function () {
       updateMembers(this);
       return this._positionCartographic;
-    },
+    }
   },
 
   /**
@@ -906,7 +907,7 @@ Object.defineProperties(Camera.prototype, {
     get: function () {
       updateMembers(this);
       return this._positionWC;
-    },
+    }
   },
 
   /**
@@ -920,7 +921,7 @@ Object.defineProperties(Camera.prototype, {
     get: function () {
       updateMembers(this);
       return this._directionWC;
-    },
+    }
   },
 
   /**
@@ -934,7 +935,7 @@ Object.defineProperties(Camera.prototype, {
     get: function () {
       updateMembers(this);
       return this._upWC;
-    },
+    }
   },
 
   /**
@@ -948,7 +949,7 @@ Object.defineProperties(Camera.prototype, {
     get: function () {
       updateMembers(this);
       return this._rightWC;
-    },
+    }
   },
 
   /**
@@ -979,7 +980,7 @@ Object.defineProperties(Camera.prototype, {
       }
 
       return undefined;
-    },
+    }
   },
 
   /**
@@ -1010,7 +1011,7 @@ Object.defineProperties(Camera.prototype, {
       }
 
       return undefined;
-    },
+    }
   },
 
   /**
@@ -1041,7 +1042,7 @@ Object.defineProperties(Camera.prototype, {
       }
 
       return undefined;
-    },
+    }
   },
 
   /**
@@ -1053,7 +1054,7 @@ Object.defineProperties(Camera.prototype, {
   moveStart: {
     get: function () {
       return this._moveStart;
-    },
+    }
   },
 
   /**
@@ -1065,7 +1066,7 @@ Object.defineProperties(Camera.prototype, {
   moveEnd: {
     get: function () {
       return this._moveEnd;
-    },
+    }
   },
 
   /**
@@ -1077,8 +1078,8 @@ Object.defineProperties(Camera.prototype, {
   changed: {
     get: function () {
       return this._changed;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -1087,14 +1088,14 @@ Object.defineProperties(Camera.prototype, {
 Camera.prototype.update = function (mode) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(mode)) {
-    throw new DeveloperError("mode is required.");
+    throw new DeveloperError('mode is required.');
   }
   if (
     mode === SceneMode.SCENE2D &&
     !(this.frustum instanceof OrthographicOffCenterFrustum)
   ) {
     throw new DeveloperError(
-      "An OrthographicOffCenterFrustum is required in 2D."
+      'An OrthographicOffCenterFrustum is required in 2D.'
     );
   }
   if (
@@ -1103,7 +1104,7 @@ Camera.prototype.update = function (mode) {
     !(this.frustum instanceof OrthographicFrustum)
   ) {
     throw new DeveloperError(
-      "A PerspectiveFrustum or OrthographicFrustum is required in 3D and Columbus view"
+      'A PerspectiveFrustum or OrthographicFrustum is required in 3D and Columbus view'
     );
   }
   //>>includeEnd('debug');
@@ -1121,7 +1122,7 @@ Camera.prototype.update = function (mode) {
     //>>includeStart('debug', pragmas.debug);
     if (!(frustum instanceof OrthographicOffCenterFrustum)) {
       throw new DeveloperError(
-        "The camera frustum is expected to be orthographic for 2D camera control."
+        'The camera frustum is expected to be orthographic for 2D camera control.'
       );
     }
     //>>includeEnd('debug');
@@ -1389,10 +1390,10 @@ const scratchSetViewOptions = {
     up: undefined,
     heading: undefined,
     pitch: undefined,
-    roll: undefined,
+    roll: undefined
   },
   convert: undefined,
-  endTransform: undefined,
+  endTransform: undefined
 };
 
 const scratchHpr = new HeadingPitchRoll();
@@ -1517,7 +1518,7 @@ Camera.prototype.flyHome = function (duration) {
     this.flyTo({
       destination: Camera.DEFAULT_VIEW_RECTANGLE,
       duration: duration,
-      endTransform: Matrix4.IDENTITY,
+      endTransform: Matrix4.IDENTITY
     });
   } else if (mode === SceneMode.SCENE3D) {
     const destination = this.getRectangleCameraCoordinates(
@@ -1532,7 +1533,7 @@ Camera.prototype.flyHome = function (duration) {
     this.flyTo({
       destination: destination,
       duration: duration,
-      endTransform: Matrix4.IDENTITY,
+      endTransform: Matrix4.IDENTITY
     });
   } else if (mode === SceneMode.COLUMBUS_VIEW) {
     const maxRadii = this._projection.ellipsoid.maximumRadius;
@@ -1548,10 +1549,10 @@ Camera.prototype.flyHome = function (duration) {
       orientation: {
         heading: 0.0,
         pitch: -Math.acos(Cartesian3.normalize(position, pitchScratch).z),
-        roll: 0.0,
+        roll: 0.0
       },
       endTransform: Matrix4.IDENTITY,
-      convert: false,
+      convert: false
     });
   }
 };
@@ -1566,7 +1567,7 @@ Camera.prototype.flyHome = function (duration) {
 Camera.prototype.worldToCameraCoordinates = function (cartesian, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(cartesian)) {
-    throw new DeveloperError("cartesian is required.");
+    throw new DeveloperError('cartesian is required.');
   }
   //>>includeEnd('debug');
 
@@ -1587,7 +1588,7 @@ Camera.prototype.worldToCameraCoordinates = function (cartesian, result) {
 Camera.prototype.worldToCameraCoordinatesPoint = function (cartesian, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(cartesian)) {
-    throw new DeveloperError("cartesian is required.");
+    throw new DeveloperError('cartesian is required.');
   }
   //>>includeEnd('debug');
 
@@ -1608,7 +1609,7 @@ Camera.prototype.worldToCameraCoordinatesPoint = function (cartesian, result) {
 Camera.prototype.worldToCameraCoordinatesVector = function (cartesian, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(cartesian)) {
-    throw new DeveloperError("cartesian is required.");
+    throw new DeveloperError('cartesian is required.');
   }
   //>>includeEnd('debug');
 
@@ -1633,7 +1634,7 @@ Camera.prototype.worldToCameraCoordinatesVector = function (cartesian, result) {
 Camera.prototype.cameraToWorldCoordinates = function (cartesian, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(cartesian)) {
-    throw new DeveloperError("cartesian is required.");
+    throw new DeveloperError('cartesian is required.');
   }
   //>>includeEnd('debug');
 
@@ -1654,7 +1655,7 @@ Camera.prototype.cameraToWorldCoordinates = function (cartesian, result) {
 Camera.prototype.cameraToWorldCoordinatesPoint = function (cartesian, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(cartesian)) {
-    throw new DeveloperError("cartesian is required.");
+    throw new DeveloperError('cartesian is required.');
   }
   //>>includeEnd('debug');
 
@@ -1675,7 +1676,7 @@ Camera.prototype.cameraToWorldCoordinatesPoint = function (cartesian, result) {
 Camera.prototype.cameraToWorldCoordinatesVector = function (cartesian, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(cartesian)) {
-    throw new DeveloperError("cartesian is required.");
+    throw new DeveloperError('cartesian is required.');
   }
   //>>includeEnd('debug');
 
@@ -1737,7 +1738,7 @@ const moveScratch = new Cartesian3();
 Camera.prototype.move = function (direction, amount) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(direction)) {
-    throw new DeveloperError("direction is required.");
+    throw new DeveloperError('direction is required.');
   }
   //>>includeEnd('debug');
 
@@ -1926,7 +1927,7 @@ const lookScratchMatrix = new Matrix3();
 Camera.prototype.look = function (axis, angle) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(axis)) {
-    throw new DeveloperError("axis is required.");
+    throw new DeveloperError('axis is required.');
   }
   //>>includeEnd('debug');
 
@@ -1988,7 +1989,7 @@ const rotateScratchMatrix = new Matrix3();
 Camera.prototype.rotate = function (axis, angle) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(axis)) {
-    throw new DeveloperError("axis is required.");
+    throw new DeveloperError('axis is required.');
   }
   //>>includeEnd('debug');
 
@@ -2140,7 +2141,7 @@ function zoom2D(camera, amount) {
     !defined(frustum.top)
   ) {
     throw new DeveloperError(
-      "The camera frustum is expected to be orthographic for 2D camera control."
+      'The camera frustum is expected to be orthographic for 2D camera control.'
     );
   }
   //>>includeEnd('debug');
@@ -2291,13 +2292,13 @@ const scratchLookAtMatrix4 = new Matrix4();
 Camera.prototype.lookAt = function (target, offset) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(target)) {
-    throw new DeveloperError("target is required");
+    throw new DeveloperError('target is required');
   }
   if (!defined(offset)) {
-    throw new DeveloperError("offset is required");
+    throw new DeveloperError('offset is required');
   }
   if (this._mode === SceneMode.MORPHING) {
-    throw new DeveloperError("lookAt is not supported while morphing.");
+    throw new DeveloperError('lookAt is not supported while morphing.');
   }
   //>>includeEnd('debug');
 
@@ -2379,11 +2380,11 @@ function offsetFromHeadingPitchRange(heading, pitch, range) {
 Camera.prototype.lookAtTransform = function (transform, offset) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(transform)) {
-    throw new DeveloperError("transform is required");
+    throw new DeveloperError('transform is required');
   }
   if (this._mode === SceneMode.MORPHING) {
     throw new DeveloperError(
-      "lookAtTransform is not supported while morphing."
+      'lookAtTransform is not supported while morphing.'
     );
   }
   //>>includeEnd('debug');
@@ -2463,7 +2464,7 @@ const viewRectangle3DEquator = new Cartesian3();
 const defaultRF = {
   direction: new Cartesian3(),
   right: new Cartesian3(),
-  up: new Cartesian3(),
+  up: new Cartesian3()
 };
 let viewRectangle3DEllipsoidGeodesic;
 
@@ -2519,11 +2520,8 @@ function rectangleCameraPosition3D(camera, rectangle, result, updateCamera) {
       !defined(ellipsoidGeodesic) ||
       ellipsoidGeodesic.ellipsoid !== ellipsoid
     ) {
-      viewRectangle3DEllipsoidGeodesic = ellipsoidGeodesic = new EllipsoidGeodesic(
-        undefined,
-        undefined,
-        ellipsoid
-      );
+      viewRectangle3DEllipsoidGeodesic = ellipsoidGeodesic =
+        new EllipsoidGeodesic(undefined, undefined, ellipsoid);
     }
 
     ellipsoidGeodesic.setEndPoints(northCartographic, southCartographic);
@@ -2778,7 +2776,7 @@ function rectangleCameraPosition2D(camera, rectangle, result) {
 Camera.prototype.getRectangleCameraCoordinates = function (rectangle, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(rectangle)) {
-    throw new DeveloperError("rectangle is required");
+    throw new DeveloperError('rectangle is required');
   }
   //>>includeEnd('debug');
   const mode = this._mode;
@@ -2867,7 +2865,7 @@ function pickMapColumbusView(camera, windowPosition, projection, result) {
 Camera.prototype.pickEllipsoid = function (windowPosition, ellipsoid, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(windowPosition)) {
-    throw new DeveloperError("windowPosition is required.");
+    throw new DeveloperError('windowPosition is required.');
   }
   //>>includeEnd('debug');
 
@@ -2994,7 +2992,7 @@ function getPickRayOrthographic(camera, windowPosition, result) {
 Camera.prototype.getPickRay = function (windowPosition, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(windowPosition)) {
-    throw new DeveloperError("windowPosition is required.");
+    throw new DeveloperError('windowPosition is required.');
   }
   //>>includeEnd('debug');
 
@@ -3031,7 +3029,7 @@ const scratchProj = new Cartesian3();
 Camera.prototype.distanceToBoundingSphere = function (boundingSphere) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(boundingSphere)) {
-    throw new DeveloperError("boundingSphere is required.");
+    throw new DeveloperError('boundingSphere is required.');
   }
   //>>includeEnd('debug');
 
@@ -3065,13 +3063,13 @@ Camera.prototype.getPixelSize = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(boundingSphere)) {
-    throw new DeveloperError("boundingSphere is required.");
+    throw new DeveloperError('boundingSphere is required.');
   }
   if (!defined(drawingBufferWidth)) {
-    throw new DeveloperError("drawingBufferWidth is required.");
+    throw new DeveloperError('drawingBufferWidth is required.');
   }
   if (!defined(drawingBufferHeight)) {
-    throw new DeveloperError("drawingBufferHeight is required.");
+    throw new DeveloperError('drawingBufferHeight is required.');
   }
   //>>includeEnd('debug');
 
@@ -3120,13 +3118,13 @@ function createAnimationTemplateCV(
   return {
     easingFunction: EasingFunction.EXPONENTIAL_OUT,
     startObject: {
-      time: 0.0,
+      time: 0.0
     },
     stopObject: {
-      time: 1.0,
+      time: 1.0
     },
     duration: duration,
-    update: updateCV,
+    update: updateCV
   };
 }
 
@@ -3202,7 +3200,7 @@ function createAnimationCV(camera, duration) {
 Camera.prototype.createCorrectPositionTween = function (duration) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(duration)) {
-    throw new DeveloperError("duration is required.");
+    throw new DeveloperError('duration is required.');
   }
   //>>includeEnd('debug');
 
@@ -3224,7 +3222,7 @@ const newOptions = {
   cancel: undefined,
   endTransform: undefined,
   maximumHeight: undefined,
-  easingFunction: undefined,
+  easingFunction: undefined
 };
 
 /**
@@ -3251,8 +3249,8 @@ Camera.prototype.completeFlight = function () {
       orientation: {
         heading: undefined,
         pitch: undefined,
-        roll: undefined,
-      },
+        roll: undefined
+      }
     };
 
     options.destination = newOptions.destination;
@@ -3326,7 +3324,7 @@ Camera.prototype.flyTo = function (options) {
   let destination = options.destination;
   //>>includeStart('debug', pragmas.debug);
   if (!defined(destination)) {
-    throw new DeveloperError("destination is required.");
+    throw new DeveloperError('destination is required.');
   }
   //>>includeEnd('debug');
 
@@ -3359,7 +3357,7 @@ Camera.prototype.flyTo = function (options) {
     setViewOptions.convert = options.convert;
     setViewOptions.endTransform = options.endTransform;
     this.setView(setViewOptions);
-    if (typeof options.complete === "function") {
+    if (typeof options.complete === 'function') {
       options.complete();
     }
     return;
@@ -3404,7 +3402,7 @@ Camera.prototype.flyTo = function (options) {
   // If the camera doesn't actually need to go anywhere, duration
   // will be 0 and we can just complete the current flight.
   if (tweenOptions.duration === 0) {
-    if (typeof tweenOptions.complete === "function") {
+    if (typeof tweenOptions.complete === 'function') {
       tweenOptions.complete();
     }
     return;
@@ -3420,14 +3418,15 @@ Camera.prototype.flyTo = function (options) {
     }
     preloadFlightCamera.setView({
       destination: destination,
-      orientation: orientation,
+      orientation: orientation
     });
 
-    this._scene.preloadFlightCullingVolume = preloadFlightCamera.frustum.computeCullingVolume(
-      preloadFlightCamera.positionWC,
-      preloadFlightCamera.directionWC,
-      preloadFlightCamera.upWC
-    );
+    this._scene.preloadFlightCullingVolume =
+      preloadFlightCamera.frustum.computeCullingVolume(
+        preloadFlightCamera.positionWC,
+        preloadFlightCamera.directionWC,
+        preloadFlightCamera.upWC
+      );
   }
 };
 
@@ -3509,12 +3508,12 @@ function adjustBoundingSphereOffset(camera, boundingSphere, offset) {
 Camera.prototype.viewBoundingSphere = function (boundingSphere, offset) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(boundingSphere)) {
-    throw new DeveloperError("boundingSphere is required.");
+    throw new DeveloperError('boundingSphere is required.');
   }
 
   if (this._mode === SceneMode.MORPHING) {
     throw new DeveloperError(
-      "viewBoundingSphere is not supported while morphing."
+      'viewBoundingSphere is not supported while morphing.'
     );
   }
   //>>includeEnd('debug');
@@ -3560,7 +3559,7 @@ const scratchFlyToBoundingSphereMatrix3 = new Matrix3();
 Camera.prototype.flyToBoundingSphere = function (boundingSphere, options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(boundingSphere)) {
-    throw new DeveloperError("boundingSphere is required.");
+    throw new DeveloperError('boundingSphere is required.');
   }
   //>>includeEnd('debug');
 
@@ -3643,7 +3642,7 @@ Camera.prototype.flyToBoundingSphere = function (boundingSphere, options) {
     destination: position,
     orientation: {
       direction: direction,
-      up: up,
+      up: up
     },
     duration: options.duration,
     complete: options.complete,
@@ -3653,7 +3652,7 @@ Camera.prototype.flyToBoundingSphere = function (boundingSphere, options) {
     easingFunction: options.easingFunction,
     flyOverLongitude: options.flyOverLongitude,
     flyOverLongitudeWeight: options.flyOverLongitudeWeight,
-    pitchAdjustHeight: options.pitchAdjustHeight,
+    pitchAdjustHeight: options.pitchAdjustHeight
   });
 };
 
@@ -3665,7 +3664,7 @@ const horizonPoints = [
   new Cartesian3(),
   new Cartesian3(),
   new Cartesian3(),
-  new Cartesian3(),
+  new Cartesian3()
 ];
 
 function computeHorizonQuad(camera, ellipsoid) {
@@ -3748,7 +3747,7 @@ const cartoArray = [
   new Cartographic(),
   new Cartographic(),
   new Cartographic(),
-  new Cartographic(),
+  new Cartographic()
 ];
 function addToResult(x, y, index, camera, ellipsoid, computedHorizonQuad) {
   scratchPickCartesian2.x = x;

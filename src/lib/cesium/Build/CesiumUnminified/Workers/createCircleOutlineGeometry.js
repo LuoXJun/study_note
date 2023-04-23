@@ -23,7 +23,38 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './EllipseOutlineGeometry-ca2110e2', './ComponentDatatype-4eeb6d9b', './WebGLConstants-6da700a2', './Transforms-273eeb44', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './EllipseGeometryLibrary-dac95924', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './GeometryOffsetAttribute-59b14f45', './IndexDatatype-f228f5fd'], (function (Matrix2, RuntimeError, defaultValue, EllipseOutlineGeometry, ComponentDatatype, WebGLConstants, Transforms, _commonjsHelpers3aae1032, combine, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype) { 'use strict';
+define([
+  './Matrix2-9e1c22e2',
+  './RuntimeError-4f8ec8a2',
+  './defaultValue-97284df2',
+  './EllipseOutlineGeometry-ca2110e2',
+  './ComponentDatatype-4eeb6d9b',
+  './WebGLConstants-6da700a2',
+  './Transforms-273eeb44',
+  './_commonjsHelpers-3aae1032-65601a27',
+  './combine-d11b1f00',
+  './EllipseGeometryLibrary-dac95924',
+  './GeometryAttribute-9be2d2e5',
+  './GeometryAttributes-734a3446',
+  './GeometryOffsetAttribute-59b14f45',
+  './IndexDatatype-f228f5fd'
+], function (
+  Matrix2,
+  RuntimeError,
+  defaultValue,
+  EllipseOutlineGeometry,
+  ComponentDatatype,
+  WebGLConstants,
+  Transforms,
+  _commonjsHelpers3aae1032,
+  combine,
+  EllipseGeometryLibrary,
+  GeometryAttribute,
+  GeometryAttributes,
+  GeometryOffsetAttribute,
+  IndexDatatype
+) {
+  'use strict';
 
   /**
    * A description of the outline of a circle on the ellipsoid.
@@ -55,11 +86,14 @@ define(['./Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df
    * const geometry = Cesium.CircleOutlineGeometry.createGeometry(circle);
    */
   function CircleOutlineGeometry(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
     const radius = options.radius;
 
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("radius", radius);
+    RuntimeError.Check.typeOf.number('radius', radius);
     //>>includeEnd('debug');
 
     const ellipseGeometryOptions = {
@@ -70,17 +104,20 @@ define(['./Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df
       height: options.height,
       extrudedHeight: options.extrudedHeight,
       granularity: options.granularity,
-      numberOfVerticalLines: options.numberOfVerticalLines,
+      numberOfVerticalLines: options.numberOfVerticalLines
     };
-    this._ellipseGeometry = new EllipseOutlineGeometry.EllipseOutlineGeometry(ellipseGeometryOptions);
-    this._workerName = "createCircleOutlineGeometry";
+    this._ellipseGeometry = new EllipseOutlineGeometry.EllipseOutlineGeometry(
+      ellipseGeometryOptions
+    );
+    this._workerName = 'createCircleOutlineGeometry';
   }
 
   /**
    * The number of elements used to pack the object into an array.
    * @type {Number}
    */
-  CircleOutlineGeometry.packedLength = EllipseOutlineGeometry.EllipseOutlineGeometry.packedLength;
+  CircleOutlineGeometry.packedLength =
+    EllipseOutlineGeometry.EllipseOutlineGeometry.packedLength;
 
   /**
    * Stores the provided instance into the provided array.
@@ -93,7 +130,7 @@ define(['./Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df
    */
   CircleOutlineGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
+    RuntimeError.Check.typeOf.object('value', value);
     //>>includeEnd('debug');
     return EllipseOutlineGeometry.EllipseOutlineGeometry.pack(
       value._ellipseGeometry,
@@ -102,11 +139,12 @@ define(['./Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df
     );
   };
 
-  const scratchEllipseGeometry = new EllipseOutlineGeometry.EllipseOutlineGeometry({
-    center: new Matrix2.Cartesian3(),
-    semiMajorAxis: 1.0,
-    semiMinorAxis: 1.0,
-  });
+  const scratchEllipseGeometry =
+    new EllipseOutlineGeometry.EllipseOutlineGeometry({
+      center: new Matrix2.Cartesian3(),
+      semiMajorAxis: 1.0,
+      semiMinorAxis: 1.0
+    });
   const scratchOptions = {
     center: new Matrix2.Cartesian3(),
     radius: undefined,
@@ -116,7 +154,7 @@ define(['./Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df
     granularity: undefined,
     numberOfVerticalLines: undefined,
     semiMajorAxis: undefined,
-    semiMinorAxis: undefined,
+    semiMinorAxis: undefined
   };
 
   /**
@@ -128,11 +166,12 @@ define(['./Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df
    * @returns {CircleOutlineGeometry} The modified result parameter or a new CircleOutlineGeometry instance if one was not provided.
    */
   CircleOutlineGeometry.unpack = function (array, startingIndex, result) {
-    const ellipseGeometry = EllipseOutlineGeometry.EllipseOutlineGeometry.unpack(
-      array,
-      startingIndex,
-      scratchEllipseGeometry
-    );
+    const ellipseGeometry =
+      EllipseOutlineGeometry.EllipseOutlineGeometry.unpack(
+        array,
+        startingIndex,
+        scratchEllipseGeometry
+      );
     scratchOptions.center = Matrix2.Cartesian3.clone(
       ellipseGeometry._center,
       scratchOptions.center
@@ -144,7 +183,8 @@ define(['./Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df
     scratchOptions.height = ellipseGeometry._height;
     scratchOptions.extrudedHeight = ellipseGeometry._extrudedHeight;
     scratchOptions.granularity = ellipseGeometry._granularity;
-    scratchOptions.numberOfVerticalLines = ellipseGeometry._numberOfVerticalLines;
+    scratchOptions.numberOfVerticalLines =
+      ellipseGeometry._numberOfVerticalLines;
 
     if (!defaultValue.defined(result)) {
       scratchOptions.radius = ellipseGeometry._semiMajorAxis;
@@ -153,7 +193,9 @@ define(['./Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df
 
     scratchOptions.semiMajorAxis = ellipseGeometry._semiMajorAxis;
     scratchOptions.semiMinorAxis = ellipseGeometry._semiMinorAxis;
-    result._ellipseGeometry = new EllipseOutlineGeometry.EllipseOutlineGeometry(scratchOptions);
+    result._ellipseGeometry = new EllipseOutlineGeometry.EllipseOutlineGeometry(
+      scratchOptions
+    );
     return result;
   };
 
@@ -164,7 +206,9 @@ define(['./Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df
    * @returns {Geometry|undefined} The computed vertices and indices.
    */
   CircleOutlineGeometry.createGeometry = function (circleGeometry) {
-    return EllipseOutlineGeometry.EllipseOutlineGeometry.createGeometry(circleGeometry._ellipseGeometry);
+    return EllipseOutlineGeometry.EllipseOutlineGeometry.createGeometry(
+      circleGeometry._ellipseGeometry
+    );
   };
 
   function createCircleOutlineGeometry(circleGeometry, offset) {
@@ -181,6 +225,5 @@ define(['./Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df
   }
 
   return createCircleOutlineGeometry;
-
-}));
+});
 //# sourceMappingURL=createCircleOutlineGeometry.js.map

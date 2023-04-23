@@ -35,7 +35,7 @@ const ShadowMode = {
    * @type {Number}
    * @constant
    */
-  RECEIVE_ONLY: 3,
+  RECEIVE_ONLY: 3
 };
 
 /**

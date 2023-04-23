@@ -1,9 +1,9 @@
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import CesiumMath from "./Math.js";
-import defaultValue from "./defaultValue.js";
-import DeveloperError from "./DeveloperError.js";
-import Quaternion from "./Quaternion.js";
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import CesiumMath from './Math.js';
+import defaultValue from './defaultValue.js';
+import DeveloperError from './DeveloperError.js';
+import Quaternion from './Quaternion.js';
 
 /**
  * Creates a curve parameterized and evaluated by time. This type describes an interface
@@ -48,7 +48,7 @@ function Spline() {
  * @private
  */
 Spline.getPointType = function (point) {
-  if (typeof point === "number") {
+  if (typeof point === 'number') {
     return Number;
   }
   if (point instanceof Cartesian3) {
@@ -60,7 +60,7 @@ Spline.getPointType = function (point) {
 
   //>>includeStart('debug', pragmas.debug);
   throw new DeveloperError(
-    "point must be a Cartesian3, Quaternion, or Number."
+    'point must be a Cartesian3, Quaternion, or Number.'
   );
   //>>includeEnd('debug');
 };
@@ -96,9 +96,9 @@ Spline.prototype.findTimeInterval = function (time, startIndex) {
   const length = times.length;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("time", time);
+  Check.typeOf.number('time', time);
   if (time < times[0] || time > times[length - 1]) {
-    throw new DeveloperError("time is out of range.");
+    throw new DeveloperError('time is out of range.');
   }
   //>>includeEnd('debug');
 
@@ -151,7 +151,7 @@ Spline.prototype.findTimeInterval = function (time, startIndex) {
  */
 Spline.prototype.wrapTime = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("time", time);
+  Check.typeOf.number('time', time);
   //>>includeEnd('debug');
 
   const times = this.times;
@@ -179,7 +179,7 @@ Spline.prototype.wrapTime = function (time) {
  */
 Spline.prototype.clampTime = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("time", time);
+  Check.typeOf.number('time', time);
   //>>includeEnd('debug');
 
   const times = this.times;

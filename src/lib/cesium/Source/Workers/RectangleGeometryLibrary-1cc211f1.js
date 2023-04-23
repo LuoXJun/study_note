@@ -1,5 +1,20 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeError-c581ca93', './Transforms-3ac41eb6', './ComponentDatatype-4a60b8d6'], (function (exports, Matrix2, defaultValue, RuntimeError, Transforms, ComponentDatatype) { 'use strict';
+define([
+  'exports',
+  './Matrix2-fc7e9822',
+  './defaultValue-94c3e563',
+  './RuntimeError-c581ca93',
+  './Transforms-3ac41eb6',
+  './ComponentDatatype-4a60b8d6'
+], function (
+  exports,
+  Matrix2,
+  defaultValue,
+  RuntimeError,
+  Transforms,
+  ComponentDatatype
+) {
+  'use strict';
 
   const cos = Math.cos;
   const sin = Math.sin;
@@ -62,8 +77,10 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
           row * computedOptions.stGranYSin +
           col * computedOptions.stGranXCos;
 
-        st.x = (stLongitude - computedOptions.stWest) * computedOptions.lonScalar;
-        st.y = (stLatitude - computedOptions.stSouth) * computedOptions.latScalar;
+        st.x =
+          (stLongitude - computedOptions.stWest) * computedOptions.lonScalar;
+        st.y =
+          (stLatitude - computedOptions.stSouth) * computedOptions.latScalar;
       } else {
         st.x = (stLongitude - rectangle.west) * computedOptions.lonScalar;
         st.y = (stLatitude - rectangle.south) * computedOptions.latScalar;
@@ -96,14 +113,25 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
 
     nwCartesian = proj.project(nwCorner, nwCartesian);
 
-    nwCartesian = Matrix2.Cartesian3.subtract(nwCartesian, centerCartesian, nwCartesian);
-    const rotationMatrix = Matrix2.Matrix2.fromRotation(rotation, rotationMatrixScratch);
+    nwCartesian = Matrix2.Cartesian3.subtract(
+      nwCartesian,
+      centerCartesian,
+      nwCartesian
+    );
+    const rotationMatrix = Matrix2.Matrix2.fromRotation(
+      rotation,
+      rotationMatrixScratch
+    );
     nwCartesian = Matrix2.Matrix2.multiplyByVector(
       rotationMatrix,
       nwCartesian,
       nwCartesian
     );
-    nwCartesian = Matrix2.Cartesian3.add(nwCartesian, centerCartesian, nwCartesian);
+    nwCartesian = Matrix2.Cartesian3.add(
+      nwCartesian,
+      centerCartesian,
+      nwCartesian
+    );
     nwCorner = proj.unproject(nwCartesian, nwCorner);
 
     width -= 1;
@@ -134,7 +162,7 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
       granYSin: granYSin,
       granXCos: granXCos,
       granXSin: granXSin,
-      nwCorner: nwCorner,
+      nwCorner: nwCorner
     };
   }
 
@@ -207,7 +235,7 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
       width: width,
       height: height,
       northCap: northCap,
-      southCap: southCap,
+      southCap: southCap
     };
 
     if (rotation !== 0) {
@@ -233,7 +261,7 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
         south > ComponentDatatype.CesiumMath.PI_OVER_TWO
       ) {
         throw new RuntimeError.DeveloperError(
-          "Rotated rectangle is invalid.  It crosses over either the north or south pole."
+          'Rotated rectangle is invalid.  It crosses over either the north or south pole.'
         );
       }
       //>>includeEnd('debug')
@@ -251,7 +279,10 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
 
     if (stRotation !== 0) {
       rotation = rotation - stRotation;
-      const stNwCorner = Matrix2.Rectangle.northwest(boundingRectangle, stNwCornerResult);
+      const stNwCorner = Matrix2.Rectangle.northwest(
+        boundingRectangle,
+        stNwCornerResult
+      );
 
       const stRotationOptions = getRotationOptions(
         stNwCorner,
@@ -276,5 +307,4 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
   };
 
   exports.RectangleGeometryLibrary = RectangleGeometryLibrary;
-
-}));
+});

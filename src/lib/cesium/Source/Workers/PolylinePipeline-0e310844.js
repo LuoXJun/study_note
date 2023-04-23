@@ -1,5 +1,26 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeError-c581ca93', './EllipsoidGeodesic-dc94f381', './EllipsoidRhumbLine-daebc75b', './IntersectionTests-68fbc42d', './ComponentDatatype-4a60b8d6', './Plane-e20fba8c'], (function (exports, Matrix2, defaultValue, RuntimeError, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, ComponentDatatype, Plane) { 'use strict';
+define([
+  'exports',
+  './Matrix2-fc7e9822',
+  './defaultValue-94c3e563',
+  './RuntimeError-c581ca93',
+  './EllipsoidGeodesic-dc94f381',
+  './EllipsoidRhumbLine-daebc75b',
+  './IntersectionTests-68fbc42d',
+  './ComponentDatatype-4a60b8d6',
+  './Plane-e20fba8c'
+], function (
+  exports,
+  Matrix2,
+  defaultValue,
+  RuntimeError,
+  EllipsoidGeodesic,
+  EllipsoidRhumbLine,
+  IntersectionTests,
+  ComponentDatatype,
+  Plane
+) {
+  'use strict';
 
   /**
    * @private
@@ -144,7 +165,11 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
     const heights = subdivideHeights(numPoints, h0, h1);
 
     if (!ellipsoidRhumb.ellipsoid.equals(ellipsoid)) {
-      ellipsoidRhumb = new EllipsoidRhumbLine.EllipsoidRhumbLine(undefined, undefined, ellipsoid);
+      ellipsoidRhumb = new EllipsoidRhumbLine.EllipsoidRhumbLine(
+        undefined,
+        undefined,
+        ellipsoid
+      );
     }
     ellipsoidRhumb.setEndPoints(start, end);
     const surfaceDistanceBetweenPoints =
@@ -198,7 +223,10 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
     const segments = [];
 
     if (defaultValue.defined(positions) && positions.length > 0) {
-      modelMatrix = defaultValue.defaultValue(modelMatrix, Matrix2.Matrix4.IDENTITY);
+      modelMatrix = defaultValue.defaultValue(
+        modelMatrix,
+        Matrix2.Matrix4.IDENTITY
+      );
       const inverseModelMatrix = Matrix2.Matrix4.inverseTransformation(
         modelMatrix,
         wrapLongitudeInversMatrix
@@ -250,12 +278,13 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
           Plane.Plane.getPointDistance(yzPlane, cur) < 0.0
         ) {
           // and intersects the xz-plane
-          const intersection = IntersectionTests.IntersectionTests.lineSegmentPlane(
-            prev,
-            cur,
-            xzPlane,
-            wrapLongitudeIntersection
-          );
+          const intersection =
+            IntersectionTests.IntersectionTests.lineSegmentPlane(
+              prev,
+              cur,
+              xzPlane,
+              wrapLongitudeIntersection
+            );
           if (defaultValue.defined(intersection)) {
             // move point on the xz-plane slightly away from the plane
             const offset = Matrix2.Cartesian3.multiplyByScalar(
@@ -268,13 +297,21 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
             }
 
             cartesians.push(
-              Matrix2.Cartesian3.add(intersection, offset, new Matrix2.Cartesian3())
+              Matrix2.Cartesian3.add(
+                intersection,
+                offset,
+                new Matrix2.Cartesian3()
+              )
             );
             segments.push(count + 1);
 
             Matrix2.Cartesian3.negate(offset, offset);
             cartesians.push(
-              Matrix2.Cartesian3.add(intersection, offset, new Matrix2.Cartesian3())
+              Matrix2.Cartesian3.add(
+                intersection,
+                offset,
+                new Matrix2.Cartesian3()
+              )
             );
             count = 1;
           }
@@ -291,7 +328,7 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
 
     return {
       positions: cartesians,
-      lengths: segments,
+      lengths: segments
     };
   };
 
@@ -322,12 +359,15 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
     const positions = options.positions;
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(positions)) {
-      throw new RuntimeError.DeveloperError("options.positions is required.");
+      throw new RuntimeError.DeveloperError('options.positions is required.');
     }
     //>>includeEnd('debug');
 
     const length = positions.length;
-    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    const ellipsoid = defaultValue.defaultValue(
+      options.ellipsoid,
+      Matrix2.Ellipsoid.WGS84
+    );
     let height = defaultValue.defaultValue(options.height, 0);
     const hasHeightArray = Array.isArray(height);
 
@@ -351,7 +391,10 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
         options.granularity,
         ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
       );
-      minDistance = ComponentDatatype.CesiumMath.chordLength(granularity, ellipsoid.maximumRadius);
+      minDistance = ComponentDatatype.CesiumMath.chordLength(
+        granularity,
+        ellipsoid.maximumRadius
+      );
     }
 
     let numPoints = 0;
@@ -429,12 +472,15 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
     const positions = options.positions;
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(positions)) {
-      throw new RuntimeError.DeveloperError("options.positions is required.");
+      throw new RuntimeError.DeveloperError('options.positions is required.');
     }
     //>>includeEnd('debug');
 
     const length = positions.length;
-    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    const ellipsoid = defaultValue.defaultValue(
+      options.ellipsoid,
+      Matrix2.Ellipsoid.WGS84
+    );
     let height = defaultValue.defaultValue(options.height, 0);
     const hasHeightArray = Array.isArray(height);
 
@@ -470,7 +516,11 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
         positions[i + 1],
         scratchCartographic1
       );
-      numPoints += PolylinePipeline.numberOfPointsRhumbLine(c0, c1, granularity);
+      numPoints += PolylinePipeline.numberOfPointsRhumbLine(
+        c0,
+        c1,
+        granularity
+      );
       c0 = Matrix2.Cartographic.clone(c1, scratchCartographic0);
     }
 
@@ -569,5 +619,4 @@ define(['exports', './Matrix2-fc7e9822', './defaultValue-94c3e563', './RuntimeEr
   };
 
   exports.PolylinePipeline = PolylinePipeline;
-
-}));
+});

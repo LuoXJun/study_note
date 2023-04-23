@@ -1,8 +1,8 @@
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import NearFarScalar from "../Core/NearFarScalar.js";
-import Rectangle from "../Core/Rectangle.js";
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import NearFarScalar from '../Core/NearFarScalar.js';
+import Rectangle from '../Core/Rectangle.js';
 
 /**
  * Properties for controlling globe translucency.
@@ -48,10 +48,10 @@ Object.defineProperties(GlobeTranslucency.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.bool("enabled", value);
+      Check.typeOf.bool('enabled', value);
       //>>includeEnd('debug');
       this._enabled = value;
-    },
+    }
   },
 
   /**
@@ -78,11 +78,11 @@ Object.defineProperties(GlobeTranslucency.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number.greaterThanOrEquals("frontFaceAlpha", value, 0.0);
-      Check.typeOf.number.lessThanOrEquals("frontFaceAlpha", value, 1.0);
+      Check.typeOf.number.greaterThanOrEquals('frontFaceAlpha', value, 0.0);
+      Check.typeOf.number.lessThanOrEquals('frontFaceAlpha', value, 1.0);
       //>>includeEnd('debug');
       this._frontFaceAlpha = value;
-    },
+    }
   },
   /**
    * Gets or sets near and far translucency properties of front faces of the globe based on the distance to the camera.
@@ -123,7 +123,7 @@ Object.defineProperties(GlobeTranslucency.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (defined(value) && value.far < value.near) {
         throw new DeveloperError(
-          "far distance must be greater than near distance."
+          'far distance must be greater than near distance.'
         );
       }
       //>>includeEnd('debug');
@@ -131,7 +131,7 @@ Object.defineProperties(GlobeTranslucency.prototype, {
         value,
         this._frontFaceAlphaByDistance
       );
-    },
+    }
   },
 
   /**
@@ -158,11 +158,11 @@ Object.defineProperties(GlobeTranslucency.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number.greaterThanOrEquals("backFaceAlpha", value, 0.0);
-      Check.typeOf.number.lessThanOrEquals("backFaceAlpha", value, 1.0);
+      Check.typeOf.number.greaterThanOrEquals('backFaceAlpha', value, 0.0);
+      Check.typeOf.number.lessThanOrEquals('backFaceAlpha', value, 1.0);
       //>>includeEnd('debug');
       this._backFaceAlpha = value;
-    },
+    }
   },
   /**
    * Gets or sets near and far translucency properties of back faces of the globe based on the distance to the camera.
@@ -203,7 +203,7 @@ Object.defineProperties(GlobeTranslucency.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (defined(value) && value.far < value.near) {
         throw new DeveloperError(
-          "far distance must be greater than near distance."
+          'far distance must be greater than near distance.'
         );
       }
       //>>includeEnd('debug');
@@ -211,7 +211,7 @@ Object.defineProperties(GlobeTranslucency.prototype, {
         value,
         this._backFaceAlphaByDistance
       );
-    },
+    }
   },
 
   /**
@@ -232,8 +232,8 @@ Object.defineProperties(GlobeTranslucency.prototype, {
         value = Rectangle.clone(Rectangle.MAX_VALUE);
       }
       Rectangle.clone(value, this._rectangle);
-    },
-  },
+    }
+  }
 });
 
 export default GlobeTranslucency;

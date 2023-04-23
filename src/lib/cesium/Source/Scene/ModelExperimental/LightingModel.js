@@ -24,7 +24,7 @@ const LightingModel = {
    * @type {Number}
    * @constant
    */
-  PBR: 1,
+  PBR: 1
 };
 
 export default Object.freeze(LightingModel);

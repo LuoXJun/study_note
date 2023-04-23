@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "void customShaderStage(\n\
+export default 'void customShaderStage(\n\
     inout czm_modelVertexOutput vsOutput, \n\
     inout ProcessedAttributes attributes, \n\
     FeatureIds featureIds,\n\
@@ -14,4 +14,4 @@ export default "void customShaderStage(\n\
     vertexMain(vsInput, vsOutput);\n\
     attributes.positionMC = vsOutput.positionMC;\n\
 }\n\
-";
+';

@@ -1,12 +1,12 @@
-import buildModuleUrl from "../../Core/buildModuleUrl.js";
-import Check from "../../Core/Check.js";
-import Color from "../../Core/Color.js";
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import knockout from "../../ThirdParty/knockout.js";
-import getElement from "../getElement.js";
-import subscribeAndEvaluate from "../subscribeAndEvaluate.js";
-import InfoBoxViewModel from "./InfoBoxViewModel.js";
+import buildModuleUrl from '../../Core/buildModuleUrl.js';
+import Check from '../../Core/Check.js';
+import Color from '../../Core/Color.js';
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import knockout from '../../ThirdParty/knockout.js';
+import getElement from '../getElement.js';
+import subscribeAndEvaluate from '../subscribeAndEvaluate.js';
+import InfoBoxViewModel from './InfoBoxViewModel.js';
 
 /**
  * A widget for displaying information or a description.
@@ -20,30 +20,30 @@ import InfoBoxViewModel from "./InfoBoxViewModel.js";
  */
 function InfoBox(container) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("container", container);
+  Check.defined('container', container);
   //>>includeEnd('debug')
 
   container = getElement(container);
 
-  const infoElement = document.createElement("div");
-  infoElement.className = "cesium-infoBox";
+  const infoElement = document.createElement('div');
+  infoElement.className = 'cesium-infoBox';
   infoElement.setAttribute(
-    "data-bind",
+    'data-bind',
     '\
 css: { "cesium-infoBox-visible" : showInfo, "cesium-infoBox-bodyless" : _bodyless }'
   );
   container.appendChild(infoElement);
 
-  const titleElement = document.createElement("div");
-  titleElement.className = "cesium-infoBox-title";
-  titleElement.setAttribute("data-bind", "text: titleText");
+  const titleElement = document.createElement('div');
+  titleElement.className = 'cesium-infoBox-title';
+  titleElement.setAttribute('data-bind', 'text: titleText');
   infoElement.appendChild(titleElement);
 
-  const cameraElement = document.createElement("button");
-  cameraElement.type = "button";
-  cameraElement.className = "cesium-button cesium-infoBox-camera";
+  const cameraElement = document.createElement('button');
+  cameraElement.type = 'button';
+  cameraElement.className = 'cesium-button cesium-infoBox-camera';
   cameraElement.setAttribute(
-    "data-bind",
+    'data-bind',
     '\
 attr: { title: "Focus camera on object" },\
 click: function () { cameraClicked.raiseEvent(this); },\
@@ -52,25 +52,25 @@ cesiumSvgPath: { path: cameraIconPath, width: 32, height: 32 }'
   );
   infoElement.appendChild(cameraElement);
 
-  const closeElement = document.createElement("button");
-  closeElement.type = "button";
-  closeElement.className = "cesium-infoBox-close";
+  const closeElement = document.createElement('button');
+  closeElement.type = 'button';
+  closeElement.className = 'cesium-infoBox-close';
   closeElement.setAttribute(
-    "data-bind",
-    "\
-click: function () { closeClicked.raiseEvent(this); }"
+    'data-bind',
+    '\
+click: function () { closeClicked.raiseEvent(this); }'
   );
-  closeElement.innerHTML = "&times;";
+  closeElement.innerHTML = '&times;';
   infoElement.appendChild(closeElement);
 
-  const frame = document.createElement("iframe");
-  frame.className = "cesium-infoBox-iframe";
-  frame.setAttribute("sandbox", "allow-same-origin allow-popups allow-forms"); //allow-pointer-lock allow-scripts allow-top-navigation
+  const frame = document.createElement('iframe');
+  frame.className = 'cesium-infoBox-iframe';
+  frame.setAttribute('sandbox', 'allow-same-origin allow-popups allow-forms'); //allow-pointer-lock allow-scripts allow-top-navigation
   frame.setAttribute(
-    "data-bind",
-    "style : { maxHeight : maxHeightOffset(40) }"
+    'data-bind',
+    'style : { maxHeight : maxHeightOffset(40) }'
   );
-  frame.setAttribute("allowfullscreen", true);
+  frame.setAttribute('allowfullscreen', true);
   infoElement.appendChild(frame);
 
   const viewModel = new InfoBoxViewModel();
@@ -84,19 +84,19 @@ click: function () { closeClicked.raiseEvent(this); }"
 
   const that = this;
   //We can't actually add anything into the frame until the load event is fired
-  frame.addEventListener("load", function () {
+  frame.addEventListener('load', function () {
     const frameDocument = frame.contentDocument;
 
     //We inject default css into the content iframe,
     //end users can remove it or add their own via the exposed frame property.
-    const cssLink = frameDocument.createElement("link");
-    cssLink.href = buildModuleUrl("Widgets/InfoBox/InfoBoxDescription.css");
-    cssLink.rel = "stylesheet";
-    cssLink.type = "text/css";
+    const cssLink = frameDocument.createElement('link');
+    cssLink.href = buildModuleUrl('Widgets/InfoBox/InfoBoxDescription.css');
+    cssLink.rel = 'stylesheet';
+    cssLink.type = 'text/css';
 
     //div to use for description content.
-    const frameContent = frameDocument.createElement("div");
-    frameContent.className = "cesium-infoBox-description";
+    const frameContent = frameDocument.createElement('div');
+    frameContent.className = 'cesium-infoBox-description';
 
     frameDocument.head.appendChild(cssLink);
     frameDocument.body.appendChild(frameContent);
@@ -107,10 +107,10 @@ click: function () { closeClicked.raiseEvent(this); }"
     //   model anyway.
     that._descriptionSubscription = subscribeAndEvaluate(
       viewModel,
-      "description",
+      'description',
       function (value) {
         // Set the frame to small height, force vertical scroll bar to appear, and text to wrap accordingly.
-        frame.style.height = "5px";
+        frame.style.height = '5px';
         frameContent.innerHTML = value;
 
         //If the snippet is a single element, then use its background
@@ -124,14 +124,14 @@ click: function () { closeClicked.raiseEvent(this); }"
         ) {
           const style = window.getComputedStyle(firstElementChild);
           if (style !== null) {
-            const backgroundColor = style["background-color"];
+            const backgroundColor = style['background-color'];
             const color = Color.fromCssColorString(backgroundColor);
             if (defined(color) && color.alpha !== 0) {
-              background = style["background-color"];
+              background = style['background-color'];
             }
           }
         }
-        infoElement.style["background-color"] = background;
+        infoElement.style['background-color'] = background;
 
         // Measure and set the new custom height, based on text wrapped above.
         const height = frameContent.getBoundingClientRect().height;
@@ -141,7 +141,7 @@ click: function () { closeClicked.raiseEvent(this); }"
   });
 
   //Chrome does not send the load event unless we explicitly set a src
-  frame.setAttribute("src", "about:blank");
+  frame.setAttribute('src', 'about:blank');
 }
 
 Object.defineProperties(InfoBox.prototype, {
@@ -154,7 +154,7 @@ Object.defineProperties(InfoBox.prototype, {
   container: {
     get: function () {
       return this._container;
-    },
+    }
   },
 
   /**
@@ -166,7 +166,7 @@ Object.defineProperties(InfoBox.prototype, {
   viewModel: {
     get: function () {
       return this._viewModel;
-    },
+    }
   },
 
   /**
@@ -178,8 +178,8 @@ Object.defineProperties(InfoBox.prototype, {
   frame: {
     get: function () {
       return this._frame;
-    },
-  },
+    }
+  }
 });
 
 /**

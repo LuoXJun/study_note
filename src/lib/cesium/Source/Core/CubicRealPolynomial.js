@@ -1,5 +1,5 @@
-import DeveloperError from "./DeveloperError.js";
-import QuadraticRealPolynomial from "./QuadraticRealPolynomial.js";
+import DeveloperError from './DeveloperError.js';
+import QuadraticRealPolynomial from './QuadraticRealPolynomial.js';
 
 /**
  * Defines functions for 3rd order polynomial functions of one variable with only real coefficients.
@@ -19,17 +19,17 @@ const CubicRealPolynomial = {};
  */
 CubicRealPolynomial.computeDiscriminant = function (a, b, c, d) {
   //>>includeStart('debug', pragmas.debug);
-  if (typeof a !== "number") {
-    throw new DeveloperError("a is a required number.");
+  if (typeof a !== 'number') {
+    throw new DeveloperError('a is a required number.');
   }
-  if (typeof b !== "number") {
-    throw new DeveloperError("b is a required number.");
+  if (typeof b !== 'number') {
+    throw new DeveloperError('b is a required number.');
   }
-  if (typeof c !== "number") {
-    throw new DeveloperError("c is a required number.");
+  if (typeof c !== 'number') {
+    throw new DeveloperError('c is a required number.');
   }
-  if (typeof d !== "number") {
-    throw new DeveloperError("d is a required number.");
+  if (typeof d !== 'number') {
+    throw new DeveloperError('d is a required number.');
   }
   //>>includeEnd('debug');
 
@@ -163,17 +163,17 @@ function computeRealRoots(a, b, c, d) {
  */
 CubicRealPolynomial.computeRealRoots = function (a, b, c, d) {
   //>>includeStart('debug', pragmas.debug);
-  if (typeof a !== "number") {
-    throw new DeveloperError("a is a required number.");
+  if (typeof a !== 'number') {
+    throw new DeveloperError('a is a required number.');
   }
-  if (typeof b !== "number") {
-    throw new DeveloperError("b is a required number.");
+  if (typeof b !== 'number') {
+    throw new DeveloperError('b is a required number.');
   }
-  if (typeof c !== "number") {
-    throw new DeveloperError("c is a required number.");
+  if (typeof c !== 'number') {
+    throw new DeveloperError('c is a required number.');
   }
-  if (typeof d !== "number") {
-    throw new DeveloperError("d is a required number.");
+  if (typeof d !== 'number') {
+    throw new DeveloperError('d is a required number.');
   }
   //>>includeEnd('debug');
 

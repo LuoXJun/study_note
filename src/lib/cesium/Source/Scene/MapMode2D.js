@@ -18,6 +18,6 @@ const MapMode2D = {
    * @type {Number}
    * @constant
    */
-  INFINITE_SCROLL: 1,
+  INFINITE_SCROLL: 1
 };
 export default Object.freeze(MapMode2D);

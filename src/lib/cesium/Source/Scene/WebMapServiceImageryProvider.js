@@ -1,12 +1,12 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import GeographicTilingScheme from "../Core/GeographicTilingScheme.js";
-import Resource from "../Core/Resource.js";
-import WebMercatorProjection from "../Core/WebMercatorProjection.js";
-import GetFeatureInfoFormat from "./GetFeatureInfoFormat.js";
-import TimeDynamicImagery from "./TimeDynamicImagery.js";
-import UrlTemplateImageryProvider from "./UrlTemplateImageryProvider.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import GeographicTilingScheme from '../Core/GeographicTilingScheme.js';
+import Resource from '../Core/Resource.js';
+import WebMercatorProjection from '../Core/WebMercatorProjection.js';
+import GetFeatureInfoFormat from './GetFeatureInfoFormat.js';
+import TimeDynamicImagery from './TimeDynamicImagery.js';
+import UrlTemplateImageryProvider from './UrlTemplateImageryProvider.js';
 
 /**
  * EPSG codes known to include reverse axis orders, but are not within 4000-5000.
@@ -18,7 +18,7 @@ const includesReverseAxis = [
   3035, // ETRS89-extended / LAEA Europe
   3042, // ETRS89 / UTM zone 30N (N-E)
   3043, // ETRS89 / UTM zone 31N (N-E)
-  3044, // ETRS89 / UTM zone 32N (N-E)
+  3044 // ETRS89 / UTM zone 32N (N-E)
 ];
 
 /**
@@ -28,7 +28,7 @@ const includesReverseAxis = [
  */
 const excludesReverseAxis = [
   4471, // Mayotte
-  4559, // French Antilles
+  4559 // French Antilles
 ];
 
 /**
@@ -105,16 +105,16 @@ function WebMapServiceImageryProvider(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.url)) {
-    throw new DeveloperError("options.url is required.");
+    throw new DeveloperError('options.url is required.');
   }
   if (!defined(options.layers)) {
-    throw new DeveloperError("options.layers is required.");
+    throw new DeveloperError('options.layers is required.');
   }
   //>>includeEnd('debug');
 
   if (defined(options.times) && !defined(options.clock)) {
     throw new DeveloperError(
-      "options.times was specified, so options.clock is required."
+      'options.times was specified, so options.clock is required.'
     );
   }
 
@@ -244,16 +244,16 @@ function WebMapServiceImageryProvider(options) {
         if (defined(that._reload)) {
           that._reload();
         }
-      },
+      }
     });
   }
 
   const parameters = {};
   parameters.layers = options.layers;
   parameters.bbox =
-    "{westProjected},{southProjected},{eastProjected},{northProjected}";
-  parameters.width = "{width}";
-  parameters.height = "{height}";
+    '{westProjected},{southProjected},{eastProjected},{northProjected}';
+  parameters.width = '{width}';
+  parameters.height = '{height}';
 
   // Use SRS or CRS based on the WMS version.
   if (parseFloat(resource.queryParameters.version) >= 1.3) {
@@ -264,8 +264,8 @@ function WebMapServiceImageryProvider(options) {
       options.crs,
       options.tilingScheme &&
         options.tilingScheme.projection instanceof WebMercatorProjection
-        ? "EPSG:3857"
-        : "CRS:84"
+        ? 'EPSG:3857'
+        : 'CRS:84'
     );
 
     // The axis order in previous versions of the WMS specifications was to always use easting (x or lon ) and northing (y or
@@ -275,15 +275,15 @@ function WebMapServiceImageryProvider(options) {
     // makes sure that coordinates passed to the server (as part of the GetMap BBOX parameter) as well as those advertised
     // in the capabilities document reflect the inverse axe orders for EPSG codes between 4000 and 5000.
     //  - Taken from Section 9.1.3 of https://download.osgeo.org/mapserver/docs/MapServer-56.pdf
-    const parts = parameters.crs.split(":");
-    if (parts[0] === "EPSG" && parts.length === 2) {
+    const parts = parameters.crs.split(':');
+    if (parts[0] === 'EPSG' && parts.length === 2) {
       const code = Number(parts[1]);
       if (
         (code >= 4000 && code < 5000 && !excludesReverseAxis.includes(code)) ||
         includesReverseAxis.includes(code)
       ) {
         parameters.bbox =
-          "{southProjected},{westProjected},{northProjected},{eastProjected}";
+          '{southProjected},{westProjected},{northProjected},{eastProjected}';
       }
     }
   } else {
@@ -292,8 +292,8 @@ function WebMapServiceImageryProvider(options) {
       options.srs,
       options.tilingScheme &&
         options.tilingScheme.projection instanceof WebMercatorProjection
-        ? "EPSG:3857"
-        : "EPSG:4326"
+        ? 'EPSG:3857'
+        : 'EPSG:4326'
     );
   }
 
@@ -302,15 +302,15 @@ function WebMapServiceImageryProvider(options) {
 
   const pickFeatureParams = {
     query_layers: options.layers,
-    info_format: "{format}",
+    info_format: '{format}'
   };
   // use correct pixel coordinate identifier based on version
   if (parseFloat(pickFeatureResource.queryParameters.version) >= 1.3) {
-    pickFeatureParams.i = "{i}";
-    pickFeatureParams.j = "{j}";
+    pickFeatureParams.i = '{i}';
+    pickFeatureParams.j = '{j}';
   } else {
-    pickFeatureParams.x = "{i}";
-    pickFeatureParams.y = "{j}";
+    pickFeatureParams.x = '{i}';
+    pickFeatureParams.y = '{j}';
   }
   pickFeatureResource.setQueryParameters(pickFeatureParams, true);
 
@@ -338,7 +338,7 @@ function WebMapServiceImageryProvider(options) {
       options.getFeatureInfoFormats,
       WebMapServiceImageryProvider.DefaultGetFeatureInfoFormats
     ),
-    enablePickFeatures: options.enablePickFeatures,
+    enablePickFeatures: options.enablePickFeatures
   });
 }
 
@@ -382,7 +382,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   url: {
     get: function () {
       return this._resource._url;
-    },
+    }
   },
 
   /**
@@ -394,7 +394,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   proxy: {
     get: function () {
       return this._resource.proxy;
-    },
+    }
   },
 
   /**
@@ -406,7 +406,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   layers: {
     get: function () {
       return this._layers;
-    },
+    }
   },
 
   /**
@@ -419,7 +419,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   tileWidth: {
     get: function () {
       return this._tileProvider.tileWidth;
-    },
+    }
   },
 
   /**
@@ -432,7 +432,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   tileHeight: {
     get: function () {
       return this._tileProvider.tileHeight;
-    },
+    }
   },
 
   /**
@@ -445,7 +445,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   maximumLevel: {
     get: function () {
       return this._tileProvider.maximumLevel;
-    },
+    }
   },
 
   /**
@@ -458,7 +458,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   minimumLevel: {
     get: function () {
       return this._tileProvider.minimumLevel;
-    },
+    }
   },
 
   /**
@@ -471,7 +471,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   tilingScheme: {
     get: function () {
       return this._tileProvider.tilingScheme;
-    },
+    }
   },
 
   /**
@@ -484,7 +484,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   rectangle: {
     get: function () {
       return this._tileProvider.rectangle;
-    },
+    }
   },
 
   /**
@@ -499,7 +499,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   tileDiscardPolicy: {
     get: function () {
       return this._tileProvider.tileDiscardPolicy;
-    },
+    }
   },
 
   /**
@@ -513,7 +513,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._tileProvider.errorEvent;
-    },
+    }
   },
 
   /**
@@ -525,7 +525,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   ready: {
     get: function () {
       return this._tileProvider.ready;
-    },
+    }
   },
 
   /**
@@ -537,7 +537,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._tileProvider.readyPromise;
-    },
+    }
   },
 
   /**
@@ -550,7 +550,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   credit: {
     get: function () {
       return this._tileProvider.credit;
-    },
+    }
   },
 
   /**
@@ -566,7 +566,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   hasAlphaChannel: {
     get: function () {
       return this._tileProvider.hasAlphaChannel;
-    },
+    }
   },
 
   /**
@@ -585,7 +585,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
     },
     set: function (enablePickFeatures) {
       this._tileProvider.enablePickFeatures = enablePickFeatures;
-    },
+    }
   },
 
   /**
@@ -599,7 +599,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
     },
     set: function (value) {
       this._timeDynamicImagery.clock = value;
-    },
+    }
   },
   /**
    * Gets or sets a time interval collection that is used to get time dynamic parameters. The data of each
@@ -614,7 +614,7 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
     },
     set: function (value) {
       this._timeDynamicImagery.times = value;
-    },
+    }
   },
 
   /**
@@ -626,8 +626,8 @@ Object.defineProperties(WebMapServiceImageryProvider.prototype, {
   getFeatureInfoUrl: {
     get: function () {
       return this._getFeatureInfoUrl;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -728,11 +728,11 @@ WebMapServiceImageryProvider.prototype.pickFeatures = function (
  * @type {Object}
  */
 WebMapServiceImageryProvider.DefaultParameters = Object.freeze({
-  service: "WMS",
-  version: "1.1.1",
-  request: "GetMap",
-  styles: "",
-  format: "image/jpeg",
+  service: 'WMS',
+  version: '1.1.1',
+  request: 'GetMap',
+  styles: '',
+  format: 'image/jpeg'
 });
 
 /**
@@ -745,15 +745,15 @@ WebMapServiceImageryProvider.DefaultParameters = Object.freeze({
  * @type {Object}
  */
 WebMapServiceImageryProvider.GetFeatureInfoDefaultParameters = Object.freeze({
-  service: "WMS",
-  version: "1.1.1",
-  request: "GetFeatureInfo",
+  service: 'WMS',
+  version: '1.1.1',
+  request: 'GetFeatureInfo'
 });
 
 WebMapServiceImageryProvider.DefaultGetFeatureInfoFormats = Object.freeze([
-  Object.freeze(new GetFeatureInfoFormat("json", "application/json")),
-  Object.freeze(new GetFeatureInfoFormat("xml", "text/xml")),
-  Object.freeze(new GetFeatureInfoFormat("text", "text/html")),
+  Object.freeze(new GetFeatureInfoFormat('json', 'application/json')),
+  Object.freeze(new GetFeatureInfoFormat('xml', 'text/xml')),
+  Object.freeze(new GetFeatureInfoFormat('text', 'text/html'))
 ]);
 
 function objectToLowercase(obj) {

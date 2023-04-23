@@ -1,7 +1,7 @@
-import defined from "../Core/defined.js";
-import Rectangle from "../Core/Rectangle.js";
-import sampleTerrainMostDetailed from "../Core/sampleTerrainMostDetailed.js";
-import SceneMode from "./SceneMode.js";
+import defined from '../Core/defined.js';
+import Rectangle from '../Core/Rectangle.js';
+import sampleTerrainMostDetailed from '../Core/sampleTerrainMostDetailed.js';
+import SceneMode from './SceneMode.js';
 
 /**
  * Computes the final camera location to view a rectangle adjusted for the current terrain.
@@ -43,7 +43,7 @@ function computeFlyToLocationForRectangle(rectangle, scene) {
       Rectangle.southeast(rectangle),
       Rectangle.southwest(rectangle),
       Rectangle.northeast(rectangle),
-      Rectangle.northwest(rectangle),
+      Rectangle.northwest(rectangle)
     ];
 
     return computeFlyToLocationForRectangle
@@ -65,5 +65,6 @@ function computeFlyToLocationForRectangle(rectangle, scene) {
 }
 
 //Exposed for testing.
-computeFlyToLocationForRectangle._sampleTerrainMostDetailed = sampleTerrainMostDetailed;
+computeFlyToLocationForRectangle._sampleTerrainMostDetailed =
+  sampleTerrainMostDetailed;
 export default computeFlyToLocationForRectangle;

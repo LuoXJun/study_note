@@ -1,6 +1,6 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * A vertex format defines what attributes make up a vertex.  A VertexFormat can be provided
@@ -108,7 +108,7 @@ function VertexFormat(options) {
  */
 VertexFormat.POSITION_ONLY = Object.freeze(
   new VertexFormat({
-    position: true,
+    position: true
   })
 );
 
@@ -125,7 +125,7 @@ VertexFormat.POSITION_ONLY = Object.freeze(
 VertexFormat.POSITION_AND_NORMAL = Object.freeze(
   new VertexFormat({
     position: true,
-    normal: true,
+    normal: true
   })
 );
 
@@ -145,7 +145,7 @@ VertexFormat.POSITION_NORMAL_AND_ST = Object.freeze(
   new VertexFormat({
     position: true,
     normal: true,
-    st: true,
+    st: true
   })
 );
 
@@ -162,7 +162,7 @@ VertexFormat.POSITION_NORMAL_AND_ST = Object.freeze(
 VertexFormat.POSITION_AND_ST = Object.freeze(
   new VertexFormat({
     position: true,
-    st: true,
+    st: true
   })
 );
 
@@ -178,7 +178,7 @@ VertexFormat.POSITION_AND_ST = Object.freeze(
 VertexFormat.POSITION_AND_COLOR = Object.freeze(
   new VertexFormat({
     position: true,
-    color: true,
+    color: true
   })
 );
 
@@ -200,7 +200,7 @@ VertexFormat.ALL = Object.freeze(
     normal: true,
     st: true,
     tangent: true,
-    bitangent: true,
+    bitangent: true
   })
 );
 
@@ -236,10 +236,10 @@ VertexFormat.packedLength = 6;
 VertexFormat.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(value)) {
-    throw new DeveloperError("value is required");
+    throw new DeveloperError('value is required');
   }
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -266,7 +266,7 @@ VertexFormat.pack = function (value, array, startingIndex) {
 VertexFormat.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 

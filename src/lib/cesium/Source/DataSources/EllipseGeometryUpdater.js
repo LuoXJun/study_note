@@ -1,26 +1,26 @@
-import ApproximateTerrainHeights from "../Core/ApproximateTerrainHeights.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DistanceDisplayConditionGeometryInstanceAttribute from "../Core/DistanceDisplayConditionGeometryInstanceAttribute.js";
-import EllipseGeometry from "../Core/EllipseGeometry.js";
-import EllipseOutlineGeometry from "../Core/EllipseOutlineGeometry.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import Iso8601 from "../Core/Iso8601.js";
-import OffsetGeometryInstanceAttribute from "../Core/OffsetGeometryInstanceAttribute.js";
-import Rectangle from "../Core/Rectangle.js";
-import ShowGeometryInstanceAttribute from "../Core/ShowGeometryInstanceAttribute.js";
-import HeightReference from "../Scene/HeightReference.js";
-import MaterialAppearance from "../Scene/MaterialAppearance.js";
-import PerInstanceColorAppearance from "../Scene/PerInstanceColorAppearance.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import DynamicGeometryUpdater from "./DynamicGeometryUpdater.js";
-import GeometryUpdater from "./GeometryUpdater.js";
-import GroundGeometryUpdater from "./GroundGeometryUpdater.js";
-import Property from "./Property.js";
+import ApproximateTerrainHeights from '../Core/ApproximateTerrainHeights.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DistanceDisplayConditionGeometryInstanceAttribute from '../Core/DistanceDisplayConditionGeometryInstanceAttribute.js';
+import EllipseGeometry from '../Core/EllipseGeometry.js';
+import EllipseOutlineGeometry from '../Core/EllipseOutlineGeometry.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import Iso8601 from '../Core/Iso8601.js';
+import OffsetGeometryInstanceAttribute from '../Core/OffsetGeometryInstanceAttribute.js';
+import Rectangle from '../Core/Rectangle.js';
+import ShowGeometryInstanceAttribute from '../Core/ShowGeometryInstanceAttribute.js';
+import HeightReference from '../Scene/HeightReference.js';
+import MaterialAppearance from '../Scene/MaterialAppearance.js';
+import PerInstanceColorAppearance from '../Scene/PerInstanceColorAppearance.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import DynamicGeometryUpdater from './DynamicGeometryUpdater.js';
+import GeometryUpdater from './GeometryUpdater.js';
+import GroundGeometryUpdater from './GroundGeometryUpdater.js';
+import Property from './Property.js';
 
 const scratchColor = new Color();
 const defaultOffset = Cartesian3.ZERO;
@@ -56,11 +56,11 @@ function EllipseGeometryUpdater(entity, scene) {
     entity: entity,
     scene: scene,
     geometryOptions: new EllipseGeometryOptions(entity),
-    geometryPropertyName: "ellipse",
-    observedPropertyNames: ["availability", "position", "ellipse"],
+    geometryPropertyName: 'ellipse',
+    observedPropertyNames: ['availability', 'position', 'ellipse']
   });
 
-  this._onEntityPropertyChanged(entity, "ellipse", entity.ellipse, undefined);
+  this._onEntityPropertyChanged(entity, 'ellipse', entity.ellipse, undefined);
 }
 
 if (defined(Object.create)) {
@@ -80,11 +80,11 @@ if (defined(Object.create)) {
  */
 EllipseGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
 
   if (!this._fillEnabled) {
     throw new DeveloperError(
-      "This instance does not represent a filled geometry."
+      'This instance does not represent a filled geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -99,11 +99,12 @@ EllipseGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
         this._showProperty.getValue(time) &&
         this._fillProperty.getValue(time)
     ),
-    distanceDisplayCondition: DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-      this._distanceDisplayConditionProperty.getValue(time)
-    ),
+    distanceDisplayCondition:
+      DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+        this._distanceDisplayConditionProperty.getValue(time)
+      ),
     offset: undefined,
-    color: undefined,
+    color: undefined
   };
 
   if (this._materialProperty instanceof ColorMaterialProperty) {
@@ -134,7 +135,7 @@ EllipseGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
   return new GeometryInstance({
     id: entity,
     geometry: new EllipseGeometry(this._options),
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -150,11 +151,11 @@ EllipseGeometryUpdater.prototype.createOutlineGeometryInstance = function (
   time
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
 
   if (!this._outlineEnabled) {
     throw new DeveloperError(
-      "This instance does not represent an outlined geometry."
+      'This instance does not represent an outlined geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -167,9 +168,8 @@ EllipseGeometryUpdater.prototype.createOutlineGeometryInstance = function (
     Color.BLACK,
     scratchColor
   );
-  const distanceDisplayCondition = this._distanceDisplayConditionProperty.getValue(
-    time
-  );
+  const distanceDisplayCondition =
+    this._distanceDisplayConditionProperty.getValue(time);
 
   const attributes = {
     show: new ShowGeometryInstanceAttribute(
@@ -179,10 +179,11 @@ EllipseGeometryUpdater.prototype.createOutlineGeometryInstance = function (
         this._showOutlineProperty.getValue(time)
     ),
     color: ColorGeometryInstanceAttribute.fromColor(outlineColor),
-    distanceDisplayCondition: DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-      distanceDisplayCondition
-    ),
-    offset: undefined,
+    distanceDisplayCondition:
+      DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+        distanceDisplayCondition
+      ),
+    offset: undefined
   };
 
   if (defined(this._options.offsetAttribute)) {
@@ -199,7 +200,7 @@ EllipseGeometryUpdater.prototype.createOutlineGeometryInstance = function (
   return new GeometryInstance({
     id: entity,
     geometry: new EllipseOutlineGeometry(this._options),
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -296,12 +297,13 @@ EllipseGeometryUpdater.prototype._setStaticOptions = function (
     ellipse.numberOfVerticalLines,
     Iso8601.MINIMUM_VALUE
   );
-  options.offsetAttribute = GroundGeometryUpdater.computeGeometryOffsetAttribute(
-    heightValue,
-    heightReferenceValue,
-    extrudedHeightValue,
-    extrudedHeightReferenceValue
-  );
+  options.offsetAttribute =
+    GroundGeometryUpdater.computeGeometryOffsetAttribute(
+      heightValue,
+      heightReferenceValue,
+      extrudedHeightValue,
+      extrudedHeightReferenceValue
+    );
   options.height = GroundGeometryUpdater.getGeometryHeight(
     heightValue,
     heightReferenceValue
@@ -342,7 +344,8 @@ if (defined(Object.create)) {
   DynamicEllipseGeometryUpdater.prototype = Object.create(
     DynamicGeometryUpdater.prototype
   );
-  DynamicEllipseGeometryUpdater.prototype.constructor = DynamicEllipseGeometryUpdater;
+  DynamicEllipseGeometryUpdater.prototype.constructor =
+    DynamicEllipseGeometryUpdater;
 }
 
 DynamicEllipseGeometryUpdater.prototype._isHidden = function (
@@ -404,12 +407,13 @@ DynamicEllipseGeometryUpdater.prototype._setOptions = function (
     ellipse.numberOfVerticalLines,
     time
   );
-  options.offsetAttribute = GroundGeometryUpdater.computeGeometryOffsetAttribute(
-    heightValue,
-    heightReferenceValue,
-    extrudedHeightValue,
-    extrudedHeightReferenceValue
-  );
+  options.offsetAttribute =
+    GroundGeometryUpdater.computeGeometryOffsetAttribute(
+      heightValue,
+      heightReferenceValue,
+      extrudedHeightValue,
+      extrudedHeightReferenceValue
+    );
   options.height = GroundGeometryUpdater.getGeometryHeight(
     heightValue,
     heightReferenceValue

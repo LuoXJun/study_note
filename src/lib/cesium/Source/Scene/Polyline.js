@@ -1,14 +1,14 @@
-import arrayRemoveDuplicates from "../Core/arrayRemoveDuplicates.js";
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DistanceDisplayCondition from "../Core/DistanceDisplayCondition.js";
-import Matrix4 from "../Core/Matrix4.js";
-import PolylinePipeline from "../Core/PolylinePipeline.js";
-import Material from "./Material.js";
+import arrayRemoveDuplicates from '../Core/arrayRemoveDuplicates.js';
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DistanceDisplayCondition from '../Core/DistanceDisplayCondition.js';
+import Matrix4 from '../Core/Matrix4.js';
+import PolylinePipeline from '../Core/PolylinePipeline.js';
+import Material from './Material.js';
 
 /**
  * A renderable polyline. Create this by calling {@link PolylineCollection#add}
@@ -41,7 +41,7 @@ function Polyline(options, polylineCollection) {
   this._material = options.material;
   if (!defined(this._material)) {
     this._material = Material.fromType(Material.ColorType, {
-      color: new Color(1.0, 1.0, 1.0, 1.0),
+      color: new Color(1.0, 1.0, 1.0, 1.0)
     });
   }
 
@@ -123,7 +123,7 @@ Object.defineProperties(Polyline.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(value)) {
-        throw new DeveloperError("value is required.");
+        throw new DeveloperError('value is required.');
       }
       //>>includeEnd('debug');
 
@@ -131,7 +131,7 @@ Object.defineProperties(Polyline.prototype, {
         this._show = value;
         makeDirty(this, SHOW_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -152,7 +152,7 @@ Object.defineProperties(Polyline.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(value)) {
-        throw new DeveloperError("value is required.");
+        throw new DeveloperError('value is required.');
       }
       //>>includeEnd('debug');
 
@@ -187,7 +187,7 @@ Object.defineProperties(Polyline.prototype, {
       makeDirty(this, POSITION_INDEX);
 
       this.update();
-    },
+    }
   },
 
   /**
@@ -203,7 +203,7 @@ Object.defineProperties(Polyline.prototype, {
     set: function (material) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(material)) {
-        throw new DeveloperError("material is required.");
+        throw new DeveloperError('material is required.');
       }
       //>>includeEnd('debug');
 
@@ -211,7 +211,7 @@ Object.defineProperties(Polyline.prototype, {
         this._material = material;
         makeDirty(this, MATERIAL_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -226,7 +226,7 @@ Object.defineProperties(Polyline.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug)
       if (!defined(value)) {
-        throw new DeveloperError("value is required.");
+        throw new DeveloperError('value is required.');
       }
       //>>includeEnd('debug');
 
@@ -235,7 +235,7 @@ Object.defineProperties(Polyline.prototype, {
         this._width = value;
         makeDirty(this, WIDTH_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -250,7 +250,7 @@ Object.defineProperties(Polyline.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug)
       if (!defined(value)) {
-        throw new DeveloperError("value is required.");
+        throw new DeveloperError('value is required.');
       }
       //>>includeEnd('debug');
 
@@ -280,7 +280,7 @@ Object.defineProperties(Polyline.prototype, {
         this._loop = value;
         makeDirty(this, POSITION_SIZE_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -297,7 +297,7 @@ Object.defineProperties(Polyline.prototype, {
       if (defined(this._pickId)) {
         this._pickId.object.id = value;
       }
-    },
+    }
   },
 
   /**
@@ -306,7 +306,7 @@ Object.defineProperties(Polyline.prototype, {
   pickId: {
     get: function () {
       return this._pickId;
-    },
+    }
   },
 
   /**
@@ -319,7 +319,7 @@ Object.defineProperties(Polyline.prototype, {
   isDestroyed: {
     get: function () {
       return !defined(this._polylineCollection);
-    },
+    }
   },
 
   /**
@@ -336,7 +336,7 @@ Object.defineProperties(Polyline.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (defined(value) && value.far <= value.near) {
         throw new DeveloperError(
-          "far distance must be greater than near distance."
+          'far distance must be greater than near distance.'
         );
       }
       //>>includeEnd('debug');
@@ -349,8 +349,8 @@ Object.defineProperties(Polyline.prototype, {
         );
         makeDirty(this, DISTANCE_DISPLAY_CONDITION);
       }
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -405,7 +405,7 @@ Polyline.prototype.getPickId = function (context) {
     this._pickId = context.createPickId({
       primitive: this,
       collection: this._polylineCollection,
-      id: this._id,
+      id: this._id
     });
   }
   return this._pickId;

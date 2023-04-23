@@ -1,4 +1,4 @@
-import DeveloperError from "./DeveloperError.js";
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Determines if a given date is a leap year.
@@ -14,7 +14,7 @@ import DeveloperError from "./DeveloperError.js";
 function isLeapYear(year) {
   //>>includeStart('debug', pragmas.debug);
   if (year === null || isNaN(year)) {
-    throw new DeveloperError("year is required and must be a number.");
+    throw new DeveloperError('year is required and must be a number.');
   }
   //>>includeEnd('debug');
 

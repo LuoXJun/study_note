@@ -1,29 +1,29 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import GeometryInstance from "./GeometryInstance.js";
-import GeometryOffsetAttribute from "./GeometryOffsetAttribute.js";
-import GeometryPipeline from "./GeometryPipeline.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
-import Matrix2 from "./Matrix2.js";
-import Matrix3 from "./Matrix3.js";
-import PolygonPipeline from "./PolygonPipeline.js";
-import PrimitiveType from "./PrimitiveType.js";
-import Quaternion from "./Quaternion.js";
-import Rectangle from "./Rectangle.js";
-import RectangleGeometryLibrary from "./RectangleGeometryLibrary.js";
-import VertexFormat from "./VertexFormat.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import GeometryInstance from './GeometryInstance.js';
+import GeometryOffsetAttribute from './GeometryOffsetAttribute.js';
+import GeometryPipeline from './GeometryPipeline.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
+import Matrix2 from './Matrix2.js';
+import Matrix3 from './Matrix3.js';
+import PolygonPipeline from './PolygonPipeline.js';
+import PrimitiveType from './PrimitiveType.js';
+import Quaternion from './Quaternion.js';
+import Rectangle from './Rectangle.js';
+import RectangleGeometryLibrary from './RectangleGeometryLibrary.js';
+import VertexFormat from './VertexFormat.js';
 
 const positionScratch = new Cartesian3();
 const normalScratch = new Cartesian3();
@@ -37,33 +37,33 @@ const topBoundingSphere = new BoundingSphere();
 function createAttributes(vertexFormat, attributes) {
   const geo = new Geometry({
     attributes: new GeometryAttributes(),
-    primitiveType: PrimitiveType.TRIANGLES,
+    primitiveType: PrimitiveType.TRIANGLES
   });
 
   geo.attributes.position = new GeometryAttribute({
     componentDatatype: ComponentDatatype.DOUBLE,
     componentsPerAttribute: 3,
-    values: attributes.positions,
+    values: attributes.positions
   });
   if (vertexFormat.normal) {
     geo.attributes.normal = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: attributes.normals,
+      values: attributes.normals
     });
   }
   if (vertexFormat.tangent) {
     geo.attributes.tangent = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: attributes.tangents,
+      values: attributes.tangents
     });
   }
   if (vertexFormat.bitangent) {
     geo.attributes.bitangent = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: attributes.bitangents,
+      values: attributes.bitangents
     });
   }
   return geo;
@@ -129,7 +129,7 @@ function calculateAttributes(
     positions: positions,
     normals: normals,
     tangents: tangents,
-    bitangents: bitangents,
+    bitangents: bitangents
   });
 }
 
@@ -213,7 +213,7 @@ function calculateAttributesWall(positions, vertexFormat, ellipsoid) {
     positions: positions,
     normals: normals,
     tangents: tangents,
-    bitangents: bitangents,
+    bitangents: bitangents
   });
 }
 
@@ -421,7 +421,7 @@ function constructRectangle(rectangleGeometry, computedOptions) {
     geo.attributes.st = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 2,
-      values: textureCoordinates,
+      values: textureCoordinates
     });
   }
 
@@ -535,7 +535,7 @@ function constructExtrudedRectangle(rectangleGeometry, computedOptions) {
     topBottomGeo.attributes.extrudeDirection = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: extrudeNormals,
+      values: extrudeNormals
     });
   }
 
@@ -555,7 +555,7 @@ function constructExtrudedRectangle(rectangleGeometry, computedOptions) {
     topBottomGeo.attributes.applyOffset = new GeometryAttribute({
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 1,
-      values: offsetAttribute,
+      values: offsetAttribute
     });
   }
 
@@ -846,21 +846,21 @@ function constructExtrudedRectangle(rectangleGeometry, computedOptions) {
     geo.attributes.st = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 2,
-      values: wallTextures,
+      values: wallTextures
     });
   }
   if (shadowVolume) {
     geo.attributes.extrudeDirection = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: wallExtrudeNormals,
+      values: wallExtrudeNormals
     });
   }
   if (hasOffsets) {
     geo.attributes.applyOffset = new GeometryAttribute({
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 1,
-      values: wallOffsetAttribute,
+      values: wallOffsetAttribute
     });
   }
 
@@ -897,11 +897,11 @@ function constructExtrudedRectangle(rectangleGeometry, computedOptions) {
 
   geo = GeometryPipeline.combineInstances([
     new GeometryInstance({
-      geometry: topBottomGeo,
+      geometry: topBottomGeo
     }),
     new GeometryInstance({
-      geometry: geo,
-    }),
+      geometry: geo
+    })
   ]);
 
   return geo[0];
@@ -911,7 +911,7 @@ const scratchRectanglePoints = [
   new Cartesian3(),
   new Cartesian3(),
   new Cartesian3(),
-  new Cartesian3(),
+  new Cartesian3()
 ];
 const nwScratch = new Cartographic();
 const stNwScratch = new Cartographic();
@@ -1019,11 +1019,11 @@ function RectangleGeometry(options) {
   const rectangle = options.rectangle;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.object('rectangle', rectangle);
   Rectangle.validate(rectangle);
   if (rectangle.north < rectangle.south) {
     throw new DeveloperError(
-      "options.rectangle.north must be greater than or equal to options.rectangle.south"
+      'options.rectangle.north must be greater than or equal to options.rectangle.south'
     );
   }
   //>>includeEnd('debug');
@@ -1047,7 +1047,7 @@ function RectangleGeometry(options) {
   );
   this._extrudedHeight = Math.min(height, extrudedHeight);
   this._shadowVolume = defaultValue(options.shadowVolume, false);
-  this._workerName = "createRectangleGeometry";
+  this._workerName = 'createRectangleGeometry';
   this._offsetAttribute = options.offsetAttribute;
   this._rotatedRectangle = undefined;
 
@@ -1075,8 +1075,8 @@ RectangleGeometry.packedLength =
  */
 RectangleGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -1113,7 +1113,7 @@ const scratchOptions = {
   stRotation: undefined,
   extrudedHeight: undefined,
   shadowVolume: undefined,
-  offsetAttribute: undefined,
+  offsetAttribute: undefined
 };
 
 /**
@@ -1126,7 +1126,7 @@ const scratchOptions = {
  */
 RectangleGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -1198,11 +1198,11 @@ RectangleGeometry.computeRectangle = function (options, result) {
   const rectangle = options.rectangle;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.object('rectangle', rectangle);
   Rectangle.validate(rectangle);
   if (rectangle.north < rectangle.south) {
     throw new DeveloperError(
-      "options.rectangle.north must be greater than or equal to options.rectangle.south"
+      'options.rectangle.north must be greater than or equal to options.rectangle.south'
     );
   }
   //>>includeEnd('debug');
@@ -1320,7 +1320,7 @@ RectangleGeometry.createGeometry = function (rectangleGeometry) {
       geometry.attributes.applyOffset = new GeometryAttribute({
         componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,
-        values: applyOffset,
+        values: applyOffset
       });
     }
 
@@ -1340,7 +1340,7 @@ RectangleGeometry.createGeometry = function (rectangleGeometry) {
     indices: geometry.indices,
     primitiveType: geometry.primitiveType,
     boundingSphere: boundingSphere,
-    offsetAttribute: rectangleGeometry._offsetAttribute,
+    offsetAttribute: rectangleGeometry._offsetAttribute
   });
 };
 
@@ -1367,7 +1367,7 @@ RectangleGeometry.createShadowVolume = function (
     extrudedHeight: maxHeight,
     height: minHeight,
     vertexFormat: VertexFormat.POSITION_ONLY,
-    shadowVolume: true,
+    shadowVolume: true
   });
 };
 
@@ -1466,7 +1466,7 @@ Object.defineProperties(RectangleGeometry.prototype, {
         );
       }
       return this._rotatedRectangle;
-    },
+    }
   },
   /**
    * For remapping texture coordinates when rendering RectangleGeometries as GroundPrimitives.
@@ -1478,12 +1478,11 @@ Object.defineProperties(RectangleGeometry.prototype, {
   textureCoordinateRotationPoints: {
     get: function () {
       if (!defined(this._textureCoordinateRotationPoints)) {
-        this._textureCoordinateRotationPoints = textureCoordinateRotationPoints(
-          this
-        );
+        this._textureCoordinateRotationPoints =
+          textureCoordinateRotationPoints(this);
       }
       return this._textureCoordinateRotationPoints;
-    },
-  },
+    }
+  }
 });
 export default RectangleGeometry;

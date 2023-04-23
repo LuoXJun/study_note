@@ -23,7 +23,24 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './AttributeCompression-f202be44', './ComponentDatatype-4eeb6d9b'], (function (exports, Transforms, Matrix2, RuntimeError, defaultValue, AttributeCompression, ComponentDatatype) { 'use strict';
+define([
+  'exports',
+  './Transforms-273eeb44',
+  './Matrix2-9e1c22e2',
+  './RuntimeError-4f8ec8a2',
+  './defaultValue-97284df2',
+  './AttributeCompression-f202be44',
+  './ComponentDatatype-4eeb6d9b'
+], function (
+  exports,
+  Transforms,
+  Matrix2,
+  RuntimeError,
+  defaultValue,
+  AttributeCompression,
+  ComponentDatatype
+) {
+  'use strict';
 
   /**
    * Determine whether or not other objects are visible or hidden behind the visible horizon defined by
@@ -50,7 +67,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    */
   function EllipsoidalOccluder(ellipsoid, cameraPosition) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("ellipsoid", ellipsoid);
+    RuntimeError.Check.typeOf.object('ellipsoid', ellipsoid);
     //>>includeEnd('debug');
 
     this._ellipsoid = ellipsoid;
@@ -73,7 +90,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     ellipsoid: {
       get: function () {
         return this._ellipsoid;
-      },
+      }
     },
     /**
      * Gets or sets the position of the camera.
@@ -91,13 +108,14 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
           cameraPosition,
           this._cameraPositionInScaledSpace
         );
-        const vhMagnitudeSquared = Matrix2.Cartesian3.magnitudeSquared(cv) - 1.0;
+        const vhMagnitudeSquared =
+          Matrix2.Cartesian3.magnitudeSquared(cv) - 1.0;
 
         Matrix2.Cartesian3.clone(cameraPosition, this._cameraPosition);
         this._cameraPositionInScaledSpace = cv;
         this._distanceToLimbInScaledSpaceSquared = vhMagnitudeSquared;
-      },
-    },
+      }
+    }
   });
 
   const scratchCartesian = new Matrix2.Cartesian3();
@@ -117,10 +135,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    */
   EllipsoidalOccluder.prototype.isPointVisible = function (occludee) {
     const ellipsoid = this._ellipsoid;
-    const occludeeScaledSpacePosition = ellipsoid.transformPositionToScaledSpace(
-      occludee,
-      scratchCartesian
-    );
+    const occludeeScaledSpacePosition =
+      ellipsoid.transformPositionToScaledSpace(occludee, scratchCartesian);
     return isScaledSpacePointVisible(
       occludeeScaledSpacePosition,
       this._cameraPositionInScaledSpace,
@@ -166,36 +182,34 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * @param {Cartesian3} occludeeScaledSpacePosition The point to test for visibility, represented in the scaled space of the possibly-shrunk ellipsoid.
    * @returns {Boolean} <code>true</code> if the occludee is visible; otherwise <code>false</code>.
    */
-  EllipsoidalOccluder.prototype.isScaledSpacePointVisiblePossiblyUnderEllipsoid = function (
-    occludeeScaledSpacePosition,
-    minimumHeight
-  ) {
-    const ellipsoid = this._ellipsoid;
-    let vhMagnitudeSquared;
-    let cv;
+  EllipsoidalOccluder.prototype.isScaledSpacePointVisiblePossiblyUnderEllipsoid =
+    function (occludeeScaledSpacePosition, minimumHeight) {
+      const ellipsoid = this._ellipsoid;
+      let vhMagnitudeSquared;
+      let cv;
 
-    if (
-      defaultValue.defined(minimumHeight) &&
-      minimumHeight < 0.0 &&
-      ellipsoid.minimumRadius > -minimumHeight
-    ) {
-      // This code is similar to the cameraPosition setter, but unrolled for performance because it will be called a lot.
-      cv = scratchCameraPositionInScaledSpaceShrunk;
-      cv.x = this._cameraPosition.x / (ellipsoid.radii.x + minimumHeight);
-      cv.y = this._cameraPosition.y / (ellipsoid.radii.y + minimumHeight);
-      cv.z = this._cameraPosition.z / (ellipsoid.radii.z + minimumHeight);
-      vhMagnitudeSquared = cv.x * cv.x + cv.y * cv.y + cv.z * cv.z - 1.0;
-    } else {
-      cv = this._cameraPositionInScaledSpace;
-      vhMagnitudeSquared = this._distanceToLimbInScaledSpaceSquared;
-    }
+      if (
+        defaultValue.defined(minimumHeight) &&
+        minimumHeight < 0.0 &&
+        ellipsoid.minimumRadius > -minimumHeight
+      ) {
+        // This code is similar to the cameraPosition setter, but unrolled for performance because it will be called a lot.
+        cv = scratchCameraPositionInScaledSpaceShrunk;
+        cv.x = this._cameraPosition.x / (ellipsoid.radii.x + minimumHeight);
+        cv.y = this._cameraPosition.y / (ellipsoid.radii.y + minimumHeight);
+        cv.z = this._cameraPosition.z / (ellipsoid.radii.z + minimumHeight);
+        vhMagnitudeSquared = cv.x * cv.x + cv.y * cv.y + cv.z * cv.z - 1.0;
+      } else {
+        cv = this._cameraPositionInScaledSpace;
+        vhMagnitudeSquared = this._distanceToLimbInScaledSpaceSquared;
+      }
 
-    return isScaledSpacePointVisible(
-      occludeeScaledSpacePosition,
-      cv,
-      vhMagnitudeSquared
-    );
-  };
+      return isScaledSpacePointVisible(
+        occludeeScaledSpacePosition,
+        cv,
+        vhMagnitudeSquared
+      );
+    };
 
   /**
    * Computes a point that can be used for horizon culling from a list of positions.  If the point is below
@@ -226,7 +240,9 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     );
   };
 
-  const scratchEllipsoidShrunk = Matrix2.Ellipsoid.clone(Matrix2.Ellipsoid.UNIT_SPHERE);
+  const scratchEllipsoidShrunk = Matrix2.Ellipsoid.clone(
+    Matrix2.Ellipsoid.UNIT_SPHERE
+  );
 
   /**
    * Similar to {@link EllipsoidalOccluder#computeHorizonCullingPoint} except computes the culling
@@ -245,24 +261,20 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * @param {Cartesian3} [result] The instance on which to store the result instead of allocating a new instance.
    * @returns {Cartesian3} The computed horizon culling point, expressed in the possibly-shrunk ellipsoid-scaled space.
    */
-  EllipsoidalOccluder.prototype.computeHorizonCullingPointPossiblyUnderEllipsoid = function (
-    directionToPoint,
-    positions,
-    minimumHeight,
-    result
-  ) {
-    const possiblyShrunkEllipsoid = getPossiblyShrunkEllipsoid(
-      this._ellipsoid,
-      minimumHeight,
-      scratchEllipsoidShrunk
-    );
-    return computeHorizonCullingPointFromPositions(
-      possiblyShrunkEllipsoid,
-      directionToPoint,
-      positions,
-      result
-    );
-  };
+  EllipsoidalOccluder.prototype.computeHorizonCullingPointPossiblyUnderEllipsoid =
+    function (directionToPoint, positions, minimumHeight, result) {
+      const possiblyShrunkEllipsoid = getPossiblyShrunkEllipsoid(
+        this._ellipsoid,
+        minimumHeight,
+        scratchEllipsoidShrunk
+      );
+      return computeHorizonCullingPointFromPositions(
+        possiblyShrunkEllipsoid,
+        directionToPoint,
+        positions,
+        result
+      );
+    };
   /**
    * Computes a point that can be used for horizon culling from a list of positions.  If the point is below
    * the horizon, all of the positions are guaranteed to be below the horizon as well.  The returned point
@@ -281,22 +293,17 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * @param {Cartesian3} [result] The instance on which to store the result instead of allocating a new instance.
    * @returns {Cartesian3} The computed horizon culling point, expressed in the ellipsoid-scaled space.
    */
-  EllipsoidalOccluder.prototype.computeHorizonCullingPointFromVertices = function (
-    directionToPoint,
-    vertices,
-    stride,
-    center,
-    result
-  ) {
-    return computeHorizonCullingPointFromVertices(
-      this._ellipsoid,
-      directionToPoint,
-      vertices,
-      stride,
-      center,
-      result
-    );
-  };
+  EllipsoidalOccluder.prototype.computeHorizonCullingPointFromVertices =
+    function (directionToPoint, vertices, stride, center, result) {
+      return computeHorizonCullingPointFromVertices(
+        this._ellipsoid,
+        directionToPoint,
+        vertices,
+        stride,
+        center,
+        result
+      );
+    };
 
   /**
    * Similar to {@link EllipsoidalOccluder#computeHorizonCullingPointFromVertices} except computes the culling
@@ -317,28 +324,29 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * @param {Cartesian3} [result] The instance on which to store the result instead of allocating a new instance.
    * @returns {Cartesian3} The computed horizon culling point, expressed in the possibly-shrunk ellipsoid-scaled space.
    */
-  EllipsoidalOccluder.prototype.computeHorizonCullingPointFromVerticesPossiblyUnderEllipsoid = function (
-    directionToPoint,
-    vertices,
-    stride,
-    center,
-    minimumHeight,
-    result
-  ) {
-    const possiblyShrunkEllipsoid = getPossiblyShrunkEllipsoid(
-      this._ellipsoid,
-      minimumHeight,
-      scratchEllipsoidShrunk
-    );
-    return computeHorizonCullingPointFromVertices(
-      possiblyShrunkEllipsoid,
+  EllipsoidalOccluder.prototype.computeHorizonCullingPointFromVerticesPossiblyUnderEllipsoid =
+    function (
       directionToPoint,
       vertices,
       stride,
       center,
+      minimumHeight,
       result
-    );
-  };
+    ) {
+      const possiblyShrunkEllipsoid = getPossiblyShrunkEllipsoid(
+        this._ellipsoid,
+        minimumHeight,
+        scratchEllipsoidShrunk
+      );
+      return computeHorizonCullingPointFromVertices(
+        possiblyShrunkEllipsoid,
+        directionToPoint,
+        vertices,
+        stride,
+        center,
+        result
+      );
+    };
 
   const subsampleScratch = [];
 
@@ -354,31 +362,31 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * @param {Cartesian3} [result] The instance on which to store the result instead of allocating a new instance.
    * @returns {Cartesian3} The computed horizon culling point, expressed in the ellipsoid-scaled space.
    */
-  EllipsoidalOccluder.prototype.computeHorizonCullingPointFromRectangle = function (
-    rectangle,
-    ellipsoid,
-    result
-  ) {
-    //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
-    //>>includeEnd('debug');
+  EllipsoidalOccluder.prototype.computeHorizonCullingPointFromRectangle =
+    function (rectangle, ellipsoid, result) {
+      //>>includeStart('debug', pragmas.debug);
+      RuntimeError.Check.typeOf.object('rectangle', rectangle);
+      //>>includeEnd('debug');
 
-    const positions = Matrix2.Rectangle.subsample(
-      rectangle,
-      ellipsoid,
-      0.0,
-      subsampleScratch
-    );
-    const bs = Transforms.BoundingSphere.fromPoints(positions);
+      const positions = Matrix2.Rectangle.subsample(
+        rectangle,
+        ellipsoid,
+        0.0,
+        subsampleScratch
+      );
+      const bs = Transforms.BoundingSphere.fromPoints(positions);
 
-    // If the bounding sphere center is too close to the center of the occluder, it doesn't make
-    // sense to try to horizon cull it.
-    if (Matrix2.Cartesian3.magnitude(bs.center) < 0.1 * ellipsoid.minimumRadius) {
-      return undefined;
-    }
+      // If the bounding sphere center is too close to the center of the occluder, it doesn't make
+      // sense to try to horizon cull it.
+      if (
+        Matrix2.Cartesian3.magnitude(bs.center) <
+        0.1 * ellipsoid.minimumRadius
+      ) {
+        return undefined;
+      }
 
-    return this.computeHorizonCullingPoint(bs.center, positions, result);
-  };
+      return this.computeHorizonCullingPoint(bs.center, positions, result);
+    };
 
   const scratchEllipsoidShrunkRadii = new Matrix2.Cartesian3();
 
@@ -394,7 +402,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         ellipsoid.radii.z + minimumHeight,
         scratchEllipsoidShrunkRadii
       );
-      ellipsoid = Matrix2.Ellipsoid.fromCartesian3(ellipsoidShrunkRadii, result);
+      ellipsoid = Matrix2.Ellipsoid.fromCartesian3(
+        ellipsoidShrunkRadii,
+        result
+      );
     }
     return ellipsoid;
   }
@@ -406,8 +417,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("directionToPoint", directionToPoint);
-    RuntimeError.Check.defined("positions", positions);
+    RuntimeError.Check.typeOf.object('directionToPoint', directionToPoint);
+    RuntimeError.Check.defined('positions', positions);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -434,7 +445,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       resultMagnitude = Math.max(resultMagnitude, candidateMagnitude);
     }
 
-    return magnitudeToPoint(scaledSpaceDirectionToPoint, resultMagnitude, result);
+    return magnitudeToPoint(
+      scaledSpaceDirectionToPoint,
+      resultMagnitude,
+      result
+    );
   }
 
   const positionScratch = new Matrix2.Cartesian3();
@@ -448,9 +463,9 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("directionToPoint", directionToPoint);
-    RuntimeError.Check.defined("vertices", vertices);
-    RuntimeError.Check.typeOf.number("stride", stride);
+    RuntimeError.Check.typeOf.object('directionToPoint', directionToPoint);
+    RuntimeError.Check.defined('vertices', vertices);
+    RuntimeError.Check.typeOf.number('stride', stride);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -482,7 +497,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       resultMagnitude = Math.max(resultMagnitude, candidateMagnitude);
     }
 
-    return magnitudeToPoint(scaledSpaceDirectionToPoint, resultMagnitude, result);
+    return magnitudeToPoint(
+      scaledSpaceDirectionToPoint,
+      resultMagnitude,
+      result
+    );
   }
 
   function isScaledSpacePointVisible(
@@ -518,7 +537,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       position,
       scaledSpaceScratch
     );
-    let magnitudeSquared = Matrix2.Cartesian3.magnitudeSquared(scaledSpacePosition);
+    let magnitudeSquared =
+      Matrix2.Cartesian3.magnitudeSquared(scaledSpacePosition);
     let magnitude = Math.sqrt(magnitudeSquared);
     const direction = Matrix2.Cartesian3.divideByScalar(
       scaledSpacePosition,
@@ -530,9 +550,16 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     magnitudeSquared = Math.max(1.0, magnitudeSquared);
     magnitude = Math.max(1.0, magnitude);
 
-    const cosAlpha = Matrix2.Cartesian3.dot(direction, scaledSpaceDirectionToPoint);
+    const cosAlpha = Matrix2.Cartesian3.dot(
+      direction,
+      scaledSpaceDirectionToPoint
+    );
     const sinAlpha = Matrix2.Cartesian3.magnitude(
-      Matrix2.Cartesian3.cross(direction, scaledSpaceDirectionToPoint, direction)
+      Matrix2.Cartesian3.cross(
+        direction,
+        scaledSpaceDirectionToPoint,
+        direction
+      )
     );
     const cosBeta = 1.0 / magnitude;
     const sinBeta = Math.sqrt(magnitudeSquared - 1.0) * cosBeta;
@@ -573,7 +600,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       directionToPoint,
       directionToPointScratch
     );
-    return Matrix2.Cartesian3.normalize(directionToPointScratch, directionToPointScratch);
+    return Matrix2.Cartesian3.normalize(
+      directionToPointScratch,
+      directionToPointScratch
+    );
   }
 
   /**
@@ -644,7 +674,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
      * @type {Number}
      * @constant
      */
-    BITS12: 1,
+    BITS12: 1
   };
   var TerrainQuantization$1 = Object.freeze(TerrainQuantization);
 
@@ -707,7 +737,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         cartesian3DimScratch
       );
       const hDim = maximumHeight - minimumHeight;
-      const maxDim = Math.max(Matrix2.Cartesian3.maximumComponent(dimensions), hDim);
+      const maxDim = Math.max(
+        Matrix2.Cartesian3.maximumComponent(dimensions),
+        hDim
+      );
 
       if (maxDim < SHIFT_LEFT_12 - 1.0) {
         quantization = TerrainQuantization$1.BITS12;
@@ -715,7 +748,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         quantization = TerrainQuantization$1.NONE;
       }
 
-      toENU = Matrix2.Matrix4.inverseTransformation(fromENU, new Matrix2.Matrix4());
+      toENU = Matrix2.Matrix4.inverseTransformation(
+        fromENU,
+        new Matrix2.Matrix4()
+      );
 
       const translation = Matrix2.Cartesian3.negate(minimum, cartesian3Scratch);
       Matrix2.Matrix4.multiply(
@@ -728,16 +764,30 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       scale.x = 1.0 / dimensions.x;
       scale.y = 1.0 / dimensions.y;
       scale.z = 1.0 / dimensions.z;
-      Matrix2.Matrix4.multiply(Matrix2.Matrix4.fromScale(scale, matrix4Scratch), toENU, toENU);
+      Matrix2.Matrix4.multiply(
+        Matrix2.Matrix4.fromScale(scale, matrix4Scratch),
+        toENU,
+        toENU
+      );
 
       matrix = Matrix2.Matrix4.clone(fromENU);
       Matrix2.Matrix4.setTranslation(matrix, Matrix2.Cartesian3.ZERO, matrix);
 
       fromENU = Matrix2.Matrix4.clone(fromENU, new Matrix2.Matrix4());
 
-      const translationMatrix = Matrix2.Matrix4.fromTranslation(minimum, matrix4Scratch);
-      const scaleMatrix = Matrix2.Matrix4.fromScale(dimensions, matrix4Scratch2);
-      const st = Matrix2.Matrix4.multiply(translationMatrix, scaleMatrix, matrix4Scratch);
+      const translationMatrix = Matrix2.Matrix4.fromTranslation(
+        minimum,
+        matrix4Scratch
+      );
+      const scaleMatrix = Matrix2.Matrix4.fromScale(
+        dimensions,
+        matrix4Scratch2
+      );
+      const st = Matrix2.Matrix4.multiply(
+        translationMatrix,
+        scaleMatrix,
+        matrix4Scratch
+      );
 
       Matrix2.Matrix4.multiply(fromENU, st, fromENU);
       Matrix2.Matrix4.multiply(matrix, st, matrix);
@@ -859,22 +909,33 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       position.z = ComponentDatatype.CesiumMath.clamp(position.z, 0.0, 1.0);
 
       const hDim = this.maximumHeight - this.minimumHeight;
-      const h = ComponentDatatype.CesiumMath.clamp((height - this.minimumHeight) / hDim, 0.0, 1.0);
+      const h = ComponentDatatype.CesiumMath.clamp(
+        (height - this.minimumHeight) / hDim,
+        0.0,
+        1.0
+      );
 
-      Matrix2.Cartesian2.fromElements(position.x, position.y, cartesian2Scratch);
-      const compressed0 = AttributeCompression.AttributeCompression.compressTextureCoordinates(
+      Matrix2.Cartesian2.fromElements(
+        position.x,
+        position.y,
         cartesian2Scratch
       );
+      const compressed0 =
+        AttributeCompression.AttributeCompression.compressTextureCoordinates(
+          cartesian2Scratch
+        );
 
       Matrix2.Cartesian2.fromElements(position.z, h, cartesian2Scratch);
-      const compressed1 = AttributeCompression.AttributeCompression.compressTextureCoordinates(
-        cartesian2Scratch
-      );
+      const compressed1 =
+        AttributeCompression.AttributeCompression.compressTextureCoordinates(
+          cartesian2Scratch
+        );
 
       Matrix2.Cartesian2.fromElements(u, v, cartesian2Scratch);
-      const compressed2 = AttributeCompression.AttributeCompression.compressTextureCoordinates(
-        cartesian2Scratch
-      );
+      const compressed2 =
+        AttributeCompression.AttributeCompression.compressTextureCoordinates(
+          cartesian2Scratch
+        );
 
       vertexBuffer[bufferIndex++] = compressed0;
       vertexBuffer[bufferIndex++] = compressed1;
@@ -882,9 +943,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
 
       if (this.hasWebMercatorT) {
         Matrix2.Cartesian2.fromElements(webMercatorT, 0.0, cartesian2Scratch);
-        const compressed3 = AttributeCompression.AttributeCompression.compressTextureCoordinates(
-          cartesian2Scratch
-        );
+        const compressed3 =
+          AttributeCompression.AttributeCompression.compressTextureCoordinates(
+            cartesian2Scratch
+          );
         vertexBuffer[bufferIndex++] = compressed3;
       }
     } else {
@@ -903,9 +965,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     }
 
     if (this.hasVertexNormals) {
-      vertexBuffer[bufferIndex++] = AttributeCompression.AttributeCompression.octPackFloat(
-        normalToPack
-      );
+      vertexBuffer[bufferIndex++] =
+        AttributeCompression.AttributeCompression.octPackFloat(normalToPack);
     }
 
     if (this.hasGeodeticSurfaceNormals) {
@@ -985,20 +1046,26 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     index *= this.stride;
 
     if (this.quantization === TerrainQuantization$1.BITS12) {
-      const xy = AttributeCompression.AttributeCompression.decompressTextureCoordinates(
-        buffer[index],
-        cartesian2Scratch
-      );
+      const xy =
+        AttributeCompression.AttributeCompression.decompressTextureCoordinates(
+          buffer[index],
+          cartesian2Scratch
+        );
       result.x = xy.x;
       result.y = xy.y;
 
-      const zh = AttributeCompression.AttributeCompression.decompressTextureCoordinates(
-        buffer[index + 1],
-        cartesian2Scratch
-      );
+      const zh =
+        AttributeCompression.AttributeCompression.decompressTextureCoordinates(
+          buffer[index + 1],
+          cartesian2Scratch
+        );
       result.z = zh.x;
 
-      return Matrix2.Matrix4.multiplyByPoint(this.fromScaledENU, result, result);
+      return Matrix2.Matrix4.multiplyByPoint(
+        this.fromScaledENU,
+        result,
+        result
+      );
     }
 
     result.x = buffer[index];
@@ -1058,17 +1125,22 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       );
     }
 
-    return Matrix2.Cartesian2.fromElements(buffer[index + 4], buffer[index + 5], result);
+    return Matrix2.Cartesian2.fromElements(
+      buffer[index + 4],
+      buffer[index + 5],
+      result
+    );
   };
 
   TerrainEncoding.prototype.decodeHeight = function (buffer, index) {
     index *= this.stride;
 
     if (this.quantization === TerrainQuantization$1.BITS12) {
-      const zh = AttributeCompression.AttributeCompression.decompressTextureCoordinates(
-        buffer[index + 1],
-        cartesian2Scratch
-      );
+      const zh =
+        AttributeCompression.AttributeCompression.decompressTextureCoordinates(
+          buffer[index + 1],
+          cartesian2Scratch
+        );
       return (
         zh.y * (this.maximumHeight - this.minimumHeight) + this.minimumHeight
       );
@@ -1145,17 +1217,18 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
   const attributesIndicesNone = {
     position3DAndHeight: 0,
     textureCoordAndEncodedNormals: 1,
-    geodeticSurfaceNormal: 2,
+    geodeticSurfaceNormal: 2
   };
   const attributesIndicesBits12 = {
     compressed0: 0,
     compressed1: 1,
-    geodeticSurfaceNormal: 2,
+    geodeticSurfaceNormal: 2
   };
 
   TerrainEncoding.prototype.getAttributes = function (buffer) {
     const datatype = ComponentDatatype.ComponentDatatype.FLOAT;
-    const sizeInBytes = ComponentDatatype.ComponentDatatype.getSizeInBytes(datatype);
+    const sizeInBytes =
+      ComponentDatatype.ComponentDatatype.getSizeInBytes(datatype);
     const strideInBytes = this.stride * sizeInBytes;
     let offsetInBytes = 0;
 
@@ -1167,7 +1240,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         componentDatatype: datatype,
         componentsPerAttribute: componentsPerAttribute,
         offsetInBytes: offsetInBytes,
-        strideInBytes: strideInBytes,
+        strideInBytes: strideInBytes
       });
       offsetInBytes += componentsPerAttribute * sizeInBytes;
     }
@@ -1246,6 +1319,5 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
 
   exports.EllipsoidalOccluder = EllipsoidalOccluder;
   exports.TerrainEncoding = TerrainEncoding;
-
-}));
+});
 //# sourceMappingURL=TerrainEncoding-8fbe9124.js.map

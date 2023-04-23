@@ -1,7 +1,7 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import CesiumMath from "../Core/Math.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import CesiumMath from '../Core/Math.js';
 
 const defaultAngle = CesiumMath.toRadians(30.0);
 
@@ -31,11 +31,11 @@ Object.defineProperties(ConeEmitter.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number("value", value);
+      Check.typeOf.number('value', value);
       //>>includeEnd('debug');
       this._angle = value;
-    },
-  },
+    }
+  }
 });
 
 /**

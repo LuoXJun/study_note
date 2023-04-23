@@ -1,4 +1,4 @@
-import WebGLConstants from "../Core/WebGLConstants.js";
+import WebGLConstants from '../Core/WebGLConstants.js';
 
 /**
  * Determines the function used to compare stencil values for the stencil test.
@@ -68,6 +68,6 @@ const StencilFunction = {
    * @type {Number}
    * @constant
    */
-  ALWAYS: WebGLConstants.ALWAYS,
+  ALWAYS: WebGLConstants.ALWAYS
 };
 export default Object.freeze(StencilFunction);

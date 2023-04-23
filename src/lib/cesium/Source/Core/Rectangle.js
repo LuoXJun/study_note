@@ -1,9 +1,9 @@
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Ellipsoid from "./Ellipsoid.js";
-import CesiumMath from "./Math.js";
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Ellipsoid from './Ellipsoid.js';
+import CesiumMath from './Math.js';
 
 /**
  * A two dimensional region specified as longitude and latitude coordinates.
@@ -62,7 +62,7 @@ Object.defineProperties(Rectangle.prototype, {
   width: {
     get: function () {
       return Rectangle.computeWidth(this);
-    },
+    }
   },
 
   /**
@@ -74,8 +74,8 @@ Object.defineProperties(Rectangle.prototype, {
   height: {
     get: function () {
       return Rectangle.computeHeight(this);
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -95,8 +95,8 @@ Rectangle.packedLength = 4;
  */
 Rectangle.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -119,7 +119,7 @@ Rectangle.pack = function (value, array, startingIndex) {
  */
 Rectangle.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -142,7 +142,7 @@ Rectangle.unpack = function (array, startingIndex, result) {
  */
 Rectangle.computeWidth = function (rectangle) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.object('rectangle', rectangle);
   //>>includeEnd('debug');
   let east = rectangle.east;
   const west = rectangle.west;
@@ -159,7 +159,7 @@ Rectangle.computeWidth = function (rectangle) {
  */
 Rectangle.computeHeight = function (rectangle) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.object('rectangle', rectangle);
   //>>includeEnd('debug');
   return rectangle.north - rectangle.south;
 };
@@ -230,7 +230,7 @@ Rectangle.fromRadians = function (west, south, east, north, result) {
  */
 Rectangle.fromCartographicArray = function (cartographics, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("cartographics", cartographics);
+  Check.defined('cartographics', cartographics);
   //>>includeEnd('debug');
 
   let west = Number.MAX_VALUE;
@@ -288,7 +288,7 @@ Rectangle.fromCartographicArray = function (cartographics, result) {
  */
 Rectangle.fromCartesianArray = function (cartesians, ellipsoid, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("cartesians", cartesians);
+  Check.defined('cartesians', cartesians);
   //>>includeEnd('debug');
   ellipsoid = defaultValue(ellipsoid, Ellipsoid.WGS84);
 
@@ -455,31 +455,31 @@ Rectangle.prototype.equalsEpsilon = function (other, epsilon) {
  */
 Rectangle.validate = function (rectangle) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.object('rectangle', rectangle);
 
   const north = rectangle.north;
   Check.typeOf.number.greaterThanOrEquals(
-    "north",
+    'north',
     north,
     -CesiumMath.PI_OVER_TWO
   );
-  Check.typeOf.number.lessThanOrEquals("north", north, CesiumMath.PI_OVER_TWO);
+  Check.typeOf.number.lessThanOrEquals('north', north, CesiumMath.PI_OVER_TWO);
 
   const south = rectangle.south;
   Check.typeOf.number.greaterThanOrEquals(
-    "south",
+    'south',
     south,
     -CesiumMath.PI_OVER_TWO
   );
-  Check.typeOf.number.lessThanOrEquals("south", south, CesiumMath.PI_OVER_TWO);
+  Check.typeOf.number.lessThanOrEquals('south', south, CesiumMath.PI_OVER_TWO);
 
   const west = rectangle.west;
-  Check.typeOf.number.greaterThanOrEquals("west", west, -Math.PI);
-  Check.typeOf.number.lessThanOrEquals("west", west, Math.PI);
+  Check.typeOf.number.greaterThanOrEquals('west', west, -Math.PI);
+  Check.typeOf.number.lessThanOrEquals('west', west, Math.PI);
 
   const east = rectangle.east;
-  Check.typeOf.number.greaterThanOrEquals("east", east, -Math.PI);
-  Check.typeOf.number.lessThanOrEquals("east", east, Math.PI);
+  Check.typeOf.number.greaterThanOrEquals('east', east, -Math.PI);
+  Check.typeOf.number.lessThanOrEquals('east', east, Math.PI);
   //>>includeEnd('debug');
 };
 
@@ -492,7 +492,7 @@ Rectangle.validate = function (rectangle) {
  */
 Rectangle.southwest = function (rectangle, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.object('rectangle', rectangle);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -513,7 +513,7 @@ Rectangle.southwest = function (rectangle, result) {
  */
 Rectangle.northwest = function (rectangle, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.object('rectangle', rectangle);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -534,7 +534,7 @@ Rectangle.northwest = function (rectangle, result) {
  */
 Rectangle.northeast = function (rectangle, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.object('rectangle', rectangle);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -555,7 +555,7 @@ Rectangle.northeast = function (rectangle, result) {
  */
 Rectangle.southeast = function (rectangle, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.object('rectangle', rectangle);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -576,7 +576,7 @@ Rectangle.southeast = function (rectangle, result) {
  */
 Rectangle.center = function (rectangle, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.object('rectangle', rectangle);
   //>>includeEnd('debug');
 
   let east = rectangle.east;
@@ -613,8 +613,8 @@ Rectangle.center = function (rectangle, result) {
  */
 Rectangle.intersection = function (rectangle, otherRectangle, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
-  Check.typeOf.object("otherRectangle", otherRectangle);
+  Check.typeOf.object('rectangle', rectangle);
+  Check.typeOf.object('otherRectangle', otherRectangle);
   //>>includeEnd('debug');
 
   let rectangleEast = rectangle.east;
@@ -680,8 +680,8 @@ Rectangle.intersection = function (rectangle, otherRectangle, result) {
  */
 Rectangle.simpleIntersection = function (rectangle, otherRectangle, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
-  Check.typeOf.object("otherRectangle", otherRectangle);
+  Check.typeOf.object('rectangle', rectangle);
+  Check.typeOf.object('otherRectangle', otherRectangle);
   //>>includeEnd('debug');
 
   const west = Math.max(rectangle.west, otherRectangle.west);
@@ -714,8 +714,8 @@ Rectangle.simpleIntersection = function (rectangle, otherRectangle, result) {
  */
 Rectangle.union = function (rectangle, otherRectangle, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
-  Check.typeOf.object("otherRectangle", otherRectangle);
+  Check.typeOf.object('rectangle', rectangle);
+  Check.typeOf.object('otherRectangle', otherRectangle);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -765,8 +765,8 @@ Rectangle.union = function (rectangle, otherRectangle, result) {
  */
 Rectangle.expand = function (rectangle, cartographic, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
-  Check.typeOf.object("cartographic", cartographic);
+  Check.typeOf.object('rectangle', rectangle);
+  Check.typeOf.object('cartographic', cartographic);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -790,8 +790,8 @@ Rectangle.expand = function (rectangle, cartographic, result) {
  */
 Rectangle.contains = function (rectangle, cartographic) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
-  Check.typeOf.object("cartographic", cartographic);
+  Check.typeOf.object('rectangle', rectangle);
+  Check.typeOf.object('cartographic', cartographic);
   //>>includeEnd('debug');
 
   let longitude = cartographic.longitude;
@@ -830,7 +830,7 @@ const subsampleLlaScratch = new Cartographic();
  */
 Rectangle.subsample = function (rectangle, ellipsoid, surfaceHeight, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.object('rectangle', rectangle);
   //>>includeEnd('debug');
 
   ellipsoid = defaultValue(ellipsoid, Ellipsoid.WGS84);
@@ -914,18 +914,18 @@ Rectangle.subsection = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
-  Check.typeOf.number.greaterThanOrEquals("westLerp", westLerp, 0.0);
-  Check.typeOf.number.lessThanOrEquals("westLerp", westLerp, 1.0);
-  Check.typeOf.number.greaterThanOrEquals("southLerp", southLerp, 0.0);
-  Check.typeOf.number.lessThanOrEquals("southLerp", southLerp, 1.0);
-  Check.typeOf.number.greaterThanOrEquals("eastLerp", eastLerp, 0.0);
-  Check.typeOf.number.lessThanOrEquals("eastLerp", eastLerp, 1.0);
-  Check.typeOf.number.greaterThanOrEquals("northLerp", northLerp, 0.0);
-  Check.typeOf.number.lessThanOrEquals("northLerp", northLerp, 1.0);
+  Check.typeOf.object('rectangle', rectangle);
+  Check.typeOf.number.greaterThanOrEquals('westLerp', westLerp, 0.0);
+  Check.typeOf.number.lessThanOrEquals('westLerp', westLerp, 1.0);
+  Check.typeOf.number.greaterThanOrEquals('southLerp', southLerp, 0.0);
+  Check.typeOf.number.lessThanOrEquals('southLerp', southLerp, 1.0);
+  Check.typeOf.number.greaterThanOrEquals('eastLerp', eastLerp, 0.0);
+  Check.typeOf.number.lessThanOrEquals('eastLerp', eastLerp, 1.0);
+  Check.typeOf.number.greaterThanOrEquals('northLerp', northLerp, 0.0);
+  Check.typeOf.number.lessThanOrEquals('northLerp', northLerp, 1.0);
 
-  Check.typeOf.number.lessThanOrEquals("westLerp", westLerp, eastLerp);
-  Check.typeOf.number.lessThanOrEquals("southLerp", southLerp, northLerp);
+  Check.typeOf.number.lessThanOrEquals('westLerp', westLerp, eastLerp);
+  Check.typeOf.number.lessThanOrEquals('southLerp', southLerp, northLerp);
   //>>includeEnd('debug');
 
   if (!defined(result)) {

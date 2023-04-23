@@ -1,14 +1,14 @@
-import ComponentDatatype from "../../Core/ComponentDatatype.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import Buffer from "../../Renderer/Buffer.js";
-import BufferUsage from "../../Renderer/BufferUsage.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
-import VertexAttributeSemantic from "../VertexAttributeSemantic.js";
-import ModelComponents from "../ModelComponents.js";
-import FeatureIdStageFS from "../../Shaders/ModelExperimental/FeatureIdStageFS.js";
-import FeatureIdStageVS from "../../Shaders/ModelExperimental/FeatureIdStageVS.js";
+import ComponentDatatype from '../../Core/ComponentDatatype.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import Buffer from '../../Renderer/Buffer.js';
+import BufferUsage from '../../Renderer/BufferUsage.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
+import VertexAttributeSemantic from '../VertexAttributeSemantic.js';
+import ModelComponents from '../ModelComponents.js';
+import FeatureIdStageFS from '../../Shaders/ModelExperimental/FeatureIdStageFS.js';
+import FeatureIdStageVS from '../../Shaders/ModelExperimental/FeatureIdStageVS.js';
 
 /**
  * The feature ID pipeline stage is responsible for processing feature IDs
@@ -19,27 +19,27 @@ import FeatureIdStageVS from "../../Shaders/ModelExperimental/FeatureIdStageVS.j
  * @private
  */
 const FeatureIdPipelineStage = {};
-FeatureIdPipelineStage.name = "FeatureIdPipelineStage"; // Helps with debugging
+FeatureIdPipelineStage.name = 'FeatureIdPipelineStage'; // Helps with debugging
 
-FeatureIdPipelineStage.STRUCT_ID_FEATURE_IDS_VS = "FeatureIdsVS";
-FeatureIdPipelineStage.STRUCT_ID_FEATURE_IDS_FS = "FeatureIdsFS";
-FeatureIdPipelineStage.STRUCT_NAME_FEATURE_IDS = "FeatureIds";
+FeatureIdPipelineStage.STRUCT_ID_FEATURE_IDS_VS = 'FeatureIdsVS';
+FeatureIdPipelineStage.STRUCT_ID_FEATURE_IDS_FS = 'FeatureIdsFS';
+FeatureIdPipelineStage.STRUCT_NAME_FEATURE_IDS = 'FeatureIds';
 FeatureIdPipelineStage.FUNCTION_ID_INITIALIZE_FEATURE_IDS_VS =
-  "initializeFeatureIdsVS";
+  'initializeFeatureIdsVS';
 FeatureIdPipelineStage.FUNCTION_ID_INITIALIZE_FEATURE_IDS_FS =
-  "initializeFeatureIdsFS";
+  'initializeFeatureIdsFS';
 FeatureIdPipelineStage.FUNCTION_ID_INITIALIZE_FEATURE_ID_ALIASES_VS =
-  "initializeFeatureIdAliasesVS";
+  'initializeFeatureIdAliasesVS';
 FeatureIdPipelineStage.FUNCTION_ID_INITIALIZE_FEATURE_ID_ALIASES_FS =
-  "initializeFeatureIdAliasesFS";
+  'initializeFeatureIdAliasesFS';
 FeatureIdPipelineStage.FUNCTION_SIGNATURE_INITIALIZE_FEATURE_IDS =
-  "void initializeFeatureIds(out FeatureIds featureIds, ProcessedAttributes attributes)";
+  'void initializeFeatureIds(out FeatureIds featureIds, ProcessedAttributes attributes)';
 FeatureIdPipelineStage.FUNCTION_SIGNATURE_INITIALIZE_FEATURE_ID_ALIASES =
-  "void initializeFeatureIdAliases(inout FeatureIds featureIds)";
+  'void initializeFeatureIdAliases(inout FeatureIds featureIds)';
 FeatureIdPipelineStage.FUNCTION_ID_SET_FEATURE_ID_VARYINGS =
-  "setFeatureIdVaryings";
+  'setFeatureIdVaryings';
 FeatureIdPipelineStage.FUNCTION_SIGNATURE_SET_FEATURE_ID_VARYINGS =
-  "void setFeatureIdVaryings()";
+  'void setFeatureIdVaryings()';
 
 /**
  * Process a primitive. This modifies the following parts of the render resources:
@@ -201,19 +201,19 @@ function processInstanceAttribute(
   const shaderBuilder = renderResources.shaderBuilder;
   shaderBuilder.addStructField(
     FeatureIdPipelineStage.STRUCT_ID_FEATURE_IDS_VS,
-    "int",
+    'int',
     variableName
   );
   shaderBuilder.addStructField(
     FeatureIdPipelineStage.STRUCT_ID_FEATURE_IDS_FS,
-    "int",
+    'int',
     variableName
   );
 
   // Initialize the field from the corresponding attribute.
   // Example: featureIds.instanceFeatureId_n = int(czm_round(attributes.instanceFeatureId_0));
   const setIndex = featureIdAttribute.setIndex;
-  const prefix = variableName.replace(/_\d+$/, "_");
+  const prefix = variableName.replace(/_\d+$/, '_');
 
   const attributeName = `a_${prefix}${setIndex}`;
   const varyingName = `v_${prefix}${setIndex}`;
@@ -230,7 +230,7 @@ function processInstanceAttribute(
   );
 
   // Instanced attributes don't normally need varyings, so add one here
-  shaderBuilder.addVarying("float", varyingName);
+  shaderBuilder.addVarying('float', varyingName);
 
   // The varying needs initialization in the vertex shader
   // Example:
@@ -252,12 +252,12 @@ function processAttribute(renderResources, featureIdAttribute, variableName) {
   const shaderBuilder = renderResources.shaderBuilder;
   shaderBuilder.addStructField(
     FeatureIdPipelineStage.STRUCT_ID_FEATURE_IDS_VS,
-    "int",
+    'int',
     variableName
   );
   shaderBuilder.addStructField(
     FeatureIdPipelineStage.STRUCT_ID_FEATURE_IDS_FS,
-    "int",
+    'int',
     variableName
   );
 
@@ -266,10 +266,10 @@ function processAttribute(renderResources, featureIdAttribute, variableName) {
   // Since this uses the ProcessedAttributes struct, the line is the same
   // for both vertex and fragment shader.
   const setIndex = featureIdAttribute.setIndex;
-  const prefix = variableName.replace(/_\d+$/, "_");
+  const prefix = variableName.replace(/_\d+$/, '_');
 
   const initializationLines = [
-    `featureIds.${variableName} = int(czm_round(attributes.${prefix}${setIndex}));`,
+    `featureIds.${variableName} = int(czm_round(attributes.${prefix}${setIndex}));`
   ];
   shaderBuilder.addFunctionLines(
     FeatureIdPipelineStage.FUNCTION_ID_INITIALIZE_FEATURE_IDS_VS,
@@ -303,12 +303,12 @@ function processImplicitRange(
   // Example: attribute float a_implicit_feature_id_n;
   const shaderBuilder = renderResources.shaderBuilder;
   const implicitAttributeName = `a_implicit_${variableName}`;
-  shaderBuilder.addAttribute("float", implicitAttributeName);
+  shaderBuilder.addAttribute('float', implicitAttributeName);
 
   // Also declare the corresponding varyings
   // Example: varying float v_implicit_feature_id_n;
   const implicitVaryingName = `v_implicit_${variableName}`;
-  shaderBuilder.addVarying("float", implicitVaryingName);
+  shaderBuilder.addVarying('float', implicitVaryingName);
 
   // Add a field to the FeatureIds struct.
   // Example:
@@ -319,12 +319,12 @@ function processImplicitRange(
   // }
   shaderBuilder.addStructField(
     FeatureIdPipelineStage.STRUCT_ID_FEATURE_IDS_VS,
-    "int",
+    'int',
     variableName
   );
   shaderBuilder.addStructField(
     FeatureIdPipelineStage.STRUCT_ID_FEATURE_IDS_FS,
-    "int",
+    'int',
     variableName
   );
 
@@ -381,13 +381,13 @@ function processTexture(
   const shaderBuilder = renderResources.shaderBuilder;
   shaderBuilder.addStructField(
     FeatureIdPipelineStage.STRUCT_ID_FEATURE_IDS_FS,
-    "int",
+    'int',
     variableName
   );
 
   // Declare the uniform in the fragment shader
   shaderBuilder.addUniform(
-    "sampler2D",
+    'sampler2D',
     uniformName,
     ShaderDestination.FRAGMENT
   );
@@ -420,20 +420,20 @@ function addAlias(renderResources, variableName, alias, shaderDestination) {
   if (updateVS) {
     shaderBuilder.addStructField(
       FeatureIdPipelineStage.STRUCT_ID_FEATURE_IDS_VS,
-      "int",
+      'int',
       alias
     );
   }
   shaderBuilder.addStructField(
     FeatureIdPipelineStage.STRUCT_ID_FEATURE_IDS_FS,
-    "int",
+    'int',
     alias
   );
 
   // Initialize the field from the original variable
   // Example: featureIds.alias = featureIds.featureId_n;
   const initializationLines = [
-    `featureIds.${alias} = featureIds.${variableName};`,
+    `featureIds.${alias} = featureIds.${variableName};`
   ];
   if (updateVS) {
     shaderBuilder.addFunctionLines(
@@ -465,7 +465,7 @@ function generateImplicitFeatureIdAttribute(
     vertexBuffer = Buffer.createVertexBuffer({
       context: frameState.context,
       typedArray: typedArray,
-      usage: BufferUsage.STATIC_DRAW,
+      usage: BufferUsage.STATIC_DRAW
     });
     vertexBuffer.vertexArrayDestroyable = false;
     model._pipelineResources.push(vertexBuffer);
@@ -484,7 +484,7 @@ function generateImplicitFeatureIdAttribute(
     componentsPerAttribute: 1,
     componentDatatype: ComponentDatatype.FLOAT,
     strideInBytes: ComponentDatatype.getSizeInBytes(ComponentDatatype.FLOAT),
-    offsetInBytes: 0,
+    offsetInBytes: 0
   };
 
   renderResources.attributes.push(generatedFeatureIdAttribute);

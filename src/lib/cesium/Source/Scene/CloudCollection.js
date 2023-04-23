@@ -1,38 +1,38 @@
-import BlendingState from "./BlendingState.js";
-import Buffer from "../Renderer/Buffer.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import ComputeCommand from "../Renderer/ComputeCommand.js";
-import CloudType from "./CloudType.js";
-import CloudCollectionFS from "../Shaders/CloudCollectionFS.js";
-import CloudCollectionVS from "../Shaders/CloudCollectionVS.js";
-import CloudNoiseFS from "../Shaders/CloudNoiseFS.js";
-import CloudNoiseVS from "../Shaders/CloudNoiseVS.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import CumulusCloud from "./CumulusCloud.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import EncodedCartesian3 from "../Core/EncodedCartesian3.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import Pass from "../Renderer/Pass.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import RenderState from "../Renderer/RenderState.js";
-import Sampler from "../Renderer/Sampler.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import Texture from "../Renderer/Texture.js";
-import TextureMagnificationFilter from "../Renderer/TextureMagnificationFilter.js";
-import TextureMinificationFilter from "../Renderer/TextureMinificationFilter.js";
-import TextureWrap from "../Renderer/TextureWrap.js";
-import VertexArray from "../Renderer/VertexArray.js";
-import VertexArrayFacade from "../Renderer/VertexArrayFacade.js";
-import WebGLConstants from "../Core/WebGLConstants.js";
+import BlendingState from './BlendingState.js';
+import Buffer from '../Renderer/Buffer.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import ComputeCommand from '../Renderer/ComputeCommand.js';
+import CloudType from './CloudType.js';
+import CloudCollectionFS from '../Shaders/CloudCollectionFS.js';
+import CloudCollectionVS from '../Shaders/CloudCollectionVS.js';
+import CloudNoiseFS from '../Shaders/CloudNoiseFS.js';
+import CloudNoiseVS from '../Shaders/CloudNoiseVS.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import CumulusCloud from './CumulusCloud.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import EncodedCartesian3 from '../Core/EncodedCartesian3.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import Pass from '../Renderer/Pass.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import RenderState from '../Renderer/RenderState.js';
+import Sampler from '../Renderer/Sampler.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import Texture from '../Renderer/Texture.js';
+import TextureMagnificationFilter from '../Renderer/TextureMagnificationFilter.js';
+import TextureMinificationFilter from '../Renderer/TextureMinificationFilter.js';
+import TextureWrap from '../Renderer/TextureWrap.js';
+import VertexArray from '../Renderer/VertexArray.js';
+import VertexArrayFacade from '../Renderer/VertexArrayFacade.js';
+import WebGLConstants from '../Core/WebGLConstants.js';
 
 let attributeLocations;
 const scratchTextureDimensions = new Cartesian3();
@@ -42,7 +42,7 @@ const attributeLocationsBatched = {
   positionLowAndScaleY: 1,
   packedAttribute0: 2, // show, brightness, direction
   packedAttribute1: 3, // cloudSize, slice
-  color: 4,
+  color: 4
 };
 
 const attributeLocationsInstanced = {
@@ -51,7 +51,7 @@ const attributeLocationsInstanced = {
   positionLowAndScaleY: 2,
   packedAttribute0: 3, // show, brightness
   packedAttribute1: 4, // cloudSize, slice
-  color: 5,
+  color: 5
 };
 
 const SHOW_INDEX = CumulusCloud.SHOW_INDEX;
@@ -182,7 +182,7 @@ function CloudCollection(options) {
     u_noiseTextureDimensions: getNoiseTextureDimensions(that),
     u_noiseDetail: function () {
       return that.noiseDetail;
-    },
+    }
   };
 
   this._vaNoise = undefined;
@@ -250,8 +250,8 @@ Object.defineProperties(CloudCollection.prototype, {
     get: function () {
       removeClouds(this);
       return this._clouds.length;
-    },
-  },
+    }
+  }
 });
 
 function destroyClouds(clouds) {
@@ -302,7 +302,7 @@ CloudCollection.prototype.add = function (options) {
   const cloudType = defaultValue(options.cloudType, CloudType.CUMULUS);
   //>>includeStart('debug', pragmas.debug);
   if (!CloudType.validate(cloudType)) {
-    throw new DeveloperError("invalid cloud type");
+    throw new DeveloperError('invalid cloud type');
   }
   //>>includeEnd('debug');
 
@@ -439,7 +439,7 @@ CloudCollection.prototype.contains = function (cloud) {
  */
 CloudCollection.prototype.get = function (index) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("index", index);
+  Check.typeOf.number('index', index);
   //>>includeEnd('debug');
 
   removeClouds(this);
@@ -447,14 +447,7 @@ CloudCollection.prototype.get = function (index) {
 };
 
 const texturePositions = new Float32Array([
-  -1.0,
-  -1.0,
-  1.0,
-  -1.0,
-  1.0,
-  1.0,
-  -1.0,
-  1.0,
+  -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0
 ]);
 
 const textureIndices = new Uint16Array([0, 1, 2, 0, 2, 3]);
@@ -463,13 +456,13 @@ function createTextureVA(context) {
   const positionBuffer = Buffer.createVertexBuffer({
     context: context,
     typedArray: texturePositions,
-    usage: BufferUsage.STATIC_DRAW,
+    usage: BufferUsage.STATIC_DRAW
   });
   const indexBuffer = Buffer.createIndexBuffer({
     context: context,
     typedArray: textureIndices,
     usage: BufferUsage.STATIC_DRAW,
-    indexDatatype: IndexDatatype.UNSIGNED_SHORT,
+    indexDatatype: IndexDatatype.UNSIGNED_SHORT
   });
 
   const attributes = [
@@ -477,14 +470,14 @@ function createTextureVA(context) {
       index: 0,
       vertexBuffer: positionBuffer,
       componentsPerAttribute: 2,
-      componentDatatype: ComponentDatatype.FLOAT,
-    },
+      componentDatatype: ComponentDatatype.FLOAT
+    }
   ];
 
   return new VertexArray({
     context: context,
     attributes: attributes,
-    indexBuffer: indexBuffer,
+    indexBuffer: indexBuffer
   });
 }
 
@@ -516,7 +509,7 @@ function getIndexBufferBatched(context) {
     context: context,
     typedArray: indices,
     usage: BufferUsage.STATIC_DRAW,
-    indexDatatype: IndexDatatype.UNSIGNED_SHORT,
+    indexDatatype: IndexDatatype.UNSIGNED_SHORT
   });
   indexBuffer.vertexArrayDestroyable = false;
   context.cache.cloudCollection_indexBufferBatched = indexBuffer;
@@ -533,7 +526,7 @@ function getIndexBufferInstanced(context) {
     context: context,
     typedArray: new Uint16Array([0, 1, 2, 0, 2, 3]),
     usage: BufferUsage.STATIC_DRAW,
-    indexDatatype: IndexDatatype.UNSIGNED_SHORT,
+    indexDatatype: IndexDatatype.UNSIGNED_SHORT
   });
 
   indexBuffer.vertexArrayDestroyable = false;
@@ -550,7 +543,7 @@ function getVertexBufferInstanced(context) {
   vertexBuffer = Buffer.createVertexBuffer({
     context: context,
     typedArray: new Float32Array([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0]),
-    usage: BufferUsage.STATIC_DRAW,
+    usage: BufferUsage.STATIC_DRAW
   });
 
   vertexBuffer.vertexArrayDestroyable = false;
@@ -564,33 +557,33 @@ function createVAF(context, numberOfClouds, instanced) {
       index: attributeLocations.positionHighAndScaleX,
       componentsPerAttribute: 4,
       componentDatatype: ComponentDatatype.FLOAT,
-      usage: BufferUsage.STATIC_DRAW,
+      usage: BufferUsage.STATIC_DRAW
     },
     {
       index: attributeLocations.positionLowAndScaleY,
       componentsPerAttribute: 4,
       componentDatatype: ComponentDatatype.FLOAT,
-      usage: BufferUsage.STATIC_DRAW,
+      usage: BufferUsage.STATIC_DRAW
     },
     {
       index: attributeLocations.packedAttribute0,
       componentsPerAttribute: 4,
       componentDatatype: ComponentDatatype.FLOAT,
-      usage: BufferUsage.STATIC_DRAW,
+      usage: BufferUsage.STATIC_DRAW
     },
     {
       index: attributeLocations.packedAttribute1,
       componentsPerAttribute: 4,
       componentDatatype: ComponentDatatype.FLOAT,
-      usage: BufferUsage.STATIC_DRAW,
+      usage: BufferUsage.STATIC_DRAW
     },
     {
       index: attributeLocations.color,
       componentsPerAttribute: 4,
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       normalize: true,
-      usage: BufferUsage.STATIC_DRAW,
-    },
+      usage: BufferUsage.STATIC_DRAW
+    }
   ];
 
   if (instanced) {
@@ -598,7 +591,7 @@ function createVAF(context, numberOfClouds, instanced) {
       index: attributeLocations.direction,
       componentsPerAttribute: 2,
       componentDatatype: ComponentDatatype.FLOAT,
-      vertexBuffer: getVertexBufferInstanced(context),
+      vertexBuffer: getVertexBufferInstanced(context)
     });
   }
 
@@ -713,7 +706,7 @@ function createNoiseTexture(cloudCollection, frameState, vsSource, fsSource) {
     textureSliceWidth % noiseTextureRows !== 0
   ) {
     throw new DeveloperError(
-      "noiseTextureRows must evenly divide textureSliceWidth"
+      'noiseTextureRows must evenly divide textureSliceWidth'
     );
   }
   //>>includeEnd('debug');
@@ -725,8 +718,8 @@ function createNoiseTexture(cloudCollection, frameState, vsSource, fsSource) {
     vertexShaderSource: vsSource,
     fragmentShaderSource: fsSource,
     attributeLocations: {
-      position: 0,
-    },
+      position: 0
+    }
   });
 
   const noiseDetail = that.noiseDetail;
@@ -742,8 +735,8 @@ function createNoiseTexture(cloudCollection, frameState, vsSource, fsSource) {
       wrapS: TextureWrap.REPEAT,
       wrapT: TextureWrap.REPEAT,
       minificationFilter: TextureMinificationFilter.NEAREST,
-      magnificationFilter: TextureMagnificationFilter.NEAREST,
-    }),
+      magnificationFilter: TextureMagnificationFilter.NEAREST
+    })
   });
 
   const textureCommand = new ComputeCommand({
@@ -757,14 +750,14 @@ function createNoiseTexture(cloudCollection, frameState, vsSource, fsSource) {
       },
       u_noiseOffset: function () {
         return noiseOffset;
-      },
+      }
     },
     persists: false,
     owner: cloudCollection,
     postExecute: function (texture) {
       that._ready = true;
       that._loading = false;
-    },
+    }
   });
 
   frameState.commandList.push(textureCommand);
@@ -870,24 +863,24 @@ function createShaderProgram(cloudCollection, frameState, vsSource, fsSource) {
   const that = cloudCollection;
   const vs = new ShaderSource({
     defines: [],
-    sources: [vsSource],
+    sources: [vsSource]
   });
 
   if (that._instanced) {
-    vs.defines.push("INSTANCED");
+    vs.defines.push('INSTANCED');
   }
 
   const fs = new ShaderSource({
     defines: [],
-    sources: [fsSource],
+    sources: [fsSource]
   });
 
   if (that.debugBillboards) {
-    fs.defines.push("DEBUG_BILLBOARDS");
+    fs.defines.push('DEBUG_BILLBOARDS');
   }
 
   if (that.debugEllipsoids) {
-    fs.defines.push("DEBUG_ELLIPSOIDS");
+    fs.defines.push('DEBUG_ELLIPSOIDS');
   }
 
   that._sp = ShaderProgram.replaceCache({
@@ -895,16 +888,16 @@ function createShaderProgram(cloudCollection, frameState, vsSource, fsSource) {
     shaderProgram: that._sp,
     vertexShaderSource: vs,
     fragmentShaderSource: fs,
-    attributeLocations: attributeLocations,
+    attributeLocations: attributeLocations
   });
 
   that._rs = RenderState.fromCache({
     depthTest: {
       enabled: true,
-      func: WebGLConstants.LESS,
+      func: WebGLConstants.LESS
     },
     depthMask: false,
-    blending: BlendingState.ALPHA_BLEND,
+    blending: BlendingState.ALPHA_BLEND
   });
 
   that._spCreated = true;

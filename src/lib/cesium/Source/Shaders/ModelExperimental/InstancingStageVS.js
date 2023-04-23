@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "void instancingStage(inout ProcessedAttributes attributes) \n\
+export default 'void instancingStage(inout ProcessedAttributes attributes) \n\
 {\n\
     vec3 positionMC = attributes.positionMC;\n\
     \n\
@@ -11,4 +11,4 @@ export default "void instancingStage(inout ProcessedAttributes attributes) \n\
     attributes.position2D = (instancingTransform2D * vec4(positionMC, 1.0)).xyz;\n\
     #endif\n\
 }\n\
-";
+';

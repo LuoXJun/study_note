@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "uniform vec3 u_noiseTextureDimensions;\n\
+export default 'uniform vec3 u_noiseTextureDimensions;\n\
 uniform float u_noiseDetail;\n\
 uniform vec3 u_noiseOffset;\n\
 varying vec2 v_position;\n\
@@ -91,4 +91,4 @@ void main() {\n\
     float worley2 = clamp(worleyFBMNoise(position, 3.0, 3.0), 0.0, 1.0);\n\
     gl_FragColor = vec4(worley0, worley1, worley2, 1.0);\n\
 }\n\
-";
+';

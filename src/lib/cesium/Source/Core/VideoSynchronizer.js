@@ -1,8 +1,8 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import destroyObject from "./destroyObject.js";
-import Iso8601 from "./Iso8601.js";
-import JulianDate from "./JulianDate.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import destroyObject from './destroyObject.js';
+import Iso8601 from './Iso8601.js';
+import JulianDate from './JulianDate.js';
 
 /**
  * Synchronizes a video element with a simulation clock.
@@ -84,7 +84,7 @@ Object.defineProperties(VideoSynchronizer.prototype, {
       }
 
       this._clock = value;
-    },
+    }
   },
   /**
    * Gets or sets the video element to synchronize.
@@ -104,20 +104,20 @@ Object.defineProperties(VideoSynchronizer.prototype, {
       }
 
       if (defined(oldValue)) {
-        oldValue.removeEventListener("seeked", this._seekFunction, false);
+        oldValue.removeEventListener('seeked', this._seekFunction, false);
       }
 
       if (defined(value)) {
         this._seeking = false;
         this._seekFunction = createSeekFunction(this);
-        value.addEventListener("seeked", this._seekFunction, false);
+        value.addEventListener('seeked', this._seekFunction, false);
       }
 
       this._element = value;
       this._seeking = false;
       this._firstTickAfterSeek = false;
-    },
-  },
+    }
+  }
 });
 
 /**

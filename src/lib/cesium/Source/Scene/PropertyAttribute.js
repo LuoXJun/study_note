@@ -1,7 +1,7 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import PropertyAttributeProperty from "./PropertyAttributeProperty.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import PropertyAttributeProperty from './PropertyAttributeProperty.js';
 
 /**
  * A property attribute; a collection of per-point properties stored as custom
@@ -28,8 +28,8 @@ export default function PropertyAttribute(options) {
   const classDefinition = options.class;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.propertyAttribute", propertyAttribute);
-  Check.typeOf.object("options.class", classDefinition);
+  Check.typeOf.object('options.propertyAttribute', propertyAttribute);
+  Check.typeOf.object('options.class', classDefinition);
   //>>includeEnd('debug');
 
   const properties = {};
@@ -38,7 +38,7 @@ export default function PropertyAttribute(options) {
       if (propertyAttribute.properties.hasOwnProperty(propertyId)) {
         properties[propertyId] = new PropertyAttributeProperty({
           property: propertyAttribute.properties[propertyId],
-          classProperty: classDefinition.properties[propertyId],
+          classProperty: classDefinition.properties[propertyId]
         });
       }
     }
@@ -65,7 +65,7 @@ Object.defineProperties(PropertyAttribute.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
   /**
    * An identifier for this attribute. Useful for debugging.
@@ -79,7 +79,7 @@ Object.defineProperties(PropertyAttribute.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
   /**
    * The class that properties conform to.
@@ -93,7 +93,7 @@ Object.defineProperties(PropertyAttribute.prototype, {
   class: {
     get: function () {
       return this._class;
-    },
+    }
   },
 
   /**
@@ -108,7 +108,7 @@ Object.defineProperties(PropertyAttribute.prototype, {
   properties: {
     get: function () {
       return this._properties;
-    },
+    }
   },
 
   /**
@@ -123,7 +123,7 @@ Object.defineProperties(PropertyAttribute.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -138,8 +138,8 @@ Object.defineProperties(PropertyAttribute.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -151,7 +151,7 @@ Object.defineProperties(PropertyAttribute.prototype, {
  */
 PropertyAttribute.prototype.getProperty = function (propertyId) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("propertyId", propertyId);
+  Check.typeOf.string('propertyId', propertyId);
   //>>includeEnd('debug');
 
   return this._properties[propertyId];

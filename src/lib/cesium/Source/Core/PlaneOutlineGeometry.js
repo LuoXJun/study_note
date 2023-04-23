@@ -1,12 +1,12 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defined from "./defined.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import PrimitiveType from "./PrimitiveType.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defined from './defined.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import PrimitiveType from './PrimitiveType.js';
 
 /**
  * Describes geometry representing the outline of a plane centered at the origin, with a unit width and length.
@@ -16,7 +16,7 @@ import PrimitiveType from "./PrimitiveType.js";
  *
  */
 function PlaneOutlineGeometry() {
-  this._workerName = "createPlaneOutlineGeometry";
+  this._workerName = 'createPlaneOutlineGeometry';
 }
 
 /**
@@ -35,8 +35,8 @@ PlaneOutlineGeometry.packedLength = 0;
  */
 PlaneOutlineGeometry.pack = function (value, array) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("value", value);
-  Check.defined("array", array);
+  Check.defined('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   return array;
@@ -52,7 +52,7 @@ PlaneOutlineGeometry.pack = function (value, array) {
  */
 PlaneOutlineGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -91,7 +91,7 @@ PlaneOutlineGeometry.createGeometry = function () {
   attributes.position = new GeometryAttribute({
     componentDatatype: ComponentDatatype.DOUBLE,
     componentsPerAttribute: 3,
-    values: positions,
+    values: positions
   });
 
   indices[0] = 0;
@@ -107,7 +107,7 @@ PlaneOutlineGeometry.createGeometry = function () {
     attributes: attributes,
     indices: indices,
     primitiveType: PrimitiveType.LINES,
-    boundingSphere: new BoundingSphere(Cartesian3.ZERO, Math.sqrt(2.0)),
+    boundingSphere: new BoundingSphere(Cartesian3.ZERO, Math.sqrt(2.0))
   });
 };
 export default PlaneOutlineGeometry;

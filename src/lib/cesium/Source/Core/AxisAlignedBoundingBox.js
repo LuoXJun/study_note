@@ -1,8 +1,8 @@
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Intersect from "./Intersect.js";
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Intersect from './Intersect.js';
 
 /**
  * Creates an instance of an AxisAlignedBoundingBox from the minimum and maximum points along the x, y, and z axes.
@@ -59,8 +59,8 @@ function AxisAlignedBoundingBox(minimum, maximum, center) {
  */
 AxisAlignedBoundingBox.fromCorners = function (minimum, maximum, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("minimum", minimum);
-  Check.defined("maximum", maximum);
+  Check.defined('minimum', minimum);
+  Check.defined('maximum', maximum);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -190,8 +190,8 @@ let intersectScratch = new Cartesian3();
  */
 AxisAlignedBoundingBox.intersectPlane = function (box, plane) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("box", box);
-  Check.defined("plane", plane);
+  Check.defined('box', box);
+  Check.defined('plane', plane);
   //>>includeEnd('debug');
 
   intersectScratch = Cartesian3.subtract(

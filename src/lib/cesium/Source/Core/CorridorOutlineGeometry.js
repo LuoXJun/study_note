@@ -1,21 +1,21 @@
-import arrayRemoveDuplicates from "./arrayRemoveDuplicates.js";
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import CornerType from "./CornerType.js";
-import CorridorGeometryLibrary from "./CorridorGeometryLibrary.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import GeometryOffsetAttribute from "./GeometryOffsetAttribute.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
-import PolygonPipeline from "./PolygonPipeline.js";
-import PrimitiveType from "./PrimitiveType.js";
+import arrayRemoveDuplicates from './arrayRemoveDuplicates.js';
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import CornerType from './CornerType.js';
+import CorridorGeometryLibrary from './CorridorGeometryLibrary.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Ellipsoid from './Ellipsoid.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import GeometryOffsetAttribute from './GeometryOffsetAttribute.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
+import PolygonPipeline from './PolygonPipeline.js';
+import PrimitiveType from './PrimitiveType.js';
 
 const cartesian1 = new Cartesian3();
 const cartesian2 = new Cartesian3();
@@ -264,13 +264,13 @@ function combine(computedPositions, cornerType) {
   attributes.position = new GeometryAttribute({
     componentDatatype: ComponentDatatype.DOUBLE,
     componentsPerAttribute: 3,
-    values: finalPositions,
+    values: finalPositions
   });
 
   return {
     attributes: attributes,
     indices: indices,
-    wallIndices: wallIndices,
+    wallIndices: wallIndices
   };
 }
 
@@ -317,7 +317,7 @@ function computePositionsExtruded(params) {
     attributes.applyOffset = new GeometryAttribute({
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 1,
-      values: applyOffset,
+      values: applyOffset
     });
   }
 
@@ -348,7 +348,7 @@ function computePositionsExtruded(params) {
 
   return {
     attributes: attributes,
-    indices: newIndices,
+    indices: newIndices
   };
 }
 
@@ -381,8 +381,8 @@ function CorridorOutlineGeometry(options) {
   const width = options.width;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.positions", positions);
-  Check.typeOf.number("options.width", width);
+  Check.typeOf.object('options.positions', positions);
+  Check.typeOf.number('options.width', width);
   //>>includeEnd('debug');
 
   const height = defaultValue(options.height, 0.0);
@@ -401,7 +401,7 @@ function CorridorOutlineGeometry(options) {
     CesiumMath.RADIANS_PER_DEGREE
   );
   this._offsetAttribute = options.offsetAttribute;
-  this._workerName = "createCorridorOutlineGeometry";
+  this._workerName = 'createCorridorOutlineGeometry';
 
   /**
    * The number of elements used to pack the object into an array.
@@ -422,8 +422,8 @@ function CorridorOutlineGeometry(options) {
  */
 CorridorOutlineGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.typeOf.object("array", array);
+  Check.typeOf.object('value', value);
+  Check.typeOf.object('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -458,7 +458,7 @@ const scratchOptions = {
   extrudedHeight: undefined,
   cornerType: undefined,
   granularity: undefined,
-  offsetAttribute: undefined,
+  offsetAttribute: undefined
 };
 
 /**
@@ -471,7 +471,7 @@ const scratchOptions = {
  */
 CorridorOutlineGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("array", array);
+  Check.typeOf.object('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -554,7 +554,7 @@ CorridorOutlineGeometry.createGeometry = function (corridorOutlineGeometry) {
     width: width,
     cornerType: corridorOutlineGeometry._cornerType,
     granularity: corridorOutlineGeometry._granularity,
-    saveAttributes: false,
+    saveAttributes: false
   };
   let attr;
   if (extrude) {
@@ -582,7 +582,7 @@ CorridorOutlineGeometry.createGeometry = function (corridorOutlineGeometry) {
       attr.attributes.applyOffset = new GeometryAttribute({
         componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,
-        values: applyOffset,
+        values: applyOffset
       });
     }
   }
@@ -598,7 +598,7 @@ CorridorOutlineGeometry.createGeometry = function (corridorOutlineGeometry) {
     indices: attr.indices,
     primitiveType: PrimitiveType.LINES,
     boundingSphere: boundingSphere,
-    offsetAttribute: corridorOutlineGeometry._offsetAttribute,
+    offsetAttribute: corridorOutlineGeometry._offsetAttribute
   });
 };
 export default CorridorOutlineGeometry;

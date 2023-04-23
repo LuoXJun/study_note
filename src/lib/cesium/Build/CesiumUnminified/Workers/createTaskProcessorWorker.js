@@ -23,7 +23,8 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-97284df2'], (function (defaultValue) { 'use strict';
+define(['./defaultValue-97284df2'], function (defaultValue) {
+  'use strict';
 
   /**
    * Formats an error object into a String.  If available, uses name, message, and stack
@@ -102,7 +103,7 @@ define(['./defaultValue-97284df2'], (function (defaultValue) { 'use strict';
       const responseMessage = {
         id: data.id,
         result: undefined,
-        error: undefined,
+        error: undefined
       };
 
       return Promise.resolve(
@@ -117,7 +118,7 @@ define(['./defaultValue-97284df2'], (function (defaultValue) { 'use strict';
             responseMessage.error = {
               name: e.name,
               message: e.message,
-              stack: e.stack,
+              stack: e.stack
             };
           } else {
             responseMessage.error = e;
@@ -125,7 +126,10 @@ define(['./defaultValue-97284df2'], (function (defaultValue) { 'use strict';
         })
         .finally(function () {
           if (!defaultValue.defined(postMessage)) {
-            postMessage = defaultValue.defaultValue(self.webkitPostMessage, self.postMessage);
+            postMessage = defaultValue.defaultValue(
+              self.webkitPostMessage,
+              self.postMessage
+            );
           }
 
           if (!data.canTransferArrayBuffer) {
@@ -139,8 +143,8 @@ define(['./defaultValue-97284df2'], (function (defaultValue) { 'use strict';
             // error that we can be sure will be cloneable
             responseMessage.result = undefined;
             responseMessage.error = `postMessage failed with error: ${formatError(
-            e
-          )}\n  with responseMessage: ${JSON.stringify(responseMessage)}`;
+              e
+            )}\n  with responseMessage: ${JSON.stringify(responseMessage)}`;
             postMessage(responseMessage);
           }
         });
@@ -148,6 +152,5 @@ define(['./defaultValue-97284df2'], (function (defaultValue) { 'use strict';
   }
 
   return createTaskProcessorWorker;
-
-}));
+});
 //# sourceMappingURL=createTaskProcessorWorker.js.map

@@ -1,16 +1,16 @@
-import Cartesian3 from "../../Core/Cartesian3.js";
-import CesiumMath from "../../Core/Math.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import OrthographicFrustum from "../../Core/OrthographicFrustum.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import PointCloudAttenuationStageVS from "../../Shaders/ModelExperimental/PointCloudAttenuationStageVS.js";
-import Cesium3DTileRefine from "../Cesium3DTileRefine.js";
-import SceneMode from "../SceneMode.js";
-import VertexAttributeSemantic from "../VertexAttributeSemantic.js";
-import ModelExperimentalType from "./ModelExperimentalType.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
+import Cartesian3 from '../../Core/Cartesian3.js';
+import CesiumMath from '../../Core/Math.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import OrthographicFrustum from '../../Core/OrthographicFrustum.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import PointCloudAttenuationStageVS from '../../Shaders/ModelExperimental/PointCloudAttenuationStageVS.js';
+import Cesium3DTileRefine from '../Cesium3DTileRefine.js';
+import SceneMode from '../SceneMode.js';
+import VertexAttributeSemantic from '../VertexAttributeSemantic.js';
+import ModelExperimentalType from './ModelExperimentalType.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
 
 /**
  * Stage to handle point cloud attenuation. This stage assumes that either
@@ -22,7 +22,7 @@ import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
  * @private
  */
 const PointCloudAttenuationPipelineStage = {};
-PointCloudAttenuationPipelineStage.name = "PointCloudAttenuationPipelineStage"; // Helps with debugging
+PointCloudAttenuationPipelineStage.name = 'PointCloudAttenuationPipelineStage'; // Helps with debugging
 
 const scratchAttenuationUniform = new Cartesian3();
 
@@ -46,7 +46,7 @@ PointCloudAttenuationPipelineStage.process = function (
   const shaderBuilder = renderResources.shaderBuilder;
   shaderBuilder.addVertexLines([PointCloudAttenuationStageVS]);
   shaderBuilder.addDefine(
-    "USE_POINT_CLOUD_ATTENUATION",
+    'USE_POINT_CLOUD_ATTENUATION',
     undefined,
     ShaderDestination.VERTEX
   );
@@ -64,8 +64,8 @@ PointCloudAttenuationPipelineStage.process = function (
   }
 
   shaderBuilder.addUniform(
-    "vec3",
-    "model_pointCloudAttenuation",
+    'vec3',
+    'model_pointCloudAttenuation',
     ShaderDestination.VERTEX
   );
   renderResources.uniformMap.model_pointCloudAttenuation = function () {

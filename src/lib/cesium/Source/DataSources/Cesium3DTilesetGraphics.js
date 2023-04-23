@@ -1,8 +1,8 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
 
 /**
  * @typedef {Object} Cesium3DTilesetGraphics.ConstructorOptions
@@ -46,7 +46,7 @@ Object.defineProperties(Cesium3DTilesetGraphics.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -55,21 +55,21 @@ Object.defineProperties(Cesium3DTilesetGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  show: createPropertyDescriptor("show"),
+  show: createPropertyDescriptor('show'),
 
   /**
    * Gets or sets the string Property specifying the URI of the glTF asset.
    * @memberof Cesium3DTilesetGraphics.prototype
    * @type {Property|undefined}
    */
-  uri: createPropertyDescriptor("uri"),
+  uri: createPropertyDescriptor('uri'),
 
   /**
    * Gets or sets the maximum screen space error used to drive level of detail refinement.
    * @memberof Cesium3DTilesetGraphics.prototype
    * @type {Property|undefined}
    */
-  maximumScreenSpaceError: createPropertyDescriptor("maximumScreenSpaceError"),
+  maximumScreenSpaceError: createPropertyDescriptor('maximumScreenSpaceError')
 });
 
 /**
@@ -98,7 +98,7 @@ Cesium3DTilesetGraphics.prototype.clone = function (result) {
 Cesium3DTilesetGraphics.prototype.merge = function (source) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
-    throw new DeveloperError("source is required.");
+    throw new DeveloperError('source is required.');
   }
   //>>includeEnd('debug');
 

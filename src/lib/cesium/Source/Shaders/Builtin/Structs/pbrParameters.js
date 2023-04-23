@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "/**\n\
+export default '/**\n\
  * Parameters for {@link czm_pbrLighting}\n\
  *\n\
  * @name czm_material\n\
@@ -15,4 +15,4 @@ struct czm_pbrParameters\n\
     float roughness;\n\
     vec3 f0;\n\
 };\n\
-";
+';

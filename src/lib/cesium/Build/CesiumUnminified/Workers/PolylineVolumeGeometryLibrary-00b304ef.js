@@ -23,7 +23,26 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './ComponentDatatype-4eeb6d9b', './PolylinePipeline-e67c0760', './Transforms-273eeb44', './defaultValue-97284df2', './RuntimeError-4f8ec8a2'], (function (exports, Matrix2, EllipsoidTangentPlane, ComponentDatatype, PolylinePipeline, Transforms, defaultValue, RuntimeError) { 'use strict';
+define([
+  'exports',
+  './Matrix2-9e1c22e2',
+  './EllipsoidTangentPlane-d42ee682',
+  './ComponentDatatype-4eeb6d9b',
+  './PolylinePipeline-e67c0760',
+  './Transforms-273eeb44',
+  './defaultValue-97284df2',
+  './RuntimeError-4f8ec8a2'
+], function (
+  exports,
+  Matrix2,
+  EllipsoidTangentPlane,
+  ComponentDatatype,
+  PolylinePipeline,
+  Transforms,
+  defaultValue,
+  RuntimeError
+) {
+  'use strict';
 
   /**
    * Style options for corners.
@@ -59,7 +78,7 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
      * @type {Number}
      * @constant
      */
-    BEVELED: 2,
+    BEVELED: 2
   };
   var CornerType$1 = Object.freeze(CornerType);
 
@@ -90,7 +109,7 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
   function oneTimeWarning(identifier, message) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(identifier)) {
-      throw new RuntimeError.DeveloperError("identifier is required.");
+      throw new RuntimeError.DeveloperError('identifier is required.');
     }
     //>>includeEnd('debug');
 
@@ -101,15 +120,15 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
   }
 
   oneTimeWarning.geometryOutlines =
-    "Entity geometry outlines are unsupported on terrain. Outlines will be disabled. To enable outlines, disable geometry terrain clamping by explicitly setting height to 0.";
+    'Entity geometry outlines are unsupported on terrain. Outlines will be disabled. To enable outlines, disable geometry terrain clamping by explicitly setting height to 0.';
 
   oneTimeWarning.geometryZIndex =
-    "Entity geometry with zIndex are unsupported when height or extrudedHeight are defined.  zIndex will be ignored";
+    'Entity geometry with zIndex are unsupported when height or extrudedHeight are defined.  zIndex will be ignored';
 
   oneTimeWarning.geometryHeightReference =
-    "Entity corridor, ellipse, polygon or rectangle with heightReference must also have a defined height.  heightReference will be ignored";
+    'Entity corridor, ellipse, polygon or rectangle with heightReference must also have a defined height.  heightReference will be ignored';
   oneTimeWarning.geometryExtrudedHeightReference =
-    "Entity corridor, ellipse, polygon or rectangle with extrudedHeightReference must also have a defined extrudedHeight.  extrudedHeightReference will be ignored";
+    'Entity corridor, ellipse, polygon or rectangle with extrudedHeightReference must also have a defined extrudedHeight.  extrudedHeightReference will be ignored';
 
   const scratch2Array = [new Matrix2.Cartesian3(), new Matrix2.Cartesian3()];
   const scratchCartesian1 = new Matrix2.Cartesian3();
@@ -174,7 +193,10 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
   const prevScratch = new Matrix2.Cartesian3();
 
   function computeRotationAngle(start, end, position, ellipsoid) {
-    const tangentPlane = new EllipsoidTangentPlane.EllipsoidTangentPlane(position, ellipsoid);
+    const tangentPlane = new EllipsoidTangentPlane.EllipsoidTangentPlane(
+      position,
+      ellipsoid
+    );
     const next = tangentPlane.projectPointOntoPlane(
       Matrix2.Cartesian3.add(position, start, nextScratch),
       nextScratch
@@ -208,7 +230,11 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
   ) {
     let west = westScratch;
     let finalPosition = finalPosScratch;
-    transform = Transforms.Transforms.eastNorthUpToFixedFrame(center, ellipsoid, transform);
+    transform = Transforms.Transforms.eastNorthUpToFixedFrame(
+      center,
+      ellipsoid,
+      transform
+    );
 
     west = Matrix2.Matrix4.multiplyByPointAsVector(transform, negativeX, west);
     west = Matrix2.Cartesian3.normalize(west, west);
@@ -218,7 +244,11 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
     heightCartesian.z = height;
     transform = Matrix2.Matrix4.multiplyTransformation(
       transform,
-      Matrix2.Matrix4.fromRotationTranslation(rotationZ, heightCartesian, translation),
+      Matrix2.Matrix4.fromRotationTranslation(
+        rotationZ,
+        heightCartesian,
+        translation
+      ),
       transform
     );
     const scale = scaleMatrix;
@@ -355,7 +385,11 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
       );
     } else {
       m = Matrix2.Matrix3.fromQuaternion(
-        Transforms.Quaternion.fromAxisAngle(pivot, angle / (granularity + 1), quaterion),
+        Transforms.Quaternion.fromAxisAngle(
+          pivot,
+          angle / (granularity + 1),
+          quaterion
+        ),
         rotMatrix
       );
     }
@@ -366,7 +400,11 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
     if (granularity > 0) {
       const repeat = duplicatePoints ? 2 : 1;
       for (let i = 0; i < granularity; i++) {
-        startPoint = Matrix2.Matrix3.multiplyByVector(m, startPoint, startPoint);
+        startPoint = Matrix2.Matrix3.multiplyByVector(
+          m,
+          startPoint,
+          startPoint
+        );
         left = Matrix2.Cartesian3.subtract(startPoint, pivot, scratch1);
         left = Matrix2.Cartesian3.normalize(left, left);
         if (!leftIsOutside) {
@@ -447,7 +485,10 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
     position,
     ellipsoid
   ) {
-    const tangentPlane = new EllipsoidTangentPlane.EllipsoidTangentPlane(position, ellipsoid);
+    const tangentPlane = new EllipsoidTangentPlane.EllipsoidTangentPlane(
+      position,
+      ellipsoid
+    );
     const next = tangentPlane.projectPointOntoPlane(
       Matrix2.Cartesian3.add(position, forward, nextScratch),
       nextScratch
@@ -527,14 +568,21 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
       nextPosition = positions[i + 1];
       if (position.equals(nextPosition)) {
         oneTimeWarning(
-          "Positions are too close and are considered equivalent with rounding error."
+          'Positions are too close and are considered equivalent with rounding error.'
         );
         continue;
       }
       forward = Matrix2.Cartesian3.subtract(nextPosition, position, forward);
       forward = Matrix2.Cartesian3.normalize(forward, forward);
-      cornerDirection = Matrix2.Cartesian3.add(forward, backward, cornerDirection);
-      cornerDirection = Matrix2.Cartesian3.normalize(cornerDirection, cornerDirection);
+      cornerDirection = Matrix2.Cartesian3.add(
+        forward,
+        backward,
+        cornerDirection
+      );
+      cornerDirection = Matrix2.Cartesian3.normalize(
+        cornerDirection,
+        cornerDirection
+      );
       surfaceNormal = ellipsoid.geodeticSurfaceNormal(position, surfaceNormal);
 
       const forwardProjection = Matrix2.Cartesian3.multiplyByScalar(
@@ -542,7 +590,11 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
         Matrix2.Cartesian3.dot(forward, surfaceNormal),
         scratchForwardProjection
       );
-      Matrix2.Cartesian3.subtract(forward, forwardProjection, forwardProjection);
+      Matrix2.Cartesian3.subtract(
+        forward,
+        forwardProjection,
+        forwardProjection
+      );
       Matrix2.Cartesian3.normalize(forwardProjection, forwardProjection);
 
       const backwardProjection = Matrix2.Cartesian3.multiplyByScalar(
@@ -550,7 +602,11 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
         Matrix2.Cartesian3.dot(backward, surfaceNormal),
         scratchBackwardProjection
       );
-      Matrix2.Cartesian3.subtract(backward, backwardProjection, backwardProjection);
+      Matrix2.Cartesian3.subtract(
+        backward,
+        backwardProjection,
+        backwardProjection
+      );
       Matrix2.Cartesian3.normalize(backwardProjection, backwardProjection);
 
       const doCorner = !ComponentDatatype.CesiumMath.equalsEpsilon(
@@ -570,7 +626,10 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
           cornerDirection,
           cornerDirection
         );
-        cornerDirection = Matrix2.Cartesian3.normalize(cornerDirection, cornerDirection);
+        cornerDirection = Matrix2.Cartesian3.normalize(
+          cornerDirection,
+          cornerDirection
+        );
         const scalar =
           1 /
           Math.max(
@@ -579,12 +638,13 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
               Matrix2.Cartesian3.cross(cornerDirection, backward, scratch1)
             )
           );
-        const leftIsOutside = PolylineVolumeGeometryLibrary.angleIsGreaterThanPi(
-          forward,
-          backward,
-          position,
-          ellipsoid
-        );
+        const leftIsOutside =
+          PolylineVolumeGeometryLibrary.angleIsGreaterThanPi(
+            forward,
+            backward,
+            position,
+            ellipsoid
+          );
         if (leftIsOutside) {
           pivot = Matrix2.Cartesian3.add(
             position,
@@ -600,7 +660,10 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
             Matrix2.Cartesian3.multiplyByScalar(left, width, start),
             start
           );
-          scratch2Array[0] = Matrix2.Cartesian3.clone(previousPosition, scratch2Array[0]);
+          scratch2Array[0] = Matrix2.Cartesian3.clone(
+            previousPosition,
+            scratch2Array[0]
+          );
           scratch2Array[1] = Matrix2.Cartesian3.clone(start, scratch2Array[1]);
           subdividedHeights = subdivideHeights(
             scratch2Array,
@@ -611,7 +674,7 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
           subdividedPositions = PolylinePipeline.PolylinePipeline.generateArc({
             positions: scratch2Array,
             granularity: granularity,
-            ellipsoid: ellipsoid,
+            ellipsoid: ellipsoid
           });
           finalPositions = addPositions(
             subdividedPositions,
@@ -646,7 +709,10 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
               duplicatePoints
             );
           } else {
-            cornerDirection = Matrix2.Cartesian3.negate(cornerDirection, cornerDirection);
+            cornerDirection = Matrix2.Cartesian3.negate(
+              cornerDirection,
+              cornerDirection
+            );
             finalPositions = addPosition(
               position,
               cornerDirection,
@@ -674,7 +740,10 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
             Matrix2.Cartesian3.multiplyByScalar(left, -width, start),
             start
           );
-          scratch2Array[0] = Matrix2.Cartesian3.clone(previousPosition, scratch2Array[0]);
+          scratch2Array[0] = Matrix2.Cartesian3.clone(
+            previousPosition,
+            scratch2Array[0]
+          );
           scratch2Array[1] = Matrix2.Cartesian3.clone(start, scratch2Array[1]);
           subdividedHeights = subdivideHeights(
             scratch2Array,
@@ -685,7 +754,7 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
           subdividedPositions = PolylinePipeline.PolylinePipeline.generateArc({
             positions: scratch2Array,
             granularity: granularity,
-            ellipsoid: ellipsoid,
+            ellipsoid: ellipsoid
           });
           finalPositions = addPositions(
             subdividedPositions,
@@ -752,7 +821,10 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
       position = nextPosition;
     }
 
-    scratch2Array[0] = Matrix2.Cartesian3.clone(previousPosition, scratch2Array[0]);
+    scratch2Array[0] = Matrix2.Cartesian3.clone(
+      previousPosition,
+      scratch2Array[0]
+    );
     scratch2Array[1] = Matrix2.Cartesian3.clone(position, scratch2Array[1]);
     subdividedHeights = subdivideHeights(
       scratch2Array,
@@ -763,7 +835,7 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
     subdividedPositions = PolylinePipeline.PolylinePipeline.generateArc({
       positions: scratch2Array,
       granularity: granularity,
-      ellipsoid: ellipsoid,
+      ellipsoid: ellipsoid
     });
     finalPositions = addPositions(
       subdividedPositions,
@@ -801,6 +873,5 @@ define(['exports', './Matrix2-9e1c22e2', './EllipsoidTangentPlane-d42ee682', './
   exports.CornerType = CornerType$1;
   exports.PolylineVolumeGeometryLibrary = PolylineVolumeGeometryLibrary;
   exports.oneTimeWarning = oneTimeWarning;
-
-}));
+});
 //# sourceMappingURL=PolylineVolumeGeometryLibrary-00b304ef.js.map

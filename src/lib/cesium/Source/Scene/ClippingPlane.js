@@ -1,6 +1,6 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
 
 /**
  * A Plane in Hessian Normal form to be used with {@link ClippingPlaneCollection}.
@@ -18,8 +18,8 @@ import defined from "../Core/defined.js";
  */
 function ClippingPlane(normal, distance) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("normal", normal);
-  Check.typeOf.number("distance", distance);
+  Check.typeOf.object('normal', normal);
+  Check.typeOf.number('distance', distance);
   //>>includeEnd('debug');
 
   this._distance = distance;
@@ -45,13 +45,13 @@ Object.defineProperties(ClippingPlane.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number("value", value);
+      Check.typeOf.number('value', value);
       //>>includeEnd('debug');
       if (defined(this.onChangeCallback) && value !== this._distance) {
         this.onChangeCallback(this.index);
       }
       this._distance = value;
-    },
+    }
   },
   /**
    * The plane's normal.
@@ -65,7 +65,7 @@ Object.defineProperties(ClippingPlane.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.object("value", value);
+      Check.typeOf.object('value', value);
       //>>includeEnd('debug');
       if (
         defined(this.onChangeCallback) &&
@@ -75,8 +75,8 @@ Object.defineProperties(ClippingPlane.prototype, {
       }
       // Set without firing callback again
       Cartesian3.clone(value, this._normal._cartesian3);
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -88,7 +88,7 @@ Object.defineProperties(ClippingPlane.prototype, {
  */
 ClippingPlane.fromPlane = function (plane, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("plane", plane);
+  Check.typeOf.object('plane', plane);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -135,7 +135,7 @@ Object.defineProperties(UpdateChangedCartesian3.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number("value", value);
+      Check.typeOf.number('value', value);
       //>>includeEnd('debug');
       if (
         defined(this._clippingPlane.onChangeCallback) &&
@@ -144,7 +144,7 @@ Object.defineProperties(UpdateChangedCartesian3.prototype, {
         this._clippingPlane.onChangeCallback(this._clippingPlane.index);
       }
       this._cartesian3.x = value;
-    },
+    }
   },
   y: {
     get: function () {
@@ -152,7 +152,7 @@ Object.defineProperties(UpdateChangedCartesian3.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number("value", value);
+      Check.typeOf.number('value', value);
       //>>includeEnd('debug');
       if (
         defined(this._clippingPlane.onChangeCallback) &&
@@ -161,7 +161,7 @@ Object.defineProperties(UpdateChangedCartesian3.prototype, {
         this._clippingPlane.onChangeCallback(this._clippingPlane.index);
       }
       this._cartesian3.y = value;
-    },
+    }
   },
   z: {
     get: function () {
@@ -169,7 +169,7 @@ Object.defineProperties(UpdateChangedCartesian3.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number("value", value);
+      Check.typeOf.number('value', value);
       //>>includeEnd('debug');
       if (
         defined(this._clippingPlane.onChangeCallback) &&
@@ -178,7 +178,7 @@ Object.defineProperties(UpdateChangedCartesian3.prototype, {
         this._clippingPlane.onChangeCallback(this._clippingPlane.index);
       }
       this._cartesian3.z = value;
-    },
-  },
+    }
+  }
 });
 export default ClippingPlane;

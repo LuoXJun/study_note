@@ -1,22 +1,22 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import ClearCommand from "../Renderer/ClearCommand.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import FramebufferManager from "../Renderer/FramebufferManager.js";
-import Pass from "../Renderer/Pass.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import RenderState from "../Renderer/RenderState.js";
-import Sampler from "../Renderer/Sampler.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import Texture from "../Renderer/Texture.js";
-import CompareAndPackTranslucentDepth from "../Shaders/CompareAndPackTranslucentDepth.js";
-import CompositeTranslucentClassification from "../Shaders/PostProcessStages/CompositeTranslucentClassification.js";
-import BlendingState from "./BlendingState.js";
-import StencilConstants from "./StencilConstants.js";
-import StencilFunction from "./StencilFunction.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import ClearCommand from '../Renderer/ClearCommand.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import FramebufferManager from '../Renderer/FramebufferManager.js';
+import Pass from '../Renderer/Pass.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import RenderState from '../Renderer/RenderState.js';
+import Sampler from '../Renderer/Sampler.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import Texture from '../Renderer/Texture.js';
+import CompareAndPackTranslucentDepth from '../Shaders/CompareAndPackTranslucentDepth.js';
+import CompositeTranslucentClassification from '../Shaders/PostProcessStages/CompositeTranslucentClassification.js';
+import BlendingState from './BlendingState.js';
+import StencilConstants from './StencilConstants.js';
+import StencilFunction from './StencilFunction.js';
 
 const debugShowPackedDepth = false;
 
@@ -28,10 +28,10 @@ const debugShowPackedDepth = false;
  */
 function TranslucentTileClassification(context) {
   this._drawClassificationFBO = new FramebufferManager({
-    createDepthAttachments: false,
+    createDepthAttachments: false
   });
   this._accumulationFBO = new FramebufferManager({
-    createDepthAttachments: false,
+    createDepthAttachments: false
   });
   this._packFBO = new FramebufferManager();
 
@@ -49,13 +49,13 @@ function TranslucentTileClassification(context) {
 
   this._clearColorCommand = new ClearCommand({
     color: new Color(0.0, 0.0, 0.0, 0.0),
-    owner: this,
+    owner: this
   });
 
   this._clearDepthStencilCommand = new ClearCommand({
     depth: 1.0,
     stencil: 0,
-    owner: this,
+    owner: this
   });
 
   this._supported = context.depthTexture;
@@ -82,8 +82,8 @@ Object.defineProperties(TranslucentTileClassification.prototype, {
   hasTranslucentDepth: {
     get: function () {
       return this._hasTranslucentDepth;
-    },
-  },
+    }
+  }
 });
 
 function destroyTextures(transpClass) {
@@ -110,7 +110,7 @@ function updateTextures(transpClass, context, width, height) {
     height: height,
     pixelFormat: PixelFormat.DEPTH_STENCIL,
     pixelDatatype: PixelDatatype.UNSIGNED_INT_24_8,
-    sampler: Sampler.NEAREST,
+    sampler: Sampler.NEAREST
   });
 }
 
@@ -153,7 +153,7 @@ function updateResources(
 
   if (!defined(transpClass._packDepthCommand)) {
     fs = new ShaderSource({
-      sources: [CompareAndPackTranslucentDepth],
+      sources: [CompareAndPackTranslucentDepth]
     });
 
     uniformMap = {
@@ -162,28 +162,28 @@ function updateResources(
       },
       u_translucentDepthTexture: function () {
         return transpClass._translucentDepthStencilTexture;
-      },
+      }
     };
 
     transpClass._packDepthCommand = context.createViewportQuadCommand(fs, {
       uniformMap: uniformMap,
-      owner: transpClass,
+      owner: transpClass
     });
   }
 
   if (!defined(transpClass._compositeCommand)) {
     fs = new ShaderSource({
-      sources: [CompositeTranslucentClassification],
+      sources: [CompositeTranslucentClassification]
     });
 
     uniformMap = {
       colorTexture: function () {
         return transpClass._textureToComposite;
-      },
+      }
     };
 
     if (debugShowPackedDepth) {
-      fs.defines = ["DEBUG_SHOW_DEPTH"];
+      fs.defines = ['DEBUG_SHOW_DEPTH'];
       uniformMap.u_packedTranslucentDepth = function () {
         return transpClass._packFBO.getColorTexture();
       };
@@ -191,21 +191,21 @@ function updateResources(
 
     transpClass._compositeCommand = context.createViewportQuadCommand(fs, {
       uniformMap: uniformMap,
-      owner: transpClass,
+      owner: transpClass
     });
 
     const compositeCommand = transpClass._compositeCommand;
     const compositeProgram = compositeCommand.shaderProgram;
     const compositePickProgram = context.shaderCache.createDerivedShaderProgram(
       compositeProgram,
-      "pick",
+      'pick',
       {
         vertexShaderSource: compositeProgram.vertexShaderSource,
         fragmentShaderSource: new ShaderSource({
           sources: fs.sources,
-          defines: ["PICK"],
+          defines: ['PICK']
         }),
-        attributeLocations: compositeProgram._attributeLocations,
+        attributeLocations: compositeProgram._attributeLocations
       }
     );
     const compositePickCommand = DrawCommand.shallowClone(compositeCommand);
@@ -215,35 +215,35 @@ function updateResources(
 
   if (!defined(transpClass._copyCommand)) {
     fs = new ShaderSource({
-      sources: [CompositeTranslucentClassification],
+      sources: [CompositeTranslucentClassification]
     });
 
     uniformMap = {
       colorTexture: function () {
         return transpClass._drawClassificationFBO.getColorTexture();
-      },
+      }
     };
 
     transpClass._copyCommand = context.createViewportQuadCommand(fs, {
       uniformMap: uniformMap,
-      owner: transpClass,
+      owner: transpClass
     });
   }
 
   if (!defined(transpClass._accumulateCommand)) {
     fs = new ShaderSource({
-      sources: [CompositeTranslucentClassification],
+      sources: [CompositeTranslucentClassification]
     });
 
     uniformMap = {
       colorTexture: function () {
         return transpClass._drawClassificationFBO.getColorTexture();
-      },
+      }
     };
 
     transpClass._accumulateCommand = context.createViewportQuadCommand(fs, {
       uniformMap: uniformMap,
-      owner: transpClass,
+      owner: transpClass
     });
   }
 
@@ -279,8 +279,8 @@ function updateResources(
       viewport: transpClass._viewport,
       scissorTest: {
         enabled: transpClass._useScissorTest,
-        rectangle: transpClass._scissorRectangle,
-      },
+        rectangle: transpClass._scissorRectangle
+      }
     });
   }
 
@@ -300,13 +300,13 @@ function updateResources(
       viewport: transpClass._viewport,
       scissorTest: {
         enabled: transpClass._useScissorTest,
-        rectangle: transpClass._scissorRectangle,
+        rectangle: transpClass._scissorRectangle
       },
       stencilTest: {
         enabled: true,
         frontFunction: StencilFunction.EQUAL,
-        reference: StencilConstants.CESIUM_3D_TILE_MASK,
-      },
+        reference: StencilConstants.CESIUM_3D_TILE_MASK
+      }
     });
   }
 
@@ -326,9 +326,9 @@ function updateResources(
       viewport: transpClass._viewport,
       scissorTest: {
         enabled: transpClass._useScissorTest,
-        rectangle: transpClass._scissorRectangle,
+        rectangle: transpClass._scissorRectangle
       },
-      blending: BlendingState.ALPHA_BLEND,
+      blending: BlendingState.ALPHA_BLEND
     });
   }
 
@@ -401,52 +401,49 @@ TranslucentTileClassification.prototype.executeTranslucentCommands = function (
   passState.framebuffer = framebuffer;
 };
 
-TranslucentTileClassification.prototype.executeClassificationCommands = function (
-  scene,
-  executeCommand,
-  passState,
-  frustumCommands
-) {
-  if (!this._hasTranslucentDepth) {
-    return;
-  }
+TranslucentTileClassification.prototype.executeClassificationCommands =
+  function (scene, executeCommand, passState, frustumCommands) {
+    if (!this._hasTranslucentDepth) {
+      return;
+    }
 
-  const context = scene.context;
-  const us = context.uniformState;
-  const framebuffer = passState.framebuffer;
+    const context = scene.context;
+    const us = context.uniformState;
+    const framebuffer = passState.framebuffer;
 
-  if (this._frustumsDrawn === 2) {
-    // copy classification from first frustum
+    if (this._frustumsDrawn === 2) {
+      // copy classification from first frustum
+      passState.framebuffer = this._accumulationFBO.framebuffer;
+      this._copyCommand.execute(context, passState);
+    }
+
+    passState.framebuffer = this._drawClassificationFBO.framebuffer;
+    if (this._frustumsDrawn > 1) {
+      this._clearColorCommand.execute(context, passState);
+    }
+
+    us.updatePass(Pass.CESIUM_3D_TILE_CLASSIFICATION);
+    const swapGlobeDepth = us.globeDepthTexture;
+    us.globeDepthTexture = this._packFBO.getColorTexture();
+    const commands =
+      frustumCommands.commands[Pass.CESIUM_3D_TILE_CLASSIFICATION];
+    const length = frustumCommands.indices[Pass.CESIUM_3D_TILE_CLASSIFICATION];
+    for (let i = 0; i < length; ++i) {
+      executeCommand(commands[i], scene, context, passState);
+    }
+
+    us.globeDepthTexture = swapGlobeDepth;
+    passState.framebuffer = framebuffer;
+
+    if (this._frustumsDrawn === 1) {
+      return;
+    }
+
     passState.framebuffer = this._accumulationFBO.framebuffer;
-    this._copyCommand.execute(context, passState);
-  }
+    this._accumulateCommand.execute(context, passState);
 
-  passState.framebuffer = this._drawClassificationFBO.framebuffer;
-  if (this._frustumsDrawn > 1) {
-    this._clearColorCommand.execute(context, passState);
-  }
-
-  us.updatePass(Pass.CESIUM_3D_TILE_CLASSIFICATION);
-  const swapGlobeDepth = us.globeDepthTexture;
-  us.globeDepthTexture = this._packFBO.getColorTexture();
-  const commands = frustumCommands.commands[Pass.CESIUM_3D_TILE_CLASSIFICATION];
-  const length = frustumCommands.indices[Pass.CESIUM_3D_TILE_CLASSIFICATION];
-  for (let i = 0; i < length; ++i) {
-    executeCommand(commands[i], scene, context, passState);
-  }
-
-  us.globeDepthTexture = swapGlobeDepth;
-  passState.framebuffer = framebuffer;
-
-  if (this._frustumsDrawn === 1) {
-    return;
-  }
-
-  passState.framebuffer = this._accumulationFBO.framebuffer;
-  this._accumulateCommand.execute(context, passState);
-
-  passState.framebuffer = framebuffer;
-};
+    passState.framebuffer = framebuffer;
+  };
 
 TranslucentTileClassification.prototype.execute = function (scene, passState) {
   if (!this._hasTranslucentDepth) {

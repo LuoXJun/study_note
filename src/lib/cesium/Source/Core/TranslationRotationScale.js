@@ -1,7 +1,7 @@
-import Cartesian3 from "./Cartesian3.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Quaternion from "./Quaternion.js";
+import Cartesian3 from './Cartesian3.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Quaternion from './Quaternion.js';
 
 const defaultScale = new Cartesian3(1.0, 1.0, 1.0);
 const defaultTranslation = Cartesian3.ZERO;

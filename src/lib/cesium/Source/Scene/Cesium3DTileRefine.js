@@ -24,6 +24,6 @@ const Cesium3DTileRefine = {
    * @type {Number}
    * @constant
    */
-  REPLACE: 1,
+  REPLACE: 1
 };
 export default Object.freeze(Cesium3DTileRefine);

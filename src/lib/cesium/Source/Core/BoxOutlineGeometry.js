@@ -1,15 +1,15 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import GeometryOffsetAttribute from "./GeometryOffsetAttribute.js";
-import PrimitiveType from "./PrimitiveType.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import GeometryOffsetAttribute from './GeometryOffsetAttribute.js';
+import PrimitiveType from './PrimitiveType.js';
 
 const diffScratch = new Cartesian3();
 
@@ -41,14 +41,14 @@ function BoxOutlineGeometry(options) {
   const max = options.maximum;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("min", min);
-  Check.typeOf.object("max", max);
+  Check.typeOf.object('min', min);
+  Check.typeOf.object('max', max);
   if (
     defined(options.offsetAttribute) &&
     options.offsetAttribute === GeometryOffsetAttribute.TOP
   ) {
     throw new DeveloperError(
-      "GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry."
+      'GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -56,7 +56,7 @@ function BoxOutlineGeometry(options) {
   this._min = Cartesian3.clone(min);
   this._max = Cartesian3.clone(max);
   this._offsetAttribute = options.offsetAttribute;
-  this._workerName = "createBoxOutlineGeometry";
+  this._workerName = 'createBoxOutlineGeometry';
 }
 
 /**
@@ -82,10 +82,10 @@ BoxOutlineGeometry.fromDimensions = function (options) {
   const dimensions = options.dimensions;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("dimensions", dimensions);
-  Check.typeOf.number.greaterThanOrEquals("dimensions.x", dimensions.x, 0);
-  Check.typeOf.number.greaterThanOrEquals("dimensions.y", dimensions.y, 0);
-  Check.typeOf.number.greaterThanOrEquals("dimensions.z", dimensions.z, 0);
+  Check.typeOf.object('dimensions', dimensions);
+  Check.typeOf.number.greaterThanOrEquals('dimensions.x', dimensions.x, 0);
+  Check.typeOf.number.greaterThanOrEquals('dimensions.y', dimensions.y, 0);
+  Check.typeOf.number.greaterThanOrEquals('dimensions.z', dimensions.z, 0);
   //>>includeEnd('debug');
 
   const corner = Cartesian3.multiplyByScalar(dimensions, 0.5, new Cartesian3());
@@ -93,7 +93,7 @@ BoxOutlineGeometry.fromDimensions = function (options) {
   return new BoxOutlineGeometry({
     minimum: Cartesian3.negate(corner, new Cartesian3()),
     maximum: corner,
-    offsetAttribute: options.offsetAttribute,
+    offsetAttribute: options.offsetAttribute
   });
 };
 
@@ -119,12 +119,12 @@ BoxOutlineGeometry.fromDimensions = function (options) {
  */
 BoxOutlineGeometry.fromAxisAlignedBoundingBox = function (boundingBox) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("boundindBox", boundingBox);
+  Check.typeOf.object('boundindBox', boundingBox);
   //>>includeEnd('debug');
 
   return new BoxOutlineGeometry({
     minimum: boundingBox.minimum,
-    maximum: boundingBox.maximum,
+    maximum: boundingBox.maximum
   });
 };
 
@@ -145,8 +145,8 @@ BoxOutlineGeometry.packedLength = 2 * Cartesian3.packedLength + 1;
  */
 BoxOutlineGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -166,7 +166,7 @@ const scratchMax = new Cartesian3();
 const scratchOptions = {
   minimum: scratchMin,
   maximum: scratchMax,
-  offsetAttribute: undefined,
+  offsetAttribute: undefined
 };
 
 /**
@@ -179,7 +179,7 @@ const scratchOptions = {
  */
 BoxOutlineGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -253,7 +253,7 @@ BoxOutlineGeometry.createGeometry = function (boxGeometry) {
   attributes.position = new GeometryAttribute({
     componentDatatype: ComponentDatatype.DOUBLE,
     componentsPerAttribute: 3,
-    values: positions,
+    values: positions
   });
 
   // top
@@ -299,7 +299,7 @@ BoxOutlineGeometry.createGeometry = function (boxGeometry) {
     attributes.applyOffset = new GeometryAttribute({
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 1,
-      values: applyOffset,
+      values: applyOffset
     });
   }
 
@@ -308,7 +308,7 @@ BoxOutlineGeometry.createGeometry = function (boxGeometry) {
     indices: indices,
     primitiveType: PrimitiveType.LINES,
     boundingSphere: new BoundingSphere(Cartesian3.ZERO, radius),
-    offsetAttribute: boxGeometry._offsetAttribute,
+    offsetAttribute: boxGeometry._offsetAttribute
   });
 };
 export default BoxOutlineGeometry;

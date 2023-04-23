@@ -1,41 +1,41 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Cartographic from "../Core/Cartographic.js";
-import Color from "../Core/Color.js";
-import combine from "../Core/combine.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import EncodedCartesian3 from "../Core/EncodedCartesian3.js";
-import FeatureDetection from "../Core/FeatureDetection.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import Intersect from "../Core/Intersect.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import Plane from "../Core/Plane.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import Buffer from "../Renderer/Buffer.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import ContextLimits from "../Renderer/ContextLimits.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import Pass from "../Renderer/Pass.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import Texture from "../Renderer/Texture.js";
-import VertexArray from "../Renderer/VertexArray.js";
-import PolylineCommon from "../Shaders/PolylineCommon.js";
-import PolylineFS from "../Shaders/PolylineFS.js";
-import PolylineVS from "../Shaders/PolylineVS.js";
-import BatchTable from "./BatchTable.js";
-import BlendingState from "./BlendingState.js";
-import Material from "./Material.js";
-import Polyline from "./Polyline.js";
-import SceneMode from "./SceneMode.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Cartographic from '../Core/Cartographic.js';
+import Color from '../Core/Color.js';
+import combine from '../Core/combine.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import EncodedCartesian3 from '../Core/EncodedCartesian3.js';
+import FeatureDetection from '../Core/FeatureDetection.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import Intersect from '../Core/Intersect.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import Plane from '../Core/Plane.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import Buffer from '../Renderer/Buffer.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import ContextLimits from '../Renderer/ContextLimits.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import Pass from '../Renderer/Pass.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import Texture from '../Renderer/Texture.js';
+import VertexArray from '../Renderer/VertexArray.js';
+import PolylineCommon from '../Shaders/PolylineCommon.js';
+import PolylineFS from '../Shaders/PolylineFS.js';
+import PolylineVS from '../Shaders/PolylineVS.js';
+import BatchTable from './BatchTable.js';
+import BlendingState from './BlendingState.js';
+import Material from './Material.js';
+import Polyline from './Polyline.js';
+import SceneMode from './SceneMode.js';
 
 const SHOW_INDEX = Polyline.SHOW_INDEX;
 const WIDTH_INDEX = Polyline.WIDTH_INDEX;
@@ -60,7 +60,7 @@ const attributeLocations = {
   nextPosition3DHigh: 9,
   nextPosition3DLow: 10,
   nextPosition2DHigh: 11,
-  nextPosition2DLow: 12,
+  nextPosition2DLow: 12
 };
 
 /**
@@ -169,7 +169,7 @@ function PolylineCollection(options) {
   // The buffer usage is determined based on the usage of the attribute over time.
   this._positionBufferUsage = {
     bufferUsage: BufferUsage.STATIC_DRAW,
-    frameCount: 0,
+    frameCount: 0
   };
 
   this._mode = undefined;
@@ -190,7 +190,7 @@ function PolylineCollection(options) {
   this._uniformMap = {
     u_highlightColor: function () {
       return that._highlightColor;
-    },
+    }
   };
 }
 
@@ -206,8 +206,8 @@ Object.defineProperties(PolylineCollection.prototype, {
     get: function () {
       removePolylines(this);
       return this._polylines.length;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -357,7 +357,7 @@ PolylineCollection.prototype.contains = function (polyline) {
 PolylineCollection.prototype.get = function (index) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(index)) {
-    throw new DeveloperError("index is required.");
+    throw new DeveloperError('index is required.');
   }
   //>>includeEnd('debug');
 
@@ -372,31 +372,31 @@ function createBatchTable(collection, context) {
 
   const attributes = [
     {
-      functionName: "batchTable_getWidthAndShow",
+      functionName: 'batchTable_getWidthAndShow',
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
-      componentsPerAttribute: 2,
+      componentsPerAttribute: 2
     },
     {
-      functionName: "batchTable_getPickColor",
+      functionName: 'batchTable_getPickColor',
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 4,
-      normalize: true,
+      normalize: true
     },
     {
-      functionName: "batchTable_getCenterHigh",
+      functionName: 'batchTable_getCenterHigh',
       componentDatatype: ComponentDatatype.FLOAT,
-      componentsPerAttribute: 3,
+      componentsPerAttribute: 3
     },
     {
-      functionName: "batchTable_getCenterLowAndRadius",
+      functionName: 'batchTable_getCenterLowAndRadius',
       componentDatatype: ComponentDatatype.FLOAT,
-      componentsPerAttribute: 4,
+      componentsPerAttribute: 4
     },
     {
-      functionName: "batchTable_getDistanceDisplayCondition",
+      functionName: 'batchTable_getDistanceDisplayCondition',
       componentDatatype: ComponentDatatype.FLOAT,
-      componentsPerAttribute: 2,
-    },
+      componentsPerAttribute: 2
+    }
   ];
 
   collection._batchTable = new BatchTable(
@@ -437,7 +437,7 @@ PolylineCollection.prototype.update = function (frameState) {
   if (this._createBatchTable) {
     if (ContextLimits.maximumVertexTextureImageUnits === 0) {
       throw new RuntimeError(
-        "Vertex texture fetch support is required to render polylines. The maximum number of vertex texture image units must be greater than zero."
+        'Vertex texture fetch support is required to render polylines. The maximum number of vertex texture image units must be greater than zero.'
       );
     }
     createBatchTable(this, context);
@@ -565,8 +565,8 @@ PolylineCollection.prototype.update = function (frameState) {
     this._opaqueRS = RenderState.fromCache({
       depthMask: useDepthTest,
       depthTest: {
-        enabled: useDepthTest,
-      },
+        enabled: useDepthTest
+      }
     });
   }
 
@@ -578,8 +578,8 @@ PolylineCollection.prototype.update = function (frameState) {
       blending: BlendingState.ALPHA_BLEND,
       depthMask: !useDepthTest,
       depthTest: {
-        enabled: useDepthTest,
-      },
+        enabled: useDepthTest
+      }
     });
   }
 
@@ -642,7 +642,7 @@ function createCommandLists(
 
             if (commandIndex >= commandsLength) {
               command = new DrawCommand({
-                owner: polylineCollection,
+                owner: polylineCollection
               });
               commands.push(command);
             } else {
@@ -668,7 +668,7 @@ function createCommandLists(
               : polylineCollection._opaqueRS;
             command.pass = translucent ? Pass.TRANSLUCENT : Pass.OPAQUE;
             command.debugShowBoundingVolume = debugShowBoundingVolume;
-            command.pickId = "v_pickColor";
+            command.pickId = 'v_pickColor';
 
             command.uniformMap = uniformMap;
             command.count = count;
@@ -734,7 +734,7 @@ function createCommandLists(
       if (defined(currentId) && count > 0) {
         if (commandIndex >= commandsLength) {
           command = new DrawCommand({
-            owner: polylineCollection,
+            owner: polylineCollection
           });
           commands.push(command);
         } else {
@@ -762,7 +762,7 @@ function createCommandLists(
           ? Pass.TRANSLUCENT
           : Pass.OPAQUE;
         command.debugShowBoundingVolume = debugShowBoundingVolume;
-        command.pickId = "v_pickColor";
+        command.pickId = 'v_pickColor';
 
         command.uniformMap = uniformMap;
         command.count = count;
@@ -926,20 +926,20 @@ function createVertexArrays(collection, context, projection) {
     collection._positionBuffer = Buffer.createVertexBuffer({
       context: context,
       typedArray: positionArray,
-      usage: positionBufferUsage,
+      usage: positionBufferUsage
     });
     let position3DBuffer;
     if (defined(position3DArray)) {
       position3DBuffer = Buffer.createVertexBuffer({
         context: context,
         typedArray: position3DArray,
-        usage: positionBufferUsage,
+        usage: positionBufferUsage
       });
     }
     collection._texCoordExpandAndBatchIndexBuffer = Buffer.createVertexBuffer({
       context: context,
       typedArray: texCoordExpandAndBatchIndexArray,
-      usage: texCoordExpandAndBatchIndexBufferUsage,
+      usage: texCoordExpandAndBatchIndexBufferUsage
     });
 
     const positionSizeInBytes = 3 * Float32Array.BYTES_PER_ELEMENT;
@@ -957,7 +957,7 @@ function createVertexArrays(collection, context, projection) {
           context: context,
           typedArray: indicesArray,
           usage: BufferUsage.STATIC_DRAW,
-          indexDatatype: IndexDatatype.UNSIGNED_SHORT,
+          indexDatatype: IndexDatatype.UNSIGNED_SHORT
         });
 
         vbo += vertexBufferOffset[k];
@@ -986,92 +986,92 @@ function createVertexArrays(collection, context, projection) {
             componentsPerAttribute: 3,
             componentDatatype: ComponentDatatype.FLOAT,
             offsetInBytes: positionHighOffset,
-            strideInBytes: 6 * positionSizeInBytes,
+            strideInBytes: 6 * positionSizeInBytes
           },
           {
             index: attributeLocations.position3DLow,
             componentsPerAttribute: 3,
             componentDatatype: ComponentDatatype.FLOAT,
             offsetInBytes: positionLowOffset,
-            strideInBytes: 6 * positionSizeInBytes,
+            strideInBytes: 6 * positionSizeInBytes
           },
           {
             index: attributeLocations.position2DHigh,
             componentsPerAttribute: 3,
             componentDatatype: ComponentDatatype.FLOAT,
             offsetInBytes: positionHighOffset,
-            strideInBytes: 6 * positionSizeInBytes,
+            strideInBytes: 6 * positionSizeInBytes
           },
           {
             index: attributeLocations.position2DLow,
             componentsPerAttribute: 3,
             componentDatatype: ComponentDatatype.FLOAT,
             offsetInBytes: positionLowOffset,
-            strideInBytes: 6 * positionSizeInBytes,
+            strideInBytes: 6 * positionSizeInBytes
           },
           {
             index: attributeLocations.prevPosition3DHigh,
             componentsPerAttribute: 3,
             componentDatatype: ComponentDatatype.FLOAT,
             offsetInBytes: prevPositionHighOffset,
-            strideInBytes: 6 * positionSizeInBytes,
+            strideInBytes: 6 * positionSizeInBytes
           },
           {
             index: attributeLocations.prevPosition3DLow,
             componentsPerAttribute: 3,
             componentDatatype: ComponentDatatype.FLOAT,
             offsetInBytes: prevPositionLowOffset,
-            strideInBytes: 6 * positionSizeInBytes,
+            strideInBytes: 6 * positionSizeInBytes
           },
           {
             index: attributeLocations.prevPosition2DHigh,
             componentsPerAttribute: 3,
             componentDatatype: ComponentDatatype.FLOAT,
             offsetInBytes: prevPositionHighOffset,
-            strideInBytes: 6 * positionSizeInBytes,
+            strideInBytes: 6 * positionSizeInBytes
           },
           {
             index: attributeLocations.prevPosition2DLow,
             componentsPerAttribute: 3,
             componentDatatype: ComponentDatatype.FLOAT,
             offsetInBytes: prevPositionLowOffset,
-            strideInBytes: 6 * positionSizeInBytes,
+            strideInBytes: 6 * positionSizeInBytes
           },
           {
             index: attributeLocations.nextPosition3DHigh,
             componentsPerAttribute: 3,
             componentDatatype: ComponentDatatype.FLOAT,
             offsetInBytes: nextPositionHighOffset,
-            strideInBytes: 6 * positionSizeInBytes,
+            strideInBytes: 6 * positionSizeInBytes
           },
           {
             index: attributeLocations.nextPosition3DLow,
             componentsPerAttribute: 3,
             componentDatatype: ComponentDatatype.FLOAT,
             offsetInBytes: nextPositionLowOffset,
-            strideInBytes: 6 * positionSizeInBytes,
+            strideInBytes: 6 * positionSizeInBytes
           },
           {
             index: attributeLocations.nextPosition2DHigh,
             componentsPerAttribute: 3,
             componentDatatype: ComponentDatatype.FLOAT,
             offsetInBytes: nextPositionHighOffset,
-            strideInBytes: 6 * positionSizeInBytes,
+            strideInBytes: 6 * positionSizeInBytes
           },
           {
             index: attributeLocations.nextPosition2DLow,
             componentsPerAttribute: 3,
             componentDatatype: ComponentDatatype.FLOAT,
             offsetInBytes: nextPositionLowOffset,
-            strideInBytes: 6 * positionSizeInBytes,
+            strideInBytes: 6 * positionSizeInBytes
           },
           {
             index: attributeLocations.texCoordExpandAndBatchIndex,
             componentsPerAttribute: 4,
             componentDatatype: ComponentDatatype.FLOAT,
             vertexBuffer: collection._texCoordExpandAndBatchIndexBuffer,
-            offsetInBytes: vertexTexCoordExpandAndBatchIndexBufferOffset,
-          },
+            offsetInBytes: vertexTexCoordExpandAndBatchIndexBufferOffset
+          }
         ];
 
         let bufferProperty3D;
@@ -1081,22 +1081,22 @@ function createVertexArrays(collection, context, projection) {
 
         if (mode === SceneMode.SCENE3D) {
           buffer3D = collection._positionBuffer;
-          bufferProperty3D = "vertexBuffer";
+          bufferProperty3D = 'vertexBuffer';
           buffer2D = emptyVertexBuffer;
-          bufferProperty2D = "value";
+          bufferProperty2D = 'value';
         } else if (
           mode === SceneMode.SCENE2D ||
           mode === SceneMode.COLUMBUS_VIEW
         ) {
           buffer3D = emptyVertexBuffer;
-          bufferProperty3D = "value";
+          bufferProperty3D = 'value';
           buffer2D = collection._positionBuffer;
-          bufferProperty2D = "vertexBuffer";
+          bufferProperty2D = 'vertexBuffer';
         } else {
           buffer3D = position3DBuffer;
-          bufferProperty3D = "vertexBuffer";
+          bufferProperty3D = 'vertexBuffer';
           buffer2D = collection._positionBuffer;
-          bufferProperty2D = "vertexBuffer";
+          bufferProperty2D = 'vertexBuffer';
         }
 
         attributes[0][bufferProperty3D] = buffer3D;
@@ -1115,11 +1115,11 @@ function createVertexArrays(collection, context, projection) {
         const va = new VertexArray({
           context: context,
           attributes: attributes,
-          indexBuffer: indexBuffer,
+          indexBuffer: indexBuffer
         });
         collection._vertexArrays.push({
           va: va,
-          buckets: vertexArrayBuckets[k],
+          buckets: vertexArrayBuckets[k]
         });
       }
     }
@@ -1287,9 +1287,9 @@ PolylineBucket.prototype.updateShader = function (
     return;
   }
 
-  const defines = ["DISTANCE_DISPLAY_CONDITION"];
+  const defines = ['DISTANCE_DISPLAY_CONDITION'];
   if (useHighlightColor) {
-    defines.push("VECTOR_TILE");
+    defines.push('VECTOR_TILE');
   }
 
   // Check for use of v_polylineAngle in material shader
@@ -1297,33 +1297,33 @@ PolylineBucket.prototype.updateShader = function (
     this.material.shaderSource.search(/varying\s+float\s+v_polylineAngle;/g) !==
     -1
   ) {
-    defines.push("POLYLINE_DASH");
+    defines.push('POLYLINE_DASH');
   }
 
   if (!FeatureDetection.isInternetExplorer()) {
-    defines.push("CLIP_POLYLINE");
+    defines.push('CLIP_POLYLINE');
   }
 
   const fs = new ShaderSource({
     defines: defines,
     sources: [
-      "varying vec4 v_pickColor;\n",
+      'varying vec4 v_pickColor;\n',
       this.material.shaderSource,
-      PolylineFS,
-    ],
+      PolylineFS
+    ]
   });
 
   const vsSource = batchTable.getVertexShaderCallback()(PolylineVS);
   const vs = new ShaderSource({
     defines: defines,
-    sources: [PolylineCommon, vsSource],
+    sources: [PolylineCommon, vsSource]
   });
 
   this.shaderProgram = ShaderProgram.fromCache({
     context: context,
     vertexShaderSource: vs,
     fragmentShaderSource: fs,
-    attributeLocations: attributeLocations,
+    attributeLocations: attributeLocations
   });
 };
 
@@ -1487,12 +1487,10 @@ PolylineBucket.prototype.write = function (
           j / (positionsLength - 1); // s tex coord
         texCoordExpandAndBatchIndexArray[texCoordExpandAndBatchIndexIndex + 1] =
           2 * (k % 2) - 1; // expand direction
-        texCoordExpandAndBatchIndexArray[
-          texCoordExpandAndBatchIndexIndex + 2
-        ] = direction;
-        texCoordExpandAndBatchIndexArray[
-          texCoordExpandAndBatchIndexIndex + 3
-        ] = polylineBatchIndex;
+        texCoordExpandAndBatchIndexArray[texCoordExpandAndBatchIndexIndex + 2] =
+          direction;
+        texCoordExpandAndBatchIndexArray[texCoordExpandAndBatchIndexIndex + 3] =
+          polylineBatchIndex;
 
         positionIndex += 6 * 3;
         texCoordExpandAndBatchIndexIndex += 4;
@@ -1697,7 +1695,7 @@ PolylineBucket.prototype.updateIndices = function (
           if (indicesCount + 4 > CesiumMath.SIXTY_FOUR_KILOBYTES) {
             polyline._locatorBuckets.push({
               locator: bucketLocator,
-              count: segmentIndexCount,
+              count: segmentIndexCount
             });
             segmentIndexCount = 0;
             vertexBufferOffset.push(4);
@@ -1723,7 +1721,7 @@ PolylineBucket.prototype.updateIndices = function (
 
       polyline._locatorBuckets.push({
         locator: bucketLocator,
-        count: segmentIndexCount,
+        count: segmentIndexCount
       });
 
       if (indicesCount + 4 > CesiumMath.SIXTY_FOUR_KILOBYTES) {
@@ -1760,7 +1758,7 @@ PolylineBucket.prototype.getPolylineStartIndex = function (polyline) {
 
 const scratchSegments = {
   positions: undefined,
-  lengths: undefined,
+  lengths: undefined
 };
 const scratchLengths = new Array(1);
 const pscratch = new Cartesian3();

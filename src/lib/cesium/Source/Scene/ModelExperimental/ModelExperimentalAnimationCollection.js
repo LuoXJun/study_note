@@ -1,12 +1,12 @@
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import Event from "../../Core/Event.js";
-import JulianDate from "../../Core/JulianDate.js";
-import CesiumMath from "../../Core/Math.js";
-import ModelExperimentalAnimation from "./ModelExperimentalAnimation.js";
-import ModelAnimationLoop from ".././ModelAnimationLoop.js";
-import ModelAnimationState from ".././ModelAnimationState.js";
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import Event from '../../Core/Event.js';
+import JulianDate from '../../Core/JulianDate.js';
+import CesiumMath from '../../Core/Math.js';
+import ModelExperimentalAnimation from './ModelExperimentalAnimation.js';
+import ModelAnimationLoop from '.././ModelAnimationLoop.js';
+import ModelAnimationState from '.././ModelAnimationState.js';
 
 /**
  * A collection of active model animations. Access this using {@link ModelExperimental#activeAnimations}.
@@ -74,7 +74,7 @@ Object.defineProperties(ModelExperimentalAnimationCollection.prototype, {
   length: {
     get: function () {
       return this._runtimeAnimations.length;
-    },
+    }
   },
 
   /**
@@ -88,8 +88,8 @@ Object.defineProperties(ModelExperimentalAnimationCollection.prototype, {
   model: {
     get: function () {
       return this._model;
-    },
-  },
+    }
+  }
 });
 
 function addAnimation(collection, animation, options) {
@@ -174,7 +174,7 @@ ModelExperimentalAnimationCollection.prototype.add = function (options) {
   //>>includeStart('debug', pragmas.debug);
   if (!model.ready) {
     throw new DeveloperError(
-      "Animations are not loaded.  Wait for ModelExperimental.readyPromise to resolve."
+      'Animations are not loaded.  Wait for ModelExperimental.readyPromise to resolve.'
     );
   }
   //>>includeEnd('debug');
@@ -184,19 +184,19 @@ ModelExperimentalAnimationCollection.prototype.add = function (options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.name) && !defined(options.index)) {
     throw new DeveloperError(
-      "Either options.name or options.index must be defined."
+      'Either options.name or options.index must be defined.'
     );
   }
 
   if (defined(options.multiplier) && options.multiplier <= 0.0) {
-    throw new DeveloperError("options.multiplier must be greater than zero.");
+    throw new DeveloperError('options.multiplier must be greater than zero.');
   }
 
   if (
     defined(options.index) &&
     (options.index >= animations.length || options.index < 0)
   ) {
-    throw new DeveloperError("options.index must be a valid animation index.");
+    throw new DeveloperError('options.index must be a valid animation index.');
   }
   //>>includeEnd('debug');
 
@@ -216,7 +216,7 @@ ModelExperimentalAnimationCollection.prototype.add = function (options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(index)) {
-    throw new DeveloperError("options.name must be a valid animation name.");
+    throw new DeveloperError('options.name must be a valid animation name.');
   }
   //>>includeEnd('debug');
 
@@ -258,12 +258,12 @@ ModelExperimentalAnimationCollection.prototype.addAll = function (options) {
   //>>includeStart('debug', pragmas.debug);
   if (!model.ready) {
     throw new DeveloperError(
-      "Animations are not loaded.  Wait for Model.readyPromise to resolve."
+      'Animations are not loaded.  Wait for Model.readyPromise to resolve.'
     );
   }
 
   if (defined(options.multiplier) && options.multiplier <= 0.0) {
-    throw new DeveloperError("options.multiplier must be greater than zero.");
+    throw new DeveloperError('options.multiplier must be greater than zero.');
   }
   //>>includeEnd('debug');
 
@@ -370,12 +370,12 @@ ModelExperimentalAnimationCollection.prototype.contains = function (
 ModelExperimentalAnimationCollection.prototype.get = function (index) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(index)) {
-    throw new DeveloperError("index is required.");
+    throw new DeveloperError('index is required.');
   }
 
   if (index >= this._runtimeAnimations.length || index < 0) {
     throw new DeveloperError(
-      "index must be valid within the range of the collection"
+      'index must be valid within the range of the collection'
     );
   }
   //>>includeEnd('debug');

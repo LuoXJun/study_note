@@ -1,4 +1,4 @@
-import DeveloperError from "./DeveloperError.js";
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Static interface for {@link Packable} types which are interpolated in a
@@ -38,6 +38,6 @@ const PackableForInterpolation = {
    * @param {Object} [result] The object into which to store the result.
    * @returns {Object} The modified result parameter or a new Object instance if one was not provided.
    */
-  unpackInterpolationResult: DeveloperError.throwInstantiationError,
+  unpackInterpolationResult: DeveloperError.throwInstantiationError
 };
 export default PackableForInterpolation;

@@ -1,12 +1,12 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import parseStructuralMetadata from "./parseStructuralMetadata.js";
-import parseFeatureMetadataLegacy from "./parseFeatureMetadataLegacy.js";
-import ResourceCache from "./ResourceCache.js";
-import ResourceLoader from "./ResourceLoader.js";
-import ResourceLoaderState from "./ResourceLoaderState.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import parseStructuralMetadata from './parseStructuralMetadata.js';
+import parseFeatureMetadataLegacy from './parseFeatureMetadataLegacy.js';
+import ResourceCache from './ResourceCache.js';
+import ResourceLoader from './ResourceLoader.js';
+import ResourceLoaderState from './ResourceLoaderState.js';
 
 /**
  * Loads glTF structural metadata
@@ -43,14 +43,14 @@ export default function GltfStructuralMetadataLoader(options) {
   const asynchronous = defaultValue(options.asynchronous, true);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.gltf", gltf);
-  Check.typeOf.object("options.gltfResource", gltfResource);
-  Check.typeOf.object("options.baseResource", baseResource);
-  Check.typeOf.object("options.supportedImageFormats", supportedImageFormats);
+  Check.typeOf.object('options.gltf', gltf);
+  Check.typeOf.object('options.gltfResource', gltfResource);
+  Check.typeOf.object('options.baseResource', baseResource);
+  Check.typeOf.object('options.supportedImageFormats', supportedImageFormats);
 
   if (!defined(options.extension) && !defined(options.extensionLegacy)) {
     throw new DeveloperError(
-      "One of options.extension or options.extensionLegacy must be specified"
+      'One of options.extension or options.extensionLegacy must be specified'
     );
   }
   //>>includeEnd('debug');
@@ -75,7 +75,8 @@ if (defined(Object.create)) {
   GltfStructuralMetadataLoader.prototype = Object.create(
     ResourceLoader.prototype
   );
-  GltfStructuralMetadataLoader.prototype.constructor = GltfStructuralMetadataLoader;
+  GltfStructuralMetadataLoader.prototype.constructor =
+    GltfStructuralMetadataLoader;
 }
 
 Object.defineProperties(GltfStructuralMetadataLoader.prototype, {
@@ -91,7 +92,7 @@ Object.defineProperties(GltfStructuralMetadataLoader.prototype, {
   promise: {
     get: function () {
       return this._promise;
-    },
+    }
   },
   /**
    * The cache key of the resource.
@@ -105,7 +106,7 @@ Object.defineProperties(GltfStructuralMetadataLoader.prototype, {
   cacheKey: {
     get: function () {
       return this._cacheKey;
-    },
+    }
   },
   /**
    * The parsed structural metadata
@@ -119,8 +120,8 @@ Object.defineProperties(GltfStructuralMetadataLoader.prototype, {
   structuralMetadata: {
     get: function () {
       return this._structuralMetadata;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -141,7 +142,7 @@ GltfStructuralMetadataLoader.prototype.load = function () {
   this._promise = Promise.all([
     bufferViewsPromise,
     texturesPromise,
-    schemaPromise,
+    schemaPromise
   ])
     .then(function (results) {
       if (that.isDestroyed()) {
@@ -156,14 +157,14 @@ GltfStructuralMetadataLoader.prototype.load = function () {
           extension: that._extension,
           schema: schema,
           bufferViews: bufferViews,
-          textures: textures,
+          textures: textures
         });
       } else {
         that._structuralMetadata = parseFeatureMetadataLegacy({
           extension: that._extensionLegacy,
           schema: schema,
           bufferViews: bufferViews,
-          textures: textures,
+          textures: textures
         });
       }
       that._state = ResourceLoaderState.READY;
@@ -175,7 +176,7 @@ GltfStructuralMetadataLoader.prototype.load = function () {
       }
       that.unload();
       that._state = ResourceLoaderState.FAILED;
-      const errorMessage = "Failed to load structural metadata";
+      const errorMessage = 'Failed to load structural metadata';
       return Promise.reject(that.getError(errorMessage, error));
     });
 };
@@ -278,7 +279,7 @@ function loadBufferViews(structuralMetadataLoader) {
         gltf: structuralMetadataLoader._gltf,
         bufferViewId: parseInt(bufferViewId),
         gltfResource: structuralMetadataLoader._gltfResource,
-        baseResource: structuralMetadataLoader._baseResource,
+        baseResource: structuralMetadataLoader._baseResource
       });
       bufferViewPromises.push(bufferViewLoader.promise);
       structuralMetadataLoader._bufferViewLoaders.push(bufferViewLoader);
@@ -389,7 +390,7 @@ function loadTextures(structuralMetadataLoader) {
         gltfResource: gltfResource,
         baseResource: baseResource,
         supportedImageFormats: supportedImageFormats,
-        asynchronous: asynchronous,
+        asynchronous: asynchronous
       });
       texturePromises.push(textureLoader.promise);
       structuralMetadataLoader._textureLoaders.push(textureLoader);
@@ -419,14 +420,14 @@ function loadSchema(structuralMetadataLoader) {
   let schemaLoader;
   if (defined(extension.schemaUri)) {
     const resource = structuralMetadataLoader._baseResource.getDerivedResource({
-      url: extension.schemaUri,
+      url: extension.schemaUri
     });
     schemaLoader = ResourceCache.loadSchema({
-      resource: resource,
+      resource: resource
     });
   } else {
     schemaLoader = ResourceCache.loadSchema({
-      schema: extension.schema,
+      schema: extension.schema
     });
   }
 
@@ -445,7 +446,7 @@ function loadSchema(structuralMetadataLoader) {
  */
 GltfStructuralMetadataLoader.prototype.process = function (frameState) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("frameState", frameState);
+  Check.typeOf.object('frameState', frameState);
   //>>includeEnd('debug');
 
   if (this._state !== ResourceLoaderState.LOADING) {

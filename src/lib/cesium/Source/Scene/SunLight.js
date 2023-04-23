@@ -1,5 +1,5 @@
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
 
 /**
  * A directional light source that originates from the Sun.

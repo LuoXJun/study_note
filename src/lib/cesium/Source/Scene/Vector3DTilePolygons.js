@@ -1,16 +1,16 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import OrientedBoundingBox from "../Core/OrientedBoundingBox.js";
-import Rectangle from "../Core/Rectangle.js";
-import TaskProcessor from "../Core/TaskProcessor.js";
-import ClassificationType from "./ClassificationType.js";
-import Vector3DTileBatch from "./Vector3DTileBatch.js";
-import Vector3DTilePrimitive from "./Vector3DTilePrimitive.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import OrientedBoundingBox from '../Core/OrientedBoundingBox.js';
+import Rectangle from '../Core/Rectangle.js';
+import TaskProcessor from '../Core/TaskProcessor.js';
+import ClassificationType from './ClassificationType.js';
+import Vector3DTileBatch from './Vector3DTileBatch.js';
+import Vector3DTilePrimitive from './Vector3DTilePrimitive.js';
 
 /**
  * Creates a batch of pre-triangulated polygons draped on terrain and/or 3D Tiles.
@@ -118,7 +118,7 @@ Object.defineProperties(Vector3DTilePolygons.prototype, {
         return this._primitive.trianglesLength;
       }
       return 0;
-    },
+    }
   },
 
   /**
@@ -135,7 +135,7 @@ Object.defineProperties(Vector3DTilePolygons.prototype, {
         return this._primitive.geometryByteLength;
       }
       return 0;
-    },
+    }
   },
 
   /**
@@ -147,8 +147,8 @@ Object.defineProperties(Vector3DTilePolygons.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
-  },
+    }
+  }
 });
 
 function packBuffer(polygons) {
@@ -208,13 +208,13 @@ function unpackBuffer(polygons, packedBuffer) {
       color: color,
       offset: indexOffset,
       count: count,
-      batchIds: batchIds,
+      batchIds: batchIds
     });
   }
 }
 
 const createVerticesTaskProcessor = new TaskProcessor(
-  "createVectorTilePolygons",
+  'createVectorTilePolygons',
   5
 );
 const scratchColor = new Color();
@@ -270,7 +270,7 @@ function createPrimitive(polygons) {
       indices.buffer,
       batchIds.buffer,
       batchTableColors.buffer,
-      packedBuffer.buffer,
+      packedBuffer.buffer
     ];
     const parameters = {
       packedBuffer: packedBuffer.buffer,
@@ -279,7 +279,7 @@ function createPrimitive(polygons) {
       indexCounts: indexCounts.buffer,
       indices: indices.buffer,
       batchIds: batchIds.buffer,
-      batchTableColors: batchTableColors.buffer,
+      batchTableColors: batchTableColors.buffer
     };
 
     let minimumHeights = polygons._polygonMinimumHeights;
@@ -293,10 +293,11 @@ function createPrimitive(polygons) {
       parameters.maximumHeights = maximumHeights;
     }
 
-    const verticesPromise = (polygons._verticesPromise = createVerticesTaskProcessor.scheduleTask(
-      parameters,
-      transferrableObjects
-    ));
+    const verticesPromise = (polygons._verticesPromise =
+      createVerticesTaskProcessor.scheduleTask(
+        parameters,
+        transferrableObjects
+      ));
     if (!defined(verticesPromise)) {
       // Postponed
       return;
@@ -341,7 +342,7 @@ function finishPrimitive(polygons) {
       batchedIndices: polygons._batchedIndices,
       boundingVolume: polygons._boundingVolume,
       boundingVolumes: polygons._boundingVolumes,
-      center: polygons._center,
+      center: polygons._center
     });
 
     polygons._batchTable = undefined;

@@ -1,11 +1,11 @@
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import EventHelper from "../../Core/EventHelper.js";
-import SceneMode from "../../Scene/SceneMode.js";
-import knockout from "../../ThirdParty/knockout.js";
-import createCommand from "../createCommand.js";
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import EventHelper from '../../Core/EventHelper.js';
+import SceneMode from '../../Scene/SceneMode.js';
+import knockout from '../../ThirdParty/knockout.js';
+import createCommand from '../createCommand.js';
 
 /**
  * The view model for {@link SceneModePicker}.
@@ -18,7 +18,7 @@ import createCommand from "../createCommand.js";
 function SceneModePickerViewModel(scene, duration) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required.");
+    throw new DeveloperError('scene is required.');
   }
   //>>includeEnd('debug');
 
@@ -54,28 +54,28 @@ function SceneModePickerViewModel(scene, duration) {
    * @type {String}
    * @default '2D'
    */
-  this.tooltip2D = "2D";
+  this.tooltip2D = '2D';
 
   /**
    * Gets or sets the 3D tooltip.  This property is observable.
    * @type {String}
    * @default '3D'
    */
-  this.tooltip3D = "3D";
+  this.tooltip3D = '3D';
 
   /**
    * Gets or sets the Columbus View tooltip.  This property is observable.
    * @type {String}
    * @default 'Columbus View'
    */
-  this.tooltipColumbusView = "Columbus View";
+  this.tooltipColumbusView = 'Columbus View';
 
   knockout.track(this, [
-    "sceneMode",
-    "dropDownVisible",
-    "tooltip2D",
-    "tooltip3D",
-    "tooltipColumbusView",
+    'sceneMode',
+    'dropDownVisible',
+    'tooltip2D',
+    'tooltip3D',
+    'tooltipColumbusView'
   ]);
 
   /**
@@ -83,7 +83,7 @@ function SceneModePickerViewModel(scene, duration) {
    * @type {String}
    */
   this.selectedTooltip = undefined;
-  knockout.defineProperty(this, "selectedTooltip", function () {
+  knockout.defineProperty(this, 'selectedTooltip', function () {
     const mode = that.sceneMode;
     if (mode === SceneMode.SCENE2D) {
       return that.tooltip2D;
@@ -123,7 +123,7 @@ Object.defineProperties(SceneModePickerViewModel.prototype, {
   scene: {
     get: function () {
       return this._scene;
-    },
+    }
   },
 
   /**
@@ -139,12 +139,12 @@ Object.defineProperties(SceneModePickerViewModel.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (value < 0.0) {
-        throw new DeveloperError("duration value must be positive.");
+        throw new DeveloperError('duration value must be positive.');
       }
       //>>includeEnd('debug');
 
       this._duration = value;
-    },
+    }
   },
 
   /**
@@ -156,7 +156,7 @@ Object.defineProperties(SceneModePickerViewModel.prototype, {
   toggleDropDown: {
     get: function () {
       return this._toggleDropDown;
-    },
+    }
   },
 
   /**
@@ -168,7 +168,7 @@ Object.defineProperties(SceneModePickerViewModel.prototype, {
   morphTo2D: {
     get: function () {
       return this._morphTo2D;
-    },
+    }
   },
 
   /**
@@ -180,7 +180,7 @@ Object.defineProperties(SceneModePickerViewModel.prototype, {
   morphTo3D: {
     get: function () {
       return this._morphTo3D;
-    },
+    }
   },
 
   /**
@@ -192,8 +192,8 @@ Object.defineProperties(SceneModePickerViewModel.prototype, {
   morphToColumbusView: {
     get: function () {
       return this._morphToColumbusView;
-    },
-  },
+    }
+  }
 });
 
 /**

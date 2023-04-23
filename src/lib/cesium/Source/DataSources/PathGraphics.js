@@ -1,9 +1,9 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import createMaterialPropertyDescriptor from "./createMaterialPropertyDescriptor.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import createMaterialPropertyDescriptor from './createMaterialPropertyDescriptor.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
 
 /**
  * @typedef {Object} PathGraphics.ConstructorOptions
@@ -57,7 +57,7 @@ Object.defineProperties(PathGraphics.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -66,21 +66,21 @@ Object.defineProperties(PathGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  show: createPropertyDescriptor("show"),
+  show: createPropertyDescriptor('show'),
 
   /**
    * Gets or sets the Property specifying the number of seconds in front of the object to show.
    * @memberof PathGraphics.prototype
    * @type {Property|undefined}
    */
-  leadTime: createPropertyDescriptor("leadTime"),
+  leadTime: createPropertyDescriptor('leadTime'),
 
   /**
    * Gets or sets the Property specifying the number of seconds behind the object to show.
    * @memberof PathGraphics.prototype
    * @type {Property|undefined}
    */
-  trailTime: createPropertyDescriptor("trailTime"),
+  trailTime: createPropertyDescriptor('trailTime'),
 
   /**
    * Gets or sets the numeric Property specifying the width in pixels.
@@ -88,7 +88,7 @@ Object.defineProperties(PathGraphics.prototype, {
    * @type {Property|undefined}
    * @default 1.0
    */
-  width: createPropertyDescriptor("width"),
+  width: createPropertyDescriptor('width'),
 
   /**
    * Gets or sets the Property specifying the maximum number of seconds to step when sampling the position.
@@ -96,7 +96,7 @@ Object.defineProperties(PathGraphics.prototype, {
    * @type {Property|undefined}
    * @default 60
    */
-  resolution: createPropertyDescriptor("resolution"),
+  resolution: createPropertyDescriptor('resolution'),
 
   /**
    * Gets or sets the Property specifying the material used to draw the path.
@@ -104,16 +104,14 @@ Object.defineProperties(PathGraphics.prototype, {
    * @type {MaterialProperty}
    * @default Color.WHITE
    */
-  material: createMaterialPropertyDescriptor("material"),
+  material: createMaterialPropertyDescriptor('material'),
 
   /**
    * Gets or sets the {@link DistanceDisplayCondition} Property specifying at what distance from the camera that this path will be displayed.
    * @memberof PathGraphics.prototype
    * @type {Property|undefined}
    */
-  distanceDisplayCondition: createPropertyDescriptor(
-    "distanceDisplayCondition"
-  ),
+  distanceDisplayCondition: createPropertyDescriptor('distanceDisplayCondition')
 });
 
 /**
@@ -145,7 +143,7 @@ PathGraphics.prototype.clone = function (result) {
 PathGraphics.prototype.merge = function (source) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
-    throw new DeveloperError("source is required.");
+    throw new DeveloperError('source is required.');
   }
   //>>includeEnd('debug');
 

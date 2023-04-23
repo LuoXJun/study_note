@@ -1,15 +1,15 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import GeometryOffsetAttribute from "../Core/GeometryOffsetAttribute.js";
-import oneTimeWarning from "../Core/oneTimeWarning.js";
-import GroundPrimitive from "../Scene/GroundPrimitive.js";
-import HeightReference from "../Scene/HeightReference.js";
-import CallbackProperty from "./CallbackProperty.js";
-import ConstantProperty from "./ConstantProperty.js";
-import GeometryUpdater from "./GeometryUpdater.js";
-import TerrainOffsetProperty from "./TerrainOffsetProperty.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import GeometryOffsetAttribute from '../Core/GeometryOffsetAttribute.js';
+import oneTimeWarning from '../Core/oneTimeWarning.js';
+import GroundPrimitive from '../Scene/GroundPrimitive.js';
+import HeightReference from '../Scene/HeightReference.js';
+import CallbackProperty from './CallbackProperty.js';
+import ConstantProperty from './ConstantProperty.js';
+import GeometryUpdater from './GeometryUpdater.js';
+import TerrainOffsetProperty from './TerrainOffsetProperty.js';
 
 const defaultZIndex = new ConstantProperty(0);
 
@@ -46,7 +46,7 @@ Object.defineProperties(GroundGeometryUpdater.prototype, {
   zIndex: {
     get: function () {
       return this._zIndex;
-    },
+    }
   },
 
   /**
@@ -59,8 +59,8 @@ Object.defineProperties(GroundGeometryUpdater.prototype, {
   terrainOffsetProperty: {
     get: function () {
       return this._terrainOffsetProperty;
-    },
-  },
+    }
+  }
 });
 
 GroundGeometryUpdater.prototype._isOnTerrain = function (entity, geometry) {
@@ -155,7 +155,7 @@ GroundGeometryUpdater.prototype.destroy = function () {
  */
 GroundGeometryUpdater.getGeometryHeight = function (height, heightReference) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("heightReference", heightReference);
+  Check.defined('heightReference', heightReference);
   //>>includeEnd('debug');
   if (!defined(height)) {
     if (heightReference !== HeightReference.NONE) {
@@ -178,7 +178,7 @@ GroundGeometryUpdater.getGeometryExtrudedHeight = function (
   extrudedHeightReference
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("extrudedHeightReference", extrudedHeightReference);
+  Check.defined('extrudedHeightReference', extrudedHeightReference);
   //>>includeEnd('debug');
   if (!defined(extrudedHeight)) {
     if (extrudedHeightReference !== HeightReference.NONE) {
@@ -196,7 +196,7 @@ GroundGeometryUpdater.getGeometryExtrudedHeight = function (
 /**
  * @private
  */
-GroundGeometryUpdater.CLAMP_TO_GROUND = "clamp";
+GroundGeometryUpdater.CLAMP_TO_GROUND = 'clamp';
 
 /**
  * @private

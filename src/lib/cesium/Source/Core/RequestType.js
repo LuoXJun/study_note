@@ -34,6 +34,6 @@ const RequestType = {
    * @type Number
    * @constant
    */
-  OTHER: 3,
+  OTHER: 3
 };
 export default Object.freeze(RequestType);

@@ -1,6 +1,6 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import formatError from "../Core/formatError.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import formatError from '../Core/formatError.js';
 
 // createXXXGeometry functions may return Geometry or a Promise that resolves to Geometry
 // if the function requires access to ApproximateTerrainHeights.
@@ -51,7 +51,7 @@ function createTaskProcessorWorker(workerFunction) {
     const responseMessage = {
       id: data.id,
       result: undefined,
-      error: undefined,
+      error: undefined
     };
 
     return Promise.resolve(
@@ -66,7 +66,7 @@ function createTaskProcessorWorker(workerFunction) {
           responseMessage.error = {
             name: e.name,
             message: e.message,
-            stack: e.stack,
+            stack: e.stack
           };
         } else {
           responseMessage.error = e;

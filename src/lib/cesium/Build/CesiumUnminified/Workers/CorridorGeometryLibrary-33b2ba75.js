@@ -23,7 +23,24 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304ef', './defaultValue-97284df2', './ComponentDatatype-4eeb6d9b', './PolylinePipeline-e67c0760', './Transforms-273eeb44'], (function (exports, Matrix2, PolylineVolumeGeometryLibrary, defaultValue, ComponentDatatype, PolylinePipeline, Transforms) { 'use strict';
+define([
+  'exports',
+  './Matrix2-9e1c22e2',
+  './PolylineVolumeGeometryLibrary-00b304ef',
+  './defaultValue-97284df2',
+  './ComponentDatatype-4eeb6d9b',
+  './PolylinePipeline-e67c0760',
+  './Transforms-273eeb44'
+], function (
+  exports,
+  Matrix2,
+  PolylineVolumeGeometryLibrary,
+  defaultValue,
+  ComponentDatatype,
+  PolylinePipeline,
+  Transforms
+) {
+  'use strict';
 
   /**
    * @private
@@ -85,7 +102,11 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
       );
     } else {
       m = Matrix2.Matrix3.fromQuaternion(
-        Transforms.Quaternion.fromAxisAngle(cornerPoint, angle / granularity, quaterion),
+        Transforms.Quaternion.fromAxisAngle(
+          cornerPoint,
+          angle / granularity,
+          quaterion
+        ),
         rotMatrix
       );
     }
@@ -113,8 +134,16 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
       leftEdge.length - 3,
       startPoint
     );
-    endPoint = Matrix2.Cartesian3.fromArray(calculatedPositions[0], 0, endPoint);
-    cornerPoint = Matrix2.Cartesian3.midpoint(startPoint, endPoint, cornerPoint);
+    endPoint = Matrix2.Cartesian3.fromArray(
+      calculatedPositions[0],
+      0,
+      endPoint
+    );
+    cornerPoint = Matrix2.Cartesian3.midpoint(
+      startPoint,
+      endPoint,
+      cornerPoint
+    );
     const firstEndCap = computeRoundCorner(
       cornerPoint,
       startPoint,
@@ -132,7 +161,11 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
       startPoint
     );
     endPoint = Matrix2.Cartesian3.fromArray(leftEdge, 0, endPoint);
-    cornerPoint = Matrix2.Cartesian3.midpoint(startPoint, endPoint, cornerPoint);
+    cornerPoint = Matrix2.Cartesian3.midpoint(
+      startPoint,
+      endPoint,
+      cornerPoint
+    );
     const lastEndCap = computeRoundCorner(
       cornerPoint,
       startPoint,
@@ -152,13 +185,21 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
   ) {
     let cornerPoint = scratch1;
     if (leftIsOutside) {
-      cornerPoint = Matrix2.Cartesian3.add(position, leftCornerDirection, cornerPoint);
+      cornerPoint = Matrix2.Cartesian3.add(
+        position,
+        leftCornerDirection,
+        cornerPoint
+      );
     } else {
       leftCornerDirection = Matrix2.Cartesian3.negate(
         leftCornerDirection,
         leftCornerDirection
       );
-      cornerPoint = Matrix2.Cartesian3.add(position, leftCornerDirection, cornerPoint);
+      cornerPoint = Matrix2.Cartesian3.add(
+        position,
+        leftCornerDirection,
+        cornerPoint
+      );
     }
     return [
       cornerPoint.x,
@@ -166,14 +207,18 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
       cornerPoint.z,
       lastPoint.x,
       lastPoint.y,
-      lastPoint.z,
+      lastPoint.z
     ];
   }
 
   function addShiftedPositions(positions, left, scalar, calculatedPositions) {
     const rightPositions = new Array(positions.length);
     const leftPositions = new Array(positions.length);
-    const scaledLeft = Matrix2.Cartesian3.multiplyByScalar(left, scalar, scratch1);
+    const scaledLeft = Matrix2.Cartesian3.multiplyByScalar(
+      left,
+      scalar,
+      scratch1
+    );
     const scaledRight = Matrix2.Cartesian3.negate(scaledLeft, scratch2);
     let rightIndex = 0;
     let leftIndex = positions.length - 1;
@@ -253,7 +298,10 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
       forward
     );
     normal = ellipsoid.geodeticSurfaceNormal(position, normal);
-    left = Matrix2.Cartesian3.normalize(Matrix2.Cartesian3.cross(normal, forward, left), left);
+    left = Matrix2.Cartesian3.normalize(
+      Matrix2.Cartesian3.cross(normal, forward, left),
+      left
+    );
     if (saveAttributes) {
       calculatedLefts.push(left.x, left.y, left.z);
       calculatedNormals.push(normal.x, normal.y, normal.z);
@@ -284,7 +332,11 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
         Matrix2.Cartesian3.dot(forward, normal),
         scratchForwardProjection
       );
-      Matrix2.Cartesian3.subtract(forward, forwardProjection, forwardProjection);
+      Matrix2.Cartesian3.subtract(
+        forward,
+        forwardProjection,
+        forwardProjection
+      );
       Matrix2.Cartesian3.normalize(forwardProjection, forwardProjection);
 
       const backwardProjection = Matrix2.Cartesian3.multiplyByScalar(
@@ -292,7 +344,11 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
         Matrix2.Cartesian3.dot(backward, normal),
         scratchBackwardProjection
       );
-      Matrix2.Cartesian3.subtract(backward, backwardProjection, backwardProjection);
+      Matrix2.Cartesian3.subtract(
+        backward,
+        backwardProjection,
+        backwardProjection
+      );
       Matrix2.Cartesian3.normalize(backwardProjection, backwardProjection);
 
       const doCorner = !ComponentDatatype.CesiumMath.equalsEpsilon(
@@ -312,7 +368,10 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
           cornerDirection,
           cornerDirection
         );
-        cornerDirection = Matrix2.Cartesian3.normalize(cornerDirection, cornerDirection);
+        cornerDirection = Matrix2.Cartesian3.normalize(
+          cornerDirection,
+          cornerDirection
+        );
         const scalar =
           width /
           Math.max(
@@ -321,19 +380,24 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
               Matrix2.Cartesian3.cross(cornerDirection, backward, scratch1)
             )
           );
-        const leftIsOutside = PolylineVolumeGeometryLibrary.PolylineVolumeGeometryLibrary.angleIsGreaterThanPi(
-          forward,
-          backward,
-          position,
-          ellipsoid
-        );
+        const leftIsOutside =
+          PolylineVolumeGeometryLibrary.PolylineVolumeGeometryLibrary.angleIsGreaterThanPi(
+            forward,
+            backward,
+            position,
+            ellipsoid
+          );
         cornerDirection = Matrix2.Cartesian3.multiplyByScalar(
           cornerDirection,
           scalar,
           cornerDirection
         );
         if (leftIsOutside) {
-          rightPos = Matrix2.Cartesian3.add(position, cornerDirection, rightPos);
+          rightPos = Matrix2.Cartesian3.add(
+            position,
+            cornerDirection,
+            rightPos
+          );
           center = Matrix2.Cartesian3.add(
             rightPos,
             Matrix2.Cartesian3.multiplyByScalar(left, width, center),
@@ -344,12 +408,15 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
             Matrix2.Cartesian3.multiplyByScalar(left, width * 2, leftPos),
             leftPos
           );
-          scaleArray2[0] = Matrix2.Cartesian3.clone(previousPos, scaleArray2[0]);
+          scaleArray2[0] = Matrix2.Cartesian3.clone(
+            previousPos,
+            scaleArray2[0]
+          );
           scaleArray2[1] = Matrix2.Cartesian3.clone(center, scaleArray2[1]);
           subdividedPositions = PolylinePipeline.PolylinePipeline.generateArc({
             positions: scaleArray2,
             granularity: granularity,
-            ellipsoid: ellipsoid,
+            ellipsoid: ellipsoid
           });
           calculatedPositions = addShiftedPositions(
             subdividedPositions,
@@ -387,7 +454,7 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
                 leftPos,
                 cornerType,
                 leftIsOutside
-              ),
+              )
             });
           } else {
             corners.push({
@@ -396,7 +463,7 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
                 Matrix2.Cartesian3.negate(cornerDirection, cornerDirection),
                 leftPos,
                 leftIsOutside
-              ),
+              )
             });
           }
         } else {
@@ -417,12 +484,15 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
             ),
             rightPos
           );
-          scaleArray2[0] = Matrix2.Cartesian3.clone(previousPos, scaleArray2[0]);
+          scaleArray2[0] = Matrix2.Cartesian3.clone(
+            previousPos,
+            scaleArray2[0]
+          );
           scaleArray2[1] = Matrix2.Cartesian3.clone(center, scaleArray2[1]);
           subdividedPositions = PolylinePipeline.PolylinePipeline.generateArc({
             positions: scaleArray2,
             granularity: granularity,
-            ellipsoid: ellipsoid,
+            ellipsoid: ellipsoid
           });
           calculatedPositions = addShiftedPositions(
             subdividedPositions,
@@ -466,7 +536,7 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
                 rightPos,
                 cornerType,
                 leftIsOutside
-              ),
+              )
             });
           } else {
             corners.push({
@@ -475,7 +545,7 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
                 cornerDirection,
                 rightPos,
                 leftIsOutside
-              ),
+              )
             });
           }
         }
@@ -490,7 +560,7 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
     subdividedPositions = PolylinePipeline.PolylinePipeline.generateArc({
       positions: scaleArray2,
       granularity: granularity,
-      ellipsoid: ellipsoid,
+      ellipsoid: ellipsoid
     });
     calculatedPositions = addShiftedPositions(
       subdividedPositions,
@@ -513,11 +583,10 @@ define(['exports', './Matrix2-9e1c22e2', './PolylineVolumeGeometryLibrary-00b304
       corners: corners,
       lefts: calculatedLefts,
       normals: calculatedNormals,
-      endPositions: endPositions,
+      endPositions: endPositions
     };
   };
 
   exports.CorridorGeometryLibrary = CorridorGeometryLibrary;
-
-}));
+});
 //# sourceMappingURL=CorridorGeometryLibrary-33b2ba75.js.map

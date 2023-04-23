@@ -1,13 +1,13 @@
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import Event from "../../Core/Event.js";
-import wrapFunction from "../../Core/wrapFunction.js";
-import CzmlDataSource from "../../DataSources/CzmlDataSource.js";
-import GeoJsonDataSource from "../../DataSources/GeoJsonDataSource.js";
-import KmlDataSource from "../../DataSources/KmlDataSource.js";
-import GpxDataSource from "../../DataSources/GpxDataSource.js";
-import getElement from "../getElement.js";
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import Event from '../../Core/Event.js';
+import wrapFunction from '../../Core/wrapFunction.js';
+import CzmlDataSource from '../../DataSources/CzmlDataSource.js';
+import GeoJsonDataSource from '../../DataSources/GeoJsonDataSource.js';
+import KmlDataSource from '../../DataSources/KmlDataSource.js';
+import GpxDataSource from '../../DataSources/GpxDataSource.js';
+import getElement from '../getElement.js';
 
 /**
  * A mixin which adds default drag and drop support for CZML files to the Viewer widget.
@@ -40,27 +40,27 @@ import getElement from "../getElement.js";
 function viewerDragDropMixin(viewer, options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(viewer)) {
-    throw new DeveloperError("viewer is required.");
+    throw new DeveloperError('viewer is required.');
   }
-  if (viewer.hasOwnProperty("dropTarget")) {
-    throw new DeveloperError("dropTarget is already defined by another mixin.");
+  if (viewer.hasOwnProperty('dropTarget')) {
+    throw new DeveloperError('dropTarget is already defined by another mixin.');
   }
-  if (viewer.hasOwnProperty("dropEnabled")) {
+  if (viewer.hasOwnProperty('dropEnabled')) {
     throw new DeveloperError(
-      "dropEnabled is already defined by another mixin."
+      'dropEnabled is already defined by another mixin.'
     );
   }
-  if (viewer.hasOwnProperty("dropError")) {
-    throw new DeveloperError("dropError is already defined by another mixin.");
+  if (viewer.hasOwnProperty('dropError')) {
+    throw new DeveloperError('dropError is already defined by another mixin.');
   }
-  if (viewer.hasOwnProperty("clearOnDrop")) {
+  if (viewer.hasOwnProperty('clearOnDrop')) {
     throw new DeveloperError(
-      "clearOnDrop is already defined by another mixin."
+      'clearOnDrop is already defined by another mixin.'
     );
   }
-  if (viewer.hasOwnProperty("flyToOnDrop")) {
+  if (viewer.hasOwnProperty('flyToOnDrop')) {
     throw new DeveloperError(
-      "flyToOnDrop is already defined by another mixin."
+      'flyToOnDrop is already defined by another mixin.'
     );
   }
   //>>includeEnd('debug');
@@ -92,14 +92,14 @@ function viewerDragDropMixin(viewer, options) {
       set: function (value) {
         //>>includeStart('debug', pragmas.debug);
         if (!defined(value)) {
-          throw new DeveloperError("value is required.");
+          throw new DeveloperError('value is required.');
         }
         //>>includeEnd('debug');
 
         unsubscribe(dropTarget, handleDrop);
         dropTarget = value;
         subscribe(dropTarget, handleDrop);
-      },
+      }
     },
 
     /**
@@ -120,7 +120,7 @@ function viewerDragDropMixin(viewer, options) {
           }
           dropEnabled = value;
         }
-      },
+      }
     },
 
     /**
@@ -131,7 +131,7 @@ function viewerDragDropMixin(viewer, options) {
     dropError: {
       get: function () {
         return dropError;
-      },
+      }
     },
 
     /**
@@ -145,7 +145,7 @@ function viewerDragDropMixin(viewer, options) {
       },
       set: function (value) {
         clearOnDrop = value;
-      },
+      }
     },
 
     /**
@@ -159,7 +159,7 @@ function viewerDragDropMixin(viewer, options) {
       },
       set: function (value) {
         flyToOnDrop = value;
-      },
+      }
     },
 
     /**
@@ -173,7 +173,7 @@ function viewerDragDropMixin(viewer, options) {
       },
       set: function (value) {
         proxy = value;
-      },
+      }
     },
 
     /**
@@ -187,8 +187,8 @@ function viewerDragDropMixin(viewer, options) {
       },
       set: function (value) {
         clampToGround = value;
-      },
-    },
+      }
+    }
   });
 
   function handleDrop(event) {
@@ -230,18 +230,18 @@ function stop(event) {
 function unsubscribe(dropTarget, handleDrop) {
   const currentTarget = dropTarget;
   if (defined(currentTarget)) {
-    currentTarget.removeEventListener("drop", handleDrop, false);
-    currentTarget.removeEventListener("dragenter", stop, false);
-    currentTarget.removeEventListener("dragover", stop, false);
-    currentTarget.removeEventListener("dragexit", stop, false);
+    currentTarget.removeEventListener('drop', handleDrop, false);
+    currentTarget.removeEventListener('dragenter', stop, false);
+    currentTarget.removeEventListener('dragover', stop, false);
+    currentTarget.removeEventListener('dragexit', stop, false);
   }
 }
 
 function subscribe(dropTarget, handleDrop) {
-  dropTarget.addEventListener("drop", handleDrop, false);
-  dropTarget.addEventListener("dragenter", stop, false);
-  dropTarget.addEventListener("dragover", stop, false);
-  dropTarget.addEventListener("dragexit", stop, false);
+  dropTarget.addEventListener('drop', handleDrop, false);
+  dropTarget.addEventListener('dragenter', stop, false);
+  dropTarget.addEventListener('dragover', stop, false);
+  dropTarget.addEventListener('dragexit', stop, false);
 }
 
 function createOnLoadCallback(viewer, file, proxy, clampToGround) {
@@ -253,7 +253,7 @@ function createOnLoadCallback(viewer, file, proxy, clampToGround) {
 
       if (/\.czml$/i.test(fileName)) {
         loadPromise = CzmlDataSource.load(JSON.parse(evt.target.result), {
-          sourceUri: fileName,
+          sourceUri: fileName
         });
       } else if (
         /\.geojson$/i.test(fileName) ||
@@ -262,7 +262,7 @@ function createOnLoadCallback(viewer, file, proxy, clampToGround) {
       ) {
         loadPromise = GeoJsonDataSource.load(JSON.parse(evt.target.result), {
           sourceUri: fileName,
-          clampToGround: clampToGround,
+          clampToGround: clampToGround
         });
       } else if (/\.(kml|kmz)$/i.test(fileName)) {
         loadPromise = KmlDataSource.load(file, {
@@ -271,12 +271,12 @@ function createOnLoadCallback(viewer, file, proxy, clampToGround) {
           camera: scene.camera,
           canvas: scene.canvas,
           clampToGround: clampToGround,
-          screenOverlayContainer: viewer.container,
+          screenOverlayContainer: viewer.container
         });
       } else if (/\.gpx$/i.test(fileName)) {
         loadPromise = GpxDataSource.load(file, {
           sourceUri: fileName,
-          proxy: proxy,
+          proxy: proxy
         });
       } else {
         viewer.dropError.raiseEvent(

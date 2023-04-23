@@ -1,5 +1,5 @@
-import ForEach from "./ForEach.js";
-import defined from "../../Core/defined.js";
+import ForEach from './ForEach.js';
+import defined from '../../Core/defined.js';
 
 /**
  * Iterate through the objects within the glTF and delete their pipeline extras object.

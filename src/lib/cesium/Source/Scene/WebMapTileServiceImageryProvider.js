@@ -1,19 +1,19 @@
-import combine from "../Core/combine.js";
-import Credit from "../Core/Credit.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import Rectangle from "../Core/Rectangle.js";
-import Resource from "../Core/Resource.js";
-import WebMercatorTilingScheme from "../Core/WebMercatorTilingScheme.js";
-import ImageryProvider from "./ImageryProvider.js";
-import TimeDynamicImagery from "./TimeDynamicImagery.js";
+import combine from '../Core/combine.js';
+import Credit from '../Core/Credit.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import Rectangle from '../Core/Rectangle.js';
+import Resource from '../Core/Resource.js';
+import WebMercatorTilingScheme from '../Core/WebMercatorTilingScheme.js';
+import ImageryProvider from './ImageryProvider.js';
+import TimeDynamicImagery from './TimeDynamicImagery.js';
 
 const defaultParameters = Object.freeze({
-  service: "WMTS",
-  version: "1.0.0",
-  request: "GetTile",
+  service: 'WMTS',
+  version: '1.0.0',
+  request: 'GetTile'
 });
 
 /**
@@ -118,20 +118,20 @@ function WebMapTileServiceImageryProvider(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.url)) {
-    throw new DeveloperError("options.url is required.");
+    throw new DeveloperError('options.url is required.');
   }
   if (!defined(options.layer)) {
-    throw new DeveloperError("options.layer is required.");
+    throw new DeveloperError('options.layer is required.');
   }
   if (!defined(options.style)) {
-    throw new DeveloperError("options.style is required.");
+    throw new DeveloperError('options.style is required.');
   }
   if (!defined(options.tileMatrixSetID)) {
-    throw new DeveloperError("options.tileMatrixSetID is required.");
+    throw new DeveloperError('options.tileMatrixSetID is required.');
   }
   if (defined(options.times) && !defined(options.clock)) {
     throw new DeveloperError(
-      "options.times was specified, so options.clock is required."
+      'options.times was specified, so options.clock is required.'
     );
   }
   //>>includeEnd('debug');
@@ -239,7 +239,7 @@ function WebMapTileServiceImageryProvider(options) {
     const templateValues = {
       style: style,
       Style: style,
-      TileMatrixSet: tileMatrixSetID,
+      TileMatrixSet: tileMatrixSetID
     };
 
     resource.setTemplateValues(templateValues);
@@ -251,7 +251,7 @@ function WebMapTileServiceImageryProvider(options) {
   this._style = style;
   this._tileMatrixSetID = tileMatrixSetID;
   this._tileMatrixLabels = options.tileMatrixLabels;
-  this._format = defaultValue(options.format, "image/jpeg");
+  this._format = defaultValue(options.format, 'image/jpeg');
   this._tileDiscardPolicy = options.tileDiscardPolicy;
 
   this._tilingScheme = defined(options.tilingScheme)
@@ -282,7 +282,7 @@ function WebMapTileServiceImageryProvider(options) {
         if (defined(that._reload)) {
           that._reload();
         }
-      },
+      }
     });
   }
 
@@ -312,15 +312,15 @@ function WebMapTileServiceImageryProvider(options) {
   this._errorEvent = new Event();
 
   const credit = options.credit;
-  this._credit = typeof credit === "string" ? new Credit(credit) : credit;
+  this._credit = typeof credit === 'string' ? new Credit(credit) : credit;
 
   this._subdomains = options.subdomains;
   if (Array.isArray(this._subdomains)) {
     this._subdomains = this._subdomains.slice();
   } else if (defined(this._subdomains) && this._subdomains.length > 0) {
-    this._subdomains = this._subdomains.split("");
+    this._subdomains = this._subdomains.split('');
   } else {
-    this._subdomains = ["a", "b", "c"];
+    this._subdomains = ['a', 'b', 'c'];
   }
 }
 
@@ -338,11 +338,11 @@ function requestImage(imageryProvider, col, row, level, request, interval) {
       TileMatrix: tileMatrix,
       TileRow: row.toString(),
       TileCol: col.toString(),
-      s: subdomains[(col + row + level) % subdomains.length],
+      s: subdomains[(col + row + level) % subdomains.length]
     };
 
     resource = imageryProvider._resource.getDerivedResource({
-      request: request,
+      request: request
     });
     resource.setTemplateValues(templateValues);
 
@@ -373,12 +373,12 @@ function requestImage(imageryProvider, col, row, level, request, interval) {
     }
 
     templateValues = {
-      s: subdomains[(col + row + level) % subdomains.length],
+      s: subdomains[(col + row + level) % subdomains.length]
     };
 
     resource = imageryProvider._resource.getDerivedResource({
       queryParameters: query,
-      request: request,
+      request: request
     });
     resource.setTemplateValues(templateValues);
   }
@@ -396,7 +396,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
   url: {
     get: function () {
       return this._resource.url;
-    },
+    }
   },
 
   /**
@@ -408,7 +408,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
   proxy: {
     get: function () {
       return this._resource.proxy;
-    },
+    }
   },
 
   /**
@@ -421,7 +421,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
   tileWidth: {
     get: function () {
       return this._tileWidth;
-    },
+    }
   },
 
   /**
@@ -434,7 +434,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
   tileHeight: {
     get: function () {
       return this._tileHeight;
-    },
+    }
   },
 
   /**
@@ -447,7 +447,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
   maximumLevel: {
     get: function () {
       return this._maximumLevel;
-    },
+    }
   },
 
   /**
@@ -460,7 +460,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
   minimumLevel: {
     get: function () {
       return this._minimumLevel;
-    },
+    }
   },
 
   /**
@@ -473,7 +473,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
   tilingScheme: {
     get: function () {
       return this._tilingScheme;
-    },
+    }
   },
 
   /**
@@ -486,7 +486,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
   rectangle: {
     get: function () {
       return this._rectangle;
-    },
+    }
   },
 
   /**
@@ -501,7 +501,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
   tileDiscardPolicy: {
     get: function () {
       return this._tileDiscardPolicy;
-    },
+    }
   },
 
   /**
@@ -515,7 +515,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._errorEvent;
-    },
+    }
   },
 
   /**
@@ -527,7 +527,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
   format: {
     get: function () {
       return this._format;
-    },
+    }
   },
 
   /**
@@ -537,7 +537,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
    * @readonly
    */
   ready: {
-    value: true,
+    value: true
   },
 
   /**
@@ -549,7 +549,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   /**
@@ -562,7 +562,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
   credit: {
     get: function () {
       return this._credit;
-    },
+    }
   },
 
   /**
@@ -578,7 +578,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
   hasAlphaChannel: {
     get: function () {
       return true;
-    },
+    }
   },
   /**
    * Gets or sets a clock that is used to get keep the time used for time dynamic parameters.
@@ -591,7 +591,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
     },
     set: function (value) {
       this._timeDynamicImagery.clock = value;
-    },
+    }
   },
   /**
    * Gets or sets a time interval collection that is used to get time dynamic parameters. The data of each
@@ -606,7 +606,7 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
     },
     set: function (value) {
       this._timeDynamicImagery.times = value;
-    },
+    }
   },
   /**
    * Gets or sets an object that contains static dimensions and their values.
@@ -624,8 +624,8 @@ Object.defineProperties(WebMapTileServiceImageryProvider.prototype, {
           this._reload();
         }
       }
-    },
-  },
+    }
+  }
 });
 
 /**

@@ -1,8 +1,8 @@
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
-import defaultValue from "../Core/defaultValue.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import RuntimeError from "../Core/RuntimeError.js";
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
+import defaultValue from '../Core/defaultValue.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import RuntimeError from '../Core/RuntimeError.js';
 
 /**
  * An availability bitstream for use in an {@link ImplicitSubtree}. This handles
@@ -25,7 +25,7 @@ export default function ImplicitAvailabilityBitstream(options) {
   let availableCount = options.availableCount;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("options.lengthBits", lengthBits);
+  Check.typeOf.number('options.lengthBits', lengthBits);
   //>>includeEnd('debug');
 
   const constant = options.constant;
@@ -90,7 +90,7 @@ Object.defineProperties(ImplicitAvailabilityBitstream.prototype, {
   lengthBits: {
     get: function () {
       return this._lengthBits;
-    },
+    }
   },
   /**
    * The number of bits in the bitstream with value <code>1</code>.
@@ -104,8 +104,8 @@ Object.defineProperties(ImplicitAvailabilityBitstream.prototype, {
   availableCount: {
     get: function () {
       return this._availableCount;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -119,7 +119,7 @@ Object.defineProperties(ImplicitAvailabilityBitstream.prototype, {
 ImplicitAvailabilityBitstream.prototype.getBit = function (index) {
   //>>includeStart('debug', pragmas.debug);
   if (index < 0 || index >= this._lengthBits) {
-    throw new DeveloperError("Bit index out of bounds.");
+    throw new DeveloperError('Bit index out of bounds.');
   }
   //>>includeEnd('debug');
 

@@ -1,4 +1,4 @@
-import defined from "../Core/defined.js";
+import defined from '../Core/defined.js';
 /**
  * Pauses the KmlTour for a given number of seconds.
  *
@@ -11,7 +11,7 @@ import defined from "../Core/defined.js";
  * @see KmlTourFlyTo
  */
 function KmlTourWait(duration) {
-  this.type = "KmlTourWait";
+  this.type = 'KmlTourWait';
   this.blocking = true;
   this.duration = duration;
 

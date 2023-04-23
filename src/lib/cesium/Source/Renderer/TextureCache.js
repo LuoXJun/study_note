@@ -1,5 +1,5 @@
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
 
 /**
  * @private
@@ -14,8 +14,8 @@ Object.defineProperties(TextureCache.prototype, {
   numberOfTextures: {
     get: function () {
       return this._numberOfTextures;
-    },
-  },
+    }
+  }
 });
 
 TextureCache.prototype.getTexture = function (keyword) {
@@ -34,7 +34,7 @@ TextureCache.prototype.getTexture = function (keyword) {
 TextureCache.prototype.addTexture = function (keyword, texture) {
   const cachedTexture = {
     texture: texture,
-    count: 1,
+    count: 1
   };
 
   texture.finalDestroy = texture.destroy;

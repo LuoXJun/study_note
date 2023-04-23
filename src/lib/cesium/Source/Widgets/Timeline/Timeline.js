@@ -1,11 +1,11 @@
-import ClockRange from "../../Core/ClockRange.js";
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import JulianDate from "../../Core/JulianDate.js";
-import getElement from "../getElement.js";
-import TimelineHighlightRange from "./TimelineHighlightRange.js";
-import TimelineTrack from "./TimelineTrack.js";
+import ClockRange from '../../Core/ClockRange.js';
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import JulianDate from '../../Core/JulianDate.js';
+import getElement from '../getElement.js';
+import TimelineHighlightRange from './TimelineHighlightRange.js';
+import TimelineTrack from './TimelineTrack.js';
 
 let timelineWheelDelta = 1e12;
 
@@ -14,14 +14,14 @@ const timelineMouseMode = {
   scrub: 1,
   slide: 2,
   zoom: 3,
-  touchOnly: 4,
+  touchOnly: 4
 };
 const timelineTouchMode = {
   none: 0,
   scrub: 1,
   slideZoom: 2,
   singleTap: 3,
-  ignore: 4,
+  ignore: 4
 };
 
 const timelineTicScales = [
@@ -72,22 +72,22 @@ const timelineTicScales = [
   6307200000.0, // 200years
   12614400000.0, // 400years
   15768000000.0, // 500years
-  31536000000.0, // 1000years
+  31536000000.0 // 1000years
 ];
 
 const timelineMonthNames = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec'
 ];
 
 /**
@@ -101,10 +101,10 @@ const timelineMonthNames = [
 function Timeline(container, clock) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(container)) {
-    throw new DeveloperError("container is required.");
+    throw new DeveloperError('container is required.');
   }
   if (!defined(clock)) {
-    throw new DeveloperError("clock is required.");
+    throw new DeveloperError('clock is required.');
   }
   //>>includeEnd('debug');
 
@@ -118,8 +118,8 @@ function Timeline(container, clock) {
    */
   this.container = container;
 
-  const topDiv = ownerDocument.createElement("div");
-  topDiv.className = "cesium-timeline-main";
+  const topDiv = ownerDocument.createElement('div');
+  topDiv.className = 'cesium-timeline-main';
   container.appendChild(topDiv);
   this._topDiv = topDiv;
 
@@ -136,7 +136,7 @@ function Timeline(container, clock) {
   this._touchMode = timelineTouchMode.none;
   this._touchState = {
     centerX: 0,
-    spanX: 0,
+    spanX: 0
   };
   this._mouseX = 0;
   this._timelineDrag = 0;
@@ -153,7 +153,7 @@ function Timeline(container, clock) {
   this._trackListEle = this._topDiv.childNodes[1].childNodes[0];
   this._needleEle = this._topDiv.childNodes[2];
   this._rulerEle = this._topDiv.childNodes[3];
-  this._context = this._trackListEle.getContext("2d");
+  this._context = this._trackListEle.getContext('2d');
 
   this._trackList = [];
   this._highlightRanges = [];
@@ -169,15 +169,15 @@ function Timeline(container, clock) {
   this._onTouchEnd = createTouchEndCallback(this);
 
   const timeBarEle = this._timeBarEle;
-  ownerDocument.addEventListener("mouseup", this._onMouseUp, false);
-  ownerDocument.addEventListener("mousemove", this._onMouseMove, false);
-  timeBarEle.addEventListener("mousedown", this._onMouseDown, false);
-  timeBarEle.addEventListener("DOMMouseScroll", this._onMouseWheel, false); // Mozilla mouse wheel
-  timeBarEle.addEventListener("mousewheel", this._onMouseWheel, false);
-  timeBarEle.addEventListener("touchstart", this._onTouchStart, false);
-  timeBarEle.addEventListener("touchmove", this._onTouchMove, false);
-  timeBarEle.addEventListener("touchend", this._onTouchEnd, false);
-  timeBarEle.addEventListener("touchcancel", this._onTouchEnd, false);
+  ownerDocument.addEventListener('mouseup', this._onMouseUp, false);
+  ownerDocument.addEventListener('mousemove', this._onMouseMove, false);
+  timeBarEle.addEventListener('mousedown', this._onMouseDown, false);
+  timeBarEle.addEventListener('DOMMouseScroll', this._onMouseWheel, false); // Mozilla mouse wheel
+  timeBarEle.addEventListener('mousewheel', this._onMouseWheel, false);
+  timeBarEle.addEventListener('touchstart', this._onTouchStart, false);
+  timeBarEle.addEventListener('touchmove', this._onTouchMove, false);
+  timeBarEle.addEventListener('touchend', this._onTouchEnd, false);
+  timeBarEle.addEventListener('touchcancel', this._onTouchEnd, false);
 
   this._topDiv.oncontextmenu = function () {
     return false;
@@ -216,17 +216,17 @@ Timeline.prototype.destroy = function () {
   this._clock.onTick.removeEventListener(this.updateFromClock, this);
 
   const doc = this.container.ownerDocument;
-  doc.removeEventListener("mouseup", this._onMouseUp, false);
-  doc.removeEventListener("mousemove", this._onMouseMove, false);
+  doc.removeEventListener('mouseup', this._onMouseUp, false);
+  doc.removeEventListener('mousemove', this._onMouseMove, false);
 
   const timeBarEle = this._timeBarEle;
-  timeBarEle.removeEventListener("mousedown", this._onMouseDown, false);
-  timeBarEle.removeEventListener("DOMMouseScroll", this._onMouseWheel, false); // Mozilla mouse wheel
-  timeBarEle.removeEventListener("mousewheel", this._onMouseWheel, false);
-  timeBarEle.removeEventListener("touchstart", this._onTouchStart, false);
-  timeBarEle.removeEventListener("touchmove", this._onTouchMove, false);
-  timeBarEle.removeEventListener("touchend", this._onTouchEnd, false);
-  timeBarEle.removeEventListener("touchcancel", this._onTouchEnd, false);
+  timeBarEle.removeEventListener('mousedown', this._onMouseDown, false);
+  timeBarEle.removeEventListener('DOMMouseScroll', this._onMouseWheel, false); // Mozilla mouse wheel
+  timeBarEle.removeEventListener('mousewheel', this._onMouseWheel, false);
+  timeBarEle.removeEventListener('touchstart', this._onTouchStart, false);
+  timeBarEle.removeEventListener('touchmove', this._onTouchMove, false);
+  timeBarEle.removeEventListener('touchend', this._onTouchEnd, false);
+  timeBarEle.removeEventListener('touchcancel', this._onTouchEnd, false);
   this.container.removeChild(this._topDiv);
   destroyObject(this);
 };
@@ -271,13 +271,13 @@ Timeline.prototype.addTrack = function (
 Timeline.prototype.zoomTo = function (startTime, stopTime) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(startTime)) {
-    throw new DeveloperError("startTime is required.");
+    throw new DeveloperError('startTime is required.');
   }
   if (!defined(stopTime)) {
-    throw new DeveloperError("stopTime is required");
+    throw new DeveloperError('stopTime is required');
   }
   if (JulianDate.lessThanOrEquals(stopTime, startTime)) {
-    throw new DeveloperError("Start time must come before end time.");
+    throw new DeveloperError('Start time must come before end time.');
   }
   //>>includeEnd('debug');
 
@@ -330,8 +330,8 @@ Timeline.prototype.zoomTo = function (startTime, stopTime) {
 
   this._makeTics();
 
-  const evt = document.createEvent("Event");
-  evt.initEvent("setzoom", true, true);
+  const evt = document.createEvent('Event');
+  evt.initEvent('setzoom', true, true);
   evt.startJulian = this._startJulian;
   evt.endJulian = this._endJulian;
   evt.epochJulian = this._epochJulian;
@@ -378,7 +378,7 @@ function twoDigits(num) {
 Timeline.prototype.makeLabel = function (time) {
   const gregorian = JulianDate.toGregorianDate(time);
   const millisecond = gregorian.millisecond;
-  let millisecondString = " UTC";
+  let millisecondString = ' UTC';
   if (millisecond > 0 && this._timeBarSecondsSpan < 3600) {
     millisecondString = Math.floor(millisecond).toString();
     while (millisecondString.length < 3) {
@@ -418,7 +418,7 @@ Timeline.prototype._makeTics = function () {
 
   this._needleEle.style.left = `${xPos.toString()}px`;
 
-  let tics = "";
+  let tics = '';
 
   const minimumDuration = 0.01;
   const maximumDuration = 31536000000.0; // ~1000 years
@@ -527,7 +527,7 @@ Timeline.prototype._makeTics = function () {
     epochJulian: epochJulian,
     duration: duration,
     timeBarWidth: timeBarWidth,
-    getAlpha: getAlpha,
+    getAlpha: getAlpha
   };
   this._highlightRanges.forEach(function (highlightRange) {
     tics += highlightRange.render(renderState);
@@ -752,8 +752,8 @@ Timeline.prototype._setTimeBarTime = function (xPos, seconds) {
     this._needleEle.style.left = `${xPos.toString()}px`;
   }
 
-  const evt = document.createEvent("Event");
-  evt.initEvent("settime", true, true);
+  const evt = document.createEvent('Event');
+  evt.initEvent('settime', true, true);
   evt.clientX = xPos;
   evt.timeSeconds = seconds;
   evt.timeJulian = this._scrubJulian;
@@ -767,7 +767,7 @@ function createMouseDownCallback(timeline) {
       if (e.button === 0) {
         timeline._mouseMode = timelineMouseMode.scrub;
         if (timeline._scrubElement) {
-          timeline._scrubElement.style.backgroundPosition = "-16px 0";
+          timeline._scrubElement.style.backgroundPosition = '-16px 0';
         }
         timeline._onMouseMove(e);
       } else {
@@ -787,7 +787,7 @@ function createMouseUpCallback(timeline) {
   return function (e) {
     timeline._mouseMode = timelineMouseMode.none;
     if (timeline._scrubElement) {
-      timeline._scrubElement.style.backgroundPosition = "0 0";
+      timeline._scrubElement.style.backgroundPosition = '0 0';
     }
     timeline._timelineDrag = 0;
     timeline._timelineDragLocation = undefined;
@@ -868,7 +868,7 @@ function createTouchStartCallback(timeline) {
         timeline._touchMode = timelineTouchMode.scrub;
         if (timeline._scrubElement) {
           timeline._scrubElement.style.backgroundPosition =
-            len === 1 ? "-16px 0" : "0 0";
+            len === 1 ? '-16px 0' : '0 0';
         }
       } else {
         timeline._touchMode = timelineTouchMode.singleTap;
@@ -905,7 +905,7 @@ function createTouchEndCallback(timeline) {
       timeline._touchState.centerX = e.touches[0].clientX - leftX;
     }
     if (timeline._scrubElement) {
-      timeline._scrubElement.style.backgroundPosition = "0 0";
+      timeline._scrubElement.style.backgroundPosition = '0 0';
     }
   };
 }

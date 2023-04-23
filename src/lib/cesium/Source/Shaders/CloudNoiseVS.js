@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "uniform vec3 u_noiseTextureDimensions;\n\
+export default 'uniform vec3 u_noiseTextureDimensions;\n\
 attribute vec2 position;\n\
 \n\
 varying vec2 v_position;\n\
@@ -17,4 +17,4 @@ void main()\n\
     transformedPos.y *= noiseTextureRows;\n\
     v_position = transformedPos;\n\
 }\n\
-";
+';

@@ -1,17 +1,17 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartographic from "../Core/Cartographic.js";
-import defaultValue from "../Core/defaultValue.js";
-import defer from "../Core/defer.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import GeographicProjection from "../Core/GeographicProjection.js";
-import GeographicTilingScheme from "../Core/GeographicTilingScheme.js";
-import Rectangle from "../Core/Rectangle.js";
-import Resource from "../Core/Resource.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import TileProviderError from "../Core/TileProviderError.js";
-import WebMercatorTilingScheme from "../Core/WebMercatorTilingScheme.js";
-import UrlTemplateImageryProvider from "./UrlTemplateImageryProvider.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartographic from '../Core/Cartographic.js';
+import defaultValue from '../Core/defaultValue.js';
+import defer from '../Core/defer.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import GeographicProjection from '../Core/GeographicProjection.js';
+import GeographicTilingScheme from '../Core/GeographicTilingScheme.js';
+import Rectangle from '../Core/Rectangle.js';
+import Resource from '../Core/Resource.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import TileProviderError from '../Core/TileProviderError.js';
+import WebMercatorTilingScheme from '../Core/WebMercatorTilingScheme.js';
+import UrlTemplateImageryProvider from './UrlTemplateImageryProvider.js';
 
 /**
  * @typedef {Object} TileMapServiceImageryProvider.ConstructorOptions
@@ -74,7 +74,7 @@ function TileMapServiceImageryProvider(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.url)) {
-    throw new DeveloperError("options.url is required.");
+    throw new DeveloperError('options.url is required.');
   }
   //>>includeEnd('debug');
 
@@ -100,7 +100,7 @@ function TileMapServiceImageryProvider(options) {
 
       that._tmsResource = resource;
       that._xmlResource = resource.getDerivedResource({
-        url: "tilemapresource.xml",
+        url: 'tilemapresource.xml'
       });
 
       that._requestMetadata();
@@ -114,7 +114,8 @@ if (defined(Object.create)) {
   TileMapServiceImageryProvider.prototype = Object.create(
     UrlTemplateImageryProvider.prototype
   );
-  TileMapServiceImageryProvider.prototype.constructor = TileMapServiceImageryProvider;
+  TileMapServiceImageryProvider.prototype.constructor =
+    TileMapServiceImageryProvider;
 }
 
 TileMapServiceImageryProvider.prototype._requestMetadata = function () {
@@ -226,41 +227,41 @@ TileMapServiceImageryProvider.prototype._metadataSuccess = function (xml) {
   const options = this._options;
   const fileExtension = defaultValue(
     options.fileExtension,
-    format.getAttribute("extension")
+    format.getAttribute('extension')
   );
   const tileWidth = defaultValue(
     options.tileWidth,
-    parseInt(format.getAttribute("width"), 10)
+    parseInt(format.getAttribute('width'), 10)
   );
   const tileHeight = defaultValue(
     options.tileHeight,
-    parseInt(format.getAttribute("height"), 10)
+    parseInt(format.getAttribute('height'), 10)
   );
   let minimumLevel = defaultValue(
     options.minimumLevel,
-    parseInt(tilesetsList[0].getAttribute("order"), 10)
+    parseInt(tilesetsList[0].getAttribute('order'), 10)
   );
   const maximumLevel = defaultValue(
     options.maximumLevel,
-    parseInt(tilesetsList[tilesetsList.length - 1].getAttribute("order"), 10)
+    parseInt(tilesetsList[tilesetsList.length - 1].getAttribute('order'), 10)
   );
-  const tilingSchemeName = tilesets.getAttribute("profile");
+  const tilingSchemeName = tilesets.getAttribute('profile');
   let tilingScheme = options.tilingScheme;
 
   if (!defined(tilingScheme)) {
     if (
-      tilingSchemeName === "geodetic" ||
-      tilingSchemeName === "global-geodetic"
+      tilingSchemeName === 'geodetic' ||
+      tilingSchemeName === 'global-geodetic'
     ) {
       tilingScheme = new GeographicTilingScheme({
-        ellipsoid: options.ellipsoid,
+        ellipsoid: options.ellipsoid
       });
     } else if (
-      tilingSchemeName === "mercator" ||
-      tilingSchemeName === "global-mercator"
+      tilingSchemeName === 'mercator' ||
+      tilingSchemeName === 'global-mercator'
     ) {
       tilingScheme = new WebMercatorTilingScheme({
-        ellipsoid: options.ellipsoid,
+        ellipsoid: options.ellipsoid
       });
     } else {
       message = `${xmlResource.url}specifies an unsupported profile attribute, ${tilingSchemeName}.`;
@@ -296,21 +297,21 @@ TileMapServiceImageryProvider.prototype._metadataSuccess = function (xml) {
     const flipXY = defaultValue(options.flipXY, false);
     if (flipXY) {
       swXY = new Cartesian2(
-        parseFloat(bbox.getAttribute("miny")),
-        parseFloat(bbox.getAttribute("minx"))
+        parseFloat(bbox.getAttribute('miny')),
+        parseFloat(bbox.getAttribute('minx'))
       );
       neXY = new Cartesian2(
-        parseFloat(bbox.getAttribute("maxy")),
-        parseFloat(bbox.getAttribute("maxx"))
+        parseFloat(bbox.getAttribute('maxy')),
+        parseFloat(bbox.getAttribute('maxx'))
       );
     } else {
       swXY = new Cartesian2(
-        parseFloat(bbox.getAttribute("minx")),
-        parseFloat(bbox.getAttribute("miny"))
+        parseFloat(bbox.getAttribute('minx')),
+        parseFloat(bbox.getAttribute('miny'))
       );
       neXY = new Cartesian2(
-        parseFloat(bbox.getAttribute("maxx")),
-        parseFloat(bbox.getAttribute("maxy"))
+        parseFloat(bbox.getAttribute('maxx')),
+        parseFloat(bbox.getAttribute('maxy'))
       );
     }
 
@@ -319,7 +320,7 @@ TileMapServiceImageryProvider.prototype._metadataSuccess = function (xml) {
     // 'global-mercator' and 'global-geodetic' profiles. In the gdal2Tiles case, X and Y are always in
     // geodetic degrees.
     const isGdal2tiles =
-      tilingSchemeName === "geodetic" || tilingSchemeName === "mercator";
+      tilingSchemeName === 'geodetic' || tilingSchemeName === 'mercator';
     if (
       tilingScheme.projection instanceof GeographicProjection ||
       isGdal2tiles
@@ -350,7 +351,7 @@ TileMapServiceImageryProvider.prototype._metadataSuccess = function (xml) {
   );
 
   const templateResource = this._tmsResource.getDerivedResource({
-    url: `{z}/{x}/{reverseY}.${fileExtension}`,
+    url: `{z}/{x}/{reverseY}.${fileExtension}`
   });
 
   deferred.resolve({
@@ -362,14 +363,14 @@ TileMapServiceImageryProvider.prototype._metadataSuccess = function (xml) {
     minimumLevel: minimumLevel,
     maximumLevel: maximumLevel,
     tileDiscardPolicy: options.tileDiscardPolicy,
-    credit: options.credit,
+    credit: options.credit
   });
 };
 
 TileMapServiceImageryProvider.prototype._metadataFailure = function (error) {
   // Can't load XML, still allow options and defaults
   const options = this._options;
-  const fileExtension = defaultValue(options.fileExtension, "png");
+  const fileExtension = defaultValue(options.fileExtension, 'png');
   const tileWidth = defaultValue(options.tileWidth, 256);
   const tileHeight = defaultValue(options.tileHeight, 256);
   const maximumLevel = options.maximumLevel;
@@ -389,7 +390,7 @@ TileMapServiceImageryProvider.prototype._metadataFailure = function (error) {
   );
 
   const templateResource = this._tmsResource.getDerivedResource({
-    url: `{z}/{x}/{reverseY}.${fileExtension}`,
+    url: `{z}/{x}/{reverseY}.${fileExtension}`
   });
 
   this._deferred.resolve({
@@ -401,7 +402,7 @@ TileMapServiceImageryProvider.prototype._metadataFailure = function (error) {
     minimumLevel: minimumLevel,
     maximumLevel: maximumLevel,
     tileDiscardPolicy: options.tileDiscardPolicy,
-    credit: options.credit,
+    credit: options.credit
   });
 };
 

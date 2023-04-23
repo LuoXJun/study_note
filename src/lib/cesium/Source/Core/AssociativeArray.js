@@ -1,5 +1,5 @@
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * A collection of key-value pairs that is stored as a hash for easy
@@ -22,7 +22,7 @@ Object.defineProperties(AssociativeArray.prototype, {
   length: {
     get: function () {
       return this._array.length;
-    },
+    }
   },
   /**
    * Gets an unordered array of all values in the collection.
@@ -35,8 +35,8 @@ Object.defineProperties(AssociativeArray.prototype, {
   values: {
     get: function () {
       return this._array;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -47,8 +47,8 @@ Object.defineProperties(AssociativeArray.prototype, {
  */
 AssociativeArray.prototype.contains = function (key) {
   //>>includeStart('debug', pragmas.debug);
-  if (typeof key !== "string" && typeof key !== "number") {
-    throw new DeveloperError("key is required to be a string or number.");
+  if (typeof key !== 'string' && typeof key !== 'number') {
+    throw new DeveloperError('key is required to be a string or number.');
   }
   //>>includeEnd('debug');
   return defined(this._hash[key]);
@@ -63,8 +63,8 @@ AssociativeArray.prototype.contains = function (key) {
  */
 AssociativeArray.prototype.set = function (key, value) {
   //>>includeStart('debug', pragmas.debug);
-  if (typeof key !== "string" && typeof key !== "number") {
-    throw new DeveloperError("key is required to be a string or number.");
+  if (typeof key !== 'string' && typeof key !== 'number') {
+    throw new DeveloperError('key is required to be a string or number.');
   }
   //>>includeEnd('debug');
 
@@ -84,8 +84,8 @@ AssociativeArray.prototype.set = function (key, value) {
  */
 AssociativeArray.prototype.get = function (key) {
   //>>includeStart('debug', pragmas.debug);
-  if (typeof key !== "string" && typeof key !== "number") {
-    throw new DeveloperError("key is required to be a string or number.");
+  if (typeof key !== 'string' && typeof key !== 'number') {
+    throw new DeveloperError('key is required to be a string or number.');
   }
   //>>includeEnd('debug');
   return this._hash[key];
@@ -99,8 +99,8 @@ AssociativeArray.prototype.get = function (key) {
  */
 AssociativeArray.prototype.remove = function (key) {
   //>>includeStart('debug', pragmas.debug);
-  if (defined(key) && typeof key !== "string" && typeof key !== "number") {
-    throw new DeveloperError("key is required to be a string or number.");
+  if (defined(key) && typeof key !== 'string' && typeof key !== 'number') {
+    throw new DeveloperError('key is required to be a string or number.');
   }
   //>>includeEnd('debug');
 

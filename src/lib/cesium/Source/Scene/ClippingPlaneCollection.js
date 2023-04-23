@@ -1,23 +1,23 @@
-import AttributeCompression from "../Core/AttributeCompression.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import Intersect from "../Core/Intersect.js";
-import Matrix4 from "../Core/Matrix4.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import Plane from "../Core/Plane.js";
-import ContextLimits from "../Renderer/ContextLimits.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import Sampler from "../Renderer/Sampler.js";
-import Texture from "../Renderer/Texture.js";
-import ClippingPlane from "./ClippingPlane.js";
+import AttributeCompression from '../Core/AttributeCompression.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import Intersect from '../Core/Intersect.js';
+import Matrix4 from '../Core/Matrix4.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import Plane from '../Core/Plane.js';
+import ContextLimits from '../Renderer/ContextLimits.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import Sampler from '../Renderer/Sampler.js';
+import Texture from '../Renderer/Texture.js';
+import ClippingPlane from './ClippingPlane.js';
 
 /**
  * Specifies a set of clipping planes. Clipping planes selectively disable rendering in a region on the
@@ -169,7 +169,7 @@ Object.defineProperties(ClippingPlaneCollection.prototype, {
   length: {
     get: function () {
       return this._planes.length;
-    },
+    }
   },
 
   /**
@@ -193,7 +193,7 @@ Object.defineProperties(ClippingPlaneCollection.prototype, {
       this._testIntersection = value
         ? unionIntersectFunction
         : defaultIntersectFunction;
-    },
+    }
   },
 
   /**
@@ -212,7 +212,7 @@ Object.defineProperties(ClippingPlaneCollection.prototype, {
         return;
       }
       this._enabled = value;
-    },
+    }
   },
 
   /**
@@ -226,7 +226,7 @@ Object.defineProperties(ClippingPlaneCollection.prototype, {
   texture: {
     get: function () {
       return this._clippingPlanesTexture;
-    },
+    }
   },
 
   /**
@@ -239,7 +239,7 @@ Object.defineProperties(ClippingPlaneCollection.prototype, {
   owner: {
     get: function () {
       return this._owner;
-    },
+    }
   },
 
   /**
@@ -258,8 +258,8 @@ Object.defineProperties(ClippingPlaneCollection.prototype, {
       return this._unionClippingRegions
         ? this._planes.length
         : -this._planes.length;
-    },
-  },
+    }
+  }
 });
 
 function setIndexDirty(collection, index) {
@@ -310,7 +310,7 @@ ClippingPlaneCollection.prototype.add = function (plane) {
  */
 ClippingPlaneCollection.prototype.get = function (index) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("index", index);
+  Check.typeOf.number('index', index);
   //>>includeEnd('debug');
 
   return this._planes[index];
@@ -520,7 +520,7 @@ ClippingPlaneCollection.prototype.update = function (frameState) {
         pixelFormat: PixelFormat.RGBA,
         pixelDatatype: PixelDatatype.FLOAT,
         sampler: Sampler.NEAREST,
-        flipY: false,
+        flipY: false
       });
       this._float32View = new Float32Array(
         requiredResolution.x * requiredResolution.y * 4
@@ -533,7 +533,7 @@ ClippingPlaneCollection.prototype.update = function (frameState) {
         pixelFormat: PixelFormat.RGBA,
         pixelDatatype: PixelDatatype.UNSIGNED_BYTE,
         sampler: Sampler.NEAREST,
-        flipY: false,
+        flipY: false
       });
       this._uint8View = new Uint8Array(
         requiredResolution.x * requiredResolution.y * 4
@@ -561,10 +561,10 @@ ClippingPlaneCollection.prototype.update = function (frameState) {
         source: {
           width: 1,
           height: 1,
-          arrayBufferView: this._float32View,
+          arrayBufferView: this._float32View
         },
         xOffset: offsetX,
-        yOffset: offsetY,
+        yOffset: offsetY
       });
     } else {
       offsetY = Math.floor((dirtyIndex * 2) / clippingPlanesTexture.width);
@@ -576,10 +576,10 @@ ClippingPlaneCollection.prototype.update = function (frameState) {
         source: {
           width: 2,
           height: 1,
-          arrayBufferView: this._uint8View,
+          arrayBufferView: this._uint8View
         },
         xOffset: offsetX,
-        yOffset: offsetY,
+        yOffset: offsetY
       });
     }
   } else if (useFloatTexture) {
@@ -588,8 +588,8 @@ ClippingPlaneCollection.prototype.update = function (frameState) {
       source: {
         width: clippingPlanesTexture.width,
         height: clippingPlanesTexture.height,
-        arrayBufferView: this._float32View,
-      },
+        arrayBufferView: this._float32View
+      }
     });
   } else {
     packPlanesAsUint8(this, 0, this._planes.length);
@@ -597,8 +597,8 @@ ClippingPlaneCollection.prototype.update = function (frameState) {
       source: {
         width: clippingPlanesTexture.width,
         height: clippingPlanesTexture.height,
-        arrayBufferView: this._uint8View,
-      },
+        arrayBufferView: this._uint8View
+      }
     });
   }
 
@@ -619,42 +619,40 @@ const scratchPlane = new Plane(Cartesian3.UNIT_X, 0.0);
  *                      if the entire volume is on the opposite side and should be clipped, and
  *                      {@link Intersect.INTERSECTING} if the volume intersects the planes.
  */
-ClippingPlaneCollection.prototype.computeIntersectionWithBoundingVolume = function (
-  tileBoundingVolume,
-  transform
-) {
-  const planes = this._planes;
-  const length = planes.length;
+ClippingPlaneCollection.prototype.computeIntersectionWithBoundingVolume =
+  function (tileBoundingVolume, transform) {
+    const planes = this._planes;
+    const length = planes.length;
 
-  let modelMatrix = this.modelMatrix;
-  if (defined(transform)) {
-    modelMatrix = Matrix4.multiply(transform, modelMatrix, scratchMatrix);
-  }
-
-  // If the collection is not set to union the clipping regions, the volume must be outside of all planes to be
-  // considered completely clipped. If the collection is set to union the clipping regions, if the volume can be
-  // outside any the planes, it is considered completely clipped.
-  // Lastly, if not completely clipped, if any plane is intersecting, more calculations must be performed.
-  let intersection = Intersect.INSIDE;
-  if (!this.unionClippingRegions && length > 0) {
-    intersection = Intersect.OUTSIDE;
-  }
-
-  for (let i = 0; i < length; ++i) {
-    const plane = planes[i];
-
-    Plane.transform(plane, modelMatrix, scratchPlane); // ClippingPlane can be used for Plane math
-
-    const value = tileBoundingVolume.intersectPlane(scratchPlane);
-    if (value === Intersect.INTERSECTING) {
-      intersection = value;
-    } else if (this._testIntersection(value)) {
-      return value;
+    let modelMatrix = this.modelMatrix;
+    if (defined(transform)) {
+      modelMatrix = Matrix4.multiply(transform, modelMatrix, scratchMatrix);
     }
-  }
 
-  return intersection;
-};
+    // If the collection is not set to union the clipping regions, the volume must be outside of all planes to be
+    // considered completely clipped. If the collection is set to union the clipping regions, if the volume can be
+    // outside any the planes, it is considered completely clipped.
+    // Lastly, if not completely clipped, if any plane is intersecting, more calculations must be performed.
+    let intersection = Intersect.INSIDE;
+    if (!this.unionClippingRegions && length > 0) {
+      intersection = Intersect.OUTSIDE;
+    }
+
+    for (let i = 0; i < length; ++i) {
+      const plane = planes[i];
+
+      Plane.transform(plane, modelMatrix, scratchPlane); // ClippingPlane can be used for Plane math
+
+      const value = tileBoundingVolume.intersectPlane(scratchPlane);
+      if (value === Intersect.INTERSECTING) {
+        intersection = value;
+      } else if (this._testIntersection(value)) {
+        return value;
+      }
+    }
+
+    return intersection;
+  };
 
 /**
  * Sets the owner for the input ClippingPlaneCollection if there wasn't another owner.
@@ -680,7 +678,7 @@ ClippingPlaneCollection.setOwner = function (
     //>>includeStart('debug', pragmas.debug);
     if (defined(clippingPlaneCollection._owner)) {
       throw new DeveloperError(
-        "ClippingPlaneCollection should only be assigned to one object"
+        'ClippingPlaneCollection should only be assigned to one object'
       );
     }
     //>>includeEnd('debug');

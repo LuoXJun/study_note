@@ -14,10 +14,10 @@ function getImageFromTypedArray(typedArray, width, height) {
   const dataArray = new Uint8ClampedArray(typedArray.buffer);
   const imageData = new ImageData(dataArray, width, height);
 
-  const canvas = document.createElement("canvas");
+  const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
-  canvas.getContext("2d").putImageData(imageData, 0, 0);
+  canvas.getContext('2d').putImageData(imageData, 0, 0);
 
   return canvas;
 }

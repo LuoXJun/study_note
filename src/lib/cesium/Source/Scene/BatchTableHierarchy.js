@@ -1,13 +1,13 @@
-import AttributeType from "./AttributeType.js";
-import Check from "../Core/Check.js";
-import clone from "../Core/clone.js";
-import combine from "../Core/combine.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defined from "../Core/defined.js";
-import defaultValue from "../Core/defaultValue.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import getBinaryAccessor from "./getBinaryAccessor.js";
-import RuntimeError from "../Core/RuntimeError.js";
+import AttributeType from './AttributeType.js';
+import Check from '../Core/Check.js';
+import clone from '../Core/clone.js';
+import combine from '../Core/combine.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defined from '../Core/defined.js';
+import defaultValue from '../Core/defaultValue.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import getBinaryAccessor from './getBinaryAccessor.js';
+import RuntimeError from '../Core/RuntimeError.js';
 
 /**
  * Object for handling the <code>3DTILES_batch_table_hierarchy</code> extension
@@ -33,7 +33,7 @@ export default function BatchTableHierarchy(options) {
   this._byteLength = 0;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.extension", options.extension);
+  Check.typeOf.object('options.extension', options.extension);
   //>>includeEnd('debug');
 
   initialize(this, options.extension, options.binaryBody);
@@ -47,8 +47,8 @@ Object.defineProperties(BatchTableHierarchy.prototype, {
   byteLength: {
     get: function () {
       return this._byteLength;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -172,10 +172,10 @@ function getBinaryProperties(featuresLength, properties, binaryBody) {
         const componentType = property.componentType;
         const type = property.type;
         if (!defined(componentType)) {
-          throw new RuntimeError("componentType is required.");
+          throw new RuntimeError('componentType is required.');
         }
         if (!defined(type)) {
-          throw new RuntimeError("type is required.");
+          throw new RuntimeError('type is required.');
         }
         if (!defined(binaryBody)) {
           throw new RuntimeError(
@@ -201,7 +201,7 @@ function getBinaryProperties(featuresLength, properties, binaryBody) {
         binaryProperties[name] = {
           typedArray: typedArray,
           componentCount: componentCount,
-          type: classType,
+          type: classType
         };
       }
     }
@@ -252,7 +252,7 @@ function validateInstance(hierarchy, instanceIndex, stack) {
   }
   if (stack.indexOf(instanceIndex) > -1) {
     throw new DeveloperError(
-      "Circular dependency detected in the batch table hierarchy."
+      'Circular dependency detected in the batch table hierarchy.'
     );
   }
 
@@ -371,16 +371,17 @@ function traverseHierarchy(hierarchy, instanceIndex, endConditionCallback) {
  * @private
  */
 BatchTableHierarchy.prototype.hasProperty = function (batchId, propertyId) {
-  const result = traverseHierarchy(this, batchId, function (
-    hierarchy,
-    instanceIndex
-  ) {
-    const classId = hierarchy._classIds[instanceIndex];
-    const instances = hierarchy._classes[classId].instances;
-    if (defined(instances[propertyId])) {
-      return true;
+  const result = traverseHierarchy(
+    this,
+    batchId,
+    function (hierarchy, instanceIndex) {
+      const classId = hierarchy._classIds[instanceIndex];
+      const instances = hierarchy._classes[classId].instances;
+      if (defined(instances[propertyId])) {
+        return true;
+      }
     }
-  });
+  );
   return defined(result);
 };
 
@@ -480,30 +481,31 @@ BatchTableHierarchy.prototype.setProperty = function (
   propertyId,
   value
 ) {
-  const result = traverseHierarchy(this, batchId, function (
-    hierarchy,
-    instanceIndex
-  ) {
-    const classId = hierarchy._classIds[instanceIndex];
-    const instanceClass = hierarchy._classes[classId];
-    const indexInClass = hierarchy._classIndexes[instanceIndex];
-    const propertyValues = instanceClass.instances[propertyId];
-    if (defined(propertyValues)) {
-      //>>includeStart('debug', pragmas.debug);
-      if (instanceIndex !== batchId) {
-        throw new DeveloperError(
-          `Inherited property "${propertyId}" is read-only.`
-        );
+  const result = traverseHierarchy(
+    this,
+    batchId,
+    function (hierarchy, instanceIndex) {
+      const classId = hierarchy._classIds[instanceIndex];
+      const instanceClass = hierarchy._classes[classId];
+      const indexInClass = hierarchy._classIndexes[instanceIndex];
+      const propertyValues = instanceClass.instances[propertyId];
+      if (defined(propertyValues)) {
+        //>>includeStart('debug', pragmas.debug);
+        if (instanceIndex !== batchId) {
+          throw new DeveloperError(
+            `Inherited property "${propertyId}" is read-only.`
+          );
+        }
+        //>>includeEnd('debug');
+        if (defined(propertyValues.typedArray)) {
+          setBinaryProperty(propertyValues, indexInClass, value);
+        } else {
+          propertyValues[indexInClass] = clone(value, true);
+        }
+        return true;
       }
-      //>>includeEnd('debug');
-      if (defined(propertyValues.typedArray)) {
-        setBinaryProperty(propertyValues, indexInClass, value);
-      } else {
-        propertyValues[indexInClass] = clone(value, true);
-      }
-      return true;
     }
-  });
+  );
   return defined(result);
 };
 
@@ -528,16 +530,17 @@ function setBinaryProperty(binaryProperty, index, value) {
 BatchTableHierarchy.prototype.isClass = function (batchId, className) {
   // PERFORMANCE_IDEA : cache results in the ancestor classes to speed up this check if this area becomes a hotspot
   // PERFORMANCE_IDEA : treat class names as integers for faster comparisons
-  const result = traverseHierarchy(this, batchId, function (
-    hierarchy,
-    instanceIndex
-  ) {
-    const classId = hierarchy._classIds[instanceIndex];
-    const instanceClass = hierarchy._classes[classId];
-    if (instanceClass.name === className) {
-      return true;
+  const result = traverseHierarchy(
+    this,
+    batchId,
+    function (hierarchy, instanceIndex) {
+      const classId = hierarchy._classIds[instanceIndex];
+      const instanceClass = hierarchy._classes[classId];
+      if (instanceClass.name === className) {
+        return true;
+      }
     }
-  });
+  );
   return defined(result);
 };
 

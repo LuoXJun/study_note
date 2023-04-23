@@ -1,9 +1,9 @@
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Event from "../Core/Event.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
-import Property from "./Property.js";
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Event from '../Core/Event.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
+import Property from './Property.js';
 
 const defaultColor = Color.WHITE;
 const defaultGapColor = Color.TRANSPARENT;
@@ -56,7 +56,7 @@ Object.defineProperties(PolylineDashMaterialProperty.prototype, {
         Property.isConstant(this._dashLength) &&
         Property.isConstant(this._dashPattern)
       );
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -69,35 +69,35 @@ Object.defineProperties(PolylineDashMaterialProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   /**
    * Gets or sets the Property specifying the {@link Color} of the line.
    * @memberof PolylineDashMaterialProperty.prototype
    * @type {Property|undefined}
    */
-  color: createPropertyDescriptor("color"),
+  color: createPropertyDescriptor('color'),
 
   /**
    * Gets or sets the Property specifying the {@link Color} of the gaps in the line.
    * @memberof PolylineDashMaterialProperty.prototype
    * @type {Property|undefined}
    */
-  gapColor: createPropertyDescriptor("gapColor"),
+  gapColor: createPropertyDescriptor('gapColor'),
 
   /**
    * Gets or sets the numeric Property specifying the length of a dash cycle
    * @memberof PolylineDashMaterialProperty.prototype
    * @type {Property|undefined}
    */
-  dashLength: createPropertyDescriptor("dashLength"),
+  dashLength: createPropertyDescriptor('dashLength'),
 
   /**
    * Gets or sets the numeric Property specifying a dash pattern
    * @memberof PolylineDashMaterialProperty.prototype
    * @type {Property|undefined}
    */
-  dashPattern: createPropertyDescriptor("dashPattern"),
+  dashPattern: createPropertyDescriptor('dashPattern')
 });
 
 /**
@@ -107,7 +107,7 @@ Object.defineProperties(PolylineDashMaterialProperty.prototype, {
  * @returns {String} The type of material.
  */
 PolylineDashMaterialProperty.prototype.getType = function (time) {
-  return "PolylineDash";
+  return 'PolylineDash';
 };
 
 /**

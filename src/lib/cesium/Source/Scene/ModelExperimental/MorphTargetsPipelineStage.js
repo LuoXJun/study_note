@@ -1,9 +1,9 @@
-import AttributeType from "../AttributeType.js";
-import combine from "../../Core/combine.js";
-import defined from "../../Core/defined.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import MorphTargetsStageVS from "../../Shaders/ModelExperimental/MorphTargetsStageVS.js";
-import VertexAttributeSemantic from "../VertexAttributeSemantic.js";
+import AttributeType from '../AttributeType.js';
+import combine from '../../Core/combine.js';
+import defined from '../../Core/defined.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import MorphTargetsStageVS from '../../Shaders/ModelExperimental/MorphTargetsStageVS.js';
+import VertexAttributeSemantic from '../VertexAttributeSemantic.js';
 
 /**
  * The morph targets pipeline stage processes the morph targets and weights of a primitive.
@@ -13,17 +13,17 @@ import VertexAttributeSemantic from "../VertexAttributeSemantic.js";
  * @private
  */
 const MorphTargetsPipelineStage = {};
-MorphTargetsPipelineStage.name = "MorphTargetsPipelineStage"; // Helps with debugging
+MorphTargetsPipelineStage.name = 'MorphTargetsPipelineStage'; // Helps with debugging
 MorphTargetsPipelineStage.FUNCTION_ID_GET_MORPHED_POSITION =
-  "getMorphedPosition";
+  'getMorphedPosition';
 MorphTargetsPipelineStage.FUNCTION_SIGNATURE_GET_MORPHED_POSITION =
-  "vec3 getMorphedPosition(in vec3 position)";
-MorphTargetsPipelineStage.FUNCTION_ID_GET_MORPHED_NORMAL = "getMorphedNormal";
+  'vec3 getMorphedPosition(in vec3 position)';
+MorphTargetsPipelineStage.FUNCTION_ID_GET_MORPHED_NORMAL = 'getMorphedNormal';
 MorphTargetsPipelineStage.FUNCTION_SIGNATURE_GET_MORPHED_NORMAL =
-  "vec3 getMorphedNormal(in vec3 normal)";
-MorphTargetsPipelineStage.FUNCTION_ID_GET_MORPHED_TANGENT = "getMorphedTangent";
+  'vec3 getMorphedNormal(in vec3 normal)';
+MorphTargetsPipelineStage.FUNCTION_ID_GET_MORPHED_TANGENT = 'getMorphedTangent';
 MorphTargetsPipelineStage.FUNCTION_SIGNATURE_GET_MORPHED_TANGENT =
-  "vec3 getMorphedTangent(in vec3 tangent)";
+  'vec3 getMorphedTangent(in vec3 tangent)';
 
 /**
  * This pipeline stage processes the morph targets and weights of a primitive,
@@ -45,7 +45,7 @@ MorphTargetsPipelineStage.process = function (renderResources, primitive) {
   const shaderBuilder = renderResources.shaderBuilder;
 
   shaderBuilder.addDefine(
-    "HAS_MORPH_TARGETS",
+    'HAS_MORPH_TARGETS',
     undefined,
     ShaderDestination.VERTEX
   );
@@ -85,7 +85,7 @@ MorphTargetsPipelineStage.process = function (renderResources, primitive) {
   const weights = renderResources.runtimeNode.morphWeights;
   const weightsLength = weights.length;
   shaderBuilder.addUniform(
-    "float",
+    'float',
     `u_morphWeights[${weightsLength}]`,
     ShaderDestination.VERTEX
   );
@@ -95,7 +95,7 @@ MorphTargetsPipelineStage.process = function (renderResources, primitive) {
   const uniformMap = {
     u_morphWeights: function () {
       return renderResources.runtimeNode.morphWeights;
-    },
+    }
   };
 
   renderResources.uniformMap = combine(uniformMap, renderResources.uniformMap);
@@ -103,7 +103,7 @@ MorphTargetsPipelineStage.process = function (renderResources, primitive) {
 
 const scratchAttributeInfo = {
   attributeString: undefined,
-  functionId: undefined,
+  functionId: undefined
 };
 
 function processMorphTargetAttribute(
@@ -145,7 +145,7 @@ function addMorphTargetAttributeToRenderResources(
     componentDatatype: attribute.componentDatatype,
     offsetInBytes: attribute.byteOffset,
     strideInBytes: attribute.byteStride,
-    normalize: attribute.normalized,
+    normalize: attribute.normalized
   };
 
   renderResources.attributes.push(vertexAttribute);
@@ -155,17 +155,17 @@ function getMorphTargetAttributeInfo(attribute, result) {
   const semantic = attribute.semantic;
   switch (semantic) {
     case VertexAttributeSemantic.POSITION:
-      result.attributeString = "Position";
+      result.attributeString = 'Position';
       result.functionId =
         MorphTargetsPipelineStage.FUNCTION_ID_GET_MORPHED_POSITION;
       break;
     case VertexAttributeSemantic.NORMAL:
-      result.attributeString = "Normal";
+      result.attributeString = 'Normal';
       result.functionId =
         MorphTargetsPipelineStage.FUNCTION_ID_GET_MORPHED_NORMAL;
       break;
     case VertexAttributeSemantic.TANGENT:
-      result.attributeString = "Tangent";
+      result.attributeString = 'Tangent';
       result.functionId =
         MorphTargetsPipelineStage.FUNCTION_ID_GET_MORPHED_TANGENT;
       break;
@@ -183,7 +183,7 @@ function addMorphTargetAttributeDeclarationAndFunctionLine(
   const attributeString = attributeInfo.attributeString;
   const attributeName = `a_target${attributeString}_${morphTargetIndex}`;
   const line = `morphed${attributeString} += u_morphWeights[${morphTargetIndex}] * a_target${attributeString}_${morphTargetIndex};`;
-  shaderBuilder.addAttribute("vec3", attributeName);
+  shaderBuilder.addAttribute('vec3', attributeName);
   shaderBuilder.addFunctionLines(attributeInfo.functionId, [line]);
 }
 
@@ -194,7 +194,7 @@ function addGetMorphedAttributeFunctionDeclarations(shaderBuilder) {
     ShaderDestination.VERTEX
   );
 
-  const positionLine = "vec3 morphedPosition = position;";
+  const positionLine = 'vec3 morphedPosition = position;';
   shaderBuilder.addFunctionLines(
     MorphTargetsPipelineStage.FUNCTION_ID_GET_MORPHED_POSITION,
     [positionLine]
@@ -206,7 +206,7 @@ function addGetMorphedAttributeFunctionDeclarations(shaderBuilder) {
     ShaderDestination.VERTEX
   );
 
-  const normalLine = "vec3 morphedNormal = normal;";
+  const normalLine = 'vec3 morphedNormal = normal;';
   shaderBuilder.addFunctionLines(
     MorphTargetsPipelineStage.FUNCTION_ID_GET_MORPHED_NORMAL,
     [normalLine]
@@ -218,7 +218,7 @@ function addGetMorphedAttributeFunctionDeclarations(shaderBuilder) {
     ShaderDestination.VERTEX
   );
 
-  const tangentLine = "vec3 morphedTangent = tangent;";
+  const tangentLine = 'vec3 morphedTangent = tangent;';
   shaderBuilder.addFunctionLines(
     MorphTargetsPipelineStage.FUNCTION_ID_GET_MORPHED_TANGENT,
     [tangentLine]
@@ -226,19 +226,19 @@ function addGetMorphedAttributeFunctionDeclarations(shaderBuilder) {
 }
 
 function addGetMorphedAttributeFunctionReturns(shaderBuilder) {
-  const positionLine = "return morphedPosition;";
+  const positionLine = 'return morphedPosition;';
   shaderBuilder.addFunctionLines(
     MorphTargetsPipelineStage.FUNCTION_ID_GET_MORPHED_POSITION,
     [positionLine]
   );
 
-  const normalLine = "return morphedNormal;";
+  const normalLine = 'return morphedNormal;';
   shaderBuilder.addFunctionLines(
     MorphTargetsPipelineStage.FUNCTION_ID_GET_MORPHED_NORMAL,
     [normalLine]
   );
 
-  const tangentLine = "return morphedTangent;";
+  const tangentLine = 'return morphedTangent;';
   shaderBuilder.addFunctionLines(
     MorphTargetsPipelineStage.FUNCTION_ID_GET_MORPHED_TANGENT,
     [tangentLine]

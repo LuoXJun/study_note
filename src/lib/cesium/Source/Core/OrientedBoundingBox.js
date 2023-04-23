@@ -1,20 +1,20 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import EllipsoidTangentPlane from "./EllipsoidTangentPlane.js";
-import Intersect from "./Intersect.js";
-import Interval from "./Interval.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
-import Matrix4 from "./Matrix4.js";
-import Plane from "./Plane.js";
-import Rectangle from "./Rectangle.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import EllipsoidTangentPlane from './EllipsoidTangentPlane.js';
+import Intersect from './Intersect.js';
+import Interval from './Interval.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
+import Matrix4 from './Matrix4.js';
+import Plane from './Plane.js';
+import Rectangle from './Rectangle.js';
 
 /**
  * Creates an instance of an OrientedBoundingBox.
@@ -71,8 +71,8 @@ OrientedBoundingBox.packedLength =
  */
 OrientedBoundingBox.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -93,7 +93,7 @@ OrientedBoundingBox.pack = function (value, array, startingIndex) {
  */
 OrientedBoundingBox.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -120,7 +120,7 @@ const scratchCartesian6 = new Cartesian3();
 const scratchCovarianceResult = new Matrix3();
 const scratchEigenResult = {
   unitary: new Matrix3(),
-  diagonal: new Matrix3(),
+  diagonal: new Matrix3()
 };
 
 /**
@@ -263,7 +263,7 @@ function fromPlaneExtents(
     !defined(maximumZ)
   ) {
     throw new DeveloperError(
-      "all extents (minimum/maximum X/Y/Z) are required."
+      'all extents (minimum/maximum X/Y/Z) are required.'
     );
   }
   //>>includeEnd('debug');
@@ -347,13 +347,13 @@ OrientedBoundingBox.fromRectangle = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(rectangle)) {
-    throw new DeveloperError("rectangle is required");
+    throw new DeveloperError('rectangle is required');
   }
   if (rectangle.width < 0.0 || rectangle.width > CesiumMath.TWO_PI) {
-    throw new DeveloperError("Rectangle width must be between 0 and 2*pi");
+    throw new DeveloperError('Rectangle width must be between 0 and 2*pi');
   }
   if (rectangle.height < 0.0 || rectangle.height > CesiumMath.PI) {
-    throw new DeveloperError("Rectangle height must be between 0 and pi");
+    throw new DeveloperError('Rectangle height must be between 0 and pi');
   }
   if (
     defined(ellipsoid) &&
@@ -364,7 +364,7 @@ OrientedBoundingBox.fromRectangle = function (
     )
   ) {
     throw new DeveloperError(
-      "Ellipsoid must be an ellipsoid of revolution (radii.x == radii.y)"
+      'Ellipsoid must be an ellipsoid of revolution (radii.x == radii.y)'
     );
   }
   //>>includeEnd('debug');
@@ -480,7 +480,8 @@ OrientedBoundingBox.fromRectangle = function (
     minY = Math.min(perimeterProjectedSW.y, perimeterProjectedSC.y);
 
     // Compute minimum Z using the rectangle at minimum height, since it will be deeper than the maximum height
-    perimeterCartographicNW.height = perimeterCartographicSW.height = minimumHeight;
+    perimeterCartographicNW.height = perimeterCartographicSW.height =
+      minimumHeight;
     perimeterCartesianNW = ellipsoid.cartographicToCartesian(
       perimeterCartographicNW,
       scratchPerimeterCartesianNW
@@ -617,7 +618,7 @@ OrientedBoundingBox.fromRectangle = function (
  */
 OrientedBoundingBox.fromTransformation = function (transformation, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("transformation", transformation);
+  Check.typeOf.object('transformation', transformation);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -669,11 +670,11 @@ OrientedBoundingBox.clone = function (box, result) {
 OrientedBoundingBox.intersectPlane = function (box, plane) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(box)) {
-    throw new DeveloperError("box is required.");
+    throw new DeveloperError('box is required.');
   }
 
   if (!defined(plane)) {
-    throw new DeveloperError("plane is required.");
+    throw new DeveloperError('plane is required.');
   }
   //>>includeEnd('debug');
 
@@ -737,10 +738,10 @@ OrientedBoundingBox.distanceSquaredTo = function (box, cartesian) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(box)) {
-    throw new DeveloperError("box is required.");
+    throw new DeveloperError('box is required.');
   }
   if (!defined(cartesian)) {
-    throw new DeveloperError("cartesian is required.");
+    throw new DeveloperError('cartesian is required.');
   }
   //>>includeEnd('debug');
 
@@ -895,15 +896,15 @@ OrientedBoundingBox.computePlaneDistances = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(box)) {
-    throw new DeveloperError("box is required.");
+    throw new DeveloperError('box is required.');
   }
 
   if (!defined(position)) {
-    throw new DeveloperError("position is required.");
+    throw new DeveloperError('position is required.');
   }
 
   if (!defined(direction)) {
-    throw new DeveloperError("direction is required.");
+    throw new DeveloperError('direction is required.');
   }
   //>>includeEnd('debug');
 
@@ -1027,7 +1028,7 @@ const scratchZAxis = new Cartesian3();
  */
 OrientedBoundingBox.computeCorners = function (box, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("box", box);
+  Check.typeOf.object('box', box);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -1039,7 +1040,7 @@ OrientedBoundingBox.computeCorners = function (box, result) {
       new Cartesian3(),
       new Cartesian3(),
       new Cartesian3(),
-      new Cartesian3(),
+      new Cartesian3()
     ];
   }
 
@@ -1103,7 +1104,7 @@ const scratchRotationScale = new Matrix3();
  */
 OrientedBoundingBox.computeTransformation = function (box, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("box", box);
+  Check.typeOf.object('box', box);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -1131,10 +1132,10 @@ const scratchBoundingSphere = new BoundingSphere();
 OrientedBoundingBox.isOccluded = function (box, occluder) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(box)) {
-    throw new DeveloperError("box is required.");
+    throw new DeveloperError('box is required.');
   }
   if (!defined(occluder)) {
-    throw new DeveloperError("occluder is required.");
+    throw new DeveloperError('occluder is required.');
   }
   //>>includeEnd('debug');
 

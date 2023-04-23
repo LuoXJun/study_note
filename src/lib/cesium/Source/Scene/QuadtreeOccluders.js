@@ -1,5 +1,5 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import EllipsoidalOccluder from "../Core/EllipsoidalOccluder.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import EllipsoidalOccluder from '../Core/EllipsoidalOccluder.js';
 
 /**
  * A set of occluders that can be used to test quadtree tiles for occlusion.
@@ -24,7 +24,7 @@ Object.defineProperties(QuadtreeOccluders.prototype, {
   ellipsoid: {
     get: function () {
       return this._ellipsoid;
-    },
-  },
+    }
+  }
 });
 export default QuadtreeOccluders;

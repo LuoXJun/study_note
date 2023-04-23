@@ -1,5 +1,5 @@
-import defined from "../Core/defined.js";
-import DoublyLinkedList from "../Core/DoublyLinkedList.js";
+import defined from '../Core/defined.js';
+import DoublyLinkedList from '../Core/DoublyLinkedList.js';
 
 /**
  * Stores tiles with content loaded.

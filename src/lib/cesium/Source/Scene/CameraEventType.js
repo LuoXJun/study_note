@@ -42,6 +42,6 @@ const CameraEventType = {
    * @type {Number}
    * @constant
    */
-  PINCH: 4,
+  PINCH: 4
 };
 export default Object.freeze(CameraEventType);

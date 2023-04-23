@@ -1,16 +1,16 @@
-import AttributeType from "../AttributeType.js";
-import ComponentDatatype from "../../Core/ComponentDatatype.js";
-import defined from "../../Core/defined.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import GeometryStageFS from "../../Shaders/ModelExperimental/GeometryStageFS.js";
-import GeometryStageVS from "../../Shaders/ModelExperimental/GeometryStageVS.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
-import ModelExperimentalType from "./ModelExperimentalType.js";
-import PrimitiveType from "../../Core/PrimitiveType.js";
-import SceneMode from "../SceneMode.js";
-import SelectedFeatureIdPipelineStage from "./SelectedFeatureIdPipelineStage.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import VertexAttributeSemantic from "../VertexAttributeSemantic.js";
+import AttributeType from '../AttributeType.js';
+import ComponentDatatype from '../../Core/ComponentDatatype.js';
+import defined from '../../Core/defined.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import GeometryStageFS from '../../Shaders/ModelExperimental/GeometryStageFS.js';
+import GeometryStageVS from '../../Shaders/ModelExperimental/GeometryStageVS.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
+import ModelExperimentalType from './ModelExperimentalType.js';
+import PrimitiveType from '../../Core/PrimitiveType.js';
+import SceneMode from '../SceneMode.js';
+import SelectedFeatureIdPipelineStage from './SelectedFeatureIdPipelineStage.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import VertexAttributeSemantic from '../VertexAttributeSemantic.js';
 
 /**
  * The geometry pipeline stage processes the vertex attributes of a primitive.
@@ -20,23 +20,23 @@ import VertexAttributeSemantic from "../VertexAttributeSemantic.js";
  * @private
  */
 const GeometryPipelineStage = {};
-GeometryPipelineStage.name = "GeometryPipelineStage"; // Helps with debugging
+GeometryPipelineStage.name = 'GeometryPipelineStage'; // Helps with debugging
 
 GeometryPipelineStage.STRUCT_ID_PROCESSED_ATTRIBUTES_VS =
-  "ProcessedAttributesVS";
+  'ProcessedAttributesVS';
 GeometryPipelineStage.STRUCT_ID_PROCESSED_ATTRIBUTES_FS =
-  "ProcessedAttributesFS";
-GeometryPipelineStage.STRUCT_NAME_PROCESSED_ATTRIBUTES = "ProcessedAttributes";
+  'ProcessedAttributesFS';
+GeometryPipelineStage.STRUCT_NAME_PROCESSED_ATTRIBUTES = 'ProcessedAttributes';
 GeometryPipelineStage.FUNCTION_ID_INITIALIZE_ATTRIBUTES =
-  "initializeAttributes";
+  'initializeAttributes';
 GeometryPipelineStage.FUNCTION_SIGNATURE_INITIALIZE_ATTRIBUTES =
-  "void initializeAttributes(out ProcessedAttributes attributes)";
+  'void initializeAttributes(out ProcessedAttributes attributes)';
 GeometryPipelineStage.FUNCTION_ID_SET_DYNAMIC_VARYINGS_VS =
-  "setDynamicVaryingsVS";
+  'setDynamicVaryingsVS';
 GeometryPipelineStage.FUNCTION_ID_SET_DYNAMIC_VARYINGS_FS =
-  "setDynamicVaryingsFS";
+  'setDynamicVaryingsFS';
 GeometryPipelineStage.FUNCTION_SIGNATURE_SET_DYNAMIC_VARYINGS =
-  "void setDynamicVaryings(inout ProcessedAttributes attributes)";
+  'void setDynamicVaryings(inout ProcessedAttributes attributes)';
 
 /**
  * This pipeline stage processes the vertex attributes of a primitive, adding the attribute declarations to the shaders,
@@ -71,12 +71,12 @@ GeometryPipelineStage.process = function (
   // additional fields.
   shaderBuilder.addStruct(
     GeometryPipelineStage.STRUCT_ID_PROCESSED_ATTRIBUTES_VS,
-    "ProcessedAttributes",
+    'ProcessedAttributes',
     ShaderDestination.VERTEX
   );
   shaderBuilder.addStruct(
     GeometryPipelineStage.STRUCT_ID_PROCESSED_ATTRIBUTES_FS,
-    "ProcessedAttributes",
+    'ProcessedAttributes',
     ShaderDestination.FRAGMENT
   );
 
@@ -97,17 +97,17 @@ GeometryPipelineStage.process = function (
   );
 
   // Positions in other coordinate systems need more variables
-  shaderBuilder.addVarying("vec3", "v_positionWC");
-  shaderBuilder.addVarying("vec3", "v_positionEC");
+  shaderBuilder.addVarying('vec3', 'v_positionWC');
+  shaderBuilder.addVarying('vec3', 'v_positionEC');
   shaderBuilder.addStructField(
     GeometryPipelineStage.STRUCT_ID_PROCESSED_ATTRIBUTES_FS,
-    "vec3",
-    "positionWC"
+    'vec3',
+    'positionWC'
   );
   shaderBuilder.addStructField(
     GeometryPipelineStage.STRUCT_ID_PROCESSED_ATTRIBUTES_FS,
-    "vec3",
-    "positionEC"
+    'vec3',
+    'positionEC'
   );
 
   // Though they have identical signatures, the implementation is different
@@ -129,7 +129,7 @@ GeometryPipelineStage.process = function (
   const modelType = model.type;
   if (modelType === ModelExperimentalType.TILE_PNTS) {
     shaderBuilder.addDefine(
-      "HAS_SRGB_COLOR",
+      'HAS_SRGB_COLOR',
       undefined,
       ShaderDestination.FRAGMENT
     );
@@ -161,7 +161,7 @@ GeometryPipelineStage.process = function (
     //>>includeStart('debug', pragmas.debug);
     if (!defined(attribute.buffer) && !defined(attribute.constant)) {
       throw new DeveloperError(
-        "Attributes must be provided as a Buffer or constant value"
+        'Attributes must be provided as a Buffer or constant value'
       );
     }
     //>>includeEnd('debug');
@@ -189,7 +189,7 @@ GeometryPipelineStage.process = function (
   handleBitangents(shaderBuilder, primitive.attributes);
 
   if (primitive.primitiveType === PrimitiveType.POINTS) {
-    shaderBuilder.addDefine("PRIMITIVE_TYPE_POINTS");
+    shaderBuilder.addDefine('PRIMITIVE_TYPE_POINTS');
   }
 
   shaderBuilder.addVertexLines([GeometryStageVS]);
@@ -250,10 +250,10 @@ function addSemanticDefine(shaderBuilder, attribute) {
   const setIndex = attribute.setIndex;
   switch (semantic) {
     case VertexAttributeSemantic.NORMAL:
-      shaderBuilder.addDefine("HAS_NORMALS");
+      shaderBuilder.addDefine('HAS_NORMALS');
       break;
     case VertexAttributeSemantic.TANGENT:
-      shaderBuilder.addDefine("HAS_TANGENTS");
+      shaderBuilder.addDefine('HAS_TANGENTS');
       break;
     case VertexAttributeSemantic.FEATURE_ID:
       // `_FEATURE_ID starts with an underscore so no need to double the
@@ -306,7 +306,7 @@ function addAttributeToRenderResources(
     componentDatatype: componentDatatype,
     offsetInBytes: attribute.byteOffset,
     strideInBytes: attribute.byteStride,
-    normalize: attribute.normalized,
+    normalize: attribute.normalized
   };
 
   renderResources.attributes.push(vertexAttribute);
@@ -325,7 +325,7 @@ function addAttributeToRenderResources(
     componentDatatype: ComponentDatatype.FLOAT, // Projected positions will always be floats.
     offsetInBytes: attribute.byteOffset,
     strideInBytes: attribute.byteStride,
-    normalize: attribute.normalized,
+    normalize: attribute.normalized
   };
 
   renderResources.attributes.push(positionAttribute2D);
@@ -355,9 +355,8 @@ function addMatrixAttributeToRenderResources(
   // componentsPerColumn is either 2, 3, or 4
   const componentsPerColumn = componentCount / columnCount;
 
-  const componentSizeInBytes = ComponentDatatype.getSizeInBytes(
-    componentDatatype
-  );
+  const componentSizeInBytes =
+    ComponentDatatype.getSizeInBytes(componentDatatype);
 
   const columnLengthInBytes = componentsPerColumn * componentSizeInBytes;
 
@@ -376,7 +375,7 @@ function addMatrixAttributeToRenderResources(
       componentDatatype: componentDatatype,
       offsetInBytes: offsetInBytes,
       strideInBytes: strideInBytes,
-      normalize: normalized,
+      normalize: normalized
     };
 
     renderResources.attributes.push(columnAttribute);
@@ -388,17 +387,17 @@ function addVaryingDeclaration(shaderBuilder, attributeInfo) {
   let varyingName = `v_${variableName}`;
 
   let glslType;
-  if (variableName === "normalMC") {
+  if (variableName === 'normalMC') {
     // though the attribute is in model coordinates, the varying is
     // in eye coordinates.
-    varyingName = "v_normalEC";
+    varyingName = 'v_normalEC';
     glslType = attributeInfo.glslType;
-  } else if (variableName === "tangentMC") {
+  } else if (variableName === 'tangentMC') {
     // Tangent's glslType is vec4, but in the shader it is split into
     // vec3 tangent and vec3 bitangent
-    glslType = "vec3";
+    glslType = 'vec3';
     // like normalMC, the varying is converted to eye coordinates
-    varyingName = "v_tangentEC";
+    varyingName = 'v_tangentEC';
   } else {
     glslType = attributeInfo.glslType;
   }
@@ -428,7 +427,7 @@ function addAttributeDeclaration(shaderBuilder, attributeInfo, modifyFor2D) {
   }
 
   if (isPosition && modifyFor2D) {
-    shaderBuilder.addAttribute("vec3", "a_position2D");
+    shaderBuilder.addAttribute('vec3', 'a_position2D');
   }
 }
 
@@ -437,19 +436,19 @@ function updateAttributesStruct(shaderBuilder, attributeInfo, use2D) {
   const fsStructId = GeometryPipelineStage.STRUCT_ID_PROCESSED_ATTRIBUTES_FS;
   const variableName = attributeInfo.variableName;
 
-  if (variableName === "tangentMC") {
+  if (variableName === 'tangentMC') {
     // The w component of the tangent is only used for computing the bitangent,
     // so it can be separated from the other tangent components.
-    shaderBuilder.addStructField(vsStructId, "vec3", "tangentMC");
-    shaderBuilder.addStructField(vsStructId, "float", "tangentSignMC");
+    shaderBuilder.addStructField(vsStructId, 'vec3', 'tangentMC');
+    shaderBuilder.addStructField(vsStructId, 'float', 'tangentSignMC');
     // The tangent is in model coordinates in the vertex shader
     // but in eye space in the fragment coordinates
-    shaderBuilder.addStructField(fsStructId, "vec3", "tangentEC");
-  } else if (variableName === "normalMC") {
+    shaderBuilder.addStructField(fsStructId, 'vec3', 'tangentEC');
+  } else if (variableName === 'normalMC') {
     // Normals are in model coordinates in the vertex shader but in eye
     // coordinates in the fragment shader
-    shaderBuilder.addStructField(vsStructId, "vec3", "normalMC");
-    shaderBuilder.addStructField(fsStructId, "vec3", "normalEC");
+    shaderBuilder.addStructField(vsStructId, 'vec3', 'normalMC');
+    shaderBuilder.addStructField(fsStructId, 'vec3', 'normalEC');
   } else {
     shaderBuilder.addStructField(
       vsStructId,
@@ -463,8 +462,8 @@ function updateAttributesStruct(shaderBuilder, attributeInfo, use2D) {
     );
   }
 
-  if (variableName === "positionMC" && use2D) {
-    shaderBuilder.addStructField(vsStructId, "vec3", "position2D");
+  if (variableName === 'positionMC' && use2D) {
+    shaderBuilder.addStructField(vsStructId, 'vec3', 'position2D');
   }
 }
 
@@ -478,9 +477,9 @@ function updateInitializeAttributesFunction(
 
   // If the scene is in 2D / CV mode, this line should always be added
   // regardless of whether the data is quantized.
-  const use2DPosition = variableName === "positionMC" && use2D;
+  const use2DPosition = variableName === 'positionMC' && use2D;
   if (use2DPosition) {
-    const line = "attributes.position2D = a_position2D;";
+    const line = 'attributes.position2D = a_position2D;';
     shaderBuilder.addFunctionLines(functionId, [line]);
   }
 
@@ -490,9 +489,9 @@ function updateInitializeAttributesFunction(
   }
 
   const lines = [];
-  if (variableName === "tangentMC") {
-    lines.push("attributes.tangentMC = a_tangentMC.xyz;");
-    lines.push("attributes.tangentSignMC = a_tangentMC.w;");
+  if (variableName === 'tangentMC') {
+    lines.push('attributes.tangentMC = a_tangentMC.xyz;');
+    lines.push('attributes.tangentSignMC = a_tangentMC.w;');
   } else {
     lines.push(`attributes.${variableName} = a_${variableName};`);
   }
@@ -540,18 +539,18 @@ function handleBitangents(shaderBuilder, attributes) {
     return;
   }
 
-  shaderBuilder.addDefine("HAS_BITANGENTS");
+  shaderBuilder.addDefine('HAS_BITANGENTS');
 
-  shaderBuilder.addVarying("vec3", "v_bitangentEC");
+  shaderBuilder.addVarying('vec3', 'v_bitangentEC');
   shaderBuilder.addStructField(
     GeometryPipelineStage.STRUCT_ID_PROCESSED_ATTRIBUTES_VS,
-    "vec3",
-    "bitangentMC"
+    'vec3',
+    'bitangentMC'
   );
   shaderBuilder.addStructField(
     GeometryPipelineStage.STRUCT_ID_PROCESSED_ATTRIBUTES_FS,
-    "vec3",
-    "bitangentEC"
+    'vec3',
+    'bitangentEC'
   );
 }
 

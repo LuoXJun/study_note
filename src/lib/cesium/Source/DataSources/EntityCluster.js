@@ -1,19 +1,19 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import EllipsoidalOccluder from "../Core/EllipsoidalOccluder.js";
-import Event from "../Core/Event.js";
-import Matrix4 from "../Core/Matrix4.js";
-import Billboard from "../Scene/Billboard.js";
-import BillboardCollection from "../Scene/BillboardCollection.js";
-import Label from "../Scene/Label.js";
-import LabelCollection from "../Scene/LabelCollection.js";
-import PointPrimitive from "../Scene/PointPrimitive.js";
-import PointPrimitiveCollection from "../Scene/PointPrimitiveCollection.js";
-import SceneMode from "../Scene/SceneMode.js";
-import KDBush from "../ThirdParty/kdbush.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import EllipsoidalOccluder from '../Core/EllipsoidalOccluder.js';
+import Event from '../Core/Event.js';
+import Matrix4 from '../Core/Matrix4.js';
+import Billboard from '../Scene/Billboard.js';
+import BillboardCollection from '../Scene/BillboardCollection.js';
+import Label from '../Scene/Label.js';
+import LabelCollection from '../Scene/LabelCollection.js';
+import PointPrimitive from '../Scene/PointPrimitive.js';
+import PointPrimitiveCollection from '../Scene/PointPrimitiveCollection.js';
+import SceneMode from '../Scene/SceneMode.js';
+import KDBush from '../ThirdParty/kdbush.js';
 
 /**
  * Defines how screen space objects (billboards, points, labels) are clustered.
@@ -152,7 +152,7 @@ function addCluster(position, numPoints, ids, entityCluster) {
   const cluster = {
     billboard: entityCluster._clusterBillboardCollection.add(),
     label: entityCluster._clusterLabelCollection.add(),
-    point: entityCluster._clusterPointCollection.add(),
+    point: entityCluster._clusterPointCollection.add()
   };
 
   cluster.billboard.show = false;
@@ -160,7 +160,10 @@ function addCluster(position, numPoints, ids, entityCluster) {
   cluster.label.show = true;
   cluster.label.text = numPoints.toLocaleString();
   cluster.label.id = ids;
-  cluster.billboard.position = cluster.label.position = cluster.point.position = position;
+  cluster.billboard.position =
+    cluster.label.position =
+    cluster.point.position =
+      position;
 
   entityCluster._clusterEvent.raiseEvent(ids, cluster);
 }
@@ -216,7 +219,7 @@ function getScreenSpacePositions(
       index: i,
       collection: collection,
       clustered: false,
-      coord: coord,
+      coord: coord
     });
   }
 }
@@ -256,27 +259,26 @@ function createDeclutterCallback(entityCluster) {
     if (defined(clusteredLabelCollection)) {
       clusteredLabelCollection.removeAll();
     } else {
-      clusteredLabelCollection = entityCluster._clusterLabelCollection = new LabelCollection(
-        {
-          scene: scene,
-        }
-      );
+      clusteredLabelCollection = entityCluster._clusterLabelCollection =
+        new LabelCollection({
+          scene: scene
+        });
     }
 
     if (defined(clusteredBillboardCollection)) {
       clusteredBillboardCollection.removeAll();
     } else {
-      clusteredBillboardCollection = entityCluster._clusterBillboardCollection = new BillboardCollection(
-        {
-          scene: scene,
-        }
-      );
+      clusteredBillboardCollection = entityCluster._clusterBillboardCollection =
+        new BillboardCollection({
+          scene: scene
+        });
     }
 
     if (defined(clusteredPointCollection)) {
       clusteredPointCollection.removeAll();
     } else {
-      clusteredPointCollection = entityCluster._clusterPointCollection = new PointPrimitiveCollection();
+      clusteredPointCollection = entityCluster._clusterPointCollection =
+        new PointPrimitiveCollection();
     }
 
     const pixelRange = entityCluster._pixelRange;
@@ -474,7 +476,7 @@ function createDeclutterCallback(entityCluster) {
           width: totalBBox.width,
           height: totalBBox.height,
           minimumWidth: bbox.width,
-          minimumHeight: bbox.height,
+          minimumHeight: bbox.height
         });
 
         for (j = 0; j < neighborLength; ++j) {
@@ -526,7 +528,7 @@ Object.defineProperties(EntityCluster.prototype, {
     set: function (value) {
       this._enabledDirty = value !== this._enabled;
       this._enabled = value;
-    },
+    }
   },
   /**
    * Gets or sets the pixel range to extend the screen space bounding box.
@@ -540,7 +542,7 @@ Object.defineProperties(EntityCluster.prototype, {
     set: function (value) {
       this._clusterDirty = this._clusterDirty || value !== this._pixelRange;
       this._pixelRange = value;
-    },
+    }
   },
   /**
    * Gets or sets the minimum number of screen space objects that can be clustered.
@@ -555,7 +557,7 @@ Object.defineProperties(EntityCluster.prototype, {
       this._clusterDirty =
         this._clusterDirty || value !== this._minimumClusterSize;
       this._minimumClusterSize = value;
-    },
+    }
   },
   /**
    * Gets the event that will be raised when a new cluster will be displayed. The signature of the event listener is {@link EntityCluster.newClusterCallback}.
@@ -565,7 +567,7 @@ Object.defineProperties(EntityCluster.prototype, {
   clusterEvent: {
     get: function () {
       return this._clusterEvent;
-    },
+    }
   },
   /**
    * Gets or sets whether clustering billboard entities is enabled.
@@ -580,7 +582,7 @@ Object.defineProperties(EntityCluster.prototype, {
       this._clusterDirty =
         this._clusterDirty || value !== this._clusterBillboards;
       this._clusterBillboards = value;
-    },
+    }
   },
   /**
    * Gets or sets whether clustering labels entities is enabled.
@@ -594,7 +596,7 @@ Object.defineProperties(EntityCluster.prototype, {
     set: function (value) {
       this._clusterDirty = this._clusterDirty || value !== this._clusterLabels;
       this._clusterLabels = value;
-    },
+    }
   },
   /**
    * Gets or sets whether clustering point entities is enabled.
@@ -608,8 +610,8 @@ Object.defineProperties(EntityCluster.prototype, {
     set: function (value) {
       this._clusterDirty = this._clusterDirty || value !== this._clusterPoints;
       this._clusterPoints = value;
-    },
-  },
+    }
+  }
 });
 
 function createGetEntity(
@@ -631,7 +633,7 @@ function createGetEntity(
       entityIndices = this._collectionIndicesByEntity[entity.id] = {
         billboardIndex: undefined,
         labelIndex: undefined,
-        pointIndex: undefined,
+        pointIndex: undefined
       };
     }
 
@@ -641,7 +643,7 @@ function createGetEntity(
 
     if (!defined(collection)) {
       collection = this[collectionProperty] = new CollectionConstructor({
-        scene: this._scene,
+        scene: this._scene
       });
     }
 
@@ -688,10 +690,10 @@ function removeEntityIndicesIfUnused(entityCluster, entityId) {
  * @private
  */
 EntityCluster.prototype.getLabel = createGetEntity(
-  "_labelCollection",
+  '_labelCollection',
   LabelCollection,
-  "_unusedLabelIndices",
-  "labelIndex"
+  '_unusedLabelIndices',
+  'labelIndex'
 );
 
 /**
@@ -718,7 +720,7 @@ EntityCluster.prototype.removeLabel = function (entity) {
 
   const label = this._labelCollection.get(index);
   label.show = false;
-  label.text = "";
+  label.text = '';
   label.id = undefined;
 
   this._unusedLabelIndices.push(index);
@@ -734,10 +736,10 @@ EntityCluster.prototype.removeLabel = function (entity) {
  * @private
  */
 EntityCluster.prototype.getBillboard = createGetEntity(
-  "_billboardCollection",
+  '_billboardCollection',
   BillboardCollection,
-  "_unusedBillboardIndices",
-  "billboardIndex"
+  '_unusedBillboardIndices',
+  'billboardIndex'
 );
 
 /**
@@ -780,10 +782,10 @@ EntityCluster.prototype.removeBillboard = function (entity) {
  * @private
  */
 EntityCluster.prototype.getPoint = createGetEntity(
-  "_pointCollection",
+  '_pointCollection',
   PointPrimitiveCollection,
-  "_unusedPointIndices",
-  "pointIndex"
+  '_unusedPointIndices',
+  'pointIndex'
 );
 
 /**

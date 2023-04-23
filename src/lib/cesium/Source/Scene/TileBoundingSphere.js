@@ -1,13 +1,13 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import SphereOutlineGeometry from "../Core/SphereOutlineGeometry.js";
-import PerInstanceColorAppearance from "./PerInstanceColorAppearance.js";
-import Primitive from "./Primitive.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import SphereOutlineGeometry from '../Core/SphereOutlineGeometry.js';
+import PerInstanceColorAppearance from './PerInstanceColorAppearance.js';
+import Primitive from './Primitive.js';
 
 /**
  * A tile bounding volume specified as a sphere.
@@ -38,7 +38,7 @@ Object.defineProperties(TileBoundingSphere.prototype, {
   center: {
     get: function () {
       return this._boundingSphere.center;
-    },
+    }
   },
 
   /**
@@ -52,7 +52,7 @@ Object.defineProperties(TileBoundingSphere.prototype, {
   radius: {
     get: function () {
       return this._boundingSphere.radius;
-    },
+    }
   },
 
   /**
@@ -66,7 +66,7 @@ Object.defineProperties(TileBoundingSphere.prototype, {
   boundingVolume: {
     get: function () {
       return this._boundingSphere;
-    },
+    }
   },
   /**
    * The underlying bounding sphere
@@ -79,8 +79,8 @@ Object.defineProperties(TileBoundingSphere.prototype, {
   boundingSphere: {
     get: function () {
       return this._boundingSphere;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -92,7 +92,7 @@ Object.defineProperties(TileBoundingSphere.prototype, {
  */
 TileBoundingSphere.prototype.distanceToCamera = function (frameState) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("frameState", frameState);
+  Check.defined('frameState', frameState);
   //>>includeEnd('debug');
   const boundingSphere = this._boundingSphere;
   return Math.max(
@@ -113,7 +113,7 @@ TileBoundingSphere.prototype.distanceToCamera = function (frameState) {
  */
 TileBoundingSphere.prototype.intersectPlane = function (plane) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("plane", plane);
+  Check.defined('plane', plane);
   //>>includeEnd('debug');
   return BoundingSphere.intersectPlane(this._boundingSphere, plane);
 };
@@ -137,10 +137,10 @@ TileBoundingSphere.prototype.update = function (center, radius) {
  */
 TileBoundingSphere.prototype.createDebugVolume = function (color) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("color", color);
+  Check.defined('color', color);
   //>>includeEnd('debug');
   const geometry = new SphereOutlineGeometry({
-    radius: this.radius,
+    radius: this.radius
   });
   const modelMatrix = Matrix4.fromTranslation(
     this.center,
@@ -148,20 +148,20 @@ TileBoundingSphere.prototype.createDebugVolume = function (color) {
   );
   const instance = new GeometryInstance({
     geometry: geometry,
-    id: "outline",
+    id: 'outline',
     modelMatrix: modelMatrix,
     attributes: {
-      color: ColorGeometryInstanceAttribute.fromColor(color),
-    },
+      color: ColorGeometryInstanceAttribute.fromColor(color)
+    }
   });
 
   return new Primitive({
     geometryInstances: instance,
     appearance: new PerInstanceColorAppearance({
       translucent: false,
-      flat: true,
+      flat: true
     }),
-    asynchronous: false,
+    asynchronous: false
   });
 };
 export default TileBoundingSphere;

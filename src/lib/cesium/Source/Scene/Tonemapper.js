@@ -47,6 +47,6 @@ const Tonemapper = {
       tonemapper === Tonemapper.FILMIC ||
       tonemapper === Tonemapper.ACES
     );
-  },
+  }
 };
 export default Object.freeze(Tonemapper);

@@ -1,9 +1,9 @@
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import defined from "./defined.js";
-import GeocodeType from "./GeocodeType.js";
-import Rectangle from "./Rectangle.js";
-import Resource from "./Resource.js";
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import defined from './defined.js';
+import GeocodeType from './GeocodeType.js';
+import Rectangle from './Rectangle.js';
+import Resource from './Resource.js';
 
 /**
  * Provides geocoding via a {@link https://pelias.io/|Pelias} server.
@@ -25,7 +25,7 @@ import Resource from "./Resource.js";
  */
 function PeliasGeocoderService(url) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("url", url);
+  Check.defined('url', url);
   //>>includeEnd('debug');
 
   this._url = Resource.createIfNeeded(url);
@@ -42,8 +42,8 @@ Object.defineProperties(PeliasGeocoderService.prototype, {
   url: {
     get: function () {
       return this._url;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -55,14 +55,14 @@ Object.defineProperties(PeliasGeocoderService.prototype, {
  */
 PeliasGeocoderService.prototype.geocode = function (query, type) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("query", query);
+  Check.typeOf.string('query', query);
   //>>includeEnd('debug');
 
   const resource = this._url.getDerivedResource({
-    url: type === GeocodeType.AUTOCOMPLETE ? "autocomplete" : "search",
+    url: type === GeocodeType.AUTOCOMPLETE ? 'autocomplete' : 'search',
     queryParameters: {
-      text: query,
-    },
+      text: query
+    }
   });
 
   return resource.fetchJson().then(function (results) {
@@ -85,7 +85,7 @@ PeliasGeocoderService.prototype.geocode = function (query, type) {
 
       return {
         displayName: resultObject.properties.label,
-        destination: destination,
+        destination: destination
       };
     });
   });

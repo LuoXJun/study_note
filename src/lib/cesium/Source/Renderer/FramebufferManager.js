@@ -1,14 +1,14 @@
-import Framebuffer from "./Framebuffer.js";
-import MultisampleFramebuffer from "./MultisampleFramebuffer.js";
-import PixelDatatype from "./PixelDatatype.js";
-import Renderbuffer from "./Renderbuffer.js";
-import RenderbufferFormat from "./RenderbufferFormat.js";
-import Sampler from "./Sampler.js";
-import Texture from "./Texture.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import PixelFormat from "../Core/PixelFormat.js";
+import Framebuffer from './Framebuffer.js';
+import MultisampleFramebuffer from './MultisampleFramebuffer.js';
+import PixelDatatype from './PixelDatatype.js';
+import Renderbuffer from './Renderbuffer.js';
+import RenderbufferFormat from './RenderbufferFormat.js';
+import Sampler from './Sampler.js';
+import Texture from './Texture.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import PixelFormat from '../Core/PixelFormat.js';
 
 /**
  * Creates a wrapper object around a framebuffer and its resources.
@@ -49,12 +49,12 @@ function FramebufferManager(options) {
   //>>includeStart('debug', pragmas.debug);
   if (!this._color && !this._depth && !this._depthStencil) {
     throw new DeveloperError(
-      "Must enable at least one type of framebuffer attachment."
+      'Must enable at least one type of framebuffer attachment.'
     );
   }
   if (this._depth && this._depthStencil) {
     throw new DeveloperError(
-      "Cannot have both a depth and depth-stencil attachment."
+      'Cannot have both a depth and depth-stencil attachment.'
     );
   }
   //>>includeEnd('debug');
@@ -97,18 +97,18 @@ Object.defineProperties(FramebufferManager.prototype, {
         return this._multisampleFramebuffer.getRenderFramebuffer();
       }
       return this._framebuffer;
-    },
+    }
   },
   numSamples: {
     get: function () {
       return this._numSamples;
-    },
+    }
   },
   status: {
     get: function () {
       return this.framebuffer.status;
-    },
-  },
+    }
+  }
 });
 
 FramebufferManager.prototype.isDirty = function (
@@ -149,7 +149,7 @@ FramebufferManager.prototype.update = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(width) || !defined(height)) {
-    throw new DeveloperError("width and height must be defined.");
+    throw new DeveloperError('width and height must be defined.');
   }
   //>>includeEnd('debug');
   numSamples = context.msaa ? defaultValue(numSamples, 1) : 1;
@@ -182,7 +182,7 @@ FramebufferManager.prototype.update = function (
           height: height,
           pixelFormat: pixelFormat,
           pixelDatatype: pixelDatatype,
-          sampler: Sampler.NEAREST,
+          sampler: Sampler.NEAREST
         });
         if (this._numSamples > 1) {
           const format = RenderbufferFormat.getColorFormat(pixelDatatype);
@@ -191,7 +191,7 @@ FramebufferManager.prototype.update = function (
             width: width,
             height: height,
             format: format,
-            numSamples: this._numSamples,
+            numSamples: this._numSamples
           });
         }
       }
@@ -206,7 +206,7 @@ FramebufferManager.prototype.update = function (
           height: height,
           pixelFormat: PixelFormat.DEPTH_STENCIL,
           pixelDatatype: PixelDatatype.UNSIGNED_INT_24_8,
-          sampler: Sampler.NEAREST,
+          sampler: Sampler.NEAREST
         });
         if (this._numSamples > 1) {
           this._depthStencilRenderbuffer = new Renderbuffer({
@@ -214,7 +214,7 @@ FramebufferManager.prototype.update = function (
             width: width,
             height: height,
             format: RenderbufferFormat.DEPTH24_STENCIL8,
-            numSamples: this._numSamples,
+            numSamples: this._numSamples
           });
         }
       } else {
@@ -222,7 +222,7 @@ FramebufferManager.prototype.update = function (
           context: context,
           width: width,
           height: height,
-          format: RenderbufferFormat.DEPTH_STENCIL,
+          format: RenderbufferFormat.DEPTH_STENCIL
         });
       }
     }
@@ -236,14 +236,14 @@ FramebufferManager.prototype.update = function (
           height: height,
           pixelFormat: PixelFormat.DEPTH_COMPONENT,
           pixelDatatype: PixelDatatype.UNSIGNED_INT,
-          sampler: Sampler.NEAREST,
+          sampler: Sampler.NEAREST
         });
       } else {
         this._depthRenderbuffer = new Renderbuffer({
           context: context,
           width: width,
           height: height,
-          format: RenderbufferFormat.DEPTH_COMPONENT16,
+          format: RenderbufferFormat.DEPTH_COMPONENT16
         });
       }
     }
@@ -257,7 +257,7 @@ FramebufferManager.prototype.update = function (
         colorRenderbuffers: this._colorRenderbuffers,
         depthStencilTexture: this._depthStencilTexture,
         depthStencilRenderbuffer: this._depthStencilRenderbuffer,
-        destroyAttachments: false,
+        destroyAttachments: false
       });
     } else {
       this._framebuffer = new Framebuffer({
@@ -267,7 +267,7 @@ FramebufferManager.prototype.update = function (
         depthRenderbuffer: this._depthRenderbuffer,
         depthStencilTexture: this._depthStencilTexture,
         depthStencilRenderbuffer: this._depthStencilRenderbuffer,
-        destroyAttachments: false,
+        destroyAttachments: false
       });
     }
   }
@@ -278,7 +278,7 @@ FramebufferManager.prototype.getColorTexture = function (index) {
   //>>includeStart('debug', pragmas.debug);
   if (index >= this._colorAttachmentsLength) {
     throw new DeveloperError(
-      "index must be smaller than total number of color attachments."
+      'index must be smaller than total number of color attachments.'
     );
   }
   //>>includeEnd('debug');
@@ -290,12 +290,12 @@ FramebufferManager.prototype.setColorTexture = function (texture, index) {
   //>>includeStart('debug', pragmas.debug);
   if (this._createColorAttachments) {
     throw new DeveloperError(
-      "createColorAttachments must be false if setColorTexture is called."
+      'createColorAttachments must be false if setColorTexture is called.'
     );
   }
   if (index >= this._colorAttachmentsLength) {
     throw new DeveloperError(
-      "index must be smaller than total number of color attachments."
+      'index must be smaller than total number of color attachments.'
     );
   }
   //>>includeEnd('debug');
@@ -308,7 +308,7 @@ FramebufferManager.prototype.getColorRenderbuffer = function (index) {
   //>>includeStart('debug', pragmas.debug);
   if (index >= this._colorAttachmentsLength) {
     throw new DeveloperError(
-      "index must be smaller than total number of color attachments."
+      'index must be smaller than total number of color attachments.'
     );
   }
   //>>includeEnd('debug');
@@ -323,12 +323,12 @@ FramebufferManager.prototype.setColorRenderbuffer = function (
   //>>includeStart('debug', pragmas.debug);
   if (this._createColorAttachments) {
     throw new DeveloperError(
-      "createColorAttachments must be false if setColorRenderbuffer is called."
+      'createColorAttachments must be false if setColorRenderbuffer is called.'
     );
   }
   if (index >= this._colorAttachmentsLength) {
     throw new DeveloperError(
-      "index must be smaller than total number of color attachments."
+      'index must be smaller than total number of color attachments.'
     );
   }
   //>>includeEnd('debug');
@@ -344,7 +344,7 @@ FramebufferManager.prototype.setDepthRenderbuffer = function (renderbuffer) {
   //>>includeStart('debug', pragmas.debug);
   if (this._createDepthAttachments) {
     throw new DeveloperError(
-      "createDepthAttachments must be false if setDepthRenderbuffer is called."
+      'createDepthAttachments must be false if setDepthRenderbuffer is called.'
     );
   }
   //>>includeEnd('debug');
@@ -360,7 +360,7 @@ FramebufferManager.prototype.setDepthTexture = function (texture) {
   //>>includeStart('debug', pragmas.debug);
   if (this._createDepthAttachments) {
     throw new DeveloperError(
-      "createDepthAttachments must be false if setDepthTexture is called."
+      'createDepthAttachments must be false if setDepthTexture is called.'
     );
   }
   //>>includeEnd('debug');
@@ -378,7 +378,7 @@ FramebufferManager.prototype.setDepthStencilRenderbuffer = function (
   //>>includeStart('debug', pragmas.debug);
   if (this._createDepthAttachments) {
     throw new DeveloperError(
-      "createDepthAttachments must be false if setDepthStencilRenderbuffer is called."
+      'createDepthAttachments must be false if setDepthStencilRenderbuffer is called.'
     );
   }
   //>>includeEnd('debug');
@@ -394,7 +394,7 @@ FramebufferManager.prototype.setDepthStencilTexture = function (texture) {
   //>>includeStart('debug', pragmas.debug);
   if (this._createDepthAttachments) {
     throw new DeveloperError(
-      "createDepthAttachments must be false if setDepthStencilTexture is called."
+      'createDepthAttachments must be false if setDepthStencilTexture is called.'
     );
   }
   //>>includeEnd('debug');

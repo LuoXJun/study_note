@@ -23,7 +23,14 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Transforms-273eeb44'], (function (exports, Matrix2, RuntimeError, defaultValue, Transforms) { 'use strict';
+define([
+  'exports',
+  './Matrix2-9e1c22e2',
+  './RuntimeError-4f8ec8a2',
+  './defaultValue-97284df2',
+  './Transforms-273eeb44'
+], function (exports, Matrix2, RuntimeError, defaultValue, Transforms) {
+  'use strict';
 
   /**
    * A bounding rectangle given by a corner, width and height.
@@ -85,8 +92,8 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
    */
   BoundingRectangle.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -109,7 +116,7 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
    */
   BoundingRectangle.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -251,8 +258,8 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
    */
   BoundingRectangle.union = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -281,8 +288,8 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
    */
   BoundingRectangle.expand = function (rectangle, point, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
-    RuntimeError.Check.typeOf.object("point", point);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
+    RuntimeError.Check.typeOf.object('point', point);
     //>>includeEnd('debug');
 
     result = BoundingRectangle.clone(rectangle, result);
@@ -316,8 +323,8 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
    */
   BoundingRectangle.intersect = function (left, right) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
     //>>includeEnd('debug');
 
     const leftX = left.x;
@@ -390,6 +397,5 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
   };
 
   exports.BoundingRectangle = BoundingRectangle;
-
-}));
+});
 //# sourceMappingURL=BoundingRectangle-4974cee9.js.map

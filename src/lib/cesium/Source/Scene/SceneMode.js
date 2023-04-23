@@ -36,7 +36,7 @@ const SceneMode = {
    * @type {Number}
    * @constant
    */
-  SCENE3D: 3,
+  SCENE3D: 3
 };
 
 /**

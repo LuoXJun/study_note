@@ -23,7 +23,34 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './ComponentDatatype-4eeb6d9b', './Transforms-273eeb44', './EncodedCartesian3-491ac596', './GeometryAttribute-9be2d2e5', './IndexDatatype-f228f5fd', './IntersectionTests-ea138127', './Plane-76b84425'], (function (exports, AttributeCompression, Matrix2, RuntimeError, defaultValue, ComponentDatatype, Transforms, EncodedCartesian3, GeometryAttribute, IndexDatatype, IntersectionTests, Plane) { 'use strict';
+define([
+  'exports',
+  './AttributeCompression-f202be44',
+  './Matrix2-9e1c22e2',
+  './RuntimeError-4f8ec8a2',
+  './defaultValue-97284df2',
+  './ComponentDatatype-4eeb6d9b',
+  './Transforms-273eeb44',
+  './EncodedCartesian3-491ac596',
+  './GeometryAttribute-9be2d2e5',
+  './IndexDatatype-f228f5fd',
+  './IntersectionTests-ea138127',
+  './Plane-76b84425'
+], function (
+  exports,
+  AttributeCompression,
+  Matrix2,
+  RuntimeError,
+  defaultValue,
+  ComponentDatatype,
+  Transforms,
+  EncodedCartesian3,
+  GeometryAttribute,
+  IndexDatatype,
+  IntersectionTests,
+  Plane
+) {
+  'use strict';
 
   const scratchCartesian1 = new Matrix2.Cartesian3();
   const scratchCartesian2$1 = new Matrix2.Cartesian3();
@@ -51,10 +78,10 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
    */
   function barycentricCoordinates(point, p0, p1, p2, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("point", point);
-    RuntimeError.Check.defined("p0", p0);
-    RuntimeError.Check.defined("p1", p1);
-    RuntimeError.Check.defined("p2", p2);
+    RuntimeError.Check.defined('point', point);
+    RuntimeError.Check.defined('p0', p0);
+    RuntimeError.Check.defined('p1', p1);
+    RuntimeError.Check.defined('p2', p2);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -72,13 +99,31 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     let dot12;
 
     if (!defaultValue.defined(p0.z)) {
-      if (Matrix2.Cartesian2.equalsEpsilon(point, p0, ComponentDatatype.CesiumMath.EPSILON14)) {
+      if (
+        Matrix2.Cartesian2.equalsEpsilon(
+          point,
+          p0,
+          ComponentDatatype.CesiumMath.EPSILON14
+        )
+      ) {
         return Matrix2.Cartesian3.clone(Matrix2.Cartesian3.UNIT_X, result);
       }
-      if (Matrix2.Cartesian2.equalsEpsilon(point, p1, ComponentDatatype.CesiumMath.EPSILON14)) {
+      if (
+        Matrix2.Cartesian2.equalsEpsilon(
+          point,
+          p1,
+          ComponentDatatype.CesiumMath.EPSILON14
+        )
+      ) {
         return Matrix2.Cartesian3.clone(Matrix2.Cartesian3.UNIT_Y, result);
       }
-      if (Matrix2.Cartesian2.equalsEpsilon(point, p2, ComponentDatatype.CesiumMath.EPSILON14)) {
+      if (
+        Matrix2.Cartesian2.equalsEpsilon(
+          point,
+          p2,
+          ComponentDatatype.CesiumMath.EPSILON14
+        )
+      ) {
         return Matrix2.Cartesian3.clone(Matrix2.Cartesian3.UNIT_Z, result);
       }
 
@@ -92,13 +137,31 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       dot11 = Matrix2.Cartesian2.dot(v1, v1);
       dot12 = Matrix2.Cartesian2.dot(v1, v2);
     } else {
-      if (Matrix2.Cartesian3.equalsEpsilon(point, p0, ComponentDatatype.CesiumMath.EPSILON14)) {
+      if (
+        Matrix2.Cartesian3.equalsEpsilon(
+          point,
+          p0,
+          ComponentDatatype.CesiumMath.EPSILON14
+        )
+      ) {
         return Matrix2.Cartesian3.clone(Matrix2.Cartesian3.UNIT_X, result);
       }
-      if (Matrix2.Cartesian3.equalsEpsilon(point, p1, ComponentDatatype.CesiumMath.EPSILON14)) {
+      if (
+        Matrix2.Cartesian3.equalsEpsilon(
+          point,
+          p1,
+          ComponentDatatype.CesiumMath.EPSILON14
+        )
+      ) {
         return Matrix2.Cartesian3.clone(Matrix2.Cartesian3.UNIT_Y, result);
       }
-      if (Matrix2.Cartesian3.equalsEpsilon(point, p2, ComponentDatatype.CesiumMath.EPSILON14)) {
+      if (
+        Matrix2.Cartesian3.equalsEpsilon(
+          point,
+          p2,
+          ComponentDatatype.CesiumMath.EPSILON14
+        )
+      ) {
         return Matrix2.Cartesian3.clone(Matrix2.Cartesian3.UNIT_Z, result);
       }
 
@@ -165,14 +228,17 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
    * const acmr = Cesium.Tipsify.calculateACMR({indices : indices, maxIndex : maxIndex, cacheSize : cacheSize});
    */
   Tipsify.calculateACMR = function (options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
     const indices = options.indices;
     let maximumIndex = options.maximumIndex;
     const cacheSize = defaultValue.defaultValue(options.cacheSize, 24);
 
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(indices)) {
-      throw new RuntimeError.DeveloperError("indices is required.");
+      throw new RuntimeError.DeveloperError('indices is required.');
     }
     //>>includeEnd('debug');
 
@@ -180,13 +246,19 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
 
     //>>includeStart('debug', pragmas.debug);
     if (numIndices < 3 || numIndices % 3 !== 0) {
-      throw new RuntimeError.DeveloperError("indices length must be a multiple of three.");
+      throw new RuntimeError.DeveloperError(
+        'indices length must be a multiple of three.'
+      );
     }
     if (maximumIndex <= 0) {
-      throw new RuntimeError.DeveloperError("maximumIndex must be greater than zero.");
+      throw new RuntimeError.DeveloperError(
+        'maximumIndex must be greater than zero.'
+      );
     }
     if (cacheSize < 3) {
-      throw new RuntimeError.DeveloperError("cacheSize must be greater than two.");
+      throw new RuntimeError.DeveloperError(
+        'cacheSize must be greater than two.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -243,7 +315,10 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
    * const reorderedIndices = Cesium.Tipsify.tipsify({indices : indices, maxIndex : maxIndex, cacheSize : cacheSize});
    */
   Tipsify.tipsify = function (options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
     const indices = options.indices;
     const maximumIndex = options.maximumIndex;
     const cacheSize = defaultValue.defaultValue(options.cacheSize, 24);
@@ -311,7 +386,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
 
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(indices)) {
-      throw new RuntimeError.DeveloperError("indices is required.");
+      throw new RuntimeError.DeveloperError('indices is required.');
     }
     //>>includeEnd('debug');
 
@@ -319,13 +394,19 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
 
     //>>includeStart('debug', pragmas.debug);
     if (numIndices < 3 || numIndices % 3 !== 0) {
-      throw new RuntimeError.DeveloperError("indices length must be a multiple of three.");
+      throw new RuntimeError.DeveloperError(
+        'indices length must be a multiple of three.'
+      );
     }
     if (maximumIndex <= 0) {
-      throw new RuntimeError.DeveloperError("maximumIndex must be greater than zero.");
+      throw new RuntimeError.DeveloperError(
+        'maximumIndex must be greater than zero.'
+      );
     }
     if (cacheSize < 3) {
-      throw new RuntimeError.DeveloperError("cacheSize must be greater than two.");
+      throw new RuntimeError.DeveloperError(
+        'cacheSize must be greater than two.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -357,7 +438,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       vertices[i] = {
         numLiveTriangles: 0,
         timeStamp: 0,
-        vertexTriangles: [],
+        vertexTriangles: []
       };
     }
     currentIndex = 0;
@@ -465,7 +546,13 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
 
     let index = 0;
     for (let i = 0; i < count; i += 3, index += 6) {
-      addTriangle(lines, index, triangles[i], triangles[i + 1], triangles[i + 2]);
+      addTriangle(
+        lines,
+        index,
+        triangles[i],
+        triangles[i + 1],
+        triangles[i + 2]
+      );
     }
 
     return lines;
@@ -533,7 +620,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   GeometryPipeline.toWireframe = function (geometry) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(geometry)) {
-      throw new RuntimeError.DeveloperError("geometry is required.");
+      throw new RuntimeError.DeveloperError('geometry is required.');
     }
     //>>includeEnd('debug');
 
@@ -552,7 +639,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
         //>>includeStart('debug', pragmas.debug);
         default:
           throw new RuntimeError.DeveloperError(
-            "geometry.primitiveType must be TRIANGLES, TRIANGLE_STRIP, or TRIANGLE_FAN."
+            'geometry.primitiveType must be TRIANGLES, TRIANGLE_STRIP, or TRIANGLE_FAN.'
           );
         //>>includeEnd('debug');
       }
@@ -583,14 +670,16 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     attributeName,
     length
   ) {
-    attributeName = defaultValue.defaultValue(attributeName, "normal");
+    attributeName = defaultValue.defaultValue(attributeName, 'normal');
 
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(geometry)) {
-      throw new RuntimeError.DeveloperError("geometry is required.");
+      throw new RuntimeError.DeveloperError('geometry is required.');
     }
     if (!defaultValue.defined(geometry.attributes.position)) {
-      throw new RuntimeError.DeveloperError("geometry.attributes.position is required.");
+      throw new RuntimeError.DeveloperError(
+        'geometry.attributes.position is required.'
+      );
     }
     if (!defaultValue.defined(geometry.attributes[attributeName])) {
       throw new RuntimeError.DeveloperError(
@@ -621,7 +710,10 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     let newBoundingSphere;
     const bs = geometry.boundingSphere;
     if (defaultValue.defined(bs)) {
-      newBoundingSphere = new Transforms.BoundingSphere(bs.center, bs.radius + length);
+      newBoundingSphere = new Transforms.BoundingSphere(
+        bs.center,
+        bs.radius + length
+      );
     }
 
     return new GeometryAttribute.Geometry({
@@ -629,11 +721,11 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
         position: new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
           componentsPerAttribute: 3,
-          values: newPositions,
-        }),
+          values: newPositions
+        })
       },
       primitiveType: GeometryAttribute.PrimitiveType.LINES,
-      boundingSphere: newBoundingSphere,
+      boundingSphere: newBoundingSphere
     });
   };
 
@@ -655,37 +747,37 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   GeometryPipeline.createAttributeLocations = function (geometry) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(geometry)) {
-      throw new RuntimeError.DeveloperError("geometry is required.");
+      throw new RuntimeError.DeveloperError('geometry is required.');
     }
     //>>includeEnd('debug')
 
     // There can be a WebGL performance hit when attribute 0 is disabled, so
     // assign attribute locations to well-known attributes.
     const semantics = [
-      "position",
-      "positionHigh",
-      "positionLow",
+      'position',
+      'positionHigh',
+      'positionLow',
 
       // From VertexFormat.position - after 2D projection and high-precision encoding
-      "position3DHigh",
-      "position3DLow",
-      "position2DHigh",
-      "position2DLow",
+      'position3DHigh',
+      'position3DLow',
+      'position2DHigh',
+      'position2DLow',
 
       // From Primitive
-      "pickColor",
+      'pickColor',
 
       // From VertexFormat
-      "normal",
-      "st",
-      "tangent",
-      "bitangent",
+      'normal',
+      'st',
+      'tangent',
+      'bitangent',
 
       // For shadow volumes
-      "extrudeDirection",
+      'extrudeDirection',
 
       // From compressing texture coordinates and normals
-      "compressedAttributes",
+      'compressedAttributes'
     ];
 
     const attributes = geometry.attributes;
@@ -705,7 +797,10 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
 
     // Locations for custom attributes
     for (const name in attributes) {
-      if (attributes.hasOwnProperty(name) && !defaultValue.defined(indices[name])) {
+      if (
+        attributes.hasOwnProperty(name) &&
+        !defaultValue.defined(indices[name])
+      ) {
         indices[name] = j++;
       }
     }
@@ -730,11 +825,12 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   GeometryPipeline.reorderForPreVertexCache = function (geometry) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(geometry)) {
-      throw new RuntimeError.DeveloperError("geometry is required.");
+      throw new RuntimeError.DeveloperError('geometry is required.');
     }
     //>>includeEnd('debug');
 
-    const numVertices = GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
+    const numVertices =
+      GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
 
     const indices = geometry.indices;
     if (defaultValue.defined(indices)) {
@@ -746,7 +842,10 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       // Construct cross reference and reorder indices
       const indicesIn = indices;
       const numIndices = indicesIn.length;
-      const indicesOut = IndexDatatype.IndexDatatype.createTypedArray(numVertices, numIndices);
+      const indicesOut = IndexDatatype.IndexDatatype.createTypedArray(
+        numVertices,
+        numIndices
+      );
 
       let intoIndicesIn = 0;
       let intoIndicesOut = 0;
@@ -780,10 +879,11 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
           const elementsIn = attribute.values;
           let intoElementsIn = 0;
           const numComponents = attribute.componentsPerAttribute;
-          const elementsOut = ComponentDatatype.ComponentDatatype.createTypedArray(
-            attribute.componentDatatype,
-            nextIndex * numComponents
-          );
+          const elementsOut =
+            ComponentDatatype.ComponentDatatype.createTypedArray(
+              attribute.componentDatatype,
+              nextIndex * numComponents
+            );
           while (intoElementsIn < numVertices) {
             const temp = indexCrossReferenceOldToNew[intoElementsIn];
             if (temp !== -1) {
@@ -827,12 +927,15 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(geometry)) {
-      throw new RuntimeError.DeveloperError("geometry is required.");
+      throw new RuntimeError.DeveloperError('geometry is required.');
     }
     //>>includeEnd('debug');
 
     const indices = geometry.indices;
-    if (geometry.primitiveType === GeometryAttribute.PrimitiveType.TRIANGLES && defaultValue.defined(indices)) {
+    if (
+      geometry.primitiveType === GeometryAttribute.PrimitiveType.TRIANGLES &&
+      defaultValue.defined(indices)
+    ) {
       const numIndices = indices.length;
       let maximumIndex = 0;
       for (let j = 0; j < numIndices; j++) {
@@ -843,7 +946,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       geometry.indices = Tipsify.tipsify({
         indices: indices,
         maximumIndex: maximumIndex,
-        cacheSize: cacheCapacity,
+        cacheSize: cacheCapacity
       });
     }
 
@@ -864,7 +967,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
           componentDatatype: attr.componentDatatype,
           componentsPerAttribute: attr.componentsPerAttribute,
           normalize: attr.normalize,
-          values: [],
+          values: []
         });
       }
     }
@@ -910,7 +1013,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   GeometryPipeline.fitToUnsignedShortIndices = function (geometry) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(geometry)) {
-      throw new RuntimeError.DeveloperError("geometry is required.");
+      throw new RuntimeError.DeveloperError('geometry is required.');
     }
     if (
       defaultValue.defined(geometry.indices) &&
@@ -919,7 +1022,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       geometry.primitiveType !== GeometryAttribute.PrimitiveType.POINTS
     ) {
       throw new RuntimeError.DeveloperError(
-        "geometry.primitiveType must equal to PrimitiveType.TRIANGLES, PrimitiveType.LINES, or PrimitiveType.POINTS."
+        'geometry.primitiveType must equal to PrimitiveType.TRIANGLES, PrimitiveType.LINES, or PrimitiveType.POINTS.'
       );
     }
     //>>includeEnd('debug');
@@ -928,7 +1031,8 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
 
     // If there's an index list and more than 64K attributes, it is possible that
     // some indices are outside the range of unsigned short [0, 64K - 1]
-    const numberOfVertices = GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
+    const numberOfVertices =
+      GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
     if (
       defaultValue.defined(geometry.indices) &&
       numberOfVertices >= ComponentDatatype.CesiumMath.SIXTY_FOUR_KILOBYTES
@@ -943,11 +1047,17 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
 
       let indicesPerPrimitive;
 
-      if (geometry.primitiveType === GeometryAttribute.PrimitiveType.TRIANGLES) {
+      if (
+        geometry.primitiveType === GeometryAttribute.PrimitiveType.TRIANGLES
+      ) {
         indicesPerPrimitive = 3;
-      } else if (geometry.primitiveType === GeometryAttribute.PrimitiveType.LINES) {
+      } else if (
+        geometry.primitiveType === GeometryAttribute.PrimitiveType.LINES
+      ) {
         indicesPerPrimitive = 2;
-      } else if (geometry.primitiveType === GeometryAttribute.PrimitiveType.POINTS) {
+      } else if (
+        geometry.primitiveType === GeometryAttribute.PrimitiveType.POINTS
+      ) {
         indicesPerPrimitive = 1;
       }
 
@@ -973,7 +1083,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
               indices: newIndices,
               primitiveType: geometry.primitiveType,
               boundingSphere: geometry.boundingSphere,
-              boundingSphereCV: geometry.boundingSphereCV,
+              boundingSphereCV: geometry.boundingSphereCV
             })
           );
 
@@ -992,7 +1102,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
             indices: newIndices,
             primitiveType: geometry.primitiveType,
             boundingSphere: geometry.boundingSphere,
-            boundingSphereCV: geometry.boundingSphereCV,
+            boundingSphereCV: geometry.boundingSphereCV
           })
         );
       }
@@ -1037,16 +1147,16 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(geometry)) {
-      throw new RuntimeError.DeveloperError("geometry is required.");
+      throw new RuntimeError.DeveloperError('geometry is required.');
     }
     if (!defaultValue.defined(attributeName)) {
-      throw new RuntimeError.DeveloperError("attributeName is required.");
+      throw new RuntimeError.DeveloperError('attributeName is required.');
     }
     if (!defaultValue.defined(attributeName3D)) {
-      throw new RuntimeError.DeveloperError("attributeName3D is required.");
+      throw new RuntimeError.DeveloperError('attributeName3D is required.');
     }
     if (!defaultValue.defined(attributeName2D)) {
-      throw new RuntimeError.DeveloperError("attributeName2D is required.");
+      throw new RuntimeError.DeveloperError('attributeName2D is required.');
     }
     if (!defaultValue.defined(geometry.attributes[attributeName])) {
       throw new RuntimeError.DeveloperError(
@@ -1058,13 +1168,15 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       ComponentDatatype.ComponentDatatype.DOUBLE
     ) {
       throw new RuntimeError.DeveloperError(
-        "The attribute componentDatatype must be ComponentDatatype.DOUBLE."
+        'The attribute componentDatatype must be ComponentDatatype.DOUBLE.'
       );
     }
     //>>includeEnd('debug');
 
     const attribute = geometry.attributes[attributeName];
-    projection = defaultValue.defined(projection) ? projection : new Transforms.GeographicProjection();
+    projection = defaultValue.defined(projection)
+      ? projection
+      : new Transforms.GeographicProjection();
     const ellipsoid = projection.ellipsoid;
 
     // Project original values to 2D.
@@ -1105,11 +1217,12 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     geometry.attributes[attributeName3D] = attribute;
 
     // Replace original cartesians with 2D projected cartesians
-    geometry.attributes[attributeName2D] = new GeometryAttribute.GeometryAttribute({
-      componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
-      componentsPerAttribute: 3,
-      values: projectedValues,
-    });
+    geometry.attributes[attributeName2D] =
+      new GeometryAttribute.GeometryAttribute({
+        componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
+        componentsPerAttribute: 3,
+        values: projectedValues
+      });
     delete geometry.attributes[attributeName];
 
     return geometry;
@@ -1117,7 +1230,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
 
   const encodedResult = {
     high: 0.0,
-    low: 0.0,
+    low: 0.0
   };
 
   /**
@@ -1147,16 +1260,16 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(geometry)) {
-      throw new RuntimeError.DeveloperError("geometry is required.");
+      throw new RuntimeError.DeveloperError('geometry is required.');
     }
     if (!defaultValue.defined(attributeName)) {
-      throw new RuntimeError.DeveloperError("attributeName is required.");
+      throw new RuntimeError.DeveloperError('attributeName is required.');
     }
     if (!defaultValue.defined(attributeHighName)) {
-      throw new RuntimeError.DeveloperError("attributeHighName is required.");
+      throw new RuntimeError.DeveloperError('attributeHighName is required.');
     }
     if (!defaultValue.defined(attributeLowName)) {
-      throw new RuntimeError.DeveloperError("attributeLowName is required.");
+      throw new RuntimeError.DeveloperError('attributeLowName is required.');
     }
     if (!defaultValue.defined(geometry.attributes[attributeName])) {
       throw new RuntimeError.DeveloperError(
@@ -1168,7 +1281,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       ComponentDatatype.ComponentDatatype.DOUBLE
     ) {
       throw new RuntimeError.DeveloperError(
-        "The attribute componentDatatype must be ComponentDatatype.DOUBLE."
+        'The attribute componentDatatype must be ComponentDatatype.DOUBLE.'
       );
     }
     //>>includeEnd('debug');
@@ -1187,16 +1300,18 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
 
     const componentsPerAttribute = attribute.componentsPerAttribute;
 
-    geometry.attributes[attributeHighName] = new GeometryAttribute.GeometryAttribute({
-      componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
-      componentsPerAttribute: componentsPerAttribute,
-      values: highValues,
-    });
-    geometry.attributes[attributeLowName] = new GeometryAttribute.GeometryAttribute({
-      componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
-      componentsPerAttribute: componentsPerAttribute,
-      values: lowValues,
-    });
+    geometry.attributes[attributeHighName] =
+      new GeometryAttribute.GeometryAttribute({
+        componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
+        componentsPerAttribute: componentsPerAttribute,
+        values: highValues
+      });
+    geometry.attributes[attributeLowName] =
+      new GeometryAttribute.GeometryAttribute({
+        componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
+        componentsPerAttribute: componentsPerAttribute,
+        values: lowValues
+      });
     delete geometry.attributes[attributeName];
 
     return geometry;
@@ -1210,7 +1325,11 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       const length = values.length;
       for (let i = 0; i < length; i += 3) {
         Matrix2.Cartesian3.unpack(values, i, scratchCartesian3);
-        Matrix2.Matrix4.multiplyByPoint(matrix, scratchCartesian3, scratchCartesian3);
+        Matrix2.Matrix4.multiplyByPoint(
+          matrix,
+          scratchCartesian3,
+          scratchCartesian3
+        );
         Matrix2.Cartesian3.pack(scratchCartesian3, values, i);
       }
     }
@@ -1222,7 +1341,11 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       const length = values.length;
       for (let i = 0; i < length; i += 3) {
         Matrix2.Cartesian3.unpack(values, i, scratchCartesian3);
-        Matrix2.Matrix3.multiplyByVector(matrix, scratchCartesian3, scratchCartesian3);
+        Matrix2.Matrix3.multiplyByVector(
+          matrix,
+          scratchCartesian3,
+          scratchCartesian3
+        );
         scratchCartesian3 = Matrix2.Cartesian3.normalize(
           scratchCartesian3,
           scratchCartesian3
@@ -1250,7 +1373,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   GeometryPipeline.transformToWorldCoordinates = function (instance) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(instance)) {
-      throw new RuntimeError.DeveloperError("instance is required.");
+      throw new RuntimeError.DeveloperError('instance is required.');
     }
     //>>includeEnd('debug');
 
@@ -1333,15 +1456,16 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
         }
 
         if (inAllGeometries) {
-          attributesInAllGeometries[name] = new GeometryAttribute.GeometryAttribute({
-            componentDatatype: attribute.componentDatatype,
-            componentsPerAttribute: attribute.componentsPerAttribute,
-            normalize: attribute.normalize,
-            values: ComponentDatatype.ComponentDatatype.createTypedArray(
-              attribute.componentDatatype,
-              numberOfComponents
-            ),
-          });
+          attributesInAllGeometries[name] =
+            new GeometryAttribute.GeometryAttribute({
+              componentDatatype: attribute.componentDatatype,
+              componentsPerAttribute: attribute.componentsPerAttribute,
+              normalize: attribute.normalize,
+              values: ComponentDatatype.ComponentDatatype.createTypedArray(
+                attribute.componentDatatype,
+                numberOfComponents
+              )
+            });
         }
       }
     }
@@ -1360,22 +1484,28 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     let k;
 
     const m = instances[0].modelMatrix;
-    const haveIndices = defaultValue.defined(instances[0][propertyName].indices);
+    const haveIndices = defaultValue.defined(
+      instances[0][propertyName].indices
+    );
     const primitiveType = instances[0][propertyName].primitiveType;
 
     //>>includeStart('debug', pragmas.debug);
     for (i = 1; i < length; ++i) {
       if (!Matrix2.Matrix4.equals(instances[i].modelMatrix, m)) {
-        throw new RuntimeError.DeveloperError("All instances must have the same modelMatrix.");
-      }
-      if (defaultValue.defined(instances[i][propertyName].indices) !== haveIndices) {
         throw new RuntimeError.DeveloperError(
-          "All instance geometries must have an indices or not have one."
+          'All instances must have the same modelMatrix.'
+        );
+      }
+      if (
+        defaultValue.defined(instances[i][propertyName].indices) !== haveIndices
+      ) {
+        throw new RuntimeError.DeveloperError(
+          'All instance geometries must have an indices or not have one.'
         );
       }
       if (instances[i][propertyName].primitiveType !== primitiveType) {
         throw new RuntimeError.DeveloperError(
-          "All instance geometries must have the same primitiveType."
+          'All instance geometries must have the same primitiveType.'
         );
       }
     }
@@ -1413,12 +1543,13 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
         numberOfIndices += instances[i][propertyName].indices.length;
       }
 
-      const numberOfVertices = GeometryAttribute.Geometry.computeNumberOfVertices(
-        new GeometryAttribute.Geometry({
-          attributes: attributes,
-          primitiveType: GeometryAttribute.PrimitiveType.POINTS,
-        })
-      );
+      const numberOfVertices =
+        GeometryAttribute.Geometry.computeNumberOfVertices(
+          new GeometryAttribute.Geometry({
+            attributes: attributes,
+            primitiveType: GeometryAttribute.PrimitiveType.POINTS
+          })
+        );
       const destIndices = IndexDatatype.IndexDatatype.createTypedArray(
         numberOfVertices,
         numberOfIndices
@@ -1435,7 +1566,9 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
           destIndices[destOffset++] = offset + sourceIndices[k];
         }
 
-        offset += GeometryAttribute.Geometry.computeNumberOfVertices(instances[i][propertyName]);
+        offset += GeometryAttribute.Geometry.computeNumberOfVertices(
+          instances[i][propertyName]
+        );
       }
 
       indices = destIndices;
@@ -1479,7 +1612,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       primitiveType: primitiveType,
       boundingSphere: defaultValue.defined(center)
         ? new Transforms.BoundingSphere(center, radius)
-        : undefined,
+        : undefined
     });
   }
 
@@ -1517,7 +1650,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(instances) || instances.length < 1) {
       throw new RuntimeError.DeveloperError(
-        "instances is required and must have length greater than zero."
+        'instances is required and must have length greater than zero.'
       );
     }
     //>>includeEnd('debug');
@@ -1540,15 +1673,15 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
 
     const geometries = [];
     if (instanceGeometry.length > 0) {
-      geometries.push(combineGeometries(instanceGeometry, "geometry"));
+      geometries.push(combineGeometries(instanceGeometry, 'geometry'));
     }
 
     if (instanceSplitGeometry.length > 0) {
       geometries.push(
-        combineGeometries(instanceSplitGeometry, "westHemisphereGeometry")
+        combineGeometries(instanceSplitGeometry, 'westHemisphereGeometry')
       );
       geometries.push(
-        combineGeometries(instanceSplitGeometry, "eastHemisphereGeometry")
+        combineGeometries(instanceSplitGeometry, 'eastHemisphereGeometry')
       );
     }
 
@@ -1577,27 +1710,27 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   GeometryPipeline.computeNormal = function (geometry) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(geometry)) {
-      throw new RuntimeError.DeveloperError("geometry is required.");
+      throw new RuntimeError.DeveloperError('geometry is required.');
     }
     if (
       !defaultValue.defined(geometry.attributes.position) ||
       !defaultValue.defined(geometry.attributes.position.values)
     ) {
       throw new RuntimeError.DeveloperError(
-        "geometry.attributes.position.values is required."
+        'geometry.attributes.position.values is required.'
       );
     }
     if (!defaultValue.defined(geometry.indices)) {
-      throw new RuntimeError.DeveloperError("geometry.indices is required.");
+      throw new RuntimeError.DeveloperError('geometry.indices is required.');
     }
     if (geometry.indices.length < 2 || geometry.indices.length % 3 !== 0) {
       throw new RuntimeError.DeveloperError(
-        "geometry.indices length must be greater than 0 and be a multiple of 3."
+        'geometry.indices length must be greater than 0 and be a multiple of 3.'
       );
     }
     if (geometry.primitiveType !== GeometryAttribute.PrimitiveType.TRIANGLES) {
       throw new RuntimeError.DeveloperError(
-        "geometry.primitiveType must be PrimitiveType.TRIANGLES."
+        'geometry.primitiveType must be PrimitiveType.TRIANGLES.'
       );
     }
     //>>includeEnd('debug');
@@ -1615,7 +1748,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       normalsPerVertex[i] = {
         indexOffset: 0,
         count: 0,
-        currentCount: 0,
+        currentCount: 0
       };
     }
 
@@ -1644,7 +1777,11 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
 
       Matrix2.Cartesian3.subtract(v1, v0, v1);
       Matrix2.Cartesian3.subtract(v2, v0, v2);
-      normalsPerTriangle[j] = Matrix2.Cartesian3.cross(v1, v2, new Matrix2.Cartesian3());
+      normalsPerTriangle[j] = Matrix2.Cartesian3.cross(
+        v1,
+        v2,
+        new Matrix2.Cartesian3()
+      );
       j++;
     }
 
@@ -1691,7 +1828,11 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
 
         // We can run into an issue where a vertex is used with 2 primitives that have opposite winding order.
         if (
-          Matrix2.Cartesian3.equalsEpsilon(Matrix2.Cartesian3.ZERO, normal, ComponentDatatype.CesiumMath.EPSILON10)
+          Matrix2.Cartesian3.equalsEpsilon(
+            Matrix2.Cartesian3.ZERO,
+            normal,
+            ComponentDatatype.CesiumMath.EPSILON10
+          )
         ) {
           Matrix2.Cartesian3.clone(
             normalsPerTriangle[normalIndices[vertexNormalData.indexOffset]],
@@ -1702,7 +1843,11 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
 
       // We end up with a zero vector probably because of a degenerate triangle
       if (
-        Matrix2.Cartesian3.equalsEpsilon(Matrix2.Cartesian3.ZERO, normal, ComponentDatatype.CesiumMath.EPSILON10)
+        Matrix2.Cartesian3.equalsEpsilon(
+          Matrix2.Cartesian3.ZERO,
+          normal,
+          ComponentDatatype.CesiumMath.EPSILON10
+        )
       ) {
         // Default to (0,0,1)
         normal.z = 1.0;
@@ -1717,7 +1862,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     geometry.attributes.normal = new GeometryAttribute.GeometryAttribute({
       componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: normalValues,
+      values: normalValues
     });
 
     return geometry;
@@ -1748,7 +1893,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   GeometryPipeline.computeTangentAndBitangent = function (geometry) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(geometry)) {
-      throw new RuntimeError.DeveloperError("geometry is required.");
+      throw new RuntimeError.DeveloperError('geometry is required.');
     }
     //>>includeEnd('debug');
 
@@ -1756,28 +1901,41 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     const indices = geometry.indices;
 
     //>>includeStart('debug', pragmas.debug);
-    if (!defaultValue.defined(attributes.position) || !defaultValue.defined(attributes.position.values)) {
+    if (
+      !defaultValue.defined(attributes.position) ||
+      !defaultValue.defined(attributes.position.values)
+    ) {
       throw new RuntimeError.DeveloperError(
-        "geometry.attributes.position.values is required."
+        'geometry.attributes.position.values is required.'
       );
     }
-    if (!defaultValue.defined(attributes.normal) || !defaultValue.defined(attributes.normal.values)) {
-      throw new RuntimeError.DeveloperError("geometry.attributes.normal.values is required.");
+    if (
+      !defaultValue.defined(attributes.normal) ||
+      !defaultValue.defined(attributes.normal.values)
+    ) {
+      throw new RuntimeError.DeveloperError(
+        'geometry.attributes.normal.values is required.'
+      );
     }
-    if (!defaultValue.defined(attributes.st) || !defaultValue.defined(attributes.st.values)) {
-      throw new RuntimeError.DeveloperError("geometry.attributes.st.values is required.");
+    if (
+      !defaultValue.defined(attributes.st) ||
+      !defaultValue.defined(attributes.st.values)
+    ) {
+      throw new RuntimeError.DeveloperError(
+        'geometry.attributes.st.values is required.'
+      );
     }
     if (!defaultValue.defined(indices)) {
-      throw new RuntimeError.DeveloperError("geometry.indices is required.");
+      throw new RuntimeError.DeveloperError('geometry.indices is required.');
     }
     if (indices.length < 2 || indices.length % 3 !== 0) {
       throw new RuntimeError.DeveloperError(
-        "geometry.indices length must be greater than 0 and be a multiple of 3."
+        'geometry.indices length must be greater than 0 and be a multiple of 3.'
       );
     }
     if (geometry.primitiveType !== GeometryAttribute.PrimitiveType.TRIANGLES) {
       throw new RuntimeError.DeveloperError(
-        "geometry.primitiveType must be PrimitiveType.TRIANGLES."
+        'geometry.primitiveType must be PrimitiveType.TRIANGLES.'
       );
     }
     //>>includeEnd('debug');
@@ -1850,7 +2008,10 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       const t = Matrix2.Cartesian3.fromArray(tan1, i03, tScratch);
       const scalar = Matrix2.Cartesian3.dot(n, t);
       Matrix2.Cartesian3.multiplyByScalar(n, scalar, normalScale);
-      Matrix2.Cartesian3.normalize(Matrix2.Cartesian3.subtract(t, normalScale, t), t);
+      Matrix2.Cartesian3.normalize(
+        Matrix2.Cartesian3.subtract(t, normalScale, t),
+        t
+      );
 
       tangentValues[i03] = t.x;
       tangentValues[i13] = t.y;
@@ -1866,13 +2027,13 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     geometry.attributes.tangent = new GeometryAttribute.GeometryAttribute({
       componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: tangentValues,
+      values: tangentValues
     });
 
     geometry.attributes.bitangent = new GeometryAttribute.GeometryAttribute({
       componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: bitangentValues,
+      values: bitangentValues
     });
 
     return geometry;
@@ -1895,7 +2056,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   GeometryPipeline.compressVertices = function (geometry) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(geometry)) {
-      throw new RuntimeError.DeveloperError("geometry is required.");
+      throw new RuntimeError.DeveloperError('geometry is required.');
     }
     //>>includeEnd('debug');
 
@@ -1915,20 +2076,22 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
           i2 += 2;
           continue;
         }
-        encodeResult2 = AttributeCompression.AttributeCompression.octEncodeInRange(
-          toEncode1,
-          65535,
-          encodeResult2
-        );
+        encodeResult2 =
+          AttributeCompression.AttributeCompression.octEncodeInRange(
+            toEncode1,
+            65535,
+            encodeResult2
+          );
         compressedDirections[i2++] = encodeResult2.x;
         compressedDirections[i2++] = encodeResult2.y;
       }
 
-      geometry.attributes.compressedAttributes = new GeometryAttribute.GeometryAttribute({
-        componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
-        componentsPerAttribute: 2,
-        values: compressedDirections,
-      });
+      geometry.attributes.compressedAttributes =
+        new GeometryAttribute.GeometryAttribute({
+          componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
+          componentsPerAttribute: 2,
+          values: compressedDirections
+        });
       delete geometry.attributes.extrudeDirection;
       return geometry;
     }
@@ -1981,13 +2144,18 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     for (i = 0; i < numVertices; ++i) {
       if (hasSt) {
         Matrix2.Cartesian2.fromArray(st, i * 2.0, scratchCartesian2);
-        compressedAttributes[
-          normalIndex++
-        ] = AttributeCompression.AttributeCompression.compressTextureCoordinates(scratchCartesian2);
+        compressedAttributes[normalIndex++] =
+          AttributeCompression.AttributeCompression.compressTextureCoordinates(
+            scratchCartesian2
+          );
       }
 
       const index = i * 3.0;
-      if (hasNormal && defaultValue.defined(tangents) && defaultValue.defined(bitangents)) {
+      if (
+        hasNormal &&
+        defaultValue.defined(tangents) &&
+        defaultValue.defined(bitangents)
+      ) {
         Matrix2.Cartesian3.fromArray(normals, index, toEncode1);
         Matrix2.Cartesian3.fromArray(tangents, index, toEncode2);
         Matrix2.Cartesian3.fromArray(bitangents, index, toEncode3);
@@ -2003,32 +2171,30 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       } else {
         if (hasNormal) {
           Matrix2.Cartesian3.fromArray(normals, index, toEncode1);
-          compressedAttributes[
-            normalIndex++
-          ] = AttributeCompression.AttributeCompression.octEncodeFloat(toEncode1);
+          compressedAttributes[normalIndex++] =
+            AttributeCompression.AttributeCompression.octEncodeFloat(toEncode1);
         }
 
         if (hasTangent) {
           Matrix2.Cartesian3.fromArray(tangents, index, toEncode1);
-          compressedAttributes[
-            normalIndex++
-          ] = AttributeCompression.AttributeCompression.octEncodeFloat(toEncode1);
+          compressedAttributes[normalIndex++] =
+            AttributeCompression.AttributeCompression.octEncodeFloat(toEncode1);
         }
 
         if (hasBitangent) {
           Matrix2.Cartesian3.fromArray(bitangents, index, toEncode1);
-          compressedAttributes[
-            normalIndex++
-          ] = AttributeCompression.AttributeCompression.octEncodeFloat(toEncode1);
+          compressedAttributes[normalIndex++] =
+            AttributeCompression.AttributeCompression.octEncodeFloat(toEncode1);
         }
       }
     }
 
-    geometry.attributes.compressedAttributes = new GeometryAttribute.GeometryAttribute({
-      componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
-      componentsPerAttribute: numCompressedComponents,
-      values: compressedAttributes,
-    });
+    geometry.attributes.compressedAttributes =
+      new GeometryAttribute.GeometryAttribute({
+        componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
+        componentsPerAttribute: numCompressedComponents,
+        values: compressedAttributes
+      });
 
     if (hasNormal) {
       delete geometry.attributes.normal;
@@ -2050,15 +2216,18 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     if (defaultValue.defined(geometry.indices)) {
       return geometry;
     }
-    const numberOfVertices = GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
+    const numberOfVertices =
+      GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
 
     //>>includeStart('debug', pragmas.debug);
     if (numberOfVertices < 3) {
-      throw new RuntimeError.DeveloperError("The number of vertices must be at least three.");
+      throw new RuntimeError.DeveloperError(
+        'The number of vertices must be at least three.'
+      );
     }
     if (numberOfVertices % 3 !== 0) {
       throw new RuntimeError.DeveloperError(
-        "The number of vertices must be a multiple of three."
+        'The number of vertices must be a multiple of three.'
       );
     }
     //>>includeEnd('debug');
@@ -2076,11 +2245,14 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   }
 
   function indexTriangleFan(geometry) {
-    const numberOfVertices = GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
+    const numberOfVertices =
+      GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
 
     //>>includeStart('debug', pragmas.debug);
     if (numberOfVertices < 3) {
-      throw new RuntimeError.DeveloperError("The number of vertices must be at least three.");
+      throw new RuntimeError.DeveloperError(
+        'The number of vertices must be at least three.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -2105,11 +2277,14 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   }
 
   function indexTriangleStrip(geometry) {
-    const numberOfVertices = GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
+    const numberOfVertices =
+      GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
 
     //>>includeStart('debug', pragmas.debug);
     if (numberOfVertices < 3) {
-      throw new RuntimeError.DeveloperError("The number of vertices must be at least 3.");
+      throw new RuntimeError.DeveloperError(
+        'The number of vertices must be at least 3.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -2149,14 +2324,19 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     if (defaultValue.defined(geometry.indices)) {
       return geometry;
     }
-    const numberOfVertices = GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
+    const numberOfVertices =
+      GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
 
     //>>includeStart('debug', pragmas.debug);
     if (numberOfVertices < 2) {
-      throw new RuntimeError.DeveloperError("The number of vertices must be at least two.");
+      throw new RuntimeError.DeveloperError(
+        'The number of vertices must be at least two.'
+      );
     }
     if (numberOfVertices % 2 !== 0) {
-      throw new RuntimeError.DeveloperError("The number of vertices must be a multiple of 2.");
+      throw new RuntimeError.DeveloperError(
+        'The number of vertices must be a multiple of 2.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -2173,11 +2353,14 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   }
 
   function indexLineStrip(geometry) {
-    const numberOfVertices = GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
+    const numberOfVertices =
+      GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
 
     //>>includeStart('debug', pragmas.debug);
     if (numberOfVertices < 2) {
-      throw new RuntimeError.DeveloperError("The number of vertices must be at least two.");
+      throw new RuntimeError.DeveloperError(
+        'The number of vertices must be at least two.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -2199,11 +2382,14 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   }
 
   function indexLineLoop(geometry) {
-    const numberOfVertices = GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
+    const numberOfVertices =
+      GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
 
     //>>includeStart('debug', pragmas.debug);
     if (numberOfVertices < 2) {
-      throw new RuntimeError.DeveloperError("The number of vertices must be at least two.");
+      throw new RuntimeError.DeveloperError(
+        'The number of vertices must be at least two.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -2312,7 +2498,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
 
   const splitTriangleResult = {
     positions: new Array(7),
-    indices: new Array(3 * 3),
+    indices: new Array(3 * 3)
   };
 
   function splitTriangle(p0, p1, p2) {
@@ -2440,7 +2626,8 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       }
     }
 
-    const numberOfVertices = GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
+    const numberOfVertices =
+      GeometryAttribute.Geometry.computeNumberOfVertices(geometry);
     geometry.indices = IndexDatatype.IndexDatatype.createTypedArray(
       numberOfVertices,
       geometry.indices
@@ -2470,7 +2657,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
           componentDatatype: attribute.componentDatatype,
           componentsPerAttribute: attribute.componentsPerAttribute,
           normalize: attribute.normalize,
-          values: [],
+          values: []
         });
       }
     }
@@ -2478,19 +2665,33 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     return new GeometryAttribute.Geometry({
       attributes: copiedAttributes,
       indices: [],
-      primitiveType: geometry.primitiveType,
+      primitiveType: geometry.primitiveType
     });
   }
 
   function updateInstanceAfterSplit(instance, westGeometry, eastGeometry) {
-    const computeBoundingSphere = defaultValue.defined(instance.geometry.boundingSphere);
+    const computeBoundingSphere = defaultValue.defined(
+      instance.geometry.boundingSphere
+    );
 
-    westGeometry = updateGeometryAfterSplit(westGeometry, computeBoundingSphere);
-    eastGeometry = updateGeometryAfterSplit(eastGeometry, computeBoundingSphere);
+    westGeometry = updateGeometryAfterSplit(
+      westGeometry,
+      computeBoundingSphere
+    );
+    eastGeometry = updateGeometryAfterSplit(
+      eastGeometry,
+      computeBoundingSphere
+    );
 
-    if (defaultValue.defined(eastGeometry) && !defaultValue.defined(westGeometry)) {
+    if (
+      defaultValue.defined(eastGeometry) &&
+      !defaultValue.defined(westGeometry)
+    ) {
       instance.geometry = eastGeometry;
-    } else if (!defaultValue.defined(eastGeometry) && defaultValue.defined(westGeometry)) {
+    } else if (
+      !defaultValue.defined(eastGeometry) &&
+      defaultValue.defined(westGeometry)
+    ) {
       instance.geometry = westGeometry;
     } else {
       instance.westHemisphereGeometry = westGeometry;
@@ -2576,7 +2777,8 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     const v1 = sourceValues[i0] * coords.x;
     const v2 = sourceValues[i1] * coords.y;
     const v3 = sourceValues[i2] * coords.z;
-    currentValues[insertedIndex] = v1 + v2 + v3 > ComponentDatatype.CesiumMath.EPSILON6 ? 1 : 0;
+    currentValues[insertedIndex] =
+      v1 + v2 + v3 > ComponentDatatype.CesiumMath.EPSILON6 ? 1 : 0;
   };
 
   const p0Scratch = new Matrix2.Cartesian3();
@@ -2616,7 +2818,13 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     const p0 = Matrix2.Cartesian3.fromArray(positions, i0 * 3, p0Scratch);
     const p1 = Matrix2.Cartesian3.fromArray(positions, i1 * 3, p1Scratch);
     const p2 = Matrix2.Cartesian3.fromArray(positions, i2 * 3, p2Scratch);
-    const coords = barycentricCoordinates(point, p0, p1, p2, barycentricScratch);
+    const coords = barycentricCoordinates(
+      point,
+      p0,
+      p1,
+      p2,
+      barycentricScratch
+    );
     if (!defaultValue.defined(coords)) {
       return;
     }
@@ -2635,9 +2843,21 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     }
 
     if (defaultValue.defined(extrudeDirections)) {
-      const d0 = Matrix2.Cartesian3.fromArray(extrudeDirections, i0 * 3, p0Scratch);
-      const d1 = Matrix2.Cartesian3.fromArray(extrudeDirections, i1 * 3, p1Scratch);
-      const d2 = Matrix2.Cartesian3.fromArray(extrudeDirections, i2 * 3, p2Scratch);
+      const d0 = Matrix2.Cartesian3.fromArray(
+        extrudeDirections,
+        i0 * 3,
+        p0Scratch
+      );
+      const d1 = Matrix2.Cartesian3.fromArray(
+        extrudeDirections,
+        i1 * 3,
+        p1Scratch
+      );
+      const d2 = Matrix2.Cartesian3.fromArray(
+        extrudeDirections,
+        i2 * 3,
+        p2Scratch
+      );
 
       Matrix2.Cartesian3.multiplyByScalar(d0, coords.x, d0);
       Matrix2.Cartesian3.multiplyByScalar(d1, coords.y, d1);
@@ -2825,7 +3045,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     tangent: true,
     st: true,
     extrudeDirection: true,
-    applyOffset: true,
+    applyOffset: true
   };
   function splitLongitudeTriangles(instance) {
     const geometry = instance.geometry;
@@ -2840,7 +3060,9 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     const tangents = defaultValue.defined(attributes.tangent)
       ? attributes.tangent.values
       : undefined;
-    const texCoords = defaultValue.defined(attributes.st) ? attributes.st.values : undefined;
+    const texCoords = defaultValue.defined(attributes.st)
+      ? attributes.st.values
+      : undefined;
     const extrudeDirections = defaultValue.defined(attributes.extrudeDirection)
       ? attributes.extrudeDirection.values
       : undefined;
@@ -3041,7 +3263,10 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     updateInstanceAfterSplit(instance, westGeometry, eastGeometry);
   }
 
-  const xzPlane = Plane.Plane.fromPointNormal(Matrix2.Cartesian3.ZERO, Matrix2.Cartesian3.UNIT_Y);
+  const xzPlane = Plane.Plane.fromPointNormal(
+    Matrix2.Cartesian3.ZERO,
+    Matrix2.Cartesian3.UNIT_Y
+  );
 
   const offsetScratch = new Matrix2.Cartesian3();
   const offsetPointScratch = new Matrix2.Cartesian3();
@@ -3060,7 +3285,13 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     }
 
     const p0 = Matrix2.Cartesian3.fromArray(positions, i0 * 3, p0Scratch);
-    if (Matrix2.Cartesian3.equalsEpsilon(p0, point, ComponentDatatype.CesiumMath.EPSILON10)) {
+    if (
+      Matrix2.Cartesian3.equalsEpsilon(
+        p0,
+        point,
+        ComponentDatatype.CesiumMath.EPSILON10
+      )
+    ) {
       currentAttributes.applyOffset.values[insertIndex] = applyOffset[i0];
     } else {
       currentAttributes.applyOffset.values[insertIndex] = applyOffset[i1];
@@ -3303,7 +3534,11 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
 
     const length = positions.length;
     for (let j = 0; j < length; j += 3) {
-      const position = Matrix2.Cartesian3.unpack(positions, j, cartesian3Scratch0);
+      const position = Matrix2.Cartesian3.unpack(
+        positions,
+        j,
+        cartesian3Scratch0
+      );
       if (position.x > 0.0) {
         continue;
       }
@@ -3357,7 +3592,9 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
     const nextPositions = attributes.nextPosition.values;
     const expandAndWidths = attributes.expandAndWidth.values;
 
-    const texCoords = defaultValue.defined(attributes.st) ? attributes.st.values : undefined;
+    const texCoords = defaultValue.defined(attributes.st)
+      ? attributes.st.values
+      : undefined;
     const colors = defaultValue.defined(attributes.color)
       ? attributes.color.values
       : undefined;
@@ -3376,8 +3613,16 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       const i0 = i;
       const i2 = i + 2;
 
-      const p0 = Matrix2.Cartesian3.fromArray(positions, i0 * 3, cartesian3Scratch0);
-      const p2 = Matrix2.Cartesian3.fromArray(positions, i2 * 3, cartesian3Scratch2);
+      const p0 = Matrix2.Cartesian3.fromArray(
+        positions,
+        i0 * 3,
+        cartesian3Scratch0
+      );
+      const p2 = Matrix2.Cartesian3.fromArray(
+        positions,
+        i2 * 3,
+        cartesian3Scratch2
+      );
 
       // Offset points that are close to the 180 longitude and change the previous/next point
       // to be the same offset point so it can be projected to 2D. There is special handling in the
@@ -3462,7 +3707,14 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
           prevPositions[i0 * 3 + 4],
           prevPositions[i0 * 3 + 5]
         );
-        p0Attributes.prevPosition.values.push(p0.x, p0.y, p0.z, p0.x, p0.y, p0.z);
+        p0Attributes.prevPosition.values.push(
+          p0.x,
+          p0.y,
+          p0.z,
+          p0.x,
+          p0.y,
+          p0.z
+        );
 
         p0Attributes.nextPosition.values.push(
           offsetPoint.x,
@@ -3520,7 +3772,14 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
           offsetPoint.z
         );
 
-        p2Attributes.nextPosition.values.push(p2.x, p2.y, p2.z, p2.x, p2.y, p2.z);
+        p2Attributes.nextPosition.values.push(
+          p2.x,
+          p2.y,
+          p2.z,
+          p2.x,
+          p2.y,
+          p2.z
+        );
         p2Attributes.nextPosition.values.push(
           nextPositions[i2 * 3],
           nextPositions[i2 * 3 + 1],
@@ -3552,8 +3811,16 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
         );
 
         if (defaultValue.defined(colors)) {
-          const c0 = Matrix2.Cartesian4.fromArray(colors, i0 * 4, cartesian4Scratch0);
-          const c2 = Matrix2.Cartesian4.fromArray(colors, i2 * 4, cartesian4Scratch0);
+          const c0 = Matrix2.Cartesian4.fromArray(
+            colors,
+            i0 * 4,
+            cartesian4Scratch0
+          );
+          const c2 = Matrix2.Cartesian4.fromArray(
+            colors,
+            i2 * 4,
+            cartesian4Scratch0
+          );
 
           const r = ComponentDatatype.CesiumMath.lerp(c0.x, c2.x, t);
           const g = ComponentDatatype.CesiumMath.lerp(c0.y, c2.y, t);
@@ -3573,7 +3840,11 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
         }
 
         if (defaultValue.defined(texCoords)) {
-          const s0 = Matrix2.Cartesian2.fromArray(texCoords, i0 * 2, cartesian2Scratch0);
+          const s0 = Matrix2.Cartesian2.fromArray(
+            texCoords,
+            i0 * 2,
+            cartesian2Scratch0
+          );
           const s3 = Matrix2.Cartesian2.fromArray(
             texCoords,
             (i + 3) * 2,
@@ -3667,7 +3938,7 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   GeometryPipeline.splitLongitude = function (instance) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(instance)) {
-      throw new RuntimeError.DeveloperError("instance is required.");
+      throw new RuntimeError.DeveloperError('instance is required.');
     }
     //>>includeEnd('debug');
 
@@ -3677,8 +3948,10 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       const minX = boundingSphere.center.x - boundingSphere.radius;
       if (
         minX > 0 ||
-        Transforms.BoundingSphere.intersectPlane(boundingSphere, Plane.Plane.ORIGIN_ZX_PLANE) !==
-          Transforms.Intersect.INTERSECTING
+        Transforms.BoundingSphere.intersectPlane(
+          boundingSphere,
+          Plane.Plane.ORIGIN_ZX_PLANE
+        ) !== Transforms.Intersect.INTERSECTING
       ) {
         return instance;
       }
@@ -3698,9 +3971,13 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
       }
     } else {
       indexPrimitive(geometry);
-      if (geometry.primitiveType === GeometryAttribute.PrimitiveType.TRIANGLES) {
+      if (
+        geometry.primitiveType === GeometryAttribute.PrimitiveType.TRIANGLES
+      ) {
         splitLongitudeTriangles(instance);
-      } else if (geometry.primitiveType === GeometryAttribute.PrimitiveType.LINES) {
+      } else if (
+        geometry.primitiveType === GeometryAttribute.PrimitiveType.LINES
+      ) {
         splitLongitudeLines(instance);
       }
     }
@@ -3709,6 +3986,5 @@ define(['exports', './AttributeCompression-f202be44', './Matrix2-9e1c22e2', './R
   };
 
   exports.GeometryPipeline = GeometryPipeline;
-
-}));
+});
 //# sourceMappingURL=GeometryPipeline-d7363877.js.map

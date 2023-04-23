@@ -1,30 +1,30 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DistanceDisplayCondition from "../Core/DistanceDisplayCondition.js";
-import DistanceDisplayConditionGeometryInstanceAttribute from "../Core/DistanceDisplayConditionGeometryInstanceAttribute.js";
-import EllipsoidGeometry from "../Core/EllipsoidGeometry.js";
-import EllipsoidOutlineGeometry from "../Core/EllipsoidOutlineGeometry.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import GeometryOffsetAttribute from "../Core/GeometryOffsetAttribute.js";
-import Iso8601 from "../Core/Iso8601.js";
-import Matrix4 from "../Core/Matrix4.js";
-import OffsetGeometryInstanceAttribute from "../Core/OffsetGeometryInstanceAttribute.js";
-import ShowGeometryInstanceAttribute from "../Core/ShowGeometryInstanceAttribute.js";
-import HeightReference from "../Scene/HeightReference.js";
-import MaterialAppearance from "../Scene/MaterialAppearance.js";
-import PerInstanceColorAppearance from "../Scene/PerInstanceColorAppearance.js";
-import Primitive from "../Scene/Primitive.js";
-import SceneMode from "../Scene/SceneMode.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import DynamicGeometryUpdater from "./DynamicGeometryUpdater.js";
-import GeometryUpdater from "./GeometryUpdater.js";
-import heightReferenceOnEntityPropertyChanged from "./heightReferenceOnEntityPropertyChanged.js";
-import MaterialProperty from "./MaterialProperty.js";
-import Property from "./Property.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DistanceDisplayCondition from '../Core/DistanceDisplayCondition.js';
+import DistanceDisplayConditionGeometryInstanceAttribute from '../Core/DistanceDisplayConditionGeometryInstanceAttribute.js';
+import EllipsoidGeometry from '../Core/EllipsoidGeometry.js';
+import EllipsoidOutlineGeometry from '../Core/EllipsoidOutlineGeometry.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import GeometryOffsetAttribute from '../Core/GeometryOffsetAttribute.js';
+import Iso8601 from '../Core/Iso8601.js';
+import Matrix4 from '../Core/Matrix4.js';
+import OffsetGeometryInstanceAttribute from '../Core/OffsetGeometryInstanceAttribute.js';
+import ShowGeometryInstanceAttribute from '../Core/ShowGeometryInstanceAttribute.js';
+import HeightReference from '../Scene/HeightReference.js';
+import MaterialAppearance from '../Scene/MaterialAppearance.js';
+import PerInstanceColorAppearance from '../Scene/PerInstanceColorAppearance.js';
+import Primitive from '../Scene/Primitive.js';
+import SceneMode from '../Scene/SceneMode.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import DynamicGeometryUpdater from './DynamicGeometryUpdater.js';
+import GeometryUpdater from './GeometryUpdater.js';
+import heightReferenceOnEntityPropertyChanged from './heightReferenceOnEntityPropertyChanged.js';
+import MaterialProperty from './MaterialProperty.js';
+import Property from './Property.js';
 
 const defaultMaterial = new ColorMaterialProperty(Color.WHITE);
 const defaultOffset = Cartesian3.ZERO;
@@ -64,18 +64,18 @@ function EllipsoidGeometryUpdater(entity, scene) {
     entity: entity,
     scene: scene,
     geometryOptions: new EllipsoidGeometryOptions(entity),
-    geometryPropertyName: "ellipsoid",
+    geometryPropertyName: 'ellipsoid',
     observedPropertyNames: [
-      "availability",
-      "position",
-      "orientation",
-      "ellipsoid",
-    ],
+      'availability',
+      'position',
+      'orientation',
+      'ellipsoid'
+    ]
   });
 
   this._onEntityPropertyChanged(
     entity,
-    "ellipsoid",
+    'ellipsoid',
     entity.ellipsoid,
     undefined
   );
@@ -97,8 +97,8 @@ Object.defineProperties(EllipsoidGeometryUpdater.prototype, {
   terrainOffsetProperty: {
     get: function () {
       return this._terrainOffsetProperty;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -117,7 +117,7 @@ EllipsoidGeometryUpdater.prototype.createFillGeometryInstance = function (
   modelMatrixResult
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
   //>>includeEnd('debug');
 
   const entity = this._entity;
@@ -130,18 +130,18 @@ EllipsoidGeometryUpdater.prototype.createFillGeometryInstance = function (
       this._showProperty.getValue(time) &&
       this._fillProperty.getValue(time)
   );
-  const distanceDisplayCondition = this._distanceDisplayConditionProperty.getValue(
-    time
-  );
-  const distanceDisplayConditionAttribute = DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-    distanceDisplayCondition
-  );
+  const distanceDisplayCondition =
+    this._distanceDisplayConditionProperty.getValue(time);
+  const distanceDisplayConditionAttribute =
+    DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+      distanceDisplayCondition
+    );
 
   const attributes = {
     show: show,
     distanceDisplayCondition: distanceDisplayConditionAttribute,
     color: undefined,
-    offset: undefined,
+    offset: undefined
   };
 
   if (this._materialProperty instanceof ColorMaterialProperty) {
@@ -181,7 +181,7 @@ EllipsoidGeometryUpdater.prototype.createFillGeometryInstance = function (
           this._scene.mapProjection.ellipsoid,
           modelMatrixResult
         ),
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -201,7 +201,7 @@ EllipsoidGeometryUpdater.prototype.createOutlineGeometryInstance = function (
   modelMatrixResult
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
   //>>includeEnd('debug');
 
   const entity = this._entity;
@@ -213,9 +213,8 @@ EllipsoidGeometryUpdater.prototype.createOutlineGeometryInstance = function (
     Color.BLACK,
     scratchColor
   );
-  const distanceDisplayCondition = this._distanceDisplayConditionProperty.getValue(
-    time
-  );
+  const distanceDisplayCondition =
+    this._distanceDisplayConditionProperty.getValue(time);
 
   const attributes = {
     show: new ShowGeometryInstanceAttribute(
@@ -225,10 +224,11 @@ EllipsoidGeometryUpdater.prototype.createOutlineGeometryInstance = function (
         this._showOutlineProperty.getValue(time)
     ),
     color: ColorGeometryInstanceAttribute.fromColor(outlineColor),
-    distanceDisplayCondition: DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-      distanceDisplayCondition
-    ),
-    offset: undefined,
+    distanceDisplayCondition:
+      DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+        distanceDisplayCondition
+      ),
+    offset: undefined
   };
   if (defined(this._options.offsetAttribute)) {
     attributes.offset = OffsetGeometryInstanceAttribute.fromCartesian3(
@@ -253,7 +253,7 @@ EllipsoidGeometryUpdater.prototype.createOutlineGeometryInstance = function (
           this._scene.mapProjection.ellipsoid,
           modelMatrixResult
         ),
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -342,9 +342,11 @@ EllipsoidGeometryUpdater.prototype._setStaticOptions = function (
       : undefined;
 };
 
-EllipsoidGeometryUpdater.prototype._onEntityPropertyChanged = heightReferenceOnEntityPropertyChanged;
+EllipsoidGeometryUpdater.prototype._onEntityPropertyChanged =
+  heightReferenceOnEntityPropertyChanged;
 
-EllipsoidGeometryUpdater.DynamicGeometryUpdater = DynamicEllipsoidGeometryUpdater;
+EllipsoidGeometryUpdater.DynamicGeometryUpdater =
+  DynamicEllipsoidGeometryUpdater;
 
 /**
  * @private
@@ -378,12 +380,13 @@ if (defined(Object.create)) {
   DynamicEllipsoidGeometryUpdater.prototype = Object.create(
     DynamicGeometryUpdater.prototype
   );
-  DynamicEllipsoidGeometryUpdater.prototype.constructor = DynamicEllipsoidGeometryUpdater;
+  DynamicEllipsoidGeometryUpdater.prototype.constructor =
+    DynamicEllipsoidGeometryUpdater;
 }
 
 DynamicEllipsoidGeometryUpdater.prototype.update = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
   //>>includeEnd('debug');
 
   const entity = this._entity;
@@ -500,11 +503,10 @@ DynamicEllipsoidGeometryUpdater.prototype.update = function (time) {
 
   const shadows = this._geometryUpdater.shadowsProperty.getValue(time);
 
-  const distanceDisplayConditionProperty = this._geometryUpdater
-    .distanceDisplayConditionProperty;
-  const distanceDisplayCondition = distanceDisplayConditionProperty.getValue(
-    time
-  );
+  const distanceDisplayConditionProperty =
+    this._geometryUpdater.distanceDisplayConditionProperty;
+  const distanceDisplayCondition =
+    distanceDisplayConditionProperty.getValue(time);
 
   const offset = Property.getValueOrDefault(
     this._geometryUpdater.terrainOffsetProperty,
@@ -568,7 +570,7 @@ DynamicEllipsoidGeometryUpdater.prototype.update = function (time) {
     const appearance = new MaterialAppearance({
       material: material,
       translucent: material.isTranslucent(),
-      closed: true,
+      closed: true
     });
     options.vertexFormat = appearance.vertexFormat;
 
@@ -583,7 +585,7 @@ DynamicEllipsoidGeometryUpdater.prototype.update = function (time) {
         geometryInstances: fillInstance,
         appearance: appearance,
         asynchronous: false,
-        shadows: shadows,
+        shadows: shadows
       })
     );
 
@@ -599,13 +601,11 @@ DynamicEllipsoidGeometryUpdater.prototype.update = function (time) {
           flat: true,
           translucent: outlineInstance.attributes.color.value[3] !== 255,
           renderState: {
-            lineWidth: this._geometryUpdater._scene.clampLineWidth(
-              outlineWidth
-            ),
-          },
+            lineWidth: this._geometryUpdater._scene.clampLineWidth(outlineWidth)
+          }
         }),
         asynchronous: false,
-        shadows: shadows,
+        shadows: shadows
       })
     );
 
@@ -639,9 +639,8 @@ DynamicEllipsoidGeometryUpdater.prototype.update = function (time) {
     let outlineAttributes = this._outlineAttributes;
 
     if (!defined(outlineAttributes)) {
-      outlineAttributes = outlinePrimitive.getGeometryInstanceAttributes(
-        entity
-      );
+      outlineAttributes =
+        outlinePrimitive.getGeometryInstanceAttributes(entity);
       this._outlineAttributes = outlineAttributes;
     }
 
@@ -667,14 +666,16 @@ DynamicEllipsoidGeometryUpdater.prototype.update = function (time) {
         this._lastDistanceDisplayCondition
       )
     ) {
-      attributes.distanceDisplayCondition = DistanceDisplayConditionGeometryInstanceAttribute.toValue(
-        distanceDisplayCondition,
-        attributes.distanceDisplayCondition
-      );
-      outlineAttributes.distanceDisplayCondition = DistanceDisplayConditionGeometryInstanceAttribute.toValue(
-        distanceDisplayCondition,
-        outlineAttributes.distanceDisplayCondition
-      );
+      attributes.distanceDisplayCondition =
+        DistanceDisplayConditionGeometryInstanceAttribute.toValue(
+          distanceDisplayCondition,
+          attributes.distanceDisplayCondition
+        );
+      outlineAttributes.distanceDisplayCondition =
+        DistanceDisplayConditionGeometryInstanceAttribute.toValue(
+          distanceDisplayCondition,
+          outlineAttributes.distanceDisplayCondition
+        );
       DistanceDisplayCondition.clone(
         distanceDisplayCondition,
         this._lastDistanceDisplayCondition

@@ -1,4 +1,4 @@
-import Tween from "../ThirdParty/Tween.js";
+import Tween from '../ThirdParty/Tween.js';
 
 /**
  * Easing functions for use with TweenCollection.  These function are from
@@ -234,7 +234,7 @@ const EasingFunction = {
    * @type {EasingFunction.Callback}
    * @constant
    */
-  BOUNCE_IN_OUT: Tween.Easing.Bounce.InOut,
+  BOUNCE_IN_OUT: Tween.Easing.Bounce.InOut
 };
 
 /**

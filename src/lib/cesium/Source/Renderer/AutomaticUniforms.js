@@ -1,6 +1,6 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Matrix4 from "../Core/Matrix4.js";
-import WebGLConstants from "../Core/WebGLConstants.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Matrix4 from '../Core/Matrix4.js';
+import WebGLConstants from '../Core/WebGLConstants.js';
 
 const viewerPositionWCScratch = new Cartesian3();
 
@@ -11,30 +11,30 @@ function AutomaticUniform(options) {
 }
 
 const datatypeToGlsl = {};
-datatypeToGlsl[WebGLConstants.FLOAT] = "float";
-datatypeToGlsl[WebGLConstants.FLOAT_VEC2] = "vec2";
-datatypeToGlsl[WebGLConstants.FLOAT_VEC3] = "vec3";
-datatypeToGlsl[WebGLConstants.FLOAT_VEC4] = "vec4";
-datatypeToGlsl[WebGLConstants.INT] = "int";
-datatypeToGlsl[WebGLConstants.INT_VEC2] = "ivec2";
-datatypeToGlsl[WebGLConstants.INT_VEC3] = "ivec3";
-datatypeToGlsl[WebGLConstants.INT_VEC4] = "ivec4";
-datatypeToGlsl[WebGLConstants.BOOL] = "bool";
-datatypeToGlsl[WebGLConstants.BOOL_VEC2] = "bvec2";
-datatypeToGlsl[WebGLConstants.BOOL_VEC3] = "bvec3";
-datatypeToGlsl[WebGLConstants.BOOL_VEC4] = "bvec4";
-datatypeToGlsl[WebGLConstants.FLOAT_MAT2] = "mat2";
-datatypeToGlsl[WebGLConstants.FLOAT_MAT3] = "mat3";
-datatypeToGlsl[WebGLConstants.FLOAT_MAT4] = "mat4";
-datatypeToGlsl[WebGLConstants.SAMPLER_2D] = "sampler2D";
-datatypeToGlsl[WebGLConstants.SAMPLER_CUBE] = "samplerCube";
+datatypeToGlsl[WebGLConstants.FLOAT] = 'float';
+datatypeToGlsl[WebGLConstants.FLOAT_VEC2] = 'vec2';
+datatypeToGlsl[WebGLConstants.FLOAT_VEC3] = 'vec3';
+datatypeToGlsl[WebGLConstants.FLOAT_VEC4] = 'vec4';
+datatypeToGlsl[WebGLConstants.INT] = 'int';
+datatypeToGlsl[WebGLConstants.INT_VEC2] = 'ivec2';
+datatypeToGlsl[WebGLConstants.INT_VEC3] = 'ivec3';
+datatypeToGlsl[WebGLConstants.INT_VEC4] = 'ivec4';
+datatypeToGlsl[WebGLConstants.BOOL] = 'bool';
+datatypeToGlsl[WebGLConstants.BOOL_VEC2] = 'bvec2';
+datatypeToGlsl[WebGLConstants.BOOL_VEC3] = 'bvec3';
+datatypeToGlsl[WebGLConstants.BOOL_VEC4] = 'bvec4';
+datatypeToGlsl[WebGLConstants.FLOAT_MAT2] = 'mat2';
+datatypeToGlsl[WebGLConstants.FLOAT_MAT3] = 'mat3';
+datatypeToGlsl[WebGLConstants.FLOAT_MAT4] = 'mat4';
+datatypeToGlsl[WebGLConstants.SAMPLER_2D] = 'sampler2D';
+datatypeToGlsl[WebGLConstants.SAMPLER_CUBE] = 'samplerCube';
 
 AutomaticUniform.prototype.getDeclaration = function (name) {
   let declaration = `uniform ${datatypeToGlsl[this._datatype]} ${name}`;
 
   const size = this._size;
   if (size === 1) {
-    declaration += ";";
+    declaration += ';';
   } else {
     declaration += `[${size.toString()}];`;
   }
@@ -66,7 +66,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC4,
     getValue: function (uniformState) {
       return uniformState.viewportCartesian4;
-    },
+    }
   }),
 
   /**
@@ -98,7 +98,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.viewportOrthographic;
-    },
+    }
   }),
 
   /**
@@ -137,7 +137,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.viewportTransformation;
-    },
+    }
   }),
 
   /**
@@ -158,7 +158,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.SAMPLER_2D,
     getValue: function (uniformState) {
       return uniformState.globeDepthTexture;
-    },
+    }
   }),
 
   /**
@@ -182,7 +182,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.model;
-    },
+    }
   }),
 
   /**
@@ -205,7 +205,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.inverseModel;
-    },
+    }
   }),
 
   /**
@@ -231,7 +231,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.view;
-    },
+    }
   }),
 
   /**
@@ -256,7 +256,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.view3D;
-    },
+    }
   }),
 
   /**
@@ -280,7 +280,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT3,
     getValue: function (uniformState) {
       return uniformState.viewRotation;
-    },
+    }
   }),
 
   /**
@@ -305,7 +305,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT3,
     getValue: function (uniformState) {
       return uniformState.viewRotation3D;
-    },
+    }
   }),
 
   /**
@@ -328,7 +328,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.inverseView;
-    },
+    }
   }),
 
   /**
@@ -353,7 +353,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.inverseView3D;
-    },
+    }
   }),
 
   /**
@@ -377,7 +377,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT3,
     getValue: function (uniformState) {
       return uniformState.inverseViewRotation;
-    },
+    }
   }),
 
   /**
@@ -402,7 +402,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT3,
     getValue: function (uniformState) {
       return uniformState.inverseViewRotation3D;
-    },
+    }
   }),
 
   /**
@@ -427,7 +427,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.projection;
-    },
+    }
   }),
 
   /**
@@ -450,7 +450,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.inverseProjection;
-    },
+    }
   }),
 
   /**
@@ -476,7 +476,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.infiniteProjection;
-    },
+    }
   }),
 
   /**
@@ -507,7 +507,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.modelView;
-    },
+    }
   }),
 
   /**
@@ -538,7 +538,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.modelView3D;
-    },
+    }
   }),
 
   /**
@@ -569,7 +569,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.modelViewRelativeToEye;
-    },
+    }
   }),
 
   /**
@@ -591,7 +591,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.inverseModelView;
-    },
+    }
   }),
 
   /**
@@ -617,7 +617,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.inverseModelView3D;
-    },
+    }
   }),
 
   /**
@@ -646,7 +646,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.viewProjection;
-    },
+    }
   }),
 
   /**
@@ -669,7 +669,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.inverseViewProjection;
-    },
+    }
   }),
 
   /**
@@ -701,7 +701,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.modelViewProjection;
-    },
+    }
   }),
 
   /**
@@ -724,7 +724,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.inverseModelViewProjection;
-    },
+    }
   }),
 
   /**
@@ -756,7 +756,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.modelViewProjectionRelativeToEye;
-    },
+    }
   }),
 
   /**
@@ -787,7 +787,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT4,
     getValue: function (uniformState) {
       return uniformState.modelViewInfiniteProjection;
-    },
+    }
   }),
 
   /**
@@ -800,7 +800,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.orthographicIn3D ? 1 : 0;
-    },
+    }
   }),
 
   /**
@@ -826,7 +826,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT3,
     getValue: function (uniformState) {
       return uniformState.normal;
-    },
+    }
   }),
 
   /**
@@ -855,7 +855,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT3,
     getValue: function (uniformState) {
       return uniformState.normal3D;
-    },
+    }
   }),
 
   /**
@@ -880,7 +880,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT3,
     getValue: function (uniformState) {
       return uniformState.inverseNormal;
-    },
+    }
   }),
 
   /**
@@ -907,7 +907,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT3,
     getValue: function (uniformState) {
       return uniformState.inverseNormal3D;
-    },
+    }
   }),
 
   /**
@@ -921,7 +921,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.eyeHeight;
-    },
+    }
   }),
 
   /**
@@ -936,7 +936,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC2,
     getValue: function (uniformState) {
       return uniformState.eyeHeight2D;
-    },
+    }
   }),
 
   /**
@@ -959,7 +959,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC2,
     getValue: function (uniformState) {
       return uniformState.entireFrustum;
-    },
+    }
   }),
 
   /**
@@ -982,7 +982,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC2,
     getValue: function (uniformState) {
       return uniformState.currentFrustum;
-    },
+    }
   }),
 
   /**
@@ -994,7 +994,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC4,
     getValue: function (uniformState) {
       return uniformState.frustumPlanes;
-    },
+    }
   }),
 
   /**
@@ -1005,7 +1005,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.farDepthFromNearPlusOne;
-    },
+    }
   }),
 
   /**
@@ -1016,7 +1016,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.log2FarDepthFromNearPlusOne;
-    },
+    }
   }),
 
   /**
@@ -1027,7 +1027,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.oneOverLog2FarDepthFromNearPlusOne;
-    },
+    }
   }),
 
   /**
@@ -1046,7 +1046,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC3,
     getValue: function (uniformState) {
       return uniformState.sunPositionWC;
-    },
+    }
   }),
 
   /**
@@ -1064,7 +1064,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC3,
     getValue: function (uniformState) {
       return uniformState.sunPositionColumbusView;
-    },
+    }
   }),
 
   /**
@@ -1086,7 +1086,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC3,
     getValue: function (uniformState) {
       return uniformState.sunDirectionEC;
-    },
+    }
   }),
 
   /**
@@ -1108,7 +1108,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC3,
     getValue: function (uniformState) {
       return uniformState.sunDirectionWC;
-    },
+    }
   }),
 
   /**
@@ -1129,7 +1129,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC3,
     getValue: function (uniformState) {
       return uniformState.moonDirectionEC;
-    },
+    }
   }),
 
   /**
@@ -1151,7 +1151,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC3,
     getValue: function (uniformState) {
       return uniformState.lightDirectionEC;
-    },
+    }
   }),
 
   /**
@@ -1173,7 +1173,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC3,
     getValue: function (uniformState) {
       return uniformState.lightDirectionWC;
-    },
+    }
   }),
 
   /**
@@ -1196,7 +1196,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC3,
     getValue: function (uniformState) {
       return uniformState.lightColor;
-    },
+    }
   }),
 
   /**
@@ -1218,7 +1218,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC3,
     getValue: function (uniformState) {
       return uniformState.lightColorHdr;
-    },
+    }
   }),
 
   /**
@@ -1239,7 +1239,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC3,
     getValue: function (uniformState) {
       return uniformState.encodedCameraPositionMCHigh;
-    },
+    }
   }),
 
   /**
@@ -1260,7 +1260,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC3,
     getValue: function (uniformState) {
       return uniformState.encodedCameraPositionMCLow;
-    },
+    }
   }),
 
   /**
@@ -1278,7 +1278,7 @@ const AutomaticUniforms = {
         uniformState.inverseView,
         viewerPositionWCScratch
       );
-    },
+    }
   }),
 
   /**
@@ -1294,7 +1294,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.frameState.frameNumber;
-    },
+    }
   }),
 
   /**
@@ -1313,7 +1313,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.frameState.morphTime;
-    },
+    }
   }),
 
   /**
@@ -1340,7 +1340,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.frameState.mode;
-    },
+    }
   }),
 
   /**
@@ -1361,7 +1361,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.pass;
-    },
+    }
   }),
 
   /**
@@ -1387,7 +1387,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC4,
     getValue: function (uniformState) {
       return uniformState.backgroundColor;
-    },
+    }
   }),
 
   /**
@@ -1407,7 +1407,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.SAMPLER_2D,
     getValue: function (uniformState) {
       return uniformState.brdfLut;
-    },
+    }
   }),
 
   /**
@@ -1426,7 +1426,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.SAMPLER_CUBE,
     getValue: function (uniformState) {
       return uniformState.environmentMap;
-    },
+    }
   }),
 
   /**
@@ -1441,7 +1441,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.SAMPLER_2D,
     getValue: function (uniformState) {
       return uniformState.specularEnvironmentMaps;
-    },
+    }
   }),
 
   /**
@@ -1456,7 +1456,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC2,
     getValue: function (uniformState) {
       return uniformState.specularEnvironmentMapsDimensions;
-    },
+    }
   }),
 
   /**
@@ -1471,7 +1471,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.specularEnvironmentMapsMaximumLOD;
-    },
+    }
   }),
 
   /**
@@ -1486,7 +1486,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC3,
     getValue: function (uniformState) {
       return uniformState.sphericalHarmonicCoefficients;
-    },
+    }
   }),
 
   /**
@@ -1508,7 +1508,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_MAT3,
     getValue: function (uniformState) {
       return uniformState.temeToPseudoFixedMatrix;
-    },
+    }
   }),
 
   /**
@@ -1522,7 +1522,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.pixelRatio;
-    },
+    }
   }),
 
   /**
@@ -1535,7 +1535,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.fogDensity;
-    },
+    }
   }),
 
   /**
@@ -1551,7 +1551,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.splitPosition;
-    },
+    }
   }),
 
   /**
@@ -1562,7 +1562,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.geometricToleranceOverMeter;
-    },
+    }
   }),
 
   /**
@@ -1575,7 +1575,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.minimumDisableDepthTestDistance;
-    },
+    }
   }),
 
   /**
@@ -1586,7 +1586,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC4,
     getValue: function (uniformState) {
       return uniformState.invertClassificationColor;
-    },
+    }
   }),
 
   /**
@@ -1597,7 +1597,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT,
     getValue: function (uniformState) {
       return uniformState.gamma;
-    },
+    }
   }),
 
   /**
@@ -1608,7 +1608,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC3,
     getValue: function (uniformState) {
       return uniformState.ellipsoid.radii;
-    },
+    }
   }),
 
   /**
@@ -1619,7 +1619,7 @@ const AutomaticUniforms = {
     datatype: WebGLConstants.FLOAT_VEC3,
     getValue: function (uniformState) {
       return uniformState.ellipsoid.oneOverRadii;
-    },
-  }),
+    }
+  })
 };
 export default AutomaticUniforms;

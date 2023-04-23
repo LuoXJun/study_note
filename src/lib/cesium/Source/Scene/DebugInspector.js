@@ -1,8 +1,8 @@
-import Color from "../Core/Color.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import defined from "../Core/defined.js";
+import Color from '../Core/Color.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import defined from '../Core/defined.js';
 
 /**
  * @private
@@ -30,7 +30,7 @@ function createDebugShowFrustumsShaderProgram(scene, shaderProgram) {
 
   const targets = [];
   fs.sources = fs.sources.map(function (source) {
-    source = ShaderSource.replaceMain(source, "czm_Debug_main");
+    source = ShaderSource.replaceMain(source, 'czm_Debug_main');
     const re = /gl_FragData\[(\d+)\]/g;
     let match;
     while ((match = re.exec(source)) !== null) {
@@ -42,10 +42,10 @@ function createDebugShowFrustumsShaderProgram(scene, shaderProgram) {
   });
   const length = targets.length;
 
-  let newMain = "";
-  newMain += "uniform vec3 debugShowCommandsColor;\n";
-  newMain += "uniform vec3 debugShowFrustumsColor;\n";
-  newMain += "void main() \n" + "{ \n" + "    czm_Debug_main(); \n";
+  let newMain = '';
+  newMain += 'uniform vec3 debugShowCommandsColor;\n';
+  newMain += 'uniform vec3 debugShowFrustumsColor;\n';
+  newMain += 'void main() \n' + '{ \n' + '    czm_Debug_main(); \n';
 
   // set debugShowCommandsColor to Color(1.0, 1.0, 1.0, 1.0) to stop rendering scene.debugShowCommands
   // set debugShowFrustumsColor to Color(1.0, 1.0, 1.0, 1.0) to stop rendering scene.debugShowFrustums
@@ -56,10 +56,10 @@ function createDebugShowFrustumsShaderProgram(scene, shaderProgram) {
       newMain += `    gl_FragData[${targets[i]}].rgb *= debugShowFrustumsColor;\n`;
     }
   } else {
-    newMain += "    gl_FragColor.rgb *= debugShowCommandsColor;\n";
-    newMain += "    gl_FragColor.rgb *= debugShowFrustumsColor;\n";
+    newMain += '    gl_FragColor.rgb *= debugShowCommandsColor;\n';
+    newMain += '    gl_FragColor.rgb *= debugShowFrustumsColor;\n';
   }
-  newMain += "}";
+  newMain += '}';
 
   fs.sources.push(newMain);
 
@@ -69,7 +69,7 @@ function createDebugShowFrustumsShaderProgram(scene, shaderProgram) {
     context: context,
     vertexShaderSource: sp.vertexShaderSource,
     fragmentShaderSource: fs,
-    attributeLocations: attributeLocations,
+    attributeLocations: attributeLocations
   });
 }
 

@@ -1,19 +1,19 @@
-import AxisAlignedBoundingBox from "./AxisAlignedBoundingBox.js";
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import EllipsoidalOccluder from "./EllipsoidalOccluder.js";
-import CesiumMath from "./Math.js";
-import Matrix4 from "./Matrix4.js";
-import OrientedBoundingBox from "./OrientedBoundingBox.js";
-import Rectangle from "./Rectangle.js";
-import TerrainEncoding from "./TerrainEncoding.js";
-import Transforms from "./Transforms.js";
-import WebMercatorProjection from "./WebMercatorProjection.js";
+import AxisAlignedBoundingBox from './AxisAlignedBoundingBox.js';
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import EllipsoidalOccluder from './EllipsoidalOccluder.js';
+import CesiumMath from './Math.js';
+import Matrix4 from './Matrix4.js';
+import OrientedBoundingBox from './OrientedBoundingBox.js';
+import Rectangle from './Rectangle.js';
+import TerrainEncoding from './TerrainEncoding.js';
+import Transforms from './Transforms.js';
+import WebMercatorProjection from './WebMercatorProjection.js';
 
 /**
  * Contains functions to create a mesh from a heightmap image.
@@ -35,7 +35,7 @@ HeightmapTessellator.DEFAULT_STRUCTURE = Object.freeze({
   elementsPerHeight: 1,
   stride: 1,
   elementMultiplier: 256.0,
-  isBigEndian: false,
+  isBigEndian: false
 });
 
 const cartesian3Scratch = new Cartesian3();
@@ -116,16 +116,16 @@ const maximumScratch = new Cartesian3();
 HeightmapTessellator.computeVertices = function (options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options) || !defined(options.heightmap)) {
-    throw new DeveloperError("options.heightmap is required.");
+    throw new DeveloperError('options.heightmap is required.');
   }
   if (!defined(options.width) || !defined(options.height)) {
-    throw new DeveloperError("options.width and options.height are required.");
+    throw new DeveloperError('options.width and options.height are required.');
   }
   if (!defined(options.nativeRectangle)) {
-    throw new DeveloperError("options.nativeRectangle is required.");
+    throw new DeveloperError('options.nativeRectangle is required.');
   }
   if (!defined(options.skirtHeight)) {
-    throw new DeveloperError("options.skirtHeight is required.");
+    throw new DeveloperError('options.skirtHeight is required.');
   }
   //>>includeEnd('debug');
 
@@ -254,9 +254,8 @@ HeightmapTessellator.computeVertices = function (options) {
   let southMercatorY;
   let oneOverMercatorHeight;
   if (includeWebMercatorT) {
-    southMercatorY = WebMercatorProjection.geodeticLatitudeToMercatorAngle(
-      geographicSouth
-    );
+    southMercatorY =
+      WebMercatorProjection.geodeticLatitudeToMercatorAngle(geographicSouth);
     oneOverMercatorHeight =
       1.0 /
       (WebMercatorProjection.geodeticLatitudeToMercatorAngle(geographicNorth) -
@@ -465,9 +464,8 @@ HeightmapTessellator.computeVertices = function (options) {
       }
 
       if (includeGeodeticSurfaceNormals) {
-        geodeticSurfaceNormals[index] = ellipsoid.geodeticSurfaceNormal(
-          position
-        );
+        geodeticSurfaceNormals[index] =
+          ellipsoid.geodeticSurfaceNormal(position);
       }
     }
   }
@@ -486,11 +484,12 @@ HeightmapTessellator.computeVertices = function (options) {
   let occludeePointInScaledSpace;
   if (hasRelativeToCenter) {
     const occluder = new EllipsoidalOccluder(ellipsoid);
-    occludeePointInScaledSpace = occluder.computeHorizonCullingPointPossiblyUnderEllipsoid(
-      relativeToCenter,
-      positions,
-      minimumHeight
-    );
+    occludeePointInScaledSpace =
+      occluder.computeHorizonCullingPointPossiblyUnderEllipsoid(
+        relativeToCenter,
+        positions,
+        minimumHeight
+      );
   }
 
   const aaBox = new AxisAlignedBoundingBox(minimum, maximum, relativeToCenter);
@@ -529,7 +528,7 @@ HeightmapTessellator.computeVertices = function (options) {
     encoding: encoding,
     boundingSphere3D: boundingSphere3D,
     orientedBoundingBox: orientedBoundingBox,
-    occludeePointInScaledSpace: occludeePointInScaledSpace,
+    occludeePointInScaledSpace: occludeePointInScaledSpace
   };
 };
 export default HeightmapTessellator;

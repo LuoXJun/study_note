@@ -20,6 +20,6 @@ const TerrainQuantization = {
    * @type {Number}
    * @constant
    */
-  BITS12: 1,
+  BITS12: 1
 };
 export default Object.freeze(TerrainQuantization);

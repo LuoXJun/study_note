@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "uniform sampler2D colorTexture;\n\
+export default 'uniform sampler2D colorTexture;\n\
 \n\
 #ifdef DEBUG_SHOW_DEPTH\n\
 uniform sampler2D u_packedTranslucentDepth;\n\
@@ -30,4 +30,4 @@ void main()\n\
     gl_FragColor = color;\n\
 #endif\n\
 }\n\
-";
+';

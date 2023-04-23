@@ -22,8 +22,8 @@ Object.defineProperties(Queue.prototype, {
   length: {
     get: function () {
       return this._length;
-    },
-  },
+    }
+  }
 });
 
 /**

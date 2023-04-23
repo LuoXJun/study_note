@@ -609,6 +609,6 @@ const WebGLConstants = {
   TEXTURE_IMMUTABLE_LEVELS: 0x82df,
 
   // Extensions
-  MAX_TEXTURE_MAX_ANISOTROPY_EXT: 0x84ff,
+  MAX_TEXTURE_MAX_ANISOTROPY_EXT: 0x84ff
 };
 export default Object.freeze(WebGLConstants);

@@ -1,6 +1,6 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Encapsulates an algorithm to optimize triangles for the post
@@ -46,7 +46,7 @@ Tipsify.calculateACMR = function (options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(indices)) {
-    throw new DeveloperError("indices is required.");
+    throw new DeveloperError('indices is required.');
   }
   //>>includeEnd('debug');
 
@@ -54,13 +54,13 @@ Tipsify.calculateACMR = function (options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (numIndices < 3 || numIndices % 3 !== 0) {
-    throw new DeveloperError("indices length must be a multiple of three.");
+    throw new DeveloperError('indices length must be a multiple of three.');
   }
   if (maximumIndex <= 0) {
-    throw new DeveloperError("maximumIndex must be greater than zero.");
+    throw new DeveloperError('maximumIndex must be greater than zero.');
   }
   if (cacheSize < 3) {
-    throw new DeveloperError("cacheSize must be greater than two.");
+    throw new DeveloperError('cacheSize must be greater than two.');
   }
   //>>includeEnd('debug');
 
@@ -185,7 +185,7 @@ Tipsify.tipsify = function (options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(indices)) {
-    throw new DeveloperError("indices is required.");
+    throw new DeveloperError('indices is required.');
   }
   //>>includeEnd('debug');
 
@@ -193,13 +193,13 @@ Tipsify.tipsify = function (options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (numIndices < 3 || numIndices % 3 !== 0) {
-    throw new DeveloperError("indices length must be a multiple of three.");
+    throw new DeveloperError('indices length must be a multiple of three.');
   }
   if (maximumIndex <= 0) {
-    throw new DeveloperError("maximumIndex must be greater than zero.");
+    throw new DeveloperError('maximumIndex must be greater than zero.');
   }
   if (cacheSize < 3) {
-    throw new DeveloperError("cacheSize must be greater than two.");
+    throw new DeveloperError('cacheSize must be greater than two.');
   }
   //>>includeEnd('debug');
 
@@ -231,7 +231,7 @@ Tipsify.tipsify = function (options) {
     vertices[i] = {
       numLiveTriangles: 0,
       timeStamp: 0,
-      vertexTriangles: [],
+      vertexTriangles: []
     };
   }
   currentIndex = 0;

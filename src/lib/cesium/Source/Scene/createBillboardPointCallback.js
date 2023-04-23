@@ -18,12 +18,12 @@ function createBillboardPointCallback(
   pixelSize
 ) {
   return function () {
-    const canvas = document.createElement("canvas");
+    const canvas = document.createElement('canvas');
 
     const length = pixelSize + 2 * cssOutlineWidth;
     canvas.height = canvas.width = length;
 
-    const context2D = canvas.getContext("2d");
+    const context2D = canvas.getContext('2d');
     context2D.clearRect(0, 0, length, length);
 
     if (cssOutlineWidth !== 0) {
@@ -35,7 +35,7 @@ function createBillboardPointCallback(
       // Punch a hole in the center if needed.
       if (centerAlpha < 1.0) {
         context2D.save();
-        context2D.globalCompositeOperation = "destination-out";
+        context2D.globalCompositeOperation = 'destination-out';
         context2D.beginPath();
         context2D.arc(
           length / 2,
@@ -46,7 +46,7 @@ function createBillboardPointCallback(
           true
         );
         context2D.closePath();
-        context2D.fillStyle = "black";
+        context2D.fillStyle = 'black';
         context2D.fill();
         context2D.restore();
       }

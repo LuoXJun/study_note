@@ -1,4 +1,4 @@
-import Check from "../Core/Check.js";
+import Check from '../Core/Check.js';
 
 /**
  * Gets a GLSL snippet that clips a fragment using the `clip` function from {@link getClippingFunction} and styles it.
@@ -15,9 +15,9 @@ function getClipAndStyleCode(
   styleUniformName
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("samplerUniformName", samplerUniformName);
-  Check.typeOf.string("matrixUniformName", matrixUniformName);
-  Check.typeOf.string("styleUniformName", styleUniformName);
+  Check.typeOf.string('samplerUniformName', samplerUniformName);
+  Check.typeOf.string('matrixUniformName', matrixUniformName);
+  Check.typeOf.string('styleUniformName', styleUniformName);
   //>>includeEnd('debug');
 
   const shaderCode =

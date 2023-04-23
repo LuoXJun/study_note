@@ -1,17 +1,17 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import GeometryOffsetAttribute from "./GeometryOffsetAttribute.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
-import PrimitiveType from "./PrimitiveType.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import GeometryOffsetAttribute from './GeometryOffsetAttribute.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
+import PrimitiveType from './PrimitiveType.js';
 
 const defaultRadii = new Cartesian3(1.0, 1.0, 1.0);
 const cos = Math.cos;
@@ -61,14 +61,14 @@ function EllipsoidOutlineGeometry(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (stackPartitions < 1) {
-    throw new DeveloperError("options.stackPartitions cannot be less than 1");
+    throw new DeveloperError('options.stackPartitions cannot be less than 1');
   }
   if (slicePartitions < 0) {
-    throw new DeveloperError("options.slicePartitions cannot be less than 0");
+    throw new DeveloperError('options.slicePartitions cannot be less than 0');
   }
   if (subdivisions < 0) {
     throw new DeveloperError(
-      "options.subdivisions must be greater than or equal to zero."
+      'options.subdivisions must be greater than or equal to zero.'
     );
   }
   if (
@@ -76,7 +76,7 @@ function EllipsoidOutlineGeometry(options) {
     options.offsetAttribute === GeometryOffsetAttribute.TOP
   ) {
     throw new DeveloperError(
-      "GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry."
+      'GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -91,7 +91,7 @@ function EllipsoidOutlineGeometry(options) {
   this._slicePartitions = slicePartitions;
   this._subdivisions = subdivisions;
   this._offsetAttribute = options.offsetAttribute;
-  this._workerName = "createEllipsoidOutlineGeometry";
+  this._workerName = 'createEllipsoidOutlineGeometry';
 }
 
 /**
@@ -112,10 +112,10 @@ EllipsoidOutlineGeometry.packedLength = 2 * Cartesian3.packedLength + 8;
 EllipsoidOutlineGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(value)) {
-    throw new DeveloperError("value is required");
+    throw new DeveloperError('value is required');
   }
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -151,7 +151,7 @@ const scratchOptions = {
   stackPartitions: undefined,
   slicePartitions: undefined,
   subdivisions: undefined,
-  offsetAttribute: undefined,
+  offsetAttribute: undefined
 };
 
 /**
@@ -165,7 +165,7 @@ const scratchOptions = {
 EllipsoidOutlineGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -435,8 +435,8 @@ EllipsoidOutlineGeometry.createGeometry = function (ellipsoidGeometry) {
     position: new GeometryAttribute({
       componentDatatype: ComponentDatatype.DOUBLE,
       componentsPerAttribute: 3,
-      values: positions,
-    }),
+      values: positions
+    })
   });
 
   if (defined(ellipsoidGeometry._offsetAttribute)) {
@@ -449,7 +449,7 @@ EllipsoidOutlineGeometry.createGeometry = function (ellipsoidGeometry) {
     attributes.applyOffset = new GeometryAttribute({
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 1,
-      values: applyOffset,
+      values: applyOffset
     });
   }
 
@@ -458,7 +458,7 @@ EllipsoidOutlineGeometry.createGeometry = function (ellipsoidGeometry) {
     indices: indices,
     primitiveType: PrimitiveType.LINES,
     boundingSphere: BoundingSphere.fromEllipsoid(ellipsoid),
-    offsetAttribute: ellipsoidGeometry._offsetAttribute,
+    offsetAttribute: ellipsoidGeometry._offsetAttribute
   });
 };
 export default EllipsoidOutlineGeometry;

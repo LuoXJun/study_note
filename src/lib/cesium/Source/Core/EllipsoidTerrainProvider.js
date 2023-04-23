@@ -1,10 +1,10 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Event from "./Event.js";
-import GeographicTilingScheme from "./GeographicTilingScheme.js";
-import HeightmapTerrainData from "./HeightmapTerrainData.js";
-import TerrainProvider from "./TerrainProvider.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Ellipsoid from './Ellipsoid.js';
+import Event from './Event.js';
+import GeographicTilingScheme from './GeographicTilingScheme.js';
+import HeightmapTerrainData from './HeightmapTerrainData.js';
+import TerrainProvider from './TerrainProvider.js';
 
 /**
  * A very simple {@link TerrainProvider} that produces geometry by tessellating an ellipsoidal
@@ -29,17 +29,18 @@ function EllipsoidTerrainProvider(options) {
   this._tilingScheme = options.tilingScheme;
   if (!defined(this._tilingScheme)) {
     this._tilingScheme = new GeographicTilingScheme({
-      ellipsoid: defaultValue(options.ellipsoid, Ellipsoid.WGS84),
+      ellipsoid: defaultValue(options.ellipsoid, Ellipsoid.WGS84)
     });
   }
 
   // Note: the 64 below does NOT need to match the actual vertex dimensions, because
   // the ellipsoid is significantly smoother than actual terrain.
-  this._levelZeroMaximumGeometricError = TerrainProvider.getEstimatedLevelZeroGeometricErrorForAHeightmap(
-    this._tilingScheme.ellipsoid,
-    64,
-    this._tilingScheme.getNumberOfXTilesAtLevel(0)
-  );
+  this._levelZeroMaximumGeometricError =
+    TerrainProvider.getEstimatedLevelZeroGeometricErrorForAHeightmap(
+      this._tilingScheme.ellipsoid,
+      64,
+      this._tilingScheme.getNumberOfXTilesAtLevel(0)
+    );
 
   this._errorEvent = new Event();
   this._readyPromise = Promise.resolve(true);
@@ -57,7 +58,7 @@ Object.defineProperties(EllipsoidTerrainProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._errorEvent;
-    },
+    }
   },
 
   /**
@@ -70,7 +71,7 @@ Object.defineProperties(EllipsoidTerrainProvider.prototype, {
   credit: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -83,7 +84,7 @@ Object.defineProperties(EllipsoidTerrainProvider.prototype, {
   tilingScheme: {
     get: function () {
       return this._tilingScheme;
-    },
+    }
   },
 
   /**
@@ -95,7 +96,7 @@ Object.defineProperties(EllipsoidTerrainProvider.prototype, {
   ready: {
     get: function () {
       return true;
-    },
+    }
   },
 
   /**
@@ -107,7 +108,7 @@ Object.defineProperties(EllipsoidTerrainProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   /**
@@ -122,7 +123,7 @@ Object.defineProperties(EllipsoidTerrainProvider.prototype, {
   hasWaterMask: {
     get: function () {
       return false;
-    },
+    }
   },
 
   /**
@@ -135,7 +136,7 @@ Object.defineProperties(EllipsoidTerrainProvider.prototype, {
   hasVertexNormals: {
     get: function () {
       return false;
-    },
+    }
   },
   /**
    * Gets an object that can be used to determine availability of terrain from this provider, such as
@@ -149,8 +150,8 @@ Object.defineProperties(EllipsoidTerrainProvider.prototype, {
   availability: {
     get: function () {
       return undefined;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -179,7 +180,7 @@ EllipsoidTerrainProvider.prototype.requestTileGeometry = function (
     new HeightmapTerrainData({
       buffer: new Uint8Array(width * height),
       width: width,
-      height: height,
+      height: height
     })
   );
 };

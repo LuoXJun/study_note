@@ -1,44 +1,44 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Cartographic from "../Core/Cartographic.js";
-import clone from "../Core/clone.js";
-import Color from "../Core/Color.js";
-import combine from "../Core/combine.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defer from "../Core/defer.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import EncodedCartesian3 from "../Core/EncodedCartesian3.js";
-import FeatureDetection from "../Core/FeatureDetection.js";
-import Geometry from "../Core/Geometry.js";
-import GeometryAttribute from "../Core/GeometryAttribute.js";
-import GeometryAttributes from "../Core/GeometryAttributes.js";
-import GeometryOffsetAttribute from "../Core/GeometryOffsetAttribute.js";
-import Intersect from "../Core/Intersect.js";
-import Matrix4 from "../Core/Matrix4.js";
-import Plane from "../Core/Plane.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import subdivideArray from "../Core/subdivideArray.js";
-import TaskProcessor from "../Core/TaskProcessor.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import ContextLimits from "../Renderer/ContextLimits.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import Pass from "../Renderer/Pass.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import VertexArray from "../Renderer/VertexArray.js";
-import BatchTable from "./BatchTable.js";
-import CullFace from "./CullFace.js";
-import DepthFunction from "./DepthFunction.js";
-import PrimitivePipeline from "./PrimitivePipeline.js";
-import PrimitiveState from "./PrimitiveState.js";
-import SceneMode from "./SceneMode.js";
-import ShadowMode from "./ShadowMode.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Cartographic from '../Core/Cartographic.js';
+import clone from '../Core/clone.js';
+import Color from '../Core/Color.js';
+import combine from '../Core/combine.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defer from '../Core/defer.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import EncodedCartesian3 from '../Core/EncodedCartesian3.js';
+import FeatureDetection from '../Core/FeatureDetection.js';
+import Geometry from '../Core/Geometry.js';
+import GeometryAttribute from '../Core/GeometryAttribute.js';
+import GeometryAttributes from '../Core/GeometryAttributes.js';
+import GeometryOffsetAttribute from '../Core/GeometryOffsetAttribute.js';
+import Intersect from '../Core/Intersect.js';
+import Matrix4 from '../Core/Matrix4.js';
+import Plane from '../Core/Plane.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import subdivideArray from '../Core/subdivideArray.js';
+import TaskProcessor from '../Core/TaskProcessor.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import ContextLimits from '../Renderer/ContextLimits.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import Pass from '../Renderer/Pass.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import VertexArray from '../Renderer/VertexArray.js';
+import BatchTable from './BatchTable.js';
+import CullFace from './CullFace.js';
+import DepthFunction from './DepthFunction.js';
+import PrimitivePipeline from './PrimitivePipeline.js';
+import PrimitiveState from './PrimitiveState.js';
+import SceneMode from './SceneMode.js';
+import ShadowMode from './ShadowMode.js';
 
 /**
  * A primitive represents geometry in the {@link Scene}.  The geometry can be from a single {@link GeometryInstance}
@@ -289,7 +289,7 @@ function Primitive(options) {
         this.geometryInstances.length !== 1))
   ) {
     throw new DeveloperError(
-      "Relative-to-center rendering only supports one geometry instance."
+      'Relative-to-center rendering only supports one geometry instance.'
     );
   }
   //>>includeEnd('debug');
@@ -378,7 +378,7 @@ Object.defineProperties(Primitive.prototype, {
   vertexCacheOptimize: {
     get: function () {
       return this._vertexCacheOptimize;
-    },
+    }
   },
 
   /**
@@ -394,7 +394,7 @@ Object.defineProperties(Primitive.prototype, {
   interleave: {
     get: function () {
       return this._interleave;
-    },
+    }
   },
 
   /**
@@ -410,7 +410,7 @@ Object.defineProperties(Primitive.prototype, {
   releaseGeometryInstances: {
     get: function () {
       return this._releaseGeometryInstances;
-    },
+    }
   },
 
   /**
@@ -426,7 +426,7 @@ Object.defineProperties(Primitive.prototype, {
   allowPicking: {
     get: function () {
       return this._allowPicking;
-    },
+    }
   },
 
   /**
@@ -442,7 +442,7 @@ Object.defineProperties(Primitive.prototype, {
   asynchronous: {
     get: function () {
       return this._asynchronous;
-    },
+    }
   },
 
   /**
@@ -458,7 +458,7 @@ Object.defineProperties(Primitive.prototype, {
   compressVertices: {
     get: function () {
       return this._compressVertices;
-    },
+    }
   },
 
   /**
@@ -474,7 +474,7 @@ Object.defineProperties(Primitive.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -486,8 +486,8 @@ Object.defineProperties(Primitive.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise.promise;
-    },
-  },
+    }
+  }
 });
 
 function getCommonPerInstanceAttributeNames(instances) {
@@ -578,36 +578,36 @@ function createBatchTable(primitive, context) {
       functionName: `czm_batchTable_${name}`,
       componentDatatype: attribute.componentDatatype,
       componentsPerAttribute: attribute.componentsPerAttribute,
-      normalize: attribute.normalize,
+      normalize: attribute.normalize
     });
   }
 
-  if (names.indexOf("distanceDisplayCondition") !== -1) {
+  if (names.indexOf('distanceDisplayCondition') !== -1) {
     attributes.push(
       {
-        functionName: "czm_batchTable_boundingSphereCenter3DHigh",
+        functionName: 'czm_batchTable_boundingSphereCenter3DHigh',
         componentDatatype: ComponentDatatype.FLOAT,
-        componentsPerAttribute: 3,
+        componentsPerAttribute: 3
       },
       {
-        functionName: "czm_batchTable_boundingSphereCenter3DLow",
+        functionName: 'czm_batchTable_boundingSphereCenter3DLow',
         componentDatatype: ComponentDatatype.FLOAT,
-        componentsPerAttribute: 3,
+        componentsPerAttribute: 3
       },
       {
-        functionName: "czm_batchTable_boundingSphereCenter2DHigh",
+        functionName: 'czm_batchTable_boundingSphereCenter2DHigh',
         componentDatatype: ComponentDatatype.FLOAT,
-        componentsPerAttribute: 3,
+        componentsPerAttribute: 3
       },
       {
-        functionName: "czm_batchTable_boundingSphereCenter2DLow",
+        functionName: 'czm_batchTable_boundingSphereCenter2DLow',
         componentDatatype: ComponentDatatype.FLOAT,
-        componentsPerAttribute: 3,
+        componentsPerAttribute: 3
       },
       {
-        functionName: "czm_batchTable_boundingSphereRadius",
+        functionName: 'czm_batchTable_boundingSphereRadius',
         componentDatatype: ComponentDatatype.FLOAT,
-        componentsPerAttribute: 1,
+        componentsPerAttribute: 1
       }
     );
     boundingSphereAttributeIndices.center3DHigh = attributes.length - 5;
@@ -617,20 +617,20 @@ function createBatchTable(primitive, context) {
     boundingSphereAttributeIndices.radius = attributes.length - 1;
   }
 
-  if (names.indexOf("offset") !== -1) {
+  if (names.indexOf('offset') !== -1) {
     attributes.push({
-      functionName: "czm_batchTable_offset2D",
+      functionName: 'czm_batchTable_offset2D',
       componentDatatype: ComponentDatatype.FLOAT,
-      componentsPerAttribute: 3,
+      componentsPerAttribute: 3
     });
     offset2DIndex = attributes.length - 1;
   }
 
   attributes.push({
-    functionName: "czm_batchTable_pickColor",
+    functionName: 'czm_batchTable_pickColor',
     componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
     componentsPerAttribute: 4,
-    normalize: true,
+    normalize: true
   });
 
   const attributesLength = attributes.length;
@@ -649,7 +649,7 @@ function createBatchTable(primitive, context) {
     }
 
     const pickObject = {
-      primitive: defaultValue(instance.pickPrimitive, primitive),
+      primitive: defaultValue(instance.pickPrimitive, primitive)
     };
 
     if (defined(instance.id)) {
@@ -671,7 +671,8 @@ function createBatchTable(primitive, context) {
 
   primitive._batchTable = batchTable;
   primitive._batchTableAttributeIndices = attributeIndices;
-  primitive._batchTableBoundingSphereAttributeIndices = boundingSphereAttributeIndices;
+  primitive._batchTableBoundingSphereAttributeIndices =
+    boundingSphereAttributeIndices;
   primitive._batchTableOffsetAttribute2DIndex = offset2DIndex;
 }
 
@@ -686,7 +687,7 @@ function cloneAttribute(attribute) {
     componentDatatype: attribute.componentDatatype,
     componentsPerAttribute: attribute.componentsPerAttribute,
     normalize: attribute.normalize,
-    values: clonedValues,
+    values: clonedValues
   });
 }
 
@@ -713,7 +714,7 @@ function cloneGeometry(geometry) {
     attributes: newAttributes,
     indices: indices,
     primitiveType: geometry.primitiveType,
-    boundingSphere: BoundingSphere.clone(geometry.boundingSphere),
+    boundingSphere: BoundingSphere.clone(geometry.boundingSphere)
   });
 }
 
@@ -723,7 +724,7 @@ function cloneInstance(instance, geometry) {
     attributes: instance.attributes,
     modelMatrix: Matrix4.clone(instance.modelMatrix),
     pickPrimitive: instance.pickPrimitive,
-    id: instance.id,
+    id: instance.id
   };
 }
 
@@ -736,9 +737,9 @@ Primitive._modifyShaderPosition = function (
 ) {
   let match;
 
-  let forwardDecl = "";
-  let attributes = "";
-  let computeFunctions = "";
+  let forwardDecl = '';
+  let attributes = '';
+  let computeFunctions = '';
 
   while ((match = positionRegex.exec(vertexShaderSource)) !== null) {
     const name = match[1];
@@ -748,7 +749,7 @@ Primitive._modifyShaderPosition = function (
     )}()`;
 
     // Don't forward-declare czm_computePosition because computePosition.glsl already does.
-    if (functionName !== "vec4 czm_computePosition()") {
+    if (functionName !== 'vec4 czm_computePosition()') {
       forwardDecl += `${functionName};\n`;
     }
 
@@ -790,15 +791,15 @@ Primitive._modifyShaderPosition = function (
       // Use RTC
       vertexShaderSource = vertexShaderSource.replace(
         /attribute\s+vec(?:3|4)\s+position3DHigh;/g,
-        ""
+        ''
       );
       vertexShaderSource = vertexShaderSource.replace(
         /attribute\s+vec(?:3|4)\s+position3DLow;/g,
-        ""
+        ''
       );
 
-      forwardDecl += "uniform mat4 u_modifiedModelView;\n";
-      attributes += "attribute vec4 position;\n";
+      forwardDecl += 'uniform mat4 u_modifiedModelView;\n';
+      attributes += 'attribute vec4 position;\n';
 
       computeFunctions +=
         `${functionName}\n` +
@@ -808,17 +809,17 @@ Primitive._modifyShaderPosition = function (
 
       vertexShaderSource = vertexShaderSource.replace(
         /czm_modelViewRelativeToEye\s+\*\s+/g,
-        ""
+        ''
       );
       vertexShaderSource = vertexShaderSource.replace(
         /czm_modelViewProjectionRelativeToEye/g,
-        "czm_projection"
+        'czm_projection'
       );
     }
   }
 
   return [forwardDecl, attributes, vertexShaderSource, computeFunctions].join(
-    "\n"
+    '\n'
   );
 };
 
@@ -829,14 +830,14 @@ Primitive._appendShowToShader = function (primitive, vertexShaderSource) {
 
   const renamedVS = ShaderSource.replaceMain(
     vertexShaderSource,
-    "czm_non_show_main"
+    'czm_non_show_main'
   );
   const showMain =
-    "void main() \n" +
-    "{ \n" +
-    "    czm_non_show_main(); \n" +
-    "    gl_Position *= czm_batchTable_show(batchId); \n" +
-    "}";
+    'void main() \n' +
+    '{ \n' +
+    '    czm_non_show_main(); \n' +
+    '    gl_Position *= czm_batchTable_show(batchId); \n' +
+    '}';
 
   return `${renamedVS}\n${showMain}`;
 };
@@ -865,36 +866,36 @@ Primitive._updateColorAttribute = function (
     !defined(primitive._batchTableAttributeIndices.depthFailColor)
   ) {
     throw new DeveloperError(
-      "A depthFailColor per-instance attribute is required when using a depth fail appearance that uses a color attribute."
+      'A depthFailColor per-instance attribute is required when using a depth fail appearance that uses a color attribute.'
     );
   }
   //>>includeEnd('debug');
 
   let modifiedVS = vertexShaderSource;
-  modifiedVS = modifiedVS.replace(/attribute\s+vec4\s+color;/g, "");
+  modifiedVS = modifiedVS.replace(/attribute\s+vec4\s+color;/g, '');
   if (!isDepthFail) {
     modifiedVS = modifiedVS.replace(
       /(\b)color(\b)/g,
-      "$1czm_batchTable_color(batchId)$2"
+      '$1czm_batchTable_color(batchId)$2'
     );
   } else {
     modifiedVS = modifiedVS.replace(
       /(\b)color(\b)/g,
-      "$1czm_batchTable_depthFailColor(batchId)$2"
+      '$1czm_batchTable_depthFailColor(batchId)$2'
     );
   }
   return modifiedVS;
 };
 
 function appendPickToVertexShader(source) {
-  const renamedVS = ShaderSource.replaceMain(source, "czm_non_pick_main");
+  const renamedVS = ShaderSource.replaceMain(source, 'czm_non_pick_main');
   const pickMain =
-    "varying vec4 v_pickColor; \n" +
-    "void main() \n" +
-    "{ \n" +
-    "    czm_non_pick_main(); \n" +
-    "    v_pickColor = czm_batchTable_pickColor(batchId); \n" +
-    "}";
+    'varying vec4 v_pickColor; \n' +
+    'void main() \n' +
+    '{ \n' +
+    '    czm_non_pick_main(); \n' +
+    '    v_pickColor = czm_batchTable_pickColor(batchId); \n' +
+    '}';
 
   return `${renamedVS}\n${pickMain}`;
 }
@@ -904,10 +905,10 @@ function appendPickToFragmentShader(source) {
 }
 
 Primitive._updatePickColorAttribute = function (source) {
-  let vsPick = source.replace(/attribute\s+vec4\s+pickColor;/g, "");
+  let vsPick = source.replace(/attribute\s+vec4\s+pickColor;/g, '');
   vsPick = vsPick.replace(
     /(\b)pickColor(\b)/g,
-    "$1czm_batchTable_pickColor(batchId)$2"
+    '$1czm_batchTable_pickColor(batchId)$2'
   );
   return vsPick;
 };
@@ -917,24 +918,24 @@ Primitive._appendOffsetToShader = function (primitive, vertexShaderSource) {
     return vertexShaderSource;
   }
 
-  let attr = "attribute float batchId;\n";
-  attr += "attribute float applyOffset;";
+  let attr = 'attribute float batchId;\n';
+  attr += 'attribute float applyOffset;';
   let modifiedShader = vertexShaderSource.replace(
     /attribute\s+float\s+batchId;/g,
     attr
   );
 
-  let str = "vec4 $1 = czm_computePosition();\n";
-  str += "    if (czm_sceneMode == czm_sceneMode3D)\n";
-  str += "    {\n";
+  let str = 'vec4 $1 = czm_computePosition();\n';
+  str += '    if (czm_sceneMode == czm_sceneMode3D)\n';
+  str += '    {\n';
   str +=
-    "        $1 = $1 + vec4(czm_batchTable_offset(batchId) * applyOffset, 0.0);";
-  str += "    }\n";
-  str += "    else\n";
-  str += "    {\n";
+    '        $1 = $1 + vec4(czm_batchTable_offset(batchId) * applyOffset, 0.0);';
+  str += '    }\n';
+  str += '    else\n';
+  str += '    {\n';
   str +=
-    "        $1 = $1 + vec4(czm_batchTable_offset2D(batchId) * applyOffset, 0.0);";
-  str += "    }\n";
+    '        $1 = $1 + vec4(czm_batchTable_offset2D(batchId) * applyOffset, 0.0);';
+  str += '    }\n';
   modifiedShader = modifiedShader.replace(
     /vec4\s+([A-Za-z0-9_]+)\s+=\s+czm_computePosition\(\);/g,
     str
@@ -955,59 +956,59 @@ Primitive._appendDistanceDisplayConditionToShader = function (
 
   const renamedVS = ShaderSource.replaceMain(
     vertexShaderSource,
-    "czm_non_distanceDisplayCondition_main"
+    'czm_non_distanceDisplayCondition_main'
   );
   let distanceDisplayConditionMain =
-    "void main() \n" +
-    "{ \n" +
-    "    czm_non_distanceDisplayCondition_main(); \n" +
-    "    vec2 distanceDisplayCondition = czm_batchTable_distanceDisplayCondition(batchId);\n" +
-    "    vec3 boundingSphereCenter3DHigh = czm_batchTable_boundingSphereCenter3DHigh(batchId);\n" +
-    "    vec3 boundingSphereCenter3DLow = czm_batchTable_boundingSphereCenter3DLow(batchId);\n" +
-    "    float boundingSphereRadius = czm_batchTable_boundingSphereRadius(batchId);\n";
+    'void main() \n' +
+    '{ \n' +
+    '    czm_non_distanceDisplayCondition_main(); \n' +
+    '    vec2 distanceDisplayCondition = czm_batchTable_distanceDisplayCondition(batchId);\n' +
+    '    vec3 boundingSphereCenter3DHigh = czm_batchTable_boundingSphereCenter3DHigh(batchId);\n' +
+    '    vec3 boundingSphereCenter3DLow = czm_batchTable_boundingSphereCenter3DLow(batchId);\n' +
+    '    float boundingSphereRadius = czm_batchTable_boundingSphereRadius(batchId);\n';
 
   if (!scene3DOnly) {
     distanceDisplayConditionMain +=
-      "    vec3 boundingSphereCenter2DHigh = czm_batchTable_boundingSphereCenter2DHigh(batchId);\n" +
-      "    vec3 boundingSphereCenter2DLow = czm_batchTable_boundingSphereCenter2DLow(batchId);\n" +
-      "    vec4 centerRTE;\n" +
-      "    if (czm_morphTime == 1.0)\n" +
-      "    {\n" +
-      "        centerRTE = czm_translateRelativeToEye(boundingSphereCenter3DHigh, boundingSphereCenter3DLow);\n" +
-      "    }\n" +
-      "    else if (czm_morphTime == 0.0)\n" +
-      "    {\n" +
-      "        centerRTE = czm_translateRelativeToEye(boundingSphereCenter2DHigh.zxy, boundingSphereCenter2DLow.zxy);\n" +
-      "    }\n" +
-      "    else\n" +
-      "    {\n" +
-      "        centerRTE = czm_columbusViewMorph(\n" +
-      "                czm_translateRelativeToEye(boundingSphereCenter2DHigh.zxy, boundingSphereCenter2DLow.zxy),\n" +
-      "                czm_translateRelativeToEye(boundingSphereCenter3DHigh, boundingSphereCenter3DLow),\n" +
-      "                czm_morphTime);\n" +
-      "    }\n";
+      '    vec3 boundingSphereCenter2DHigh = czm_batchTable_boundingSphereCenter2DHigh(batchId);\n' +
+      '    vec3 boundingSphereCenter2DLow = czm_batchTable_boundingSphereCenter2DLow(batchId);\n' +
+      '    vec4 centerRTE;\n' +
+      '    if (czm_morphTime == 1.0)\n' +
+      '    {\n' +
+      '        centerRTE = czm_translateRelativeToEye(boundingSphereCenter3DHigh, boundingSphereCenter3DLow);\n' +
+      '    }\n' +
+      '    else if (czm_morphTime == 0.0)\n' +
+      '    {\n' +
+      '        centerRTE = czm_translateRelativeToEye(boundingSphereCenter2DHigh.zxy, boundingSphereCenter2DLow.zxy);\n' +
+      '    }\n' +
+      '    else\n' +
+      '    {\n' +
+      '        centerRTE = czm_columbusViewMorph(\n' +
+      '                czm_translateRelativeToEye(boundingSphereCenter2DHigh.zxy, boundingSphereCenter2DLow.zxy),\n' +
+      '                czm_translateRelativeToEye(boundingSphereCenter3DHigh, boundingSphereCenter3DLow),\n' +
+      '                czm_morphTime);\n' +
+      '    }\n';
   } else {
     distanceDisplayConditionMain +=
-      "    vec4 centerRTE = czm_translateRelativeToEye(boundingSphereCenter3DHigh, boundingSphereCenter3DLow);\n";
+      '    vec4 centerRTE = czm_translateRelativeToEye(boundingSphereCenter3DHigh, boundingSphereCenter3DLow);\n';
   }
 
   distanceDisplayConditionMain +=
-    "    float radiusSq = boundingSphereRadius * boundingSphereRadius; \n" +
-    "    float distanceSq; \n" +
-    "    if (czm_sceneMode == czm_sceneMode2D) \n" +
-    "    { \n" +
-    "        distanceSq = czm_eyeHeight2D.y - radiusSq; \n" +
-    "    } \n" +
-    "    else \n" +
-    "    { \n" +
-    "        distanceSq = dot(centerRTE.xyz, centerRTE.xyz) - radiusSq; \n" +
-    "    } \n" +
-    "    distanceSq = max(distanceSq, 0.0); \n" +
-    "    float nearSq = distanceDisplayCondition.x * distanceDisplayCondition.x; \n" +
-    "    float farSq = distanceDisplayCondition.y * distanceDisplayCondition.y; \n" +
-    "    float show = (distanceSq >= nearSq && distanceSq <= farSq) ? 1.0 : 0.0; \n" +
-    "    gl_Position *= show; \n" +
-    "}";
+    '    float radiusSq = boundingSphereRadius * boundingSphereRadius; \n' +
+    '    float distanceSq; \n' +
+    '    if (czm_sceneMode == czm_sceneMode2D) \n' +
+    '    { \n' +
+    '        distanceSq = czm_eyeHeight2D.y - radiusSq; \n' +
+    '    } \n' +
+    '    else \n' +
+    '    { \n' +
+    '        distanceSq = dot(centerRTE.xyz, centerRTE.xyz) - radiusSq; \n' +
+    '    } \n' +
+    '    distanceSq = max(distanceSq, 0.0); \n' +
+    '    float nearSq = distanceDisplayCondition.x * distanceDisplayCondition.x; \n' +
+    '    float farSq = distanceDisplayCondition.y * distanceDisplayCondition.y; \n' +
+    '    float show = (distanceSq >= nearSq && distanceSq <= farSq) ? 1.0 : 0.0; \n' +
+    '    gl_Position *= show; \n' +
+    '}';
   return `${renamedVS}\n${distanceDisplayConditionMain}`;
 };
 
@@ -1032,95 +1033,95 @@ function modifyForEncodedNormals(primitive, vertexShaderSource) {
   let numComponents = containsSt && containsNormal ? 2.0 : 1.0;
   numComponents += containsTangent || containsBitangent ? 1 : 0;
 
-  const type = numComponents > 1 ? `vec${numComponents}` : "float";
+  const type = numComponents > 1 ? `vec${numComponents}` : 'float';
 
-  const attributeName = "compressedAttributes";
+  const attributeName = 'compressedAttributes';
   const attributeDecl = `attribute ${type} ${attributeName};`;
 
-  let globalDecl = "";
-  let decode = "";
+  let globalDecl = '';
+  let decode = '';
 
   if (containsSt) {
-    globalDecl += "vec2 st;\n";
+    globalDecl += 'vec2 st;\n';
     const stComponent =
       numComponents > 1 ? `${attributeName}.x` : attributeName;
     decode += `    st = czm_decompressTextureCoordinates(${stComponent});\n`;
   }
 
   if (containsNormal && containsTangent && containsBitangent) {
-    globalDecl += "vec3 normal;\n" + "vec3 tangent;\n" + "vec3 bitangent;\n";
+    globalDecl += 'vec3 normal;\n' + 'vec3 tangent;\n' + 'vec3 bitangent;\n';
     decode += `    czm_octDecode(${attributeName}.${
-      containsSt ? "yz" : "xy"
+      containsSt ? 'yz' : 'xy'
     }, normal, tangent, bitangent);\n`;
   } else {
     if (containsNormal) {
-      globalDecl += "vec3 normal;\n";
+      globalDecl += 'vec3 normal;\n';
       decode += `    normal = czm_octDecode(${attributeName}${
-        numComponents > 1 ? `.${containsSt ? "y" : "x"}` : ""
+        numComponents > 1 ? `.${containsSt ? 'y' : 'x'}` : ''
       });\n`;
     }
 
     if (containsTangent) {
-      globalDecl += "vec3 tangent;\n";
+      globalDecl += 'vec3 tangent;\n';
       decode += `    tangent = czm_octDecode(${attributeName}.${
-        containsSt && containsNormal ? "z" : "y"
+        containsSt && containsNormal ? 'z' : 'y'
       });\n`;
     }
 
     if (containsBitangent) {
-      globalDecl += "vec3 bitangent;\n";
+      globalDecl += 'vec3 bitangent;\n';
       decode += `    bitangent = czm_octDecode(${attributeName}.${
-        containsSt && containsNormal ? "z" : "y"
+        containsSt && containsNormal ? 'z' : 'y'
       });\n`;
     }
   }
 
   let modifiedVS = vertexShaderSource;
-  modifiedVS = modifiedVS.replace(/attribute\s+vec3\s+normal;/g, "");
-  modifiedVS = modifiedVS.replace(/attribute\s+vec2\s+st;/g, "");
-  modifiedVS = modifiedVS.replace(/attribute\s+vec3\s+tangent;/g, "");
-  modifiedVS = modifiedVS.replace(/attribute\s+vec3\s+bitangent;/g, "");
-  modifiedVS = ShaderSource.replaceMain(modifiedVS, "czm_non_compressed_main");
+  modifiedVS = modifiedVS.replace(/attribute\s+vec3\s+normal;/g, '');
+  modifiedVS = modifiedVS.replace(/attribute\s+vec2\s+st;/g, '');
+  modifiedVS = modifiedVS.replace(/attribute\s+vec3\s+tangent;/g, '');
+  modifiedVS = modifiedVS.replace(/attribute\s+vec3\s+bitangent;/g, '');
+  modifiedVS = ShaderSource.replaceMain(modifiedVS, 'czm_non_compressed_main');
   const compressedMain =
-    `${"void main() \n" + "{ \n"}${decode}    czm_non_compressed_main(); \n` +
+    `${'void main() \n' + '{ \n'}${decode}    czm_non_compressed_main(); \n` +
     `}`;
 
-  return [attributeDecl, globalDecl, modifiedVS, compressedMain].join("\n");
+  return [attributeDecl, globalDecl, modifiedVS, compressedMain].join('\n');
 }
 
 function depthClampVS(vertexShaderSource) {
   let modifiedVS = ShaderSource.replaceMain(
     vertexShaderSource,
-    "czm_non_depth_clamp_main"
+    'czm_non_depth_clamp_main'
   );
   modifiedVS +=
-    "void main() {\n" +
-    "    czm_non_depth_clamp_main();\n" +
-    "    gl_Position = czm_depthClamp(gl_Position);" +
-    "}\n";
+    'void main() {\n' +
+    '    czm_non_depth_clamp_main();\n' +
+    '    gl_Position = czm_depthClamp(gl_Position);' +
+    '}\n';
   return modifiedVS;
 }
 
 function depthClampFS(fragmentShaderSource) {
   let modifiedFS = ShaderSource.replaceMain(
     fragmentShaderSource,
-    "czm_non_depth_clamp_main"
+    'czm_non_depth_clamp_main'
   );
   modifiedFS +=
-    "void main() {\n" +
-    "    czm_non_depth_clamp_main();\n" +
-    "#if defined(GL_EXT_frag_depth)\n" +
-    "    #if defined(LOG_DEPTH)\n" +
-    "        czm_writeLogDepth();\n" +
-    "    #else\n" +
-    "        czm_writeDepthClamp();\n" +
-    "    #endif\n" +
-    "#endif\n" +
-    "}\n";
+    'void main() {\n' +
+    '    czm_non_depth_clamp_main();\n' +
+    '#if defined(GL_EXT_frag_depth)\n' +
+    '    #if defined(LOG_DEPTH)\n' +
+    '        czm_writeLogDepth();\n' +
+    '    #else\n' +
+    '        czm_writeDepthClamp();\n' +
+    '    #endif\n' +
+    '#endif\n' +
+    '}\n';
   modifiedFS = `${
-    "#ifdef GL_EXT_frag_depth\n" +
-    "#extension GL_EXT_frag_depth : enable\n" +
-    "#endif\n"
+    '#ifdef GL_EXT_frag_depth\n' +
+    '#extension GL_EXT_frag_depth : enable\n' +
+    '#endif\n'
   }${modifiedFS}`;
   return modifiedFS;
 }
@@ -1161,7 +1162,7 @@ const numberOfCreationWorkers = Math.max(
   1
 );
 let createGeometryTaskProcessors;
-const combineGeometryTaskProcessor = new TaskProcessor("combineGeometry");
+const combineGeometryTaskProcessor = new TaskProcessor('combineGeometry');
 
 function loadAsynchronous(primitive, frameState) {
   let instances;
@@ -1186,21 +1187,21 @@ function loadAsynchronous(primitive, frameState) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(geometry._workerName)) {
         throw new DeveloperError(
-          "_workerName must be defined for asynchronous geometry."
+          '_workerName must be defined for asynchronous geometry.'
         );
       }
       //>>includeEnd('debug');
 
       subTasks.push({
         moduleName: geometry._workerName,
-        geometry: geometry,
+        geometry: geometry
       });
     }
 
     if (!defined(createGeometryTaskProcessors)) {
       createGeometryTaskProcessors = new Array(numberOfCreationWorkers);
       for (i = 0; i < numberOfCreationWorkers; i++) {
-        createGeometryTaskProcessors[i] = new TaskProcessor("createGeometry");
+        createGeometryTaskProcessors[i] = new TaskProcessor('createGeometry');
       }
     }
 
@@ -1242,7 +1243,7 @@ function loadAsynchronous(primitive, frameState) {
       promises.push(
         createGeometryTaskProcessors[i].scheduleTask(
           {
-            subTasks: subTasks[i],
+            subTasks: subTasks[i]
           },
           subTaskTransferableObjects
         )
@@ -1280,7 +1281,7 @@ function loadAsynchronous(primitive, frameState) {
           vertexCacheOptimize: primitive.vertexCacheOptimize,
           compressVertices: primitive.compressVertices,
           modelMatrix: primitive.modelMatrix,
-          createPickOffsets: primitive._createPickOffsets,
+          createPickOffsets: primitive._createPickOffsets
         },
         transferableObjects
       ),
@@ -1292,9 +1293,8 @@ function loadAsynchronous(primitive, frameState) {
 
     Promise.resolve(promise)
       .then(function (packedResult) {
-        const result = PrimitivePipeline.unpackCombineGeometryResults(
-          packedResult
-        );
+        const result =
+          PrimitivePipeline.unpackCombineGeometryResults(packedResult);
         primitive._geometries = result.geometries;
         primitive._attributeLocations = result.attributeLocations;
         primitive.modelMatrix = Matrix4.clone(
@@ -1363,7 +1363,7 @@ function loadSynchronous(primitive, frameState) {
     vertexCacheOptimize: primitive.vertexCacheOptimize,
     compressVertices: primitive.compressVertices,
     modelMatrix: primitive.modelMatrix,
-    createPickOffsets: primitive._createPickOffsets,
+    createPickOffsets: primitive._createPickOffsets
   });
 
   primitive._geometries = result.geometries;
@@ -1652,7 +1652,7 @@ function createVertexArray(primitive, frameState) {
         geometry: geometry,
         attributeLocations: attributeLocations,
         bufferUsage: BufferUsage.STATIC_DRAW,
-        interleave: primitive._interleave,
+        interleave: primitive._interleave
       })
     );
 
@@ -1701,7 +1701,7 @@ function createRenderStates(primitive, context, appearance, twoPasses) {
     rs = clone(renderState, false);
     rs.cull = {
       enabled: true,
-      face: CullFace.BACK,
+      face: CullFace.BACK
     };
     primitive._frontFaceRS = RenderState.fromCache(rs);
 
@@ -1724,7 +1724,7 @@ function createRenderStates(primitive, context, appearance, twoPasses) {
     if (twoPasses) {
       rs.cull = {
         enabled: true,
-        face: CullFace.BACK,
+        face: CullFace.BACK
       };
       primitive._frontFaceDepthFailRS = RenderState.fromCache(rs);
 
@@ -1764,7 +1764,7 @@ function createShaderProgram(primitive, frameState, appearance) {
     shaderProgram: primitive._sp,
     vertexShaderSource: vs,
     fragmentShaderSource: fs,
-    attributeLocations: attributeLocations,
+    attributeLocations: attributeLocations
   });
   validateShaderMatching(primitive._sp, attributeLocations);
 
@@ -1793,7 +1793,7 @@ function createShaderProgram(primitive, frameState, appearance) {
       shaderProgram: primitive._spDepthFail,
       vertexShaderSource: vs,
       fragmentShaderSource: fs,
-      attributeLocations: attributeLocations,
+      attributeLocations: attributeLocations
     });
     validateShaderMatching(primitive._spDepthFail, attributeLocations);
   }
@@ -1893,7 +1893,7 @@ function createCommands(
       if (!defined(colorCommand)) {
         colorCommand = colorCommands[i] = new DrawCommand({
           owner: primitive,
-          primitiveType: primitive._primitiveType,
+          primitiveType: primitive._primitiveType
         });
       }
       colorCommand.vertexArray = primitive._va[vaIndex];
@@ -1909,7 +1909,7 @@ function createCommands(
     if (!defined(colorCommand)) {
       colorCommand = colorCommands[i] = new DrawCommand({
         owner: primitive,
-        primitiveType: primitive._primitiveType,
+        primitiveType: primitive._primitiveType
       });
     }
     colorCommand.vertexArray = primitive._va[vaIndex];
@@ -1926,7 +1926,7 @@ function createCommands(
         if (!defined(colorCommand)) {
           colorCommand = colorCommands[i] = new DrawCommand({
             owner: primitive,
-            primitiveType: primitive._primitiveType,
+            primitiveType: primitive._primitiveType
           });
         }
         colorCommand.vertexArray = primitive._va[vaIndex];
@@ -1942,7 +1942,7 @@ function createCommands(
       if (!defined(colorCommand)) {
         colorCommand = colorCommands[i] = new DrawCommand({
           owner: primitive,
-          primitiveType: primitive._primitiveType,
+          primitiveType: primitive._primitiveType
         });
       }
       colorCommand.vertexArray = primitive._va[vaIndex];
@@ -2027,7 +2027,7 @@ function updateAndQueueCommands(
     !Matrix4.equals(modelMatrix, Matrix4.IDENTITY)
   ) {
     throw new DeveloperError(
-      "Primitive.modelMatrix is only supported in 3D mode."
+      'Primitive.modelMatrix is only supported in 3D mode.'
     );
   }
   //>>includeEnd('debug');
@@ -2070,7 +2070,7 @@ function updateAndQueueCommands(
       colorCommand.receiveShadows = receiveShadows;
 
       if (allowPicking) {
-        colorCommand.pickId = "v_pickColor";
+        colorCommand.pickId = 'v_pickColor';
       } else {
         colorCommand.pickId = undefined;
       }
@@ -2113,7 +2113,7 @@ Primitive.prototype.update = function (frameState) {
   //>>includeStart('debug', pragmas.debug);
   if (defined(this.rtcCenter) && !frameState.scene3DOnly) {
     throw new DeveloperError(
-      "RTC rendering is only available for 3D only scenes."
+      'RTC rendering is only available for 3D only scenes.'
     );
   }
   //>>includeEnd('debug');
@@ -2129,7 +2129,7 @@ Primitive.prototype.update = function (frameState) {
   if (this._batchTable.attributes.length > 0) {
     if (ContextLimits.maximumVertexTextureImageUnits === 0) {
       throw new RuntimeError(
-        "Vertex texture fetch support is required to render primitives with per-instance attributes. The maximum number of vertex texture image units must be greater than zero."
+        'Vertex texture fetch support is required to render primitives with per-instance attributes. The maximum number of vertex texture image units must be greater than zero.'
       );
     }
     this._batchTable.update(frameState);
@@ -2317,7 +2317,7 @@ function createSetFunction(
       value.length > 4
     ) {
       throw new DeveloperError(
-        "value must be and array with length between 1 and 4."
+        'value must be and array with length between 1 and 4.'
       );
     }
     //>>includeEnd('debug');
@@ -2327,7 +2327,7 @@ function createSetFunction(
       attributeIndex,
       attributeValue
     );
-    if (name === "offset") {
+    if (name === 'offset') {
       primitive._recomputeBoundingSpheres = true;
       primitive._batchTableOffsetsUpdated = false;
     }
@@ -2360,12 +2360,12 @@ function createBoundingSphereProperties(primitive, properties, index) {
       }
 
       return boundingSphere;
-    },
+    }
   };
   properties.boundingSphereCV = {
     get: function () {
       return primitive._instanceBoundingSpheresCV[index];
-    },
+    }
   };
 }
 
@@ -2373,7 +2373,7 @@ function createPickIdProperty(primitive, properties, index) {
   properties.pickId = {
     get: function () {
       return primitive._pickIds[index];
-    },
+    }
   };
 }
 
@@ -2395,11 +2395,11 @@ function createPickIdProperty(primitive, properties, index) {
 Primitive.prototype.getGeometryInstanceAttributes = function (id) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(id)) {
-    throw new DeveloperError("id is required");
+    throw new DeveloperError('id is required');
   }
   if (!defined(this._batchTable)) {
     throw new DeveloperError(
-      "must call update before calling getGeometryInstanceAttributes"
+      'must call update before calling getGeometryInstanceAttributes'
     );
   }
   //>>includeEnd('debug');
@@ -2435,7 +2435,7 @@ Primitive.prototype.getGeometryInstanceAttributes = function (id) {
       const attributeIndex = perInstanceAttributeIndices[name];
       properties[name] = {
         get: createGetFunction(batchTable, index, attributeIndex),
-        set: createSetFunction(batchTable, index, attributeIndex, this, name),
+        set: createSetFunction(batchTable, index, attributeIndex, this, name)
       };
     }
   }

@@ -1,6 +1,6 @@
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
 
 /**
  * An enum describing the built-in vertex attribute semantics.
@@ -16,7 +16,7 @@ const VertexAttributeSemantic = {
    * @type {String}
    * @constant
    */
-  POSITION: "POSITION",
+  POSITION: 'POSITION',
 
   /**
    * Per-vertex normal.
@@ -24,7 +24,7 @@ const VertexAttributeSemantic = {
    * @type {String}
    * @constant
    */
-  NORMAL: "NORMAL",
+  NORMAL: 'NORMAL',
 
   /**
    * Per-vertex tangent.
@@ -32,7 +32,7 @@ const VertexAttributeSemantic = {
    * @type {String}
    * @constant
    */
-  TANGENT: "TANGENT",
+  TANGENT: 'TANGENT',
 
   /**
    * Per-vertex texture coordinates.
@@ -40,7 +40,7 @@ const VertexAttributeSemantic = {
    * @type {String}
    * @constant
    */
-  TEXCOORD: "TEXCOORD",
+  TEXCOORD: 'TEXCOORD',
 
   /**
    * Per-vertex color.
@@ -48,7 +48,7 @@ const VertexAttributeSemantic = {
    * @type {String}
    * @constant
    */
-  COLOR: "COLOR",
+  COLOR: 'COLOR',
 
   /**
    * Per-vertex joint IDs for skinning.
@@ -56,7 +56,7 @@ const VertexAttributeSemantic = {
    * @type {String}
    * @constant
    */
-  JOINTS: "JOINTS",
+  JOINTS: 'JOINTS',
 
   /**
    * Per-vertex joint weights for skinning.
@@ -64,7 +64,7 @@ const VertexAttributeSemantic = {
    * @type {String}
    * @constant
    */
-  WEIGHTS: "WEIGHTS",
+  WEIGHTS: 'WEIGHTS',
 
   /**
    * Per-vertex feature ID.
@@ -72,30 +72,30 @@ const VertexAttributeSemantic = {
    * @type {String}
    * @constant
    */
-  FEATURE_ID: "_FEATURE_ID",
+  FEATURE_ID: '_FEATURE_ID'
 };
 
 function semanticToVariableName(semantic) {
   switch (semantic) {
     case VertexAttributeSemantic.POSITION:
-      return "positionMC";
+      return 'positionMC';
     case VertexAttributeSemantic.NORMAL:
-      return "normalMC";
+      return 'normalMC';
     case VertexAttributeSemantic.TANGENT:
-      return "tangentMC";
+      return 'tangentMC';
     case VertexAttributeSemantic.TEXCOORD:
-      return "texCoord";
+      return 'texCoord';
     case VertexAttributeSemantic.COLOR:
-      return "color";
+      return 'color';
     case VertexAttributeSemantic.JOINTS:
-      return "joints";
+      return 'joints';
     case VertexAttributeSemantic.WEIGHTS:
-      return "weights";
+      return 'weights';
     case VertexAttributeSemantic.FEATURE_ID:
-      return "featureId";
+      return 'featureId';
     //>>includeStart('debug', pragmas.debug);
     default:
-      throw new DeveloperError("semantic is not a valid value.");
+      throw new DeveloperError('semantic is not a valid value.');
     //>>includeEnd('debug');
   }
 }
@@ -111,7 +111,7 @@ function semanticToVariableName(semantic) {
  */
 VertexAttributeSemantic.hasSetIndex = function (semantic) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("semantic", semantic);
+  Check.typeOf.string('semantic', semantic);
   //>>includeEnd('debug');
 
   switch (semantic) {
@@ -127,7 +127,7 @@ VertexAttributeSemantic.hasSetIndex = function (semantic) {
       return true;
     //>>includeStart('debug', pragmas.debug);
     default:
-      throw new DeveloperError("semantic is not a valid value.");
+      throw new DeveloperError('semantic is not a valid value.');
     //>>includeEnd('debug');
   }
 };
@@ -143,7 +143,7 @@ VertexAttributeSemantic.hasSetIndex = function (semantic) {
  */
 VertexAttributeSemantic.fromGltfSemantic = function (gltfSemantic) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("gltfSemantic", gltfSemantic);
+  Check.typeOf.string('gltfSemantic', gltfSemantic);
   //>>includeEnd('debug');
 
   let semantic = gltfSemantic;
@@ -156,21 +156,21 @@ VertexAttributeSemantic.fromGltfSemantic = function (gltfSemantic) {
   }
 
   switch (semantic) {
-    case "POSITION":
+    case 'POSITION':
       return VertexAttributeSemantic.POSITION;
-    case "NORMAL":
+    case 'NORMAL':
       return VertexAttributeSemantic.NORMAL;
-    case "TANGENT":
+    case 'TANGENT':
       return VertexAttributeSemantic.TANGENT;
-    case "TEXCOORD":
+    case 'TEXCOORD':
       return VertexAttributeSemantic.TEXCOORD;
-    case "COLOR":
+    case 'COLOR':
       return VertexAttributeSemantic.COLOR;
-    case "JOINTS":
+    case 'JOINTS':
       return VertexAttributeSemantic.JOINTS;
-    case "WEIGHTS":
+    case 'WEIGHTS':
       return VertexAttributeSemantic.WEIGHTS;
-    case "_FEATURE_ID":
+    case '_FEATURE_ID':
       return VertexAttributeSemantic.FEATURE_ID;
   }
 
@@ -188,25 +188,25 @@ VertexAttributeSemantic.fromGltfSemantic = function (gltfSemantic) {
  */
 VertexAttributeSemantic.fromPntsSemantic = function (pntsSemantic) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("pntsSemantic", pntsSemantic);
+  Check.typeOf.string('pntsSemantic', pntsSemantic);
   //>>includeEnd('debug');
 
   switch (pntsSemantic) {
-    case "POSITION":
-    case "POSITION_QUANTIZED":
+    case 'POSITION':
+    case 'POSITION_QUANTIZED':
       return VertexAttributeSemantic.POSITION;
-    case "RGBA":
-    case "RGB":
-    case "RGB565":
+    case 'RGBA':
+    case 'RGB':
+    case 'RGB565':
       return VertexAttributeSemantic.COLOR;
-    case "NORMAL":
-    case "NORMAL_OCT16P":
+    case 'NORMAL':
+    case 'NORMAL_OCT16P':
       return VertexAttributeSemantic.NORMAL;
-    case "BATCH_ID":
+    case 'BATCH_ID':
       return VertexAttributeSemantic.FEATURE_ID;
     //>>includeStart('debug', pragmas.debug);
     default:
-      throw new DeveloperError("pntsSemantic is not a valid value.");
+      throw new DeveloperError('pntsSemantic is not a valid value.');
     //>>includeEnd('debug');
   }
 };
@@ -223,27 +223,27 @@ VertexAttributeSemantic.fromPntsSemantic = function (pntsSemantic) {
  */
 VertexAttributeSemantic.getGlslType = function (semantic) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("semantic", semantic);
+  Check.typeOf.string('semantic', semantic);
   //>>includeEnd('debug');
 
   switch (semantic) {
     case VertexAttributeSemantic.POSITION:
     case VertexAttributeSemantic.NORMAL:
     case VertexAttributeSemantic.TANGENT:
-      return "vec3";
+      return 'vec3';
     case VertexAttributeSemantic.TEXCOORD:
-      return "vec2";
+      return 'vec2';
     case VertexAttributeSemantic.COLOR:
-      return "vec4";
+      return 'vec4';
     case VertexAttributeSemantic.JOINTS:
-      return "ivec4";
+      return 'ivec4';
     case VertexAttributeSemantic.WEIGHTS:
-      return "vec4";
+      return 'vec4';
     case VertexAttributeSemantic.FEATURE_ID:
-      return "int";
+      return 'int';
     //>>includeStart('debug', pragmas.debug);
     default:
-      throw new DeveloperError("semantic is not a valid value.");
+      throw new DeveloperError('semantic is not a valid value.');
     //>>includeEnd('debug');
   }
 };
@@ -260,7 +260,7 @@ VertexAttributeSemantic.getGlslType = function (semantic) {
  */
 VertexAttributeSemantic.getVariableName = function (semantic, setIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("semantic", semantic);
+  Check.typeOf.string('semantic', semantic);
   //>>includeEnd('debug');
 
   let variableName = semanticToVariableName(semantic);

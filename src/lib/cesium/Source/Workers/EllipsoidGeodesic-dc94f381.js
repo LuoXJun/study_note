@@ -1,5 +1,12 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultValue-94c3e563', './ComponentDatatype-4a60b8d6'], (function (exports, Matrix2, RuntimeError, defaultValue, ComponentDatatype) { 'use strict';
+define([
+  'exports',
+  './Matrix2-fc7e9822',
+  './RuntimeError-c581ca93',
+  './defaultValue-94c3e563',
+  './ComponentDatatype-4a60b8d6'
+], function (exports, Matrix2, RuntimeError, defaultValue, ComponentDatatype) {
+  'use strict';
 
   function setConstants(ellipsoidGeodesic) {
     const uSquared = ellipsoidGeodesic._uSquared;
@@ -34,7 +41,8 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
       (3.0 * u4Over16) / 4.0 +
       (5.0 * u6Over64) / 4.0 -
       (175.0 * u8Over256) / 64.0;
-    const a1 = 1.0 - u2Over4 + (15.0 * u4Over16) / 8.0 - (35.0 * u6Over64) / 8.0;
+    const a1 =
+      1.0 - u2Over4 + (15.0 * u4Over16) / 8.0 - (35.0 * u6Over64) / 8.0;
     const a2 = 1.0 - 3.0 * u2Over4 + (35.0 * u4Over16) / 4.0;
     const a3 = 1.0 - 5.0 * u2Over4;
 
@@ -99,7 +107,8 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
           (cosineTwiceSigmaMidpoint +
             C *
               cosineSigma *
-              (2.0 * cosineTwiceSigmaMidpoint * cosineTwiceSigmaMidpoint - 1.0)))
+              (2.0 * cosineTwiceSigmaMidpoint * cosineTwiceSigmaMidpoint -
+                1.0)))
     );
   }
 
@@ -181,7 +190,9 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
           cosineSigma,
           cosineTwiceSigmaMidpoint
         );
-    } while (Math.abs(lambda - lambdaDot) > ComponentDatatype.CesiumMath.EPSILON12);
+    } while (
+      Math.abs(lambda - lambdaDot) > ComponentDatatype.CesiumMath.EPSILON12
+    );
 
     const uSquared =
       (cosineSquaredAlpha * (major * major - minor * minor)) / (minor * minor);
@@ -216,7 +227,10 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
       cosineU2 * sineLambda,
       cs - sc * cosineLambda
     );
-    const endHeading = Math.atan2(cosineU1 * sineLambda, cs * cosineLambda - sc);
+    const endHeading = Math.atan2(
+      cosineU1 * sineLambda,
+      cs * cosineLambda - sc
+    );
 
     ellipsoidGeodesic._distance = distance;
     ellipsoidGeodesic._startHeading = startHeading;
@@ -238,9 +252,11 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
 
     //>>includeStart('debug', pragmas.debug);
     RuntimeError.Check.typeOf.number.greaterThanOrEquals(
-      "value",
+      'value',
       Math.abs(
-        Math.abs(Matrix2.Cartesian3.angleBetween(firstCartesian, lastCartesian)) - Math.PI
+        Math.abs(
+          Matrix2.Cartesian3.angleBetween(firstCartesian, lastCartesian)
+        ) - Math.PI
       ),
       0.0125
     );
@@ -260,7 +276,10 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
       start,
       ellipsoidGeodesic._start
     );
-    ellipsoidGeodesic._end = Matrix2.Cartographic.clone(end, ellipsoidGeodesic._end);
+    ellipsoidGeodesic._end = Matrix2.Cartographic.clone(
+      end,
+      ellipsoidGeodesic._end
+    );
     ellipsoidGeodesic._start.height = 0;
     ellipsoidGeodesic._end.height = 0;
 
@@ -304,7 +323,7 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
     ellipsoid: {
       get: function () {
         return this._ellipsoid;
-      },
+      }
     },
 
     /**
@@ -316,11 +335,11 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
     surfaceDistance: {
       get: function () {
         //>>includeStart('debug', pragmas.debug);
-        RuntimeError.Check.defined("distance", this._distance);
+        RuntimeError.Check.defined('distance', this._distance);
         //>>includeEnd('debug');
 
         return this._distance;
-      },
+      }
     },
 
     /**
@@ -332,7 +351,7 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
     start: {
       get: function () {
         return this._start;
-      },
+      }
     },
 
     /**
@@ -344,7 +363,7 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
     end: {
       get: function () {
         return this._end;
-      },
+      }
     },
 
     /**
@@ -356,11 +375,11 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
     startHeading: {
       get: function () {
         //>>includeStart('debug', pragmas.debug);
-        RuntimeError.Check.defined("distance", this._distance);
+        RuntimeError.Check.defined('distance', this._distance);
         //>>includeEnd('debug');
 
         return this._startHeading;
-      },
+      }
     },
 
     /**
@@ -372,12 +391,12 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
     endHeading: {
       get: function () {
         //>>includeStart('debug', pragmas.debug);
-        RuntimeError.Check.defined("distance", this._distance);
+        RuntimeError.Check.defined('distance', this._distance);
         //>>includeEnd('debug');
 
         return this._endHeading;
-      },
-    },
+      }
+    }
   });
 
   /**
@@ -388,8 +407,8 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    */
   EllipsoidGeodesic.prototype.setEndPoints = function (start, end) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("start", start);
-    RuntimeError.Check.defined("end", end);
+    RuntimeError.Check.defined('start', start);
+    RuntimeError.Check.defined('end', end);
     //>>includeEnd('debug');
 
     computeProperties(this, start, end, this._ellipsoid);
@@ -426,7 +445,7 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("distance", this._distance);
+    RuntimeError.Check.defined('distance', this._distance);
     //>>includeEnd('debug');
 
     const constants = this._constants;
@@ -517,5 +536,4 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
   };
 
   exports.EllipsoidGeodesic = EllipsoidGeodesic;
-
-}));
+});

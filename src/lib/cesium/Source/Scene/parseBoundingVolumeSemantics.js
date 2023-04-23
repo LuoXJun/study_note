@@ -1,5 +1,5 @@
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
 
 /**
  * Parse the bounding volume-related semantics such as
@@ -21,20 +21,20 @@ import defined from "../Core/defined.js";
  */
 export default function parseBoundingVolumeSemantics(tileMetadata) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("tileMetadata", tileMetadata);
+  Check.typeOf.object('tileMetadata', tileMetadata);
   //>>includeEnd('debug');
 
   return {
     tile: {
-      boundingVolume: parseBoundingVolume("TILE", tileMetadata),
-      minimumHeight: parseMinimumHeight("TILE", tileMetadata),
-      maximumHeight: parseMaximumHeight("TILE", tileMetadata),
+      boundingVolume: parseBoundingVolume('TILE', tileMetadata),
+      minimumHeight: parseMinimumHeight('TILE', tileMetadata),
+      maximumHeight: parseMaximumHeight('TILE', tileMetadata)
     },
     content: {
-      boundingVolume: parseBoundingVolume("CONTENT", tileMetadata),
-      minimumHeight: parseMinimumHeight("CONTENT", tileMetadata),
-      maximumHeight: parseMaximumHeight("CONTENT", tileMetadata),
-    },
+      boundingVolume: parseBoundingVolume('CONTENT', tileMetadata),
+      minimumHeight: parseMinimumHeight('CONTENT', tileMetadata),
+      maximumHeight: parseMaximumHeight('CONTENT', tileMetadata)
+    }
   };
 }
 
@@ -58,7 +58,7 @@ function parseBoundingVolume(prefix, tileMetadata) {
 
   if (defined(boundingBox)) {
     return {
-      box: boundingBox,
+      box: boundingBox
     };
   }
 
@@ -69,7 +69,7 @@ function parseBoundingVolume(prefix, tileMetadata) {
 
   if (defined(boundingRegion)) {
     return {
-      region: boundingRegion,
+      region: boundingRegion
     };
   }
 
@@ -81,7 +81,7 @@ function parseBoundingVolume(prefix, tileMetadata) {
   if (defined(boundingSphere)) {
     // ARRAY with 4 elements is automatically converted to a Cartesian4
     return {
-      sphere: boundingSphere,
+      sphere: boundingSphere
     };
   }
 

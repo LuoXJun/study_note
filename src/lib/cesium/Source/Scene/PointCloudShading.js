@@ -1,5 +1,5 @@
-import defaultValue from "../Core/defaultValue.js";
-import PointCloudEyeDomeLighting from "./PointCloudEyeDomeLighting.js";
+import defaultValue from '../Core/defaultValue.js';
+import PointCloudEyeDomeLighting from './PointCloudEyeDomeLighting.js';
 
 /**
  * Options for performing point attenuation based on geometric error when rendering

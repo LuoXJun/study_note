@@ -36,6 +36,6 @@ const HorizontalOrigin = {
    * @type {Number}
    * @constant
    */
-  RIGHT: -1,
+  RIGHT: -1
 };
 export default Object.freeze(HorizontalOrigin);

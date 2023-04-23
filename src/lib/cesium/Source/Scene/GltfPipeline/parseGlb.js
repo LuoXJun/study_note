@@ -1,10 +1,10 @@
-import addPipelineExtras from "./addPipelineExtras.js";
-import removeExtensionsUsed from "./removeExtensionsUsed.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import getMagic from "../../Core/getMagic.js";
-import getStringFromTypedArray from "../../Core/getStringFromTypedArray.js";
-import RuntimeError from "../../Core/RuntimeError.js";
+import addPipelineExtras from './addPipelineExtras.js';
+import removeExtensionsUsed from './removeExtensionsUsed.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import getMagic from '../../Core/getMagic.js';
+import getStringFromTypedArray from '../../Core/getStringFromTypedArray.js';
+import RuntimeError from '../../Core/RuntimeError.js';
 
 const sizeOfUint32 = 4;
 
@@ -21,14 +21,14 @@ const sizeOfUint32 = 4;
 function parseGlb(glb) {
   // Check that the magic string is present
   const magic = getMagic(glb);
-  if (magic !== "glTF") {
-    throw new RuntimeError("File is not valid binary glTF");
+  if (magic !== 'glTF') {
+    throw new RuntimeError('File is not valid binary glTF');
   }
 
   const header = readHeader(glb, 0, 5);
   const version = header[1];
   if (version !== 1 && version !== 2) {
-    throw new RuntimeError("Binary glTF version is not 1 or 2");
+    throw new RuntimeError('Binary glTF version is not 1 or 2');
   }
 
   if (version === 1) {
@@ -57,7 +57,7 @@ function parseGlbVersion1(glb, header) {
 
   // Check that the content format is 0, indicating that it is JSON
   if (contentFormat !== 0) {
-    throw new RuntimeError("Binary glTF scene format is not JSON");
+    throw new RuntimeError('Binary glTF scene format is not JSON');
   }
 
   const jsonStart = 20;
@@ -82,7 +82,7 @@ function parseGlbVersion1(glb, header) {
     }
   }
   // Remove the KHR_binary_glTF extension
-  removeExtensionsUsed(gltf, "KHR_binary_glTF");
+  removeExtensionsUsed(gltf, 'KHR_binary_glTF');
   return gltf;
 }
 

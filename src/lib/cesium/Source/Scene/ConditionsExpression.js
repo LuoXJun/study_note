@@ -1,6 +1,6 @@
-import clone from "../Core/clone.js";
-import defined from "../Core/defined.js";
-import Expression from "./Expression.js";
+import clone from '../Core/clone.js';
+import defined from '../Core/defined.js';
+import Expression from './Expression.js';
 
 /**
  * An expression for a style applied to a {@link Cesium3DTileset}.
@@ -50,8 +50,8 @@ Object.defineProperties(ConditionsExpression.prototype, {
   conditionsExpression: {
     get: function () {
       return this._conditionsExpression;
-    },
-  },
+    }
+  }
 });
 
 function Statement(condition, expression) {
@@ -155,7 +155,7 @@ ConditionsExpression.prototype.getShaderFunction = function (
     return undefined;
   }
 
-  let shaderFunction = "";
+  let shaderFunction = '';
   const length = conditions.length;
   for (let i = 0; i < length; ++i) {
     const statement = conditions[i];
@@ -171,7 +171,7 @@ ConditionsExpression.prototype.getShaderFunction = function (
 
     // Build the if/else chain from the list of conditions
     shaderFunction +=
-      `    ${i === 0 ? "if" : "else if"} (${condition})\n` +
+      `    ${i === 0 ? 'if' : 'else if'} (${condition})\n` +
       `    {\n` +
       `        return ${expression};\n` +
       `    }\n`;

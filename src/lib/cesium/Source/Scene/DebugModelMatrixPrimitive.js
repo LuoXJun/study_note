@@ -1,14 +1,14 @@
-import ArcType from "../Core/ArcType.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import Matrix4 from "../Core/Matrix4.js";
-import PolylineGeometry from "../Core/PolylineGeometry.js";
-import PolylineColorAppearance from "./PolylineColorAppearance.js";
-import Primitive from "./Primitive.js";
+import ArcType from '../Core/ArcType.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import Matrix4 from '../Core/Matrix4.js';
+import PolylineGeometry from '../Core/PolylineGeometry.js';
+import PolylineColorAppearance from './PolylineColorAppearance.js';
+import Primitive from './Primitive.js';
 
 /**
  * Draws the axes of a reference frame defined by a matrix that transforms to world
@@ -131,7 +131,7 @@ DebugModelMatrixPrimitive.prototype.update = function (frameState) {
         width: this.width,
         vertexFormat: PolylineColorAppearance.VERTEX_FORMAT,
         colors: [Color.RED, Color.RED],
-        arcType: ArcType.NONE,
+        arcType: ArcType.NONE
       }),
       modelMatrix: Matrix4.multiplyByUniformScale(
         this.modelMatrix,
@@ -139,7 +139,7 @@ DebugModelMatrixPrimitive.prototype.update = function (frameState) {
         new Matrix4()
       ),
       id: this.id,
-      pickPrimitive: this,
+      pickPrimitive: this
     });
     const y = new GeometryInstance({
       geometry: new PolylineGeometry({
@@ -147,7 +147,7 @@ DebugModelMatrixPrimitive.prototype.update = function (frameState) {
         width: this.width,
         vertexFormat: PolylineColorAppearance.VERTEX_FORMAT,
         colors: [Color.GREEN, Color.GREEN],
-        arcType: ArcType.NONE,
+        arcType: ArcType.NONE
       }),
       modelMatrix: Matrix4.multiplyByUniformScale(
         this.modelMatrix,
@@ -155,7 +155,7 @@ DebugModelMatrixPrimitive.prototype.update = function (frameState) {
         new Matrix4()
       ),
       id: this.id,
-      pickPrimitive: this,
+      pickPrimitive: this
     });
     const z = new GeometryInstance({
       geometry: new PolylineGeometry({
@@ -163,7 +163,7 @@ DebugModelMatrixPrimitive.prototype.update = function (frameState) {
         width: this.width,
         vertexFormat: PolylineColorAppearance.VERTEX_FORMAT,
         colors: [Color.BLUE, Color.BLUE],
-        arcType: ArcType.NONE,
+        arcType: ArcType.NONE
       }),
       modelMatrix: Matrix4.multiplyByUniformScale(
         this.modelMatrix,
@@ -171,13 +171,13 @@ DebugModelMatrixPrimitive.prototype.update = function (frameState) {
         new Matrix4()
       ),
       id: this.id,
-      pickPrimitive: this,
+      pickPrimitive: this
     });
 
     this._primitive = new Primitive({
       geometryInstances: [x, y, z],
       appearance: new PolylineColorAppearance(),
-      asynchronous: false,
+      asynchronous: false
     });
   }
 

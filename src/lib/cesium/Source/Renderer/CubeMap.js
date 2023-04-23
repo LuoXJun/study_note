@@ -1,17 +1,17 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import CesiumMath from "../Core/Math.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import ContextLimits from "./ContextLimits.js";
-import CubeMapFace from "./CubeMapFace.js";
-import MipmapHint from "./MipmapHint.js";
-import PixelDatatype from "./PixelDatatype.js";
-import Sampler from "./Sampler.js";
-import TextureMagnificationFilter from "./TextureMagnificationFilter.js";
-import TextureMinificationFilter from "./TextureMinificationFilter.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import CesiumMath from '../Core/Math.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import ContextLimits from './ContextLimits.js';
+import CubeMapFace from './CubeMapFace.js';
+import MipmapHint from './MipmapHint.js';
+import PixelDatatype from './PixelDatatype.js';
+import Sampler from './Sampler.js';
+import TextureMagnificationFilter from './TextureMagnificationFilter.js';
+import TextureMinificationFilter from './TextureMinificationFilter.js';
 
 /**
  * @private
@@ -20,7 +20,7 @@ function CubeMap(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.context", options.context);
+  Check.defined('options.context', options.context);
   //>>includeEnd('debug');
 
   const context = options.context;
@@ -35,7 +35,7 @@ function CubeMap(options) {
       source.positiveY,
       source.negativeY,
       source.positiveZ,
-      source.negativeZ,
+      source.negativeZ
     ];
 
     //>>includeStart('debug', pragmas.debug);
@@ -48,7 +48,7 @@ function CubeMap(options) {
       !faces[5]
     ) {
       throw new DeveloperError(
-        "options.source requires positiveX, negativeX, positiveY, negativeY, positiveZ, and negativeZ faces."
+        'options.source requires positiveX, negativeX, positiveY, negativeY, positiveZ, and negativeZ faces.'
       );
     }
     //>>includeEnd('debug');
@@ -63,7 +63,7 @@ function CubeMap(options) {
         Number(faces[i].height) !== height
       ) {
         throw new DeveloperError(
-          "Each face in options.source must have the same width and height."
+          'Each face in options.source must have the same width and height.'
         );
       }
     }
@@ -88,16 +88,16 @@ function CubeMap(options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(width) || !defined(height)) {
     throw new DeveloperError(
-      "options requires a source field to create an initialized cube map or width and height fields to create a blank cube map."
+      'options requires a source field to create an initialized cube map or width and height fields to create a blank cube map.'
     );
   }
 
   if (width !== height) {
-    throw new DeveloperError("Width must equal height.");
+    throw new DeveloperError('Width must equal height.');
   }
 
   if (size <= 0) {
-    throw new DeveloperError("Width and height must be greater than zero.");
+    throw new DeveloperError('Width and height must be greater than zero.');
   }
 
   if (size > ContextLimits.maximumCubeMapSize) {
@@ -107,22 +107,22 @@ function CubeMap(options) {
   }
 
   if (!PixelFormat.validate(pixelFormat)) {
-    throw new DeveloperError("Invalid options.pixelFormat.");
+    throw new DeveloperError('Invalid options.pixelFormat.');
   }
 
   if (PixelFormat.isDepthFormat(pixelFormat)) {
     throw new DeveloperError(
-      "options.pixelFormat cannot be DEPTH_COMPONENT or DEPTH_STENCIL."
+      'options.pixelFormat cannot be DEPTH_COMPONENT or DEPTH_STENCIL.'
     );
   }
 
   if (!PixelDatatype.validate(pixelDatatype)) {
-    throw new DeveloperError("Invalid options.pixelDatatype.");
+    throw new DeveloperError('Invalid options.pixelDatatype.');
   }
 
   if (pixelDatatype === PixelDatatype.FLOAT && !context.floatingPointTexture) {
     throw new DeveloperError(
-      "When options.pixelDatatype is FLOAT, this WebGL implementation must support the OES_texture_float extension."
+      'When options.pixelDatatype is FLOAT, this WebGL implementation must support the OES_texture_float extension.'
     );
   }
 
@@ -131,7 +131,7 @@ function CubeMap(options) {
     !context.halfFloatingPointTexture
   ) {
     throw new DeveloperError(
-      "When options.pixelDatatype is HALF_FLOAT, this WebGL implementation must support the OES_texture_half_float extension."
+      'When options.pixelDatatype is HALF_FLOAT, this WebGL implementation must support the OES_texture_half_float extension.'
     );
   }
   //>>includeEnd('debug');
@@ -444,32 +444,32 @@ Object.defineProperties(CubeMap.prototype, {
   positiveX: {
     get: function () {
       return this._positiveX;
-    },
+    }
   },
   negativeX: {
     get: function () {
       return this._negativeX;
-    },
+    }
   },
   positiveY: {
     get: function () {
       return this._positiveY;
-    },
+    }
   },
   negativeY: {
     get: function () {
       return this._negativeY;
-    },
+    }
   },
   positiveZ: {
     get: function () {
       return this._positiveZ;
-    },
+    }
   },
   negativeZ: {
     get: function () {
       return this._negativeZ;
-    },
+    }
   },
   sampler: {
     get: function () {
@@ -523,27 +523,27 @@ Object.defineProperties(CubeMap.prototype, {
       gl.bindTexture(target, null);
 
       this._sampler = sampler;
-    },
+    }
   },
   pixelFormat: {
     get: function () {
       return this._pixelFormat;
-    },
+    }
   },
   pixelDatatype: {
     get: function () {
       return this._pixelDatatype;
-    },
+    }
   },
   width: {
     get: function () {
       return this._size;
-    },
+    }
   },
   height: {
     get: function () {
       return this._size;
-    },
+    }
   },
   sizeInBytes: {
     get: function () {
@@ -551,24 +551,24 @@ Object.defineProperties(CubeMap.prototype, {
         return Math.floor((this._sizeInBytes * 4) / 3);
       }
       return this._sizeInBytes;
-    },
+    }
   },
   preMultiplyAlpha: {
     get: function () {
       return this._preMultiplyAlpha;
-    },
+    }
   },
   flipY: {
     get: function () {
       return this._flipY;
-    },
+    }
   },
 
   _target: {
     get: function () {
       return this._textureTarget;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -595,11 +595,11 @@ CubeMap.prototype.generateMipmap = function (hint) {
   //>>includeStart('debug', pragmas.debug);
   if (this._size > 1 && !CesiumMath.isPowerOfTwo(this._size)) {
     throw new DeveloperError(
-      "width and height must be a power of two to call generateMipmap()."
+      'width and height must be a power of two to call generateMipmap().'
     );
   }
   if (!MipmapHint.validate(hint)) {
-    throw new DeveloperError("hint is invalid.");
+    throw new DeveloperError('hint is invalid.');
   }
   //>>includeEnd('debug');
 

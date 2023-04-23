@@ -1,21 +1,21 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import FrustumGeometry from "../Core/FrustumGeometry.js";
-import FrustumOutlineGeometry from "../Core/FrustumOutlineGeometry.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import Matrix3 from "../Core/Matrix3.js";
-import OrthographicFrustum from "../Core/OrthographicFrustum.js";
-import OrthographicOffCenterFrustum from "../Core/OrthographicOffCenterFrustum.js";
-import PerspectiveFrustum from "../Core/PerspectiveFrustum.js";
-import PerspectiveOffCenterFrustum from "../Core/PerspectiveOffCenterFrustum.js";
-import Quaternion from "../Core/Quaternion.js";
-import PerInstanceColorAppearance from "./PerInstanceColorAppearance.js";
-import Primitive from "./Primitive.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import FrustumGeometry from '../Core/FrustumGeometry.js';
+import FrustumOutlineGeometry from '../Core/FrustumOutlineGeometry.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import Matrix3 from '../Core/Matrix3.js';
+import OrthographicFrustum from '../Core/OrthographicFrustum.js';
+import OrthographicOffCenterFrustum from '../Core/OrthographicOffCenterFrustum.js';
+import PerspectiveFrustum from '../Core/PerspectiveFrustum.js';
+import PerspectiveOffCenterFrustum from '../Core/PerspectiveOffCenterFrustum.js';
+import Quaternion from '../Core/Quaternion.js';
+import PerInstanceColorAppearance from './PerInstanceColorAppearance.js';
+import Primitive from './Primitive.js';
 
 /**
  * Draws the outline of the camera's view frustum.
@@ -42,7 +42,7 @@ function DebugCameraPrimitive(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.camera)) {
-    throw new DeveloperError("options.camera is required.");
+    throw new DeveloperError('options.camera is required.');
   }
   //>>includeEnd('debug');
 
@@ -166,21 +166,21 @@ DebugCameraPrimitive.prototype.update = function (frameState) {
             origin: position,
             orientation: orientation,
             frustum: frustum,
-            _drawNearPlane: i === 0,
+            _drawNearPlane: i === 0
           }),
           attributes: {
             color: ColorGeometryInstanceAttribute.fromColor(
               Color.fromAlpha(this._color, 0.1, scratchColor)
-            ),
+            )
           },
           id: this.id,
-          pickPrimitive: this,
+          pickPrimitive: this
         }),
         appearance: new PerInstanceColorAppearance({
           translucent: true,
-          flat: true,
+          flat: true
         }),
-        asynchronous: false,
+        asynchronous: false
       });
 
       outlinePrimitives[i] = new Primitive({
@@ -189,19 +189,19 @@ DebugCameraPrimitive.prototype.update = function (frameState) {
             origin: position,
             orientation: orientation,
             frustum: frustum,
-            _drawNearPlane: i === 0,
+            _drawNearPlane: i === 0
           }),
           attributes: {
-            color: ColorGeometryInstanceAttribute.fromColor(this._color),
+            color: ColorGeometryInstanceAttribute.fromColor(this._color)
           },
           id: this.id,
-          pickPrimitive: this,
+          pickPrimitive: this
         }),
         appearance: new PerInstanceColorAppearance({
           translucent: false,
-          flat: true,
+          flat: true
         }),
-        asynchronous: false,
+        asynchronous: false
       });
     }
   }

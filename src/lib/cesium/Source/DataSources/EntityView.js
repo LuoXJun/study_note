@@ -1,15 +1,15 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import HeadingPitchRange from "../Core/HeadingPitchRange.js";
-import JulianDate from "../Core/JulianDate.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
-import Transforms from "../Core/Transforms.js";
-import SceneMode from "../Scene/SceneMode.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import HeadingPitchRange from '../Core/HeadingPitchRange.js';
+import JulianDate from '../Core/JulianDate.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
+import Transforms from '../Core/Transforms.js';
+import SceneMode from '../Scene/SceneMode.js';
 
 const updateTransformMatrix3Scratch1 = new Matrix3();
 const updateTransformMatrix3Scratch2 = new Matrix3();
@@ -281,8 +281,8 @@ function updateTransform(
  */
 function EntityView(entity, scene, ellipsoid) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("entity", entity);
-  Check.defined("scene", scene);
+  Check.defined('entity', entity);
+  Check.defined('scene', scene);
   //>>includeEnd('debug');
 
   /**
@@ -333,8 +333,8 @@ Object.defineProperties(EntityView, {
     },
     set: function (vector) {
       this._defaultOffset3D = Cartesian3.clone(vector, new Cartesian3());
-    },
-  },
+    }
+  }
 });
 
 // Initialize the static property.
@@ -351,7 +351,7 @@ const scratchCartesian = new Cartesian3();
  */
 EntityView.prototype.update = function (time, boundingSphere) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
   //>>includeEnd('debug');
 
   const scene = this.scene;

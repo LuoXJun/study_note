@@ -20,6 +20,6 @@ const ExpressionNodeType = {
   LITERAL_VECTOR: 15,
   LITERAL_REGEX: 16,
   LITERAL_UNDEFINED: 17,
-  BUILTIN_VARIABLE: 18,
+  BUILTIN_VARIABLE: 18
 };
 export default Object.freeze(ExpressionNodeType);

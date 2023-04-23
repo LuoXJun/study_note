@@ -1,20 +1,20 @@
 /* global require */
-import defined from "../Core/defined.js";
-import Check from "../Core/Check.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import VulkanConstants from "../Core//VulkanConstants.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import createTaskProcessorWorker from "./createTaskProcessorWorker.js";
-import ktx_parse from "../ThirdParty/ktx-parse.js";
+import defined from '../Core/defined.js';
+import Check from '../Core/Check.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import VulkanConstants from '../Core//VulkanConstants.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import createTaskProcessorWorker from './createTaskProcessorWorker.js';
+import ktx_parse from '../ThirdParty/ktx-parse.js';
 
 const faceOrder = [
-  "positiveX",
-  "negativeX",
-  "positiveY",
-  "negativeY",
-  "positiveZ",
-  "negativeZ",
+  'positiveX',
+  'negativeX',
+  'positiveY',
+  'negativeY',
+  'positiveZ',
+  'negativeZ'
 ];
 
 // Flags
@@ -24,7 +24,7 @@ const colorModelUASTC = 166;
 let transcoderModule;
 function transcode(parameters, transferableObjects) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("transcoderModule", transcoderModule);
+  Check.typeOf.object('transcoderModule', transcoderModule);
   //>>includeEnd('debug');
 
   const data = parameters.ktx2Buffer;
@@ -33,15 +33,15 @@ function transcode(parameters, transferableObjects) {
   try {
     header = ktx_parse(data);
   } catch (e) {
-    throw new RuntimeError("Invalid KTX2 file.");
+    throw new RuntimeError('Invalid KTX2 file.');
   }
 
   if (header.layerCount !== 0) {
-    throw new RuntimeError("KTX2 texture arrays are not supported.");
+    throw new RuntimeError('KTX2 texture arrays are not supported.');
   }
 
   if (header.pixelDepth !== 0) {
-    throw new RuntimeError("KTX2 3D textures are unsupported.");
+    throw new RuntimeError('KTX2 3D textures are unsupported.');
   }
 
   const dfd = header.dataFormatDescriptor[0];
@@ -127,7 +127,7 @@ function parseUncompressed(header, result) {
         datatype: datatype,
         width: width,
         height: height,
-        levelBuffer: faceView,
+        levelBuffer: faceView
       };
     }
   }
@@ -150,7 +150,7 @@ function transcodeCompressed(
   if (!(width > 0) || !(height > 0) || !(levels > 0)) {
     ktx2File.close();
     ktx2File.delete();
-    throw new RuntimeError("Invalid KTX2 file");
+    throw new RuntimeError('Invalid KTX2 file');
   }
 
   let internalFormat, transcoderFormat;
@@ -189,7 +189,7 @@ function transcodeCompressed(
       transcoderFormat = BasisFormat.cTFBC7_RGBA;
     } else {
       throw new RuntimeError(
-        "No transcoding format target available for ETC1S compressed ktx2."
+        'No transcoding format target available for ETC1S compressed ktx2.'
       );
     }
   } else if (dfd.colorModel === colorModelUASTC) {
@@ -223,7 +223,7 @@ function transcodeCompressed(
         : BasisFormat.cTFPVRTC1_4_RGB;
     } else {
       throw new RuntimeError(
-        "No transcoding format target available for UASTC compressed ktx2."
+        'No transcoding format target available for UASTC compressed ktx2.'
       );
     }
   }
@@ -231,7 +231,7 @@ function transcodeCompressed(
   if (!ktx2File.startTranscoding()) {
     ktx2File.close();
     ktx2File.delete();
-    throw new RuntimeError("startTranscoding() failed");
+    throw new RuntimeError('startTranscoding() failed');
   }
 
   for (let i = 0; i < header.levels.length; ++i) {
@@ -263,7 +263,7 @@ function transcodeCompressed(
     );
 
     if (!defined(transcoded)) {
-      throw new RuntimeError("transcodeImage() failed.");
+      throw new RuntimeError('transcodeImage() failed.');
     }
 
     transferableObjects.push(dst.buffer);
@@ -272,7 +272,7 @@ function transcodeCompressed(
       internalFormat: internalFormat,
       width: width,
       height: height,
-      levelBuffer: dst,
+      levelBuffer: dst
     };
   }
 

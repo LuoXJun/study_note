@@ -1,8 +1,8 @@
-import defined from "../../Core/defined.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import MetadataStageFS from "../../Shaders/ModelExperimental/MetadataStageFS.js";
-import MetadataStageVS from "../../Shaders/ModelExperimental/MetadataStageVS.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
+import defined from '../../Core/defined.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import MetadataStageFS from '../../Shaders/ModelExperimental/MetadataStageFS.js';
+import MetadataStageVS from '../../Shaders/ModelExperimental/MetadataStageVS.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
 
 /**
  * The metadata pipeline stage processes metadata properties from
@@ -15,20 +15,20 @@ import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
  * @private
  */
 const MetadataPipelineStage = {};
-MetadataPipelineStage.name = "MetadataPipelineStage";
+MetadataPipelineStage.name = 'MetadataPipelineStage';
 
-MetadataPipelineStage.STRUCT_ID_METADATA_VS = "MetadataVS";
-MetadataPipelineStage.STRUCT_ID_METADATA_FS = "MetadataFS";
-MetadataPipelineStage.STRUCT_NAME_METADATA = "Metadata";
+MetadataPipelineStage.STRUCT_ID_METADATA_VS = 'MetadataVS';
+MetadataPipelineStage.STRUCT_ID_METADATA_FS = 'MetadataFS';
+MetadataPipelineStage.STRUCT_NAME_METADATA = 'Metadata';
 MetadataPipelineStage.FUNCTION_ID_INITIALIZE_METADATA_VS =
-  "initializeMetadataVS";
+  'initializeMetadataVS';
 MetadataPipelineStage.FUNCTION_ID_INITIALIZE_METADATA_FS =
-  "initializeMetadataFS";
+  'initializeMetadataFS';
 MetadataPipelineStage.FUNCTION_SIGNATURE_INITIALIZE_METADATA =
-  "void initializeMetadata(out Metadata metadata, ProcessedAttributes attributes)";
-MetadataPipelineStage.FUNCTION_ID_SET_METADATA_VARYINGS = "setMetadataVaryings";
+  'void initializeMetadata(out Metadata metadata, ProcessedAttributes attributes)';
+MetadataPipelineStage.FUNCTION_ID_SET_METADATA_VARYINGS = 'setMetadataVaryings';
 MetadataPipelineStage.FUNCTION_SIGNATURE_SET_METADATA_VARYINGS =
-  "void setMetadataVaryings()";
+  'void setMetadataVaryings()';
 
 /**
  * Process a primitive. This modifies the following parts of the render
@@ -125,9 +125,8 @@ function processPropertyAttributes(
           primitive,
           property.attribute
         );
-        const attributeInfo = ModelExperimentalUtility.getAttributeInfo(
-          modelAttribute
-        );
+        const attributeInfo =
+          ModelExperimentalUtility.getAttributeInfo(modelAttribute);
 
         addPropertyAttributeProperty(
           renderResources,
@@ -182,7 +181,7 @@ function addPropertyAttributeProperty(
       metadataVariable: metadataVariable,
       shaderDestination: ShaderDestination.BOTH,
       offset: property.offset,
-      scale: property.scale,
+      scale: property.scale
     });
   }
 
@@ -264,7 +263,7 @@ function addPropertyTextureProperty(renderResources, propertyId, property) {
       metadataVariable: metadataVariable,
       shaderDestination: ShaderDestination.FRAGMENT,
       offset: property.offset,
-      scale: property.scale,
+      scale: property.scale
     });
   }
 
@@ -282,7 +281,7 @@ function addPropertyTextureUniform(
 ) {
   const shaderBuilder = renderResources.shaderBuilder;
   shaderBuilder.addUniform(
-    "sampler2D",
+    'sampler2D',
     uniformName,
     ShaderDestination.FRAGMENT
   );
@@ -319,7 +318,7 @@ function addValueTransformUniforms(valueExpression, options) {
 function sanitizeGlslIdentifier(identifier) {
   // for use in the shader, the property ID must be a valid GLSL identifier,
   // so replace invalid characters with _
-  return identifier.replaceAll(/[^_a-zA-Z0-9]+/g, "_");
+  return identifier.replaceAll(/[^_a-zA-Z0-9]+/g, '_');
 }
 
 export default MetadataPipelineStage;

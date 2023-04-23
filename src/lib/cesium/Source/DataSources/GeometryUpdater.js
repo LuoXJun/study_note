@@ -1,19 +1,19 @@
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DistanceDisplayCondition from "../Core/DistanceDisplayCondition.js";
-import Event from "../Core/Event.js";
-import Iso8601 from "../Core/Iso8601.js";
-import oneTimeWarning from "../Core/oneTimeWarning.js";
-import ClassificationType from "../Scene/ClassificationType.js";
-import ShadowMode from "../Scene/ShadowMode.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import ConstantProperty from "./ConstantProperty.js";
-import Entity from "./Entity.js";
-import Property from "./Property.js";
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DistanceDisplayCondition from '../Core/DistanceDisplayCondition.js';
+import Event from '../Core/Event.js';
+import Iso8601 from '../Core/Iso8601.js';
+import oneTimeWarning from '../Core/oneTimeWarning.js';
+import ClassificationType from '../Scene/ClassificationType.js';
+import ShadowMode from '../Scene/ShadowMode.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import ConstantProperty from './ConstantProperty.js';
+import Entity from './Entity.js';
+import Property from './Property.js';
 
 const defaultMaterial = new ColorMaterialProperty(Color.WHITE);
 const defaultShow = new ConstantProperty(true);
@@ -40,11 +40,11 @@ const defaultClassificationType = new ConstantProperty(ClassificationType.BOTH);
  */
 function GeometryUpdater(options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.entity", options.entity);
-  Check.defined("options.scene", options.scene);
-  Check.defined("options.geometryOptions", options.geometryOptions);
-  Check.defined("options.geometryPropertyName", options.geometryPropertyName);
-  Check.defined("options.observedPropertyNames", options.observedPropertyNames);
+  Check.defined('options.entity', options.entity);
+  Check.defined('options.scene', options.scene);
+  Check.defined('options.geometryOptions', options.geometryOptions);
+  Check.defined('options.geometryPropertyName', options.geometryPropertyName);
+  Check.defined('options.observedPropertyNames', options.observedPropertyNames);
   //>>includeEnd('debug');
 
   const entity = options.entity;
@@ -70,9 +70,8 @@ function GeometryUpdater(options) {
   this._geometryPropertyName = geometryPropertyName;
   this._id = `${geometryPropertyName}-${entity.id}`;
   this._observedPropertyNames = options.observedPropertyNames;
-  this._supportsMaterialsforEntitiesOnTerrain = Entity.supportsMaterialsforEntitiesOnTerrain(
-    options.scene
-  );
+  this._supportsMaterialsforEntitiesOnTerrain =
+    Entity.supportsMaterialsforEntitiesOnTerrain(options.scene);
 }
 
 Object.defineProperties(GeometryUpdater.prototype, {
@@ -85,7 +84,7 @@ Object.defineProperties(GeometryUpdater.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
   /**
    * Gets the entity associated with this geometry.
@@ -97,7 +96,7 @@ Object.defineProperties(GeometryUpdater.prototype, {
   entity: {
     get: function () {
       return this._entity;
-    },
+    }
   },
   /**
    * Gets a value indicating if the geometry has a fill component.
@@ -109,7 +108,7 @@ Object.defineProperties(GeometryUpdater.prototype, {
   fillEnabled: {
     get: function () {
       return this._fillEnabled;
-    },
+    }
   },
   /**
    * Gets a value indicating if fill visibility varies with simulation time.
@@ -126,7 +125,7 @@ Object.defineProperties(GeometryUpdater.prototype, {
           Property.isConstant(this._showProperty) &&
           Property.isConstant(this._fillProperty))
       );
-    },
+    }
   },
   /**
    * Gets the material property used to fill the geometry.
@@ -138,7 +137,7 @@ Object.defineProperties(GeometryUpdater.prototype, {
   fillMaterialProperty: {
     get: function () {
       return this._materialProperty;
-    },
+    }
   },
   /**
    * Gets a value indicating if the geometry has an outline component.
@@ -150,7 +149,7 @@ Object.defineProperties(GeometryUpdater.prototype, {
   outlineEnabled: {
     get: function () {
       return this._outlineEnabled;
-    },
+    }
   },
   /**
    * Gets a value indicating if the geometry has an outline component.
@@ -167,7 +166,7 @@ Object.defineProperties(GeometryUpdater.prototype, {
           Property.isConstant(this._showProperty) &&
           Property.isConstant(this._showOutlineProperty))
       );
-    },
+    }
   },
   /**
    * Gets the {@link Color} property for the geometry outline.
@@ -179,7 +178,7 @@ Object.defineProperties(GeometryUpdater.prototype, {
   outlineColorProperty: {
     get: function () {
       return this._outlineColorProperty;
-    },
+    }
   },
   /**
    * Gets the constant with of the geometry outline, in pixels.
@@ -192,7 +191,7 @@ Object.defineProperties(GeometryUpdater.prototype, {
   outlineWidth: {
     get: function () {
       return this._outlineWidth;
-    },
+    }
   },
   /**
    * Gets the property specifying whether the geometry
@@ -205,7 +204,7 @@ Object.defineProperties(GeometryUpdater.prototype, {
   shadowsProperty: {
     get: function () {
       return this._shadowsProperty;
-    },
+    }
   },
   /**
    * Gets or sets the {@link DistanceDisplayCondition} Property specifying at what distance from the camera that this geometry will be displayed.
@@ -217,7 +216,7 @@ Object.defineProperties(GeometryUpdater.prototype, {
   distanceDisplayConditionProperty: {
     get: function () {
       return this._distanceDisplayConditionProperty;
-    },
+    }
   },
   /**
    * Gets or sets the {@link ClassificationType} Property specifying if this geometry will classify terrain, 3D Tiles, or both when on the ground.
@@ -229,7 +228,7 @@ Object.defineProperties(GeometryUpdater.prototype, {
   classificationTypeProperty: {
     get: function () {
       return this._classificationTypeProperty;
-    },
+    }
   },
   /**
    * Gets a value indicating if the geometry is time-varying.
@@ -243,7 +242,7 @@ Object.defineProperties(GeometryUpdater.prototype, {
   isDynamic: {
     get: function () {
       return this._dynamic;
-    },
+    }
   },
   /**
    * Gets a value indicating if the geometry is closed.
@@ -256,7 +255,7 @@ Object.defineProperties(GeometryUpdater.prototype, {
   isClosed: {
     get: function () {
       return this._isClosed;
-    },
+    }
   },
   /**
    * Gets a value indicating if the geometry should be drawn on terrain.
@@ -268,7 +267,7 @@ Object.defineProperties(GeometryUpdater.prototype, {
   onTerrain: {
     get: function () {
       return this._onTerrain;
-    },
+    }
   },
   /**
    * Gets an event that is raised whenever the public properties
@@ -281,8 +280,8 @@ Object.defineProperties(GeometryUpdater.prototype, {
   geometryChanged: {
     get: function () {
       return this._geometryChanged;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -526,12 +525,12 @@ GeometryUpdater.prototype.createDynamicUpdater = function (
   groundPrimitives
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("primitives", primitives);
-  Check.defined("groundPrimitives", groundPrimitives);
+  Check.defined('primitives', primitives);
+  Check.defined('groundPrimitives', groundPrimitives);
 
   if (!this._dynamic) {
     throw new DeveloperError(
-      "This instance does not represent dynamic geometry."
+      'This instance does not represent dynamic geometry.'
     );
   }
   //>>includeEnd('debug');

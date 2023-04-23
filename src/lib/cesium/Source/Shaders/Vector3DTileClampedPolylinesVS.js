@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "attribute vec3 startEllipsoidNormal;\n\
+export default 'attribute vec3 startEllipsoidNormal;\n\
 attribute vec3 endEllipsoidNormal;\n\
 attribute vec4 startPositionAndHeight;\n\
 attribute vec4 endPositionAndHeight;\n\
@@ -52,16 +52,16 @@ void main()\n\
     right = czm_normal * right;\n\
 \n\
     // Push for width in a direction that is in the start or end plane and in a plane with right\n\
-    // N = normalEC (\"right-facing\" direction for push)\n\
+    // N = normalEC ("right-facing" direction for push)\n\
     // R = right\n\
     // p = angle between N and R\n\
     // w = distance to push along R if R == N\n\
     // d = distance to push along N\n\
     //\n\
     //   N   R\n\
-    //  { \ p| }      * cos(p) = dot(N, R) = w / d\n\
-    //  d\ \ |  |w    * d = w / dot(N, R)\n\
-    //    { \| }\n\
+    //  {  p| }      * cos(p) = dot(N, R) = w / d\n\
+    //  d  |  |w    * d = w / dot(N, R)\n\
+    //    { | }\n\
     //       o---------- polyline segment ---->\n\
     //\n\
     vec3 scratchNormal = mix(-startFaceNormalAndVertexCorner.xyz, endFaceNormalAndHalfWidth.xyz, isEnd);\n\
@@ -84,4 +84,4 @@ void main()\n\
     v_endPlaneEC = vec4(endNormalEC, -dot(endNormalEC, position.xyz));\n\
     v_halfWidth = endFaceNormalAndHalfWidth.w;\n\
 }\n\
-";
+';

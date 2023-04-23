@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "void morphTargetsStage(inout ProcessedAttributes attributes) \n\
+export default 'void morphTargetsStage(inout ProcessedAttributes attributes) \n\
 {\n\
     vec3 positionMC = attributes.positionMC;\n\
     attributes.positionMC = getMorphedPosition(positionMC);\n\
@@ -13,4 +13,4 @@ export default "void morphTargetsStage(inout ProcessedAttributes attributes) \n\
     vec3 tangentMC = attributes.tangentMC;\n\
     attributes.tangentMC = getMorphedTangent(tangentMC);\n\
     #endif\n\
-}";
+}';

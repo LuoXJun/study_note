@@ -1,6 +1,6 @@
-import defaultValue from "../Core/defaultValue.js";
-import IonImageryProvider from "./IonImageryProvider.js";
-import IonWorldImageryStyle from "./IonWorldImageryStyle.js";
+import defaultValue from '../Core/defaultValue.js';
+import IonImageryProvider from './IonImageryProvider.js';
+import IonWorldImageryStyle from './IonWorldImageryStyle.js';
 
 /**
  * Creates an {@link IonImageryProvider} instance for ion's default global base imagery layer, currently Bing Maps.
@@ -32,7 +32,7 @@ function createWorldImagery(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
   const style = defaultValue(options.style, IonWorldImageryStyle.AERIAL);
   return new IonImageryProvider({
-    assetId: style,
+    assetId: style
   });
 }
 export default createWorldImagery;

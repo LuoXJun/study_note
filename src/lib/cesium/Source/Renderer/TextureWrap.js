@@ -1,4 +1,4 @@
-import WebGLConstants from "../Core/WebGLConstants.js";
+import WebGLConstants from '../Core/WebGLConstants.js';
 
 /**
  * @private
@@ -14,6 +14,6 @@ const TextureWrap = {
       textureWrap === TextureWrap.REPEAT ||
       textureWrap === TextureWrap.MIRRORED_REPEAT
     );
-  },
+  }
 };
 export default Object.freeze(TextureWrap);

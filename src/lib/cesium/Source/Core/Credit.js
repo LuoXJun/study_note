@@ -1,7 +1,7 @@
-import DOMPurify from "../ThirdParty/dompurify.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
+import DOMPurify from '../ThirdParty/dompurify.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
 
 let nextCreditId = 0;
 const creditToId = {};
@@ -22,7 +22,7 @@ const creditToId = {};
  */
 function Credit(html, showOnScreen) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("html", html);
+  Check.typeOf.string('html', html);
   //>>includeEnd('debug');
   let id;
   const key = html;
@@ -53,7 +53,7 @@ Object.defineProperties(Credit.prototype, {
   html: {
     get: function () {
       return this._html;
-    },
+    }
   },
 
   /**
@@ -66,7 +66,7 @@ Object.defineProperties(Credit.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
 
   /**
@@ -80,7 +80,7 @@ Object.defineProperties(Credit.prototype, {
     },
     set: function (value) {
       this._showOnScreen = value;
-    },
+    }
   },
 
   /**
@@ -94,21 +94,21 @@ Object.defineProperties(Credit.prototype, {
       if (!defined(this._element)) {
         const html = DOMPurify.sanitize(this._html);
 
-        const div = document.createElement("div");
+        const div = document.createElement('div');
         div._creditId = this._id;
-        div.style.display = "inline";
+        div.style.display = 'inline';
         div.innerHTML = html;
 
-        const links = div.querySelectorAll("a");
+        const links = div.querySelectorAll('a');
         for (let i = 0; i < links.length; i++) {
-          links[i].setAttribute("target", "_blank");
+          links[i].setAttribute('target', '_blank');
         }
 
         this._element = div;
       }
       return this._element;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -148,7 +148,7 @@ Credit.getIonCredit = function (attribution) {
     defined(attribution.collapsible) && !attribution.collapsible;
   const credit = new Credit(attribution.html, showOnScreen);
 
-  credit._isIon = credit.html.indexOf("ion-credit.png") !== -1;
+  credit._isIon = credit.html.indexOf('ion-credit.png') !== -1;
   return credit;
 };
 

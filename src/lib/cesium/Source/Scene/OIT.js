@@ -1,20 +1,20 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import WebGLConstants from "../Core/WebGLConstants.js";
-import ClearCommand from "../Renderer/ClearCommand.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import FramebufferManager from "../Renderer/FramebufferManager.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import Texture from "../Renderer/Texture.js";
-import AdjustTranslucentFS from "../Shaders/AdjustTranslucentFS.js";
-import CompositeOITFS from "../Shaders/CompositeOITFS.js";
-import BlendEquation from "./BlendEquation.js";
-import BlendFunction from "./BlendFunction.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import WebGLConstants from '../Core/WebGLConstants.js';
+import ClearCommand from '../Renderer/ClearCommand.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import FramebufferManager from '../Renderer/FramebufferManager.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import Texture from '../Renderer/Texture.js';
+import AdjustTranslucentFS from '../Shaders/AdjustTranslucentFS.js';
+import CompositeOITFS from '../Shaders/CompositeOITFS.js';
+import BlendEquation from './BlendEquation.js';
+import BlendFunction from './BlendFunction.js';
 
 /**
  * @private
@@ -41,37 +41,37 @@ function OIT(context) {
     colorAttachmentsLength: this._translucentMRTSupport ? 2 : 1,
     createColorAttachments: false,
     createDepthAttachments: false,
-    depth: true,
+    depth: true
   });
   this._alphaFBO = new FramebufferManager({
     createColorAttachments: false,
     createDepthAttachments: false,
-    depth: true,
+    depth: true
   });
 
   this._adjustTranslucentFBO = new FramebufferManager({
     colorAttachmentsLength: this._translucentMRTSupport ? 2 : 1,
-    createColorAttachments: false,
+    createColorAttachments: false
   });
   this._adjustAlphaFBO = new FramebufferManager({
-    createColorAttachments: false,
+    createColorAttachments: false
   });
 
   this._opaqueClearCommand = new ClearCommand({
     color: new Color(0.0, 0.0, 0.0, 0.0),
-    owner: this,
+    owner: this
   });
   this._translucentMRTClearCommand = new ClearCommand({
     color: new Color(0.0, 0.0, 0.0, 1.0),
-    owner: this,
+    owner: this
   });
   this._translucentMultipassClearCommand = new ClearCommand({
     color: new Color(0.0, 0.0, 0.0, 0.0),
-    owner: this,
+    owner: this
   });
   this._alphaClearCommand = new ClearCommand({
     color: new Color(1.0, 1.0, 1.0, 1.0),
-    owner: this,
+    owner: this
   });
 
   this._translucentRenderStateCache = {};
@@ -121,7 +121,7 @@ function updateTextures(oit, context, width, height) {
     width: width,
     height: height,
     pixelFormat: PixelFormat.RGBA,
-    pixelDatatype: PixelDatatype.FLOAT,
+    pixelDatatype: PixelDatatype.FLOAT
   });
 
   // Use zeroed arraybuffer instead of null to initialize texture
@@ -134,9 +134,9 @@ function updateTextures(oit, context, width, height) {
     source: {
       arrayBufferView: source,
       width: width,
-      height: height,
+      height: height
     },
-    flipY: false,
+    flipY: false
   });
 }
 
@@ -255,10 +255,10 @@ OIT.prototype.update = function (
 
   if (!defined(this._compositeCommand)) {
     fs = new ShaderSource({
-      sources: [CompositeOITFS],
+      sources: [CompositeOITFS]
     });
     if (this._translucentMRTSupport) {
-      fs.defines.push("MRT");
+      fs.defines.push('MRT');
     }
 
     uniformMap = {
@@ -270,19 +270,19 @@ OIT.prototype.update = function (
       },
       u_revealage: function () {
         return that._revealageTexture;
-      },
+      }
     };
     this._compositeCommand = context.createViewportQuadCommand(fs, {
       uniformMap: uniformMap,
-      owner: this,
+      owner: this
     });
   }
 
   if (!defined(this._adjustTranslucentCommand)) {
     if (this._translucentMRTSupport) {
       fs = new ShaderSource({
-        defines: ["MRT"],
-        sources: [AdjustTranslucentFS],
+        defines: ['MRT'],
+        sources: [AdjustTranslucentFS]
       });
 
       uniformMap = {
@@ -291,16 +291,16 @@ OIT.prototype.update = function (
         },
         u_depthTexture: function () {
           return that._depthStencilTexture;
-        },
+        }
       };
 
       this._adjustTranslucentCommand = context.createViewportQuadCommand(fs, {
         uniformMap: uniformMap,
-        owner: this,
+        owner: this
       });
     } else if (this._translucentMultipassSupport) {
       fs = new ShaderSource({
-        sources: [AdjustTranslucentFS],
+        sources: [AdjustTranslucentFS]
       });
 
       uniformMap = {
@@ -309,12 +309,12 @@ OIT.prototype.update = function (
         },
         u_depthTexture: function () {
           return that._depthStencilTexture;
-        },
+        }
       };
 
       this._adjustTranslucentCommand = context.createViewportQuadCommand(fs, {
         uniformMap: uniformMap,
-        owner: this,
+        owner: this
       });
 
       uniformMap = {
@@ -323,12 +323,12 @@ OIT.prototype.update = function (
         },
         u_depthTexture: function () {
           return that._depthStencilTexture;
-        },
+        }
       };
 
       this._adjustAlphaCommand = context.createViewportQuadCommand(fs, {
         uniformMap: uniformMap,
-        owner: this,
+        owner: this
       });
     }
   }
@@ -360,8 +360,8 @@ OIT.prototype.update = function (
       viewport: this._viewport,
       scissorTest: {
         enabled: this._useScissorTest,
-        rectangle: this._scissorRectangle,
-      },
+        rectangle: this._scissorRectangle
+      }
     });
   }
 
@@ -386,7 +386,7 @@ const translucentMRTBlend = {
   functionSourceRgb: BlendFunction.ONE,
   functionDestinationRgb: BlendFunction.ONE,
   functionSourceAlpha: BlendFunction.ZERO,
-  functionDestinationAlpha: BlendFunction.ONE_MINUS_SOURCE_ALPHA,
+  functionDestinationAlpha: BlendFunction.ONE_MINUS_SOURCE_ALPHA
 };
 
 const translucentColorBlend = {
@@ -397,7 +397,7 @@ const translucentColorBlend = {
   functionSourceRgb: BlendFunction.ONE,
   functionDestinationRgb: BlendFunction.ONE,
   functionSourceAlpha: BlendFunction.ONE,
-  functionDestinationAlpha: BlendFunction.ONE,
+  functionDestinationAlpha: BlendFunction.ONE
 };
 
 const translucentAlphaBlend = {
@@ -408,7 +408,7 @@ const translucentAlphaBlend = {
   functionSourceRgb: BlendFunction.ZERO,
   functionDestinationRgb: BlendFunction.ONE_MINUS_SOURCE_ALPHA,
   functionSourceAlpha: BlendFunction.ZERO,
-  functionDestinationAlpha: BlendFunction.ONE_MINUS_SOURCE_ALPHA,
+  functionDestinationAlpha: BlendFunction.ONE_MINUS_SOURCE_ALPHA
 };
 
 function getTranslucentRenderState(
@@ -458,20 +458,20 @@ function getTranslucentAlphaRenderState(oit, context, renderState) {
 }
 
 const mrtShaderSource =
-  "    vec3 Ci = czm_gl_FragColor.rgb * czm_gl_FragColor.a;\n" +
-  "    float ai = czm_gl_FragColor.a;\n" +
-  "    float wzi = czm_alphaWeight(ai);\n" +
-  "    gl_FragData[0] = vec4(Ci * wzi, ai);\n" +
-  "    gl_FragData[1] = vec4(ai * wzi);\n";
+  '    vec3 Ci = czm_gl_FragColor.rgb * czm_gl_FragColor.a;\n' +
+  '    float ai = czm_gl_FragColor.a;\n' +
+  '    float wzi = czm_alphaWeight(ai);\n' +
+  '    gl_FragData[0] = vec4(Ci * wzi, ai);\n' +
+  '    gl_FragData[1] = vec4(ai * wzi);\n';
 
 const colorShaderSource =
-  "    vec3 Ci = czm_gl_FragColor.rgb * czm_gl_FragColor.a;\n" +
-  "    float ai = czm_gl_FragColor.a;\n" +
-  "    float wzi = czm_alphaWeight(ai);\n" +
-  "    gl_FragColor = vec4(Ci, ai) * wzi;\n";
+  '    vec3 Ci = czm_gl_FragColor.rgb * czm_gl_FragColor.a;\n' +
+  '    float ai = czm_gl_FragColor.a;\n' +
+  '    float wzi = czm_alphaWeight(ai);\n' +
+  '    gl_FragColor = vec4(Ci, ai) * wzi;\n';
 
 const alphaShaderSource =
-  "    float ai = czm_gl_FragColor.a;\n" + "    gl_FragColor = vec4(ai);\n";
+  '    float ai = czm_gl_FragColor.a;\n' + '    gl_FragColor = vec4(ai);\n';
 
 function getTranslucentShaderProgram(context, shaderProgram, keyword, source) {
   let shader = context.shaderCache.getDerivedShaderProgram(
@@ -484,10 +484,10 @@ function getTranslucentShaderProgram(context, shaderProgram, keyword, source) {
     const fs = shaderProgram.fragmentShaderSource.clone();
 
     fs.sources = fs.sources.map(function (source) {
-      source = ShaderSource.replaceMain(source, "czm_translucent_main");
-      source = source.replace(/gl_FragColor/g, "czm_gl_FragColor");
-      source = source.replace(/\bdiscard\b/g, "czm_discard = true");
-      source = source.replace(/czm_phong/g, "czm_translucentPhong");
+      source = ShaderSource.replaceMain(source, 'czm_translucent_main');
+      source = source.replace(/gl_FragColor/g, 'czm_gl_FragColor');
+      source = source.replace(/\bdiscard\b/g, 'czm_discard = true');
+      source = source.replace(/czm_phong/g, 'czm_translucentPhong');
       return source;
     });
 
@@ -498,21 +498,21 @@ function getTranslucentShaderProgram(context, shaderProgram, keyword, source) {
       0,
       0,
       `${
-        source.indexOf("gl_FragData") !== -1
-          ? "#extension GL_EXT_draw_buffers : enable \n"
-          : ""
+        source.indexOf('gl_FragData') !== -1
+          ? '#extension GL_EXT_draw_buffers : enable \n'
+          : ''
       }vec4 czm_gl_FragColor;\n` + `bool czm_discard = false;\n`
     );
 
     fs.sources.push(
       `${
-        "void main()\n" +
-        "{\n" +
-        "    czm_translucent_main();\n" +
-        "    if (czm_discard)\n" +
-        "    {\n" +
-        "        discard;\n" +
-        "    }\n"
+        'void main()\n' +
+        '{\n' +
+        '    czm_translucent_main();\n' +
+        '    if (czm_discard)\n' +
+        '    {\n' +
+        '        discard;\n' +
+        '    }\n'
       }${source}}\n`
     );
 
@@ -522,7 +522,7 @@ function getTranslucentShaderProgram(context, shaderProgram, keyword, source) {
       {
         vertexShaderSource: shaderProgram.vertexShaderSource,
         fragmentShaderSource: fs,
-        attributeLocations: attributeLocations,
+        attributeLocations: attributeLocations
       }
     );
   }
@@ -534,7 +534,7 @@ function getTranslucentMRTShaderProgram(context, shaderProgram) {
   return getTranslucentShaderProgram(
     context,
     shaderProgram,
-    "translucentMRT",
+    'translucentMRT',
     mrtShaderSource
   );
 }
@@ -543,7 +543,7 @@ function getTranslucentColorShaderProgram(context, shaderProgram) {
   return getTranslucentShaderProgram(
     context,
     shaderProgram,
-    "translucentMultipass",
+    'translucentMultipass',
     colorShaderSource
   );
 }
@@ -552,7 +552,7 @@ function getTranslucentAlphaShaderProgram(context, shaderProgram) {
   return getTranslucentShaderProgram(
     context,
     shaderProgram,
-    "alphaMultipass",
+    'alphaMultipass',
     alphaShaderSource
   );
 }
@@ -618,10 +618,8 @@ OIT.prototype.createDerivedCommands = function (command, context, result) {
       !defined(colorShader) ||
       result.shaderProgramId !== command.shaderProgram.id
     ) {
-      result.translucentCommand.shaderProgram = getTranslucentColorShaderProgram(
-        context,
-        command.shaderProgram
-      );
+      result.translucentCommand.shaderProgram =
+        getTranslucentColorShaderProgram(context, command.shaderProgram);
       result.translucentCommand.renderState = getTranslucentColorRenderState(
         this,
         context,

@@ -1,6 +1,6 @@
-import Uri from "../ThirdParty/Uri.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import Uri from '../ThirdParty/Uri.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Given a URI, returns the extension of the URI.
@@ -16,20 +16,20 @@ import DeveloperError from "./DeveloperError.js";
 function getExtensionFromUri(uri) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(uri)) {
-    throw new DeveloperError("uri is required.");
+    throw new DeveloperError('uri is required.');
   }
   //>>includeEnd('debug');
 
   const uriObject = new Uri(uri);
   uriObject.normalize();
   let path = uriObject.path();
-  let index = path.lastIndexOf("/");
+  let index = path.lastIndexOf('/');
   if (index !== -1) {
     path = path.substr(index + 1);
   }
-  index = path.lastIndexOf(".");
+  index = path.lastIndexOf('.');
   if (index === -1) {
-    path = "";
+    path = '';
   } else {
     path = path.substr(index + 1);
   }

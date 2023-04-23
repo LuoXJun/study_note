@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "mat4 getInstancingTransform()\n\
+export default 'mat4 getInstancingTransform()\n\
 {\n\
     mat4 instancingTransform;\n\
 \n\
@@ -66,4 +66,4 @@ mat4 getInstancingTransform2D()\n\
     return instancingTransform2D;\n\
 }\n\
 #endif\n\
-";
+';

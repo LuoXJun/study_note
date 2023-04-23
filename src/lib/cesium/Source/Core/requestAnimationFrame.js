@@ -1,15 +1,15 @@
-import defined from "./defined.js";
-import getTimestamp from "./getTimestamp.js";
+import defined from './defined.js';
+import getTimestamp from './getTimestamp.js';
 
 let implementation;
-if (typeof requestAnimationFrame !== "undefined") {
+if (typeof requestAnimationFrame !== 'undefined') {
   implementation = requestAnimationFrame;
 }
 
 (function () {
   // look for vendor prefixed function
-  if (!defined(implementation) && typeof window !== "undefined") {
-    const vendors = ["webkit", "moz", "ms", "o"];
+  if (!defined(implementation) && typeof window !== 'undefined') {
+    const vendors = ['webkit', 'moz', 'ms', 'o'];
     let i = 0;
     const len = vendors.length;
     while (i < len && !defined(implementation)) {

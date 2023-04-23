@@ -23,7 +23,11 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './defaultValue-97284df2'], (function (exports, defaultValue) { 'use strict';
+define(['exports', './defaultValue-97284df2'], function (
+  exports,
+  defaultValue
+) {
+  'use strict';
 
   /**
    * Attributes, which make up a geometry's vertices.  Each property in this object corresponds to a
@@ -36,7 +40,10 @@ define(['exports', './defaultValue-97284df2'], (function (exports, defaultValue)
    * @constructor
    */
   function GeometryAttributes(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     /**
      * The 3D position attribute.
@@ -112,6 +119,5 @@ define(['exports', './defaultValue-97284df2'], (function (exports, defaultValue)
   }
 
   exports.GeometryAttributes = GeometryAttributes;
-
-}));
+});
 //# sourceMappingURL=GeometryAttributes-734a3446.js.map

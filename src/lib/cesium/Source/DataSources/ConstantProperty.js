@@ -1,5 +1,5 @@
-import defined from "../Core/defined.js";
-import Event from "../Core/Event.js";
+import defined from '../Core/defined.js';
+import Event from '../Core/Event.js';
 
 /**
  * A {@link Property} whose value does not change with respect to simulation time.
@@ -29,7 +29,7 @@ Object.defineProperties(ConstantProperty.prototype, {
    * @readonly
    */
   isConstant: {
-    value: true,
+    value: true
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -43,8 +43,8 @@ Object.defineProperties(ConstantProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -67,8 +67,8 @@ ConstantProperty.prototype.setValue = function (value) {
   const oldValue = this._value;
   if (oldValue !== value) {
     const isDefined = defined(value);
-    const hasClone = isDefined && typeof value.clone === "function";
-    const hasEquals = isDefined && typeof value.equals === "function";
+    const hasClone = isDefined && typeof value.clone === 'function';
+    const hasEquals = isDefined && typeof value.equals === 'function';
 
     const changed = !hasEquals || !value.equals(oldValue);
     if (changed) {

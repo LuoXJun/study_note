@@ -23,7 +23,13 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-9e1c22e2', './ComponentDatatype-4eeb6d9b', './Transforms-273eeb44'], (function (exports, Matrix2, ComponentDatatype, Transforms) { 'use strict';
+define([
+  'exports',
+  './Matrix2-9e1c22e2',
+  './ComponentDatatype-4eeb6d9b',
+  './Transforms-273eeb44'
+], function (exports, Matrix2, ComponentDatatype, Transforms) {
+  'use strict';
 
   const EllipseGeometryLibrary = {};
 
@@ -96,10 +102,17 @@ define(['exports', './Matrix2-9e1c22e2', './ComponentDatatype-4eeb6d9b', './Tran
       const i1 = i + 1;
       const i2 = i + 2;
 
-      const position = Matrix2.Cartesian3.fromArray(positions, i, scratchCartesian1);
+      const position = Matrix2.Cartesian3.fromArray(
+        positions,
+        i,
+        scratchCartesian1
+      );
       ellipsoid.scaleToGeodeticSurface(position, position);
 
-      const extrudedPosition = Matrix2.Cartesian3.clone(position, scratchCartesian2);
+      const extrudedPosition = Matrix2.Cartesian3.clone(
+        position,
+        scratchCartesian2
+      );
       const normal = ellipsoid.geodeticSurfaceNormal(position, scratchNormal);
       const scaledNormal = Matrix2.Cartesian3.multiplyByScalar(
         normal,
@@ -109,8 +122,16 @@ define(['exports', './Matrix2-9e1c22e2', './ComponentDatatype-4eeb6d9b', './Tran
       Matrix2.Cartesian3.add(position, scaledNormal, position);
 
       if (extrude) {
-        Matrix2.Cartesian3.multiplyByScalar(normal, extrudedHeight, scaledNormal);
-        Matrix2.Cartesian3.add(extrudedPosition, scaledNormal, extrudedPosition);
+        Matrix2.Cartesian3.multiplyByScalar(
+          normal,
+          extrudedHeight,
+          scaledNormal
+        );
+        Matrix2.Cartesian3.add(
+          extrudedPosition,
+          scaledNormal,
+          extrudedPosition
+        );
 
         finalPositions[i + bottomOffset] = extrudedPosition.x;
         finalPositions[i1 + bottomOffset] = extrudedPosition.y;
@@ -155,12 +176,21 @@ define(['exports', './Matrix2-9e1c22e2', './ComponentDatatype-4eeb6d9b', './Tran
     const mag = Matrix2.Cartesian3.magnitude(center);
 
     const unitPos = Matrix2.Cartesian3.normalize(center, unitPosScratch);
-    let eastVec = Matrix2.Cartesian3.cross(Matrix2.Cartesian3.UNIT_Z, center, eastVecScratch);
+    let eastVec = Matrix2.Cartesian3.cross(
+      Matrix2.Cartesian3.UNIT_Z,
+      center,
+      eastVecScratch
+    );
     eastVec = Matrix2.Cartesian3.normalize(eastVec, eastVec);
-    const northVec = Matrix2.Cartesian3.cross(unitPos, eastVec, northVecScratch);
+    const northVec = Matrix2.Cartesian3.cross(
+      unitPos,
+      eastVec,
+      northVecScratch
+    );
 
     // The number of points in the first quadrant
-    let numPts = 1 + Math.ceil(ComponentDatatype.CesiumMath.PI_OVER_TWO / granularity);
+    let numPts =
+      1 + Math.ceil(ComponentDatatype.CesiumMath.PI_OVER_TWO / granularity);
 
     const deltaTheta = ComponentDatatype.CesiumMath.PI_OVER_TWO / (numPts - 1);
     let theta = ComponentDatatype.CesiumMath.PI_OVER_TWO - numPts * deltaTheta;
@@ -386,6 +416,5 @@ define(['exports', './Matrix2-9e1c22e2', './ComponentDatatype-4eeb6d9b', './Tran
   };
 
   exports.EllipseGeometryLibrary = EllipseGeometryLibrary;
-
-}));
+});
 //# sourceMappingURL=EllipseGeometryLibrary-dac95924.js.map

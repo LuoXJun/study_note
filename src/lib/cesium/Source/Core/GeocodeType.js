@@ -19,6 +19,6 @@ const GeocodeType = {
    * @type {Number}
    * @constant
    */
-  AUTOCOMPLETE: 1,
+  AUTOCOMPLETE: 1
 };
 export default Object.freeze(GeocodeType);

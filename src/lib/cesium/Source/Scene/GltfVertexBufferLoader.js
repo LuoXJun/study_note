@@ -1,16 +1,16 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Buffer from "../Renderer/Buffer.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import AttributeType from "./AttributeType.js";
-import JobType from "./JobType.js";
-import ModelComponents from "./ModelComponents.js";
-import ResourceLoader from "./ResourceLoader.js";
-import ResourceLoaderState from "./ResourceLoaderState.js";
-import AttributeCompression from "../Core/AttributeCompression.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Buffer from '../Renderer/Buffer.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import AttributeType from './AttributeType.js';
+import JobType from './JobType.js';
+import ModelComponents from './ModelComponents.js';
+import ResourceLoader from './ResourceLoader.js';
+import ResourceLoaderState from './ResourceLoaderState.js';
+import AttributeCompression from '../Core/AttributeCompression.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
 
 /**
  * Loads a vertex buffer from a glTF buffer view.
@@ -60,13 +60,13 @@ export default function GltfVertexBufferLoader(options) {
   const loadTypedArray = defaultValue(options.loadTypedArray, false);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.func("options.resourceCache", resourceCache);
-  Check.typeOf.object("options.gltf", gltf);
-  Check.typeOf.object("options.gltfResource", gltfResource);
-  Check.typeOf.object("options.baseResource", baseResource);
+  Check.typeOf.func('options.resourceCache', resourceCache);
+  Check.typeOf.object('options.gltf', gltf);
+  Check.typeOf.object('options.gltfResource', gltfResource);
+  Check.typeOf.object('options.baseResource', baseResource);
   if (!loadBuffer && !loadTypedArray) {
     throw new DeveloperError(
-      "At least one of loadBuffer and loadTypedArray must be true."
+      'At least one of loadBuffer and loadTypedArray must be true.'
     );
   }
 
@@ -77,26 +77,26 @@ export default function GltfVertexBufferLoader(options) {
 
   if (hasBufferViewId === hasDraco) {
     throw new DeveloperError(
-      "One of options.bufferViewId and options.draco must be defined."
+      'One of options.bufferViewId and options.draco must be defined.'
     );
   }
 
   if (hasDraco && !hasAttributeSemantic) {
     throw new DeveloperError(
-      "When options.draco is defined options.attributeSemantic must also be defined."
+      'When options.draco is defined options.attributeSemantic must also be defined.'
     );
   }
 
   if (hasDraco && !hasAccessorId) {
     throw new DeveloperError(
-      "When options.draco is defined options.accessorId must also be defined."
+      'When options.draco is defined options.accessorId must also be defined.'
     );
   }
 
   if (hasDraco) {
-    Check.typeOf.object("options.draco", draco);
-    Check.typeOf.string("options.attributeSemantic", attributeSemantic);
-    Check.typeOf.number("options.accessorId", accessorId);
+    Check.typeOf.object('options.draco', draco);
+    Check.typeOf.string('options.attributeSemantic', attributeSemantic);
+    Check.typeOf.number('options.accessorId', accessorId);
   }
   //>>includeEnd('debug');
 
@@ -141,7 +141,7 @@ Object.defineProperties(GltfVertexBufferLoader.prototype, {
   promise: {
     get: function () {
       return this._promise;
-    },
+    }
   },
   /**
    * The cache key of the resource.
@@ -155,7 +155,7 @@ Object.defineProperties(GltfVertexBufferLoader.prototype, {
   cacheKey: {
     get: function () {
       return this._cacheKey;
-    },
+    }
   },
   /**
    * The vertex buffer. This is only defined when <code>loadAsTypedArray</code> is false.
@@ -169,7 +169,7 @@ Object.defineProperties(GltfVertexBufferLoader.prototype, {
   buffer: {
     get: function () {
       return this._buffer;
-    },
+    }
   },
   /**
    * The typed array containing vertex buffer data. This is only defined when <code>loadAsTypedArray</code> is true.
@@ -183,7 +183,7 @@ Object.defineProperties(GltfVertexBufferLoader.prototype, {
   typedArray: {
     get: function () {
       return this._typedArray;
-    },
+    }
   },
   /**
    * Information about the quantized vertex attribute after Draco decode.
@@ -197,8 +197,8 @@ Object.defineProperties(GltfVertexBufferLoader.prototype, {
   quantization: {
     get: function () {
       return this._quantization;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -334,9 +334,8 @@ function getQuantizationInformation(
       const packedDimensions = new Array(componentCount).fill(
         dracoQuantization.range
       );
-      quantization.quantizedVolumeDimensions = MathType.unpack(
-        packedDimensions
-      );
+      quantization.quantizedVolumeDimensions =
+        MathType.unpack(packedDimensions);
 
       // Computing the step size
       const packedSteps = packedDimensions.map(function (dimension) {
@@ -355,7 +354,7 @@ function loadFromDraco(vertexBufferLoader) {
     gltf: vertexBufferLoader._gltf,
     draco: vertexBufferLoader._draco,
     gltfResource: vertexBufferLoader._gltfResource,
-    baseResource: vertexBufferLoader._baseResource,
+    baseResource: vertexBufferLoader._baseResource
   });
 
   vertexBufferLoader._dracoLoader = dracoLoader;
@@ -396,7 +395,7 @@ function loadFromBufferView(vertexBufferLoader) {
     gltf: vertexBufferLoader._gltf,
     bufferViewId: vertexBufferLoader._bufferViewId,
     gltfResource: vertexBufferLoader._gltfResource,
-    baseResource: vertexBufferLoader._baseResource,
+    baseResource: vertexBufferLoader._baseResource
   });
   vertexBufferLoader._state = ResourceLoaderState.LOADING;
   vertexBufferLoader._bufferViewLoader = bufferViewLoader;
@@ -415,7 +414,7 @@ function loadFromBufferView(vertexBufferLoader) {
 function handleError(vertexBufferLoader, error) {
   vertexBufferLoader.unload();
   vertexBufferLoader._state = ResourceLoaderState.FAILED;
-  const errorMessage = "Failed to load vertex buffer";
+  const errorMessage = 'Failed to load vertex buffer';
   error = vertexBufferLoader.getError(errorMessage, error);
   return Promise.reject(error);
 }
@@ -477,7 +476,7 @@ function createVertexBuffer(
   const buffer = Buffer.createVertexBuffer({
     typedArray: typedArray,
     context: context,
-    usage: BufferUsage.STATIC_DRAW,
+    usage: BufferUsage.STATIC_DRAW
   });
   buffer.vertexArrayDestroyable = false;
   return buffer;
@@ -491,7 +490,7 @@ function createVertexBuffer(
  */
 GltfVertexBufferLoader.prototype.process = function (frameState) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("frameState", frameState);
+  Check.typeOf.object('frameState', frameState);
   //>>includeEnd('debug');
 
   return this._process(this, frameState);

@@ -1,4 +1,4 @@
-import DeveloperError from "../Core/DeveloperError.js";
+import DeveloperError from '../Core/DeveloperError.js';
 
 /**
  * A light source. This type describes an interface and is not intended to be instantiated directly. Together, <code>color</code> and <code>intensity</code> produce a high-dynamic-range light color. <code>intensity</code> can also be used individually to dim or brighten the light without changing the hue.
@@ -18,7 +18,7 @@ Object.defineProperties(Light.prototype, {
    * @type {Color}
    */
   color: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -27,8 +27,8 @@ Object.defineProperties(Light.prototype, {
    * @type {Number}
    */
   intensity: {
-    get: DeveloperError.throwInstantiationError,
-  },
+    get: DeveloperError.throwInstantiationError
+  }
 });
 
 export default Light;

@@ -1,4 +1,4 @@
-import WebGLConstants from "../Core/WebGLConstants.js";
+import WebGLConstants from '../Core/WebGLConstants.js';
 
 /**
  * The data type of a pixel.
@@ -15,7 +15,7 @@ const PixelDatatype = {
   UNSIGNED_INT_24_8: WebGLConstants.UNSIGNED_INT_24_8,
   UNSIGNED_SHORT_4_4_4_4: WebGLConstants.UNSIGNED_SHORT_4_4_4_4,
   UNSIGNED_SHORT_5_5_5_1: WebGLConstants.UNSIGNED_SHORT_5_5_5_1,
-  UNSIGNED_SHORT_5_6_5: WebGLConstants.UNSIGNED_SHORT_5_6_5,
+  UNSIGNED_SHORT_5_6_5: WebGLConstants.UNSIGNED_SHORT_5_6_5
 };
 
 /**

@@ -1,9 +1,9 @@
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import CesiumMath from "./Math.js";
-import PerspectiveOffCenterFrustum from "./PerspectiveOffCenterFrustum.js";
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import CesiumMath from './Math.js';
+import PerspectiveOffCenterFrustum from './PerspectiveOffCenterFrustum.js';
 
 /**
  * The viewing frustum is defined by 6 planes.
@@ -108,8 +108,8 @@ PerspectiveFrustum.packedLength = 6;
  */
 PerspectiveFrustum.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -134,7 +134,7 @@ PerspectiveFrustum.pack = function (value, array, startingIndex) {
  */
 PerspectiveFrustum.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -162,7 +162,7 @@ function update(frustum) {
     !defined(frustum.far)
   ) {
     throw new DeveloperError(
-      "fov, aspectRatio, near, or far parameters are not set."
+      'fov, aspectRatio, near, or far parameters are not set.'
     );
   }
   //>>includeEnd('debug');
@@ -179,16 +179,16 @@ function update(frustum) {
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (frustum.fov < 0 || frustum.fov >= Math.PI) {
-      throw new DeveloperError("fov must be in the range [0, PI).");
+      throw new DeveloperError('fov must be in the range [0, PI).');
     }
 
     if (frustum.aspectRatio < 0) {
-      throw new DeveloperError("aspectRatio must be positive.");
+      throw new DeveloperError('aspectRatio must be positive.');
     }
 
     if (frustum.near < 0 || frustum.near > frustum.far) {
       throw new DeveloperError(
-        "near must be greater than zero and less than far."
+        'near must be greater than zero and less than far.'
       );
     }
     //>>includeEnd('debug');
@@ -232,7 +232,7 @@ Object.defineProperties(PerspectiveFrustum.prototype, {
     get: function () {
       update(this);
       return this._offCenterFrustum.projectionMatrix;
-    },
+    }
   },
 
   /**
@@ -247,7 +247,7 @@ Object.defineProperties(PerspectiveFrustum.prototype, {
     get: function () {
       update(this);
       return this._offCenterFrustum.infiniteProjectionMatrix;
-    },
+    }
   },
 
   /**
@@ -261,7 +261,7 @@ Object.defineProperties(PerspectiveFrustum.prototype, {
     get: function () {
       update(this);
       return this._fovy;
-    },
+    }
   },
 
   /**
@@ -272,8 +272,8 @@ Object.defineProperties(PerspectiveFrustum.prototype, {
     get: function () {
       update(this);
       return this._sseDenominator;
-    },
-  },
+    }
+  }
 });
 
 /**

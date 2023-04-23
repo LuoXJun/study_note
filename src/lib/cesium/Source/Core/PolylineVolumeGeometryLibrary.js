@@ -1,16 +1,16 @@
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartesian4 from "./Cartesian4.js";
-import Cartographic from "./Cartographic.js";
-import CornerType from "./CornerType.js";
-import EllipsoidTangentPlane from "./EllipsoidTangentPlane.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
-import Matrix4 from "./Matrix4.js";
-import PolylinePipeline from "./PolylinePipeline.js";
-import Quaternion from "./Quaternion.js";
-import Transforms from "./Transforms.js";
-import oneTimeWarning from "../Core/oneTimeWarning.js";
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartesian4 from './Cartesian4.js';
+import Cartographic from './Cartographic.js';
+import CornerType from './CornerType.js';
+import EllipsoidTangentPlane from './EllipsoidTangentPlane.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
+import Matrix4 from './Matrix4.js';
+import PolylinePipeline from './PolylinePipeline.js';
+import Quaternion from './Quaternion.js';
+import Transforms from './Transforms.js';
+import oneTimeWarning from '../Core/oneTimeWarning.js';
 
 const scratch2Array = [new Cartesian3(), new Cartesian3()];
 const scratchCartesian1 = new Cartesian3();
@@ -428,7 +428,7 @@ PolylineVolumeGeometryLibrary.computePositions = function (
     nextPosition = positions[i + 1];
     if (position.equals(nextPosition)) {
       oneTimeWarning(
-        "Positions are too close and are considered equivalent with rounding error."
+        'Positions are too close and are considered equivalent with rounding error.'
       );
       continue;
     }
@@ -512,7 +512,7 @@ PolylineVolumeGeometryLibrary.computePositions = function (
         subdividedPositions = PolylinePipeline.generateArc({
           positions: scratch2Array,
           granularity: granularity,
-          ellipsoid: ellipsoid,
+          ellipsoid: ellipsoid
         });
         finalPositions = addPositions(
           subdividedPositions,
@@ -586,7 +586,7 @@ PolylineVolumeGeometryLibrary.computePositions = function (
         subdividedPositions = PolylinePipeline.generateArc({
           positions: scratch2Array,
           granularity: granularity,
-          ellipsoid: ellipsoid,
+          ellipsoid: ellipsoid
         });
         finalPositions = addPositions(
           subdividedPositions,
@@ -664,7 +664,7 @@ PolylineVolumeGeometryLibrary.computePositions = function (
   subdividedPositions = PolylinePipeline.generateArc({
     positions: scratch2Array,
     granularity: granularity,
-    ellipsoid: ellipsoid,
+    ellipsoid: ellipsoid
   });
   finalPositions = addPositions(
     subdividedPositions,

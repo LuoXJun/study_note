@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "void silhouetteStage(in ProcessedAttributes attributes) {\n\
+export default 'void silhouetteStage(in ProcessedAttributes attributes) {\n\
      #ifdef HAS_NORMALS\n\
      if(model_silhouettePass) {\n\
           vec3 normal = normalize(czm_normal3D * attributes.normalMC);\n\
@@ -10,4 +10,4 @@ export default "void silhouetteStage(in ProcessedAttributes attributes) {\n\
           gl_Position = clip;\n\
     }\n\
     #endif\n\
-}";
+}';

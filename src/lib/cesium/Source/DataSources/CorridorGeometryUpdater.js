@@ -1,26 +1,26 @@
-import ApproximateTerrainHeights from "../Core/ApproximateTerrainHeights.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import CorridorGeometry from "../Core/CorridorGeometry.js";
-import CorridorOutlineGeometry from "../Core/CorridorOutlineGeometry.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DistanceDisplayConditionGeometryInstanceAttribute from "../Core/DistanceDisplayConditionGeometryInstanceAttribute.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import Iso8601 from "../Core/Iso8601.js";
-import OffsetGeometryInstanceAttribute from "../Core/OffsetGeometryInstanceAttribute.js";
-import Rectangle from "../Core/Rectangle.js";
-import ShowGeometryInstanceAttribute from "../Core/ShowGeometryInstanceAttribute.js";
-import HeightReference from "../Scene/HeightReference.js";
-import MaterialAppearance from "../Scene/MaterialAppearance.js";
-import PerInstanceColorAppearance from "../Scene/PerInstanceColorAppearance.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import DynamicGeometryUpdater from "./DynamicGeometryUpdater.js";
-import GeometryUpdater from "./GeometryUpdater.js";
-import GroundGeometryUpdater from "./GroundGeometryUpdater.js";
-import Property from "./Property.js";
+import ApproximateTerrainHeights from '../Core/ApproximateTerrainHeights.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import CorridorGeometry from '../Core/CorridorGeometry.js';
+import CorridorOutlineGeometry from '../Core/CorridorOutlineGeometry.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DistanceDisplayConditionGeometryInstanceAttribute from '../Core/DistanceDisplayConditionGeometryInstanceAttribute.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import Iso8601 from '../Core/Iso8601.js';
+import OffsetGeometryInstanceAttribute from '../Core/OffsetGeometryInstanceAttribute.js';
+import Rectangle from '../Core/Rectangle.js';
+import ShowGeometryInstanceAttribute from '../Core/ShowGeometryInstanceAttribute.js';
+import HeightReference from '../Scene/HeightReference.js';
+import MaterialAppearance from '../Scene/MaterialAppearance.js';
+import PerInstanceColorAppearance from '../Scene/PerInstanceColorAppearance.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import DynamicGeometryUpdater from './DynamicGeometryUpdater.js';
+import GeometryUpdater from './GeometryUpdater.js';
+import GroundGeometryUpdater from './GroundGeometryUpdater.js';
+import Property from './Property.js';
 
 const scratchColor = new Color();
 const defaultOffset = Cartesian3.ZERO;
@@ -53,11 +53,11 @@ function CorridorGeometryUpdater(entity, scene) {
     entity: entity,
     scene: scene,
     geometryOptions: new CorridorGeometryOptions(entity),
-    geometryPropertyName: "corridor",
-    observedPropertyNames: ["availability", "corridor"],
+    geometryPropertyName: 'corridor',
+    observedPropertyNames: ['availability', 'corridor']
   });
 
-  this._onEntityPropertyChanged(entity, "corridor", entity.corridor, undefined);
+  this._onEntityPropertyChanged(entity, 'corridor', entity.corridor, undefined);
 }
 
 if (defined(Object.create)) {
@@ -77,11 +77,11 @@ if (defined(Object.create)) {
  */
 CorridorGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
 
   if (!this._fillEnabled) {
     throw new DeveloperError(
-      "This instance does not represent a filled geometry."
+      'This instance does not represent a filled geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -96,11 +96,12 @@ CorridorGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
         this._showProperty.getValue(time) &&
         this._fillProperty.getValue(time)
     ),
-    distanceDisplayCondition: DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-      this._distanceDisplayConditionProperty.getValue(time)
-    ),
+    distanceDisplayCondition:
+      DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+        this._distanceDisplayConditionProperty.getValue(time)
+      ),
     offset: undefined,
-    color: undefined,
+    color: undefined
   };
 
   if (this._materialProperty instanceof ColorMaterialProperty) {
@@ -131,7 +132,7 @@ CorridorGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
   return new GeometryInstance({
     id: entity,
     geometry: new CorridorGeometry(this._options),
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -147,11 +148,11 @@ CorridorGeometryUpdater.prototype.createOutlineGeometryInstance = function (
   time
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
 
   if (!this._outlineEnabled) {
     throw new DeveloperError(
-      "This instance does not represent an outlined geometry."
+      'This instance does not represent an outlined geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -173,10 +174,11 @@ CorridorGeometryUpdater.prototype.createOutlineGeometryInstance = function (
         this._showOutlineProperty.getValue(time)
     ),
     color: ColorGeometryInstanceAttribute.fromColor(outlineColor),
-    distanceDisplayCondition: DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-      this._distanceDisplayConditionProperty.getValue(time)
-    ),
-    offset: undefined,
+    distanceDisplayCondition:
+      DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+        this._distanceDisplayConditionProperty.getValue(time)
+      ),
+    offset: undefined
   };
 
   if (defined(this._options.offsetAttribute)) {
@@ -193,7 +195,7 @@ CorridorGeometryUpdater.prototype.createOutlineGeometryInstance = function (
   return new GeometryInstance({
     id: entity,
     geometry: new CorridorOutlineGeometry(this._options),
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -279,12 +281,13 @@ CorridorGeometryUpdater.prototype._setStaticOptions = function (
     corridor.cornerType,
     Iso8601.MINIMUM_VALUE
   );
-  options.offsetAttribute = GroundGeometryUpdater.computeGeometryOffsetAttribute(
-    heightValue,
-    heightReferenceValue,
-    extrudedHeightValue,
-    extrudedHeightReferenceValue
-  );
+  options.offsetAttribute =
+    GroundGeometryUpdater.computeGeometryOffsetAttribute(
+      heightValue,
+      heightReferenceValue,
+      extrudedHeightValue,
+      extrudedHeightReferenceValue
+    );
   options.height = GroundGeometryUpdater.getGeometryHeight(
     heightValue,
     heightReferenceValue
@@ -325,7 +328,8 @@ if (defined(Object.create)) {
   DynamicCorridorGeometryUpdater.prototype = Object.create(
     DynamicGeometryUpdater.prototype
   );
-  DynamicCorridorGeometryUpdater.prototype.constructor = DynamicCorridorGeometryUpdater;
+  DynamicCorridorGeometryUpdater.prototype.constructor =
+    DynamicCorridorGeometryUpdater;
 }
 
 DynamicCorridorGeometryUpdater.prototype._isHidden = function (
@@ -378,12 +382,13 @@ DynamicCorridorGeometryUpdater.prototype._setOptions = function (
     time
   );
   options.cornerType = Property.getValueOrUndefined(corridor.cornerType, time);
-  options.offsetAttribute = GroundGeometryUpdater.computeGeometryOffsetAttribute(
-    heightValue,
-    heightReferenceValue,
-    extrudedHeightValue,
-    extrudedHeightReferenceValue
-  );
+  options.offsetAttribute =
+    GroundGeometryUpdater.computeGeometryOffsetAttribute(
+      heightValue,
+      heightReferenceValue,
+      extrudedHeightValue,
+      extrudedHeightReferenceValue
+    );
   options.height = GroundGeometryUpdater.getGeometryHeight(
     heightValue,
     heightReferenceValue

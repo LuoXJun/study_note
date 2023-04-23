@@ -1,9 +1,9 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import GltfLoaderUtil from "./GltfLoaderUtil.js";
-import MetadataType from "./MetadataType.js";
-import MetadataComponentType from "./MetadataComponentType.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import GltfLoaderUtil from './GltfLoaderUtil.js';
+import MetadataType from './MetadataType.js';
+import MetadataComponentType from './MetadataComponentType.js';
 
 /**
  * A property in a property texture.
@@ -31,9 +31,9 @@ function PropertyTextureProperty(options) {
   const textures = options.textures;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.property", property);
-  Check.typeOf.object("options.classProperty", classProperty);
-  Check.typeOf.object("options.textures", textures);
+  Check.typeOf.object('options.property', property);
+  Check.typeOf.object('options.classProperty', classProperty);
+  Check.typeOf.object('options.textures', textures);
   //>>includeEnd('debug');
 
   // in EXT_structural_metadata, the property is a valid glTF textureInfo
@@ -41,7 +41,7 @@ function PropertyTextureProperty(options) {
   const textureReader = GltfLoaderUtil.createModelTextureReader({
     textureInfo: textureInfo,
     channels: reformatChannels(property.channels),
-    texture: textures[textureInfo.index],
+    texture: textures[textureInfo.index]
   });
 
   this._min = property.min;
@@ -88,7 +88,7 @@ Object.defineProperties(PropertyTextureProperty.prototype, {
   textureReader: {
     get: function () {
       return this._textureReader;
-    },
+    }
   },
 
   /**
@@ -103,7 +103,7 @@ Object.defineProperties(PropertyTextureProperty.prototype, {
   hasValueTransform: {
     get: function () {
       return this._hasValueTransform;
-    },
+    }
   },
 
   /**
@@ -117,7 +117,7 @@ Object.defineProperties(PropertyTextureProperty.prototype, {
   offset: {
     get: function () {
       return this._offset;
-    },
+    }
   },
 
   /**
@@ -131,7 +131,7 @@ Object.defineProperties(PropertyTextureProperty.prototype, {
   scale: {
     get: function () {
       return this._scale;
-    },
+    }
   },
 
   /**
@@ -145,7 +145,7 @@ Object.defineProperties(PropertyTextureProperty.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -159,8 +159,8 @@ Object.defineProperties(PropertyTextureProperty.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
-  },
+    }
+  }
 });
 
 PropertyTextureProperty.prototype.isGpuCompatible = function () {
@@ -187,13 +187,13 @@ PropertyTextureProperty.prototype.isGpuCompatible = function () {
   return false;
 };
 
-const floatTypesByComponentCount = [undefined, "float", "vec2", "vec3", "vec4"];
+const floatTypesByComponentCount = [undefined, 'float', 'vec2', 'vec3', 'vec4'];
 const integerTypesByComponentCount = [
   undefined,
-  "int",
-  "ivec2",
-  "ivec3",
-  "ivec4",
+  'int',
+  'ivec2',
+  'ivec3',
+  'ivec4'
 ];
 PropertyTextureProperty.prototype.getGlslType = function () {
   const classProperty = this._classProperty;
@@ -240,9 +240,9 @@ PropertyTextureProperty.prototype.unpackInShader = function (packedValueGlsl) {
 function reformatChannels(channels) {
   return channels
     .map(function (channelIndex) {
-      return "rgba".charAt(channelIndex);
+      return 'rgba'.charAt(channelIndex);
     })
-    .join("");
+    .join('');
 }
 
 export default PropertyTextureProperty;

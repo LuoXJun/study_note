@@ -1,8 +1,8 @@
-import getAccessorByteStride from "./getAccessorByteStride.js";
-import getComponentReader from "./getComponentReader.js";
-import numberOfComponentsForType from "./numberOfComponentsForType.js";
-import ComponentDatatype from "../../Core/ComponentDatatype.js";
-import defined from "../../Core/defined.js";
+import getAccessorByteStride from './getAccessorByteStride.js';
+import getComponentReader from './getComponentReader.js';
+import numberOfComponentsForType from './numberOfComponentsForType.js';
+import ComponentDatatype from '../../Core/ComponentDatatype.js';
+import defined from '../../Core/defined.js';
 
 /**
  * Returns the accessor data in a contiguous array.
@@ -23,7 +23,7 @@ function readAccessorPacked(gltf, accessor) {
   const values = new Array(numberOfComponents * count);
 
   if (!defined(accessor.bufferView)) {
-    return values.fill(0)
+    return values.fill(0);
   }
 
   const bufferView = gltf.bufferViews[accessor.bufferView];

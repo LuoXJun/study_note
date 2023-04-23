@@ -1,18 +1,18 @@
-import CartographicGeocoderService from "../../Core/CartographicGeocoderService.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import Event from "../../Core/Event.js";
-import GeocodeType from "../../Core/GeocodeType.js";
-import IonGeocoderService from "../../Core/IonGeocoderService.js";
-import CesiumMath from "../../Core/Math.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import Rectangle from "../../Core/Rectangle.js";
-import sampleTerrainMostDetailed from "../../Core/sampleTerrainMostDetailed.js";
-import computeFlyToLocationForRectangle from "../../Scene/computeFlyToLocationForRectangle.js";
-import knockout from "../../ThirdParty/knockout.js";
-import createCommand from "../createCommand.js";
-import getElement from "../getElement.js";
+import CartographicGeocoderService from '../../Core/CartographicGeocoderService.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import Event from '../../Core/Event.js';
+import GeocodeType from '../../Core/GeocodeType.js';
+import IonGeocoderService from '../../Core/IonGeocoderService.js';
+import CesiumMath from '../../Core/Math.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import Rectangle from '../../Core/Rectangle.js';
+import sampleTerrainMostDetailed from '../../Core/sampleTerrainMostDetailed.js';
+import computeFlyToLocationForRectangle from '../../Scene/computeFlyToLocationForRectangle.js';
+import knockout from '../../ThirdParty/knockout.js';
+import createCommand from '../createCommand.js';
+import getElement from '../getElement.js';
 
 // The height we use if geocoding to a specific point instead of an rectangle.
 const DEFAULT_HEIGHT = 1000;
@@ -33,7 +33,7 @@ const DEFAULT_HEIGHT = 1000;
 function GeocoderViewModel(options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options) || !defined(options.scene)) {
-    throw new DeveloperError("options.scene is required.");
+    throw new DeveloperError('options.scene is required.');
   }
   //>>includeEnd('debug');
 
@@ -42,14 +42,14 @@ function GeocoderViewModel(options) {
   } else {
     this._geocoderServices = [
       new CartographicGeocoderService(),
-      new IonGeocoderService({ scene: options.scene }),
+      new IonGeocoderService({ scene: options.scene })
     ];
   }
 
   this._viewContainer = options.container;
   this._scene = options.scene;
   this._flightDuration = options.flightDuration;
-  this._searchText = "";
+  this._searchText = '';
   this._isSearchInProgress = false;
   this._geocodePromise = undefined;
   this._complete = new Event();
@@ -63,9 +63,9 @@ function GeocoderViewModel(options) {
   const that = this;
 
   this._suggestionsVisible = knockout.pureComputed(function () {
-    const suggestions = knockout.getObservable(that, "_suggestions");
+    const suggestions = knockout.getObservable(that, '_suggestions');
     const suggestionsNotEmpty = suggestions().length > 0;
-    const showSuggestions = knockout.getObservable(that, "_showSuggestions")();
+    const showSuggestions = knockout.getObservable(that, '_showSuggestions')();
     return suggestionsNotEmpty && showSuggestions;
   });
 
@@ -90,9 +90,9 @@ function GeocoderViewModel(options) {
 
   this.handleKeyDown = function (data, event) {
     const downKey =
-      event.key === "ArrowDown" || event.key === "Down" || event.keyCode === 40;
+      event.key === 'ArrowDown' || event.key === 'Down' || event.keyCode === 40;
     const upKey =
-      event.key === "ArrowUp" || event.key === "Up" || event.keyCode === 38;
+      event.key === 'ArrowUp' || event.key === 'Up' || event.keyCode === 38;
     if (downKey || upKey) {
       event.preventDefault();
     }
@@ -102,10 +102,10 @@ function GeocoderViewModel(options) {
 
   this.handleKeyUp = function (data, event) {
     const downKey =
-      event.key === "ArrowDown" || event.key === "Down" || event.keyCode === 40;
+      event.key === 'ArrowDown' || event.key === 'Down' || event.keyCode === 40;
     const upKey =
-      event.key === "ArrowUp" || event.key === "Up" || event.keyCode === 38;
-    const enterKey = event.key === "Enter" || event.keyCode === 13;
+      event.key === 'ArrowUp' || event.key === 'Up' || event.keyCode === 38;
+    const enterKey = event.key === 'Enter' || event.keyCode === 13;
     if (upKey) {
       handleArrowUp(that);
     } else if (downKey) {
@@ -166,16 +166,16 @@ function GeocoderViewModel(options) {
   this._focusTextbox = false;
 
   knockout.track(this, [
-    "_searchText",
-    "_isSearchInProgress",
-    "keepExpanded",
-    "_suggestions",
-    "_selectedSuggestion",
-    "_showSuggestions",
-    "_focusTextbox",
+    '_searchText',
+    '_isSearchInProgress',
+    'keepExpanded',
+    '_suggestions',
+    '_selectedSuggestion',
+    '_showSuggestions',
+    '_focusTextbox'
   ]);
 
-  const searchTextObservable = knockout.getObservable(this, "_searchText");
+  const searchTextObservable = knockout.getObservable(this, '_searchText');
   searchTextObservable.extend({ rateLimit: { timeout: 500 } });
   this._suggestionSubscription = searchTextObservable.subscribe(function () {
     GeocoderViewModel._updateSearchSuggestions(that);
@@ -186,10 +186,10 @@ function GeocoderViewModel(options) {
    * @type {Boolean}
    */
   this.isSearchInProgress = undefined;
-  knockout.defineProperty(this, "isSearchInProgress", {
+  knockout.defineProperty(this, 'isSearchInProgress', {
     get: function () {
       return this._isSearchInProgress;
-    },
+    }
   });
 
   /**
@@ -199,22 +199,22 @@ function GeocoderViewModel(options) {
    * @type {String}
    */
   this.searchText = undefined;
-  knockout.defineProperty(this, "searchText", {
+  knockout.defineProperty(this, 'searchText', {
     get: function () {
       if (this.isSearchInProgress) {
-        return "Searching...";
+        return 'Searching...';
       }
 
       return this._searchText;
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      if (typeof value !== "string") {
-        throw new DeveloperError("value must be a valid string.");
+      if (typeof value !== 'string') {
+        throw new DeveloperError('value must be a valid string.');
       }
       //>>includeEnd('debug');
       this._searchText = value;
-    },
+    }
   });
 
   /**
@@ -226,19 +226,19 @@ function GeocoderViewModel(options) {
    * @default undefined
    */
   this.flightDuration = undefined;
-  knockout.defineProperty(this, "flightDuration", {
+  knockout.defineProperty(this, 'flightDuration', {
     get: function () {
       return this._flightDuration;
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (defined(value) && value < 0) {
-        throw new DeveloperError("value must be positive.");
+        throw new DeveloperError('value must be positive.');
       }
       //>>includeEnd('debug');
 
       this._flightDuration = value;
-    },
+    }
   });
 }
 
@@ -252,7 +252,7 @@ Object.defineProperties(GeocoderViewModel.prototype, {
   complete: {
     get: function () {
       return this._complete;
-    },
+    }
   },
 
   /**
@@ -264,7 +264,7 @@ Object.defineProperties(GeocoderViewModel.prototype, {
   scene: {
     get: function () {
       return this._scene;
-    },
+    }
   },
 
   /**
@@ -276,7 +276,7 @@ Object.defineProperties(GeocoderViewModel.prototype, {
   search: {
     get: function () {
       return this._searchCommand;
-    },
+    }
   },
 
   /**
@@ -288,7 +288,7 @@ Object.defineProperties(GeocoderViewModel.prototype, {
   selectedSuggestion: {
     get: function () {
       return this._selectedSuggestion;
-    },
+    }
   },
 
   /**
@@ -300,8 +300,8 @@ Object.defineProperties(GeocoderViewModel.prototype, {
   suggestions: {
     get: function () {
       return this._suggestions;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -411,7 +411,7 @@ function flyToDestination(viewModel, destination) {
           viewModel._complete.raiseEvent();
         },
         duration: viewModel._flightDuration,
-        endTransform: Matrix4.IDENTITY,
+        endTransform: Matrix4.IDENTITY
       });
     });
 }
@@ -420,7 +420,7 @@ function chainPromise(promise, geocoderService, query, geocodeType) {
   return promise.then(function (result) {
     if (
       defined(result) &&
-      result.state === "fulfilled" &&
+      result.state === 'fulfilled' &&
       result.value.length > 0
     ) {
       return result;
@@ -428,10 +428,10 @@ function chainPromise(promise, geocoderService, query, geocodeType) {
     const nextPromise = geocoderService
       .geocode(query, geocodeType)
       .then(function (result) {
-        return { state: "fulfilled", value: result };
+        return { state: 'fulfilled', value: result };
       })
       .catch(function (err) {
-        return { state: "rejected", reason: err };
+        return { state: 'rejected', reason: err };
       });
 
     return nextPromise;
@@ -462,7 +462,7 @@ function geocode(viewModel, geocoderServices, geocodeType) {
 
     const geocoderResults = result.value;
     if (
-      result.state === "fulfilled" &&
+      result.state === 'fulfilled' &&
       defined(geocoderResults) &&
       geocoderResults.length > 0
     ) {
@@ -476,8 +476,8 @@ function geocode(viewModel, geocoderServices, geocodeType) {
 
 function adjustSuggestionsScroll(viewModel, focusedItemIndex) {
   const container = getElement(viewModel._viewContainer);
-  const searchResults = container.getElementsByClassName("search-results")[0];
-  const listItems = container.getElementsByTagName("li");
+  const searchResults = container.getElementsByClassName('search-results')[0];
+  const listItems = container.getElementsByTagName('li');
   const element = listItems[focusedItemIndex];
 
   if (focusedItemIndex === 0) {
@@ -506,7 +506,7 @@ function hasOnlyWhitespace(string) {
 }
 
 function clearSuggestions(viewModel) {
-  knockout.getObservable(viewModel, "_suggestions").removeAll();
+  knockout.getObservable(viewModel, '_suggestions').removeAll();
 }
 
 function updateSearchSuggestions(viewModel) {

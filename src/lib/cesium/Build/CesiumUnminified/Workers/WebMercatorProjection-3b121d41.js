@@ -23,7 +23,14 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeError-4f8ec8a2', './ComponentDatatype-4eeb6d9b'], (function (exports, Matrix2, defaultValue, RuntimeError, ComponentDatatype) { 'use strict';
+define([
+  'exports',
+  './Matrix2-9e1c22e2',
+  './defaultValue-97284df2',
+  './RuntimeError-4f8ec8a2',
+  './ComponentDatatype-4eeb6d9b'
+], function (exports, Matrix2, defaultValue, RuntimeError, ComponentDatatype) {
+  'use strict';
 
   /**
    * The map projection used by Google Maps, Bing Maps, and most of ArcGIS Online, EPSG:3857.  This
@@ -38,7 +45,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
    * @see GeographicProjection
    */
   function WebMercatorProjection(ellipsoid) {
-    this._ellipsoid = defaultValue.defaultValue(ellipsoid, Matrix2.Ellipsoid.WGS84);
+    this._ellipsoid = defaultValue.defaultValue(
+      ellipsoid,
+      Matrix2.Ellipsoid.WGS84
+    );
     this._semimajorAxis = this._ellipsoid.maximumRadius;
     this._oneOverSemimajorAxis = 1.0 / this._semimajorAxis;
   }
@@ -55,8 +65,8 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
     ellipsoid: {
       get: function () {
         return this._ellipsoid;
-      },
-    },
+      }
+    }
   });
 
   /**
@@ -69,7 +79,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
   WebMercatorProjection.mercatorAngleToGeodeticLatitude = function (
     mercatorAngle
   ) {
-    return ComponentDatatype.CesiumMath.PI_OVER_TWO - 2.0 * Math.atan(Math.exp(-mercatorAngle));
+    return (
+      ComponentDatatype.CesiumMath.PI_OVER_TWO -
+      2.0 * Math.atan(Math.exp(-mercatorAngle))
+    );
   };
 
   /**
@@ -104,9 +117,8 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
    *
    * @type {Number}
    */
-  WebMercatorProjection.MaximumLatitude = WebMercatorProjection.mercatorAngleToGeodeticLatitude(
-    Math.PI
-  );
+  WebMercatorProjection.MaximumLatitude =
+    WebMercatorProjection.mercatorAngleToGeodeticLatitude(Math.PI);
 
   /**
    * Converts geodetic ellipsoid coordinates, in radians, to the equivalent Web Mercator
@@ -150,7 +162,7 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
   WebMercatorProjection.prototype.unproject = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(cartesian)) {
-      throw new RuntimeError.DeveloperError("cartesian is required");
+      throw new RuntimeError.DeveloperError('cartesian is required');
     }
     //>>includeEnd('debug');
 
@@ -172,6 +184,5 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
   };
 
   exports.WebMercatorProjection = WebMercatorProjection;
-
-}));
+});
 //# sourceMappingURL=WebMercatorProjection-3b121d41.js.map

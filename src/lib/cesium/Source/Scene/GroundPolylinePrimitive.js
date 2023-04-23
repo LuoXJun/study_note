@@ -1,32 +1,32 @@
-import ApproximateTerrainHeights from "../Core/ApproximateTerrainHeights.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defer from "../Core/defer.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import GeometryInstanceAttribute from "../Core/GeometryInstanceAttribute.js";
-import GroundPolylineGeometry from "../Core/GroundPolylineGeometry.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import Pass from "../Renderer/Pass.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import PolylineShadowVolumeFS from "../Shaders/PolylineShadowVolumeFS.js";
-import PolylineShadowVolumeMorphFS from "../Shaders/PolylineShadowVolumeMorphFS.js";
-import PolylineShadowVolumeMorphVS from "../Shaders/PolylineShadowVolumeMorphVS.js";
-import PolylineShadowVolumeVS from "../Shaders/PolylineShadowVolumeVS.js";
-import BlendingState from "./BlendingState.js";
-import ClassificationType from "./ClassificationType.js";
-import CullFace from "./CullFace.js";
-import PolylineColorAppearance from "./PolylineColorAppearance.js";
-import PolylineMaterialAppearance from "./PolylineMaterialAppearance.js";
-import Primitive from "./Primitive.js";
-import SceneMode from "./SceneMode.js";
-import StencilConstants from "./StencilConstants.js";
-import StencilFunction from "./StencilFunction.js";
-import StencilOperation from "./StencilOperation.js";
+import ApproximateTerrainHeights from '../Core/ApproximateTerrainHeights.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defer from '../Core/defer.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import GeometryInstanceAttribute from '../Core/GeometryInstanceAttribute.js';
+import GroundPolylineGeometry from '../Core/GroundPolylineGeometry.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import Pass from '../Renderer/Pass.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import PolylineShadowVolumeFS from '../Shaders/PolylineShadowVolumeFS.js';
+import PolylineShadowVolumeMorphFS from '../Shaders/PolylineShadowVolumeMorphFS.js';
+import PolylineShadowVolumeMorphVS from '../Shaders/PolylineShadowVolumeMorphVS.js';
+import PolylineShadowVolumeVS from '../Shaders/PolylineShadowVolumeVS.js';
+import BlendingState from './BlendingState.js';
+import ClassificationType from './ClassificationType.js';
+import CullFace from './CullFace.js';
+import PolylineColorAppearance from './PolylineColorAppearance.js';
+import PolylineMaterialAppearance from './PolylineMaterialAppearance.js';
+import Primitive from './Primitive.js';
+import SceneMode from './SceneMode.js';
+import StencilConstants from './StencilConstants.js';
+import StencilFunction from './StencilFunction.js';
+import StencilOperation from './StencilOperation.js';
 
 /**
  * A GroundPolylinePrimitive represents a polyline draped over the terrain or 3D Tiles in the {@link Scene}.
@@ -186,7 +186,7 @@ function GroundPolylinePrimitive(options) {
     compressVertices: false,
     _createShaderProgramFunction: undefined,
     _createCommandsFunction: undefined,
-    _updateAndQueueCommandsFunction: undefined,
+    _updateAndQueueCommandsFunction: undefined
   };
 
   // Used when inserting in an OrderedPrimitiveCollection
@@ -207,13 +207,13 @@ function GroundPolylinePrimitive(options) {
   this._renderStateMorph = RenderState.fromCache({
     cull: {
       enabled: true,
-      face: CullFace.FRONT, // Geometry is "inverted," so cull front when materials on volume instead of on terrain (morph)
+      face: CullFace.FRONT // Geometry is "inverted," so cull front when materials on volume instead of on terrain (morph)
     },
     depthTest: {
-      enabled: true,
+      enabled: true
     },
     blending: BlendingState.PRE_MULTIPLIED_ALPHA_BLEND,
-    depthMask: false,
+    depthMask: false
   });
 }
 
@@ -231,7 +231,7 @@ Object.defineProperties(GroundPolylinePrimitive.prototype, {
   interleave: {
     get: function () {
       return this._primitiveOptions.interleave;
-    },
+    }
   },
 
   /**
@@ -247,7 +247,7 @@ Object.defineProperties(GroundPolylinePrimitive.prototype, {
   releaseGeometryInstances: {
     get: function () {
       return this._primitiveOptions.releaseGeometryInstances;
-    },
+    }
   },
 
   /**
@@ -263,7 +263,7 @@ Object.defineProperties(GroundPolylinePrimitive.prototype, {
   allowPicking: {
     get: function () {
       return this._primitiveOptions.allowPicking;
-    },
+    }
   },
 
   /**
@@ -279,7 +279,7 @@ Object.defineProperties(GroundPolylinePrimitive.prototype, {
   asynchronous: {
     get: function () {
       return this._primitiveOptions.asynchronous;
-    },
+    }
   },
 
   /**
@@ -295,7 +295,7 @@ Object.defineProperties(GroundPolylinePrimitive.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -307,7 +307,7 @@ Object.defineProperties(GroundPolylinePrimitive.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise.promise;
-    },
+    }
   },
 
   /**
@@ -326,8 +326,8 @@ Object.defineProperties(GroundPolylinePrimitive.prototype, {
   debugShowShadowVolume: {
     get: function () {
       return this._debugShowShadowVolume;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -379,69 +379,69 @@ function createShaderProgram(groundPolylinePrimitive, frameState, appearance) {
   const vsDefines = [
     `GLOBE_MINIMUM_ALTITUDE ${frameState.mapProjection.ellipsoid.minimumRadius.toFixed(
       1
-    )}`,
+    )}`
   ];
-  let colorDefine = "";
-  let materialShaderSource = "";
+  let colorDefine = '';
+  let materialShaderSource = '';
   if (defined(appearance.material)) {
     materialShaderSource = defined(appearance.material)
       ? appearance.material.shaderSource
-      : "";
+      : '';
 
     // Check for use of v_width and v_polylineAngle in material shader
     // to determine whether these varyings should be active in the vertex shader.
     if (
       materialShaderSource.search(/varying\s+float\s+v_polylineAngle;/g) !== -1
     ) {
-      vsDefines.push("ANGLE_VARYING");
+      vsDefines.push('ANGLE_VARYING');
     }
     if (materialShaderSource.search(/varying\s+float\s+v_width;/g) !== -1) {
-      vsDefines.push("WIDTH_VARYING");
+      vsDefines.push('WIDTH_VARYING');
     }
   } else {
-    colorDefine = "PER_INSTANCE_COLOR";
+    colorDefine = 'PER_INSTANCE_COLOR';
   }
 
   vsDefines.push(colorDefine);
   const fsDefines = groundPolylinePrimitive.debugShowShadowVolume
-    ? ["DEBUG_SHOW_VOLUME", colorDefine]
+    ? ['DEBUG_SHOW_VOLUME', colorDefine]
     : [colorDefine];
 
   const vsColor3D = new ShaderSource({
     defines: vsDefines,
-    sources: [vs],
+    sources: [vs]
   });
   const fsColor3D = new ShaderSource({
     defines: fsDefines,
-    sources: [materialShaderSource, fs],
+    sources: [materialShaderSource, fs]
   });
   groundPolylinePrimitive._sp = ShaderProgram.replaceCache({
     context: context,
     shaderProgram: primitive._sp,
     vertexShaderSource: vsColor3D,
     fragmentShaderSource: fsColor3D,
-    attributeLocations: attributeLocations,
+    attributeLocations: attributeLocations
   });
 
   // Derive 2D/CV
   let colorProgram2D = context.shaderCache.getDerivedShaderProgram(
     groundPolylinePrimitive._sp,
-    "2dColor"
+    '2dColor'
   );
   if (!defined(colorProgram2D)) {
     const vsColor2D = new ShaderSource({
-      defines: vsDefines.concat(["COLUMBUS_VIEW_2D"]),
-      sources: [vs],
+      defines: vsDefines.concat(['COLUMBUS_VIEW_2D']),
+      sources: [vs]
     });
     colorProgram2D = context.shaderCache.createDerivedShaderProgram(
       groundPolylinePrimitive._sp,
-      "2dColor",
+      '2dColor',
       {
         context: context,
         shaderProgram: groundPolylinePrimitive._sp2D,
         vertexShaderSource: vsColor2D,
         fragmentShaderSource: fsColor3D,
-        attributeLocations: attributeLocations,
+        attributeLocations: attributeLocations
       }
     );
   }
@@ -450,16 +450,16 @@ function createShaderProgram(groundPolylinePrimitive, frameState, appearance) {
   // Derive Morph
   let colorProgramMorph = context.shaderCache.getDerivedShaderProgram(
     groundPolylinePrimitive._sp,
-    "MorphColor"
+    'MorphColor'
   );
   if (!defined(colorProgramMorph)) {
     const vsColorMorph = new ShaderSource({
       defines: vsDefines.concat([
         `MAX_TERRAIN_HEIGHT ${ApproximateTerrainHeights._defaultMaxTerrainHeight.toFixed(
           1
-        )}`,
+        )}`
       ]),
-      sources: [vsMorph],
+      sources: [vsMorph]
     });
 
     fs = primitive._batchTable.getVertexShaderCallback()(
@@ -467,17 +467,17 @@ function createShaderProgram(groundPolylinePrimitive, frameState, appearance) {
     );
     const fsColorMorph = new ShaderSource({
       defines: fsDefines,
-      sources: [materialShaderSource, fs],
+      sources: [materialShaderSource, fs]
     });
     colorProgramMorph = context.shaderCache.createDerivedShaderProgram(
       groundPolylinePrimitive._sp,
-      "MorphColor",
+      'MorphColor',
       {
         context: context,
         shaderProgram: groundPolylinePrimitive._spMorph,
         vertexShaderSource: vsColorMorph,
         fragmentShaderSource: fsColorMorph,
-        attributeLocations: attributeLocations,
+        attributeLocations: attributeLocations
       }
     );
   }
@@ -487,7 +487,7 @@ function createShaderProgram(groundPolylinePrimitive, frameState, appearance) {
 function getRenderState(mask3DTiles) {
   return RenderState.fromCache({
     cull: {
-      enabled: true, // prevent double-draw. Geometry is "inverted" (reversed winding order) so we're drawing backfaces.
+      enabled: true // prevent double-draw. Geometry is "inverted" (reversed winding order) so we're drawing backfaces.
     },
     blending: BlendingState.PRE_MULTIPLIED_ALPHA_BLEND,
     depthMask: false,
@@ -497,17 +497,17 @@ function getRenderState(mask3DTiles) {
       frontOperation: {
         fail: StencilOperation.KEEP,
         zFail: StencilOperation.KEEP,
-        zPass: StencilOperation.KEEP,
+        zPass: StencilOperation.KEEP
       },
       backFunction: StencilFunction.EQUAL,
       backOperation: {
         fail: StencilOperation.KEEP,
         zFail: StencilOperation.KEEP,
-        zPass: StencilOperation.KEEP,
+        zPass: StencilOperation.KEEP
       },
       reference: StencilConstants.CESIUM_3D_TILE_MASK,
-      mask: StencilConstants.CESIUM_3D_TILE_MASK,
-    },
+      mask: StencilConstants.CESIUM_3D_TILE_MASK
+    }
   });
 }
 
@@ -528,9 +528,8 @@ function createCommands(
     appearance instanceof PolylineColorAppearance;
 
   const materialUniforms = isPolylineColorAppearance ? {} : material._uniforms;
-  const uniformMap = primitive._batchTable.getUniformMapCallback()(
-    materialUniforms
-  );
+  const uniformMap =
+    primitive._batchTable.getUniformMapCallback()(materialUniforms);
 
   for (let i = 0; i < length; i++) {
     const vertexArray = primitive._va[i];
@@ -539,7 +538,7 @@ function createCommands(
     if (!defined(command)) {
       command = colorCommands[i] = new DrawCommand({
         owner: groundPolylinePrimitive,
-        primitiveType: primitive._primitiveType,
+        primitiveType: primitive._primitiveType
       });
     }
 
@@ -548,7 +547,7 @@ function createCommands(
     command.shaderProgram = groundPolylinePrimitive._sp;
     command.uniformMap = uniformMap;
     command.pass = Pass.TERRAIN_CLASSIFICATION;
-    command.pickId = "czm_batchTable_pickColor(v_endPlaneNormalEcAndBatchId.w)";
+    command.pickId = 'czm_batchTable_pickColor(v_endPlaneNormalEcAndBatchId.w)';
 
     const derivedTilesetCommand = DrawCommand.shallowClone(
       command,
@@ -581,7 +580,7 @@ function createCommands(
     );
     derivedMorphCommand.renderState = groundPolylinePrimitive._renderStateMorph;
     derivedMorphCommand.shaderProgram = groundPolylinePrimitive._spMorph;
-    derivedMorphCommand.pickId = "czm_batchTable_pickColor(v_batchId)";
+    derivedMorphCommand.pickId = 'czm_batchTable_pickColor(v_batchId)';
     command.derivedCommands.colorMorph = derivedMorphCommand;
   }
 }
@@ -697,7 +696,7 @@ GroundPolylinePrimitive.prototype.update = function (frameState) {
     //>>includeStart('debug', pragmas.debug);
     if (!this.asynchronous) {
       throw new DeveloperError(
-        "For synchronous GroundPolylinePrimitives, you must call GroundPolylinePrimitives.initializeTerrainHeights() and wait for the returned promise to resolve."
+        'For synchronous GroundPolylinePrimitives, you must call GroundPolylinePrimitives.initializeTerrainHeights() and wait for the returned promise to resolve.'
       );
     }
     //>>includeEnd('debug');
@@ -743,7 +742,7 @@ GroundPolylinePrimitive.prototype.update = function (frameState) {
         attributes.width = new GeometryInstanceAttribute({
           componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
           componentsPerAttribute: 1.0,
-          value: [geometryInstance.geometry.width],
+          value: [geometryInstance.geometry.width]
         });
       }
 
@@ -758,7 +757,7 @@ GroundPolylinePrimitive.prototype.update = function (frameState) {
         geometry: geometryInstance.geometry,
         attributes: attributes,
         id: geometryInstance.id,
-        pickPrimitive: that,
+        pickPrimitive: that
       });
     }
 
@@ -833,7 +832,7 @@ GroundPolylinePrimitive.prototype.update = function (frameState) {
     !this._hasPerInstanceColors
   ) {
     throw new DeveloperError(
-      "All GeometryInstances must have color attributes to use PolylineColorAppearance with GroundPolylinePrimitive."
+      'All GeometryInstances must have color attributes to use PolylineColorAppearance with GroundPolylinePrimitive.'
     );
   }
 
@@ -862,7 +861,7 @@ GroundPolylinePrimitive.prototype.getGeometryInstanceAttributes = function (
   //>>includeStart('debug', pragmas.debug);
   if (!defined(this._primitive)) {
     throw new DeveloperError(
-      "must call update before calling getGeometryInstanceAttributes"
+      'must call update before calling getGeometryInstanceAttributes'
     );
   }
   //>>includeEnd('debug');

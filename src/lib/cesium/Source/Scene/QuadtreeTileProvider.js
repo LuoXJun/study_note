@@ -1,4 +1,4 @@
-import DeveloperError from "../Core/DeveloperError.js";
+import DeveloperError from '../Core/DeveloperError.js';
 
 /**
  * Provides general quadtree tiles to be displayed on or near the surface of an ellipsoid.  It is intended to be
@@ -39,7 +39,7 @@ Object.defineProperties(QuadtreeTileProvider.prototype, {
    */
   quadtree: {
     get: DeveloperError.throwInstantiationError,
-    set: DeveloperError.throwInstantiationError,
+    set: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -48,7 +48,7 @@ Object.defineProperties(QuadtreeTileProvider.prototype, {
    * @type {Boolean}
    */
   ready: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -58,7 +58,7 @@ Object.defineProperties(QuadtreeTileProvider.prototype, {
    * @type {TilingScheme}
    */
   tilingScheme: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -69,8 +69,8 @@ Object.defineProperties(QuadtreeTileProvider.prototype, {
    * @type {Event}
    */
   errorEvent: {
-    get: DeveloperError.throwInstantiationError,
-  },
+    get: DeveloperError.throwInstantiationError
+  }
 });
 
 /**

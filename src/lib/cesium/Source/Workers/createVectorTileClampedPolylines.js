@@ -1,5 +1,26 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './combine-761d9c3f', './IndexDatatype-db156785', './ComponentDatatype-4a60b8d6', './createTaskProcessorWorker', './RuntimeError-c581ca93', './defaultValue-94c3e563', './WebGLConstants-7dccdc96'], (function (AttributeCompression, Matrix2, combine, IndexDatatype, ComponentDatatype, createTaskProcessorWorker, RuntimeError, defaultValue, WebGLConstants) { 'use strict';
+define([
+  './AttributeCompression-4d18cc04',
+  './Matrix2-fc7e9822',
+  './combine-761d9c3f',
+  './IndexDatatype-db156785',
+  './ComponentDatatype-4a60b8d6',
+  './createTaskProcessorWorker',
+  './RuntimeError-c581ca93',
+  './defaultValue-94c3e563',
+  './WebGLConstants-7dccdc96'
+], function (
+  AttributeCompression,
+  Matrix2,
+  combine,
+  IndexDatatype,
+  ComponentDatatype,
+  createTaskProcessorWorker,
+  RuntimeError,
+  defaultValue,
+  WebGLConstants
+) {
+  'use strict';
 
   const MAX_SHORT = 32767;
   const MITER_BREAK = Math.cos(ComponentDatatype.CesiumMath.toRadians(150.0));
@@ -23,13 +44,21 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './combine-761d
       const v = vBuffer[i];
       const h = heightBuffer[i];
 
-      const lon = ComponentDatatype.CesiumMath.lerp(rectangle.west, rectangle.east, u / MAX_SHORT);
+      const lon = ComponentDatatype.CesiumMath.lerp(
+        rectangle.west,
+        rectangle.east,
+        u / MAX_SHORT
+      );
       const lat = ComponentDatatype.CesiumMath.lerp(
         rectangle.south,
         rectangle.north,
         v / MAX_SHORT
       );
-      const alt = ComponentDatatype.CesiumMath.lerp(minimumHeight, maximumHeight, h / MAX_SHORT);
+      const alt = ComponentDatatype.CesiumMath.lerp(
+        minimumHeight,
+        maximumHeight,
+        h / MAX_SHORT
+      );
 
       const cartographic = Matrix2.Cartographic.fromRadians(
         lon,
@@ -110,7 +139,10 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './combine-761d
     this.endFaceNormalAndHalfWidths = new Float32Array(vec4Floats);
     this.vertexBatchIds = new Uint16Array(vertexCount);
 
-    this.indices = IndexDatatype.IndexDatatype.createTypedArray(vertexCount, 36 * volumesCount);
+    this.indices = IndexDatatype.IndexDatatype.createTypedArray(
+      vertexCount,
+      36 * volumesCount
+    );
 
     this.vec3Offset = 0;
     this.vec4Offset = 0;
@@ -207,7 +239,7 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './combine-761d
     2,
     7,
     2,
-    3, // top
+    3 // top
   ];
   const REFERENCE_INDICES_LENGTH = REFERENCE_INDICES.length;
 
@@ -257,8 +289,8 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './combine-761d
     const startEllipsoidNormals = this.startEllipsoidNormals;
     const endEllipsoidNormals = this.endEllipsoidNormals;
     const startPositionAndHeights = this.startPositionAndHeights;
-    const startFaceNormalAndVertexCornerIds = this
-      .startFaceNormalAndVertexCornerIds;
+    const startFaceNormalAndVertexCornerIds =
+      this.startFaceNormalAndVertexCornerIds;
     const endPositionAndHeights = this.endPositionAndHeights;
     const endFaceNormalAndHalfWidths = this.endFaceNormalAndHalfWidths;
     const vertexBatchIds = this.vertexBatchIds;
@@ -269,8 +301,16 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './combine-761d
 
     let i;
     for (i = 0; i < 8; i++) {
-      Matrix2.Cartesian3.pack(startEllipsoidNormal, startEllipsoidNormals, vec3Offset);
-      Matrix2.Cartesian3.pack(endEllipsoidNormal, endEllipsoidNormals, vec3Offset);
+      Matrix2.Cartesian3.pack(
+        startEllipsoidNormal,
+        startEllipsoidNormals,
+        vec3Offset
+      );
+      Matrix2.Cartesian3.pack(
+        endEllipsoidNormal,
+        endEllipsoidNormals,
+        vec3Offset
+      );
 
       Matrix2.Cartesian3.pack(startRTC, startPositionAndHeights, vec4Offset);
       startPositionAndHeights[vec4Offset + 3] = startHeight;
@@ -285,7 +325,11 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './combine-761d
       );
       startFaceNormalAndVertexCornerIds[vec4Offset + 3] = i;
 
-      Matrix2.Cartesian3.pack(endFaceNormal, endFaceNormalAndHalfWidths, vec4Offset);
+      Matrix2.Cartesian3.pack(
+        endFaceNormal,
+        endFaceNormalAndHalfWidths,
+        vec4Offset
+      );
       endFaceNormalAndHalfWidths[vec4Offset + 3] = halfWidth;
 
       vertexBatchIds[batchIdOffset++] = batchId;
@@ -354,7 +398,11 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './combine-761d
       2 * positionsLength,
       3 * positionsLength
     );
-    AttributeCompression.AttributeCompression.zigZagDeltaDecode(uBuffer, vBuffer, heightBuffer);
+    AttributeCompression.AttributeCompression.zigZagDeltaDecode(
+      uBuffer,
+      vBuffer,
+      heightBuffer
+    );
 
     removeDuplicates(uBuffer, vBuffer, heightBuffer, counts);
 
@@ -375,7 +423,8 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './combine-761d
       rectangle,
       minimumHeight,
       maximumHeight,
-      ellipsoid);
+      ellipsoid
+    );
 
     positionsLength = uBuffer.length;
     const positionsRTC = new Float32Array(positionsLength * 3);
@@ -431,17 +480,29 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './combine-761d
             scratchPrev
           );
           if (Matrix2.Cartesian3.equals(finalPosition, volumeStart)) {
-            Matrix2.Cartesian3.unpack(positionsRTC, finalPositionIndex - 3, preStart);
+            Matrix2.Cartesian3.unpack(
+              positionsRTC,
+              finalPositionIndex - 3,
+              preStart
+            );
           } else {
             const offsetPastStart = Matrix2.Cartesian3.subtract(
               volumeStart,
               volumeEnd,
               scratchPrev
             );
-            preStart = Matrix2.Cartesian3.add(offsetPastStart, volumeStart, scratchPrev);
+            preStart = Matrix2.Cartesian3.add(
+              offsetPastStart,
+              volumeStart,
+              scratchPrev
+            );
           }
         } else {
-          Matrix2.Cartesian3.unpack(positionsRTC, currentPositionIndex - 3, preStart);
+          Matrix2.Cartesian3.unpack(
+            positionsRTC,
+            currentPositionIndex - 3,
+            preStart
+          );
         }
 
         if (j === polylineVolumeCount - 1) {
@@ -463,10 +524,18 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './combine-761d
               volumeStart,
               scratchNext
             );
-            postEnd = Matrix2.Cartesian3.add(offsetPastEnd, volumeEnd, scratchNext);
+            postEnd = Matrix2.Cartesian3.add(
+              offsetPastEnd,
+              volumeEnd,
+              scratchNext
+            );
           }
         } else {
-          Matrix2.Cartesian3.unpack(positionsRTC, currentPositionIndex + 6, postEnd);
+          Matrix2.Cartesian3.unpack(
+            positionsRTC,
+            currentPositionIndex + 6,
+            postEnd
+          );
         }
 
         attribsAndIndices.addVolume(
@@ -497,7 +566,9 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './combine-761d
       attribsAndIndices.startFaceNormalAndVertexCornerIds.buffer
     );
     transferableObjects.push(attribsAndIndices.endPositionAndHeights.buffer);
-    transferableObjects.push(attribsAndIndices.endFaceNormalAndHalfWidths.buffer);
+    transferableObjects.push(
+      attribsAndIndices.endFaceNormalAndHalfWidths.buffer
+    );
     transferableObjects.push(attribsAndIndices.vertexBatchIds.buffer);
     transferableObjects.push(indices.buffer);
 
@@ -515,7 +586,7 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './combine-761d
       endFaceNormalAndHalfWidths:
         attribsAndIndices.endFaceNormalAndHalfWidths.buffer,
       vertexBatchIds: attribsAndIndices.vertexBatchIds.buffer,
-      indices: indices.buffer,
+      indices: indices.buffer
     };
 
     if (parameters.keepDecodedPositions) {
@@ -523,14 +594,15 @@ define(['./AttributeCompression-4d18cc04', './Matrix2-fc7e9822', './combine-761d
       transferableObjects.push(positions.buffer, positionOffsets.buffer);
       results = combine.combine(results, {
         decodedPositions: positions.buffer,
-        decodedPositionOffsets: positionOffsets.buffer,
+        decodedPositionOffsets: positionOffsets.buffer
       });
     }
 
     return results;
   }
-  var createVectorTileClampedPolylines$1 = createTaskProcessorWorker(createVectorTileClampedPolylines);
+  var createVectorTileClampedPolylines$1 = createTaskProcessorWorker(
+    createVectorTileClampedPolylines
+  );
 
   return createVectorTileClampedPolylines$1;
-
-}));
+});

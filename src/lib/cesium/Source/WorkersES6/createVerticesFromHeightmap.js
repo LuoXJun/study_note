@@ -1,10 +1,10 @@
-import Ellipsoid from "../Core/Ellipsoid.js";
-import HeightmapEncoding from "../Core/HeightmapEncoding.js";
-import HeightmapTessellator from "../Core/HeightmapTessellator.js";
-import Rectangle from "../Core/Rectangle.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import Lerc from "../ThirdParty/lerc.js";
-import createTaskProcessorWorker from "./createTaskProcessorWorker.js";
+import Ellipsoid from '../Core/Ellipsoid.js';
+import HeightmapEncoding from '../Core/HeightmapEncoding.js';
+import HeightmapTessellator from '../Core/HeightmapTessellator.js';
+import Rectangle from '../Core/Rectangle.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import Lerc from '../ThirdParty/lerc.js';
+import createTaskProcessorWorker from './createTaskProcessorWorker.js';
 
 function createVerticesFromHeightmap(parameters, transferableObjects) {
   // LERC encoded buffers must be decoded, then we can process them like normal
@@ -18,7 +18,7 @@ function createVerticesFromHeightmap(parameters, transferableObjects) {
 
     const lercStatistics = result.statistics[0];
     if (lercStatistics.minValue === Number.MAX_VALUE) {
-      throw new RuntimeError("Invalid tile data");
+      throw new RuntimeError('Invalid tile data');
     }
 
     parameters.heightmap = result.pixels[0];
@@ -47,7 +47,7 @@ function createVerticesFromHeightmap(parameters, transferableObjects) {
     westIndicesSouthToNorth: statistics.westIndicesSouthToNorth,
     southIndicesEastToWest: statistics.southIndicesEastToWest,
     eastIndicesNorthToSouth: statistics.eastIndicesNorthToSouth,
-    northIndicesWestToEast: statistics.northIndicesWestToEast,
+    northIndicesWestToEast: statistics.northIndicesWestToEast
   };
 }
 export default createTaskProcessorWorker(createVerticesFromHeightmap);

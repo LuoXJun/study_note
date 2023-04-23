@@ -1,11 +1,11 @@
-import Cartesian2 from "./Cartesian2.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Ellipsoid from "./Ellipsoid.js";
-import GeographicProjection from "./GeographicProjection.js";
-import CesiumMath from "./Math.js";
-import Rectangle from "./Rectangle.js";
+import Cartesian2 from './Cartesian2.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Ellipsoid from './Ellipsoid.js';
+import GeographicProjection from './GeographicProjection.js';
+import CesiumMath from './Math.js';
+import Rectangle from './Rectangle.js';
 
 /**
  * A tiling scheme for geometry referenced to a simple {@link GeographicProjection} where
@@ -49,7 +49,7 @@ Object.defineProperties(GeographicTilingScheme.prototype, {
   ellipsoid: {
     get: function () {
       return this._ellipsoid;
-    },
+    }
   },
 
   /**
@@ -60,7 +60,7 @@ Object.defineProperties(GeographicTilingScheme.prototype, {
   rectangle: {
     get: function () {
       return this._rectangle;
-    },
+    }
   },
 
   /**
@@ -71,8 +71,8 @@ Object.defineProperties(GeographicTilingScheme.prototype, {
   projection: {
     get: function () {
       return this._projection;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -110,7 +110,7 @@ GeographicTilingScheme.prototype.rectangleToNativeRectangle = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("rectangle", rectangle);
+  Check.defined('rectangle', rectangle);
   //>>includeEnd('debug');
 
   const west = CesiumMath.toDegrees(rectangle.west);

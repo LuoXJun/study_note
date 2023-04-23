@@ -1,17 +1,17 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import combine from "../Core/combine.js";
-import decodeVectorPolylinePositions from "../Core/decodeVectorPolylinePositions.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import Rectangle from "../Core/Rectangle.js";
-import createTaskProcessorWorker from "./createTaskProcessorWorker.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import combine from '../Core/combine.js';
+import decodeVectorPolylinePositions from '../Core/decodeVectorPolylinePositions.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import Rectangle from '../Core/Rectangle.js';
+import createTaskProcessorWorker from './createTaskProcessorWorker.js';
 
 const scratchRectangle = new Rectangle();
 const scratchEllipsoid = new Ellipsoid();
 const scratchCenter = new Cartesian3();
 const scratchMinMaxHeights = {
   min: undefined,
-  max: undefined,
+  max: undefined
 };
 
 function unpackBuffer(packedBuffer) {
@@ -193,7 +193,7 @@ function createVectorTilePolylines(parameters, transferableObjects) {
     nextPositions: nextPositions.buffer,
     expandAndWidth: expandAndWidth.buffer,
     batchIds: vertexBatchIds.buffer,
-    indices: indices.buffer,
+    indices: indices.buffer
   };
 
   if (parameters.keepDecodedPositions) {
@@ -201,7 +201,7 @@ function createVectorTilePolylines(parameters, transferableObjects) {
     transferableObjects.push(positions.buffer, positionOffsets.buffer);
     results = combine(results, {
       decodedPositions: positions.buffer,
-      decodedPositionOffsets: positionOffsets.buffer,
+      decodedPositionOffsets: positionOffsets.buffer
     });
   }
 

@@ -1,13 +1,13 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Sampler from "../Renderer/Sampler.js";
-import TextureMagnificationFilter from "../Renderer/TextureMagnificationFilter.js";
-import TextureMinificationFilter from "../Renderer/TextureMinificationFilter.js";
-import TextureWrap from "../Renderer/TextureWrap.js";
-import ModelComponents from "./ModelComponents.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Sampler from '../Renderer/Sampler.js';
+import TextureMagnificationFilter from '../Renderer/TextureMagnificationFilter.js';
+import TextureMinificationFilter from '../Renderer/TextureMinificationFilter.js';
+import TextureWrap from '../Renderer/TextureWrap.js';
+import ModelComponents from './ModelComponents.js';
 
 /**
  * glTF loading utilities.
@@ -40,9 +40,9 @@ GltfLoaderUtil.getImageIdFromTexture = function (options) {
   const supportedImageFormats = options.supportedImageFormats;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.gltf", gltf);
-  Check.typeOf.number("options.textureId", textureId);
-  Check.typeOf.object("options.supportedImageFormats", supportedImageFormats);
+  Check.typeOf.object('options.gltf', gltf);
+  Check.typeOf.number('options.textureId', textureId);
+  Check.typeOf.object('options.supportedImageFormats', supportedImageFormats);
   //>>includeEnd('debug');
 
   const texture = gltf.textures[textureId];
@@ -81,8 +81,8 @@ GltfLoaderUtil.createSampler = function (options) {
   );
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.gltf", gltf);
-  Check.typeOf.object("options.textureInfo", textureInfo);
+  Check.typeOf.object('options.gltf', gltf);
+  Check.typeOf.object('options.textureInfo', textureInfo);
   //>>includeEnd('debug');
 
   // Default sampler properties
@@ -128,7 +128,7 @@ GltfLoaderUtil.createSampler = function (options) {
     wrapS: wrapS,
     wrapT: wrapT,
     minificationFilter: minFilter,
-    magnificationFilter: magFilter,
+    magnificationFilter: magFilter
   });
 };
 
@@ -151,7 +151,7 @@ GltfLoaderUtil.createModelTextureReader = function (options) {
   const texture = options.texture;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.textureInfo", textureInfo);
+  Check.typeOf.object('options.textureInfo', textureInfo);
   //>>includeEnd('debug');
 
   let texCoord = defaultValue(textureInfo.texCoord, 0);

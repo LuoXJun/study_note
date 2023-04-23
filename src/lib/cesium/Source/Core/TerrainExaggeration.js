@@ -1,4 +1,4 @@
-import Cartesian3 from "./Cartesian3.js";
+import Cartesian3 from './Cartesian3.js';
 
 /**
  * @private

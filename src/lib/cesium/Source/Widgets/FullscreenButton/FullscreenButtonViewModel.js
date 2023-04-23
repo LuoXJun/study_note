@@ -1,11 +1,11 @@
-import defined from "../../Core/defined.js";
-import defaultValue from "../../Core/defaultValue.js";
-import destroyObject from "../../Core/destroyObject.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import Fullscreen from "../../Core/Fullscreen.js";
-import knockout from "../../ThirdParty/knockout.js";
-import createCommand from "../createCommand.js";
-import getElement from "../getElement.js";
+import defined from '../../Core/defined.js';
+import defaultValue from '../../Core/defaultValue.js';
+import destroyObject from '../../Core/destroyObject.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import Fullscreen from '../../Core/Fullscreen.js';
+import knockout from '../../ThirdParty/knockout.js';
+import createCommand from '../createCommand.js';
+import getElement from '../getElement.js';
 
 /**
  * The view model for {@link FullscreenButton}.
@@ -34,10 +34,10 @@ function FullscreenButtonViewModel(fullscreenElement, container) {
    * @type {Boolean}
    */
   this.isFullscreen = undefined;
-  knockout.defineProperty(this, "isFullscreen", {
+  knockout.defineProperty(this, 'isFullscreen', {
     get: function () {
       return tmpIsFullscreen();
-    },
+    }
   });
 
   /**
@@ -47,13 +47,13 @@ function FullscreenButtonViewModel(fullscreenElement, container) {
    * @see Fullscreen.enabled
    */
   this.isFullscreenEnabled = undefined;
-  knockout.defineProperty(this, "isFullscreenEnabled", {
+  knockout.defineProperty(this, 'isFullscreenEnabled', {
     get: function () {
       return tmpIsEnabled();
     },
     set: function (value) {
       tmpIsEnabled(value && Fullscreen.enabled);
-    },
+    }
   });
 
   /**
@@ -62,11 +62,11 @@ function FullscreenButtonViewModel(fullscreenElement, container) {
    * @type {String}
    */
   this.tooltip = undefined;
-  knockout.defineProperty(this, "tooltip", function () {
+  knockout.defineProperty(this, 'tooltip', function () {
     if (!this.isFullscreenEnabled) {
-      return "Full screen unavailable";
+      return 'Full screen unavailable';
     }
-    return tmpIsFullscreen() ? "Exit full screen" : "Full screen";
+    return tmpIsFullscreen() ? 'Exit full screen' : 'Full screen';
   });
 
   this._command = createCommand(function () {
@@ -75,7 +75,7 @@ function FullscreenButtonViewModel(fullscreenElement, container) {
     } else {
       Fullscreen.requestFullscreen(that._fullscreenElement);
     }
-  }, knockout.getObservable(this, "isFullscreenEnabled"));
+  }, knockout.getObservable(this, 'isFullscreenEnabled'));
 
   this._fullscreenElement = defaultValue(
     getElement(fullscreenElement),
@@ -104,12 +104,12 @@ Object.defineProperties(FullscreenButtonViewModel.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (!(value instanceof Element)) {
-        throw new DeveloperError("value must be a valid Element.");
+        throw new DeveloperError('value must be a valid Element.');
       }
       //>>includeEnd('debug');
 
       this._fullscreenElement = value;
-    },
+    }
   },
 
   /**
@@ -121,8 +121,8 @@ Object.defineProperties(FullscreenButtonViewModel.prototype, {
   command: {
     get: function () {
       return this._command;
-    },
-  },
+    }
+  }
 });
 
 /**

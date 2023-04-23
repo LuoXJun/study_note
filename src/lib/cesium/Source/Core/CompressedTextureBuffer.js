@@ -1,4 +1,4 @@
-import defined from "./defined.js";
+import defined from './defined.js';
 
 /**
  * Describes a compressed texture and contains a compressed texture buffer.
@@ -35,7 +35,7 @@ Object.defineProperties(CompressedTextureBuffer.prototype, {
   internalFormat: {
     get: function () {
       return this._format;
-    },
+    }
   },
   /**
    * The datatype of the compressed texture.
@@ -46,7 +46,7 @@ Object.defineProperties(CompressedTextureBuffer.prototype, {
   pixelDatatype: {
     get: function () {
       return this._datatype;
-    },
+    }
   },
   /**
    * The width of the texture.
@@ -57,7 +57,7 @@ Object.defineProperties(CompressedTextureBuffer.prototype, {
   width: {
     get: function () {
       return this._width;
-    },
+    }
   },
   /**
    * The height of the texture.
@@ -68,7 +68,7 @@ Object.defineProperties(CompressedTextureBuffer.prototype, {
   height: {
     get: function () {
       return this._height;
-    },
+    }
   },
   /**
    * The compressed texture buffer.
@@ -79,8 +79,8 @@ Object.defineProperties(CompressedTextureBuffer.prototype, {
   bufferView: {
     get: function () {
       return this._buffer;
-    },
-  },
+    }
+  }
 });
 
 /**

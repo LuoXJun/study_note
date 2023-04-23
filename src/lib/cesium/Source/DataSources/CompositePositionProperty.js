@@ -1,10 +1,10 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import ReferenceFrame from "../Core/ReferenceFrame.js";
-import CompositeProperty from "./CompositeProperty.js";
-import Property from "./Property.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import ReferenceFrame from '../Core/ReferenceFrame.js';
+import CompositeProperty from './CompositeProperty.js';
+import Property from './Property.js';
 
 /**
  * A {@link CompositeProperty} which is also a {@link PositionProperty}.
@@ -36,7 +36,7 @@ Object.defineProperties(CompositePositionProperty.prototype, {
   isConstant: {
     get: function () {
       return this._composite.isConstant;
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -50,7 +50,7 @@ Object.defineProperties(CompositePositionProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   /**
    * Gets the interval collection.
@@ -61,7 +61,7 @@ Object.defineProperties(CompositePositionProperty.prototype, {
   intervals: {
     get: function () {
       return this._composite.intervals;
-    },
+    }
   },
   /**
    * Gets or sets the reference frame which this position presents itself as.
@@ -78,8 +78,8 @@ Object.defineProperties(CompositePositionProperty.prototype, {
     },
     set: function (value) {
       this._referenceFrame = value;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -108,16 +108,15 @@ CompositePositionProperty.prototype.getValueInReferenceFrame = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required.");
+    throw new DeveloperError('time is required.');
   }
   if (!defined(referenceFrame)) {
-    throw new DeveloperError("referenceFrame is required.");
+    throw new DeveloperError('referenceFrame is required.');
   }
   //>>includeEnd('debug');
 
-  const innerProperty = this._composite._intervals.findDataForIntervalContainingDate(
-    time
-  );
+  const innerProperty =
+    this._composite._intervals.findDataForIntervalContainingDate(time);
   if (defined(innerProperty)) {
     return innerProperty.getValueInReferenceFrame(time, referenceFrame, result);
   }

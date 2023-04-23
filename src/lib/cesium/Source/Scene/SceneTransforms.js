@@ -1,16 +1,16 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Cartographic from "../Core/Cartographic.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import OrthographicFrustum from "../Core/OrthographicFrustum.js";
-import OrthographicOffCenterFrustum from "../Core/OrthographicOffCenterFrustum.js";
-import Transforms from "../Core/Transforms.js";
-import SceneMode from "./SceneMode.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Cartographic from '../Core/Cartographic.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import OrthographicFrustum from '../Core/OrthographicFrustum.js';
+import OrthographicOffCenterFrustum from '../Core/OrthographicOffCenterFrustum.js';
+import Transforms from '../Core/Transforms.js';
+import SceneMode from './SceneMode.js';
 
 /**
  * Functions that do scene-dependent transforms between rendering-related coordinate systems.
@@ -106,10 +106,10 @@ SceneTransforms.wgs84WithEyeOffsetToWindowCoordinates = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required.");
+    throw new DeveloperError('scene is required.');
   }
   if (!defined(position)) {
-    throw new DeveloperError("position is required.");
+    throw new DeveloperError('position is required.');
   }
   //>>includeEnd('debug');
 

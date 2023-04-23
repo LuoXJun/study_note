@@ -1,14 +1,14 @@
-import AttributeCompression from "../Core/AttributeCompression.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import CesiumMath from "../Core/Math.js";
-import OrientedBoundingBox from "../Core/OrientedBoundingBox.js";
-import Rectangle from "../Core/Rectangle.js";
-import createTaskProcessorWorker from "./createTaskProcessorWorker.js";
+import AttributeCompression from '../Core/AttributeCompression.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import CesiumMath from '../Core/Math.js';
+import OrientedBoundingBox from '../Core/OrientedBoundingBox.js';
+import Rectangle from '../Core/Rectangle.js';
+import createTaskProcessorWorker from './createTaskProcessorWorker.js';
 
 const scratchCenter = new Cartesian3();
 const scratchEllipsoid = new Ellipsoid();
@@ -16,7 +16,7 @@ const scratchRectangle = new Rectangle();
 const scratchScalars = {
   min: undefined,
   max: undefined,
-  indexBytesPerElement: undefined,
+  indexBytesPerElement: undefined
 };
 
 function unpackBuffer(buffer) {
@@ -185,7 +185,7 @@ function createVectorTilePolygons(parameters, transferableObjects) {
         indexLength: indexCounts[i],
         offset: 0,
         indexOffset: 0,
-        batchIds: [i],
+        batchIds: [i]
       };
     } else {
       colorToBuffers[rgba].positionLength += counts[i];
@@ -224,7 +224,7 @@ function createVectorTilePolygons(parameters, transferableObjects) {
         color: Color.fromRgba(parseInt(rgba)),
         offset: buffer.indexOffset,
         count: buffer.indexLength,
-        batchIds: buffer.batchIds,
+        batchIds: buffer.batchIds
       });
     }
   }
@@ -406,7 +406,7 @@ function createVectorTilePolygons(parameters, transferableObjects) {
     indexOffsets: batchedIndexOffsets.buffer,
     indexCounts: batchedIndexCounts.buffer,
     batchIds: batchedIds.buffer,
-    packedBuffer: packedBuffer.buffer,
+    packedBuffer: packedBuffer.buffer
   };
 }
 export default createTaskProcessorWorker(createVectorTilePolygons);

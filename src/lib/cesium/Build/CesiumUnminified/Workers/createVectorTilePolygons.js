@@ -23,7 +23,44 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './Color-4a982256', './defaultValue-97284df2', './IndexDatatype-f228f5fd', './ComponentDatatype-4eeb6d9b', './OrientedBoundingBox-a82b3552', './createTaskProcessorWorker', './RuntimeError-4f8ec8a2', './Transforms-273eeb44', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './WebGLConstants-6da700a2', './EllipsoidTangentPlane-d42ee682', './AxisAlignedBoundingBox-1aaf78c2', './IntersectionTests-ea138127', './Plane-76b84425'], (function (AttributeCompression, Matrix2, Color, defaultValue, IndexDatatype, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, RuntimeError, Transforms, _commonjsHelpers3aae1032, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define([
+  './AttributeCompression-f202be44',
+  './Matrix2-9e1c22e2',
+  './Color-4a982256',
+  './defaultValue-97284df2',
+  './IndexDatatype-f228f5fd',
+  './ComponentDatatype-4eeb6d9b',
+  './OrientedBoundingBox-a82b3552',
+  './createTaskProcessorWorker',
+  './RuntimeError-4f8ec8a2',
+  './Transforms-273eeb44',
+  './_commonjsHelpers-3aae1032-65601a27',
+  './combine-d11b1f00',
+  './WebGLConstants-6da700a2',
+  './EllipsoidTangentPlane-d42ee682',
+  './AxisAlignedBoundingBox-1aaf78c2',
+  './IntersectionTests-ea138127',
+  './Plane-76b84425'
+], function (
+  AttributeCompression,
+  Matrix2,
+  Color,
+  defaultValue,
+  IndexDatatype,
+  ComponentDatatype,
+  OrientedBoundingBox,
+  createTaskProcessorWorker,
+  RuntimeError,
+  Transforms,
+  _commonjsHelpers3aae1032,
+  combine,
+  WebGLConstants,
+  EllipsoidTangentPlane,
+  AxisAlignedBoundingBox,
+  IntersectionTests,
+  Plane
+) {
+  'use strict';
 
   const scratchCenter = new Matrix2.Cartesian3();
   const scratchEllipsoid = new Matrix2.Ellipsoid();
@@ -31,7 +68,7 @@ define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './Color-4a9822
   const scratchScalars = {
     min: undefined,
     max: undefined,
-    indexBytesPerElement: undefined,
+    indexBytesPerElement: undefined
   };
 
   function unpackBuffer(buffer) {
@@ -77,7 +114,11 @@ define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './Color-4a9822
     packedBuffer[offset++] = numBVs;
 
     for (let i = 0; i < numBVs; ++i) {
-      OrientedBoundingBox.OrientedBoundingBox.pack(boundingVolumes[i], packedBuffer, offset);
+      OrientedBoundingBox.OrientedBoundingBox.pack(
+        boundingVolumes[i],
+        packedBuffer,
+        offset
+      );
       offset += OrientedBoundingBox.OrientedBoundingBox.packedLength;
     }
 
@@ -142,7 +183,10 @@ define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './Color-4a9822
 
     let minimumHeights = parameters.minimumHeights;
     let maximumHeights = parameters.maximumHeights;
-    if (defaultValue.defined(minimumHeights) && defaultValue.defined(maximumHeights)) {
+    if (
+      defaultValue.defined(minimumHeights) &&
+      defaultValue.defined(maximumHeights)
+    ) {
       minimumHeights = new Float32Array(minimumHeights);
       maximumHeights = new Float32Array(maximumHeights);
     }
@@ -154,17 +198,33 @@ define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './Color-4a9822
     const positionsLength = positions.length / 2;
     const uBuffer = positions.subarray(0, positionsLength);
     const vBuffer = positions.subarray(positionsLength, 2 * positionsLength);
-    AttributeCompression.AttributeCompression.zigZagDeltaDecode(uBuffer, vBuffer);
+    AttributeCompression.AttributeCompression.zigZagDeltaDecode(
+      uBuffer,
+      vBuffer
+    );
 
     const decodedPositions = new Float64Array(positionsLength * 3);
     for (i = 0; i < positionsLength; ++i) {
       const u = uBuffer[i];
       const v = vBuffer[i];
 
-      const x = ComponentDatatype.CesiumMath.lerp(rectangle.west, rectangle.east, u / maxShort);
-      const y = ComponentDatatype.CesiumMath.lerp(rectangle.south, rectangle.north, v / maxShort);
+      const x = ComponentDatatype.CesiumMath.lerp(
+        rectangle.west,
+        rectangle.east,
+        u / maxShort
+      );
+      const y = ComponentDatatype.CesiumMath.lerp(
+        rectangle.south,
+        rectangle.north,
+        v / maxShort
+      );
 
-      const cart = Matrix2.Cartographic.fromRadians(x, y, 0.0, scratchBVCartographic);
+      const cart = Matrix2.Cartographic.fromRadians(
+        x,
+        y,
+        0.0,
+        scratchBVCartographic
+      );
       const decodedPosition = ellipsoid.cartographicToCartesian(
         cart,
         scratchEncodedPosition
@@ -200,7 +260,7 @@ define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './Color-4a9822
           indexLength: indexCounts[i],
           offset: 0,
           indexOffset: 0,
-          batchIds: [i],
+          batchIds: [i]
         };
       } else {
         colorToBuffers[rgba].positionLength += counts[i];
@@ -239,7 +299,7 @@ define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './Color-4a9822
           color: Color.Color.fromRgba(parseInt(rgba)),
           offset: buffer.indexOffset,
           count: buffer.indexLength,
-          batchIds: buffer.batchIds,
+          batchIds: buffer.batchIds
         });
       }
     }
@@ -258,7 +318,10 @@ define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './Color-4a9822
 
       let polygonMinimumHeight = minHeight;
       let polygonMaximumHeight = maxHeight;
-      if (defaultValue.defined(minimumHeights) && defaultValue.defined(maximumHeights)) {
+      if (
+        defaultValue.defined(minimumHeights) &&
+        defaultValue.defined(maximumHeights)
+      ) {
         polygonMinimumHeight = minimumHeights[i];
         polygonMaximumHeight = maximumHeights[i];
       }
@@ -311,11 +374,27 @@ define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './Color-4a9822
           scratchMaxHeightPosition
         );
 
-        Matrix2.Cartesian3.subtract(maxHeightPosition, center, maxHeightPosition);
-        Matrix2.Cartesian3.subtract(minHeightPosition, center, minHeightPosition);
+        Matrix2.Cartesian3.subtract(
+          maxHeightPosition,
+          center,
+          maxHeightPosition
+        );
+        Matrix2.Cartesian3.subtract(
+          minHeightPosition,
+          center,
+          minHeightPosition
+        );
 
-        Matrix2.Cartesian3.pack(maxHeightPosition, batchedPositions, positionIndex);
-        Matrix2.Cartesian3.pack(minHeightPosition, batchedPositions, positionIndex + 3);
+        Matrix2.Cartesian3.pack(
+          maxHeightPosition,
+          batchedPositions,
+          positionIndex
+        );
+        Matrix2.Cartesian3.pack(
+          minHeightPosition,
+          batchedPositions,
+          positionIndex + 3
+        );
 
         batchedIds[batchIdIndex] = batchId;
         batchedIds[batchIdIndex + 1] = batchId;
@@ -330,12 +409,13 @@ define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './Color-4a9822
       rectangle.south = minLat;
       rectangle.north = maxLat;
 
-      boundingVolumes[i] = OrientedBoundingBox.OrientedBoundingBox.fromRectangle(
-        rectangle,
-        minHeight,
-        maxHeight,
-        ellipsoid
-      );
+      boundingVolumes[i] =
+        OrientedBoundingBox.OrientedBoundingBox.fromRectangle(
+          rectangle,
+          minHeight,
+          maxHeight,
+          ellipsoid
+        );
 
       let indicesIndex = buffer.indexOffset;
 
@@ -421,12 +501,13 @@ define(['./AttributeCompression-f202be44', './Matrix2-9e1c22e2', './Color-4a9822
       indexOffsets: batchedIndexOffsets.buffer,
       indexCounts: batchedIndexCounts.buffer,
       batchIds: batchedIds.buffer,
-      packedBuffer: packedBuffer.buffer,
+      packedBuffer: packedBuffer.buffer
     };
   }
-  var createVectorTilePolygons$1 = createTaskProcessorWorker(createVectorTilePolygons);
+  var createVectorTilePolygons$1 = createTaskProcessorWorker(
+    createVectorTilePolygons
+  );
 
   return createVectorTilePolygons$1;
-
-}));
+});
 //# sourceMappingURL=createVectorTilePolygons.js.map

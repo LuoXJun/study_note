@@ -1,7 +1,7 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import PropertyTextureProperty from "./PropertyTextureProperty.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import PropertyTextureProperty from './PropertyTextureProperty.js';
 
 /**
  * A property texture.
@@ -30,9 +30,9 @@ function PropertyTexture(options) {
   const textures = options.textures;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.propertyTexture", propertyTexture);
-  Check.typeOf.object("options.class", classDefinition);
-  Check.typeOf.object("options.textures", textures);
+  Check.typeOf.object('options.propertyTexture', propertyTexture);
+  Check.typeOf.object('options.class', classDefinition);
+  Check.typeOf.object('options.textures', textures);
   //>>includeEnd('debug');
 
   const extensions = propertyTexture.extensions;
@@ -45,7 +45,7 @@ function PropertyTexture(options) {
         properties[propertyId] = new PropertyTextureProperty({
           property: propertyTexture.properties[propertyId],
           classProperty: classDefinition.properties[propertyId],
-          textures: textures,
+          textures: textures
         });
       }
     }
@@ -71,7 +71,7 @@ Object.defineProperties(PropertyTexture.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
   /**
    * An identifier for this texture. Useful for debugging.
@@ -84,7 +84,7 @@ Object.defineProperties(PropertyTexture.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
   /**
    * The class that properties conform to.
@@ -97,7 +97,7 @@ Object.defineProperties(PropertyTexture.prototype, {
   class: {
     get: function () {
       return this._class;
-    },
+    }
   },
 
   /**
@@ -112,7 +112,7 @@ Object.defineProperties(PropertyTexture.prototype, {
   properties: {
     get: function () {
       return this._properties;
-    },
+    }
   },
 
   /**
@@ -126,7 +126,7 @@ Object.defineProperties(PropertyTexture.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -140,8 +140,8 @@ Object.defineProperties(PropertyTexture.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -153,7 +153,7 @@ Object.defineProperties(PropertyTexture.prototype, {
  */
 PropertyTexture.prototype.getProperty = function (propertyId) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("propertyId", propertyId);
+  Check.typeOf.string('propertyId', propertyId);
   //>>includeEnd('debug');
 
   return this._properties[propertyId];

@@ -78,6 +78,6 @@ const TimeConstants = {
    * @type {Number}
    * @constant
    */
-  MODIFIED_JULIAN_DATE_DIFFERENCE: 2400000.5,
+  MODIFIED_JULIAN_DATE_DIFFERENCE: 2400000.5
 };
 export default Object.freeze(TimeConstants);

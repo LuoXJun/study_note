@@ -32,6 +32,6 @@ const CornerType = {
    * @type {Number}
    * @constant
    */
-  BEVELED: 2,
+  BEVELED: 2
 };
 export default Object.freeze(CornerType);

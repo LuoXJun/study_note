@@ -1,7 +1,7 @@
-import defined from "../../Core/defined.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import LightingStageFS from "../../Shaders/ModelExperimental/LightingStageFS.js";
-import LightingModel from "./LightingModel.js";
+import defined from '../../Core/defined.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import LightingStageFS from '../../Shaders/ModelExperimental/LightingStageFS.js';
+import LightingModel from './LightingModel.js';
 
 /**
  * The lighting pipeline stage is responsible for taking a material and rendering
@@ -13,7 +13,7 @@ import LightingModel from "./LightingModel.js";
  * @private
  */
 const LightingPipelineStage = {};
-LightingPipelineStage.name = "LightingPipelineStage"; // Helps with debugging
+LightingPipelineStage.name = 'LightingPipelineStage'; // Helps with debugging
 
 /**
  * Process a primitive. This modifies the following parts of the render
@@ -33,14 +33,14 @@ LightingPipelineStage.process = function (renderResources, primitive) {
 
   if (defined(model.lightColor)) {
     shaderBuilder.addDefine(
-      "USE_CUSTOM_LIGHT_COLOR",
+      'USE_CUSTOM_LIGHT_COLOR',
       undefined,
       ShaderDestination.FRAGMENT
     );
 
     shaderBuilder.addUniform(
-      "vec3",
-      "model_lightColorHdr",
+      'vec3',
+      'model_lightColorHdr',
       ShaderDestination.FRAGMENT
     );
 
@@ -56,13 +56,13 @@ LightingPipelineStage.process = function (renderResources, primitive) {
 
   if (lightingModel === LightingModel.PBR) {
     shaderBuilder.addDefine(
-      "LIGHTING_PBR",
+      'LIGHTING_PBR',
       undefined,
       ShaderDestination.FRAGMENT
     );
   } else {
     shaderBuilder.addDefine(
-      "LIGHTING_UNLIT",
+      'LIGHTING_UNLIT',
       undefined,
       ShaderDestination.FRAGMENT
     );

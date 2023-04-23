@@ -1,5 +1,11 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93', './Matrix2-fc7e9822'], (function (exports, defaultValue, RuntimeError, Matrix2) { 'use strict';
+define([
+  'exports',
+  './defaultValue-94c3e563',
+  './RuntimeError-c581ca93',
+  './Matrix2-fc7e9822'
+], function (exports, defaultValue, RuntimeError, Matrix2) {
+  'use strict';
 
   /**
    * Geometry instancing allows one {@link Geometry} object to be positions in several
@@ -47,11 +53,14 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93', './Matr
    * @see Geometry
    */
   function GeometryInstance(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(options.geometry)) {
-      throw new RuntimeError.DeveloperError("options.geometry is required.");
+      throw new RuntimeError.DeveloperError('options.geometry is required.');
     }
     //>>includeEnd('debug');
 
@@ -118,5 +127,4 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93', './Matr
   }
 
   exports.GeometryInstance = GeometryInstance;
-
-}));
+});

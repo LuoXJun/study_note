@@ -1,22 +1,22 @@
-import AttributeType from "../AttributeType.js";
-import Buffer from "../../Renderer/Buffer.js";
-import BufferUsage from "../../Renderer/BufferUsage.js";
-import Cartesian3 from "../../Core/Cartesian3.js";
-import clone from "../../Core/clone.js";
-import combine from "../../Core/combine.js";
-import ComponentDatatype from "../../Core/ComponentDatatype.js";
-import defined from "../../Core/defined.js";
-import InstanceAttributeSemantic from "../InstanceAttributeSemantic.js";
-import InstancingStageCommon from "../../Shaders/ModelExperimental/InstancingStageCommon.js";
-import InstancingStageVS from "../../Shaders/ModelExperimental/InstancingStageVS.js";
-import LegacyInstancingStageVS from "../../Shaders/ModelExperimental/LegacyInstancingStageVS.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
-import Quaternion from "../../Core/Quaternion.js";
-import SceneMode from "../SceneMode.js";
-import SceneTransforms from "../SceneTransforms.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import Transforms from "../../Core/Transforms.js";
+import AttributeType from '../AttributeType.js';
+import Buffer from '../../Renderer/Buffer.js';
+import BufferUsage from '../../Renderer/BufferUsage.js';
+import Cartesian3 from '../../Core/Cartesian3.js';
+import clone from '../../Core/clone.js';
+import combine from '../../Core/combine.js';
+import ComponentDatatype from '../../Core/ComponentDatatype.js';
+import defined from '../../Core/defined.js';
+import InstanceAttributeSemantic from '../InstanceAttributeSemantic.js';
+import InstancingStageCommon from '../../Shaders/ModelExperimental/InstancingStageCommon.js';
+import InstancingStageVS from '../../Shaders/ModelExperimental/InstancingStageVS.js';
+import LegacyInstancingStageVS from '../../Shaders/ModelExperimental/LegacyInstancingStageVS.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
+import Quaternion from '../../Core/Quaternion.js';
+import SceneMode from '../SceneMode.js';
+import SceneTransforms from '../SceneTransforms.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import Transforms from '../../Core/Transforms.js';
 
 const modelViewScratch = new Matrix4();
 const nodeTransformScratch = new Matrix4();
@@ -30,7 +30,7 @@ const modelView2DScratch = new Matrix4();
  * @private
  */
 const InstancingPipelineStage = {};
-InstancingPipelineStage.name = "InstancingPipelineStage"; // Helps with debugging
+InstancingPipelineStage.name = 'InstancingPipelineStage'; // Helps with debugging
 
 /**
  * Process a node. This modifies the following parts of the render resources:
@@ -56,7 +56,7 @@ InstancingPipelineStage.process = function (renderResources, node, frameState) {
   const count = instances.attributes[0].count;
 
   const shaderBuilder = renderResources.shaderBuilder;
-  shaderBuilder.addDefine("HAS_INSTANCING");
+  shaderBuilder.addDefine('HAS_INSTANCING');
   shaderBuilder.addVertexLines([InstancingStageCommon]);
 
   const model = renderResources.model;
@@ -87,18 +87,18 @@ InstancingPipelineStage.process = function (renderResources, node, frameState) {
 
   if (instances.transformInWorldSpace) {
     shaderBuilder.addDefine(
-      "USE_LEGACY_INSTANCING",
+      'USE_LEGACY_INSTANCING',
       undefined,
       ShaderDestination.VERTEX
     );
     shaderBuilder.addUniform(
-      "mat4",
-      "u_instance_modifiedModelView",
+      'mat4',
+      'u_instance_modifiedModelView',
       ShaderDestination.VERTEX
     );
     shaderBuilder.addUniform(
-      "mat4",
-      "u_instance_nodeTransform",
+      'mat4',
+      'u_instance_nodeTransform',
       ShaderDestination.VERTEX
     );
 
@@ -175,12 +175,12 @@ InstancingPipelineStage.process = function (renderResources, node, frameState) {
 
   if (use2D) {
     shaderBuilder.addDefine(
-      "USE_2D_INSTANCING",
+      'USE_2D_INSTANCING',
       undefined,
       ShaderDestination.VERTEX
     );
 
-    shaderBuilder.addUniform("mat4", "u_modelView2D", ShaderDestination.VERTEX);
+    shaderBuilder.addUniform('mat4', 'u_modelView2D', ShaderDestination.VERTEX);
 
     const context = frameState.context;
     const modelMatrix2D = Matrix4.fromTranslation(
@@ -603,7 +603,7 @@ function createVertexBuffer(typedArray, frameState) {
   const buffer = Buffer.createVertexBuffer({
     context: frameState.context,
     typedArray: typedArray,
-    usage: BufferUsage.STATIC_DRAW,
+    usage: BufferUsage.STATIC_DRAW
   });
 
   // Destruction of resources allocated by the ModelExperimental
@@ -654,8 +654,8 @@ function processTransformAttributes(
 
   let transforms;
   if (useMatrices) {
-    shaderBuilder.addDefine("HAS_INSTANCE_MATRICES");
-    const attributeString = "Transform";
+    shaderBuilder.addDefine('HAS_INSTANCE_MATRICES');
+    const attributeString = 'Transform';
 
     transforms = getInstanceTransformsAsMatrices(
       instances,
@@ -679,7 +679,7 @@ function processTransformAttributes(
     statistics.addBuffer(buffer, hasCpuCopy);
   } else {
     if (defined(translationAttribute)) {
-      shaderBuilder.addDefine("HAS_INSTANCE_TRANSLATION");
+      shaderBuilder.addDefine('HAS_INSTANCE_TRANSLATION');
 
       const translationMax = translationAttribute.max;
       const translationMin = translationAttribute.min;
@@ -706,7 +706,7 @@ function processTransformAttributes(
         statistics.addBuffer(buffer, hasCpuCopy);
       }
 
-      const attributeString = "Translation";
+      const attributeString = 'Translation';
 
       processVec3Attribute(
         renderResources,
@@ -724,7 +724,7 @@ function processTransformAttributes(
     );
 
     if (defined(scaleAttribute)) {
-      shaderBuilder.addDefine("HAS_INSTANCE_SCALE");
+      shaderBuilder.addDefine('HAS_INSTANCE_SCALE');
 
       let buffer = scaleAttribute.buffer;
       let byteOffset = scaleAttribute.byteOffset;
@@ -746,7 +746,7 @@ function processTransformAttributes(
         statistics.addBuffer(buffer, hasCpuCopy);
       }
 
-      const attributeString = "Scale";
+      const attributeString = 'Scale';
 
       processVec3Attribute(
         renderResources,
@@ -796,7 +796,7 @@ function processTransformAttributes(
       runtimeNode.instancingTransformsBuffer2D = buffer;
     }
 
-    const attributeString2D = "Transform2D";
+    const attributeString2D = 'Transform2D';
     processMatrixAttributes(
       renderResources,
       buffer,
@@ -832,7 +832,7 @@ function processTransformAttributes(
     const byteOffset = 0;
     const byteStride = undefined;
 
-    const attributeString2D = "Translation2D";
+    const attributeString2D = 'Translation2D';
     processVec3Attribute(
       renderResources,
       buffer,
@@ -865,7 +865,7 @@ function processMatrixAttributes(
       normalize: false,
       offsetInBytes: 0,
       strideInBytes: strideInBytes,
-      instanceDivisor: 1,
+      instanceDivisor: 1
     },
     {
       index: renderResources.attributeIndex++,
@@ -875,7 +875,7 @@ function processMatrixAttributes(
       normalize: false,
       offsetInBytes: componentByteSize * 4,
       strideInBytes: strideInBytes,
-      instanceDivisor: 1,
+      instanceDivisor: 1
     },
     {
       index: renderResources.attributeIndex++,
@@ -885,14 +885,14 @@ function processMatrixAttributes(
       normalize: false,
       offsetInBytes: componentByteSize * 8,
       strideInBytes: strideInBytes,
-      instanceDivisor: 1,
-    },
+      instanceDivisor: 1
+    }
   ];
 
   const shaderBuilder = renderResources.shaderBuilder;
-  shaderBuilder.addAttribute("vec4", `a_instancing${attributeString}Row0`);
-  shaderBuilder.addAttribute("vec4", `a_instancing${attributeString}Row1`);
-  shaderBuilder.addAttribute("vec4", `a_instancing${attributeString}Row2`);
+  shaderBuilder.addAttribute('vec4', `a_instancing${attributeString}Row0`);
+  shaderBuilder.addAttribute('vec4', `a_instancing${attributeString}Row1`);
+  shaderBuilder.addAttribute('vec4', `a_instancing${attributeString}Row2`);
 
   instancingVertexAttributes.push.apply(
     instancingVertexAttributes,
@@ -916,11 +916,11 @@ function processVec3Attribute(
     normalize: false,
     offsetInBytes: byteOffset,
     strideInBytes: byteStride,
-    instanceDivisor: 1,
+    instanceDivisor: 1
   });
 
   const shaderBuilder = renderResources.shaderBuilder;
-  shaderBuilder.addAttribute("vec3", `a_instance${attributeString}`);
+  shaderBuilder.addAttribute('vec3', `a_instance${attributeString}`);
 }
 
 function processFeatureIdAttributes(
@@ -950,7 +950,7 @@ function processFeatureIdAttributes(
     const vertexBuffer = Buffer.createVertexBuffer({
       context: frameState.context,
       typedArray: attribute.packedTypedArray,
-      usage: BufferUsage.STATIC_DRAW,
+      usage: BufferUsage.STATIC_DRAW
     });
     vertexBuffer.vertexArrayDestroyable = false;
     model._pipelineResources.push(vertexBuffer);
@@ -972,18 +972,19 @@ function processFeatureIdAttributes(
       normalize: false,
       offsetInBytes: attribute.byteOffset,
       strideInBytes: attribute.byteStride,
-      instanceDivisor: 1,
+      instanceDivisor: 1
     });
 
     shaderBuilder.addAttribute(
-      "float",
+      'float',
       `a_instanceFeatureId_${attribute.setIndex}`
     );
   }
 }
 
 // Exposed for testing
-InstancingPipelineStage._getInstanceTransformsAsMatrices = getInstanceTransformsAsMatrices;
+InstancingPipelineStage._getInstanceTransformsAsMatrices =
+  getInstanceTransformsAsMatrices;
 InstancingPipelineStage._transformsToTypedArray = transformsToTypedArray;
 
 export default InstancingPipelineStage;

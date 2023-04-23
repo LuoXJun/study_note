@@ -1,18 +1,18 @@
-import buildModuleUrl from "../Core/buildModuleUrl.js";
-import Check from "../Core/Check.js";
-import Credit from "../Core/Credit.js";
-import defaultValue from "../Core/defaultValue.js";
-import defer from "../Core/defer.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import GeographicTilingScheme from "../Core/GeographicTilingScheme.js";
-import Rectangle from "../Core/Rectangle.js";
-import Resource from "../Core/Resource.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import TileProviderError from "../Core/TileProviderError.js";
-import WebMercatorTilingScheme from "../Core/WebMercatorTilingScheme.js";
-import ImageryProvider from "./ImageryProvider.js";
+import buildModuleUrl from '../Core/buildModuleUrl.js';
+import Check from '../Core/Check.js';
+import Credit from '../Core/Credit.js';
+import defaultValue from '../Core/defaultValue.js';
+import defer from '../Core/defer.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import GeographicTilingScheme from '../Core/GeographicTilingScheme.js';
+import Rectangle from '../Core/Rectangle.js';
+import Resource from '../Core/Resource.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import TileProviderError from '../Core/TileProviderError.js';
+import WebMercatorTilingScheme from '../Core/WebMercatorTilingScheme.js';
+import ImageryProvider from './ImageryProvider.js';
 
 /**
  * @typedef {Object} GoogleEarthEnterpriseMapsProvider.ConstructorOptions
@@ -94,10 +94,10 @@ function GoogleEarthEnterpriseMapsProvider(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.url)) {
-    throw new DeveloperError("options.url is required.");
+    throw new DeveloperError('options.url is required.');
   }
   if (!defined(options.channel)) {
-    throw new DeveloperError("options.channel is required.");
+    throw new DeveloperError('options.channel is required.');
   }
   //>>includeEnd('debug');
 
@@ -188,11 +188,11 @@ function GoogleEarthEnterpriseMapsProvider(options) {
   this.defaultMagnificationFilter = undefined;
 
   const url = options.url;
-  const path = defaultValue(options.path, "/default_map");
+  const path = defaultValue(options.path, '/default_map');
 
   const resource = Resource.createIfNeeded(url).getDerivedResource({
     // We used to just append path to url, so now that we do proper URI resolution, removed the /
-    url: path[0] === "/" ? path.substring(1) : path,
+    url: path[0] === '/' ? path.substring(1) : path
   });
 
   resource.appendForwardSlash();
@@ -202,7 +202,7 @@ function GoogleEarthEnterpriseMapsProvider(options) {
   this._path = path;
   this._tileDiscardPolicy = options.tileDiscardPolicy;
   this._channel = options.channel;
-  this._requestType = "ImageryMaps";
+  this._requestType = 'ImageryMaps';
   this._credit = new Credit(
     `<a href="http://www.google.com/enterprise/mapsearth/products/earthenterprise.html"><img src="${GoogleEarthEnterpriseMapsProvider.logoUrl}" title="Google Imagery"/></a>`
   );
@@ -221,12 +221,12 @@ function GoogleEarthEnterpriseMapsProvider(options) {
   this._readyPromise = defer();
 
   const metadataResource = resource.getDerivedResource({
-    url: "query",
+    url: 'query',
     queryParameters: {
-      request: "Json",
-      vars: "geeServerDefs",
-      is2d: "t",
-    },
+      request: 'Json',
+      vars: 'geeServerDefs',
+      is2d: 't'
+    }
   });
   const that = this;
   let metadataError;
@@ -286,19 +286,19 @@ function GoogleEarthEnterpriseMapsProvider(options) {
     }
     that._version = layer.version;
 
-    if (defined(data.projection) && data.projection === "flat") {
+    if (defined(data.projection) && data.projection === 'flat') {
       that._tilingScheme = new GeographicTilingScheme({
         numberOfLevelZeroTilesX: 2,
         numberOfLevelZeroTilesY: 2,
         rectangle: new Rectangle(-Math.PI, -Math.PI, Math.PI, Math.PI),
-        ellipsoid: options.ellipsoid,
+        ellipsoid: options.ellipsoid
       });
       // Default to mercator projection when projection is undefined
-    } else if (!defined(data.projection) || data.projection === "mercator") {
+    } else if (!defined(data.projection) || data.projection === 'mercator') {
       that._tilingScheme = new WebMercatorTilingScheme({
         numberOfLevelZeroTilesX: 2,
         numberOfLevelZeroTilesY: 2,
-        ellipsoid: options.ellipsoid,
+        ellipsoid: options.ellipsoid
       });
     } else {
       message = `Unsupported projection ${data.projection}.`;
@@ -362,7 +362,7 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
   url: {
     get: function () {
       return this._url;
-    },
+    }
   },
 
   /**
@@ -374,7 +374,7 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
   path: {
     get: function () {
       return this._path;
-    },
+    }
   },
 
   /**
@@ -386,7 +386,7 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
   proxy: {
     get: function () {
       return this._resource.proxy;
-    },
+    }
   },
 
   /**
@@ -398,7 +398,7 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
   channel: {
     get: function () {
       return this._channel;
-    },
+    }
   },
 
   /**
@@ -413,13 +413,13 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileWidth must not be called before the imagery provider is ready."
+          'tileWidth must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tileWidth;
-    },
+    }
   },
 
   /**
@@ -434,13 +434,13 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileHeight must not be called before the imagery provider is ready."
+          'tileHeight must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tileHeight;
-    },
+    }
   },
 
   /**
@@ -455,13 +455,13 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "maximumLevel must not be called before the imagery provider is ready."
+          'maximumLevel must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._maximumLevel;
-    },
+    }
   },
 
   /**
@@ -476,13 +476,13 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "minimumLevel must not be called before the imagery provider is ready."
+          'minimumLevel must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return 0;
-    },
+    }
   },
 
   /**
@@ -497,13 +497,13 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tilingScheme must not be called before the imagery provider is ready."
+          'tilingScheme must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tilingScheme;
-    },
+    }
   },
 
   /**
@@ -518,13 +518,13 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "version must not be called before the imagery provider is ready."
+          'version must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._version;
-    },
+    }
   },
 
   /**
@@ -539,13 +539,13 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "requestType must not be called before the imagery provider is ready."
+          'requestType must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._requestType;
-    },
+    }
   },
   /**
    * Gets the rectangle, in radians, of the imagery provided by this instance.  This function should
@@ -559,13 +559,13 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "rectangle must not be called before the imagery provider is ready."
+          'rectangle must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tilingScheme.rectangle;
-    },
+    }
   },
 
   /**
@@ -582,13 +582,13 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileDiscardPolicy must not be called before the imagery provider is ready."
+          'tileDiscardPolicy must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tileDiscardPolicy;
-    },
+    }
   },
 
   /**
@@ -602,7 +602,7 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._errorEvent;
-    },
+    }
   },
 
   /**
@@ -614,7 +614,7 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -626,7 +626,7 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise.promise;
-    },
+    }
   },
 
   /**
@@ -639,7 +639,7 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
   credit: {
     get: function () {
       return this._credit;
-    },
+    }
   },
 
   /**
@@ -655,8 +655,8 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider.prototype, {
   hasAlphaChannel: {
     get: function () {
       return true;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -699,13 +699,13 @@ GoogleEarthEnterpriseMapsProvider.prototype.requestImage = function (
   //>>includeStart('debug', pragmas.debug);
   if (!this._ready) {
     throw new DeveloperError(
-      "requestImage must not be called before the imagery provider is ready."
+      'requestImage must not be called before the imagery provider is ready.'
     );
   }
   //>>includeEnd('debug');
 
   const resource = this._resource.getDerivedResource({
-    url: "query",
+    url: 'query',
     request: request,
     queryParameters: {
       request: this._requestType,
@@ -713,8 +713,8 @@ GoogleEarthEnterpriseMapsProvider.prototype.requestImage = function (
       version: this._version,
       x: x,
       y: y,
-      z: level + 1, // Google Earth starts with a zoom level of 1, not 0
-    },
+      z: level + 1 // Google Earth starts with a zoom level of 1, not 0
+    }
   });
 
   return ImageryProvider.loadImage(this, resource);
@@ -753,18 +753,18 @@ Object.defineProperties(GoogleEarthEnterpriseMapsProvider, {
     get: function () {
       if (!defined(GoogleEarthEnterpriseMapsProvider._logoUrl)) {
         GoogleEarthEnterpriseMapsProvider._logoUrl = buildModuleUrl(
-          "Assets/Images/google_earth_credit.png"
+          'Assets/Images/google_earth_credit.png'
         );
       }
       return GoogleEarthEnterpriseMapsProvider._logoUrl;
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.defined("value", value);
+      Check.defined('value', value);
       //>>includeEnd('debug');
 
       GoogleEarthEnterpriseMapsProvider._logoUrl = value;
-    },
-  },
+    }
+  }
 });
 export default GoogleEarthEnterpriseMapsProvider;

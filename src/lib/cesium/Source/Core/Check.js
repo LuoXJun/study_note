@@ -1,5 +1,5 @@
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Contains functions for checking that supplied arguments are of a specified type
@@ -42,9 +42,9 @@ Check.defined = function (name, test) {
  * @exception {DeveloperError} test must be typeof 'function'
  */
 Check.typeOf.func = function (name, test) {
-  if (typeof test !== "function") {
+  if (typeof test !== 'function') {
     throw new DeveloperError(
-      getFailedTypeErrorMessage(typeof test, "function", name)
+      getFailedTypeErrorMessage(typeof test, 'function', name)
     );
   }
 };
@@ -57,9 +57,9 @@ Check.typeOf.func = function (name, test) {
  * @exception {DeveloperError} test must be typeof 'string'
  */
 Check.typeOf.string = function (name, test) {
-  if (typeof test !== "string") {
+  if (typeof test !== 'string') {
     throw new DeveloperError(
-      getFailedTypeErrorMessage(typeof test, "string", name)
+      getFailedTypeErrorMessage(typeof test, 'string', name)
     );
   }
 };
@@ -72,9 +72,9 @@ Check.typeOf.string = function (name, test) {
  * @exception {DeveloperError} test must be typeof 'number'
  */
 Check.typeOf.number = function (name, test) {
-  if (typeof test !== "number") {
+  if (typeof test !== 'number') {
     throw new DeveloperError(
-      getFailedTypeErrorMessage(typeof test, "number", name)
+      getFailedTypeErrorMessage(typeof test, 'number', name)
     );
   }
 };
@@ -155,9 +155,9 @@ Check.typeOf.number.greaterThanOrEquals = function (name, test, limit) {
  * @exception {DeveloperError} test must be typeof 'object'
  */
 Check.typeOf.object = function (name, test) {
-  if (typeof test !== "object") {
+  if (typeof test !== 'object') {
     throw new DeveloperError(
-      getFailedTypeErrorMessage(typeof test, "object", name)
+      getFailedTypeErrorMessage(typeof test, 'object', name)
     );
   }
 };
@@ -170,9 +170,9 @@ Check.typeOf.object = function (name, test) {
  * @exception {DeveloperError} test must be typeof 'boolean'
  */
 Check.typeOf.bool = function (name, test) {
-  if (typeof test !== "boolean") {
+  if (typeof test !== 'boolean') {
     throw new DeveloperError(
-      getFailedTypeErrorMessage(typeof test, "boolean", name)
+      getFailedTypeErrorMessage(typeof test, 'boolean', name)
     );
   }
 };
@@ -185,9 +185,9 @@ Check.typeOf.bool = function (name, test) {
  * @exception {DeveloperError} test must be typeof 'bigint'
  */
 Check.typeOf.bigint = function (name, test) {
-  if (typeof test !== "bigint") {
+  if (typeof test !== 'bigint') {
     throw new DeveloperError(
-      getFailedTypeErrorMessage(typeof test, "bigint", name)
+      getFailedTypeErrorMessage(typeof test, 'bigint', name)
     );
   }
 };

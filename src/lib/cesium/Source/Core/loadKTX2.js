@@ -1,6 +1,6 @@
-import Check from "./Check.js";
-import Resource from "./Resource.js";
-import KTX2Transcoder from "./KTX2Transcoder.js";
+import Check from './Check.js';
+import Resource from './Resource.js';
+import KTX2Transcoder from './KTX2Transcoder.js';
 
 /**
  * Stores the supported formats that KTX2 can transcode to. Called during context creation.
@@ -29,7 +29,7 @@ loadKTX2.setKTX2SupportedFormats = function (
     astc: astc,
     etc: etc,
     etc1: etc1,
-    bc7: bc7,
+    bc7: bc7
   };
 };
 
@@ -81,7 +81,7 @@ loadKTX2.setKTX2SupportedFormats = function (
  */
 function loadKTX2(resourceOrUrlOrBuffer) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("resourceOrUrlOrBuffer", resourceOrUrlOrBuffer);
+  Check.defined('resourceOrUrlOrBuffer', resourceOrUrlOrBuffer);
   //>>includeEnd('debug');
 
   let loadPromise;

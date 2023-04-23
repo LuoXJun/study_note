@@ -1,8 +1,8 @@
-import Check from "../../Core/Check.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import ModelExperimentalArticulationStage from "./ModelExperimentalArticulationStage.js";
+import Check from '../../Core/Check.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import ModelExperimentalArticulationStage from './ModelExperimentalArticulationStage.js';
 
 /**
  * An in-memory representation of an articulation that affects nodes in the
@@ -24,8 +24,8 @@ export default function ModelExperimentalArticulation(options) {
   const articulation = options.articulation;
   const sceneGraph = options.sceneGraph;
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.articulation", articulation);
-  Check.typeOf.object("options.sceneGraph", sceneGraph);
+  Check.typeOf.object('options.articulation', articulation);
+  Check.typeOf.object('options.sceneGraph', sceneGraph);
   //>>includeEnd('debug');
 
   this._articulation = articulation;
@@ -58,7 +58,7 @@ Object.defineProperties(ModelExperimentalArticulation.prototype, {
   articulation: {
     get: function () {
       return this._articulation;
-    },
+    }
   },
 
   /**
@@ -73,7 +73,7 @@ Object.defineProperties(ModelExperimentalArticulation.prototype, {
   sceneGraph: {
     get: function () {
       return this._sceneGraph;
-    },
+    }
   },
 
   /**
@@ -88,7 +88,7 @@ Object.defineProperties(ModelExperimentalArticulation.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
 
   /**
@@ -103,7 +103,7 @@ Object.defineProperties(ModelExperimentalArticulation.prototype, {
   runtimeStages: {
     get: function () {
       return this._runtimeStages;
-    },
+    }
   },
 
   /**
@@ -118,8 +118,8 @@ Object.defineProperties(ModelExperimentalArticulation.prototype, {
   runtimeNodes: {
     get: function () {
       return this._runtimeNodes;
-    },
-  },
+    }
+  }
 });
 
 function initialize(runtimeArticulation) {
@@ -134,7 +134,7 @@ function initialize(runtimeArticulation) {
     const stage = stages[i];
     const runtimeStage = new ModelExperimentalArticulationStage({
       stage: stage,
-      runtimeArticulation: runtimeArticulation,
+      runtimeArticulation: runtimeArticulation
     });
 
     // Store the stages in an array to preserve the order in which

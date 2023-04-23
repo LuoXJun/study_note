@@ -1,5 +1,10 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93'], (function (exports, defaultValue, RuntimeError) { 'use strict';
+define([
+  'exports',
+  './defaultValue-94c3e563',
+  './RuntimeError-c581ca93'
+], function (exports, defaultValue, RuntimeError) {
+  'use strict';
 
   /**
    * A vertex format defines what attributes make up a vertex.  A VertexFormat can be provided
@@ -22,7 +27,10 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93'], (funct
    * @see Packable
    */
   function VertexFormat(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     /**
      * When <code>true</code>, the vertex has a 3D position attribute.
@@ -107,7 +115,7 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93'], (funct
    */
   VertexFormat.POSITION_ONLY = Object.freeze(
     new VertexFormat({
-      position: true,
+      position: true
     })
   );
 
@@ -124,7 +132,7 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93'], (funct
   VertexFormat.POSITION_AND_NORMAL = Object.freeze(
     new VertexFormat({
       position: true,
-      normal: true,
+      normal: true
     })
   );
 
@@ -144,7 +152,7 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93'], (funct
     new VertexFormat({
       position: true,
       normal: true,
-      st: true,
+      st: true
     })
   );
 
@@ -161,7 +169,7 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93'], (funct
   VertexFormat.POSITION_AND_ST = Object.freeze(
     new VertexFormat({
       position: true,
-      st: true,
+      st: true
     })
   );
 
@@ -177,7 +185,7 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93'], (funct
   VertexFormat.POSITION_AND_COLOR = Object.freeze(
     new VertexFormat({
       position: true,
-      color: true,
+      color: true
     })
   );
 
@@ -199,7 +207,7 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93'], (funct
       normal: true,
       st: true,
       tangent: true,
-      bitangent: true,
+      bitangent: true
     })
   );
 
@@ -235,10 +243,10 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93'], (funct
   VertexFormat.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(value)) {
-      throw new RuntimeError.DeveloperError("value is required");
+      throw new RuntimeError.DeveloperError('value is required');
     }
     if (!defaultValue.defined(array)) {
-      throw new RuntimeError.DeveloperError("array is required");
+      throw new RuntimeError.DeveloperError('array is required');
     }
     //>>includeEnd('debug');
 
@@ -265,7 +273,7 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93'], (funct
   VertexFormat.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(array)) {
-      throw new RuntimeError.DeveloperError("array is required");
+      throw new RuntimeError.DeveloperError('array is required');
     }
     //>>includeEnd('debug');
 
@@ -309,5 +317,4 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93'], (funct
   };
 
   exports.VertexFormat = VertexFormat;
-
-}));
+});

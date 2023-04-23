@@ -1,5 +1,5 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
 
 /**
  * Merges two objects, copying their properties onto a new combined object. When two objects have the same
@@ -49,11 +49,11 @@ function combine(object1, object2, deep) {
         if (
           object2Defined &&
           deep &&
-          typeof object1Value === "object" &&
+          typeof object1Value === 'object' &&
           object2.hasOwnProperty(property)
         ) {
           object2Value = object2[property];
-          if (typeof object2Value === "object") {
+          if (typeof object2Value === 'object') {
             result[property] = combine(object1Value, object2Value, deep);
           } else {
             result[property] = object1Value;

@@ -1,12 +1,12 @@
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import getImageFromTypedArray from "../../Core/getImageFromTypedArray.js";
-import CesiumMath from "../../Core/Math.js";
-import resizeImageToNextPowerOfTwo from "../../Core/resizeImageToNextPowerOfTwo.js";
-import PixelDatatype from "../../Renderer/PixelDatatype.js";
-import Texture from "../../Renderer/Texture.js";
-import TextureMinificationFilter from "../../Renderer/TextureMinificationFilter.js";
-import TextureWrap from "../../Renderer/TextureWrap.js";
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import getImageFromTypedArray from '../../Core/getImageFromTypedArray.js';
+import CesiumMath from '../../Core/Math.js';
+import resizeImageToNextPowerOfTwo from '../../Core/resizeImageToNextPowerOfTwo.js';
+import PixelDatatype from '../../Renderer/PixelDatatype.js';
+import Texture from '../../Renderer/Texture.js';
+import TextureMinificationFilter from '../../Renderer/TextureMinificationFilter.js';
+import TextureWrap from '../../Renderer/TextureWrap.js';
 
 /**
  * An object to manage loading textures
@@ -43,7 +43,7 @@ function fetchTexture2D(textureManager, textureId, textureUniform) {
       textureManager._loadedImages.push({
         id: textureId,
         image: image,
-        textureUniform: textureUniform,
+        textureUniform: textureUniform
       });
     })
     .catch(function () {
@@ -69,7 +69,7 @@ TextureManager.prototype.loadTexture2D = function (textureId, textureUniform) {
   if (defined(textureUniform.typedArray)) {
     this._loadedImages.push({
       id: textureId,
-      textureUniform: textureUniform,
+      textureUniform: textureUniform
     });
   } else {
     fetchTexture2D(this, textureId, textureUniform);
@@ -136,11 +136,11 @@ function getWebGL1Texture(textureUniform, image, context) {
   // typedArray is non-power-of-two but can't be resized. Warn and return raw texture (no mipmaps)
   if (needMipmap) {
     console.warn(
-      "Texture requires resizing for mipmaps but pixelDataType cannot be resized. The texture may be rendered incorrectly."
+      'Texture requires resizing for mipmaps but pixelDataType cannot be resized. The texture may be rendered incorrectly.'
     );
   } else if (samplerRepeats) {
     console.warn(
-      "Texture requires resizing for wrapping but pixelDataType cannot be resized. The texture may be rendered incorrectly."
+      'Texture requires resizing for wrapping but pixelDataType cannot be resized. The texture may be rendered incorrectly.'
     );
   }
   return getTextureFromTypedArray(textureUniform, context);
@@ -151,7 +151,7 @@ function samplerRequiresMipmap(sampler) {
     TextureMinificationFilter.NEAREST_MIPMAP_NEAREST,
     TextureMinificationFilter.NEAREST_MIPMAP_LINEAR,
     TextureMinificationFilter.LINEAR_MIPMAP_NEAREST,
-    TextureMinificationFilter.LINEAR_MIPMAP_LINEAR,
+    TextureMinificationFilter.LINEAR_MIPMAP_LINEAR
   ].includes(sampler.minificationFilter);
 }
 
@@ -162,7 +162,7 @@ function getTextureFromTypedArray(textureUniform, context) {
     width,
     height,
     typedArray: arrayBufferView,
-    sampler,
+    sampler
   } = textureUniform;
 
   return new Texture({
@@ -171,7 +171,7 @@ function getTextureFromTypedArray(textureUniform, context) {
     pixelDatatype,
     source: { arrayBufferView, width, height },
     sampler,
-    flipY: false,
+    flipY: false
   });
 }
 

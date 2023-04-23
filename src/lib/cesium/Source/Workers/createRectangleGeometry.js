@@ -1,5 +1,52 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6', './RuntimeError-c581ca93', './ComponentDatatype-4a60b8d6', './GeometryAttribute-a441ff32', './GeometryAttributes-7df9bef6', './GeometryInstance-97bd792f', './GeometryOffsetAttribute-ec11b721', './GeometryPipeline-a88e5bfc', './IndexDatatype-db156785', './PolygonPipeline-113e3161', './RectangleGeometryLibrary-1cc211f1', './VertexFormat-e46f29d6', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './WebGLConstants-7dccdc96', './AttributeCompression-4d18cc04', './EncodedCartesian3-d3e254ea', './IntersectionTests-68fbc42d', './Plane-e20fba8c', './EllipsoidRhumbLine-daebc75b'], (function (defaultValue, Matrix2, Transforms, RuntimeError, ComponentDatatype, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryOffsetAttribute, GeometryPipeline, IndexDatatype, PolygonPipeline, RectangleGeometryLibrary, VertexFormat, _commonjsHelpers3aae1032, combine, WebGLConstants, AttributeCompression, EncodedCartesian3, IntersectionTests, Plane, EllipsoidRhumbLine) { 'use strict';
+define([
+  './defaultValue-94c3e563',
+  './Matrix2-fc7e9822',
+  './Transforms-3ac41eb6',
+  './RuntimeError-c581ca93',
+  './ComponentDatatype-4a60b8d6',
+  './GeometryAttribute-a441ff32',
+  './GeometryAttributes-7df9bef6',
+  './GeometryInstance-97bd792f',
+  './GeometryOffsetAttribute-ec11b721',
+  './GeometryPipeline-a88e5bfc',
+  './IndexDatatype-db156785',
+  './PolygonPipeline-113e3161',
+  './RectangleGeometryLibrary-1cc211f1',
+  './VertexFormat-e46f29d6',
+  './_commonjsHelpers-3aae1032-f55dc0c4',
+  './combine-761d9c3f',
+  './WebGLConstants-7dccdc96',
+  './AttributeCompression-4d18cc04',
+  './EncodedCartesian3-d3e254ea',
+  './IntersectionTests-68fbc42d',
+  './Plane-e20fba8c',
+  './EllipsoidRhumbLine-daebc75b'
+], function (
+  defaultValue,
+  Matrix2,
+  Transforms,
+  RuntimeError,
+  ComponentDatatype,
+  GeometryAttribute,
+  GeometryAttributes,
+  GeometryInstance,
+  GeometryOffsetAttribute,
+  GeometryPipeline,
+  IndexDatatype,
+  PolygonPipeline,
+  RectangleGeometryLibrary,
+  VertexFormat,
+  _commonjsHelpers3aae1032,
+  combine,
+  WebGLConstants,
+  AttributeCompression,
+  EncodedCartesian3,
+  IntersectionTests,
+  Plane,
+  EllipsoidRhumbLine
+) {
+  'use strict';
 
   const positionScratch = new Matrix2.Cartesian3();
   const normalScratch = new Matrix2.Cartesian3();
@@ -13,33 +60,33 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
   function createAttributes(vertexFormat, attributes) {
     const geo = new GeometryAttribute.Geometry({
       attributes: new GeometryAttributes.GeometryAttributes(),
-      primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES,
+      primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES
     });
 
     geo.attributes.position = new GeometryAttribute.GeometryAttribute({
       componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
       componentsPerAttribute: 3,
-      values: attributes.positions,
+      values: attributes.positions
     });
     if (vertexFormat.normal) {
       geo.attributes.normal = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: attributes.normals,
+        values: attributes.normals
       });
     }
     if (vertexFormat.tangent) {
       geo.attributes.tangent = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: attributes.tangents,
+        values: attributes.tangents
       });
     }
     if (vertexFormat.bitangent) {
       geo.attributes.bitangent = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: attributes.bitangents,
+        values: attributes.bitangents
       });
     }
     return geo;
@@ -54,7 +101,9 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     const length = positions.length;
 
     const normals = vertexFormat.normal ? new Float32Array(length) : undefined;
-    const tangents = vertexFormat.tangent ? new Float32Array(length) : undefined;
+    const tangents = vertexFormat.tangent
+      ? new Float32Array(length)
+      : undefined;
     const bitangents = vertexFormat.bitangent
       ? new Float32Array(length)
       : undefined;
@@ -72,7 +121,11 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
         normal = ellipsoid.geodeticSurfaceNormal(p, normal);
         if (vertexFormat.tangent || vertexFormat.bitangent) {
           Matrix2.Cartesian3.cross(Matrix2.Cartesian3.UNIT_Z, normal, tangent);
-          Matrix2.Matrix3.multiplyByVector(tangentRotationMatrix, tangent, tangent);
+          Matrix2.Matrix3.multiplyByVector(
+            tangentRotationMatrix,
+            tangent,
+            tangent
+          );
           Matrix2.Cartesian3.normalize(tangent, tangent);
 
           if (vertexFormat.bitangent) {
@@ -105,7 +158,7 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       positions: positions,
       normals: normals,
       tangents: tangents,
-      bitangents: bitangents,
+      bitangents: bitangents
     });
   }
 
@@ -116,7 +169,9 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     const length = positions.length;
 
     const normals = vertexFormat.normal ? new Float32Array(length) : undefined;
-    const tangents = vertexFormat.tangent ? new Float32Array(length) : undefined;
+    const tangents = vertexFormat.tangent
+      ? new Float32Array(length)
+      : undefined;
     const bitangents = vertexFormat.bitangent
       ? new Float32Array(length)
       : undefined;
@@ -132,16 +187,33 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     if (vertexFormat.normal || vertexFormat.tangent || vertexFormat.bitangent) {
       for (let i = 0; i < length; i += 6) {
         const p = Matrix2.Cartesian3.fromArray(positions, i, positionScratch);
-        const p1 = Matrix2.Cartesian3.fromArray(positions, (i + 6) % length, v1Scratch);
+        const p1 = Matrix2.Cartesian3.fromArray(
+          positions,
+          (i + 6) % length,
+          v1Scratch
+        );
         if (recomputeNormal) {
-          const p2 = Matrix2.Cartesian3.fromArray(positions, (i + 3) % length, v2Scratch);
+          const p2 = Matrix2.Cartesian3.fromArray(
+            positions,
+            (i + 3) % length,
+            v2Scratch
+          );
           Matrix2.Cartesian3.subtract(p1, p, p1);
           Matrix2.Cartesian3.subtract(p2, p, p2);
-          normal = Matrix2.Cartesian3.normalize(Matrix2.Cartesian3.cross(p2, p1, normal), normal);
+          normal = Matrix2.Cartesian3.normalize(
+            Matrix2.Cartesian3.cross(p2, p1, normal),
+            normal
+          );
           recomputeNormal = false;
         }
 
-        if (Matrix2.Cartesian3.equalsEpsilon(p1, p, ComponentDatatype.CesiumMath.EPSILON10)) {
+        if (
+          Matrix2.Cartesian3.equalsEpsilon(
+            p1,
+            p,
+            ComponentDatatype.CesiumMath.EPSILON10
+          )
+        ) {
           // if we've reached a corner
           recomputeNormal = true;
         }
@@ -189,7 +261,7 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       positions: positions,
       normals: normals,
       tangents: tangents,
-      bitangents: bitangents,
+      bitangents: bitangents
     });
   }
 
@@ -338,7 +410,10 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     if (southCap) {
       indicesSize += 3 * (width - 1);
     }
-    const indices = IndexDatatype.IndexDatatype.createTypedArray(size, indicesSize);
+    const indices = IndexDatatype.IndexDatatype.createTypedArray(
+      size,
+      indicesSize
+    );
     let index = 0;
     let indicesIndex = 0;
     let i;
@@ -397,7 +472,7 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       geo.attributes.st = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 2,
-        values: textureCoordinates,
+        values: textureCoordinates
       });
     }
 
@@ -469,15 +544,18 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     const newLength = length * 2;
     const positions = new Float64Array(newLength);
     positions.set(topPositions);
-    const bottomPositions = PolygonPipeline.PolygonPipeline.scaleToGeodeticHeight(
-      topBottomGeo.attributes.position.values,
-      minHeight,
-      ellipsoid
-    );
+    const bottomPositions =
+      PolygonPipeline.PolygonPipeline.scaleToGeodeticHeight(
+        topBottomGeo.attributes.position.values,
+        minHeight,
+        ellipsoid
+      );
     positions.set(bottomPositions, length);
     topBottomGeo.attributes.position.values = positions;
 
-    const normals = vertexFormat.normal ? new Float32Array(newLength) : undefined;
+    const normals = vertexFormat.normal
+      ? new Float32Array(newLength)
+      : undefined;
     const tangents = vertexFormat.tangent
       ? new Float32Array(newLength)
       : undefined;
@@ -508,11 +586,12 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
         topNormals[i] = -topNormals[i];
       }
       extrudeNormals.set(topNormals, length); //only get normals for bottom layer that's going to be pushed down
-      topBottomGeo.attributes.extrudeDirection = new GeometryAttribute.GeometryAttribute({
-        componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
-        componentsPerAttribute: 3,
-        values: extrudeNormals,
-      });
+      topBottomGeo.attributes.extrudeDirection =
+        new GeometryAttribute.GeometryAttribute({
+          componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
+          componentsPerAttribute: 3,
+          values: extrudeNormals
+        });
     }
 
     let offsetValue;
@@ -520,19 +599,26 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     if (hasOffsets) {
       const size = (length / 3) * 2;
       let offsetAttribute = new Uint8Array(size);
-      if (offsetAttributeValue === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
+      if (
+        offsetAttributeValue ===
+        GeometryOffsetAttribute.GeometryOffsetAttribute.TOP
+      ) {
         offsetAttribute = offsetAttribute.fill(1, 0, size / 2);
       } else {
         offsetValue =
-          offsetAttributeValue === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
+          offsetAttributeValue ===
+          GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
+            ? 0
+            : 1;
         offsetAttribute = offsetAttribute.fill(offsetValue);
       }
 
-      topBottomGeo.attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
-        componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
-        componentsPerAttribute: 1,
-        values: offsetAttribute,
-      });
+      topBottomGeo.attributes.applyOffset =
+        new GeometryAttribute.GeometryAttribute({
+          componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
+          componentsPerAttribute: 1,
+          values: offsetAttribute
+        });
     }
 
     if (vertexFormat.tangent) {
@@ -602,15 +688,22 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     const wallExtrudeNormals = shadowVolume
       ? new Float32Array(wallCount * 3)
       : undefined;
-    let wallOffsetAttribute = hasOffsets ? new Uint8Array(wallCount) : undefined;
+    let wallOffsetAttribute = hasOffsets
+      ? new Uint8Array(wallCount)
+      : undefined;
     let wallTextures = vertexFormat.st
       ? new Float32Array(wallCount * 2)
       : undefined;
 
     const computeTopOffsets =
-      offsetAttributeValue === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP;
+      offsetAttributeValue ===
+      GeometryOffsetAttribute.GeometryOffsetAttribute.TOP;
     if (hasOffsets && !computeTopOffsets) {
-      offsetValue = offsetAttributeValue === GeometryOffsetAttribute.GeometryOffsetAttribute.ALL ? 1 : 0;
+      offsetValue =
+        offsetAttributeValue ===
+        GeometryOffsetAttribute.GeometryOffsetAttribute.ALL
+          ? 1
+          : 0;
       wallOffsetAttribute = wallOffsetAttribute.fill(offsetValue);
     }
 
@@ -822,21 +915,23 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       geo.attributes.st = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 2,
-        values: wallTextures,
+        values: wallTextures
       });
     }
     if (shadowVolume) {
-      geo.attributes.extrudeDirection = new GeometryAttribute.GeometryAttribute({
-        componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
-        componentsPerAttribute: 3,
-        values: wallExtrudeNormals,
-      });
+      geo.attributes.extrudeDirection = new GeometryAttribute.GeometryAttribute(
+        {
+          componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
+          componentsPerAttribute: 3,
+          values: wallExtrudeNormals
+        }
+      );
     }
     if (hasOffsets) {
       geo.attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,
-        values: wallOffsetAttribute,
+        values: wallOffsetAttribute
       });
     }
 
@@ -854,9 +949,23 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     for (i = 0; i < length - 1; i += 2) {
       upperLeft = i;
       upperRight = (upperLeft + 2) % length;
-      const p1 = Matrix2.Cartesian3.fromArray(wallPositions, upperLeft * 3, v1Scratch);
-      const p2 = Matrix2.Cartesian3.fromArray(wallPositions, upperRight * 3, v2Scratch);
-      if (Matrix2.Cartesian3.equalsEpsilon(p1, p2, ComponentDatatype.CesiumMath.EPSILON10)) {
+      const p1 = Matrix2.Cartesian3.fromArray(
+        wallPositions,
+        upperLeft * 3,
+        v1Scratch
+      );
+      const p2 = Matrix2.Cartesian3.fromArray(
+        wallPositions,
+        upperRight * 3,
+        v2Scratch
+      );
+      if (
+        Matrix2.Cartesian3.equalsEpsilon(
+          p1,
+          p2,
+          ComponentDatatype.CesiumMath.EPSILON10
+        )
+      ) {
         continue;
       }
       lowerLeft = (upperLeft + 1) % length;
@@ -873,11 +982,11 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
 
     geo = GeometryPipeline.GeometryPipeline.combineInstances([
       new GeometryInstance.GeometryInstance({
-        geometry: topBottomGeo,
+        geometry: topBottomGeo
       }),
       new GeometryInstance.GeometryInstance({
-        geometry: geo,
-      }),
+        geometry: geo
+      })
     ]);
 
     return geo[0];
@@ -887,23 +996,30 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     new Matrix2.Cartesian3(),
     new Matrix2.Cartesian3(),
     new Matrix2.Cartesian3(),
-    new Matrix2.Cartesian3(),
+    new Matrix2.Cartesian3()
   ];
   const nwScratch = new Matrix2.Cartographic();
   const stNwScratch = new Matrix2.Cartographic();
-  function computeRectangle(rectangle, granularity, rotation, ellipsoid, result) {
+  function computeRectangle(
+    rectangle,
+    granularity,
+    rotation,
+    ellipsoid,
+    result
+  ) {
     if (rotation === 0.0) {
       return Matrix2.Rectangle.clone(rectangle, result);
     }
 
-    const computedOptions = RectangleGeometryLibrary.RectangleGeometryLibrary.computeOptions(
-      rectangle,
-      granularity,
-      rotation,
-      0,
-      rectangleScratch,
-      nwScratch
-    );
+    const computedOptions =
+      RectangleGeometryLibrary.RectangleGeometryLibrary.computeOptions(
+        rectangle,
+        granularity,
+        rotation,
+        0,
+        rectangleScratch,
+        nwScratch
+      );
 
     const height = computedOptions.height;
     const width = computedOptions.width;
@@ -990,22 +1106,28 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
    * const geometry = Cesium.RectangleGeometry.createGeometry(rectangle);
    */
   function RectangleGeometry(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     const rectangle = options.rectangle;
 
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
     Matrix2.Rectangle.validate(rectangle);
     if (rectangle.north < rectangle.south) {
       throw new RuntimeError.DeveloperError(
-        "options.rectangle.north must be greater than or equal to options.rectangle.south"
+        'options.rectangle.north must be greater than or equal to options.rectangle.south'
       );
     }
     //>>includeEnd('debug');
 
     const height = defaultValue.defaultValue(options.height, 0.0);
-    const extrudedHeight = defaultValue.defaultValue(options.extrudedHeight, height);
+    const extrudedHeight = defaultValue.defaultValue(
+      options.extrudedHeight,
+      height
+    );
 
     this._rectangle = Matrix2.Rectangle.clone(rectangle);
     this._granularity = defaultValue.defaultValue(
@@ -1019,11 +1141,14 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     this._rotation = defaultValue.defaultValue(options.rotation, 0.0);
     this._stRotation = defaultValue.defaultValue(options.stRotation, 0.0);
     this._vertexFormat = VertexFormat.VertexFormat.clone(
-      defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT)
+      defaultValue.defaultValue(
+        options.vertexFormat,
+        VertexFormat.VertexFormat.DEFAULT
+      )
     );
     this._extrudedHeight = Math.min(height, extrudedHeight);
     this._shadowVolume = defaultValue.defaultValue(options.shadowVolume, false);
-    this._workerName = "createRectangleGeometry";
+    this._workerName = 'createRectangleGeometry';
     this._offsetAttribute = options.offsetAttribute;
     this._rotatedRectangle = undefined;
 
@@ -1051,8 +1176,8 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
    */
   RectangleGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -1072,13 +1197,18 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     array[startingIndex++] = value._stRotation;
     array[startingIndex++] = value._extrudedHeight;
     array[startingIndex++] = value._shadowVolume ? 1.0 : 0.0;
-    array[startingIndex] = defaultValue.defaultValue(value._offsetAttribute, -1);
+    array[startingIndex] = defaultValue.defaultValue(
+      value._offsetAttribute,
+      -1
+    );
 
     return array;
   };
 
   const scratchRectangle = new Matrix2.Rectangle();
-  const scratchEllipsoid = Matrix2.Ellipsoid.clone(Matrix2.Ellipsoid.UNIT_SPHERE);
+  const scratchEllipsoid = Matrix2.Ellipsoid.clone(
+    Matrix2.Ellipsoid.UNIT_SPHERE
+  );
   const scratchOptions = {
     rectangle: scratchRectangle,
     ellipsoid: scratchEllipsoid,
@@ -1089,7 +1219,7 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     stRotation: undefined,
     extrudedHeight: undefined,
     shadowVolume: undefined,
-    offsetAttribute: undefined,
+    offsetAttribute: undefined
   };
 
   /**
@@ -1102,15 +1232,23 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
    */
   RectangleGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
-    const rectangle = Matrix2.Rectangle.unpack(array, startingIndex, scratchRectangle);
+    const rectangle = Matrix2.Rectangle.unpack(
+      array,
+      startingIndex,
+      scratchRectangle
+    );
     startingIndex += Matrix2.Rectangle.packedLength;
 
-    const ellipsoid = Matrix2.Ellipsoid.unpack(array, startingIndex, scratchEllipsoid);
+    const ellipsoid = Matrix2.Ellipsoid.unpack(
+      array,
+      startingIndex,
+      scratchEllipsoid
+    );
     startingIndex += Matrix2.Ellipsoid.packedLength;
 
     const vertexFormat = VertexFormat.VertexFormat.unpack(
@@ -1143,7 +1281,10 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
 
     result._rectangle = Matrix2.Rectangle.clone(rectangle, result._rectangle);
     result._ellipsoid = Matrix2.Ellipsoid.clone(ellipsoid, result._ellipsoid);
-    result._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat, result._vertexFormat);
+    result._vertexFormat = VertexFormat.VertexFormat.clone(
+      vertexFormat,
+      result._vertexFormat
+    );
     result._granularity = granularity;
     result._surfaceHeight = surfaceHeight;
     result._rotation = rotation;
@@ -1169,16 +1310,19 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
    * @returns {Rectangle} The result rectangle
    */
   RectangleGeometry.computeRectangle = function (options, result) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     const rectangle = options.rectangle;
 
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
     Matrix2.Rectangle.validate(rectangle);
     if (rectangle.north < rectangle.south) {
       throw new RuntimeError.DeveloperError(
-        "options.rectangle.north must be greater than or equal to options.rectangle.south"
+        'options.rectangle.north must be greater than or equal to options.rectangle.south'
       );
     }
     //>>includeEnd('debug');
@@ -1187,10 +1331,19 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       options.granularity,
       ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
     );
-    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    const ellipsoid = defaultValue.defaultValue(
+      options.ellipsoid,
+      Matrix2.Ellipsoid.WGS84
+    );
     const rotation = defaultValue.defaultValue(options.rotation, 0.0);
 
-    return computeRectangle(rectangle, granularity, rotation, ellipsoid, result);
+    return computeRectangle(
+      rectangle,
+      granularity,
+      rotation,
+      ellipsoid,
+      result
+    );
   };
 
   const tangentRotationMatrixScratch = new Matrix2.Matrix3();
@@ -1226,20 +1379,24 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     const stRotation = rectangleGeometry._stRotation;
     const vertexFormat = rectangleGeometry._vertexFormat;
 
-    const computedOptions = RectangleGeometryLibrary.RectangleGeometryLibrary.computeOptions(
-      rectangle,
-      rectangleGeometry._granularity,
-      rotation,
-      stRotation,
-      rectangleScratch,
-      nwScratch,
-      stNwScratch
-    );
+    const computedOptions =
+      RectangleGeometryLibrary.RectangleGeometryLibrary.computeOptions(
+        rectangle,
+        rectangleGeometry._granularity,
+        rotation,
+        stRotation,
+        rectangleScratch,
+        nwScratch,
+        stNwScratch
+      );
 
     const tangentRotationMatrix = tangentRotationMatrixScratch;
     if (stRotation !== 0 || rotation !== 0) {
       const center = Matrix2.Rectangle.center(rectangle, centerScratch);
-      const axis = ellipsoid.geodeticSurfaceNormalCartographic(center, v1Scratch);
+      const axis = ellipsoid.geodeticSurfaceNormalCartographic(
+        center,
+        v1Scratch
+      );
       Transforms.Quaternion.fromAxisAngle(axis, -stRotation, quaternionScratch);
       Matrix2.Matrix3.fromQuaternion(quaternionScratch, tangentRotationMatrix);
     } else {
@@ -1279,25 +1436,29 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       boundingSphere = Transforms.BoundingSphere.union(topBS, bottomBS);
     } else {
       geometry = constructRectangle(rectangleGeometry, computedOptions);
-      geometry.attributes.position.values = PolygonPipeline.PolygonPipeline.scaleToGeodeticHeight(
-        geometry.attributes.position.values,
-        surfaceHeight,
-        ellipsoid,
-        false
-      );
+      geometry.attributes.position.values =
+        PolygonPipeline.PolygonPipeline.scaleToGeodeticHeight(
+          geometry.attributes.position.values,
+          surfaceHeight,
+          ellipsoid,
+          false
+        );
 
       if (defaultValue.defined(rectangleGeometry._offsetAttribute)) {
         const length = geometry.attributes.position.values.length;
         const offsetValue =
-          rectangleGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
+          rectangleGeometry._offsetAttribute ===
+          GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
             ? 0
             : 1;
         const applyOffset = new Uint8Array(length / 3).fill(offsetValue);
-        geometry.attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
-          componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
-          componentsPerAttribute: 1,
-          values: applyOffset,
-        });
+        geometry.attributes.applyOffset =
+          new GeometryAttribute.GeometryAttribute({
+            componentDatatype:
+              ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
+            componentsPerAttribute: 1,
+            values: applyOffset
+          });
       }
 
       boundingSphere = Transforms.BoundingSphere.fromRectangle3D(
@@ -1316,7 +1477,7 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       indices: geometry.indices,
       primitiveType: geometry.primitiveType,
       boundingSphere: boundingSphere,
-      offsetAttribute: rectangleGeometry._offsetAttribute,
+      offsetAttribute: rectangleGeometry._offsetAttribute
     });
   };
 
@@ -1343,12 +1504,16 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       extrudedHeight: maxHeight,
       height: minHeight,
       vertexFormat: VertexFormat.VertexFormat.POSITION_ONLY,
-      shadowVolume: true,
+      shadowVolume: true
     });
   };
 
   const unrotatedTextureRectangleScratch = new Matrix2.Rectangle();
-  const points2DScratch = [new Matrix2.Cartesian2(), new Matrix2.Cartesian2(), new Matrix2.Cartesian2()];
+  const points2DScratch = [
+    new Matrix2.Cartesian2(),
+    new Matrix2.Cartesian2(),
+    new Matrix2.Cartesian2()
+  ];
   const rotation2DScratch = new Matrix2.Matrix2();
   const rectangleCenterScratch = new Matrix2.Cartographic();
 
@@ -1365,7 +1530,8 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     const ellipsoid = rectangleGeometry._ellipsoid;
 
     // Rotate to align the texture coordinates with ENU
-    const rotation = rectangleGeometry._rotation - rectangleGeometry._stRotation;
+    const rotation =
+      rectangleGeometry._rotation - rectangleGeometry._stRotation;
 
     const unrotatedTextureRectangle = computeRectangle(
       rectangle,
@@ -1412,7 +1578,8 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       point2D.y += boundingRectangleCenter.latitude;
 
       // Convert point into east-north texture coordinate space
-      point2D.x = (point2D.x - boundingRectangle.west) / boundingRectangle.width;
+      point2D.x =
+        (point2D.x - boundingRectangle.west) / boundingRectangle.width;
       point2D.y =
         (point2D.y - boundingRectangle.south) / boundingRectangle.height;
     }
@@ -1442,7 +1609,7 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
           );
         }
         return this._rotatedRectangle;
-      },
+      }
     },
     /**
      * For remapping texture coordinates when rendering RectangleGeometries as GroundPrimitives.
@@ -1454,24 +1621,26 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     textureCoordinateRotationPoints: {
       get: function () {
         if (!defaultValue.defined(this._textureCoordinateRotationPoints)) {
-          this._textureCoordinateRotationPoints = textureCoordinateRotationPoints(
-            this
-          );
+          this._textureCoordinateRotationPoints =
+            textureCoordinateRotationPoints(this);
         }
         return this._textureCoordinateRotationPoints;
-      },
-    },
+      }
+    }
   });
 
   function createRectangleGeometry(rectangleGeometry, offset) {
     if (defaultValue.defined(offset)) {
       rectangleGeometry = RectangleGeometry.unpack(rectangleGeometry, offset);
     }
-    rectangleGeometry._ellipsoid = Matrix2.Ellipsoid.clone(rectangleGeometry._ellipsoid);
-    rectangleGeometry._rectangle = Matrix2.Rectangle.clone(rectangleGeometry._rectangle);
+    rectangleGeometry._ellipsoid = Matrix2.Ellipsoid.clone(
+      rectangleGeometry._ellipsoid
+    );
+    rectangleGeometry._rectangle = Matrix2.Rectangle.clone(
+      rectangleGeometry._rectangle
+    );
     return RectangleGeometry.createGeometry(rectangleGeometry);
   }
 
   return createRectangleGeometry;
-
-}));
+});

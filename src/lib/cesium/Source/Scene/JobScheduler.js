@@ -1,7 +1,7 @@
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import getTimestamp from "../Core/getTimestamp.js";
-import JobType from "./JobType.js";
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import getTimestamp from '../Core/getTimestamp.js';
+import JobType from './JobType.js';
 
 /**
  *
@@ -41,8 +41,8 @@ Object.defineProperties(JobTypeBudget.prototype, {
   total: {
     get: function () {
       return this._total;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -68,7 +68,7 @@ function JobScheduler(budgets) {
   //>>includeStart('debug', pragmas.debug);
   if (defined(budgets) && budgets.length !== JobType.NUMBER_OF_JOB_TYPES) {
     throw new DeveloperError(
-      "A budget must be specified for each job type; budgets.length should equal JobType.NUMBER_OF_JOB_TYPES."
+      'A budget must be specified for each job type; budgets.length should equal JobType.NUMBER_OF_JOB_TYPES.'
     );
   }
   //>>includeEnd('debug');
@@ -112,8 +112,8 @@ Object.defineProperties(JobScheduler.prototype, {
   totalBudget: {
     get: function () {
       return this._totalBudget;
-    },
-  },
+    }
+  }
 });
 
 JobScheduler.prototype.disableThisFrame = function () {

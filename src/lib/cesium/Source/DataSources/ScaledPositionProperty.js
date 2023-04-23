@@ -1,9 +1,9 @@
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import Event from "../Core/Event.js";
-import ReferenceFrame from "../Core/ReferenceFrame.js";
-import Property from "./Property.js";
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import Event from '../Core/Event.js';
+import ReferenceFrame from '../Core/ReferenceFrame.js';
+import Property from './Property.js';
 
 /**
  * This is a temporary class for scaling position properties to the WGS84 surface.
@@ -21,20 +21,20 @@ Object.defineProperties(ScaledPositionProperty.prototype, {
   isConstant: {
     get: function () {
       return Property.isConstant(this._value);
-    },
+    }
   },
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   referenceFrame: {
     get: function () {
       return defined(this._value)
         ? this._value.referenceFrame
         : ReferenceFrame.FIXED;
-    },
-  },
+    }
+  }
 });
 
 ScaledPositionProperty.prototype.getValue = function (time, result) {
@@ -67,10 +67,10 @@ ScaledPositionProperty.prototype.getValueInReferenceFrame = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required.");
+    throw new DeveloperError('time is required.');
   }
   if (!defined(referenceFrame)) {
-    throw new DeveloperError("referenceFrame is required.");
+    throw new DeveloperError('referenceFrame is required.');
   }
   //>>includeEnd('debug');
 

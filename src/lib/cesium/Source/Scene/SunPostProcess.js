@@ -1,20 +1,20 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import Transforms from "../Core/Transforms.js";
-import AdditiveBlend from "../Shaders/PostProcessStages/AdditiveBlend.js";
-import BrightPass from "../Shaders/PostProcessStages/BrightPass.js";
-import GaussianBlur1D from "../Shaders/PostProcessStages/GaussianBlur1D.js";
-import PassThrough from "../Shaders/PostProcessStages/PassThrough.js";
-import PostProcessStage from "./PostProcessStage.js";
-import PostProcessStageComposite from "./PostProcessStageComposite.js";
-import PostProcessStageSampleMode from "./PostProcessStageSampleMode.js";
-import PostProcessStageTextureCache from "./PostProcessStageTextureCache.js";
-import SceneFramebuffer from "./SceneFramebuffer.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import Transforms from '../Core/Transforms.js';
+import AdditiveBlend from '../Shaders/PostProcessStages/AdditiveBlend.js';
+import BrightPass from '../Shaders/PostProcessStages/BrightPass.js';
+import GaussianBlur1D from '../Shaders/PostProcessStages/GaussianBlur1D.js';
+import PassThrough from '../Shaders/PostProcessStages/PassThrough.js';
+import PostProcessStage from './PostProcessStage.js';
+import PostProcessStageComposite from './PostProcessStageComposite.js';
+import PostProcessStageSampleMode from './PostProcessStageSampleMode.js';
+import PostProcessStageTextureCache from './PostProcessStageTextureCache.js';
+import SceneFramebuffer from './SceneFramebuffer.js';
 
 function SunPostProcess() {
   this._sceneFramebuffer = new SceneFramebuffer();
@@ -26,7 +26,7 @@ function SunPostProcess() {
     fragmentShader: PassThrough,
     textureScale: scale,
     forcePowerOfTwo: true,
-    sampleMode: PostProcessStageSampleMode.LINEAR,
+    sampleMode: PostProcessStageSampleMode.LINEAR
   });
 
   const brightPass = (stages[1] = new PostProcessStage({
@@ -34,10 +34,10 @@ function SunPostProcess() {
     uniforms: {
       avgLuminance: 0.5, // A guess at the average luminance across the entire scene
       threshold: 0.25,
-      offset: 0.1,
+      offset: 0.1
     },
     textureScale: scale,
-    forcePowerOfTwo: true,
+    forcePowerOfTwo: true
   }));
 
   const that = this;
@@ -59,10 +59,10 @@ function SunPostProcess() {
       sigma: function () {
         return that._sigma;
       },
-      direction: 0.0,
+      direction: 0.0
     },
     textureScale: scale,
-    forcePowerOfTwo: true,
+    forcePowerOfTwo: true
   });
 
   stages[3] = new PostProcessStage({
@@ -79,15 +79,15 @@ function SunPostProcess() {
       sigma: function () {
         return that._sigma;
       },
-      direction: 1.0,
+      direction: 1.0
     },
     textureScale: scale,
-    forcePowerOfTwo: true,
+    forcePowerOfTwo: true
   });
 
   stages[4] = new PostProcessStage({
     fragmentShader: PassThrough,
-    sampleMode: PostProcessStageSampleMode.LINEAR,
+    sampleMode: PostProcessStageSampleMode.LINEAR
   });
 
   this._uCenter = new Cartesian2();
@@ -104,12 +104,12 @@ function SunPostProcess() {
       },
       colorTexture2: function () {
         return that._sceneFramebuffer.framebuffer.getColorTexture(0);
-      },
-    },
+      }
+    }
   });
 
   this._stages = new PostProcessStageComposite({
-    stages: stages,
+    stages: stages
   });
 
   const textureCache = new PostProcessStageTextureCache(this);
@@ -266,9 +266,9 @@ SunPostProcess.prototype.copy = function (context, framebuffer) {
       uniformMap: {
         colorTexture: function () {
           return that._stages.get(that._stages.length - 1).outputTexture;
-        },
+        }
       },
-      owner: this,
+      owner: this
     });
   }
 

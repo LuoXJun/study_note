@@ -1,7 +1,7 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import CesiumMath from "../Core/Math.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import CesiumMath from '../Core/Math.js';
 
 /**
  * Represents a {@link Packable} number that always interpolates values
@@ -48,11 +48,11 @@ const Rotation = {
   pack: function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
     if (!defined(value)) {
-      throw new DeveloperError("value is required");
+      throw new DeveloperError('value is required');
     }
 
     if (!defined(array)) {
-      throw new DeveloperError("array is required");
+      throw new DeveloperError('array is required');
     }
     //>>includeEnd('debug');
 
@@ -73,7 +73,7 @@ const Rotation = {
   unpack: function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
     if (!defined(array)) {
-      throw new DeveloperError("array is required");
+      throw new DeveloperError('array is required');
     }
     //>>includeEnd('debug');
 
@@ -97,7 +97,7 @@ const Rotation = {
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defined(packedArray)) {
-      throw new DeveloperError("packedArray is required");
+      throw new DeveloperError('packedArray is required');
     }
     //>>includeEnd('debug');
 
@@ -139,10 +139,10 @@ const Rotation = {
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defined(array)) {
-      throw new DeveloperError("array is required");
+      throw new DeveloperError('array is required');
     }
     if (!defined(sourceArray)) {
-      throw new DeveloperError("sourceArray is required");
+      throw new DeveloperError('sourceArray is required');
     }
     //>>includeEnd('debug');
 
@@ -151,6 +151,6 @@ const Rotation = {
       return result + CesiumMath.TWO_PI;
     }
     return result;
-  },
+  }
 };
 export default Rotation;

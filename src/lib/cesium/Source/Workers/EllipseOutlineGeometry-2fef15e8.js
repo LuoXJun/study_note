@@ -1,5 +1,30 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDatatype-4a60b8d6', './defaultValue-94c3e563', './RuntimeError-c581ca93', './EllipseGeometryLibrary-d3fe9678', './GeometryAttribute-a441ff32', './GeometryAttributes-7df9bef6', './GeometryOffsetAttribute-ec11b721', './IndexDatatype-db156785'], (function (exports, Transforms, Matrix2, ComponentDatatype, defaultValue, RuntimeError, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype) { 'use strict';
+define([
+  'exports',
+  './Transforms-3ac41eb6',
+  './Matrix2-fc7e9822',
+  './ComponentDatatype-4a60b8d6',
+  './defaultValue-94c3e563',
+  './RuntimeError-c581ca93',
+  './EllipseGeometryLibrary-d3fe9678',
+  './GeometryAttribute-a441ff32',
+  './GeometryAttributes-7df9bef6',
+  './GeometryOffsetAttribute-ec11b721',
+  './IndexDatatype-db156785'
+], function (
+  exports,
+  Transforms,
+  Matrix2,
+  ComponentDatatype,
+  defaultValue,
+  RuntimeError,
+  EllipseGeometryLibrary,
+  GeometryAttribute,
+  GeometryAttributes,
+  GeometryOffsetAttribute,
+  IndexDatatype
+) {
+  'use strict';
 
   const scratchCartesian1 = new Matrix2.Cartesian3();
   let boundingSphereCenter = new Matrix2.Cartesian3();
@@ -20,26 +45,31 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDa
       boundingSphereCenter,
       options.semiMajorAxis
     );
-    const positions = EllipseGeometryLibrary.EllipseGeometryLibrary.computeEllipsePositions(
-      options,
-      false,
-      true
-    ).outerPositions;
+    const positions =
+      EllipseGeometryLibrary.EllipseGeometryLibrary.computeEllipsePositions(
+        options,
+        false,
+        true
+      ).outerPositions;
 
     const attributes = new GeometryAttributes.GeometryAttributes({
       position: new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: EllipseGeometryLibrary.EllipseGeometryLibrary.raisePositionsToHeight(
-          positions,
-          options,
-          false
-        ),
-      }),
+        values:
+          EllipseGeometryLibrary.EllipseGeometryLibrary.raisePositionsToHeight(
+            positions,
+            options,
+            false
+          )
+      })
     });
 
     const length = positions.length / 3;
-    const indices = IndexDatatype.IndexDatatype.createTypedArray(length, length * 2);
+    const indices = IndexDatatype.IndexDatatype.createTypedArray(
+      length,
+      length * 2
+    );
     let index = 0;
     for (let i = 0; i < length; ++i) {
       indices[index++] = i;
@@ -49,7 +79,7 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDa
     return {
       boundingSphere: boundingSphere,
       attributes: attributes,
-      indices: indices,
+      indices: indices
     };
   }
 
@@ -83,21 +113,23 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDa
     );
     bottomBoundingSphere.radius = semiMajorAxis;
 
-    let positions = EllipseGeometryLibrary.EllipseGeometryLibrary.computeEllipsePositions(
-      options,
-      false,
-      true
-    ).outerPositions;
+    let positions =
+      EllipseGeometryLibrary.EllipseGeometryLibrary.computeEllipsePositions(
+        options,
+        false,
+        true
+      ).outerPositions;
     const attributes = new GeometryAttributes.GeometryAttributes({
       position: new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: EllipseGeometryLibrary.EllipseGeometryLibrary.raisePositionsToHeight(
-          positions,
-          options,
-          true
-        ),
-      }),
+        values:
+          EllipseGeometryLibrary.EllipseGeometryLibrary.raisePositionsToHeight(
+            positions,
+            options,
+            true
+          )
+      })
     });
 
     positions = attributes.position.values;
@@ -109,22 +141,31 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDa
 
     if (defaultValue.defined(options.offsetAttribute)) {
       let applyOffset = new Uint8Array(length);
-      if (options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
+      if (
+        options.offsetAttribute ===
+        GeometryOffsetAttribute.GeometryOffsetAttribute.TOP
+      ) {
         applyOffset = applyOffset.fill(1, 0, length / 2);
       } else {
         const offsetValue =
-          options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
+          options.offsetAttribute ===
+          GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
+            ? 0
+            : 1;
         applyOffset = applyOffset.fill(offsetValue);
       }
 
       attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,
-        values: applyOffset,
+        values: applyOffset
       });
     }
 
-    let numberOfVerticalLines = defaultValue.defaultValue(options.numberOfVerticalLines, 16);
+    let numberOfVerticalLines = defaultValue.defaultValue(
+      options.numberOfVerticalLines,
+      16
+    );
     numberOfVerticalLines = ComponentDatatype.CesiumMath.clamp(
       numberOfVerticalLines,
       0,
@@ -161,7 +202,7 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDa
     return {
       boundingSphere: boundingSphere,
       attributes: attributes,
-      indices: indices,
+      indices: indices
     };
   }
 
@@ -198,10 +239,16 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDa
    * const geometry = Cesium.EllipseOutlineGeometry.createGeometry(ellipse);
    */
   function EllipseOutlineGeometry(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     const center = options.center;
-    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    const ellipsoid = defaultValue.defaultValue(
+      options.ellipsoid,
+      Matrix2.Ellipsoid.WGS84
+    );
     const semiMajorAxis = options.semiMajorAxis;
     const semiMinorAxis = options.semiMinorAxis;
     const granularity = defaultValue.defaultValue(
@@ -211,26 +258,31 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDa
 
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(center)) {
-      throw new RuntimeError.DeveloperError("center is required.");
+      throw new RuntimeError.DeveloperError('center is required.');
     }
     if (!defaultValue.defined(semiMajorAxis)) {
-      throw new RuntimeError.DeveloperError("semiMajorAxis is required.");
+      throw new RuntimeError.DeveloperError('semiMajorAxis is required.');
     }
     if (!defaultValue.defined(semiMinorAxis)) {
-      throw new RuntimeError.DeveloperError("semiMinorAxis is required.");
+      throw new RuntimeError.DeveloperError('semiMinorAxis is required.');
     }
     if (semiMajorAxis < semiMinorAxis) {
       throw new RuntimeError.DeveloperError(
-        "semiMajorAxis must be greater than or equal to the semiMinorAxis."
+        'semiMajorAxis must be greater than or equal to the semiMinorAxis.'
       );
     }
     if (granularity <= 0.0) {
-      throw new RuntimeError.DeveloperError("granularity must be greater than zero.");
+      throw new RuntimeError.DeveloperError(
+        'granularity must be greater than zero.'
+      );
     }
     //>>includeEnd('debug');
 
     const height = defaultValue.defaultValue(options.height, 0.0);
-    const extrudedHeight = defaultValue.defaultValue(options.extrudedHeight, height);
+    const extrudedHeight = defaultValue.defaultValue(
+      options.extrudedHeight,
+      height
+    );
 
     this._center = Matrix2.Cartesian3.clone(center);
     this._semiMajorAxis = semiMajorAxis;
@@ -245,7 +297,7 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDa
       0
     );
     this._offsetAttribute = options.offsetAttribute;
-    this._workerName = "createEllipseOutlineGeometry";
+    this._workerName = 'createEllipseOutlineGeometry';
   }
 
   /**
@@ -267,10 +319,10 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDa
   EllipseOutlineGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(value)) {
-      throw new RuntimeError.DeveloperError("value is required");
+      throw new RuntimeError.DeveloperError('value is required');
     }
     if (!defaultValue.defined(array)) {
-      throw new RuntimeError.DeveloperError("array is required");
+      throw new RuntimeError.DeveloperError('array is required');
     }
     //>>includeEnd('debug');
 
@@ -289,7 +341,10 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDa
     array[startingIndex++] = value._granularity;
     array[startingIndex++] = value._extrudedHeight;
     array[startingIndex++] = value._numberOfVerticalLines;
-    array[startingIndex] = defaultValue.defaultValue(value._offsetAttribute, -1);
+    array[startingIndex] = defaultValue.defaultValue(
+      value._offsetAttribute,
+      -1
+    );
 
     return array;
   };
@@ -306,7 +361,7 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDa
     granularity: undefined,
     extrudedHeight: undefined,
     numberOfVerticalLines: undefined,
-    offsetAttribute: undefined,
+    offsetAttribute: undefined
   };
 
   /**
@@ -320,16 +375,24 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDa
   EllipseOutlineGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(array)) {
-      throw new RuntimeError.DeveloperError("array is required");
+      throw new RuntimeError.DeveloperError('array is required');
     }
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
-    const center = Matrix2.Cartesian3.unpack(array, startingIndex, scratchCenter);
+    const center = Matrix2.Cartesian3.unpack(
+      array,
+      startingIndex,
+      scratchCenter
+    );
     startingIndex += Matrix2.Cartesian3.packedLength;
 
-    const ellipsoid = Matrix2.Ellipsoid.unpack(array, startingIndex, scratchEllipsoid);
+    const ellipsoid = Matrix2.Ellipsoid.unpack(
+      array,
+      startingIndex,
+      scratchEllipsoid
+    );
     startingIndex += Matrix2.Ellipsoid.packedLength;
 
     const semiMajorAxis = array[startingIndex++];
@@ -405,7 +468,7 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDa
       rotation: ellipseGeometry._rotation,
       height: height,
       granularity: ellipseGeometry._granularity,
-      numberOfVerticalLines: ellipseGeometry._numberOfVerticalLines,
+      numberOfVerticalLines: ellipseGeometry._numberOfVerticalLines
     };
     let geometry;
     if (extrude) {
@@ -418,15 +481,18 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDa
       if (defaultValue.defined(ellipseGeometry._offsetAttribute)) {
         const length = geometry.attributes.position.values.length;
         const offsetValue =
-          ellipseGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
+          ellipseGeometry._offsetAttribute ===
+          GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
             ? 0
             : 1;
         const applyOffset = new Uint8Array(length / 3).fill(offsetValue);
-        geometry.attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
-          componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
-          componentsPerAttribute: 1,
-          values: applyOffset,
-        });
+        geometry.attributes.applyOffset =
+          new GeometryAttribute.GeometryAttribute({
+            componentDatatype:
+              ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
+            componentsPerAttribute: 1,
+            values: applyOffset
+          });
       }
     }
 
@@ -435,10 +501,9 @@ define(['exports', './Transforms-3ac41eb6', './Matrix2-fc7e9822', './ComponentDa
       indices: geometry.indices,
       primitiveType: GeometryAttribute.PrimitiveType.LINES,
       boundingSphere: geometry.boundingSphere,
-      offsetAttribute: ellipseGeometry._offsetAttribute,
+      offsetAttribute: ellipseGeometry._offsetAttribute
     });
   };
 
   exports.EllipseOutlineGeometry = EllipseOutlineGeometry;
-
-}));
+});

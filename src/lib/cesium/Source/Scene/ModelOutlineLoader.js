@@ -1,12 +1,12 @@
-import defined from "../Core/defined.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import ContextLimits from "../Renderer/ContextLimits.js";
-import Sampler from "../Renderer/Sampler.js";
-import Texture from "../Renderer/Texture.js";
-import TextureMagnificationFilter from "../Renderer/TextureMagnificationFilter.js";
-import TextureMinificationFilter from "../Renderer/TextureMinificationFilter.js";
-import TextureWrap from "../Renderer/TextureWrap.js";
-import ForEach from "./GltfPipeline/ForEach.js";
+import defined from '../Core/defined.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import ContextLimits from '../Renderer/ContextLimits.js';
+import Sampler from '../Renderer/Sampler.js';
+import Texture from '../Renderer/Texture.js';
+import TextureMagnificationFilter from '../Renderer/TextureMagnificationFilter.js';
+import TextureMinificationFilter from '../Renderer/TextureMinificationFilter.js';
+import TextureWrap from '../Renderer/TextureWrap.js';
+import ForEach from './GltfPipeline/ForEach.js';
 
 // glTF does not allow an index value of 65535 because this is the primitive
 // restart value in some APIs.
@@ -123,7 +123,7 @@ ModelOutlineLoader.createTexture = function (model, context) {
     context: context,
     source: {
       arrayBufferView: levelZero,
-      mipLevels: mipLevels,
+      mipLevels: mipLevels
     },
     width: maxSize,
     height: 1,
@@ -132,8 +132,8 @@ ModelOutlineLoader.createTexture = function (model, context) {
       wrapS: TextureWrap.CLAMP_TO_EDGE,
       wrapT: TextureWrap.CLAMP_TO_EDGE,
       minificationFilter: TextureMinificationFilter.LINEAR_MIPMAP_LINEAR,
-      magnificationFilter: TextureMagnificationFilter.LINEAR,
-    }),
+      magnificationFilter: TextureMagnificationFilter.LINEAR
+    })
   });
 
   cache.outlineTexture = texture;
@@ -289,19 +289,14 @@ function addOutline(
             byteLength: triangleIndices.byteLength,
             extras: {
               _pipeline: {
-                source: triangleIndices.buffer,
-              },
-            },
+                source: triangleIndices.buffer
+              }
+            }
           }) - 1;
         triangleIndexBufferViewGltf.byteLength = triangleIndices.byteLength;
         triangleIndexBufferViewGltf.byteOffset = 0;
-        model._loadResources.buffers[
-          triangleIndexBufferViewGltf.buffer
-        ] = new Uint8Array(
-          triangleIndices.buffer,
-          0,
-          triangleIndices.byteLength
-        );
+        model._loadResources.buffers[triangleIndexBufferViewGltf.buffer] =
+          new Uint8Array(triangleIndices.buffer, 0, triangleIndices.byteLength);
 
         // The index componentType is also squirreled away in ModelLoadResources.
         // Hackily update it, or else we'll end up creating the wrong type
@@ -586,9 +581,9 @@ function updateBufferViewsWithNewVertices(model, bufferViews) {
         byteLength: destData.byteLength,
         extras: {
           _pipeline: {
-            source: destData.buffer,
-          },
-        },
+            source: destData.buffer
+          }
+        }
       }) - 1;
 
     bufferView.buffer = bufferId;
@@ -610,9 +605,9 @@ function updateBufferViewsWithNewVertices(model, bufferViews) {
           byteLength: outlineCoordinateBuffer.byteLength,
           extras: {
             _pipeline: {
-              source: outlineCoordinateBuffer.buffer,
-            },
-          },
+              source: outlineCoordinateBuffer.buffer
+            }
+          }
         }) - 1;
       loadResources.buffers[bufferIndex] = new Uint8Array(
         outlineCoordinateBuffer.buffer,
@@ -626,7 +621,7 @@ function updateBufferViewsWithNewVertices(model, bufferViews) {
           byteLength: outlineCoordinateBuffer.byteLength,
           byteOffset: 0,
           byteStride: 3 * Float32Array.BYTES_PER_ELEMENT,
-          target: 34962,
+          target: 34962
         }) - 1;
 
       const accessorIndex =
@@ -635,9 +630,9 @@ function updateBufferViewsWithNewVertices(model, bufferViews) {
           byteOffset: 0,
           componentType: 5126,
           count: outlineCoordinateBuffer.length / 3,
-          type: "VEC3",
+          type: 'VEC3',
           min: [0.0, 0.0, 0.0],
-          max: [1.0, 1.0, 1.0],
+          max: [1.0, 1.0, 1.0]
         }) - 1;
 
       const primitives = vertexNumberingScope.primitives;
@@ -724,31 +719,32 @@ function getVertexNumberingScope(model, primitive) {
     }
 
     if (!defined(bufferView.extras._pipeline.vertexNumberingScope)) {
-      bufferView.extras._pipeline.vertexNumberingScope = vertexNumberingScope || {
-        // Each element in this array is:
-        // a) undefined, if the vertex at this index has no copies
-        // b) the index of the copy.
-        vertexCopies: [],
+      bufferView.extras._pipeline.vertexNumberingScope =
+        vertexNumberingScope || {
+          // Each element in this array is:
+          // a) undefined, if the vertex at this index has no copies
+          // b) the index of the copy.
+          vertexCopies: [],
 
-        // Extra vertices appended after the ones originally included in the model.
-        // Each element is the index of the vertex that this one is a copy of.
-        extraVertices: [],
+          // Extra vertices appended after the ones originally included in the model.
+          // Each element is the index of the vertex that this one is a copy of.
+          extraVertices: [],
 
-        // The texture coordinates used for outlining, three floats per vertex.
-        outlineCoordinates: [],
+          // The texture coordinates used for outlining, three floats per vertex.
+          outlineCoordinates: [],
 
-        // The IDs of accessors that use this vertex numbering.
-        accessors: [],
+          // The IDs of accessors that use this vertex numbering.
+          accessors: [],
 
-        // The IDs of bufferViews that use this vertex numbering.
-        bufferViews: [],
+          // The IDs of bufferViews that use this vertex numbering.
+          bufferViews: [],
 
-        // The primitives that use this vertex numbering.
-        primitives: [],
+          // The primitives that use this vertex numbering.
+          primitives: [],
 
-        // True if the buffer for the outlines has already been created.
-        createdOutlines: false,
-      };
+          // True if the buffer for the outlines has already been created.
+          createdOutlines: false
+        };
     } else if (
       vertexNumberingScope !== undefined &&
       bufferView.extras._pipeline.vertexNumberingScope !== vertexNumberingScope

@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "#ifdef USE_CLIPPING_PLANES_FLOAT_TEXTURE\n\
+export default '#ifdef USE_CLIPPING_PLANES_FLOAT_TEXTURE\n\
 vec4 getClippingPlane(\n\
     highp sampler2D packedClippingPlanes,\n\
     int clippingPlaneNumber,\n\
@@ -87,4 +87,4 @@ void modelClippingPlanesStage(inout vec4 color)\n\
         color = clippingPlanesEdgeColor;\n\
     }\n\
 }\n\
-";
+';

@@ -1,5 +1,5 @@
-import defaultValue from "./defaultValue.js";
-import getStringFromTypedArray from "./getStringFromTypedArray.js";
+import defaultValue from './defaultValue.js';
+import getStringFromTypedArray from './getStringFromTypedArray.js';
 
 /**
  * @private

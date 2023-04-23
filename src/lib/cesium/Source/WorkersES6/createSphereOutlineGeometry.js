@@ -1,5 +1,5 @@
-import defined from "../Core/defined.js";
-import SphereOutlineGeometry from "../Core/SphereOutlineGeometry.js";
+import defined from '../Core/defined.js';
+import SphereOutlineGeometry from '../Core/SphereOutlineGeometry.js';
 
 function createSphereOutlineGeometry(sphereGeometry, offset) {
   if (defined(offset)) {

@@ -1,24 +1,24 @@
-import BoxGeometry from "../Core/BoxGeometry.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import GeometryPipeline from "../Core/GeometryPipeline.js";
-import Matrix4 from "../Core/Matrix4.js";
-import VertexFormat from "../Core/VertexFormat.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import CubeMap from "../Renderer/CubeMap.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import loadCubeMap from "../Renderer/loadCubeMap.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import VertexArray from "../Renderer/VertexArray.js";
-import SkyBoxFS from "../Shaders/SkyBoxFS.js";
-import SkyBoxVS from "../Shaders/SkyBoxVS.js";
-import BlendingState from "./BlendingState.js";
-import SceneMode from "./SceneMode.js";
+import BoxGeometry from '../Core/BoxGeometry.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import GeometryPipeline from '../Core/GeometryPipeline.js';
+import Matrix4 from '../Core/Matrix4.js';
+import VertexFormat from '../Core/VertexFormat.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import CubeMap from '../Renderer/CubeMap.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import loadCubeMap from '../Renderer/loadCubeMap.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import VertexArray from '../Renderer/VertexArray.js';
+import SkyBoxFS from '../Shaders/SkyBoxFS.js';
+import SkyBoxVS from '../Shaders/SkyBoxVS.js';
+import BlendingState from './BlendingState.js';
+import SceneMode from './SceneMode.js';
 
 /**
  * A sky box around the scene to draw stars.  The sky box is defined using the True Equator Mean Equinox (TEME) axes.
@@ -73,7 +73,7 @@ function SkyBox(options) {
 
   this._command = new DrawCommand({
     modelMatrix: Matrix4.clone(Matrix4.IDENTITY),
-    owner: this,
+    owner: this
   });
   this._cubeMap = undefined;
 
@@ -127,7 +127,7 @@ SkyBox.prototype.update = function (frameState, useHdr) {
       !defined(sources.negativeZ)
     ) {
       throw new DeveloperError(
-        "this.sources is required and must have positiveX, negativeX, positiveY, negativeY, positiveZ, and negativeZ properties."
+        'this.sources is required and must have positiveX, negativeX, positiveY, negativeY, positiveZ, and negativeZ properties.'
       );
     }
 
@@ -139,12 +139,12 @@ SkyBox.prototype.update = function (frameState, useHdr) {
       typeof sources.positiveX !== typeof sources.negativeZ
     ) {
       throw new DeveloperError(
-        "this.sources properties must all be the same type."
+        'this.sources properties must all be the same type.'
       );
     }
     //>>includeEnd('debug');
 
-    if (typeof sources.positiveX === "string") {
+    if (typeof sources.positiveX === 'string') {
       // Given urls for cube-map images.  Load them.
       loadCubeMap(context, this._sources).then(function (cubeMap) {
         that._cubeMap = that._cubeMap && that._cubeMap.destroy();
@@ -154,7 +154,7 @@ SkyBox.prototype.update = function (frameState, useHdr) {
       this._cubeMap = this._cubeMap && this._cubeMap.destroy();
       this._cubeMap = new CubeMap({
         context: context,
-        source: sources,
+        source: sources
       });
     }
   }
@@ -165,41 +165,40 @@ SkyBox.prototype.update = function (frameState, useHdr) {
     command.uniformMap = {
       u_cubeMap: function () {
         return that._cubeMap;
-      },
+      }
     };
 
     const geometry = BoxGeometry.createGeometry(
       BoxGeometry.fromDimensions({
         dimensions: new Cartesian3(2.0, 2.0, 2.0),
-        vertexFormat: VertexFormat.POSITION_ONLY,
+        vertexFormat: VertexFormat.POSITION_ONLY
       })
     );
-    const attributeLocations = (this._attributeLocations = GeometryPipeline.createAttributeLocations(
-      geometry
-    ));
+    const attributeLocations = (this._attributeLocations =
+      GeometryPipeline.createAttributeLocations(geometry));
 
     command.vertexArray = VertexArray.fromGeometry({
       context: context,
       geometry: geometry,
       attributeLocations: attributeLocations,
-      bufferUsage: BufferUsage.STATIC_DRAW,
+      bufferUsage: BufferUsage.STATIC_DRAW
     });
 
     command.renderState = RenderState.fromCache({
-      blending: BlendingState.ALPHA_BLEND,
+      blending: BlendingState.ALPHA_BLEND
     });
   }
 
   if (!defined(command.shaderProgram) || this._useHdr !== useHdr) {
     const fs = new ShaderSource({
-      defines: [useHdr ? "HDR" : ""],
-      sources: [SkyBoxFS],
+      defines: [useHdr ? 'HDR' : ''],
+      sources: [SkyBoxFS]
     });
     command.shaderProgram = ShaderProgram.fromCache({
       context: context,
       vertexShaderSource: SkyBoxVS,
       fragmentShaderSource: fs,
-      attributeLocations: this._attributeLocations,
+      attributeLocations: this._attributeLocations
     });
     this._useHdr = useHdr;
   }

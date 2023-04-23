@@ -1,4 +1,4 @@
-import WebGLConstants from "../Core/WebGLConstants.js";
+import WebGLConstants from '../Core/WebGLConstants.js';
 
 /**
  * Determines how two pixels' values are combined.
@@ -48,6 +48,6 @@ const BlendEquation = {
    * @type {Number}
    * @constant
    */
-  MAX: WebGLConstants.MAX,
+  MAX: WebGLConstants.MAX
 };
 export default Object.freeze(BlendEquation);

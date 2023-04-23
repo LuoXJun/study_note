@@ -1,13 +1,13 @@
-import BoundingSphere from "../../Core/BoundingSphere.js";
-import Cartesian3 from "../../Core/Cartesian3.js";
-import Check from "../../Core/Check.js";
-import clone from "../../Core/clone.js";
-import combine from "../../Core/combine.js";
-import defined from "../../Core/defined.js";
-import BlendingState from "../BlendingState.js";
-import DepthFunction from "../DepthFunction.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
-import ModelLightingOptions from "./ModelLightingOptions.js";
+import BoundingSphere from '../../Core/BoundingSphere.js';
+import Cartesian3 from '../../Core/Cartesian3.js';
+import Check from '../../Core/Check.js';
+import clone from '../../Core/clone.js';
+import combine from '../../Core/combine.js';
+import defined from '../../Core/defined.js';
+import BlendingState from '../BlendingState.js';
+import DepthFunction from '../DepthFunction.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
+import ModelLightingOptions from './ModelLightingOptions.js';
 
 /**
  * Each node may have many mesh primitives. Most model pipeline stages operate
@@ -23,8 +23,8 @@ export default function PrimitiveRenderResources(
   runtimePrimitive
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("nodeRenderResources", nodeRenderResources);
-  Check.typeOf.object("runtimePrimitive", runtimePrimitive);
+  Check.typeOf.object('nodeRenderResources', nodeRenderResources);
+  Check.typeOf.object('runtimePrimitive', runtimePrimitive);
   //>>includeEnd('debug');
 
   // Properties inherited from NodeRenderResources.
@@ -165,7 +165,7 @@ export default function PrimitiveRenderResources(
    */
   this.count = defined(primitive.indices)
     ? primitive.indices.count
-    : ModelExperimentalUtility.getAttributeBySemantic(primitive, "POSITION")
+    : ModelExperimentalUtility.getAttributeBySemantic(primitive, 'POSITION')
         .count;
 
   /**
@@ -272,9 +272,9 @@ export default function PrimitiveRenderResources(
   this.renderStateOptions = combine(nodeRenderResources.renderStateOptions, {
     depthTest: {
       enabled: true,
-      func: DepthFunction.LESS_OR_EQUAL,
+      func: DepthFunction.LESS_OR_EQUAL
     },
-    blending: BlendingState.DISABLED,
+    blending: BlendingState.DISABLED
   });
 
   /**

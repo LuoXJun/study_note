@@ -1,8 +1,8 @@
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defined from "../Core/defined.js";
-import FeatureDetection from "../Core/FeatureDetection.js";
-import TaskProcessor from "../Core/TaskProcessor.js";
-import ForEach from "./GltfPipeline/ForEach.js";
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defined from '../Core/defined.js';
+import FeatureDetection from '../Core/FeatureDetection.js';
+import TaskProcessor from '../Core/TaskProcessor.js';
+import ForEach from './GltfPipeline/ForEach.js';
 
 /**
  * @private
@@ -21,13 +21,13 @@ DracoLoader._taskProcessorReady = false;
 DracoLoader._getDecoderTaskProcessor = function () {
   if (!defined(DracoLoader._decoderTaskProcessor)) {
     const processor = new TaskProcessor(
-      "decodeDraco",
+      'decodeDraco',
       DracoLoader._maxDecodingConcurrency
     );
     processor
       .initWebAssemblyModule({
-        modulePath: "ThirdParty/Workers/draco_decoder_nodejs.js",
-        wasmBinaryFile: "ThirdParty/draco_decoder.wasm",
+        modulePath: 'ThirdParty/Workers/draco_decoder_nodejs.js',
+        wasmBinaryFile: 'ThirdParty/draco_decoder.wasm'
       })
       .then(function () {
         DracoLoader._taskProcessorReady = true;
@@ -62,7 +62,7 @@ function addBufferToLoadResources(loadResources, typedArray) {
   loadResources.createdBufferViews[bufferViewId] = {
     buffer: id,
     byteOffset: 0,
-    byteLength: typedArray.byteLength,
+    byteLength: typedArray.byteLength
   };
 
   return bufferViewId;
@@ -81,12 +81,12 @@ function addNewIndexBuffer(indexArray, model, context) {
   const id = addBufferToLoadResources(loadResources, typedArray);
   loadResources.indexBuffersToCreate.enqueue({
     id: id,
-    componentType: ComponentDatatype.fromTypedArray(typedArray),
+    componentType: ComponentDatatype.fromTypedArray(typedArray)
   });
 
   return {
     bufferViewId: id,
-    numberOfIndices: indexArray.numberOfIndices,
+    numberOfIndices: indexArray.numberOfIndices
   };
 }
 
@@ -108,7 +108,7 @@ function scheduleDecodingTask(
   }
 
   const promise = decoderTaskProcessor.scheduleTask(taskData, [
-    taskData.array.buffer,
+    taskData.array.buffer
   ]);
   if (!defined(promise)) {
     // Cannot schedule another task this frame
@@ -148,7 +148,7 @@ function scheduleDecodingTask(
     model._decodedData[`${taskData.mesh}.primitive.${taskData.primitive}`] = {
       bufferView: decodedIndexBuffer.bufferViewId,
       numberOfIndices: decodedIndexBuffer.numberOfIndices,
-      attributes: attributes,
+      attributes: attributes
     };
   });
 }
@@ -212,7 +212,7 @@ DracoLoader.parse = function (model, context) {
         array: typedArray,
         bufferView: bufferView,
         compressedAttributes: compressionData.attributes,
-        dequantizeInShader: dequantizeInShader,
+        dequantizeInShader: dequantizeInShader
       });
     });
   });
@@ -243,7 +243,7 @@ DracoLoader.decodeModel = function (model, context) {
     DracoLoader._decodedModelResourceCache[cacheKey] = {
       ready: false,
       count: 1,
-      data: undefined,
+      data: undefined
     };
   }
 
@@ -285,7 +285,7 @@ DracoLoader.decodePointCloud = function (parameters) {
     return;
   }
   return decoderTaskProcessor.scheduleTask(parameters, [
-    parameters.buffer.buffer,
+    parameters.buffer.buffer
   ]);
 };
 

@@ -1,6 +1,6 @@
-import AssociativeArray from "../Core/AssociativeArray.js";
-import defined from "../Core/defined.js";
-import BoundingSphereState from "./BoundingSphereState.js";
+import AssociativeArray from '../Core/AssociativeArray.js';
+import defined from '../Core/defined.js';
+import BoundingSphereState from './BoundingSphereState.js';
 
 /**
  * @private

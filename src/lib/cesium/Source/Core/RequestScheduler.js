@@ -1,13 +1,13 @@
-import Uri from "../ThirdParty/Uri.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defer from "./defer.js";
-import defined from "./defined.js";
-import Event from "./Event.js";
-import Heap from "./Heap.js";
-import isBlobUri from "./isBlobUri.js";
-import isDataUri from "./isDataUri.js";
-import RequestState from "./RequestState.js";
+import Uri from '../ThirdParty/Uri.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defer from './defer.js';
+import defined from './defined.js';
+import Event from './Event.js';
+import Heap from './Heap.js';
+import isBlobUri from './isBlobUri.js';
+import isDataUri from './isDataUri.js';
+import RequestState from './RequestState.js';
 
 function sortRequests(a, b) {
   return a.priority - b.priority;
@@ -20,12 +20,12 @@ const statistics = {
   numberOfCancelledActiveRequests: 0,
   numberOfFailedRequests: 0,
   numberOfActiveRequestsEver: 0,
-  lastNumberOfActiveRequests: 0,
+  lastNumberOfActiveRequests: 0
 };
 
 let priorityHeapLength = 20;
 const requestHeap = new Heap({
-  comparator: sortRequests,
+  comparator: sortRequests
 });
 requestHeap.maximumLength = priorityHeapLength;
 requestHeap.reserve(priorityHeapLength);
@@ -34,7 +34,7 @@ const activeRequests = [];
 let numberOfActiveRequestsByServer = {};
 
 const pageUri =
-  typeof document !== "undefined" ? new Uri(document.location.href) : new Uri();
+  typeof document !== 'undefined' ? new Uri(document.location.href) : new Uri();
 
 const requestCompletedEvent = new Event();
 
@@ -75,8 +75,8 @@ RequestScheduler.maximumRequestsPerServer = 6;
  * };
  */
 RequestScheduler.requestsByServer = {
-  "api.cesium.com:443": 18,
-  "assets.cesium.com:443": 18,
+  'api.cesium.com:443': 18,
+  'assets.cesium.com:443': 18
 };
 
 /**
@@ -117,7 +117,7 @@ Object.defineProperties(RequestScheduler, {
   statistics: {
     get: function () {
       return statistics;
-    },
+    }
   },
 
   /**
@@ -145,8 +145,8 @@ Object.defineProperties(RequestScheduler, {
       priorityHeapLength = value;
       requestHeap.maximumLength = value;
       requestHeap.reserve(value);
-    },
-  },
+    }
+  }
 });
 
 function updatePriority(request) {
@@ -347,11 +347,11 @@ RequestScheduler.update = function () {
  */
 RequestScheduler.getServerKey = function (url) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("url", url);
+  Check.typeOf.string('url', url);
   //>>includeEnd('debug');
 
   let uri = new Uri(url);
-  if (uri.scheme() === "") {
+  if (uri.scheme() === '') {
     uri = new Uri(url).absoluteTo(pageUri);
     uri.normalize();
   }
@@ -359,7 +359,7 @@ RequestScheduler.getServerKey = function (url) {
   let serverKey = uri.authority();
   if (!/:/.test(serverKey)) {
     // If the authority does not contain a port number, add port 443 for https or port 80 for http
-    serverKey = `${serverKey}:${uri.scheme() === "https" ? "443" : "80"}`;
+    serverKey = `${serverKey}:${uri.scheme() === 'https' ? '443' : '80'}`;
   }
 
   const length = numberOfActiveRequestsByServer[serverKey];
@@ -382,9 +382,9 @@ RequestScheduler.getServerKey = function (url) {
  */
 RequestScheduler.request = function (request) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("request", request);
-  Check.typeOf.string("request.url", request.url);
-  Check.typeOf.func("request.requestFunction", request.requestFunction);
+  Check.typeOf.object('request', request);
+  Check.typeOf.string('request.url', request.url);
+  Check.typeOf.func('request.requestFunction', request.requestFunction);
   //>>includeEnd('debug');
 
   if (isDataUri(request.url) || isBlobUri(request.url)) {

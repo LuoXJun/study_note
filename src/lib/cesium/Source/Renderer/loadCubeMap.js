@@ -1,8 +1,8 @@
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Resource from "../Core/Resource.js";
-import CubeMap from "./CubeMap.js";
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Resource from '../Core/Resource.js';
+import CubeMap from './CubeMap.js';
 
 /**
  * Asynchronously loads six images and creates a cube map.  Returns a promise that
@@ -40,7 +40,7 @@ import CubeMap from "./CubeMap.js";
  */
 function loadCubeMap(context, urls, skipColorSpaceConversion) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("context", context);
+  Check.defined('context', context);
   if (
     !defined(urls) ||
     !defined(urls.positiveX) ||
@@ -51,7 +51,7 @@ function loadCubeMap(context, urls, skipColorSpaceConversion) {
     !defined(urls.negativeZ)
   ) {
     throw new DeveloperError(
-      "urls is required and must have positiveX, negativeX, positiveY, negativeY, positiveZ, and negativeZ properties."
+      'urls is required and must have positiveX, negativeX, positiveY, negativeY, positiveZ, and negativeZ properties.'
     );
   }
   //>>includeEnd('debug');
@@ -64,7 +64,7 @@ function loadCubeMap(context, urls, skipColorSpaceConversion) {
   const flipOptions = {
     flipY: true,
     skipColorSpaceConversion: skipColorSpaceConversion,
-    preferImageBitmap: true,
+    preferImageBitmap: true
   };
 
   const facePromises = [
@@ -73,7 +73,7 @@ function loadCubeMap(context, urls, skipColorSpaceConversion) {
     Resource.createIfNeeded(urls.positiveY).fetchImage(flipOptions),
     Resource.createIfNeeded(urls.negativeY).fetchImage(flipOptions),
     Resource.createIfNeeded(urls.positiveZ).fetchImage(flipOptions),
-    Resource.createIfNeeded(urls.negativeZ).fetchImage(flipOptions),
+    Resource.createIfNeeded(urls.negativeZ).fetchImage(flipOptions)
   ];
 
   return Promise.all(facePromises).then(function (images) {
@@ -85,8 +85,8 @@ function loadCubeMap(context, urls, skipColorSpaceConversion) {
         positiveY: images[2],
         negativeY: images[3],
         positiveZ: images[4],
-        negativeZ: images[5],
-      },
+        negativeZ: images[5]
+      }
     });
   });
 }

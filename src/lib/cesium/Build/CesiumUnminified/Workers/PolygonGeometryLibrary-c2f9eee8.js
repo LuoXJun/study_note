@@ -23,7 +23,36 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './Matrix2-9e1c22e2', './ComponentDatatype-4eeb6d9b', './defaultValue-97284df2', './EllipsoidRhumbLine-7bc7dfce', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './GeometryPipeline-d7363877', './IndexDatatype-f228f5fd', './PolygonPipeline-db21de21', './Transforms-273eeb44'], (function (exports, ArcType, arrayRemoveDuplicates, Matrix2, ComponentDatatype, defaultValue, EllipsoidRhumbLine, GeometryAttribute, GeometryAttributes, GeometryPipeline, IndexDatatype, PolygonPipeline, Transforms) { 'use strict';
+define([
+  'exports',
+  './ArcType-de5d8777',
+  './arrayRemoveDuplicates-1af79ba4',
+  './Matrix2-9e1c22e2',
+  './ComponentDatatype-4eeb6d9b',
+  './defaultValue-97284df2',
+  './EllipsoidRhumbLine-7bc7dfce',
+  './GeometryAttribute-9be2d2e5',
+  './GeometryAttributes-734a3446',
+  './GeometryPipeline-d7363877',
+  './IndexDatatype-f228f5fd',
+  './PolygonPipeline-db21de21',
+  './Transforms-273eeb44'
+], function (
+  exports,
+  ArcType,
+  arrayRemoveDuplicates,
+  Matrix2,
+  ComponentDatatype,
+  defaultValue,
+  EllipsoidRhumbLine,
+  GeometryAttribute,
+  GeometryAttributes,
+  GeometryPipeline,
+  IndexDatatype,
+  PolygonPipeline,
+  Transforms
+) {
+  'use strict';
 
   /**
    * A queue that can enqueue items at the end, and dequeue items from the front.
@@ -49,8 +78,8 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
     length: {
       get: function () {
         return this._length;
-      },
-    },
+      }
+    }
   });
 
   /**
@@ -188,7 +217,9 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
       const positions = hierarchy.positions;
       const holes = hierarchy.holes;
 
-      array[startingIndex++] = defaultValue.defined(positions) ? positions.length : 0;
+      array[startingIndex++] = defaultValue.defined(positions)
+        ? positions.length
+        : 0;
       array[startingIndex++] = defaultValue.defined(holes) ? holes.length : 0;
 
       if (defaultValue.defined(positions)) {
@@ -245,7 +276,7 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
     return {
       positions: positions,
       holes: holes,
-      startingIndex: startingIndex,
+      startingIndex: startingIndex
     };
   };
 
@@ -276,7 +307,10 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
   PolygonGeometryLibrary.subdivideLineCount = function (p0, p1, minDistance) {
     const distance = Matrix2.Cartesian3.distance(p0, p1);
     const n = distance / minDistance;
-    const countDivide = Math.max(0, Math.ceil(ComponentDatatype.CesiumMath.log2(n)));
+    const countDivide = Math.max(
+      0,
+      Math.ceil(ComponentDatatype.CesiumMath.log2(n))
+    );
     return Math.pow(2, countDivide);
   };
 
@@ -295,7 +329,10 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
     const c1 = ellipsoid.cartesianToCartographic(p1, scratchCartographic1);
     const rhumb = new EllipsoidRhumbLine.EllipsoidRhumbLine(c0, c1, ellipsoid);
     const n = rhumb.surfaceDistance / minDistance;
-    const countDivide = Math.max(0, Math.ceil(ComponentDatatype.CesiumMath.log2(n)));
+    const countDivide = Math.max(
+      0,
+      Math.ceil(ComponentDatatype.CesiumMath.log2(n))
+    );
     return Math.pow(2, countDivide);
   };
 
@@ -337,7 +374,12 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
     // Compute texture coordinates using linear interpolation.
     let index = 0;
     for (let i = 0; i < subdivisions; i++) {
-      const t = getPointAtDistance2D(t0, t1, i * distanceBetweenCoords, length2D);
+      const t = getPointAtDistance2D(
+        t0,
+        t1,
+        i * distanceBetweenCoords,
+        length2D
+      );
       texcoords[index++] = t[0];
       texcoords[index++] = t[1];
     }
@@ -345,7 +387,12 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
     return texcoords;
   };
 
-  PolygonGeometryLibrary.subdivideLine = function (p0, p1, minDistance, result) {
+  PolygonGeometryLibrary.subdivideLine = function (
+    p0,
+    p1,
+    minDistance,
+    result
+  ) {
     const numVertices = PolygonGeometryLibrary.subdivideLineCount(
       p0,
       p1,
@@ -401,7 +448,10 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
     const n = scratchRhumbLine.surfaceDistance / minDistance;
 
     // Compute the number of subdivisions.
-    const countDivide = Math.max(0, Math.ceil(ComponentDatatype.CesiumMath.log2(n)));
+    const countDivide = Math.max(
+      0,
+      Math.ceil(ComponentDatatype.CesiumMath.log2(n))
+    );
     const subdivisions = Math.pow(2, countDivide);
 
     // Compute the distance between each subdivided point.
@@ -415,7 +465,12 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
     // Compute texture coordinates using linear interpolation.
     let index = 0;
     for (let i = 0; i < subdivisions; i++) {
-      const t = getPointAtDistance2D(t0, t1, i * distanceBetweenCoords, length2D);
+      const t = getPointAtDistance2D(
+        t0,
+        t1,
+        i * distanceBetweenCoords,
+        length2D
+      );
       texcoords[index++] = t[0];
       texcoords[index++] = t[1];
     }
@@ -435,7 +490,10 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
     const rhumb = new EllipsoidRhumbLine.EllipsoidRhumbLine(c0, c1, ellipsoid);
 
     const n = rhumb.surfaceDistance / minDistance;
-    const countDivide = Math.max(0, Math.ceil(ComponentDatatype.CesiumMath.log2(n)));
+    const countDivide = Math.max(
+      0,
+      Math.ceil(ComponentDatatype.CesiumMath.log2(n))
+    );
     const numVertices = Math.pow(2, countDivide);
     const distanceBetweenVertices = rhumb.surfaceDistance / numVertices;
 
@@ -551,7 +609,10 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
         if (scaleToEllipsoidSurface) {
           length = holePositions.length;
           for (j = 0; j < length; ++j) {
-            ellipsoid.scaleToGeodeticSurface(holePositions[j], holePositions[j]);
+            ellipsoid.scaleToGeodeticSurface(
+              holePositions[j],
+              holePositions[j]
+            );
           }
         }
         holePositions = arrayRemoveDuplicates.arrayRemoveDuplicates(
@@ -626,9 +687,8 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
       }
       const holeIndices = [];
 
-      let originalWindingOrder = PolygonPipeline.PolygonPipeline.computeWindingOrder2D(
-        positions2D
-      );
+      let originalWindingOrder =
+        PolygonPipeline.PolygonPipeline.computeWindingOrder2D(positions2D);
       if (originalWindingOrder === PolygonPipeline.WindingOrder.CLOCKWISE) {
         positions2D.reverse();
         outerRing = outerRing.slice().reverse();
@@ -645,7 +705,10 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
         if (scaleToEllipsoidSurface) {
           length = holePositions.length;
           for (j = 0; j < length; ++j) {
-            ellipsoid.scaleToGeodeticSurface(holePositions[j], holePositions[j]);
+            ellipsoid.scaleToGeodeticSurface(
+              holePositions[j],
+              holePositions[j]
+            );
           }
         }
 
@@ -665,9 +728,10 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
           continue;
         }
 
-        originalWindingOrder = PolygonPipeline.PolygonPipeline.computeWindingOrder2D(
-          holePositions2D
-        );
+        originalWindingOrder =
+          PolygonPipeline.PolygonPipeline.computeWindingOrder2D(
+            holePositions2D
+          );
         if (originalWindingOrder === PolygonPipeline.WindingOrder.CLOCKWISE) {
           holePositions2D.reverse();
           holePositions = holePositions.slice().reverse();
@@ -690,18 +754,18 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
 
       hierarchy.push({
         outerRing: outerRing,
-        holes: polygonHoles,
+        holes: polygonHoles
       });
       polygons.push({
         positions: positions,
         positions2D: positions2D,
-        holes: holeIndices,
+        holes: holeIndices
       });
     }
 
     return {
       hierarchy: hierarchy,
-      polygons: polygons,
+      polygons: polygons
     };
   };
 
@@ -765,7 +829,10 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
     vertexFormat,
     arcType
   ) {
-    let indices = PolygonPipeline.PolygonPipeline.triangulate(polygon.positions2D, polygon.holes);
+    let indices = PolygonPipeline.PolygonPipeline.triangulate(
+      polygon.positions2D,
+      polygon.holes
+    );
 
     /* If polygon is completely unrenderable, just use the first three vertices */
     if (indices.length < 3) {
@@ -793,19 +860,21 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
           position: new GeometryAttribute.GeometryAttribute({
             componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
             componentsPerAttribute: 3,
-            values: flattenedPositions,
-          }),
+            values: flattenedPositions
+          })
         },
         indices: indices,
-        primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES,
+        primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES
       };
 
       if (hasTexcoords) {
-        geometryOptions.attributes.st = new GeometryAttribute.GeometryAttribute({
-          componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
-          componentsPerAttribute: 2,
-          values: Matrix2.Cartesian2.packArray(texcoords),
-        });
+        geometryOptions.attributes.st = new GeometryAttribute.GeometryAttribute(
+          {
+            componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
+            componentsPerAttribute: 2,
+            values: Matrix2.Cartesian2.packArray(texcoords)
+          }
+        );
       }
 
       const geometry = new GeometryAttribute.Geometry(geometryOptions);
@@ -1073,18 +1142,18 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
         position: new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
           componentsPerAttribute: 3,
-          values: edgePositions,
-        }),
+          values: edgePositions
+        })
       }),
       indices: indices,
-      primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES,
+      primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES
     };
 
     if (hasTexcoords) {
       geometryOptions.attributes.st = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 2,
-        values: edgeTexcoords,
+        values: edgeTexcoords
       });
     }
 
@@ -1094,6 +1163,5 @@ define(['exports', './ArcType-de5d8777', './arrayRemoveDuplicates-1af79ba4', './
   };
 
   exports.PolygonGeometryLibrary = PolygonGeometryLibrary;
-
-}));
+});
 //# sourceMappingURL=PolygonGeometryLibrary-c2f9eee8.js.map

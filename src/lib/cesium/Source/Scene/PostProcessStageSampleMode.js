@@ -17,6 +17,6 @@ const PostProcessStageSampleMode = {
    * @type {Number}
    * @constant
    */
-  LINEAR: 1,
+  LINEAR: 1
 };
 export default PostProcessStageSampleMode;

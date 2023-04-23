@@ -1,7 +1,7 @@
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import CesiumMath from "./Math.js";
-import WebGLConstants from "./WebGLConstants.js";
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import CesiumMath from './Math.js';
+import WebGLConstants from './WebGLConstants.js';
 
 /**
  * Constants for WebGL index datatypes.  These corresponds to the
@@ -35,7 +35,7 @@ const IndexDatatype = {
    * @type {Number}
    * @constant
    */
-  UNSIGNED_INT: WebGLConstants.UNSIGNED_INT,
+  UNSIGNED_INT: WebGLConstants.UNSIGNED_INT
 };
 
 /**
@@ -60,7 +60,7 @@ IndexDatatype.getSizeInBytes = function (indexDatatype) {
 
   //>>includeStart('debug', pragmas.debug);
   throw new DeveloperError(
-    "indexDatatype is required and must be a valid IndexDatatype constant."
+    'indexDatatype is required and must be a valid IndexDatatype constant.'
   );
   //>>includeEnd('debug');
 };
@@ -82,7 +82,7 @@ IndexDatatype.fromSizeInBytes = function (sizeInBytes) {
     //>>includeStart('debug', pragmas.debug);
     default:
       throw new DeveloperError(
-        "Size in bytes cannot be mapped to an IndexDatatype"
+        'Size in bytes cannot be mapped to an IndexDatatype'
       );
     //>>includeEnd('debug');
   }
@@ -125,7 +125,7 @@ IndexDatatype.createTypedArray = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(numberOfVertices)) {
-    throw new DeveloperError("numberOfVertices is required.");
+    throw new DeveloperError('numberOfVertices is required.');
   }
   //>>includeEnd('debug');
 
@@ -155,13 +155,13 @@ IndexDatatype.createTypedArrayFromArrayBuffer = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(numberOfVertices)) {
-    throw new DeveloperError("numberOfVertices is required.");
+    throw new DeveloperError('numberOfVertices is required.');
   }
   if (!defined(sourceArray)) {
-    throw new DeveloperError("sourceArray is required.");
+    throw new DeveloperError('sourceArray is required.');
   }
   if (!defined(byteOffset)) {
-    throw new DeveloperError("byteOffset is required.");
+    throw new DeveloperError('byteOffset is required.');
   }
   //>>includeEnd('debug');
 
@@ -191,7 +191,7 @@ IndexDatatype.fromTypedArray = function (array) {
 
   //>>includeStart('debug', pragmas.debug);
   throw new DeveloperError(
-    "array must be a Uint8Array, Uint16Array, or Uint32Array."
+    'array must be a Uint8Array, Uint16Array, or Uint32Array.'
   );
   //>>includeEnd('debug');
 };

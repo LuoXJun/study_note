@@ -1,8 +1,8 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import getImagePixels from "../Core/getImagePixels.js";
-import Resource from "../Core/Resource.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import getImagePixels from '../Core/getImagePixels.js';
+import Resource from '../Core/Resource.js';
 
 /**
  * A policy for discarding tile images that match a known image containing a
@@ -24,11 +24,11 @@ function DiscardMissingTileImagePolicy(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.missingImageUrl)) {
-    throw new DeveloperError("options.missingImageUrl is required.");
+    throw new DeveloperError('options.missingImageUrl is required.');
   }
 
   if (!defined(options.pixelsToCheck)) {
-    throw new DeveloperError("options.pixelsToCheck is required.");
+    throw new DeveloperError('options.pixelsToCheck is required.');
   }
   //>>includeEnd('debug');
 
@@ -87,7 +87,7 @@ function DiscardMissingTileImagePolicy(options) {
     .fetchImage({
       preferBlob: true,
       preferImageBitmap: true,
-      flipY: true,
+      flipY: true
     })
     .then(success)
     .catch(failure);
@@ -113,7 +113,7 @@ DiscardMissingTileImagePolicy.prototype.shouldDiscardImage = function (image) {
   //>>includeStart('debug', pragmas.debug);
   if (!this._isReady) {
     throw new DeveloperError(
-      "shouldDiscardImage must not be called before the discard policy is ready."
+      'shouldDiscardImage must not be called before the discard policy is ready.'
     );
   }
   //>>includeEnd('debug');

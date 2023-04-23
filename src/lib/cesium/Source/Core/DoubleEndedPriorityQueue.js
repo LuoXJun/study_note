@@ -1,6 +1,6 @@
-import CesiumMath from "./Math.js";
-import Check from "./Check.js";
-import defined from "./defined.js";
+import CesiumMath from './Math.js';
+import Check from './Check.js';
+import defined from './defined.js';
 
 /**
  * Array-backed min-max heap implementation of a double-ended priority queue.
@@ -16,11 +16,11 @@ import defined from "./defined.js";
  */
 function DoubleEndedPriorityQueue(options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options", options);
-  Check.defined("options.comparator", options.comparator);
+  Check.typeOf.object('options', options);
+  Check.defined('options.comparator', options.comparator);
   if (defined(options.maximumLength)) {
     Check.typeOf.number.greaterThanOrEquals(
-      "options.maximumLength",
+      'options.maximumLength',
       options.maximumLength,
       0
     );
@@ -47,7 +47,7 @@ Object.defineProperties(DoubleEndedPriorityQueue.prototype, {
   length: {
     get: function () {
       return this._length;
-    },
+    }
   },
 
   /**
@@ -68,7 +68,7 @@ Object.defineProperties(DoubleEndedPriorityQueue.prototype, {
     set: function (value) {
       if (defined(value)) {
         //>>includeStart('debug', pragmas.debug);
-        Check.typeOf.number.greaterThanOrEquals("maximumLength", value, 0);
+        Check.typeOf.number.greaterThanOrEquals('maximumLength', value, 0);
         //>>includeEnd('debug');
 
         // Remove elements until the maximum length is met.
@@ -80,7 +80,7 @@ Object.defineProperties(DoubleEndedPriorityQueue.prototype, {
         this._array.length = value;
       }
       this._maximumLength = value;
-    },
+    }
   },
 
   /**
@@ -94,7 +94,7 @@ Object.defineProperties(DoubleEndedPriorityQueue.prototype, {
   internalArray: {
     get: function () {
       return this._array;
-    },
+    }
   },
 
   /**
@@ -109,8 +109,8 @@ Object.defineProperties(DoubleEndedPriorityQueue.prototype, {
   comparator: {
     get: function () {
       return this._comparator;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -126,7 +126,7 @@ DoubleEndedPriorityQueue.prototype.clone = function () {
 
   const result = new DoubleEndedPriorityQueue({
     comparator: comparator,
-    maximumLength: maximumLength,
+    maximumLength: maximumLength
   });
 
   result._length = length;

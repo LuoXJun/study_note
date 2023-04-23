@@ -24,7 +24,7 @@ const ClassificationType = {
    * @type {Number}
    * @constant
    */
-  BOTH: 2,
+  BOTH: 2
 };
 
 /**

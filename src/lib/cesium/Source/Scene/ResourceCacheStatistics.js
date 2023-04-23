@@ -1,5 +1,5 @@
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
 
 /**
  * Statistics for the GPU and CPU memory used by the models loaded through the
@@ -63,7 +63,7 @@ ResourceCacheStatistics.prototype.clear = function () {
  */
 ResourceCacheStatistics.prototype.addGeometryLoader = function (loader) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("loader", loader);
+  Check.typeOf.object('loader', loader);
   //>>includeEnd('debug');
 
   const cacheKey = loader.cacheKey;
@@ -121,7 +121,7 @@ ResourceCacheStatistics.prototype.addGeometryLoader = function (loader) {
  */
 ResourceCacheStatistics.prototype.addTextureLoader = function (loader) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("loader", loader);
+  Check.typeOf.object('loader', loader);
   //>>includeEnd('debug');
 
   const cacheKey = loader.cacheKey;
@@ -161,7 +161,7 @@ ResourceCacheStatistics.prototype.addTextureLoader = function (loader) {
  */
 ResourceCacheStatistics.prototype.removeLoader = function (loader) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("loader", loader);
+  Check.typeOf.object('loader', loader);
   //>>includeEnd('debug');
 
   const cacheKey = loader.cacheKey;

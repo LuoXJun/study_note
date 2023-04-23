@@ -1,5 +1,5 @@
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Subdivides an array into a number of smaller, equal sized arrays.
@@ -14,11 +14,11 @@ import DeveloperError from "./DeveloperError.js";
 function subdivideArray(array, numberOfArrays) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(array)) {
-    throw new DeveloperError("array is required.");
+    throw new DeveloperError('array is required.');
   }
 
   if (!defined(numberOfArrays) || numberOfArrays < 1) {
-    throw new DeveloperError("numberOfArrays must be greater than 0.");
+    throw new DeveloperError('numberOfArrays must be greater than 0.');
   }
   //>>includeEnd('debug');
 

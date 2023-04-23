@@ -1,13 +1,13 @@
-import AssociativeArray from "../Core/AssociativeArray.js";
-import BoundingSphere from "../Core/BoundingSphere.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Matrix4 from "../Core/Matrix4.js";
-import Resource from "../Core/Resource.js";
-import Cesium3DTileset from "../Scene/Cesium3DTileset.js";
-import BoundingSphereState from "./BoundingSphereState.js";
-import Property from "./Property.js";
+import AssociativeArray from '../Core/AssociativeArray.js';
+import BoundingSphere from '../Core/BoundingSphere.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Matrix4 from '../Core/Matrix4.js';
+import Resource from '../Core/Resource.js';
+import Cesium3DTileset from '../Scene/Cesium3DTileset.js';
+import BoundingSphereState from './BoundingSphereState.js';
+import Property from './Property.js';
 
 const modelMatrixScratch = new Matrix4();
 
@@ -22,10 +22,10 @@ const modelMatrixScratch = new Matrix4();
 function Cesium3DTilesetVisualizer(scene, entityCollection) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required.");
+    throw new DeveloperError('scene is required.');
   }
   if (!defined(entityCollection)) {
-    throw new DeveloperError("entityCollection is required.");
+    throw new DeveloperError('entityCollection is required.');
   }
   //>>includeEnd('debug');
 
@@ -52,7 +52,7 @@ function Cesium3DTilesetVisualizer(scene, entityCollection) {
 Cesium3DTilesetVisualizer.prototype.update = function (time) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required.");
+    throw new DeveloperError('time is required.');
   }
   //>>includeEnd('debug');
 
@@ -95,7 +95,7 @@ Cesium3DTilesetVisualizer.prototype.update = function (time) {
         delete tilesetHash[entity.id];
       }
       tileset = new Cesium3DTileset({
-        url: resource,
+        url: resource
       });
       tileset.id = entity;
       primitives.add(tileset);
@@ -103,7 +103,7 @@ Cesium3DTilesetVisualizer.prototype.update = function (time) {
       tilesetData = {
         tilesetPrimitive: tileset,
         url: resource.url,
-        loadFail: false,
+        loadFail: false
       };
       tilesetHash[entity.id] = tilesetData;
 
@@ -167,10 +167,10 @@ Cesium3DTilesetVisualizer.prototype.getBoundingSphere = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(entity)) {
-    throw new DeveloperError("entity is required.");
+    throw new DeveloperError('entity is required.');
   }
   if (!defined(result)) {
-    throw new DeveloperError("result is required.");
+    throw new DeveloperError('result is required.');
   }
   //>>includeEnd('debug');
 

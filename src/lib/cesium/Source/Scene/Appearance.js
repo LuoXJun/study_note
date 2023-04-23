@@ -1,9 +1,9 @@
-import clone from "../Core/clone.js";
-import combine from "../Core/combine.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import BlendingState from "./BlendingState.js";
-import CullFace from "./CullFace.js";
+import clone from '../Core/clone.js';
+import combine from '../Core/combine.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import BlendingState from './BlendingState.js';
+import CullFace from './CullFace.js';
 
 /**
  * An appearance defines the full GLSL vertex and fragment shaders and the
@@ -70,7 +70,7 @@ Object.defineProperties(Appearance.prototype, {
   vertexShaderSource: {
     get: function () {
       return this._vertexShaderSource;
-    },
+    }
   },
 
   /**
@@ -86,7 +86,7 @@ Object.defineProperties(Appearance.prototype, {
   fragmentShaderSource: {
     get: function () {
       return this._fragmentShaderSource;
-    },
+    }
   },
 
   /**
@@ -100,7 +100,7 @@ Object.defineProperties(Appearance.prototype, {
   renderState: {
     get: function () {
       return this._renderState;
-    },
+    }
   },
 
   /**
@@ -116,8 +116,8 @@ Object.defineProperties(Appearance.prototype, {
   closed: {
     get: function () {
       return this._closed;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -129,17 +129,17 @@ Object.defineProperties(Appearance.prototype, {
 Appearance.prototype.getFragmentShaderSource = function () {
   const parts = [];
   if (this.flat) {
-    parts.push("#define FLAT");
+    parts.push('#define FLAT');
   }
   if (this.faceForward) {
-    parts.push("#define FACE_FORWARD");
+    parts.push('#define FACE_FORWARD');
   }
   if (defined(this.material)) {
     parts.push(this.material.shaderSource);
   }
   parts.push(this.fragmentShaderSource);
 
-  return parts.join("\n");
+  return parts.join('\n');
 };
 
 /**
@@ -179,8 +179,8 @@ Appearance.prototype.getRenderState = function () {
 Appearance.getDefaultRenderState = function (translucent, closed, existing) {
   let rs = {
     depthTest: {
-      enabled: true,
-    },
+      enabled: true
+    }
   };
 
   if (translucent) {
@@ -191,7 +191,7 @@ Appearance.getDefaultRenderState = function (translucent, closed, existing) {
   if (closed) {
     rs.cull = {
       enabled: true,
-      face: CullFace.BACK,
+      face: CullFace.BACK
     };
   }
 

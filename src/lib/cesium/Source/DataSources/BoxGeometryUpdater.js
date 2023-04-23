@@ -1,25 +1,25 @@
-import BoxGeometry from "../Core/BoxGeometry.js";
-import BoxOutlineGeometry from "../Core/BoxOutlineGeometry.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DistanceDisplayConditionGeometryInstanceAttribute from "../Core/DistanceDisplayConditionGeometryInstanceAttribute.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import GeometryOffsetAttribute from "../Core/GeometryOffsetAttribute.js";
-import Iso8601 from "../Core/Iso8601.js";
-import OffsetGeometryInstanceAttribute from "../Core/OffsetGeometryInstanceAttribute.js";
-import ShowGeometryInstanceAttribute from "../Core/ShowGeometryInstanceAttribute.js";
-import HeightReference from "../Scene/HeightReference.js";
-import MaterialAppearance from "../Scene/MaterialAppearance.js";
-import PerInstanceColorAppearance from "../Scene/PerInstanceColorAppearance.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import DynamicGeometryUpdater from "./DynamicGeometryUpdater.js";
-import GeometryUpdater from "./GeometryUpdater.js";
-import heightReferenceOnEntityPropertyChanged from "./heightReferenceOnEntityPropertyChanged.js";
-import Property from "./Property.js";
+import BoxGeometry from '../Core/BoxGeometry.js';
+import BoxOutlineGeometry from '../Core/BoxOutlineGeometry.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DistanceDisplayConditionGeometryInstanceAttribute from '../Core/DistanceDisplayConditionGeometryInstanceAttribute.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import GeometryOffsetAttribute from '../Core/GeometryOffsetAttribute.js';
+import Iso8601 from '../Core/Iso8601.js';
+import OffsetGeometryInstanceAttribute from '../Core/OffsetGeometryInstanceAttribute.js';
+import ShowGeometryInstanceAttribute from '../Core/ShowGeometryInstanceAttribute.js';
+import HeightReference from '../Scene/HeightReference.js';
+import MaterialAppearance from '../Scene/MaterialAppearance.js';
+import PerInstanceColorAppearance from '../Scene/PerInstanceColorAppearance.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import DynamicGeometryUpdater from './DynamicGeometryUpdater.js';
+import GeometryUpdater from './GeometryUpdater.js';
+import heightReferenceOnEntityPropertyChanged from './heightReferenceOnEntityPropertyChanged.js';
+import Property from './Property.js';
 
 const defaultOffset = Cartesian3.ZERO;
 
@@ -48,11 +48,11 @@ function BoxGeometryUpdater(entity, scene) {
     entity: entity,
     scene: scene,
     geometryOptions: new BoxGeometryOptions(entity),
-    geometryPropertyName: "box",
-    observedPropertyNames: ["availability", "position", "orientation", "box"],
+    geometryPropertyName: 'box',
+    observedPropertyNames: ['availability', 'position', 'orientation', 'box']
   });
 
-  this._onEntityPropertyChanged(entity, "box", entity.box, undefined);
+  this._onEntityPropertyChanged(entity, 'box', entity.box, undefined);
 }
 
 if (defined(Object.create)) {
@@ -71,8 +71,8 @@ Object.defineProperties(BoxGeometryUpdater.prototype, {
   terrainOffsetProperty: {
     get: function () {
       return this._terrainOffsetProperty;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -85,11 +85,11 @@ Object.defineProperties(BoxGeometryUpdater.prototype, {
  */
 BoxGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
 
   if (!this._fillEnabled) {
     throw new DeveloperError(
-      "This instance does not represent a filled geometry."
+      'This instance does not represent a filled geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -103,18 +103,18 @@ BoxGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
       this._showProperty.getValue(time) &&
       this._fillProperty.getValue(time)
   );
-  const distanceDisplayCondition = this._distanceDisplayConditionProperty.getValue(
-    time
-  );
-  const distanceDisplayConditionAttribute = DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-    distanceDisplayCondition
-  );
+  const distanceDisplayCondition =
+    this._distanceDisplayConditionProperty.getValue(time);
+  const distanceDisplayConditionAttribute =
+    DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+      distanceDisplayCondition
+    );
 
   const attributes = {
     show: show,
     distanceDisplayCondition: distanceDisplayConditionAttribute,
     color: undefined,
-    offset: undefined,
+    offset: undefined
   };
   if (this._materialProperty instanceof ColorMaterialProperty) {
     let currentColor;
@@ -149,7 +149,7 @@ BoxGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
       this._options.dimensions.z * 0.5,
       this._scene.mapProjection.ellipsoid
     ),
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -163,11 +163,11 @@ BoxGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
  */
 BoxGeometryUpdater.prototype.createOutlineGeometryInstance = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
 
   if (!this._outlineEnabled) {
     throw new DeveloperError(
-      "This instance does not represent an outlined geometry."
+      'This instance does not represent an outlined geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -180,9 +180,8 @@ BoxGeometryUpdater.prototype.createOutlineGeometryInstance = function (time) {
     Color.BLACK,
     scratchColor
   );
-  const distanceDisplayCondition = this._distanceDisplayConditionProperty.getValue(
-    time
-  );
+  const distanceDisplayCondition =
+    this._distanceDisplayConditionProperty.getValue(time);
 
   const attributes = {
     show: new ShowGeometryInstanceAttribute(
@@ -192,10 +191,11 @@ BoxGeometryUpdater.prototype.createOutlineGeometryInstance = function (time) {
         this._showOutlineProperty.getValue(time)
     ),
     color: ColorGeometryInstanceAttribute.fromColor(outlineColor),
-    distanceDisplayCondition: DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-      distanceDisplayCondition
-    ),
-    offset: undefined,
+    distanceDisplayCondition:
+      DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+        distanceDisplayCondition
+      ),
+    offset: undefined
   };
   if (defined(this._options.offsetAttribute)) {
     attributes.offset = OffsetGeometryInstanceAttribute.fromCartesian3(
@@ -217,7 +217,7 @@ BoxGeometryUpdater.prototype.createOutlineGeometryInstance = function (time) {
       this._options.dimensions.z * 0.5,
       this._scene.mapProjection.ellipsoid
     ),
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -264,7 +264,8 @@ BoxGeometryUpdater.prototype._setStaticOptions = function (entity, box) {
       : undefined;
 };
 
-BoxGeometryUpdater.prototype._onEntityPropertyChanged = heightReferenceOnEntityPropertyChanged;
+BoxGeometryUpdater.prototype._onEntityPropertyChanged =
+  heightReferenceOnEntityPropertyChanged;
 
 BoxGeometryUpdater.DynamicGeometryUpdater = DynamicBoxGeometryUpdater;
 

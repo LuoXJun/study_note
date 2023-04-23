@@ -1,8 +1,8 @@
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import CompositeProperty from "./CompositeProperty.js";
-import Property from "./Property.js";
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import CompositeProperty from './CompositeProperty.js';
+import Property from './Property.js';
 
 /**
  * A {@link CompositeProperty} which is also a {@link MaterialProperty}.
@@ -31,7 +31,7 @@ Object.defineProperties(CompositeMaterialProperty.prototype, {
   isConstant: {
     get: function () {
       return this._composite.isConstant;
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -45,7 +45,7 @@ Object.defineProperties(CompositeMaterialProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   /**
    * Gets the interval collection.
@@ -56,8 +56,8 @@ Object.defineProperties(CompositeMaterialProperty.prototype, {
   intervals: {
     get: function () {
       return this._composite._intervals;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -69,13 +69,12 @@ Object.defineProperties(CompositeMaterialProperty.prototype, {
 CompositeMaterialProperty.prototype.getType = function (time) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required");
+    throw new DeveloperError('time is required');
   }
   //>>includeEnd('debug');
 
-  const innerProperty = this._composite._intervals.findDataForIntervalContainingDate(
-    time
-  );
+  const innerProperty =
+    this._composite._intervals.findDataForIntervalContainingDate(time);
   if (defined(innerProperty)) {
     return innerProperty.getType(time);
   }
@@ -92,13 +91,12 @@ CompositeMaterialProperty.prototype.getType = function (time) {
 CompositeMaterialProperty.prototype.getValue = function (time, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required");
+    throw new DeveloperError('time is required');
   }
   //>>includeEnd('debug');
 
-  const innerProperty = this._composite._intervals.findDataForIntervalContainingDate(
-    time
-  );
+  const innerProperty =
+    this._composite._intervals.findDataForIntervalContainingDate(time);
   if (defined(innerProperty)) {
     return innerProperty.getValue(time, result);
   }

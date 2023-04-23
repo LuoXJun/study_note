@@ -1,25 +1,25 @@
-import ArcType from "./ArcType.js";
-import arrayRemoveDuplicates from "./arrayRemoveDuplicates.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Ellipsoid from "./Ellipsoid.js";
-import EllipsoidRhumbLine from "./EllipsoidRhumbLine.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import GeometryPipeline from "./GeometryPipeline.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
-import PolygonPipeline from "./PolygonPipeline.js";
-import PrimitiveType from "./PrimitiveType.js";
-import Quaternion from "./Quaternion.js";
-import Queue from "./Queue.js";
-import WindingOrder from "./WindingOrder.js";
+import ArcType from './ArcType.js';
+import arrayRemoveDuplicates from './arrayRemoveDuplicates.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Ellipsoid from './Ellipsoid.js';
+import EllipsoidRhumbLine from './EllipsoidRhumbLine.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import GeometryPipeline from './GeometryPipeline.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
+import PolygonPipeline from './PolygonPipeline.js';
+import PrimitiveType from './PrimitiveType.js';
+import Quaternion from './Quaternion.js';
+import Queue from './Queue.js';
+import WindingOrder from './WindingOrder.js';
 
 /**
  * @private
@@ -131,7 +131,7 @@ PolygonGeometryLibrary.unpackPolygonHierarchy = function (
   return {
     positions: positions,
     holes: holes,
-    startingIndex: startingIndex,
+    startingIndex: startingIndex
   };
 };
 
@@ -512,9 +512,8 @@ PolygonGeometryLibrary.polygonsFromHierarchy = function (
     }
     const holeIndices = [];
 
-    let originalWindingOrder = PolygonPipeline.computeWindingOrder2D(
-      positions2D
-    );
+    let originalWindingOrder =
+      PolygonPipeline.computeWindingOrder2D(positions2D);
     if (originalWindingOrder === WindingOrder.CLOCKWISE) {
       positions2D.reverse();
       outerRing = outerRing.slice().reverse();
@@ -551,9 +550,8 @@ PolygonGeometryLibrary.polygonsFromHierarchy = function (
         continue;
       }
 
-      originalWindingOrder = PolygonPipeline.computeWindingOrder2D(
-        holePositions2D
-      );
+      originalWindingOrder =
+        PolygonPipeline.computeWindingOrder2D(holePositions2D);
       if (originalWindingOrder === WindingOrder.CLOCKWISE) {
         holePositions2D.reverse();
         holePositions = holePositions.slice().reverse();
@@ -576,18 +574,18 @@ PolygonGeometryLibrary.polygonsFromHierarchy = function (
 
     hierarchy.push({
       outerRing: outerRing,
-      holes: polygonHoles,
+      holes: polygonHoles
     });
     polygons.push({
       positions: positions,
       positions2D: positions2D,
-      holes: holeIndices,
+      holes: holeIndices
     });
   }
 
   return {
     hierarchy: hierarchy,
-    polygons: polygons,
+    polygons: polygons
   };
 };
 
@@ -679,18 +677,18 @@ PolygonGeometryLibrary.createGeometryFromPositions = function (
         position: new GeometryAttribute({
           componentDatatype: ComponentDatatype.DOUBLE,
           componentsPerAttribute: 3,
-          values: flattenedPositions,
-        }),
+          values: flattenedPositions
+        })
       },
       indices: indices,
-      primitiveType: PrimitiveType.TRIANGLES,
+      primitiveType: PrimitiveType.TRIANGLES
     };
 
     if (hasTexcoords) {
       geometryOptions.attributes.st = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 2,
-        values: Cartesian2.packArray(texcoords),
+        values: Cartesian2.packArray(texcoords)
       });
     }
 
@@ -959,18 +957,18 @@ PolygonGeometryLibrary.computeWallGeometry = function (
       position: new GeometryAttribute({
         componentDatatype: ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: edgePositions,
-      }),
+        values: edgePositions
+      })
     }),
     indices: indices,
-    primitiveType: PrimitiveType.TRIANGLES,
+    primitiveType: PrimitiveType.TRIANGLES
   };
 
   if (hasTexcoords) {
     geometryOptions.attributes.st = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 2,
-      values: edgeTexcoords,
+      values: edgeTexcoords
     });
   }
 

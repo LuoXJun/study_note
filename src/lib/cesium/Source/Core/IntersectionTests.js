@@ -1,14 +1,14 @@
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Interval from "./Interval.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
-import QuadraticRealPolynomial from "./QuadraticRealPolynomial.js";
-import QuarticRealPolynomial from "./QuarticRealPolynomial.js";
-import Ray from "./Ray.js";
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Interval from './Interval.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
+import QuadraticRealPolynomial from './QuadraticRealPolynomial.js';
+import QuarticRealPolynomial from './QuarticRealPolynomial.js';
+import Ray from './Ray.js';
 
 /**
  * Functions for computing the intersection between geometries such as rays, planes, triangles, and ellipsoids.
@@ -28,10 +28,10 @@ const IntersectionTests = {};
 IntersectionTests.rayPlane = function (ray, plane, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(ray)) {
-    throw new DeveloperError("ray is required.");
+    throw new DeveloperError('ray is required.');
   }
   if (!defined(plane)) {
-    throw new DeveloperError("plane is required.");
+    throw new DeveloperError('plane is required.');
   }
   //>>includeEnd('debug');
 
@@ -90,16 +90,16 @@ IntersectionTests.rayTriangleParametric = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(ray)) {
-    throw new DeveloperError("ray is required.");
+    throw new DeveloperError('ray is required.');
   }
   if (!defined(p0)) {
-    throw new DeveloperError("p0 is required.");
+    throw new DeveloperError('p0 is required.');
   }
   if (!defined(p1)) {
-    throw new DeveloperError("p1 is required.");
+    throw new DeveloperError('p1 is required.');
   }
   if (!defined(p2)) {
-    throw new DeveloperError("p2 is required.");
+    throw new DeveloperError('p2 is required.');
   }
   //>>includeEnd('debug');
 
@@ -236,19 +236,19 @@ IntersectionTests.lineSegmentTriangle = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(v0)) {
-    throw new DeveloperError("v0 is required.");
+    throw new DeveloperError('v0 is required.');
   }
   if (!defined(v1)) {
-    throw new DeveloperError("v1 is required.");
+    throw new DeveloperError('v1 is required.');
   }
   if (!defined(p0)) {
-    throw new DeveloperError("p0 is required.");
+    throw new DeveloperError('p0 is required.');
   }
   if (!defined(p1)) {
-    throw new DeveloperError("p1 is required.");
+    throw new DeveloperError('p1 is required.');
   }
   if (!defined(p2)) {
-    throw new DeveloperError("p2 is required.");
+    throw new DeveloperError('p2 is required.');
   }
   //>>includeEnd('debug');
 
@@ -308,7 +308,7 @@ function solveQuadratic(a, b, c, result) {
 
 const raySphereRoots = {
   root0: 0.0,
-  root1: 0.0,
+  root1: 0.0
 };
 
 function raySphere(ray, sphere, result) {
@@ -350,10 +350,10 @@ function raySphere(ray, sphere, result) {
 IntersectionTests.raySphere = function (ray, sphere, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(ray)) {
-    throw new DeveloperError("ray is required.");
+    throw new DeveloperError('ray is required.');
   }
   if (!defined(sphere)) {
-    throw new DeveloperError("sphere is required.");
+    throw new DeveloperError('sphere is required.');
   }
   //>>includeEnd('debug');
 
@@ -381,13 +381,13 @@ const scratchLineSegmentRay = new Ray();
 IntersectionTests.lineSegmentSphere = function (p0, p1, sphere, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(p0)) {
-    throw new DeveloperError("p0 is required.");
+    throw new DeveloperError('p0 is required.');
   }
   if (!defined(p1)) {
-    throw new DeveloperError("p1 is required.");
+    throw new DeveloperError('p1 is required.');
   }
   if (!defined(sphere)) {
-    throw new DeveloperError("sphere is required.");
+    throw new DeveloperError('sphere is required.');
   }
   //>>includeEnd('debug');
 
@@ -421,10 +421,10 @@ const scratchW = new Cartesian3();
 IntersectionTests.rayEllipsoid = function (ray, ellipsoid) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(ray)) {
-    throw new DeveloperError("ray is required.");
+    throw new DeveloperError('ray is required.');
   }
   if (!defined(ellipsoid)) {
-    throw new DeveloperError("ellipsoid is required.");
+    throw new DeveloperError('ellipsoid is required.');
   }
   //>>includeEnd('debug');
 
@@ -469,7 +469,7 @@ IntersectionTests.rayEllipsoid = function (ray, ellipsoid) {
 
       return {
         start: root1,
-        stop: root0,
+        stop: root0
       };
     }
     // qw2 == product.  Repeated roots (2 intersections).
@@ -662,10 +662,10 @@ const surfPointScratch = new Cartographic();
 IntersectionTests.grazingAltitudeLocation = function (ray, ellipsoid) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(ray)) {
-    throw new DeveloperError("ray is required.");
+    throw new DeveloperError('ray is required.');
   }
   if (!defined(ellipsoid)) {
-    throw new DeveloperError("ellipsoid is required.");
+    throw new DeveloperError('ellipsoid is required.');
   }
   //>>includeEnd('debug');
 
@@ -820,13 +820,13 @@ IntersectionTests.lineSegmentPlane = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(endPoint0)) {
-    throw new DeveloperError("endPoint0 is required.");
+    throw new DeveloperError('endPoint0 is required.');
   }
   if (!defined(endPoint1)) {
-    throw new DeveloperError("endPoint1 is required.");
+    throw new DeveloperError('endPoint1 is required.');
   }
   if (!defined(plane)) {
-    throw new DeveloperError("plane is required.");
+    throw new DeveloperError('plane is required.');
   }
   //>>includeEnd('debug');
 
@@ -885,7 +885,7 @@ IntersectionTests.lineSegmentPlane = function (
 IntersectionTests.trianglePlaneIntersection = function (p0, p1, p2, plane) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(p0) || !defined(p1) || !defined(p2) || !defined(plane)) {
-    throw new DeveloperError("p0, p1, p2, and plane are required.");
+    throw new DeveloperError('p0, p1, p2, and plane are required.');
   }
   //>>includeEnd('debug');
 
@@ -917,18 +917,11 @@ IntersectionTests.trianglePlaneIntersection = function (p0, p1, p2, plane) {
         positions: [p0, p1, p2, u1, u2],
         indices: [
           // Behind
-          0,
-          3,
-          4,
+          0, 3, 4,
 
           // In front
-          1,
-          2,
-          4,
-          1,
-          4,
-          3,
-        ],
+          1, 2, 4, 1, 4, 3
+        ]
       };
     } else if (p1Behind) {
       IntersectionTests.lineSegmentPlane(p1, p2, plane, u1);
@@ -938,18 +931,11 @@ IntersectionTests.trianglePlaneIntersection = function (p0, p1, p2, plane) {
         positions: [p0, p1, p2, u1, u2],
         indices: [
           // Behind
-          1,
-          3,
-          4,
+          1, 3, 4,
 
           // In front
-          2,
-          0,
-          4,
-          2,
-          4,
-          3,
-        ],
+          2, 0, 4, 2, 4, 3
+        ]
       };
     } else if (p2Behind) {
       IntersectionTests.lineSegmentPlane(p2, p0, plane, u1);
@@ -959,18 +945,11 @@ IntersectionTests.trianglePlaneIntersection = function (p0, p1, p2, plane) {
         positions: [p0, p1, p2, u1, u2],
         indices: [
           // Behind
-          2,
-          3,
-          4,
+          2, 3, 4,
 
           // In front
-          0,
-          1,
-          4,
-          0,
-          4,
-          3,
-        ],
+          0, 1, 4, 0, 4, 3
+        ]
       };
     }
   } else if (numBehind === 2) {
@@ -982,18 +961,11 @@ IntersectionTests.trianglePlaneIntersection = function (p0, p1, p2, plane) {
         positions: [p0, p1, p2, u1, u2],
         indices: [
           // Behind
-          1,
-          2,
-          4,
-          1,
-          4,
-          3,
+          1, 2, 4, 1, 4, 3,
 
           // In front
-          0,
-          3,
-          4,
-        ],
+          0, 3, 4
+        ]
       };
     } else if (!p1Behind) {
       IntersectionTests.lineSegmentPlane(p2, p1, plane, u1);
@@ -1003,18 +975,11 @@ IntersectionTests.trianglePlaneIntersection = function (p0, p1, p2, plane) {
         positions: [p0, p1, p2, u1, u2],
         indices: [
           // Behind
-          2,
-          0,
-          4,
-          2,
-          4,
-          3,
+          2, 0, 4, 2, 4, 3,
 
           // In front
-          1,
-          3,
-          4,
-        ],
+          1, 3, 4
+        ]
       };
     } else if (!p2Behind) {
       IntersectionTests.lineSegmentPlane(p0, p2, plane, u1);
@@ -1024,18 +989,11 @@ IntersectionTests.trianglePlaneIntersection = function (p0, p1, p2, plane) {
         positions: [p0, p1, p2, u1, u2],
         indices: [
           // Behind
-          0,
-          1,
-          4,
-          0,
-          4,
-          3,
+          0, 1, 4, 0, 4, 3,
 
           // In front
-          2,
-          3,
-          4,
-        ],
+          2, 3, 4
+        ]
       };
     }
   }

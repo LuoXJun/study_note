@@ -1,16 +1,16 @@
-import defined from "../../Core/defined.js";
-import defaultValue from "../../Core/defaultValue.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import AlphaMode from "../AlphaMode.js";
-import LightingModel from "./LightingModel.js";
-import MaterialStageFS from "../../Shaders/ModelExperimental/MaterialStageFS.js";
-import Pass from "../../Renderer/Pass.js";
-import Matrix3 from "../../Core/Matrix3.js";
-import Cartesian3 from "../../Core/Cartesian3.js";
-import Cartesian4 from "../../Core/Cartesian4.js";
-import ModelComponents from "../ModelComponents.js";
-import VertexAttributeSemantic from "../VertexAttributeSemantic.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
+import defined from '../../Core/defined.js';
+import defaultValue from '../../Core/defaultValue.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import AlphaMode from '../AlphaMode.js';
+import LightingModel from './LightingModel.js';
+import MaterialStageFS from '../../Shaders/ModelExperimental/MaterialStageFS.js';
+import Pass from '../../Renderer/Pass.js';
+import Matrix3 from '../../Core/Matrix3.js';
+import Cartesian3 from '../../Core/Cartesian3.js';
+import Cartesian4 from '../../Core/Cartesian4.js';
+import ModelComponents from '../ModelComponents.js';
+import VertexAttributeSemantic from '../VertexAttributeSemantic.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
 
 const Material = ModelComponents.Material;
 const MetallicRoughness = ModelComponents.MetallicRoughness;
@@ -30,7 +30,7 @@ const SpecularGlossiness = ModelComponents.SpecularGlossiness;
  * @private
  */
 const MaterialPipelineStage = {};
-MaterialPipelineStage.name = "MaterialPipelineStage"; // Helps with debugging
+MaterialPipelineStage.name = 'MaterialPipelineStage'; // Helps with debugging
 
 /**
  * Process a primitive. This modifies the following parts of the render
@@ -106,7 +106,7 @@ MaterialPipelineStage.process = function (
   const cull = model.backFaceCulling && !material.doubleSided;
   const translucent = defined(model.color) && model.color.alpha < 1.0;
   renderResources.renderStateOptions.cull = {
-    enabled: cull && !translucent,
+    enabled: cull && !translucent
   };
 
   const alphaOptions = renderResources.alphaOptions;
@@ -125,7 +125,7 @@ MaterialPipelineStage.process = function (
   // to disable normal mapping.
   if (model.debugWireframe) {
     shaderBuilder.addDefine(
-      "USE_WIREFRAME",
+      'USE_WIREFRAME',
       undefined,
       ShaderDestination.FRAGMENT
     );
@@ -161,7 +161,7 @@ function processTextureTransform(
   // Add a uniform for the transformation matrix
   const transformUniformName = `${uniformName}Transform`;
   shaderBuilder.addUniform(
-    "mat3",
+    'mat3',
     transformUniformName,
     ShaderDestination.FRAGMENT
   );
@@ -191,7 +191,7 @@ function processTexture(
 ) {
   // Add a uniform for the texture itself
   shaderBuilder.addUniform(
-    "sampler2D",
+    'sampler2D',
     uniformName,
     ShaderDestination.FRAGMENT
   );
@@ -244,8 +244,8 @@ function processMaterialUniforms(
       shaderBuilder,
       uniformMap,
       emissiveTexture,
-      "u_emissiveTexture",
-      "EMISSIVE",
+      'u_emissiveTexture',
+      'EMISSIVE',
       defaultEmissiveTexture
     );
   }
@@ -256,15 +256,15 @@ function processMaterialUniforms(
     !Cartesian3.equals(emissiveFactor, Material.DEFAULT_EMISSIVE_FACTOR)
   ) {
     shaderBuilder.addUniform(
-      "vec3",
-      "u_emissiveFactor",
+      'vec3',
+      'u_emissiveFactor',
       ShaderDestination.FRAGMENT
     );
     uniformMap.u_emissiveFactor = function () {
       return material.emissiveFactor;
     };
     shaderBuilder.addDefine(
-      "HAS_EMISSIVE_FACTOR",
+      'HAS_EMISSIVE_FACTOR',
       undefined,
       ShaderDestination.FRAGMENT
     );
@@ -276,8 +276,8 @@ function processMaterialUniforms(
       shaderBuilder,
       uniformMap,
       normalTexture,
-      "u_normalTexture",
-      "NORMAL",
+      'u_normalTexture',
+      'NORMAL',
       defaultNormalTexture
     );
   }
@@ -288,8 +288,8 @@ function processMaterialUniforms(
       shaderBuilder,
       uniformMap,
       occlusionTexture,
-      "u_occlusionTexture",
-      "OCCLUSION",
+      'u_occlusionTexture',
+      'OCCLUSION',
       defaultTexture
     );
   }
@@ -303,7 +303,7 @@ function processSpecularGlossinessUniforms(
 ) {
   const specularGlossiness = material.specularGlossiness;
   shaderBuilder.addDefine(
-    "USE_SPECULAR_GLOSSINESS",
+    'USE_SPECULAR_GLOSSINESS',
     undefined,
     ShaderDestination.FRAGMENT
   );
@@ -314,8 +314,8 @@ function processSpecularGlossinessUniforms(
       shaderBuilder,
       uniformMap,
       diffuseTexture,
-      "u_diffuseTexture",
-      "DIFFUSE",
+      'u_diffuseTexture',
+      'DIFFUSE',
       defaultTexture
     );
   }
@@ -326,15 +326,15 @@ function processSpecularGlossinessUniforms(
     !Cartesian4.equals(diffuseFactor, SpecularGlossiness.DEFAULT_DIFFUSE_FACTOR)
   ) {
     shaderBuilder.addUniform(
-      "vec4",
-      "u_diffuseFactor",
+      'vec4',
+      'u_diffuseFactor',
       ShaderDestination.FRAGMENT
     );
     uniformMap.u_diffuseFactor = function () {
       return specularGlossiness.diffuseFactor;
     };
     shaderBuilder.addDefine(
-      "HAS_DIFFUSE_FACTOR",
+      'HAS_DIFFUSE_FACTOR',
       undefined,
       ShaderDestination.FRAGMENT
     );
@@ -347,8 +347,8 @@ function processSpecularGlossinessUniforms(
       shaderBuilder,
       uniformMap,
       specularGlossinessTexture,
-      "u_specularGlossinessTexture",
-      "SPECULAR_GLOSSINESS",
+      'u_specularGlossinessTexture',
+      'SPECULAR_GLOSSINESS',
       defaultTexture
     );
   }
@@ -362,15 +362,15 @@ function processSpecularGlossinessUniforms(
     )
   ) {
     shaderBuilder.addUniform(
-      "vec3",
-      "u_specularFactor",
+      'vec3',
+      'u_specularFactor',
       ShaderDestination.FRAGMENT
     );
     uniformMap.u_specularFactor = function () {
       return specularGlossiness.specularFactor;
     };
     shaderBuilder.addDefine(
-      "HAS_SPECULAR_FACTOR",
+      'HAS_SPECULAR_FACTOR',
       undefined,
       ShaderDestination.FRAGMENT
     );
@@ -382,15 +382,15 @@ function processSpecularGlossinessUniforms(
     glossinessFactor !== SpecularGlossiness.DEFAULT_GLOSSINESS_FACTOR
   ) {
     shaderBuilder.addUniform(
-      "float",
-      "u_glossinessFactor",
+      'float',
+      'u_glossinessFactor',
       ShaderDestination.FRAGMENT
     );
     uniformMap.u_glossinessFactor = function () {
       return specularGlossiness.glossinessFactor;
     };
     shaderBuilder.addDefine(
-      "HAS_GLOSSINESS_FACTOR",
+      'HAS_GLOSSINESS_FACTOR',
       undefined,
       ShaderDestination.FRAGMENT
     );
@@ -405,7 +405,7 @@ function processMetallicRoughnessUniforms(
 ) {
   const metallicRoughness = material.metallicRoughness;
   shaderBuilder.addDefine(
-    "USE_METALLIC_ROUGHNESS",
+    'USE_METALLIC_ROUGHNESS',
     undefined,
     ShaderDestination.FRAGMENT
   );
@@ -416,8 +416,8 @@ function processMetallicRoughnessUniforms(
       shaderBuilder,
       uniformMap,
       baseColorTexture,
-      "u_baseColorTexture",
-      "BASE_COLOR",
+      'u_baseColorTexture',
+      'BASE_COLOR',
       defaultTexture
     );
   }
@@ -431,15 +431,15 @@ function processMetallicRoughnessUniforms(
     )
   ) {
     shaderBuilder.addUniform(
-      "vec4",
-      "u_baseColorFactor",
+      'vec4',
+      'u_baseColorFactor',
       ShaderDestination.FRAGMENT
     );
     uniformMap.u_baseColorFactor = function () {
       return metallicRoughness.baseColorFactor;
     };
     shaderBuilder.addDefine(
-      "HAS_BASE_COLOR_FACTOR",
+      'HAS_BASE_COLOR_FACTOR',
       undefined,
       ShaderDestination.FRAGMENT
     );
@@ -451,8 +451,8 @@ function processMetallicRoughnessUniforms(
       shaderBuilder,
       uniformMap,
       metallicRoughnessTexture,
-      "u_metallicRoughnessTexture",
-      "METALLIC_ROUGHNESS",
+      'u_metallicRoughnessTexture',
+      'METALLIC_ROUGHNESS',
       defaultTexture
     );
   }
@@ -463,15 +463,15 @@ function processMetallicRoughnessUniforms(
     metallicFactor !== MetallicRoughness.DEFAULT_METALLIC_FACTOR
   ) {
     shaderBuilder.addUniform(
-      "float",
-      "u_metallicFactor",
+      'float',
+      'u_metallicFactor',
       ShaderDestination.FRAGMENT
     );
     uniformMap.u_metallicFactor = function () {
       return metallicRoughness.metallicFactor;
     };
     shaderBuilder.addDefine(
-      "HAS_METALLIC_FACTOR",
+      'HAS_METALLIC_FACTOR',
       undefined,
       ShaderDestination.FRAGMENT
     );
@@ -483,15 +483,15 @@ function processMetallicRoughnessUniforms(
     roughnessFactor !== MetallicRoughness.DEFAULT_ROUGHNESS_FACTOR
   ) {
     shaderBuilder.addUniform(
-      "float",
-      "u_roughnessFactor",
+      'float',
+      'u_roughnessFactor',
       ShaderDestination.FRAGMENT
     );
     uniformMap.u_roughnessFactor = function () {
       return metallicRoughness.roughnessFactor;
     };
     shaderBuilder.addDefine(
-      "HAS_ROUGHNESS_FACTOR",
+      'HAS_ROUGHNESS_FACTOR',
       undefined,
       ShaderDestination.FRAGMENT
     );

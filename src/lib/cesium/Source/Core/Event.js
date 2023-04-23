@@ -1,5 +1,5 @@
-import Check from "./Check.js";
-import defined from "./defined.js";
+import Check from './Check.js';
+import defined from './defined.js';
 
 /**
  * A generic utility class for managing subscribers for a particular event.
@@ -38,8 +38,8 @@ Object.defineProperties(Event.prototype, {
   numberOfListeners: {
     get: function () {
       return this._listeners.length - this._toRemove.length;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -57,7 +57,7 @@ Object.defineProperties(Event.prototype, {
  */
 Event.prototype.addEventListener = function (listener, scope) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.func("listener", listener);
+  Check.typeOf.func('listener', listener);
   //>>includeEnd('debug');
 
   this._listeners.push(listener);
@@ -81,7 +81,7 @@ Event.prototype.addEventListener = function (listener, scope) {
  */
 Event.prototype.removeEventListener = function (listener, scope) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.func("listener", listener);
+  Check.typeOf.func('listener', listener);
   //>>includeEnd('debug');
 
   const listeners = this._listeners;

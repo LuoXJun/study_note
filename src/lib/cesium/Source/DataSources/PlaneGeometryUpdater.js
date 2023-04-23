@@ -1,24 +1,24 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DistanceDisplayConditionGeometryInstanceAttribute from "../Core/DistanceDisplayConditionGeometryInstanceAttribute.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import Iso8601 from "../Core/Iso8601.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
-import PlaneGeometry from "../Core/PlaneGeometry.js";
-import PlaneOutlineGeometry from "../Core/PlaneOutlineGeometry.js";
-import ShowGeometryInstanceAttribute from "../Core/ShowGeometryInstanceAttribute.js";
-import MaterialAppearance from "../Scene/MaterialAppearance.js";
-import PerInstanceColorAppearance from "../Scene/PerInstanceColorAppearance.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import DynamicGeometryUpdater from "./DynamicGeometryUpdater.js";
-import GeometryUpdater from "./GeometryUpdater.js";
-import Property from "./Property.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DistanceDisplayConditionGeometryInstanceAttribute from '../Core/DistanceDisplayConditionGeometryInstanceAttribute.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import Iso8601 from '../Core/Iso8601.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
+import PlaneGeometry from '../Core/PlaneGeometry.js';
+import PlaneOutlineGeometry from '../Core/PlaneOutlineGeometry.js';
+import ShowGeometryInstanceAttribute from '../Core/ShowGeometryInstanceAttribute.js';
+import MaterialAppearance from '../Scene/MaterialAppearance.js';
+import PerInstanceColorAppearance from '../Scene/PerInstanceColorAppearance.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import DynamicGeometryUpdater from './DynamicGeometryUpdater.js';
+import GeometryUpdater from './GeometryUpdater.js';
+import Property from './Property.js';
 
 const positionScratch = new Cartesian3();
 const scratchColor = new Color();
@@ -44,11 +44,11 @@ function PlaneGeometryUpdater(entity, scene) {
     entity: entity,
     scene: scene,
     geometryOptions: new PlaneGeometryOptions(entity),
-    geometryPropertyName: "plane",
-    observedPropertyNames: ["availability", "position", "orientation", "plane"],
+    geometryPropertyName: 'plane',
+    observedPropertyNames: ['availability', 'position', 'orientation', 'plane']
   });
 
-  this._onEntityPropertyChanged(entity, "plane", entity.plane, undefined);
+  this._onEntityPropertyChanged(entity, 'plane', entity.plane, undefined);
 }
 
 if (defined(Object.create)) {
@@ -66,11 +66,11 @@ if (defined(Object.create)) {
  */
 PlaneGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
 
   if (!this._fillEnabled) {
     throw new DeveloperError(
-      "This instance does not represent a filled geometry."
+      'This instance does not represent a filled geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -87,12 +87,12 @@ PlaneGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
       this._showProperty.getValue(time) &&
       this._fillProperty.getValue(time)
   );
-  const distanceDisplayCondition = this._distanceDisplayConditionProperty.getValue(
-    time
-  );
-  const distanceDisplayConditionAttribute = DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-    distanceDisplayCondition
-  );
+  const distanceDisplayCondition =
+    this._distanceDisplayConditionProperty.getValue(time);
+  const distanceDisplayConditionAttribute =
+    DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+      distanceDisplayCondition
+    );
   if (this._materialProperty instanceof ColorMaterialProperty) {
     let currentColor;
     if (
@@ -108,12 +108,12 @@ PlaneGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
     attributes = {
       show: show,
       distanceDisplayCondition: distanceDisplayConditionAttribute,
-      color: color,
+      color: color
     };
   } else {
     attributes = {
       show: show,
-      distanceDisplayCondition: distanceDisplayConditionAttribute,
+      distanceDisplayCondition: distanceDisplayConditionAttribute
     };
   }
 
@@ -145,7 +145,7 @@ PlaneGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
     id: entity,
     geometry: new PlaneGeometry(this._options),
     modelMatrix: modelMatrix,
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -159,11 +159,11 @@ PlaneGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
  */
 PlaneGeometryUpdater.prototype.createOutlineGeometryInstance = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
 
   if (!this._outlineEnabled) {
     throw new DeveloperError(
-      "This instance does not represent an outlined geometry."
+      'This instance does not represent an outlined geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -176,9 +176,8 @@ PlaneGeometryUpdater.prototype.createOutlineGeometryInstance = function (time) {
     Color.BLACK,
     scratchColor
   );
-  const distanceDisplayCondition = this._distanceDisplayConditionProperty.getValue(
-    time
-  );
+  const distanceDisplayCondition =
+    this._distanceDisplayConditionProperty.getValue(time);
 
   const planeGraphics = entity.plane;
   const options = this._options;
@@ -216,10 +215,11 @@ PlaneGeometryUpdater.prototype.createOutlineGeometryInstance = function (time) {
           this._showOutlineProperty.getValue(time)
       ),
       color: ColorGeometryInstanceAttribute.fromColor(outlineColor),
-      distanceDisplayCondition: DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-        distanceDisplayCondition
-      ),
-    },
+      distanceDisplayCondition:
+        DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+          distanceDisplayCondition
+        )
+    }
   });
 };
 
@@ -283,7 +283,8 @@ if (defined(Object.create)) {
   DynamicPlaneGeometryUpdater.prototype = Object.create(
     DynamicGeometryUpdater.prototype
   );
-  DynamicPlaneGeometryUpdater.prototype.constructor = DynamicPlaneGeometryUpdater;
+  DynamicPlaneGeometryUpdater.prototype.constructor =
+    DynamicPlaneGeometryUpdater;
 }
 
 DynamicPlaneGeometryUpdater.prototype._isHidden = function (

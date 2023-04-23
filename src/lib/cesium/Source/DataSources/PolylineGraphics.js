@@ -1,9 +1,9 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import createMaterialPropertyDescriptor from "./createMaterialPropertyDescriptor.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import createMaterialPropertyDescriptor from './createMaterialPropertyDescriptor.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
 
 /**
  * @typedef {Object} PolylineGraphics.ConstructorOptions
@@ -78,7 +78,7 @@ Object.defineProperties(PolylineGraphics.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -87,7 +87,7 @@ Object.defineProperties(PolylineGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  show: createPropertyDescriptor("show"),
+  show: createPropertyDescriptor('show'),
 
   /**
    * Gets or sets the Property specifying the array of {@link Cartesian3}
@@ -95,7 +95,7 @@ Object.defineProperties(PolylineGraphics.prototype, {
    * @memberof PolylineGraphics.prototype
    * @type {Property|undefined}
    */
-  positions: createPropertyDescriptor("positions"),
+  positions: createPropertyDescriptor('positions'),
 
   /**
    * Gets or sets the numeric Property specifying the width in pixels.
@@ -103,7 +103,7 @@ Object.defineProperties(PolylineGraphics.prototype, {
    * @type {Property|undefined}
    * @default 1.0
    */
-  width: createPropertyDescriptor("width"),
+  width: createPropertyDescriptor('width'),
 
   /**
    * Gets or sets the numeric Property specifying the angular distance between each latitude and longitude if arcType is not ArcType.NONE and clampToGround is false.
@@ -111,7 +111,7 @@ Object.defineProperties(PolylineGraphics.prototype, {
    * @type {Property|undefined}
    * @default Cesium.Math.RADIANS_PER_DEGREE
    */
-  granularity: createPropertyDescriptor("granularity"),
+  granularity: createPropertyDescriptor('granularity'),
 
   /**
    * Gets or sets the Property specifying the material used to draw the polyline.
@@ -119,7 +119,7 @@ Object.defineProperties(PolylineGraphics.prototype, {
    * @type {MaterialProperty}
    * @default Color.WHITE
    */
-  material: createMaterialPropertyDescriptor("material"),
+  material: createMaterialPropertyDescriptor('material'),
 
   /**
    * Gets or sets the Property specifying the material used to draw the polyline when it fails the depth test.
@@ -131,7 +131,7 @@ Object.defineProperties(PolylineGraphics.prototype, {
    * @type {MaterialProperty}
    * @default undefined
    */
-  depthFailMaterial: createMaterialPropertyDescriptor("depthFailMaterial"),
+  depthFailMaterial: createMaterialPropertyDescriptor('depthFailMaterial'),
 
   /**
    * Gets or sets the {@link ArcType} Property specifying whether the line segments should be great arcs, rhumb lines or linearly connected.
@@ -139,7 +139,7 @@ Object.defineProperties(PolylineGraphics.prototype, {
    * @type {Property|undefined}
    * @default ArcType.GEODESIC
    */
-  arcType: createPropertyDescriptor("arcType"),
+  arcType: createPropertyDescriptor('arcType'),
 
   /**
    * Gets or sets the boolean Property specifying whether the polyline
@@ -148,7 +148,7 @@ Object.defineProperties(PolylineGraphics.prototype, {
    * @type {Property|undefined}
    * @default false
    */
-  clampToGround: createPropertyDescriptor("clampToGround"),
+  clampToGround: createPropertyDescriptor('clampToGround'),
 
   /**
    * Get or sets the enum Property specifying whether the polyline
@@ -157,7 +157,7 @@ Object.defineProperties(PolylineGraphics.prototype, {
    * @type {Property|undefined}
    * @default ShadowMode.DISABLED
    */
-  shadows: createPropertyDescriptor("shadows"),
+  shadows: createPropertyDescriptor('shadows'),
 
   /**
    * Gets or sets the {@link DistanceDisplayCondition} Property specifying at what distance from the camera that this polyline will be displayed.
@@ -165,7 +165,7 @@ Object.defineProperties(PolylineGraphics.prototype, {
    * @type {Property|undefined}
    */
   distanceDisplayCondition: createPropertyDescriptor(
-    "distanceDisplayCondition"
+    'distanceDisplayCondition'
   ),
 
   /**
@@ -174,7 +174,7 @@ Object.defineProperties(PolylineGraphics.prototype, {
    * @type {Property|undefined}
    * @default ClassificationType.BOTH
    */
-  classificationType: createPropertyDescriptor("classificationType"),
+  classificationType: createPropertyDescriptor('classificationType'),
 
   /**
    * Gets or sets the zIndex Property specifying the ordering of the polyline. Only has an effect if `clampToGround` is true and polylines on terrain is supported.
@@ -182,7 +182,7 @@ Object.defineProperties(PolylineGraphics.prototype, {
    * @type {ConstantProperty|undefined}
    * @default 0
    */
-  zIndex: createPropertyDescriptor("zIndex"),
+  zIndex: createPropertyDescriptor('zIndex')
 });
 
 /**
@@ -219,7 +219,7 @@ PolylineGraphics.prototype.clone = function (result) {
 PolylineGraphics.prototype.merge = function (source) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
-    throw new DeveloperError("source is required.");
+    throw new DeveloperError('source is required.');
   }
   //>>includeEnd('debug');
 

@@ -1,5 +1,20 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './arrayRemoveDuplicates-06991c15', './Matrix2-fc7e9822', './defaultValue-94c3e563', './ComponentDatatype-4a60b8d6', './PolylinePipeline-0e310844'], (function (exports, arrayRemoveDuplicates, Matrix2, defaultValue, ComponentDatatype, PolylinePipeline) { 'use strict';
+define([
+  'exports',
+  './arrayRemoveDuplicates-06991c15',
+  './Matrix2-fc7e9822',
+  './defaultValue-94c3e563',
+  './ComponentDatatype-4a60b8d6',
+  './PolylinePipeline-0e310844'
+], function (
+  exports,
+  arrayRemoveDuplicates,
+  Matrix2,
+  defaultValue,
+  ComponentDatatype,
+  PolylinePipeline
+) {
+  'use strict';
 
   /**
    * @private
@@ -8,15 +23,26 @@ define(['exports', './arrayRemoveDuplicates-06991c15', './Matrix2-fc7e9822', './
 
   function latLonEquals(c0, c1) {
     return (
-      ComponentDatatype.CesiumMath.equalsEpsilon(c0.latitude, c1.latitude, ComponentDatatype.CesiumMath.EPSILON10) &&
-      ComponentDatatype.CesiumMath.equalsEpsilon(c0.longitude, c1.longitude, ComponentDatatype.CesiumMath.EPSILON10)
+      ComponentDatatype.CesiumMath.equalsEpsilon(
+        c0.latitude,
+        c1.latitude,
+        ComponentDatatype.CesiumMath.EPSILON10
+      ) &&
+      ComponentDatatype.CesiumMath.equalsEpsilon(
+        c0.longitude,
+        c1.longitude,
+        ComponentDatatype.CesiumMath.EPSILON10
+      )
     );
   }
 
   const scratchCartographic1 = new Matrix2.Cartographic();
   const scratchCartographic2 = new Matrix2.Cartographic();
   function removeDuplicates(ellipsoid, positions, topHeights, bottomHeights) {
-    positions = arrayRemoveDuplicates.arrayRemoveDuplicates(positions, Matrix2.Cartesian3.equalsEpsilon);
+    positions = arrayRemoveDuplicates.arrayRemoveDuplicates(
+      positions,
+      Matrix2.Cartesian3.equalsEpsilon
+    );
 
     const length = positions.length;
     if (length < 2) {
@@ -91,7 +117,7 @@ define(['exports', './arrayRemoveDuplicates-06991c15', './Matrix2-fc7e9822', './
     return {
       positions: cleanedPositions,
       topHeights: cleanedTopHeights,
-      bottomHeights: cleanedBottomHeights,
+      bottomHeights: cleanedBottomHeights
     };
   }
 
@@ -101,7 +127,7 @@ define(['exports', './arrayRemoveDuplicates-06991c15', './Matrix2-fc7e9822', './
     positions: undefined,
     height: undefined,
     granularity: undefined,
-    ellipsoid: undefined,
+    ellipsoid: undefined
   };
 
   /**
@@ -173,7 +199,8 @@ define(['exports', './arrayRemoveDuplicates-06991c15', './Matrix2-fc7e9822', './
         generateArcHeights[0] = maximumHeights[i];
         generateArcHeights[1] = maximumHeights[i + 1];
 
-        const pos = PolylinePipeline.PolylinePipeline.generateArc(generateArcOptions);
+        const pos =
+          PolylinePipeline.PolylinePipeline.generateArc(generateArcOptions);
         topPositions.set(pos, offset);
 
         generateArcHeights[0] = minimumHeights[i];
@@ -202,10 +229,9 @@ define(['exports', './arrayRemoveDuplicates-06991c15', './Matrix2-fc7e9822', './
     return {
       bottomPositions: bottomPositions,
       topPositions: topPositions,
-      numCorners: numCorners,
+      numCorners: numCorners
     };
   };
 
   exports.WallGeometryLibrary = WallGeometryLibrary;
-
-}));
+});

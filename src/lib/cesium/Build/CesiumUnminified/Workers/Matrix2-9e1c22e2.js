@@ -23,7 +23,13 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './ComponentDatatype-4eeb6d9b'], (function (exports, RuntimeError, defaultValue, ComponentDatatype) { 'use strict';
+define([
+  'exports',
+  './RuntimeError-4f8ec8a2',
+  './defaultValue-97284df2',
+  './ComponentDatatype-4eeb6d9b'
+], function (exports, RuntimeError, defaultValue, ComponentDatatype) {
+  'use strict';
 
   /**
    * A 3D Cartesian point.
@@ -70,7 +76,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.fromSpherical = function (spherical, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("spherical", spherical);
+    RuntimeError.Check.typeOf.object('spherical', spherical);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -156,8 +162,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -179,7 +185,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -202,7 +208,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.packArray = function (array, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     const length = array.length;
@@ -212,7 +218,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     } else if (!Array.isArray(result) && result.length !== resultLength) {
       //>>includeStart('debug', pragmas.debug);
       throw new RuntimeError.DeveloperError(
-        "If result is a typed array, it must have exactly array.length * 3 elements"
+        'If result is a typed array, it must have exactly array.length * 3 elements'
       );
       //>>includeEnd('debug');
     } else if (result.length !== resultLength) {
@@ -234,10 +240,16 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.unpackArray = function (array, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("array.length", array.length, 3);
+    RuntimeError.Check.defined('array', array);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'array.length',
+      array.length,
+      3
+    );
     if (array.length % 3 !== 0) {
-      throw new RuntimeError.DeveloperError("array length must be a multiple of 3.");
+      throw new RuntimeError.DeveloperError(
+        'array length must be a multiple of 3.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -283,7 +295,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.maximumComponent = function (cartesian) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
     //>>includeEnd('debug');
 
     return Math.max(cartesian.x, cartesian.y, cartesian.z);
@@ -297,7 +309,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.minimumComponent = function (cartesian) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
     //>>includeEnd('debug');
 
     return Math.min(cartesian.x, cartesian.y, cartesian.z);
@@ -313,9 +325,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.minimumByComponent = function (first, second, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("first", first);
-    RuntimeError.Check.typeOf.object("second", second);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('first', first);
+    RuntimeError.Check.typeOf.object('second', second);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = Math.min(first.x, second.x);
@@ -335,9 +347,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.maximumByComponent = function (first, second, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("first", first);
-    RuntimeError.Check.typeOf.object("second", second);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('first', first);
+    RuntimeError.Check.typeOf.object('second', second);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = Math.max(first.x, second.x);
@@ -357,10 +369,10 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.clamp = function (value, min, max, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.typeOf.object("min", min);
-    RuntimeError.Check.typeOf.object("max", max);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.typeOf.object('min', min);
+    RuntimeError.Check.typeOf.object('max', max);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const x = ComponentDatatype.CesiumMath.clamp(value.x, min.x, max.x);
@@ -382,7 +394,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.magnitudeSquared = function (cartesian) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
     //>>includeEnd('debug');
 
     return (
@@ -417,8 +429,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.distance = function (left, right) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
     //>>includeEnd('debug');
 
     Cartesian3.subtract(left, right, distanceScratch$2);
@@ -439,8 +451,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.distanceSquared = function (left, right) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
     //>>includeEnd('debug');
 
     Cartesian3.subtract(left, right, distanceScratch$2);
@@ -456,8 +468,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.normalize = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const magnitude = Cartesian3.magnitude(cartesian);
@@ -468,7 +480,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
 
     //>>includeStart('debug', pragmas.debug);
     if (isNaN(result.x) || isNaN(result.y) || isNaN(result.z)) {
-      throw new RuntimeError.DeveloperError("normalized result is not a number");
+      throw new RuntimeError.DeveloperError(
+        'normalized result is not a number'
+      );
     }
     //>>includeEnd('debug');
 
@@ -484,8 +498,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.dot = function (left, right) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
     //>>includeEnd('debug');
 
     return left.x * right.x + left.y * right.y + left.z * right.z;
@@ -501,9 +515,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.multiplyComponents = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = left.x * right.x;
@@ -522,9 +536,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.divideComponents = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = left.x / right.x;
@@ -543,9 +557,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.add = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = left.x + right.x;
@@ -564,9 +578,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.subtract = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = left.x - right.x;
@@ -585,9 +599,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.multiplyByScalar = function (cartesian, scalar, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.number("scalar", scalar);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.number('scalar', scalar);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = cartesian.x * scalar;
@@ -606,9 +620,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.divideByScalar = function (cartesian, scalar, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.number("scalar", scalar);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.number('scalar', scalar);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = cartesian.x / scalar;
@@ -626,8 +640,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.negate = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = -cartesian.x;
@@ -645,8 +659,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.abs = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = Math.abs(cartesian.x);
@@ -667,10 +681,10 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.lerp = function (start, end, t, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("start", start);
-    RuntimeError.Check.typeOf.object("end", end);
-    RuntimeError.Check.typeOf.number("t", t);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('start', start);
+    RuntimeError.Check.typeOf.object('end', end);
+    RuntimeError.Check.typeOf.number('t', t);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     Cartesian3.multiplyByScalar(end, t, lerpScratch$2);
@@ -689,13 +703,16 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.angleBetween = function (left, right) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
     //>>includeEnd('debug');
 
     Cartesian3.normalize(left, angleBetweenScratch$1);
     Cartesian3.normalize(right, angleBetweenScratch2$1);
-    const cosine = Cartesian3.dot(angleBetweenScratch$1, angleBetweenScratch2$1);
+    const cosine = Cartesian3.dot(
+      angleBetweenScratch$1,
+      angleBetweenScratch2$1
+    );
     const sine = Cartesian3.magnitude(
       Cartesian3.cross(
         angleBetweenScratch$1,
@@ -716,8 +733,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.mostOrthogonalAxis = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const f = Cartesian3.normalize(cartesian, mostOrthogonalAxisScratch$2);
@@ -747,9 +764,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.projectVector = function (a, b, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("a", a);
-    RuntimeError.Check.defined("b", b);
-    RuntimeError.Check.defined("result", result);
+    RuntimeError.Check.defined('a', a);
+    RuntimeError.Check.defined('b', b);
+    RuntimeError.Check.defined('result', result);
     //>>includeEnd('debug');
 
     const scalar = Cartesian3.dot(a, b) / Cartesian3.dot(b, b);
@@ -838,9 +855,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.cross = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const leftX = left.x;
@@ -869,9 +886,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.midpoint = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = (left.x + right.x) * 0.5;
@@ -902,13 +919,19 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("longitude", longitude);
-    RuntimeError.Check.typeOf.number("latitude", latitude);
+    RuntimeError.Check.typeOf.number('longitude', longitude);
+    RuntimeError.Check.typeOf.number('latitude', latitude);
     //>>includeEnd('debug');
 
     longitude = ComponentDatatype.CesiumMath.toRadians(longitude);
     latitude = ComponentDatatype.CesiumMath.toRadians(latitude);
-    return Cartesian3.fromRadians(longitude, latitude, height, ellipsoid, result);
+    return Cartesian3.fromRadians(
+      longitude,
+      latitude,
+      height,
+      ellipsoid,
+      result
+    );
   };
 
   let scratchN = new Cartesian3();
@@ -940,8 +963,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("longitude", longitude);
-    RuntimeError.Check.typeOf.number("latitude", latitude);
+    RuntimeError.Check.typeOf.number('longitude', longitude);
+    RuntimeError.Check.typeOf.number('latitude', latitude);
     //>>includeEnd('debug');
 
     height = defaultValue.defaultValue(height, 0.0);
@@ -979,10 +1002,10 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.fromDegreesArray = function (coordinates, ellipsoid, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("coordinates", coordinates);
+    RuntimeError.Check.defined('coordinates', coordinates);
     if (coordinates.length < 2 || coordinates.length % 2 !== 0) {
       throw new RuntimeError.DeveloperError(
-        "the number of coordinates must be a multiple of 2 and at least 2"
+        'the number of coordinates must be a multiple of 2 and at least 2'
       );
     }
     //>>includeEnd('debug');
@@ -1023,10 +1046,10 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian3.fromRadiansArray = function (coordinates, ellipsoid, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("coordinates", coordinates);
+    RuntimeError.Check.defined('coordinates', coordinates);
     if (coordinates.length < 2 || coordinates.length % 2 !== 0) {
       throw new RuntimeError.DeveloperError(
-        "the number of coordinates must be a multiple of 2 and at least 2"
+        'the number of coordinates must be a multiple of 2 and at least 2'
       );
     }
     //>>includeEnd('debug');
@@ -1065,12 +1088,16 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    * @example
    * const positions = Cesium.Cartesian3.fromDegreesArrayHeights([-115.0, 37.0, 100000.0, -107.0, 33.0, 150000.0]);
    */
-  Cartesian3.fromDegreesArrayHeights = function (coordinates, ellipsoid, result) {
+  Cartesian3.fromDegreesArrayHeights = function (
+    coordinates,
+    ellipsoid,
+    result
+  ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("coordinates", coordinates);
+    RuntimeError.Check.defined('coordinates', coordinates);
     if (coordinates.length < 3 || coordinates.length % 3 !== 0) {
       throw new RuntimeError.DeveloperError(
-        "the number of coordinates must be a multiple of 3 and at least 3"
+        'the number of coordinates must be a multiple of 3 and at least 3'
       );
     }
     //>>includeEnd('debug');
@@ -1110,12 +1137,16 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    * @example
    * const positions = Cesium.Cartesian3.fromRadiansArrayHeights([-2.007, 0.645, 100000.0, -1.867, .575, 150000.0]);
    */
-  Cartesian3.fromRadiansArrayHeights = function (coordinates, ellipsoid, result) {
+  Cartesian3.fromRadiansArrayHeights = function (
+    coordinates,
+    ellipsoid,
+    result
+  ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("coordinates", coordinates);
+    RuntimeError.Check.defined('coordinates', coordinates);
     if (coordinates.length < 3 || coordinates.length % 3 !== 0) {
       throw new RuntimeError.DeveloperError(
-        "the number of coordinates must be a multiple of 3 and at least 3"
+        'the number of coordinates must be a multiple of 3 and at least 3'
       );
     }
     //>>includeEnd('debug');
@@ -1265,16 +1296,18 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(cartesian)) {
-      throw new RuntimeError.DeveloperError("cartesian is required.");
+      throw new RuntimeError.DeveloperError('cartesian is required.');
     }
     if (!defaultValue.defined(oneOverRadii)) {
-      throw new RuntimeError.DeveloperError("oneOverRadii is required.");
+      throw new RuntimeError.DeveloperError('oneOverRadii is required.');
     }
     if (!defaultValue.defined(oneOverRadiiSquared)) {
-      throw new RuntimeError.DeveloperError("oneOverRadiiSquared is required.");
+      throw new RuntimeError.DeveloperError('oneOverRadiiSquared is required.');
     }
     if (!defaultValue.defined(centerToleranceSquared)) {
-      throw new RuntimeError.DeveloperError("centerToleranceSquared is required.");
+      throw new RuntimeError.DeveloperError(
+        'centerToleranceSquared is required.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -1425,8 +1458,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartographic.fromRadians = function (longitude, latitude, height, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("longitude", longitude);
-    RuntimeError.Check.typeOf.number("latitude", latitude);
+    RuntimeError.Check.typeOf.number('longitude', longitude);
+    RuntimeError.Check.typeOf.number('latitude', latitude);
     //>>includeEnd('debug');
 
     height = defaultValue.defaultValue(height, 0.0);
@@ -1454,8 +1487,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartographic.fromDegrees = function (longitude, latitude, height, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("longitude", longitude);
-    RuntimeError.Check.typeOf.number("latitude", latitude);
+    RuntimeError.Check.typeOf.number('longitude', longitude);
+    RuntimeError.Check.typeOf.number('latitude', latitude);
     //>>includeEnd('debug');
     longitude = ComponentDatatype.CesiumMath.toRadians(longitude);
     latitude = ComponentDatatype.CesiumMath.toRadians(latitude);
@@ -1523,7 +1556,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     const longitude = Math.atan2(n.y, n.x);
     const latitude = Math.asin(n.z);
     const height =
-      ComponentDatatype.CesiumMath.sign(Cartesian3.dot(h, cartesian)) * Cartesian3.magnitude(h);
+      ComponentDatatype.CesiumMath.sign(Cartesian3.dot(h, cartesian)) *
+      Cartesian3.magnitude(h);
 
     if (!defaultValue.defined(result)) {
       return new Cartographic(longitude, latitude, height);
@@ -1545,7 +1579,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartographic.toCartesian = function (cartographic, ellipsoid, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("cartographic", cartographic);
+    RuntimeError.Check.defined('cartographic', cartographic);
     //>>includeEnd('debug');
 
     return Cartesian3.fromRadians(
@@ -1680,9 +1714,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     z = defaultValue.defaultValue(z, 0.0);
 
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("x", x, 0.0);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("y", y, 0.0);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("z", z, 0.0);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('x', x, 0.0);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('y', y, 0.0);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('z', z, 0.0);
     //>>includeEnd('debug');
 
     ellipsoid._radii = new Cartesian3(x, y, z);
@@ -1763,7 +1797,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     radii: {
       get: function () {
         return this._radii;
-      },
+      }
     },
     /**
      * Gets the squared radii of the ellipsoid.
@@ -1774,7 +1808,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     radiiSquared: {
       get: function () {
         return this._radiiSquared;
-      },
+      }
     },
     /**
      * Gets the radii of the ellipsoid raise to the fourth power.
@@ -1785,7 +1819,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     radiiToTheFourth: {
       get: function () {
         return this._radiiToTheFourth;
-      },
+      }
     },
     /**
      * Gets one over the radii of the ellipsoid.
@@ -1796,7 +1830,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     oneOverRadii: {
       get: function () {
         return this._oneOverRadii;
-      },
+      }
     },
     /**
      * Gets one over the squared radii of the ellipsoid.
@@ -1807,7 +1841,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     oneOverRadiiSquared: {
       get: function () {
         return this._oneOverRadiiSquared;
-      },
+      }
     },
     /**
      * Gets the minimum radius of the ellipsoid.
@@ -1818,7 +1852,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     minimumRadius: {
       get: function () {
         return this._minimumRadius;
-      },
+      }
     },
     /**
      * Gets the maximum radius of the ellipsoid.
@@ -1829,8 +1863,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     maximumRadius: {
       get: function () {
         return this._maximumRadius;
-      },
-    },
+      }
+    }
   });
 
   /**
@@ -1855,7 +1889,10 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     Cartesian3.clone(ellipsoid._radiiSquared, result._radiiSquared);
     Cartesian3.clone(ellipsoid._radiiToTheFourth, result._radiiToTheFourth);
     Cartesian3.clone(ellipsoid._oneOverRadii, result._oneOverRadii);
-    Cartesian3.clone(ellipsoid._oneOverRadiiSquared, result._oneOverRadiiSquared);
+    Cartesian3.clone(
+      ellipsoid._oneOverRadiiSquared,
+      result._oneOverRadiiSquared
+    );
     result._minimumRadius = ellipsoid._minimumRadius;
     result._maximumRadius = ellipsoid._maximumRadius;
     result._centerToleranceSquared = ellipsoid._centerToleranceSquared;
@@ -1949,8 +1986,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Ellipsoid.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -1970,7 +2007,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Ellipsoid.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -2001,7 +2038,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartographic", cartographic);
+    RuntimeError.Check.typeOf.object('cartographic', cartographic);
     //>>includeEnd('debug');
 
     const longitude = cartographic.longitude;
@@ -2030,7 +2067,11 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Ellipsoid.prototype.geodeticSurfaceNormal = function (cartesian, result) {
     if (
-      Cartesian3.equalsEpsilon(cartesian, Cartesian3.ZERO, ComponentDatatype.CesiumMath.EPSILON14)
+      Cartesian3.equalsEpsilon(
+        cartesian,
+        Cartesian3.ZERO,
+        ComponentDatatype.CesiumMath.EPSILON14
+      )
     ) {
       return undefined;
     }
@@ -2060,7 +2101,10 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    * const position = new Cesium.Cartographic(Cesium.Math.toRadians(21), Cesium.Math.toRadians(78), 5000);
    * const cartesianPosition = Cesium.Ellipsoid.WGS84.cartographicToCartesian(position);
    */
-  Ellipsoid.prototype.cartographicToCartesian = function (cartographic, result) {
+  Ellipsoid.prototype.cartographicToCartesian = function (
+    cartographic,
+    result
+  ) {
     //`cartographic is required` is thrown from geodeticSurfaceNormalCartographic.
     const n = cartographicToCartesianNormal;
     const k = cartographicToCartesianK;
@@ -2095,7 +2139,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("cartographics", cartographics);
+    RuntimeError.Check.defined('cartographics', cartographics);
     //>>includeEnd('debug')
 
     const length = cartographics.length;
@@ -2141,7 +2185,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     const longitude = Math.atan2(n.y, n.x);
     const latitude = Math.asin(n.z);
     const height =
-      ComponentDatatype.CesiumMath.sign(Cartesian3.dot(h, cartesian)) * Cartesian3.magnitude(h);
+      ComponentDatatype.CesiumMath.sign(Cartesian3.dot(h, cartesian)) *
+      Cartesian3.magnitude(h);
 
     if (!defaultValue.defined(result)) {
       return new Cartographic(longitude, latitude, height);
@@ -2171,7 +2216,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("cartesians", cartesians);
+    RuntimeError.Check.defined('cartesians', cartesians);
     //>>includeEnd('debug');
 
     const length = cartesians.length;
@@ -2215,7 +2260,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Ellipsoid.prototype.scaleToGeocentricSurface = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -2290,7 +2335,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
   Ellipsoid.prototype.equals = function (right) {
     return (
       this === right ||
-      (defaultValue.defined(right) && Cartesian3.equals(this._radii, right._radii))
+      (defaultValue.defined(right) &&
+        Cartesian3.equals(this._radii, right._radii))
     );
   };
 
@@ -2325,7 +2371,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("position", position);
+    RuntimeError.Check.typeOf.object('position', position);
 
     if (
       !ComponentDatatype.CesiumMath.equalsEpsilon(
@@ -2335,11 +2381,15 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
       )
     ) {
       throw new RuntimeError.DeveloperError(
-        "Ellipsoid must be an ellipsoid of revolution (radii.x == radii.y)"
+        'Ellipsoid must be an ellipsoid of revolution (radii.x == radii.y)'
       );
     }
 
-    RuntimeError.Check.typeOf.number.greaterThan("Ellipsoid.radii.z", this._radii.z, 0);
+    RuntimeError.Check.typeOf.number.greaterThan(
+      'Ellipsoid.radii.z',
+      this._radii.z,
+      0
+    );
     //>>includeEnd('debug');
 
     buffer = defaultValue.defaultValue(buffer, 0.0);
@@ -2362,20 +2412,12 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
   };
 
   const abscissas = [
-    0.14887433898163,
-    0.43339539412925,
-    0.67940956829902,
-    0.86506336668898,
-    0.97390652851717,
-    0.0,
+    0.14887433898163, 0.43339539412925, 0.67940956829902, 0.86506336668898,
+    0.97390652851717, 0.0
   ];
   const weights = [
-    0.29552422471475,
-    0.26926671930999,
-    0.21908636251598,
-    0.14945134915058,
-    0.066671344308684,
-    0.0,
+    0.29552422471475, 0.26926671930999, 0.21908636251598, 0.14945134915058,
+    0.066671344308684, 0.0
   ];
 
   /**
@@ -2390,9 +2432,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   function gaussLegendreQuadrature(a, b, func) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("a", a);
-    RuntimeError.Check.typeOf.number("b", b);
-    RuntimeError.Check.typeOf.func("func", func);
+    RuntimeError.Check.typeOf.number('a', a);
+    RuntimeError.Check.typeOf.number('b', b);
+    RuntimeError.Check.typeOf.func('func', func);
     //>>includeEnd('debug');
 
     // The range is half of the normal range since the five weights add to one (ten weights add to two).
@@ -2430,7 +2472,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Ellipsoid.prototype.surfaceArea = function (rectangle) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
     //>>includeEnd('debug');
     const minLongitude = rectangle.west;
     let maxLongitude = rectangle.east;
@@ -2538,8 +2580,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -2567,7 +2609,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -2598,7 +2640,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.packArray = function (array, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     const length = array.length;
@@ -2608,7 +2650,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     } else if (!Array.isArray(result) && result.length !== resultLength) {
       //>>includeStart('debug', pragmas.debug);
       throw new RuntimeError.DeveloperError(
-        "If result is a typed array, it must have exactly array.length * 9 elements"
+        'If result is a typed array, it must have exactly array.length * 9 elements'
       );
       //>>includeEnd('debug');
     } else if (result.length !== resultLength) {
@@ -2630,10 +2672,16 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.unpackArray = function (array, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("array.length", array.length, 9);
+    RuntimeError.Check.defined('array', array);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'array.length',
+      array.length,
+      9
+    );
     if (array.length % 9 !== 0) {
-      throw new RuntimeError.DeveloperError("array length must be a multiple of 9.");
+      throw new RuntimeError.DeveloperError(
+        'array length must be a multiple of 9.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -2720,7 +2768,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.fromColumnMajorArray = function (values, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("values", values);
+    RuntimeError.Check.defined('values', values);
     //>>includeEnd('debug');
 
     return Matrix3.clone(values, result);
@@ -2736,7 +2784,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.fromRowMajorArray = function (values, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("values", values);
+    RuntimeError.Check.defined('values', values);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -2773,7 +2821,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.fromQuaternion = function (quaternion, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("quaternion", quaternion);
+    RuntimeError.Check.typeOf.object('quaternion', quaternion);
     //>>includeEnd('debug');
 
     const x2 = quaternion.x * quaternion.x;
@@ -2823,7 +2871,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.fromHeadingPitchRoll = function (headingPitchRoll, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("headingPitchRoll", headingPitchRoll);
+    RuntimeError.Check.typeOf.object('headingPitchRoll', headingPitchRoll);
     //>>includeEnd('debug');
 
     const cosTheta = Math.cos(-headingPitchRoll.pitch);
@@ -2876,11 +2924,21 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.fromScale = function (scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("scale", scale);
+    RuntimeError.Check.typeOf.object('scale', scale);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
-      return new Matrix3(scale.x, 0.0, 0.0, 0.0, scale.y, 0.0, 0.0, 0.0, scale.z);
+      return new Matrix3(
+        scale.x,
+        0.0,
+        0.0,
+        0.0,
+        scale.y,
+        0.0,
+        0.0,
+        0.0,
+        scale.z
+      );
     }
 
     result[0] = scale.x;
@@ -2911,7 +2969,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.fromUniformScale = function (scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("scale", scale);
+    RuntimeError.Check.typeOf.number('scale', scale);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -2946,7 +3004,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.fromCrossProduct = function (vector, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("vector", vector);
+    RuntimeError.Check.typeOf.object('vector', vector);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -2990,7 +3048,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.fromRotationX = function (angle, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("angle", angle);
+    RuntimeError.Check.typeOf.number('angle', angle);
     //>>includeEnd('debug');
 
     const cosAngle = Math.cos(angle);
@@ -3038,7 +3096,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.fromRotationY = function (angle, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("angle", angle);
+    RuntimeError.Check.typeOf.number('angle', angle);
     //>>includeEnd('debug');
 
     const cosAngle = Math.cos(angle);
@@ -3086,7 +3144,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.fromRotationZ = function (angle, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("angle", angle);
+    RuntimeError.Check.typeOf.number('angle', angle);
     //>>includeEnd('debug');
 
     const cosAngle = Math.cos(angle);
@@ -3129,7 +3187,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.toArray = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -3142,7 +3200,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
         matrix[5],
         matrix[6],
         matrix[7],
-        matrix[8],
+        matrix[8]
       ];
     }
     result[0] = matrix[0];
@@ -3175,10 +3233,10 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.getElementIndex = function (column, row) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("row", row, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("row", row, 2);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("column", column, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("column", column, 2);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('row', row, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('row', row, 2);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('column', column, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('column', column, 2);
     //>>includeEnd('debug');
 
     return column * 3 + row;
@@ -3196,10 +3254,10 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.getColumn = function (matrix, index, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("index", index, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("index", index, 2);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('index', index, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('index', index, 2);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const startIndex = index * 3;
@@ -3226,11 +3284,11 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.setColumn = function (matrix, index, cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("index", index, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("index", index, 2);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('index', index, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('index', index, 2);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result = Matrix3.clone(matrix, result);
@@ -3253,10 +3311,10 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.getRow = function (matrix, index, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("index", index, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("index", index, 2);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('index', index, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('index', index, 2);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const x = matrix[index];
@@ -3282,11 +3340,11 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.setRow = function (matrix, index, cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("index", index, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("index", index, 2);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('index', index, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('index', index, 2);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result = Matrix3.clone(matrix, result);
@@ -3316,9 +3374,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.setScale = function (matrix, scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("scale", scale);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('scale', scale);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const existingScale = Matrix3.getScale(matrix, scaleScratch1$2);
@@ -3359,9 +3417,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.setUniformScale = function (matrix, scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.number("scale", scale);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.number('scale', scale);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const existingScale = Matrix3.getScale(matrix, scaleScratch2$2);
@@ -3400,8 +3458,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.getScale = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = Cartesian3.magnitude(
@@ -3443,8 +3501,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.setRotation = function (matrix, rotation, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const scale = Matrix3.getScale(matrix, scaleScratch4$2);
@@ -3475,8 +3533,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.getRotation = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const scale = Matrix3.getScale(matrix, scaleScratch5$2);
@@ -3504,9 +3562,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.multiply = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const column0Row0 =
@@ -3552,9 +3610,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.add = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = left[0] + right[0];
@@ -3579,9 +3637,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.subtract = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = left[0] - right[0];
@@ -3606,9 +3664,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.multiplyByVector = function (matrix, cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const vX = cartesian.x;
@@ -3635,9 +3693,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.multiplyByScalar = function (matrix, scalar, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.number("scalar", scalar);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.number('scalar', scalar);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = matrix[0] * scalar;
@@ -3674,9 +3732,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.multiplyByScale = function (matrix, scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("scale", scale);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('scale', scale);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = matrix[0] * scale.x;
@@ -3713,9 +3771,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.multiplyByUniformScale = function (matrix, scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.number("scale", scale);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.number('scale', scale);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = matrix[0] * scale;
@@ -3740,8 +3798,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.negate = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = -matrix[0];
@@ -3765,8 +3823,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.transpose = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const column0Row0 = matrix[0];
@@ -3912,7 +3970,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.computeEigenDecomposition = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
     //>>includeEnd('debug');
 
     // This routine was created based upon Matrix Computations, 3rd ed., by Golub and Van Loan,
@@ -3932,11 +3990,17 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
       Matrix3.IDENTITY,
       result.unitary
     ));
-    const diagMatrix = (result.diagonal = Matrix3.clone(matrix, result.diagonal));
+    const diagMatrix = (result.diagonal = Matrix3.clone(
+      matrix,
+      result.diagonal
+    ));
 
     const epsilon = tolerance * computeFrobeniusNorm(diagMatrix);
 
-    while (sweep < maxSweeps && offDiagonalFrobeniusNorm(diagMatrix) > epsilon) {
+    while (
+      sweep < maxSweeps &&
+      offDiagonalFrobeniusNorm(diagMatrix) > epsilon
+    ) {
       shurDecomposition(diagMatrix, jMatrix);
       Matrix3.transpose(jMatrix, jMatrixTranspose);
       Matrix3.multiply(diagMatrix, jMatrix, diagMatrix);
@@ -3961,8 +4025,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.abs = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = Math.abs(matrix[0]);
@@ -3986,7 +4050,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.determinant = function (matrix) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
     //>>includeEnd('debug');
 
     const m11 = matrix[0];
@@ -4017,8 +4081,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.inverse = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const m11 = matrix[0];
@@ -4035,7 +4099,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
 
     //>>includeStart('debug', pragmas.debug);
     if (Math.abs(determinant) <= ComponentDatatype.CesiumMath.EPSILON15) {
-      throw new RuntimeError.DeveloperError("matrix is not invertible");
+      throw new RuntimeError.DeveloperError('matrix is not invertible');
     }
     //>>includeEnd('debug');
 
@@ -4064,8 +4128,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix3.inverseTranspose = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     return Matrix3.inverse(
@@ -4230,8 +4294,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     length: {
       get: function () {
         return Matrix3.packedLength;
-      },
-    },
+      }
+    }
   });
 
   /**
@@ -4375,7 +4439,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.fromColor = function (color, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("color", color);
+    RuntimeError.Check.typeOf.object('color', color);
     //>>includeEnd('debug');
     if (!defaultValue.defined(result)) {
       return new Cartesian4(color.red, color.green, color.blue, color.alpha);
@@ -4428,8 +4492,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -4452,7 +4516,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -4476,7 +4540,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.packArray = function (array, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     const length = array.length;
@@ -4486,7 +4550,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     } else if (!Array.isArray(result) && result.length !== resultLength) {
       //>>includeStart('debug', pragmas.debug);
       throw new RuntimeError.DeveloperError(
-        "If result is a typed array, it must have exactly array.length * 4 elements"
+        'If result is a typed array, it must have exactly array.length * 4 elements'
       );
       //>>includeEnd('debug');
     } else if (result.length !== resultLength) {
@@ -4508,10 +4572,16 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.unpackArray = function (array, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("array.length", array.length, 4);
+    RuntimeError.Check.defined('array', array);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'array.length',
+      array.length,
+      4
+    );
     if (array.length % 4 !== 0) {
-      throw new RuntimeError.DeveloperError("array length must be a multiple of 4.");
+      throw new RuntimeError.DeveloperError(
+        'array length must be a multiple of 4.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -4557,7 +4627,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.maximumComponent = function (cartesian) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
     //>>includeEnd('debug');
 
     return Math.max(cartesian.x, cartesian.y, cartesian.z, cartesian.w);
@@ -4571,7 +4641,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.minimumComponent = function (cartesian) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
     //>>includeEnd('debug');
 
     return Math.min(cartesian.x, cartesian.y, cartesian.z, cartesian.w);
@@ -4587,9 +4657,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.minimumByComponent = function (first, second, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("first", first);
-    RuntimeError.Check.typeOf.object("second", second);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('first', first);
+    RuntimeError.Check.typeOf.object('second', second);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = Math.min(first.x, second.x);
@@ -4610,9 +4680,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.maximumByComponent = function (first, second, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("first", first);
-    RuntimeError.Check.typeOf.object("second", second);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('first', first);
+    RuntimeError.Check.typeOf.object('second', second);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = Math.max(first.x, second.x);
@@ -4634,10 +4704,10 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.clamp = function (value, min, max, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.typeOf.object("min", min);
-    RuntimeError.Check.typeOf.object("max", max);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.typeOf.object('min', min);
+    RuntimeError.Check.typeOf.object('max', max);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const x = ComponentDatatype.CesiumMath.clamp(value.x, min.x, max.x);
@@ -4661,7 +4731,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.magnitudeSquared = function (cartesian) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
     //>>includeEnd('debug');
 
     return (
@@ -4699,8 +4769,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.distance = function (left, right) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
     //>>includeEnd('debug');
 
     Cartesian4.subtract(left, right, distanceScratch$1);
@@ -4723,8 +4793,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.distanceSquared = function (left, right) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
     //>>includeEnd('debug');
 
     Cartesian4.subtract(left, right, distanceScratch$1);
@@ -4740,8 +4810,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.normalize = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const magnitude = Cartesian4.magnitude(cartesian);
@@ -4758,7 +4828,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
       isNaN(result.z) ||
       isNaN(result.w)
     ) {
-      throw new RuntimeError.DeveloperError("normalized result is not a number");
+      throw new RuntimeError.DeveloperError(
+        'normalized result is not a number'
+      );
     }
     //>>includeEnd('debug');
 
@@ -4774,8 +4846,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.dot = function (left, right) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
     //>>includeEnd('debug');
 
     return (
@@ -4793,9 +4865,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.multiplyComponents = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = left.x * right.x;
@@ -4815,9 +4887,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.divideComponents = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = left.x / right.x;
@@ -4837,9 +4909,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.add = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = left.x + right.x;
@@ -4859,9 +4931,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.subtract = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = left.x - right.x;
@@ -4881,9 +4953,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.multiplyByScalar = function (cartesian, scalar, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.number("scalar", scalar);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.number('scalar', scalar);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = cartesian.x * scalar;
@@ -4903,9 +4975,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.divideByScalar = function (cartesian, scalar, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.number("scalar", scalar);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.number('scalar', scalar);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = cartesian.x / scalar;
@@ -4924,8 +4996,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.negate = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = -cartesian.x;
@@ -4944,8 +5016,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.abs = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = Math.abs(cartesian.x);
@@ -4967,10 +5039,10 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.lerp = function (start, end, t, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("start", start);
-    RuntimeError.Check.typeOf.object("end", end);
-    RuntimeError.Check.typeOf.number("t", t);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('start', start);
+    RuntimeError.Check.typeOf.object('end', end);
+    RuntimeError.Check.typeOf.number('t', t);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     Cartesian4.multiplyByScalar(end, t, lerpScratch$1);
@@ -4988,8 +5060,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.mostOrthogonalAxis = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const f = Cartesian4.normalize(cartesian, mostOrthogonalAxisScratch$1);
@@ -5220,7 +5292,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.packFloat = function (value, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("value", value);
+    RuntimeError.Check.typeOf.number('value', value);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -5254,7 +5326,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian4.unpackFloat = function (packedFloat) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("packedFloat", packedFloat);
+    RuntimeError.Check.typeOf.object('packedFloat', packedFloat);
     //>>includeEnd('debug');
 
     // scratchU8Array and scratchF32Array are views into the same buffer
@@ -5371,8 +5443,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -5407,7 +5479,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -5445,7 +5517,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.packArray = function (array, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     const length = array.length;
@@ -5455,7 +5527,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     } else if (!Array.isArray(result) && result.length !== resultLength) {
       //>>includeStart('debug', pragmas.debug);
       throw new RuntimeError.DeveloperError(
-        "If result is a typed array, it must have exactly array.length * 16 elements"
+        'If result is a typed array, it must have exactly array.length * 16 elements'
       );
       //>>includeEnd('debug');
     } else if (result.length !== resultLength) {
@@ -5477,10 +5549,16 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.unpackArray = function (array, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("array.length", array.length, 16);
+    RuntimeError.Check.defined('array', array);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'array.length',
+      array.length,
+      16
+    );
     if (array.length % 16 !== 0) {
-      throw new RuntimeError.DeveloperError("array length must be a multiple of 16.");
+      throw new RuntimeError.DeveloperError(
+        'array length must be a multiple of 16.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -5582,7 +5660,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.fromColumnMajorArray = function (values, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("values", values);
+    RuntimeError.Check.defined('values', values);
     //>>includeEnd('debug');
 
     return Matrix4.clone(values, result);
@@ -5598,7 +5676,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.fromRowMajorArray = function (values, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("values", values);
+    RuntimeError.Check.defined('values', values);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -5651,7 +5729,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.fromRotationTranslation = function (rotation, translation, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rotation", rotation);
+    RuntimeError.Check.typeOf.object('rotation', rotation);
     //>>includeEnd('debug');
 
     translation = defaultValue.defaultValue(translation, Cartesian3.ZERO);
@@ -5720,9 +5798,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("translation", translation);
-    RuntimeError.Check.typeOf.object("rotation", rotation);
-    RuntimeError.Check.typeOf.object("scale", scale);
+    RuntimeError.Check.typeOf.object('translation', translation);
+    RuntimeError.Check.typeOf.object('rotation', rotation);
+    RuntimeError.Check.typeOf.object('scale', scale);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -5788,7 +5866,10 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("translationRotationScale", translationRotationScale);
+    RuntimeError.Check.typeOf.object(
+      'translationRotationScale',
+      translationRotationScale
+    );
     //>>includeEnd('debug');
 
     return Matrix4.fromTranslationQuaternionRotationScale(
@@ -5810,10 +5891,14 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.fromTranslation = function (translation, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("translation", translation);
+    RuntimeError.Check.typeOf.object('translation', translation);
     //>>includeEnd('debug');
 
-    return Matrix4.fromRotationTranslation(Matrix3.IDENTITY, translation, result);
+    return Matrix4.fromRotationTranslation(
+      Matrix3.IDENTITY,
+      translation,
+      result
+    );
   };
 
   /**
@@ -5833,7 +5918,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.fromScale = function (scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("scale", scale);
+    RuntimeError.Check.typeOf.object('scale', scale);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -5893,7 +5978,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.fromUniformScale = function (scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("scale", scale);
+    RuntimeError.Check.typeOf.number('scale', scale);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -5945,7 +6030,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.fromRotation = function (rotation, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rotation", rotation);
+    RuntimeError.Check.typeOf.object('rotation', rotation);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -5987,7 +6072,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.fromCamera = function (camera, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("camera", camera);
+    RuntimeError.Check.typeOf.object('camera', camera);
     //>>includeEnd('debug');
 
     const position = camera.position;
@@ -5995,9 +6080,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     const up = camera.up;
 
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("camera.position", position);
-    RuntimeError.Check.typeOf.object("camera.direction", direction);
-    RuntimeError.Check.typeOf.object("camera.up", up);
+    RuntimeError.Check.typeOf.object('camera.position', position);
+    RuntimeError.Check.typeOf.object('camera.direction', direction);
+    RuntimeError.Check.typeOf.object('camera.up', up);
     //>>includeEnd('debug');
 
     Cartesian3.normalize(direction, fromCameraF);
@@ -6103,11 +6188,11 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number.greaterThan("fovY", fovY, 0.0);
-    RuntimeError.Check.typeOf.number.lessThan("fovY", fovY, Math.PI);
-    RuntimeError.Check.typeOf.number.greaterThan("near", near, 0.0);
-    RuntimeError.Check.typeOf.number.greaterThan("far", far, 0.0);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.number.greaterThan('fovY', fovY, 0.0);
+    RuntimeError.Check.typeOf.number.lessThan('fovY', fovY, Math.PI);
+    RuntimeError.Check.typeOf.number.greaterThan('near', near, 0.0);
+    RuntimeError.Check.typeOf.number.greaterThan('far', far, 0.0);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const bottom = Math.tan(fovY * 0.5);
@@ -6158,13 +6243,13 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("left", left);
-    RuntimeError.Check.typeOf.number("right", right);
-    RuntimeError.Check.typeOf.number("bottom", bottom);
-    RuntimeError.Check.typeOf.number("top", top);
-    RuntimeError.Check.typeOf.number("near", near);
-    RuntimeError.Check.typeOf.number("far", far);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.number('left', left);
+    RuntimeError.Check.typeOf.number('right', right);
+    RuntimeError.Check.typeOf.number('bottom', bottom);
+    RuntimeError.Check.typeOf.number('top', top);
+    RuntimeError.Check.typeOf.number('near', near);
+    RuntimeError.Check.typeOf.number('far', far);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     let a = 1.0 / (right - left);
@@ -6219,13 +6304,13 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("left", left);
-    RuntimeError.Check.typeOf.number("right", right);
-    RuntimeError.Check.typeOf.number("bottom", bottom);
-    RuntimeError.Check.typeOf.number("top", top);
-    RuntimeError.Check.typeOf.number("near", near);
-    RuntimeError.Check.typeOf.number("far", far);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.number('left', left);
+    RuntimeError.Check.typeOf.number('right', right);
+    RuntimeError.Check.typeOf.number('bottom', bottom);
+    RuntimeError.Check.typeOf.number('top', top);
+    RuntimeError.Check.typeOf.number('near', near);
+    RuntimeError.Check.typeOf.number('far', far);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const column0Row0 = (2.0 * near) / (right - left);
@@ -6275,12 +6360,12 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("left", left);
-    RuntimeError.Check.typeOf.number("right", right);
-    RuntimeError.Check.typeOf.number("bottom", bottom);
-    RuntimeError.Check.typeOf.number("top", top);
-    RuntimeError.Check.typeOf.number("near", near);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.number('left', left);
+    RuntimeError.Check.typeOf.number('right', right);
+    RuntimeError.Check.typeOf.number('bottom', bottom);
+    RuntimeError.Check.typeOf.number('top', top);
+    RuntimeError.Check.typeOf.number('near', near);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const column0Row0 = (2.0 * near) / (right - left);
@@ -6338,7 +6423,10 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
       result = new Matrix4();
     }
 
-    viewport = defaultValue.defaultValue(viewport, defaultValue.defaultValue.EMPTY_OBJECT);
+    viewport = defaultValue.defaultValue(
+      viewport,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
     const x = defaultValue.defaultValue(viewport.x, 0.0);
     const y = defaultValue.defaultValue(viewport.y, 0.0);
     const width = defaultValue.defaultValue(viewport.width, 0.0);
@@ -6390,11 +6478,11 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.computeView = function (position, direction, up, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("position", position);
-    RuntimeError.Check.typeOf.object("direction", direction);
-    RuntimeError.Check.typeOf.object("up", up);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('position', position);
+    RuntimeError.Check.typeOf.object('direction', direction);
+    RuntimeError.Check.typeOf.object('up', up);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = right.x;
@@ -6437,7 +6525,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.toArray = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -6457,7 +6545,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
         matrix[12],
         matrix[13],
         matrix[14],
-        matrix[15],
+        matrix[15]
       ];
     }
     result[0] = matrix[0];
@@ -6497,11 +6585,11 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.getElementIndex = function (column, row) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("row", row, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("row", row, 3);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('row', row, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('row', row, 3);
 
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("column", column, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("column", column, 3);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('column', column, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('column', column, 3);
     //>>includeEnd('debug');
 
     return column * 4 + row;
@@ -6536,12 +6624,12 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.getColumn = function (matrix, index, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
 
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("index", index, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("index", index, 3);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('index', index, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('index', index, 3);
 
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const startIndex = index * 4;
@@ -6585,13 +6673,13 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.setColumn = function (matrix, index, cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
 
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("index", index, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("index", index, 3);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('index', index, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('index', index, 3);
 
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result = Matrix4.clone(matrix, result);
@@ -6632,12 +6720,12 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.getRow = function (matrix, index, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
 
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("index", index, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("index", index, 3);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('index', index, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('index', index, 3);
 
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const x = matrix[index];
@@ -6680,13 +6768,13 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.setRow = function (matrix, index, cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
 
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("index", index, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("index", index, 3);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('index', index, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('index', index, 3);
 
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result = Matrix4.clone(matrix, result);
@@ -6708,9 +6796,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.setTranslation = function (matrix, translation, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("translation", translation);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('translation', translation);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = matrix[0];
@@ -6756,9 +6844,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.setScale = function (matrix, scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("scale", scale);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('scale', scale);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const existingScale = Matrix4.getScale(matrix, scaleScratch1$1);
@@ -6809,9 +6897,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.setUniformScale = function (matrix, scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.number("scale", scale);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.number('scale', scale);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const existingScale = Matrix4.getScale(matrix, scaleScratch2$1);
@@ -6860,8 +6948,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.getScale = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = Cartesian3.magnitude(
@@ -6905,8 +6993,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.setRotation = function (matrix, rotation, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const scale = Matrix4.getScale(matrix, scaleScratch4$1);
@@ -6948,8 +7036,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.getRotation = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const scale = Matrix4.getScale(matrix, scaleScratch5$1);
@@ -6979,9 +7067,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.multiply = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const left0 = left[0];
@@ -7083,9 +7171,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.add = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = left[0] + right[0];
@@ -7117,9 +7205,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.subtract = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = left[0] - right[0];
@@ -7162,9 +7250,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.multiplyTransformation = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const left0 = left[0];
@@ -7247,9 +7335,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.multiplyByMatrix3 = function (matrix, rotation, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("rotation", rotation);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('rotation', rotation);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const left0 = matrix[0];
@@ -7319,9 +7407,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.multiplyByTranslation = function (matrix, translation, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("translation", translation);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('translation', translation);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const x = translation.x;
@@ -7377,9 +7465,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.multiplyByScale = function (matrix, scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("scale", scale);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('scale', scale);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const scaleX = scale.x;
@@ -7435,9 +7523,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.multiplyByUniformScale = function (matrix, scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.number("scale", scale);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.number('scale', scale);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = matrix[0] * scale;
@@ -7473,9 +7561,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.multiplyByVector = function (matrix, cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const vX = cartesian.x;
@@ -7483,10 +7571,14 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     const vZ = cartesian.z;
     const vW = cartesian.w;
 
-    const x = matrix[0] * vX + matrix[4] * vY + matrix[8] * vZ + matrix[12] * vW;
-    const y = matrix[1] * vX + matrix[5] * vY + matrix[9] * vZ + matrix[13] * vW;
-    const z = matrix[2] * vX + matrix[6] * vY + matrix[10] * vZ + matrix[14] * vW;
-    const w = matrix[3] * vX + matrix[7] * vY + matrix[11] * vZ + matrix[15] * vW;
+    const x =
+      matrix[0] * vX + matrix[4] * vY + matrix[8] * vZ + matrix[12] * vW;
+    const y =
+      matrix[1] * vX + matrix[5] * vY + matrix[9] * vZ + matrix[13] * vW;
+    const z =
+      matrix[2] * vX + matrix[6] * vY + matrix[10] * vZ + matrix[14] * vW;
+    const w =
+      matrix[3] * vX + matrix[7] * vY + matrix[11] * vZ + matrix[15] * vW;
 
     result.x = x;
     result.y = y;
@@ -7513,9 +7605,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.multiplyByPointAsVector = function (matrix, cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const vX = cartesian.x;
@@ -7547,9 +7639,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.multiplyByPoint = function (matrix, cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const vX = cartesian.x;
@@ -7591,9 +7683,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.multiplyByScalar = function (matrix, scalar, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.number("scalar", scalar);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.number('scalar', scalar);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = matrix[0] * scalar;
@@ -7639,8 +7731,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.negate = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = -matrix[0];
@@ -7686,8 +7778,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.transpose = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const matrix1 = matrix[1];
@@ -7725,8 +7817,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.abs = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = Math.abs(matrix[0]);
@@ -7875,8 +7967,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.getTranslation = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = matrix[12];
@@ -7909,8 +8001,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.getMatrix3 = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = matrix[0];
@@ -7944,8 +8036,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.inverse = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
     //
     // Ported from:
@@ -8117,7 +8209,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
       }
 
       throw new RuntimeError.RuntimeError(
-        "matrix is not invertible because its determinate is zero."
+        'matrix is not invertible because its determinate is zero.'
       );
     }
 
@@ -8158,8 +8250,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.inverseTransformation = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     //This function is an optimized version of the below 4 lines.
@@ -8216,8 +8308,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix4.inverseTranspose = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     return Matrix4.inverse(
@@ -8418,8 +8510,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     length: {
       get: function () {
         return Matrix4.packedLength;
-      },
-    },
+      }
+    }
   });
 
   /**
@@ -8552,7 +8644,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     width: {
       get: function () {
         return Rectangle.computeWidth(this);
-      },
+      }
     },
 
     /**
@@ -8564,8 +8656,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     height: {
       get: function () {
         return Rectangle.computeHeight(this);
-      },
-    },
+      }
+    }
   });
 
   /**
@@ -8585,8 +8677,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -8609,7 +8701,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -8632,7 +8724,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.computeWidth = function (rectangle) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
     //>>includeEnd('debug');
     let east = rectangle.east;
     const west = rectangle.west;
@@ -8649,7 +8741,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.computeHeight = function (rectangle) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
     //>>includeEnd('debug');
     return rectangle.north - rectangle.south;
   };
@@ -8668,10 +8760,18 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    * const rectangle = Cesium.Rectangle.fromDegrees(0.0, 20.0, 10.0, 30.0);
    */
   Rectangle.fromDegrees = function (west, south, east, north, result) {
-    west = ComponentDatatype.CesiumMath.toRadians(defaultValue.defaultValue(west, 0.0));
-    south = ComponentDatatype.CesiumMath.toRadians(defaultValue.defaultValue(south, 0.0));
-    east = ComponentDatatype.CesiumMath.toRadians(defaultValue.defaultValue(east, 0.0));
-    north = ComponentDatatype.CesiumMath.toRadians(defaultValue.defaultValue(north, 0.0));
+    west = ComponentDatatype.CesiumMath.toRadians(
+      defaultValue.defaultValue(west, 0.0)
+    );
+    south = ComponentDatatype.CesiumMath.toRadians(
+      defaultValue.defaultValue(south, 0.0)
+    );
+    east = ComponentDatatype.CesiumMath.toRadians(
+      defaultValue.defaultValue(east, 0.0)
+    );
+    north = ComponentDatatype.CesiumMath.toRadians(
+      defaultValue.defaultValue(north, 0.0)
+    );
 
     if (!defaultValue.defined(result)) {
       return new Rectangle(west, south, east, north);
@@ -8720,7 +8820,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.fromCartographicArray = function (cartographics, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("cartographics", cartographics);
+    RuntimeError.Check.defined('cartographics', cartographics);
     //>>includeEnd('debug');
 
     let west = Number.MAX_VALUE;
@@ -8778,7 +8878,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.fromCartesianArray = function (cartesians, ellipsoid, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("cartesians", cartesians);
+    RuntimeError.Check.defined('cartesians', cartesians);
     //>>includeEnd('debug');
     ellipsoid = defaultValue.defaultValue(ellipsoid, Ellipsoid.WGS84);
 
@@ -8945,31 +9045,47 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.validate = function (rectangle) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
 
     const north = rectangle.north;
     RuntimeError.Check.typeOf.number.greaterThanOrEquals(
-      "north",
+      'north',
       north,
       -ComponentDatatype.CesiumMath.PI_OVER_TWO
     );
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("north", north, ComponentDatatype.CesiumMath.PI_OVER_TWO);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals(
+      'north',
+      north,
+      ComponentDatatype.CesiumMath.PI_OVER_TWO
+    );
 
     const south = rectangle.south;
     RuntimeError.Check.typeOf.number.greaterThanOrEquals(
-      "south",
+      'south',
       south,
       -ComponentDatatype.CesiumMath.PI_OVER_TWO
     );
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("south", south, ComponentDatatype.CesiumMath.PI_OVER_TWO);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals(
+      'south',
+      south,
+      ComponentDatatype.CesiumMath.PI_OVER_TWO
+    );
 
     const west = rectangle.west;
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("west", west, -Math.PI);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("west", west, Math.PI);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'west',
+      west,
+      -Math.PI
+    );
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('west', west, Math.PI);
 
     const east = rectangle.east;
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("east", east, -Math.PI);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("east", east, Math.PI);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'east',
+      east,
+      -Math.PI
+    );
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('east', east, Math.PI);
     //>>includeEnd('debug');
   };
 
@@ -8982,7 +9098,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.southwest = function (rectangle, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -9003,7 +9119,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.northwest = function (rectangle, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -9024,7 +9140,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.northeast = function (rectangle, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -9045,7 +9161,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.southeast = function (rectangle, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -9066,7 +9182,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.center = function (rectangle, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
     //>>includeEnd('debug');
 
     let east = rectangle.east;
@@ -9076,7 +9192,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
       east += ComponentDatatype.CesiumMath.TWO_PI;
     }
 
-    const longitude = ComponentDatatype.CesiumMath.negativePiToPi((west + east) * 0.5);
+    const longitude = ComponentDatatype.CesiumMath.negativePiToPi(
+      (west + east) * 0.5
+    );
     const latitude = (rectangle.south + rectangle.north) * 0.5;
 
     if (!defaultValue.defined(result)) {
@@ -9103,8 +9221,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.intersection = function (rectangle, otherRectangle, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
-    RuntimeError.Check.typeOf.object("otherRectangle", otherRectangle);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
+    RuntimeError.Check.typeOf.object('otherRectangle', otherRectangle);
     //>>includeEnd('debug');
 
     let rectangleEast = rectangle.east;
@@ -9170,8 +9288,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.simpleIntersection = function (rectangle, otherRectangle, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
-    RuntimeError.Check.typeOf.object("otherRectangle", otherRectangle);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
+    RuntimeError.Check.typeOf.object('otherRectangle', otherRectangle);
     //>>includeEnd('debug');
 
     const west = Math.max(rectangle.west, otherRectangle.west);
@@ -9204,8 +9322,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.union = function (rectangle, otherRectangle, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
-    RuntimeError.Check.typeOf.object("otherRectangle", otherRectangle);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
+    RuntimeError.Check.typeOf.object('otherRectangle', otherRectangle);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -9255,8 +9373,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.expand = function (rectangle, cartographic, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
-    RuntimeError.Check.typeOf.object("cartographic", cartographic);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
+    RuntimeError.Check.typeOf.object('cartographic', cartographic);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -9280,8 +9398,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.contains = function (rectangle, cartographic) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
-    RuntimeError.Check.typeOf.object("cartographic", cartographic);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
+    RuntimeError.Check.typeOf.object('cartographic', cartographic);
     //>>includeEnd('debug');
 
     let longitude = cartographic.longitude;
@@ -9298,9 +9416,17 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     }
     return (
       (longitude > west ||
-        ComponentDatatype.CesiumMath.equalsEpsilon(longitude, west, ComponentDatatype.CesiumMath.EPSILON14)) &&
+        ComponentDatatype.CesiumMath.equalsEpsilon(
+          longitude,
+          west,
+          ComponentDatatype.CesiumMath.EPSILON14
+        )) &&
       (longitude < east ||
-        ComponentDatatype.CesiumMath.equalsEpsilon(longitude, east, ComponentDatatype.CesiumMath.EPSILON14)) &&
+        ComponentDatatype.CesiumMath.equalsEpsilon(
+          longitude,
+          east,
+          ComponentDatatype.CesiumMath.EPSILON14
+        )) &&
       latitude >= rectangle.south &&
       latitude <= rectangle.north
     );
@@ -9320,7 +9446,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Rectangle.subsample = function (rectangle, ellipsoid, surfaceHeight, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
     //>>includeEnd('debug');
 
     ellipsoid = defaultValue.defaultValue(ellipsoid, Ellipsoid.WGS84);
@@ -9404,18 +9530,58 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("rectangle", rectangle);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("westLerp", westLerp, 0.0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("westLerp", westLerp, 1.0);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("southLerp", southLerp, 0.0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("southLerp", southLerp, 1.0);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("eastLerp", eastLerp, 0.0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("eastLerp", eastLerp, 1.0);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("northLerp", northLerp, 0.0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("northLerp", northLerp, 1.0);
+    RuntimeError.Check.typeOf.object('rectangle', rectangle);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'westLerp',
+      westLerp,
+      0.0
+    );
+    RuntimeError.Check.typeOf.number.lessThanOrEquals(
+      'westLerp',
+      westLerp,
+      1.0
+    );
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'southLerp',
+      southLerp,
+      0.0
+    );
+    RuntimeError.Check.typeOf.number.lessThanOrEquals(
+      'southLerp',
+      southLerp,
+      1.0
+    );
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'eastLerp',
+      eastLerp,
+      0.0
+    );
+    RuntimeError.Check.typeOf.number.lessThanOrEquals(
+      'eastLerp',
+      eastLerp,
+      1.0
+    );
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'northLerp',
+      northLerp,
+      0.0
+    );
+    RuntimeError.Check.typeOf.number.lessThanOrEquals(
+      'northLerp',
+      northLerp,
+      1.0
+    );
 
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("westLerp", westLerp, eastLerp);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("southLerp", southLerp, northLerp);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals(
+      'westLerp',
+      westLerp,
+      eastLerp
+    );
+    RuntimeError.Check.typeOf.number.lessThanOrEquals(
+      'southLerp',
+      southLerp,
+      northLerp
+    );
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -9430,9 +9596,14 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
       result.west = rectangle.west + westLerp * width;
       result.east = rectangle.west + eastLerp * width;
     } else {
-      const width = ComponentDatatype.CesiumMath.TWO_PI + rectangle.east - rectangle.west;
-      result.west = ComponentDatatype.CesiumMath.negativePiToPi(rectangle.west + westLerp * width);
-      result.east = ComponentDatatype.CesiumMath.negativePiToPi(rectangle.west + eastLerp * width);
+      const width =
+        ComponentDatatype.CesiumMath.TWO_PI + rectangle.east - rectangle.west;
+      result.west = ComponentDatatype.CesiumMath.negativePiToPi(
+        rectangle.west + westLerp * width
+      );
+      result.east = ComponentDatatype.CesiumMath.negativePiToPi(
+        rectangle.west + eastLerp * width
+      );
     }
     const height = rectangle.north - rectangle.south;
     result.south = rectangle.south + southLerp * height;
@@ -9575,8 +9746,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -9597,7 +9768,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -9619,7 +9790,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.packArray = function (array, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     const length = array.length;
@@ -9629,7 +9800,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     } else if (!Array.isArray(result) && result.length !== resultLength) {
       //>>includeStart('debug', pragmas.debug);
       throw new RuntimeError.DeveloperError(
-        "If result is a typed array, it must have exactly array.length * 2 elements"
+        'If result is a typed array, it must have exactly array.length * 2 elements'
       );
       //>>includeEnd('debug');
     } else if (result.length !== resultLength) {
@@ -9651,10 +9822,16 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.unpackArray = function (array, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("array.length", array.length, 2);
+    RuntimeError.Check.defined('array', array);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'array.length',
+      array.length,
+      2
+    );
     if (array.length % 2 !== 0) {
-      throw new RuntimeError.DeveloperError("array length must be a multiple of 2.");
+      throw new RuntimeError.DeveloperError(
+        'array length must be a multiple of 2.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -9700,7 +9877,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.maximumComponent = function (cartesian) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
     //>>includeEnd('debug');
 
     return Math.max(cartesian.x, cartesian.y);
@@ -9714,7 +9891,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.minimumComponent = function (cartesian) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
     //>>includeEnd('debug');
 
     return Math.min(cartesian.x, cartesian.y);
@@ -9730,9 +9907,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.minimumByComponent = function (first, second, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("first", first);
-    RuntimeError.Check.typeOf.object("second", second);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('first', first);
+    RuntimeError.Check.typeOf.object('second', second);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = Math.min(first.x, second.x);
@@ -9751,9 +9928,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.maximumByComponent = function (first, second, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("first", first);
-    RuntimeError.Check.typeOf.object("second", second);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('first', first);
+    RuntimeError.Check.typeOf.object('second', second);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = Math.max(first.x, second.x);
@@ -9772,10 +9949,10 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.clamp = function (value, min, max, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.typeOf.object("min", min);
-    RuntimeError.Check.typeOf.object("max", max);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.typeOf.object('min', min);
+    RuntimeError.Check.typeOf.object('max', max);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const x = ComponentDatatype.CesiumMath.clamp(value.x, min.x, max.x);
@@ -9795,7 +9972,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.magnitudeSquared = function (cartesian) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
     //>>includeEnd('debug');
 
     return cartesian.x * cartesian.x + cartesian.y * cartesian.y;
@@ -9826,8 +10003,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.distance = function (left, right) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
     //>>includeEnd('debug');
 
     Cartesian2.subtract(left, right, distanceScratch);
@@ -9848,8 +10025,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.distanceSquared = function (left, right) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
     //>>includeEnd('debug');
 
     Cartesian2.subtract(left, right, distanceScratch);
@@ -9865,8 +10042,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.normalize = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const magnitude = Cartesian2.magnitude(cartesian);
@@ -9876,7 +10053,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
 
     //>>includeStart('debug', pragmas.debug);
     if (isNaN(result.x) || isNaN(result.y)) {
-      throw new RuntimeError.DeveloperError("normalized result is not a number");
+      throw new RuntimeError.DeveloperError(
+        'normalized result is not a number'
+      );
     }
     //>>includeEnd('debug');
 
@@ -9892,8 +10071,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.dot = function (left, right) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
     //>>includeEnd('debug');
 
     return left.x * right.x + left.y * right.y;
@@ -9908,8 +10087,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.cross = function (left, right) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
     //>>includeEnd('debug');
 
     return left.x * right.y - left.y * right.x;
@@ -9925,9 +10104,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.multiplyComponents = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = left.x * right.x;
@@ -9945,9 +10124,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.divideComponents = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = left.x / right.x;
@@ -9965,9 +10144,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.add = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = left.x + right.x;
@@ -9985,9 +10164,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.subtract = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = left.x - right.x;
@@ -10005,9 +10184,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.multiplyByScalar = function (cartesian, scalar, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.number("scalar", scalar);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.number('scalar', scalar);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = cartesian.x * scalar;
@@ -10025,9 +10204,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.divideByScalar = function (cartesian, scalar, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.number("scalar", scalar);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.number('scalar', scalar);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = cartesian.x / scalar;
@@ -10044,8 +10223,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.negate = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = -cartesian.x;
@@ -10062,8 +10241,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.abs = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = Math.abs(cartesian.x);
@@ -10083,10 +10262,10 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.lerp = function (start, end, t, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("start", start);
-    RuntimeError.Check.typeOf.object("end", end);
-    RuntimeError.Check.typeOf.number("t", t);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('start', start);
+    RuntimeError.Check.typeOf.object('end', end);
+    RuntimeError.Check.typeOf.number('t', t);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     Cartesian2.multiplyByScalar(end, t, lerpScratch);
@@ -10105,8 +10284,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.angleBetween = function (left, right) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
     //>>includeEnd('debug');
 
     Cartesian2.normalize(left, angleBetweenScratch);
@@ -10126,8 +10305,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Cartesian2.mostOrthogonalAxis = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const f = Cartesian2.normalize(cartesian, mostOrthogonalAxisScratch);
@@ -10333,8 +10512,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -10357,7 +10536,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -10383,7 +10562,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.packArray = function (array, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     const length = array.length;
@@ -10393,7 +10572,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     } else if (!Array.isArray(result) && result.length !== resultLength) {
       //>>includeStart('debug', pragmas.debug);
       throw new RuntimeError.DeveloperError(
-        "If result is a typed array, it must have exactly array.length * 4 elements"
+        'If result is a typed array, it must have exactly array.length * 4 elements'
       );
       //>>includeEnd('debug');
     } else if (result.length !== resultLength) {
@@ -10415,10 +10594,16 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.unpackArray = function (array, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("array.length", array.length, 4);
+    RuntimeError.Check.defined('array', array);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'array.length',
+      array.length,
+      4
+    );
     if (array.length % 4 !== 0) {
-      throw new RuntimeError.DeveloperError("array length must be a multiple of 4.");
+      throw new RuntimeError.DeveloperError(
+        'array length must be a multiple of 4.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -10488,7 +10673,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.fromColumnMajorArray = function (values, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("values", values);
+    RuntimeError.Check.defined('values', values);
     //>>includeEnd('debug');
 
     return Matrix2.clone(values, result);
@@ -10504,7 +10689,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.fromRowMajorArray = function (values, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("values", values);
+    RuntimeError.Check.defined('values', values);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -10532,7 +10717,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.fromScale = function (scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("scale", scale);
+    RuntimeError.Check.typeOf.object('scale', scale);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -10561,7 +10746,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.fromUniformScale = function (scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("scale", scale);
+    RuntimeError.Check.typeOf.number('scale', scale);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -10590,7 +10775,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.fromRotation = function (angle, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("angle", angle);
+    RuntimeError.Check.typeOf.number('angle', angle);
     //>>includeEnd('debug');
 
     const cosAngle = Math.cos(angle);
@@ -10616,7 +10801,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.toArray = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -10647,11 +10832,11 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.getElementIndex = function (column, row) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("row", row, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("row", row, 1);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('row', row, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('row', row, 1);
 
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("column", column, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("column", column, 1);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('column', column, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('column', column, 1);
     //>>includeEnd('debug');
 
     return column * 2 + row;
@@ -10669,12 +10854,12 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.getColumn = function (matrix, index, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
 
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("index", index, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("index", index, 1);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('index', index, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('index', index, 1);
 
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const startIndex = index * 2;
@@ -10699,13 +10884,13 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.setColumn = function (matrix, index, cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
 
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("index", index, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("index", index, 1);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('index', index, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('index', index, 1);
 
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result = Matrix2.clone(matrix, result);
@@ -10727,12 +10912,12 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.getRow = function (matrix, index, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
 
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("index", index, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("index", index, 1);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('index', index, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('index', index, 1);
 
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const x = matrix[index];
@@ -10756,13 +10941,13 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.setRow = function (matrix, index, cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
 
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("index", index, 0);
-    RuntimeError.Check.typeOf.number.lessThanOrEquals("index", index, 1);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('index', index, 0);
+    RuntimeError.Check.typeOf.number.lessThanOrEquals('index', index, 1);
 
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result = Matrix2.clone(matrix, result);
@@ -10791,9 +10976,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.setScale = function (matrix, scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("scale", scale);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('scale', scale);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const existingScale = Matrix2.getScale(matrix, scaleScratch1);
@@ -10828,9 +11013,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.setUniformScale = function (matrix, scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.number("scale", scale);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.number('scale', scale);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const existingScale = Matrix2.getScale(matrix, scaleScratch2);
@@ -10863,8 +11048,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.getScale = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result.x = Cartesian2.magnitude(
@@ -10904,8 +11089,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.setRotation = function (matrix, rotation, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const scale = Matrix2.getScale(matrix, scaleScratch4);
@@ -10932,8 +11117,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.getRotation = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const scale = Matrix2.getScale(matrix, scaleScratch5);
@@ -10956,9 +11141,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.multiply = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const column0Row0 = left[0] * right[0] + left[2] * right[1];
@@ -10983,9 +11168,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.add = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = left[0] + right[0];
@@ -11005,9 +11190,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.subtract = function (left, right, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = left[0] - right[0];
@@ -11027,9 +11212,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.multiplyByVector = function (matrix, cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const x = matrix[0] * cartesian.x + matrix[2] * cartesian.y;
@@ -11050,9 +11235,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.multiplyByScalar = function (matrix, scalar, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.number("scalar", scalar);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.number('scalar', scalar);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = matrix[0] * scalar;
@@ -11084,9 +11269,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.multiplyByScale = function (matrix, scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("scale", scale);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('scale', scale);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = matrix[0] * scale.x;
@@ -11118,9 +11303,9 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.multiplyByUniformScale = function (matrix, scale, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.number("scale", scale);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.number('scale', scale);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = matrix[0] * scale;
@@ -11140,8 +11325,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.negate = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = -matrix[0];
@@ -11160,8 +11345,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.transpose = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     const column0Row0 = matrix[0];
@@ -11185,8 +11370,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
    */
   Matrix2.abs = function (matrix, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("matrix", matrix);
-    RuntimeError.Check.typeOf.object("result", result);
+    RuntimeError.Check.typeOf.object('matrix', matrix);
+    RuntimeError.Check.typeOf.object('result', result);
     //>>includeEnd('debug');
 
     result[0] = Math.abs(matrix[0]);
@@ -11326,8 +11511,8 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     length: {
       get: function () {
         return Matrix2.packedLength;
-      },
-    },
+      }
+    }
   });
 
   /**
@@ -11383,6 +11568,5 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
   exports.Matrix3 = Matrix3;
   exports.Matrix4 = Matrix4;
   exports.Rectangle = Rectangle;
-
-}));
+});
 //# sourceMappingURL=Matrix2-9e1c22e2.js.map

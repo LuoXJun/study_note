@@ -1,5 +1,5 @@
-import Check from "./Check.js";
-import RuntimeError from "./RuntimeError.js";
+import Check from './Check.js';
+import RuntimeError from './RuntimeError.js';
 
 const compressedMagic = 0x7468dead;
 const compressedMagicSwap = 0xadde6874;
@@ -18,14 +18,14 @@ function decodeGoogleEarthEnterpriseData(key, data) {
   }
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("key", key);
-  Check.typeOf.object("data", data);
+  Check.typeOf.object('key', key);
+  Check.typeOf.object('data', data);
   //>>includeEnd('debug');
 
   const keyLength = key.byteLength;
   if (keyLength === 0 || keyLength % 4 !== 0) {
     throw new RuntimeError(
-      "The length of key must be greater than 0 and a multiple of 4."
+      'The length of key must be greater than 0 and a multiple of 4.'
     );
   }
 

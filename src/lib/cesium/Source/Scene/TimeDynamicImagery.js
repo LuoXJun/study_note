@@ -1,10 +1,10 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import JulianDate from "../Core/JulianDate.js";
-import Request from "../Core/Request.js";
-import RequestType from "../Core/RequestType.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import JulianDate from '../Core/JulianDate.js';
+import Request from '../Core/Request.js';
+import RequestType from '../Core/RequestType.js';
 
 /**
  * Provides functionality for ImageryProviders that have time dynamic imagery
@@ -22,13 +22,13 @@ function TimeDynamicImagery(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.clock", options.clock);
-  Check.typeOf.object("options.times", options.times);
+  Check.typeOf.object('options.clock', options.clock);
+  Check.typeOf.object('options.times', options.times);
   Check.typeOf.func(
-    "options.requestImageFunction",
+    'options.requestImageFunction',
     options.requestImageFunction
   );
-  Check.typeOf.func("options.reloadFunction", options.reloadFunction);
+  Check.typeOf.func('options.reloadFunction', options.reloadFunction);
   //>>includeEnd('debug');
 
   this._tileCache = {};
@@ -57,7 +57,7 @@ Object.defineProperties(TimeDynamicImagery.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(value)) {
-        throw new DeveloperError("value is required.");
+        throw new DeveloperError('value is required.');
       }
       //>>includeEnd('debug');
 
@@ -66,7 +66,7 @@ Object.defineProperties(TimeDynamicImagery.prototype, {
         this._clockOnTick(value);
         this._reloadFunction();
       }
-    },
+    }
   },
   /**
    * Gets or sets a time interval collection.
@@ -80,7 +80,7 @@ Object.defineProperties(TimeDynamicImagery.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(value)) {
-        throw new DeveloperError("value is required.");
+        throw new DeveloperError('value is required.');
       }
       //>>includeEnd('debug');
 
@@ -89,7 +89,7 @@ Object.defineProperties(TimeDynamicImagery.prototype, {
         this._clockOnTick(this._clock);
         this._reloadFunction();
       }
-    },
+    }
   },
   /**
    * Gets the current interval.
@@ -99,8 +99,8 @@ Object.defineProperties(TimeDynamicImagery.prototype, {
   currentInterval: {
     get: function () {
       return this._times.get(this._currentIntervalIndex);
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -155,7 +155,7 @@ TimeDynamicImagery.prototype.checkApproachingInterval = function (
     key: key,
     // Determines priority based on camera distance to the tile.
     // Since the imagery regardless of time will be attached to the same tile we can just steal it.
-    priorityFunction: request.priorityFunction,
+    priorityFunction: request.priorityFunction
   };
   if (
     !defined(approachingInterval) ||
@@ -219,7 +219,7 @@ function getKey(x, y, level) {
 }
 
 function getKeyElements(key) {
-  const s = key.split("-");
+  const s = key.split('-');
   if (s.length !== 3) {
     return undefined;
   }
@@ -227,7 +227,7 @@ function getKeyElements(key) {
   return {
     x: Number(s[0]),
     y: Number(s[1]),
-    level: Number(s[2]),
+    level: Number(s[2])
   };
 }
 
@@ -285,7 +285,7 @@ function addToCache(that, tile, interval) {
     throttle: false,
     throttleByServer: true,
     type: RequestType.IMAGERY,
-    priorityFunction: tile.priorityFunction,
+    priorityFunction: tile.priorityFunction
   });
   const promise = that._requestImageFunction(
     keyElements.x,
@@ -300,7 +300,7 @@ function addToCache(that, tile, interval) {
 
   intervalTileCache[key] = {
     promise: promise,
-    request: request,
+    request: request
   };
 
   return true;

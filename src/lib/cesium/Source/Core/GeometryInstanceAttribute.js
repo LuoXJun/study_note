@@ -1,6 +1,6 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Values and type information for per-instance geometry attributes.
@@ -44,21 +44,21 @@ function GeometryInstanceAttribute(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.componentDatatype)) {
-    throw new DeveloperError("options.componentDatatype is required.");
+    throw new DeveloperError('options.componentDatatype is required.');
   }
   if (!defined(options.componentsPerAttribute)) {
-    throw new DeveloperError("options.componentsPerAttribute is required.");
+    throw new DeveloperError('options.componentsPerAttribute is required.');
   }
   if (
     options.componentsPerAttribute < 1 ||
     options.componentsPerAttribute > 4
   ) {
     throw new DeveloperError(
-      "options.componentsPerAttribute must be between 1 and 4."
+      'options.componentsPerAttribute must be between 1 and 4.'
     );
   }
   if (!defined(options.value)) {
-    throw new DeveloperError("options.value is required.");
+    throw new DeveloperError('options.value is required.');
   }
   //>>includeEnd('debug');
 

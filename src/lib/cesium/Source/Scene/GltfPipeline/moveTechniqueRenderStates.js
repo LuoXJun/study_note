@@ -1,8 +1,8 @@
-import addExtensionsUsed from "./addExtensionsUsed.js";
-import ForEach from "./ForEach.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import WebGLConstants from "../../Core/WebGLConstants.js";
+import addExtensionsUsed from './addExtensionsUsed.js';
+import ForEach from './ForEach.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import WebGLConstants from '../../Core/WebGLConstants.js';
 
 const defaultBlendEquation = [WebGLConstants.FUNC_ADD, WebGLConstants.FUNC_ADD];
 
@@ -10,7 +10,7 @@ const defaultBlendFactors = [
   WebGLConstants.ONE,
   WebGLConstants.ZERO,
   WebGLConstants.ONE,
-  WebGLConstants.ZERO,
+  WebGLConstants.ZERO
 ];
 
 function isStateEnabled(renderStates, state) {
@@ -32,7 +32,7 @@ const supportedBlendFactors = [
   WebGLConstants.DST_ALPHA,
   WebGLConstants.ONE_MINUS_DST_ALPHA,
   WebGLConstants.DST_COLOR,
-  WebGLConstants.ONE_MINUS_DST_COLOR,
+  WebGLConstants.ONE_MINUS_DST_COLOR
 ];
 
 // If any of the blend factors are not supported, return the default
@@ -75,7 +75,7 @@ function moveTechniqueRenderStates(gltf) {
 
       // If BLEND is enabled, the material should have alpha mode BLEND
       if (isStateEnabled(renderStates, WebGLConstants.BLEND)) {
-        materialProperties.alphaMode = "BLEND";
+        materialProperties.alphaMode = 'BLEND';
 
         const blendFunctions = renderStates.functions;
         if (
@@ -91,7 +91,7 @@ function moveTechniqueRenderStates(gltf) {
             blendFactors: getSupportedBlendFactors(
               blendFunctions.blendFuncSeparate,
               defaultBlendFactors
-            ),
+            )
           };
         }
       }
@@ -110,7 +110,7 @@ function moveTechniqueRenderStates(gltf) {
       gltf.extensions = {};
     }
 
-    addExtensionsUsed(gltf, "KHR_blend");
+    addExtensionsUsed(gltf, 'KHR_blend');
   }
 
   ForEach.material(gltf, function (material) {

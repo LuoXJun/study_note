@@ -1,12 +1,12 @@
-import AttributeCompression from "../Core/AttributeCompression.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import combine from "../Core/combine.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import CesiumMath from "../Core/Math.js";
-import Rectangle from "../Core/Rectangle.js";
-import createTaskProcessorWorker from "./createTaskProcessorWorker.js";
+import AttributeCompression from '../Core/AttributeCompression.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import combine from '../Core/combine.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import CesiumMath from '../Core/Math.js';
+import Rectangle from '../Core/Rectangle.js';
+import createTaskProcessorWorker from './createTaskProcessorWorker.js';
 
 const MAX_SHORT = 32767;
 const MITER_BREAK = Math.cos(CesiumMath.toRadians(150.0));
@@ -214,7 +214,7 @@ const REFERENCE_INDICES = [
   2,
   7,
   2,
-  3, // top
+  3 // top
 ];
 const REFERENCE_INDICES_LENGTH = REFERENCE_INDICES.length;
 
@@ -264,8 +264,8 @@ VertexAttributesAndIndices.prototype.addVolume = function (
   const startEllipsoidNormals = this.startEllipsoidNormals;
   const endEllipsoidNormals = this.endEllipsoidNormals;
   const startPositionAndHeights = this.startPositionAndHeights;
-  const startFaceNormalAndVertexCornerIds = this
-    .startFaceNormalAndVertexCornerIds;
+  const startFaceNormalAndVertexCornerIds =
+    this.startFaceNormalAndVertexCornerIds;
   const endPositionAndHeights = this.endPositionAndHeights;
   const endFaceNormalAndHalfWidths = this.endFaceNormalAndHalfWidths;
   const vertexBatchIds = this.vertexBatchIds;
@@ -524,7 +524,7 @@ function createVectorTileClampedPolylines(parameters, transferableObjects) {
     endFaceNormalAndHalfWidths:
       attribsAndIndices.endFaceNormalAndHalfWidths.buffer,
     vertexBatchIds: attribsAndIndices.vertexBatchIds.buffer,
-    indices: indices.buffer,
+    indices: indices.buffer
   };
 
   if (parameters.keepDecodedPositions) {
@@ -532,7 +532,7 @@ function createVectorTileClampedPolylines(parameters, transferableObjects) {
     transferableObjects.push(positions.buffer, positionOffsets.buffer);
     results = combine(results, {
       decodedPositions: positions.buffer,
-      decodedPositionOffsets: positionOffsets.buffer,
+      decodedPositionOffsets: positionOffsets.buffer
     });
   }
 

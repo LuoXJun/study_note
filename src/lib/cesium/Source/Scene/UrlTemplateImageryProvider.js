@@ -1,18 +1,18 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import combine from "../Core/combine.js";
-import Credit from "../Core/Credit.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import GeographicProjection from "../Core/GeographicProjection.js";
-import CesiumMath from "../Core/Math.js";
-import Rectangle from "../Core/Rectangle.js";
-import Resource from "../Core/Resource.js";
-import WebMercatorTilingScheme from "../Core/WebMercatorTilingScheme.js";
-import ImageryProvider from "./ImageryProvider.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import combine from '../Core/combine.js';
+import Credit from '../Core/Credit.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import GeographicProjection from '../Core/GeographicProjection.js';
+import CesiumMath from '../Core/Math.js';
+import Rectangle from '../Core/Rectangle.js';
+import Resource from '../Core/Resource.js';
+import WebMercatorTilingScheme from '../Core/WebMercatorTilingScheme.js';
+import ImageryProvider from './ImageryProvider.js';
 
 const templateRegex = /{[^}]+}/g;
 
@@ -33,7 +33,7 @@ const tags = {
   eastProjected: eastProjectedTag,
   northProjected: northProjectedTag,
   width: widthTag,
-  height: heightTag,
+  height: heightTag
 };
 
 const pickFeaturesTags = combine(tags, {
@@ -45,7 +45,7 @@ const pickFeaturesTags = combine(tags, {
   latitudeDegrees: latitudeDegreesTag,
   longitudeProjected: longitudeProjectedTag,
   latitudeProjected: latitudeProjectedTag,
-  format: formatTag,
+  format: formatTag
 });
 
 /**
@@ -190,10 +190,10 @@ const pickFeaturesTags = combine(tags, {
 function UrlTemplateImageryProvider(options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options)) {
-    throw new DeveloperError("options is required.");
+    throw new DeveloperError('options is required.');
   }
   if (!defined(options.then) && !defined(options.url)) {
-    throw new DeveloperError("options is required.");
+    throw new DeveloperError('options is required.');
   }
   //>>includeEnd('debug');
 
@@ -344,7 +344,7 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
   url: {
     get: function () {
       return this._resource.url;
-    },
+    }
   },
 
   /**
@@ -368,7 +368,7 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
   urlSchemeZeroPadding: {
     get: function () {
       return this._urlSchemeZeroPadding;
-    },
+    }
   },
 
   /**
@@ -394,7 +394,7 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
   pickFeaturesUrl: {
     get: function () {
       return this._pickFeaturesResource.url;
-    },
+    }
   },
 
   /**
@@ -407,7 +407,7 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
   proxy: {
     get: function () {
       return this._resource.proxy;
-    },
+    }
   },
 
   /**
@@ -423,12 +423,12 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this.ready) {
         throw new DeveloperError(
-          "tileWidth must not be called before the imagery provider is ready."
+          'tileWidth must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._tileWidth;
-    },
+    }
   },
 
   /**
@@ -444,12 +444,12 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this.ready) {
         throw new DeveloperError(
-          "tileHeight must not be called before the imagery provider is ready."
+          'tileHeight must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._tileHeight;
-    },
+    }
   },
 
   /**
@@ -465,12 +465,12 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this.ready) {
         throw new DeveloperError(
-          "maximumLevel must not be called before the imagery provider is ready."
+          'maximumLevel must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._maximumLevel;
-    },
+    }
   },
 
   /**
@@ -486,12 +486,12 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this.ready) {
         throw new DeveloperError(
-          "minimumLevel must not be called before the imagery provider is ready."
+          'minimumLevel must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._minimumLevel;
-    },
+    }
   },
 
   /**
@@ -507,12 +507,12 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this.ready) {
         throw new DeveloperError(
-          "tilingScheme must not be called before the imagery provider is ready."
+          'tilingScheme must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._tilingScheme;
-    },
+    }
   },
 
   /**
@@ -528,12 +528,12 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this.ready) {
         throw new DeveloperError(
-          "rectangle must not be called before the imagery provider is ready."
+          'rectangle must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._rectangle;
-    },
+    }
   },
 
   /**
@@ -551,12 +551,12 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this.ready) {
         throw new DeveloperError(
-          "tileDiscardPolicy must not be called before the imagery provider is ready."
+          'tileDiscardPolicy must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._tileDiscardPolicy;
-    },
+    }
   },
 
   /**
@@ -570,7 +570,7 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._errorEvent;
-    },
+    }
   },
 
   /**
@@ -582,7 +582,7 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
   ready: {
     get: function () {
       return defined(this._resource);
-    },
+    }
   },
 
   /**
@@ -594,7 +594,7 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   /**
@@ -610,12 +610,12 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this.ready) {
         throw new DeveloperError(
-          "credit must not be called before the imagery provider is ready."
+          'credit must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._credit;
-    },
+    }
   },
 
   /**
@@ -635,13 +635,13 @@ Object.defineProperties(UrlTemplateImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this.ready) {
         throw new DeveloperError(
-          "hasAlphaChannel must not be called before the imagery provider is ready."
+          'hasAlphaChannel must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._hasAlphaChannel;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -655,10 +655,10 @@ UrlTemplateImageryProvider.prototype.reinitialize = function (options) {
   that._readyPromise = Promise.resolve(options).then(function (properties) {
     //>>includeStart('debug', pragmas.debug);
     if (!defined(properties)) {
-      throw new DeveloperError("options is required.");
+      throw new DeveloperError('options is required.');
     }
     if (!defined(properties.url)) {
-      throw new DeveloperError("options.url is required.");
+      throw new DeveloperError('options.url is required.');
     }
     //>>includeEnd('debug');
 
@@ -685,9 +685,9 @@ UrlTemplateImageryProvider.prototype.reinitialize = function (options) {
     if (Array.isArray(that._subdomains)) {
       that._subdomains = that._subdomains.slice();
     } else if (defined(that._subdomains) && that._subdomains.length > 0) {
-      that._subdomains = that._subdomains.split("");
+      that._subdomains = that._subdomains.split('');
     } else {
-      that._subdomains = ["a", "b", "c"];
+      that._subdomains = ['a', 'b', 'c'];
     }
 
     that._tileWidth = defaultValue(properties.tileWidth, 256);
@@ -709,7 +709,7 @@ UrlTemplateImageryProvider.prototype.reinitialize = function (options) {
     that._hasAlphaChannel = defaultValue(properties.hasAlphaChannel, true);
 
     let credit = properties.credit;
-    if (typeof credit === "string") {
+    if (typeof credit === 'string') {
       credit = new Credit(credit);
     }
     that._credit = credit;
@@ -737,7 +737,7 @@ UrlTemplateImageryProvider.prototype.getTileCredits = function (x, y, level) {
   //>>includeStart('debug', pragmas.debug);
   if (!this.ready) {
     throw new DeveloperError(
-      "getTileCredits must not be called before the imagery provider is ready."
+      'getTileCredits must not be called before the imagery provider is ready.'
     );
   }
   //>>includeEnd('debug');
@@ -764,7 +764,7 @@ UrlTemplateImageryProvider.prototype.requestImage = function (
   //>>includeStart('debug', pragmas.debug);
   if (!this.ready) {
     throw new DeveloperError(
-      "requestImage must not be called before the imagery provider is ready."
+      'requestImage must not be called before the imagery provider is ready.'
     );
   }
   //>>includeEnd('debug');
@@ -798,7 +798,7 @@ UrlTemplateImageryProvider.prototype.pickFeatures = function (
   //>>includeStart('debug', pragmas.debug);
   if (!this.ready) {
     throw new DeveloperError(
-      "pickFeatures must not be called before the imagery provider is ready."
+      'pickFeatures must not be called before the imagery provider is ready.'
     );
   }
   //>>includeEnd('debug');
@@ -838,16 +838,16 @@ UrlTemplateImageryProvider.prototype.pickFeatures = function (
 
     ++formatIndex;
 
-    if (format.type === "json") {
+    if (format.type === 'json') {
       return resource.fetchJson().then(format.callback).catch(doRequest);
-    } else if (format.type === "xml") {
+    } else if (format.type === 'xml') {
       return resource.fetchXML().then(format.callback).catch(doRequest);
-    } else if (format.type === "text" || format.type === "html") {
+    } else if (format.type === 'text' || format.type === 'html') {
       return resource.fetchText().then(format.callback).catch(doRequest);
     }
     return resource
       .fetch({
-        responseType: format.format,
+        responseType: format.format
       })
       .then(handleResponse.bind(undefined, format))
       .catch(doRequest);
@@ -882,7 +882,7 @@ function buildImageResource(imageryProvider, x, y, level, request) {
 
   return resource.getDerivedResource({
     request: request,
-    templateValues: templateValues,
+    templateValues: templateValues
   });
 }
 
@@ -927,7 +927,7 @@ function buildPickFeaturesResource(
   }
 
   return resource.getDerivedResource({
-    templateValues: templateValues,
+    templateValues: templateValues
   });
 }
 
@@ -938,7 +938,7 @@ function padWithZerosIfNecessary(imageryProvider, key, value) {
     imageryProvider.urlSchemeZeroPadding.hasOwnProperty(key)
   ) {
     const paddingTemplate = imageryProvider.urlSchemeZeroPadding[key];
-    if (typeof paddingTemplate === "string") {
+    if (typeof paddingTemplate === 'string') {
       const paddingTemplateWidth = paddingTemplate.length;
       if (paddingTemplateWidth > 1) {
         value =
@@ -946,7 +946,7 @@ function padWithZerosIfNecessary(imageryProvider, key, value) {
             ? value
             : new Array(
                 paddingTemplateWidth - value.toString().length + 1
-              ).join("0") + value;
+              ).join('0') + value;
       }
     }
   }
@@ -954,23 +954,23 @@ function padWithZerosIfNecessary(imageryProvider, key, value) {
 }
 
 function xTag(imageryProvider, x, y, level) {
-  return padWithZerosIfNecessary(imageryProvider, "{x}", x);
+  return padWithZerosIfNecessary(imageryProvider, '{x}', x);
 }
 
 function reverseXTag(imageryProvider, x, y, level) {
   const reverseX =
     imageryProvider.tilingScheme.getNumberOfXTilesAtLevel(level) - x - 1;
-  return padWithZerosIfNecessary(imageryProvider, "{reverseX}", reverseX);
+  return padWithZerosIfNecessary(imageryProvider, '{reverseX}', reverseX);
 }
 
 function yTag(imageryProvider, x, y, level) {
-  return padWithZerosIfNecessary(imageryProvider, "{y}", y);
+  return padWithZerosIfNecessary(imageryProvider, '{y}', y);
 }
 
 function reverseYTag(imageryProvider, x, y, level) {
   const reverseY =
     imageryProvider.tilingScheme.getNumberOfYTilesAtLevel(level) - y - 1;
-  return padWithZerosIfNecessary(imageryProvider, "{reverseY}", reverseY);
+  return padWithZerosIfNecessary(imageryProvider, '{reverseY}', reverseY);
 }
 
 function reverseZTag(imageryProvider, x, y, level) {
@@ -979,11 +979,11 @@ function reverseZTag(imageryProvider, x, y, level) {
     defined(maximumLevel) && level < maximumLevel
       ? maximumLevel - level - 1
       : level;
-  return padWithZerosIfNecessary(imageryProvider, "{reverseZ}", reverseZ);
+  return padWithZerosIfNecessary(imageryProvider, '{reverseZ}', reverseZ);
 }
 
 function zTag(imageryProvider, x, y, level) {
-  return padWithZerosIfNecessary(imageryProvider, "{z}", level);
+  return padWithZerosIfNecessary(imageryProvider, '{z}', level);
 }
 
 function sTag(imageryProvider, x, y, level) {

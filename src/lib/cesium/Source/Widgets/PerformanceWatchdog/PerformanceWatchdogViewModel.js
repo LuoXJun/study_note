@@ -1,10 +1,10 @@
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import FrameRateMonitor from "../../Scene/FrameRateMonitor.js";
-import knockout from "../../ThirdParty/knockout.js";
-import createCommand from "../createCommand.js";
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import FrameRateMonitor from '../../Scene/FrameRateMonitor.js';
+import knockout from '../../ThirdParty/knockout.js';
+import createCommand from '../createCommand.js';
 
 /**
  * The view model for {@link PerformanceWatchdog}.
@@ -21,7 +21,7 @@ import createCommand from "../createCommand.js";
 function PerformanceWatchdogViewModel(options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options) || !defined(options.scene)) {
-    throw new DeveloperError("options.scene is required.");
+    throw new DeveloperError('options.scene is required.');
   }
   //>>includeEnd('debug');
 
@@ -33,7 +33,7 @@ function PerformanceWatchdogViewModel(options) {
    */
   this.lowFrameRateMessage = defaultValue(
     options.lowFrameRateMessage,
-    "This application appears to be performing poorly on your system.  Please try using a different web browser or updating your video drivers."
+    'This application appears to be performing poorly on your system.  Please try using a different web browser or updating your video drivers.'
   );
 
   /**
@@ -50,9 +50,9 @@ function PerformanceWatchdogViewModel(options) {
   this.showingLowFrameRateMessage = false;
 
   knockout.track(this, [
-    "lowFrameRateMessage",
-    "lowFrameRateMessageDismissed",
-    "showingLowFrameRateMessage",
+    'lowFrameRateMessage',
+    'lowFrameRateMessageDismissed',
+    'showingLowFrameRateMessage'
   ]);
 
   const that = this;
@@ -87,7 +87,7 @@ Object.defineProperties(PerformanceWatchdogViewModel.prototype, {
   scene: {
     get: function () {
       return this._scene;
-    },
+    }
   },
 
   /**
@@ -99,8 +99,8 @@ Object.defineProperties(PerformanceWatchdogViewModel.prototype, {
   dismissMessage: {
     get: function () {
       return this._dismissMessage;
-    },
-  },
+    }
+  }
 });
 
 PerformanceWatchdogViewModel.prototype.destroy = function () {

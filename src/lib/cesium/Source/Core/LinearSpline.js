@@ -1,8 +1,8 @@
-import Cartesian3 from "./Cartesian3.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Spline from "./Spline.js";
+import Cartesian3 from './Cartesian3.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Spline from './Spline.js';
 
 /**
  * A spline that uses piecewise linear interpolation to create a curve.
@@ -49,15 +49,15 @@ function LinearSpline(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(points) || !defined(times)) {
-    throw new DeveloperError("points and times are required.");
+    throw new DeveloperError('points and times are required.');
   }
   if (points.length < 2) {
     throw new DeveloperError(
-      "points.length must be greater than or equal to 2."
+      'points.length must be greater than or equal to 2.'
     );
   }
   if (times.length !== points.length) {
-    throw new DeveloperError("times.length must be equal to points.length.");
+    throw new DeveloperError('times.length must be equal to points.length.');
   }
   //>>includeEnd('debug');
 
@@ -80,7 +80,7 @@ Object.defineProperties(LinearSpline.prototype, {
   times: {
     get: function () {
       return this._times;
-    },
+    }
   },
 
   /**
@@ -94,8 +94,8 @@ Object.defineProperties(LinearSpline.prototype, {
   points: {
     get: function () {
       return this._points;
-    },
-  },
+    }
+  }
 });
 
 /**

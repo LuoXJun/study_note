@@ -1,4 +1,4 @@
-import defined from "../../Core/defined.js";
+import defined from '../../Core/defined.js';
 
 /**
  * The node statistics update stage updates memory usage statistics for
@@ -13,7 +13,7 @@ import defined from "../../Core/defined.js";
  * @private
  */
 const NodeStatisticsPipelineStage = {};
-NodeStatisticsPipelineStage.name = "NodeStatisticsPipelineStage"; // Helps with debugging
+NodeStatisticsPipelineStage.name = 'NodeStatisticsPipelineStage'; // Helps with debugging
 
 NodeStatisticsPipelineStage.process = function (
   renderResources,
@@ -62,7 +62,9 @@ function countInstancing2DBuffers(statistics, runtimeNode) {
 }
 
 // Exposed for testing
-NodeStatisticsPipelineStage._countInstancingAttributes = countInstancingAttributes;
-NodeStatisticsPipelineStage._countInstancing2DBuffers = countInstancing2DBuffers;
+NodeStatisticsPipelineStage._countInstancingAttributes =
+  countInstancingAttributes;
+NodeStatisticsPipelineStage._countInstancing2DBuffers =
+  countInstancing2DBuffers;
 
 export default NodeStatisticsPipelineStage;

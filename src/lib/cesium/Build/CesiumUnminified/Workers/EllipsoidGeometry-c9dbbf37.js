@@ -23,7 +23,32 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDatatype-4eeb6d9b', './defaultValue-97284df2', './RuntimeError-4f8ec8a2', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './GeometryOffsetAttribute-59b14f45', './IndexDatatype-f228f5fd', './VertexFormat-563ab2cc'], (function (exports, Transforms, Matrix2, ComponentDatatype, defaultValue, RuntimeError, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, VertexFormat) { 'use strict';
+define([
+  'exports',
+  './Transforms-273eeb44',
+  './Matrix2-9e1c22e2',
+  './ComponentDatatype-4eeb6d9b',
+  './defaultValue-97284df2',
+  './RuntimeError-4f8ec8a2',
+  './GeometryAttribute-9be2d2e5',
+  './GeometryAttributes-734a3446',
+  './GeometryOffsetAttribute-59b14f45',
+  './IndexDatatype-f228f5fd',
+  './VertexFormat-563ab2cc'
+], function (
+  exports,
+  Transforms,
+  Matrix2,
+  ComponentDatatype,
+  defaultValue,
+  RuntimeError,
+  GeometryAttribute,
+  GeometryAttributes,
+  GeometryOffsetAttribute,
+  IndexDatatype,
+  VertexFormat
+) {
+  'use strict';
 
   const scratchPosition = new Matrix2.Cartesian3();
   const scratchNormal = new Matrix2.Cartesian3();
@@ -65,27 +90,43 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
    * const geometry = Cesium.EllipsoidGeometry.createGeometry(ellipsoid);
    */
   function EllipsoidGeometry(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     const radii = defaultValue.defaultValue(options.radii, defaultRadii);
     const innerRadii = defaultValue.defaultValue(options.innerRadii, radii);
     const minimumClock = defaultValue.defaultValue(options.minimumClock, 0.0);
-    const maximumClock = defaultValue.defaultValue(options.maximumClock, ComponentDatatype.CesiumMath.TWO_PI);
+    const maximumClock = defaultValue.defaultValue(
+      options.maximumClock,
+      ComponentDatatype.CesiumMath.TWO_PI
+    );
     const minimumCone = defaultValue.defaultValue(options.minimumCone, 0.0);
-    const maximumCone = defaultValue.defaultValue(options.maximumCone, ComponentDatatype.CesiumMath.PI);
-    const stackPartitions = Math.round(defaultValue.defaultValue(options.stackPartitions, 64));
-    const slicePartitions = Math.round(defaultValue.defaultValue(options.slicePartitions, 64));
-    const vertexFormat = defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
+    const maximumCone = defaultValue.defaultValue(
+      options.maximumCone,
+      ComponentDatatype.CesiumMath.PI
+    );
+    const stackPartitions = Math.round(
+      defaultValue.defaultValue(options.stackPartitions, 64)
+    );
+    const slicePartitions = Math.round(
+      defaultValue.defaultValue(options.slicePartitions, 64)
+    );
+    const vertexFormat = defaultValue.defaultValue(
+      options.vertexFormat,
+      VertexFormat.VertexFormat.DEFAULT
+    );
 
     //>>includeStart('debug', pragmas.debug);
     if (slicePartitions < 3) {
       throw new RuntimeError.DeveloperError(
-        "options.slicePartitions cannot be less than three."
+        'options.slicePartitions cannot be less than three.'
       );
     }
     if (stackPartitions < 3) {
       throw new RuntimeError.DeveloperError(
-        "options.stackPartitions cannot be less than three."
+        'options.stackPartitions cannot be less than three.'
       );
     }
     //>>includeEnd('debug');
@@ -100,7 +141,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
     this._slicePartitions = slicePartitions;
     this._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat);
     this._offsetAttribute = options.offsetAttribute;
-    this._workerName = "createEllipsoidGeometry";
+    this._workerName = 'createEllipsoidGeometry';
   }
 
   /**
@@ -108,7 +149,9 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
    * @type {Number}
    */
   EllipsoidGeometry.packedLength =
-    2 * Matrix2.Cartesian3.packedLength + VertexFormat.VertexFormat.packedLength + 7;
+    2 * Matrix2.Cartesian3.packedLength +
+    VertexFormat.VertexFormat.packedLength +
+    7;
 
   /**
    * Stores the provided instance into the provided array.
@@ -122,10 +165,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
   EllipsoidGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(value)) {
-      throw new RuntimeError.DeveloperError("value is required");
+      throw new RuntimeError.DeveloperError('value is required');
     }
     if (!defaultValue.defined(array)) {
-      throw new RuntimeError.DeveloperError("array is required");
+      throw new RuntimeError.DeveloperError('array is required');
     }
     //>>includeEnd('debug');
 
@@ -146,7 +189,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
     array[startingIndex++] = value._maximumCone;
     array[startingIndex++] = value._stackPartitions;
     array[startingIndex++] = value._slicePartitions;
-    array[startingIndex] = defaultValue.defaultValue(value._offsetAttribute, -1);
+    array[startingIndex] = defaultValue.defaultValue(
+      value._offsetAttribute,
+      -1
+    );
 
     return array;
   };
@@ -164,7 +210,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
     maximumCone: undefined,
     stackPartitions: undefined,
     slicePartitions: undefined,
-    offsetAttribute: undefined,
+    offsetAttribute: undefined
   };
 
   /**
@@ -178,7 +224,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
   EllipsoidGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(array)) {
-      throw new RuntimeError.DeveloperError("array is required");
+      throw new RuntimeError.DeveloperError('array is required');
     }
     //>>includeEnd('debug');
 
@@ -187,7 +233,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
     const radii = Matrix2.Cartesian3.unpack(array, startingIndex, scratchRadii);
     startingIndex += Matrix2.Cartesian3.packedLength;
 
-    const innerRadii = Matrix2.Cartesian3.unpack(array, startingIndex, scratchInnerRadii);
+    const innerRadii = Matrix2.Cartesian3.unpack(
+      array,
+      startingIndex,
+      scratchInnerRadii
+    );
     startingIndex += Matrix2.Cartesian3.packedLength;
 
     const vertexFormat = VertexFormat.VertexFormat.unpack(
@@ -218,8 +268,14 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
     }
 
     result._radii = Matrix2.Cartesian3.clone(radii, result._radii);
-    result._innerRadii = Matrix2.Cartesian3.clone(innerRadii, result._innerRadii);
-    result._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat, result._vertexFormat);
+    result._innerRadii = Matrix2.Cartesian3.clone(
+      innerRadii,
+      result._innerRadii
+    );
+    result._vertexFormat = VertexFormat.VertexFormat.clone(
+      vertexFormat,
+      result._vertexFormat
+    );
     result._minimumClock = minimumClock;
     result._maximumClock = maximumClock;
     result._minimumCone = minimumCone;
@@ -265,7 +321,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
         ComponentDatatype.CesiumMath.TWO_PI
     );
     stackPartitions = Math.round(
-      (stackPartitions * Math.abs(maximumCone - minimumCone)) / ComponentDatatype.CesiumMath.PI
+      (stackPartitions * Math.abs(maximumCone - minimumCone)) /
+        ComponentDatatype.CesiumMath.PI
     );
 
     if (slicePartitions < 2) {
@@ -291,7 +348,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
     phis.push(maximumCone);
     for (j = 0; j < slicePartitions; j++) {
       thetas.push(
-        minimumClock + (j * (maximumClock - minimumClock)) / (slicePartitions - 1)
+        minimumClock +
+          (j * (maximumClock - minimumClock)) / (slicePartitions - 1)
       );
     }
     thetas.push(maximumClock);
@@ -340,7 +398,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
         extraIndices +
         1 -
         (slicePartitions + stackPartitions) * vertexMultiplier);
-    const indices = IndexDatatype.IndexDatatype.createTypedArray(indexCount, numIndices);
+    const indices = IndexDatatype.IndexDatatype.createTypedArray(
+      indexCount,
+      numIndices
+    );
 
     const normals = vertexFormat.normal
       ? new Float32Array(vertexCount * 3)
@@ -502,7 +563,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
       attributes.position = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: positions,
+        values: positions
       });
     }
 
@@ -524,7 +585,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
     ) {
       for (i = 0; i < vertexCount; i++) {
         ellipsoid = isInner[i] ? ellipsoidInner : ellipsoidOuter;
-        const position = Matrix2.Cartesian3.fromArray(positions, i * 3, scratchPosition);
+        const position = Matrix2.Cartesian3.fromArray(
+          positions,
+          i * 3,
+          scratchPosition
+        );
         const normal = ellipsoid.geodeticSurfaceNormal(position, scratchNormal);
         if (negateNormal[i]) {
           Matrix2.Cartesian3.negate(normal, normal);
@@ -533,7 +598,9 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
         if (vertexFormat.st) {
           const normalST = Matrix2.Cartesian2.negate(normal, scratchNormalST);
           st[stIndex++] =
-            Math.atan2(normalST.y, normalST.x) / ComponentDatatype.CesiumMath.TWO_PI + 0.5;
+            Math.atan2(normalST.y, normalST.x) /
+              ComponentDatatype.CesiumMath.TWO_PI +
+            0.5;
           st[stIndex++] = Math.asin(normal.z) / Math.PI + 0.5;
         }
 
@@ -571,7 +638,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
           }
 
           if (vertexFormat.bitangent) {
-            const bitangent = Matrix2.Cartesian3.cross(normal, tangent, scratchBitangent);
+            const bitangent = Matrix2.Cartesian3.cross(
+              normal,
+              tangent,
+              scratchBitangent
+            );
             Matrix2.Cartesian3.normalize(bitangent, bitangent);
 
             bitangents[bitangentIndex++] = bitangent.x;
@@ -585,7 +656,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
         attributes.st = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 2,
-          values: st,
+          values: st
         });
       }
 
@@ -593,7 +664,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
         attributes.normal = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 3,
-          values: normals,
+          values: normals
         });
       }
 
@@ -601,7 +672,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
         attributes.tangent = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 3,
-          values: tangents,
+          values: tangents
         });
       }
 
@@ -609,7 +680,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
         attributes.bitangent = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 3,
-          values: bitangents,
+          values: bitangents
         });
       }
     }
@@ -617,14 +688,15 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
     if (defaultValue.defined(ellipsoidGeometry._offsetAttribute)) {
       const length = positions.length;
       const offsetValue =
-        ellipsoidGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
+        ellipsoidGeometry._offsetAttribute ===
+        GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
           ? 0
           : 1;
       const applyOffset = new Uint8Array(length / 3).fill(offsetValue);
       attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,
-        values: applyOffset,
+        values: applyOffset
       });
     }
 
@@ -633,7 +705,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
       indices: indices,
       primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES,
       boundingSphere: Transforms.BoundingSphere.fromEllipsoid(ellipsoidOuter),
-      offsetAttribute: ellipsoidGeometry._offsetAttribute,
+      offsetAttribute: ellipsoidGeometry._offsetAttribute
     });
   };
 
@@ -650,7 +722,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
       unitEllipsoidGeometry = EllipsoidGeometry.createGeometry(
         new EllipsoidGeometry({
           radii: new Matrix2.Cartesian3(1.0, 1.0, 1.0),
-          vertexFormat: VertexFormat.VertexFormat.POSITION_ONLY,
+          vertexFormat: VertexFormat.VertexFormat.POSITION_ONLY
         })
       );
     }
@@ -658,6 +730,5 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
   };
 
   exports.EllipsoidGeometry = EllipsoidGeometry;
-
-}));
+});
 //# sourceMappingURL=EllipsoidGeometry-c9dbbf37.js.map

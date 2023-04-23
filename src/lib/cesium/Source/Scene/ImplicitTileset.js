@@ -1,10 +1,10 @@
-import Check from "../Core/Check.js";
-import clone from "../Core/clone.js";
-import defined from "../Core/defined.js";
-import Resource from "../Core/Resource.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import hasExtension from "./hasExtension.js";
-import ImplicitSubdivisionScheme from "./ImplicitSubdivisionScheme.js";
+import Check from '../Core/Check.js';
+import clone from '../Core/clone.js';
+import defined from '../Core/defined.js';
+import Resource from '../Core/Resource.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import hasExtension from './hasExtension.js';
+import ImplicitSubdivisionScheme from './ImplicitSubdivisionScheme.js';
 
 /**
  * An ImplicitTileset is a simple struct that stores information about the
@@ -27,12 +27,12 @@ export default function ImplicitTileset(
   tileJson,
   metadataSchema
 ) {
-  const implicitTiling = hasExtension(tileJson, "3DTILES_implicit_tiling")
-    ? tileJson.extensions["3DTILES_implicit_tiling"]
+  const implicitTiling = hasExtension(tileJson, '3DTILES_implicit_tiling')
+    ? tileJson.extensions['3DTILES_implicit_tiling']
     : tileJson.implicitTiling;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("implicitTiling", implicitTiling);
+  Check.typeOf.object('implicitTiling', implicitTiling);
   //>>includeEnd('debug');
 
   /**
@@ -68,10 +68,10 @@ export default function ImplicitTileset(
   if (
     !defined(boundingVolume.box) &&
     !defined(boundingVolume.region) &&
-    !hasExtension(boundingVolume, "3DTILES_bounding_volume_S2")
+    !hasExtension(boundingVolume, '3DTILES_bounding_volume_S2')
   ) {
     throw new RuntimeError(
-      "Only box, region and 3DTILES_bounding_volume_S2 are supported for implicit tiling"
+      'Only box, region and 3DTILES_bounding_volume_S2 are supported for implicit tiling'
     );
   }
 
@@ -225,8 +225,8 @@ export default function ImplicitTileset(
  * @private
  */
 function gatherContentHeaders(tileJson) {
-  if (hasExtension(tileJson, "3DTILES_multiple_contents")) {
-    const extension = tileJson.extensions["3DTILES_multiple_contents"];
+  if (hasExtension(tileJson, '3DTILES_multiple_contents')) {
+    const extension = tileJson.extensions['3DTILES_multiple_contents'];
     return defined(extension.contents) ? extension.contents : extension.content;
   }
 
@@ -247,8 +247,8 @@ function makeTileHeaderTemplate(tileJson) {
   // Remove the implicit tiling extension to prevent infinite loops,
   // as well as content-related properties since content is handled separately
   if (defined(template.extensions)) {
-    delete template.extensions["3DTILES_implicit_tiling"];
-    delete template.extensions["3DTILES_multiple_contents"];
+    delete template.extensions['3DTILES_implicit_tiling'];
+    delete template.extensions['3DTILES_multiple_contents'];
 
     // if there are no other extensions, remove the extensions property to
     // keep each tile simple

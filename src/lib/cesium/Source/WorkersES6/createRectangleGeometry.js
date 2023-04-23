@@ -1,7 +1,7 @@
-import defined from "../Core/defined.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import Rectangle from "../Core/Rectangle.js";
-import RectangleGeometry from "../Core/RectangleGeometry.js";
+import defined from '../Core/defined.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import Rectangle from '../Core/Rectangle.js';
+import RectangleGeometry from '../Core/RectangleGeometry.js';
 
 function createRectangleGeometry(rectangleGeometry, offset) {
   if (defined(offset)) {

@@ -1,30 +1,30 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Cartographic from "../Core/Cartographic.js";
-import defined from "../Core/defined.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import IntersectionTests from "../Core/IntersectionTests.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import Ray from "../Core/Ray.js";
-import Request from "../Core/Request.js";
-import RequestState from "../Core/RequestState.js";
-import RequestType from "../Core/RequestType.js";
-import TerrainEncoding from "../Core/TerrainEncoding.js";
-import TileProviderError from "../Core/TileProviderError.js";
-import Buffer from "../Renderer/Buffer.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import Sampler from "../Renderer/Sampler.js";
-import Texture from "../Renderer/Texture.js";
-import TextureMagnificationFilter from "../Renderer/TextureMagnificationFilter.js";
-import TextureMinificationFilter from "../Renderer/TextureMinificationFilter.js";
-import TextureWrap from "../Renderer/TextureWrap.js";
-import VertexArray from "../Renderer/VertexArray.js";
-import ImageryState from "./ImageryState.js";
-import QuadtreeTileLoadState from "./QuadtreeTileLoadState.js";
-import SceneMode from "./SceneMode.js";
-import TerrainState from "./TerrainState.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Cartographic from '../Core/Cartographic.js';
+import defined from '../Core/defined.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import IntersectionTests from '../Core/IntersectionTests.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import Ray from '../Core/Ray.js';
+import Request from '../Core/Request.js';
+import RequestState from '../Core/RequestState.js';
+import RequestType from '../Core/RequestType.js';
+import TerrainEncoding from '../Core/TerrainEncoding.js';
+import TileProviderError from '../Core/TileProviderError.js';
+import Buffer from '../Renderer/Buffer.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import Sampler from '../Renderer/Sampler.js';
+import Texture from '../Renderer/Texture.js';
+import TextureMagnificationFilter from '../Renderer/TextureMagnificationFilter.js';
+import TextureMinificationFilter from '../Renderer/TextureMinificationFilter.js';
+import TextureWrap from '../Renderer/TextureWrap.js';
+import VertexArray from '../Renderer/VertexArray.js';
+import ImageryState from './ImageryState.js';
+import QuadtreeTileLoadState from './QuadtreeTileLoadState.js';
+import SceneMode from './SceneMode.js';
+import TerrainState from './TerrainState.js';
 
 /**
  * Contains additional information about a {@link QuadtreeTile} of the globe's surface, and
@@ -101,7 +101,7 @@ Object.defineProperties(GlobeSurfaceTile.prototype, {
       }
 
       return shouldRemoveTile;
-    },
+    }
   },
 
   /**
@@ -122,8 +122,8 @@ Object.defineProperties(GlobeSurfaceTile.prototype, {
         return this.fill.mesh;
       }
       return undefined;
-    },
-  },
+    }
+  }
 });
 
 const scratchCartographic = new Cartographic();
@@ -726,7 +726,7 @@ function requestTileGeometry(surfaceTile, terrainProvider, x, y, level) {
     const request = new Request({
       throttle: false,
       throttleByServer: true,
-      type: RequestType.TERRAIN,
+      type: RequestType.TERRAIN
     });
     surfaceTile.request = request;
 
@@ -765,7 +765,7 @@ const scratchCreateMeshOptions = {
   level: 0,
   exaggeration: 1.0,
   exaggerationRelativeHeight: 0.0,
-  throttle: true,
+  throttle: true
 };
 
 function transform(surfaceTile, frameState, terrainProvider, x, y, level) {
@@ -806,7 +806,7 @@ GlobeSurfaceTile._createVertexArrayForMesh = function (context, mesh) {
   const buffer = Buffer.createVertexBuffer({
     context: context,
     typedArray: typedArray,
-    usage: BufferUsage.STATIC_DRAW,
+    usage: BufferUsage.STATIC_DRAW
   });
   const attributes = mesh.encoding.getAttributes(buffer);
 
@@ -818,7 +818,7 @@ GlobeSurfaceTile._createVertexArrayForMesh = function (context, mesh) {
       context: context,
       typedArray: indices,
       usage: BufferUsage.STATIC_DRAW,
-      indexDatatype: IndexDatatype.fromSizeInBytes(indices.BYTES_PER_ELEMENT),
+      indexDatatype: IndexDatatype.fromSizeInBytes(indices.BYTES_PER_ELEMENT)
     });
     indexBuffer.vertexArrayDestroyable = false;
     indexBuffer.referenceCount = 1;
@@ -831,7 +831,7 @@ GlobeSurfaceTile._createVertexArrayForMesh = function (context, mesh) {
   return new VertexArray({
     context: context,
     attributes: attributes,
-    indexBuffer: indexBuffer,
+    indexBuffer: indexBuffer
   });
 };
 
@@ -885,8 +885,8 @@ function getContextWaterMaskData(context) {
       source: {
         arrayBufferView: new Uint8Array([255]),
         width: 1,
-        height: 1,
-      },
+        height: 1
+      }
     });
     allWaterTexture.referenceCount = 1;
 
@@ -894,7 +894,7 @@ function getContextWaterMaskData(context) {
       wrapS: TextureWrap.CLAMP_TO_EDGE,
       wrapT: TextureWrap.CLAMP_TO_EDGE,
       minificationFilter: TextureMinificationFilter.LINEAR,
-      magnificationFilter: TextureMagnificationFilter.LINEAR,
+      magnificationFilter: TextureMagnificationFilter.LINEAR
     });
 
     data = {
@@ -902,7 +902,7 @@ function getContextWaterMaskData(context) {
       sampler: sampler,
       destroy: function () {
         this.allWaterTexture.destroy();
-      },
+      }
     };
 
     context.cache.tile_waterMaskData = data;
@@ -935,10 +935,10 @@ function createWaterMaskTextureIfNeeded(context, surfaceTile) {
       source: {
         width: textureSize,
         height: textureSize,
-        arrayBufferView: waterMask,
+        arrayBufferView: waterMask
       },
       sampler: waterMaskData.sampler,
-      flipY: false,
+      flipY: false
     });
 
     texture.referenceCount = 0;

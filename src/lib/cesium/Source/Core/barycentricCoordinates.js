@@ -1,8 +1,8 @@
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import defined from "./defined.js";
-import CesiumMath from "./Math.js";
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import defined from './defined.js';
+import CesiumMath from './Math.js';
 
 const scratchCartesian1 = new Cartesian3();
 const scratchCartesian2 = new Cartesian3();
@@ -30,10 +30,10 @@ const scratchCartesian3 = new Cartesian3();
  */
 function barycentricCoordinates(point, p0, p1, p2, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("point", point);
-  Check.defined("p0", p0);
-  Check.defined("p1", p1);
-  Check.defined("p2", p2);
+  Check.defined('point', point);
+  Check.defined('p0', p0);
+  Check.defined('p1', p1);
+  Check.defined('p2', p2);
   //>>includeEnd('debug');
 
   if (!defined(result)) {

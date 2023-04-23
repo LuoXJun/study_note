@@ -1,9 +1,9 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import getTimestamp from "../Core/getTimestamp.js";
-import getElement from "../Widgets/getElement.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import getTimestamp from '../Core/getTimestamp.js';
+import getElement from '../Widgets/getElement.js';
 
 /**
  * @private
@@ -14,21 +14,21 @@ function PerformanceDisplay(options) {
   const container = getElement(options.container);
   //>>includeStart('debug', pragmas.debug);
   if (!defined(container)) {
-    throw new DeveloperError("container is required");
+    throw new DeveloperError('container is required');
   }
   //>>includeEnd('debug');
 
   this._container = container;
 
-  const display = document.createElement("div");
-  display.className = "cesium-performanceDisplay";
-  const fpsElement = document.createElement("div");
-  fpsElement.className = "cesium-performanceDisplay-fps";
-  this._fpsText = document.createTextNode("");
+  const display = document.createElement('div');
+  display.className = 'cesium-performanceDisplay';
+  const fpsElement = document.createElement('div');
+  fpsElement.className = 'cesium-performanceDisplay-fps';
+  this._fpsText = document.createTextNode('');
   fpsElement.appendChild(this._fpsText);
-  const msElement = document.createElement("div");
-  msElement.className = "cesium-performanceDisplay-ms";
-  this._msText = document.createTextNode("");
+  const msElement = document.createElement('div');
+  msElement.className = 'cesium-performanceDisplay-ms';
+  this._msText = document.createTextNode('');
   msElement.appendChild(this._msText);
   display.appendChild(msElement);
   display.appendChild(fpsElement);
@@ -40,9 +40,9 @@ function PerformanceDisplay(options) {
   this._msFrameCount = 0;
 
   this._throttled = false;
-  const throttledElement = document.createElement("div");
-  throttledElement.className = "cesium-performanceDisplay-throttled";
-  this._throttledText = document.createTextNode("");
+  const throttledElement = document.createElement('div');
+  throttledElement.className = 'cesium-performanceDisplay-throttled';
+  this._throttledText = document.createTextNode('');
   throttledElement.appendChild(this._throttledText);
   display.appendChild(throttledElement);
 }
@@ -64,14 +64,14 @@ Object.defineProperties(PerformanceDisplay.prototype, {
       }
 
       if (value) {
-        this._throttledText.nodeValue = "(throttled)";
+        this._throttledText.nodeValue = '(throttled)';
       } else {
-        this._throttledText.nodeValue = "";
+        this._throttledText.nodeValue = '';
       }
 
       this._throttled = value;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -87,7 +87,7 @@ PerformanceDisplay.prototype.update = function (renderedThisFrame) {
   this._fpsFrameCount++;
   const fpsElapsedTime = time - this._lastFpsSampleTime;
   if (fpsElapsedTime > 1000) {
-    let fps = "N/A";
+    let fps = 'N/A';
     if (updateDisplay) {
       fps = ((this._fpsFrameCount * 1000) / fpsElapsedTime) | 0;
     }
@@ -100,7 +100,7 @@ PerformanceDisplay.prototype.update = function (renderedThisFrame) {
   this._msFrameCount++;
   const msElapsedTime = time - this._lastMsSampleTime;
   if (msElapsedTime > 200) {
-    let ms = "N/A";
+    let ms = 'N/A';
     if (updateDisplay) {
       ms = (msElapsedTime / this._msFrameCount).toFixed(2);
     }

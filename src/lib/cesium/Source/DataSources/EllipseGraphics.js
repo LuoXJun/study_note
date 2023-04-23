@@ -1,9 +1,9 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import createMaterialPropertyDescriptor from "./createMaterialPropertyDescriptor.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import createMaterialPropertyDescriptor from './createMaterialPropertyDescriptor.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
 
 /**
  * @typedef {Object} EllipseGraphics.ConstructorOptions
@@ -102,7 +102,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -111,21 +111,21 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  show: createPropertyDescriptor("show"),
+  show: createPropertyDescriptor('show'),
 
   /**
    * Gets or sets the numeric Property specifying the semi-major axis.
    * @memberof EllipseGraphics.prototype
    * @type {Property|undefined}
    */
-  semiMajorAxis: createPropertyDescriptor("semiMajorAxis"),
+  semiMajorAxis: createPropertyDescriptor('semiMajorAxis'),
 
   /**
    * Gets or sets the numeric Property specifying the semi-minor axis.
    * @memberof EllipseGraphics.prototype
    * @type {Property|undefined}
    */
-  semiMinorAxis: createPropertyDescriptor("semiMinorAxis"),
+  semiMinorAxis: createPropertyDescriptor('semiMinorAxis'),
 
   /**
    * Gets or sets the numeric Property specifying the altitude of the ellipse.
@@ -133,7 +133,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {Property|undefined}
    * @default 0.0
    */
-  height: createPropertyDescriptor("height"),
+  height: createPropertyDescriptor('height'),
 
   /**
    * Gets or sets the Property specifying the {@link HeightReference}.
@@ -141,7 +141,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {Property|undefined}
    * @default HeightReference.NONE
    */
-  heightReference: createPropertyDescriptor("heightReference"),
+  heightReference: createPropertyDescriptor('heightReference'),
 
   /**
    * Gets or sets the numeric Property specifying the altitude of the ellipse extrusion.
@@ -149,7 +149,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @memberof EllipseGraphics.prototype
    * @type {Property|undefined}
    */
-  extrudedHeight: createPropertyDescriptor("extrudedHeight"),
+  extrudedHeight: createPropertyDescriptor('extrudedHeight'),
 
   /**
    * Gets or sets the Property specifying the extruded {@link HeightReference}.
@@ -157,7 +157,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {Property|undefined}
    * @default HeightReference.NONE
    */
-  extrudedHeightReference: createPropertyDescriptor("extrudedHeightReference"),
+  extrudedHeightReference: createPropertyDescriptor('extrudedHeightReference'),
 
   /**
    * Gets or sets the numeric property specifying the rotation of the ellipse counter-clockwise from north.
@@ -165,7 +165,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {Property|undefined}
    * @default 0
    */
-  rotation: createPropertyDescriptor("rotation"),
+  rotation: createPropertyDescriptor('rotation'),
 
   /**
    * Gets or sets the numeric property specifying the rotation of the ellipse texture counter-clockwise from north.
@@ -173,7 +173,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {Property|undefined}
    * @default 0
    */
-  stRotation: createPropertyDescriptor("stRotation"),
+  stRotation: createPropertyDescriptor('stRotation'),
 
   /**
    * Gets or sets the numeric Property specifying the angular distance between points on the ellipse.
@@ -181,7 +181,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {Property|undefined}
    * @default {CesiumMath.RADIANS_PER_DEGREE}
    */
-  granularity: createPropertyDescriptor("granularity"),
+  granularity: createPropertyDescriptor('granularity'),
 
   /**
    * Gets or sets the boolean Property specifying whether the ellipse is filled with the provided material.
@@ -189,7 +189,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  fill: createPropertyDescriptor("fill"),
+  fill: createPropertyDescriptor('fill'),
 
   /**
    * Gets or sets the Property specifying the material used to fill the ellipse.
@@ -197,7 +197,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {MaterialProperty|undefined}
    * @default Color.WHITE
    */
-  material: createMaterialPropertyDescriptor("material"),
+  material: createMaterialPropertyDescriptor('material'),
 
   /**
    * Gets or sets the Property specifying whether the ellipse is outlined.
@@ -205,7 +205,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {Property|undefined}
    * @default false
    */
-  outline: createPropertyDescriptor("outline"),
+  outline: createPropertyDescriptor('outline'),
 
   /**
    * Gets or sets the Property specifying the {@link Color} of the outline.
@@ -213,7 +213,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {Property|undefined}
    * @default Color.BLACK
    */
-  outlineColor: createPropertyDescriptor("outlineColor"),
+  outlineColor: createPropertyDescriptor('outlineColor'),
 
   /**
    * Gets or sets the numeric Property specifying the width of the outline.
@@ -224,7 +224,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {Property|undefined}
    * @default 1.0
    */
-  outlineWidth: createPropertyDescriptor("outlineWidth"),
+  outlineWidth: createPropertyDescriptor('outlineWidth'),
 
   /**
    * Gets or sets the numeric Property specifying the number of vertical lines to draw along the perimeter for the outline.
@@ -232,7 +232,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {Property|undefined}
    * @default 16
    */
-  numberOfVerticalLines: createPropertyDescriptor("numberOfVerticalLines"),
+  numberOfVerticalLines: createPropertyDescriptor('numberOfVerticalLines'),
 
   /**
    * Get or sets the enum Property specifying whether the ellipse
@@ -241,7 +241,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {Property|undefined}
    * @default ShadowMode.DISABLED
    */
-  shadows: createPropertyDescriptor("shadows"),
+  shadows: createPropertyDescriptor('shadows'),
 
   /**
    * Gets or sets the {@link DistanceDisplayCondition} Property specifying at what distance from the camera that this ellipse will be displayed.
@@ -249,7 +249,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {Property|undefined}
    */
   distanceDisplayCondition: createPropertyDescriptor(
-    "distanceDisplayCondition"
+    'distanceDisplayCondition'
   ),
 
   /**
@@ -258,7 +258,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {Property|undefined}
    * @default ClassificationType.BOTH
    */
-  classificationType: createPropertyDescriptor("classificationType"),
+  classificationType: createPropertyDescriptor('classificationType'),
 
   /**
    * Gets or sets the zIndex Property specifying the ellipse ordering.  Only has an effect if the ellipse is constant and neither height or extrudedHeight are specified
@@ -266,7 +266,7 @@ Object.defineProperties(EllipseGraphics.prototype, {
    * @type {ConstantProperty|undefined}
    * @default 0
    */
-  zIndex: createPropertyDescriptor("zIndex"),
+  zIndex: createPropertyDescriptor('zIndex')
 });
 
 /**
@@ -311,7 +311,7 @@ EllipseGraphics.prototype.clone = function (result) {
 EllipseGraphics.prototype.merge = function (source) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
-    throw new DeveloperError("source is required.");
+    throw new DeveloperError('source is required.');
   }
   //>>includeEnd('debug');
 

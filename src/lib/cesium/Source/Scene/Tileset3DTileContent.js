@@ -1,4 +1,4 @@
-import destroyObject from "../Core/destroyObject.js";
+import destroyObject from '../Core/destroyObject.js';
 
 /**
  * Represents content for a tile in a
@@ -30,73 +30,73 @@ Object.defineProperties(Tileset3DTileContent.prototype, {
   featuresLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   pointsLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   trianglesLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   geometryByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   texturesByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   batchTableByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   innerContents: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   tileset: {
     get: function () {
       return this._tileset;
-    },
+    }
   },
 
   tile: {
     get: function () {
       return this._tile;
-    },
+    }
   },
 
   url: {
     get: function () {
       return this._resource.getUrlComponent(true);
-    },
+    }
   },
 
   batchTable: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   metadata: {
@@ -105,7 +105,7 @@ Object.defineProperties(Tileset3DTileContent.prototype, {
     },
     set: function (value) {
       this._metadata = value;
-    },
+    }
   },
 
   group: {
@@ -114,8 +114,8 @@ Object.defineProperties(Tileset3DTileContent.prototype, {
     },
     set: function (value) {
       this._group = value;
-    },
-  },
+    }
+  }
 });
 
 function initialize(content, json) {

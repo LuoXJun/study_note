@@ -1,11 +1,11 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import CesiumMath from "../Core/Math.js";
-import Rectangle from "../Core/Rectangle.js";
-import ImageryLayer from "./ImageryLayer.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import CesiumMath from '../Core/Math.js';
+import Rectangle from '../Core/Rectangle.js';
+import ImageryLayer from './ImageryLayer.js';
 
 /**
  * An ordered collection of imagery layers.
@@ -64,8 +64,8 @@ Object.defineProperties(ImageryLayerCollection.prototype, {
   length: {
     get: function () {
       return this._layers.length;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -82,14 +82,14 @@ ImageryLayerCollection.prototype.add = function (layer, index) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(layer)) {
-    throw new DeveloperError("layer is required.");
+    throw new DeveloperError('layer is required.');
   }
   if (hasIndex) {
     if (index < 0) {
-      throw new DeveloperError("index must be greater than or equal to zero.");
+      throw new DeveloperError('index must be greater than or equal to zero.');
     } else if (index > this._layers.length) {
       throw new DeveloperError(
-        "index must be less than or equal to the number of layers."
+        'index must be less than or equal to the number of layers.'
       );
     }
   }
@@ -120,7 +120,7 @@ ImageryLayerCollection.prototype.addImageryProvider = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(imageryProvider)) {
-    throw new DeveloperError("imageryProvider is required.");
+    throw new DeveloperError('imageryProvider is required.');
   }
   //>>includeEnd('debug');
 
@@ -211,7 +211,7 @@ ImageryLayerCollection.prototype.indexOf = function (layer) {
 ImageryLayerCollection.prototype.get = function (index) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(index)) {
-    throw new DeveloperError("index is required.", "index");
+    throw new DeveloperError('index is required.', 'index');
   }
   //>>includeEnd('debug');
 
@@ -221,7 +221,7 @@ ImageryLayerCollection.prototype.get = function (index) {
 function getLayerIndex(layers, layer) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(layer)) {
-    throw new DeveloperError("layer is required.");
+    throw new DeveloperError('layer is required.');
   }
   //>>includeEnd('debug');
 
@@ -229,7 +229,7 @@ function getLayerIndex(layers, layer) {
 
   //>>includeStart('debug', pragmas.debug);
   if (index === -1) {
-    throw new DeveloperError("layer is not in this collection.");
+    throw new DeveloperError('layer is not in this collection.');
   }
   //>>includeEnd('debug');
 
@@ -413,9 +413,8 @@ ImageryLayerCollection.prototype.pickImageryLayers = function (ray, scene) {
     return;
   }
 
-  const pickedLocation = scene.globe.ellipsoid.cartesianToCartographic(
-    pickedPosition
-  );
+  const pickedLocation =
+    scene.globe.ellipsoid.cartesianToCartographic(pickedPosition);
 
   const imageryLayers = [];
 
@@ -468,9 +467,8 @@ ImageryLayerCollection.prototype.pickImageryLayerFeatures = function (
     return;
   }
 
-  const pickedLocation = scene.globe.ellipsoid.cartesianToCartographic(
-    pickedPosition
-  );
+  const pickedLocation =
+    scene.globe.ellipsoid.cartesianToCartographic(pickedPosition);
 
   const promises = [];
   const imageryLayers = [];

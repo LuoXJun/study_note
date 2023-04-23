@@ -1,6 +1,6 @@
-import Uri from "../ThirdParty/Uri.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import Uri from '../ThirdParty/Uri.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * A singleton that contains all of the servers that are trusted. Credentials will be sent with
@@ -26,10 +26,10 @@ let _servers = {};
 TrustedServers.add = function (host, port) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(host)) {
-    throw new DeveloperError("host is required.");
+    throw new DeveloperError('host is required.');
   }
   if (!defined(port) || port <= 0) {
-    throw new DeveloperError("port is required to be greater than 0.");
+    throw new DeveloperError('port is required to be greater than 0.');
   }
   //>>includeEnd('debug');
 
@@ -52,10 +52,10 @@ TrustedServers.add = function (host, port) {
 TrustedServers.remove = function (host, port) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(host)) {
-    throw new DeveloperError("host is required.");
+    throw new DeveloperError('host is required.');
   }
   if (!defined(port) || port <= 0) {
-    throw new DeveloperError("port is required to be greater than 0.");
+    throw new DeveloperError('port is required to be greater than 0.');
   }
   //>>includeEnd('debug');
 
@@ -76,22 +76,22 @@ function getAuthority(url) {
   }
   uri.authority(authority);
 
-  if (authority.indexOf("@") !== -1) {
-    const parts = authority.split("@");
+  if (authority.indexOf('@') !== -1) {
+    const parts = authority.split('@');
     authority = parts[1];
   }
 
   // If the port is missing add one based on the scheme
-  if (authority.indexOf(":") === -1) {
+  if (authority.indexOf(':') === -1) {
     let scheme = uri.scheme();
     if (scheme.length === 0) {
       scheme = window.location.protocol;
       scheme = scheme.substring(0, scheme.length - 1);
     }
-    if (scheme === "http") {
-      authority += ":80";
-    } else if (scheme === "https") {
-      authority += ":443";
+    if (scheme === 'http') {
+      authority += ':80';
+    } else if (scheme === 'https') {
+      authority += ':443';
     } else {
       return undefined;
     }
@@ -122,7 +122,7 @@ function getAuthority(url) {
 TrustedServers.contains = function (url) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(url)) {
-    throw new DeveloperError("url is required.");
+    throw new DeveloperError('url is required.');
   }
   //>>includeEnd('debug');
   const authority = getAuthority(url);

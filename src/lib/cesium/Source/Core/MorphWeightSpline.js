@@ -1,8 +1,8 @@
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Spline from "./Spline.js";
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Spline from './Spline.js';
 
 /**
  * A spline that linearly interpolates over an array of weight values used by morph targets.
@@ -46,12 +46,12 @@ function MorphWeightSpline(options) {
   const times = options.times;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("weights", weights);
-  Check.defined("times", times);
-  Check.typeOf.number.greaterThanOrEquals("weights.length", weights.length, 3);
+  Check.defined('weights', weights);
+  Check.defined('times', times);
+  Check.typeOf.number.greaterThanOrEquals('weights.length', weights.length, 3);
   if (weights.length % times.length !== 0) {
     throw new DeveloperError(
-      "times.length must be a factor of weights.length."
+      'times.length must be a factor of weights.length.'
     );
   }
   //>>includeEnd('debug');
@@ -75,7 +75,7 @@ Object.defineProperties(MorphWeightSpline.prototype, {
   times: {
     get: function () {
       return this._times;
-    },
+    }
   },
 
   /**
@@ -89,8 +89,8 @@ Object.defineProperties(MorphWeightSpline.prototype, {
   weights: {
     get: function () {
       return this._weights;
-    },
-  },
+    }
+  }
 });
 
 /**

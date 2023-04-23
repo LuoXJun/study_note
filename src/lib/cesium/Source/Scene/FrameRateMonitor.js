@@ -1,10 +1,10 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import getTimestamp from "../Core/getTimestamp.js";
-import TimeConstants from "../Core/TimeConstants.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import getTimestamp from '../Core/getTimestamp.js';
+import TimeConstants from '../Core/TimeConstants.js';
 
 /**
  * Monitors the frame rate (frames per second) in a {@link Scene} and raises an event if the frame rate is
@@ -32,7 +32,7 @@ import TimeConstants from "../Core/TimeConstants.js";
 function FrameRateMonitor(options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options) || !defined(options.scene)) {
-    throw new DeveloperError("options.scene is required.");
+    throw new DeveloperError('options.scene is required.');
   }
   //>>includeEnd('debug');
 
@@ -109,24 +109,24 @@ function FrameRateMonitor(options) {
 
   this._hiddenPropertyName =
     document.hidden !== undefined
-      ? "hidden"
+      ? 'hidden'
       : document.mozHidden !== undefined
-      ? "mozHidden"
+      ? 'mozHidden'
       : document.msHidden !== undefined
-      ? "msHidden"
+      ? 'msHidden'
       : document.webkitHidden !== undefined
-      ? "webkitHidden"
+      ? 'webkitHidden'
       : undefined;
 
   const visibilityChangeEventName =
     document.hidden !== undefined
-      ? "visibilitychange"
+      ? 'visibilitychange'
       : document.mozHidden !== undefined
-      ? "mozvisibilitychange"
+      ? 'mozvisibilitychange'
       : document.msHidden !== undefined
-      ? "msvisibilitychange"
+      ? 'msvisibilitychange'
       : document.webkitHidden !== undefined
-      ? "webkitvisibilitychange"
+      ? 'webkitvisibilitychange'
       : undefined;
 
   function visibilityChangeListener() {
@@ -164,7 +164,7 @@ FrameRateMonitor.defaultSettings = {
   quietPeriod: 2.0,
   warmupPeriod: 5.0,
   minimumFrameRateDuringWarmup: 4,
-  minimumFrameRateAfterWarmup: 8,
+  minimumFrameRateAfterWarmup: 8
 };
 
 /**
@@ -177,7 +177,7 @@ FrameRateMonitor.defaultSettings = {
 FrameRateMonitor.fromScene = function (scene) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required.");
+    throw new DeveloperError('scene is required.');
   }
   //>>includeEnd('debug');
 
@@ -186,7 +186,7 @@ FrameRateMonitor.fromScene = function (scene) {
     scene._frameRateMonitor.isDestroyed()
   ) {
     scene._frameRateMonitor = new FrameRateMonitor({
-      scene: scene,
+      scene: scene
     });
   }
 
@@ -202,7 +202,7 @@ Object.defineProperties(FrameRateMonitor.prototype, {
   scene: {
     get: function () {
       return this._scene;
-    },
+    }
   },
 
   /**
@@ -215,7 +215,7 @@ Object.defineProperties(FrameRateMonitor.prototype, {
   lowFrameRate: {
     get: function () {
       return this._lowFrameRate;
-    },
+    }
   },
 
   /**
@@ -228,7 +228,7 @@ Object.defineProperties(FrameRateMonitor.prototype, {
   nominalFrameRate: {
     get: function () {
       return this._nominalFrameRate;
-    },
+    }
   },
 
   /**
@@ -240,8 +240,8 @@ Object.defineProperties(FrameRateMonitor.prototype, {
   lastFramesPerSecond: {
     get: function () {
       return this._lastFramesPerSecond;
-    },
-  },
+    }
+  }
 });
 
 /**

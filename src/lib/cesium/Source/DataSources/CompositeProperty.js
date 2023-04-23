@@ -1,9 +1,9 @@
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import EventHelper from "../Core/EventHelper.js";
-import TimeIntervalCollection from "../Core/TimeIntervalCollection.js";
-import Property from "./Property.js";
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import EventHelper from '../Core/EventHelper.js';
+import TimeIntervalCollection from '../Core/TimeIntervalCollection.js';
+import Property from './Property.js';
 
 function subscribeAll(property, eventHelper, definitionChanged, intervals) {
   function callback() {
@@ -74,7 +74,7 @@ Object.defineProperties(CompositeProperty.prototype, {
   isConstant: {
     get: function () {
       return this._intervals.isEmpty;
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -88,7 +88,7 @@ Object.defineProperties(CompositeProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   /**
    * Gets the interval collection.
@@ -99,8 +99,8 @@ Object.defineProperties(CompositeProperty.prototype, {
   intervals: {
     get: function () {
       return this._intervals;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -113,7 +113,7 @@ Object.defineProperties(CompositeProperty.prototype, {
 CompositeProperty.prototype.getValue = function (time, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required");
+    throw new DeveloperError('time is required');
   }
   //>>includeEnd('debug');
 

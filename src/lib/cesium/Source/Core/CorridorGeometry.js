@@ -1,24 +1,24 @@
-import arrayRemoveDuplicates from "./arrayRemoveDuplicates.js";
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import CornerType from "./CornerType.js";
-import CorridorGeometryLibrary from "./CorridorGeometryLibrary.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import GeometryOffsetAttribute from "./GeometryOffsetAttribute.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
-import PolygonPipeline from "./PolygonPipeline.js";
-import PrimitiveType from "./PrimitiveType.js";
-import Rectangle from "./Rectangle.js";
-import VertexFormat from "./VertexFormat.js";
+import arrayRemoveDuplicates from './arrayRemoveDuplicates.js';
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import CornerType from './CornerType.js';
+import CorridorGeometryLibrary from './CorridorGeometryLibrary.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Ellipsoid from './Ellipsoid.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import GeometryOffsetAttribute from './GeometryOffsetAttribute.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
+import PolygonPipeline from './PolygonPipeline.js';
+import PrimitiveType from './PrimitiveType.js';
+import Rectangle from './Rectangle.js';
+import VertexFormat from './VertexFormat.js';
 
 const cartesian1 = new Cartesian3();
 const cartesian2 = new Cartesian3();
@@ -110,7 +110,7 @@ function combine(computedPositions, vertexFormat, ellipsoid) {
   const attr = {
     normals: normals,
     tangents: tangents,
-    bitangents: bitangents,
+    bitangents: bitangents
   };
   let front = 0;
   let back = size - 1;
@@ -425,7 +425,7 @@ function combine(computedPositions, vertexFormat, ellipsoid) {
   attributes.position = new GeometryAttribute({
     componentDatatype: ComponentDatatype.DOUBLE,
     componentsPerAttribute: 3,
-    values: finalPositions,
+    values: finalPositions
   });
 
   if (vertexFormat.st) {
@@ -495,7 +495,7 @@ function combine(computedPositions, vertexFormat, ellipsoid) {
     attributes.st = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 2,
-      values: st,
+      values: st
     });
   }
 
@@ -503,7 +503,7 @@ function combine(computedPositions, vertexFormat, ellipsoid) {
     attributes.normal = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: attr.normals,
+      values: attr.normals
     });
   }
 
@@ -511,7 +511,7 @@ function combine(computedPositions, vertexFormat, ellipsoid) {
     attributes.tangent = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: attr.tangents,
+      values: attr.tangents
     });
   }
 
@@ -519,13 +519,13 @@ function combine(computedPositions, vertexFormat, ellipsoid) {
     attributes.bitangent = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: attr.bitangents,
+      values: attr.bitangents
     });
   }
 
   return {
     attributes: attributes,
-    indices: indices,
+    indices: indices
   };
 }
 
@@ -739,7 +739,7 @@ function computePositionsExtruded(params, vertexFormat) {
       vertexFormat.normal || vertexFormat.bitangent || params.shadowVolume,
     tangent: vertexFormat.tangent,
     bitangent: vertexFormat.normal || vertexFormat.bitangent,
-    st: vertexFormat.st,
+    st: vertexFormat.st
   });
   const ellipsoid = params.ellipsoid;
   const computedPositions = CorridorGeometryLibrary.computePositions(params);
@@ -793,7 +793,7 @@ function computePositionsExtruded(params, vertexFormat) {
     attributes.extrudeDirection = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: extrudeNormals,
+      values: extrudeNormals
     });
     if (!vertexFormat.normal) {
       attributes.normal = undefined;
@@ -813,7 +813,7 @@ function computePositionsExtruded(params, vertexFormat) {
     attributes.applyOffset = new GeometryAttribute({
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 1,
-      values: applyOffset,
+      values: applyOffset
     });
   }
 
@@ -853,7 +853,7 @@ function computePositionsExtruded(params, vertexFormat) {
 
   return {
     attributes: attributes,
-    indices: newIndices,
+    indices: newIndices
   };
 }
 
@@ -1075,8 +1075,8 @@ function CorridorGeometry(options) {
   const width = options.width;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.positions", positions);
-  Check.defined("options.width", width);
+  Check.defined('options.positions', positions);
+  Check.defined('options.width', width);
   //>>includeEnd('debug');
 
   const height = defaultValue(options.height, 0.0);
@@ -1098,7 +1098,7 @@ function CorridorGeometry(options) {
     CesiumMath.RADIANS_PER_DEGREE
   );
   this._shadowVolume = defaultValue(options.shadowVolume, false);
-  this._workerName = "createCorridorGeometry";
+  this._workerName = 'createCorridorGeometry';
   this._offsetAttribute = options.offsetAttribute;
   this._rectangle = undefined;
 
@@ -1125,8 +1125,8 @@ function CorridorGeometry(options) {
  */
 CorridorGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("value", value);
-  Check.defined("array", array);
+  Check.defined('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -1168,7 +1168,7 @@ const scratchOptions = {
   cornerType: undefined,
   granularity: undefined,
   shadowVolume: undefined,
-  offsetAttribute: undefined,
+  offsetAttribute: undefined
 };
 
 /**
@@ -1181,7 +1181,7 @@ const scratchOptions = {
  */
 CorridorGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -1258,8 +1258,8 @@ CorridorGeometry.computeRectangle = function (options, result) {
   const width = options.width;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.positions", positions);
-  Check.defined("options.width", width);
+  Check.defined('options.positions', positions);
+  Check.defined('options.width', width);
   //>>includeEnd('debug');
 
   const ellipsoid = defaultValue(options.ellipsoid, Ellipsoid.WGS84);
@@ -1305,7 +1305,7 @@ CorridorGeometry.createGeometry = function (corridorGeometry) {
     width: width,
     cornerType: corridorGeometry._cornerType,
     granularity: corridorGeometry._granularity,
-    saveAttributes: true,
+    saveAttributes: true
   };
   let attr;
   if (extrude) {
@@ -1333,7 +1333,7 @@ CorridorGeometry.createGeometry = function (corridorGeometry) {
       attr.attributes.applyOffset = new GeometryAttribute({
         componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,
-        values: applyOffset,
+        values: applyOffset
       });
     }
   }
@@ -1352,7 +1352,7 @@ CorridorGeometry.createGeometry = function (corridorGeometry) {
     indices: attr.indices,
     primitiveType: PrimitiveType.TRIANGLES,
     boundingSphere: boundingSphere,
-    offsetAttribute: corridorGeometry._offsetAttribute,
+    offsetAttribute: corridorGeometry._offsetAttribute
   });
 };
 
@@ -1379,7 +1379,7 @@ CorridorGeometry.createShadowVolume = function (
     extrudedHeight: minHeight,
     height: maxHeight,
     vertexFormat: VertexFormat.POSITION_ONLY,
-    shadowVolume: true,
+    shadowVolume: true
   });
 };
 
@@ -1398,7 +1398,7 @@ Object.defineProperties(CorridorGeometry.prototype, {
         );
       }
       return this._rectangle;
-    },
+    }
   },
   /**
    * For remapping texture coordinates when rendering CorridorGeometries as GroundPrimitives.
@@ -1410,7 +1410,7 @@ Object.defineProperties(CorridorGeometry.prototype, {
   textureCoordinateRotationPoints: {
     get: function () {
       return [0, 0, 0, 1, 1, 0];
-    },
-  },
+    }
+  }
 });
 export default CorridorGeometry;

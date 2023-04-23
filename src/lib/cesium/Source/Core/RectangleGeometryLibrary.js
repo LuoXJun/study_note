@@ -1,11 +1,11 @@
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import GeographicProjection from "./GeographicProjection.js";
-import CesiumMath from "./Math.js";
-import Matrix2 from "./Matrix2.js";
-import Rectangle from "./Rectangle.js";
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import GeographicProjection from './GeographicProjection.js';
+import CesiumMath from './Math.js';
+import Matrix2 from './Matrix2.js';
+import Rectangle from './Rectangle.js';
 
 const cos = Math.cos;
 const sin = Math.sin;
@@ -140,7 +140,7 @@ function getRotationOptions(
     granYSin: granYSin,
     granXCos: granXCos,
     granXSin: granXSin,
-    nwCorner: nwCorner,
+    nwCorner: nwCorner
   };
 }
 
@@ -213,7 +213,7 @@ RectangleGeometryLibrary.computeOptions = function (
     width: width,
     height: height,
     northCap: northCap,
-    southCap: southCap,
+    southCap: southCap
   };
 
   if (rotation !== 0) {
@@ -239,7 +239,7 @@ RectangleGeometryLibrary.computeOptions = function (
       south > CesiumMath.PI_OVER_TWO
     ) {
       throw new DeveloperError(
-        "Rotated rectangle is invalid.  It crosses over either the north or south pole."
+        'Rotated rectangle is invalid.  It crosses over either the north or south pole.'
       );
     }
     //>>includeEnd('debug')

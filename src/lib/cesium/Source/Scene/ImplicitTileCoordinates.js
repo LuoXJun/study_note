@@ -1,8 +1,8 @@
-import CesiumMath from "../Core/Math.js";
-import Check from "../Core/Check.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import MortonOrder from "../Core/MortonOrder.js";
-import ImplicitSubdivisionScheme from "./ImplicitSubdivisionScheme.js";
+import CesiumMath from '../Core/Math.js';
+import Check from '../Core/Check.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import MortonOrder from '../Core/MortonOrder.js';
+import ImplicitSubdivisionScheme from './ImplicitSubdivisionScheme.js';
 
 /**
  * The coordinates for a tile in an implicit tileset. The coordinates
@@ -50,41 +50,41 @@ import ImplicitSubdivisionScheme from "./ImplicitSubdivisionScheme.js";
  */
 export default function ImplicitTileCoordinates(options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("options.subdivisionScheme", options.subdivisionScheme);
-  Check.typeOf.number("options.subtreeLevels", options.subtreeLevels);
-  Check.typeOf.number("options.level", options.level);
-  Check.typeOf.number("options.x", options.x);
-  Check.typeOf.number("options.y", options.y);
+  Check.typeOf.string('options.subdivisionScheme', options.subdivisionScheme);
+  Check.typeOf.number('options.subtreeLevels', options.subtreeLevels);
+  Check.typeOf.number('options.level', options.level);
+  Check.typeOf.number('options.x', options.x);
+  Check.typeOf.number('options.y', options.y);
   if (options.subdivisionScheme === ImplicitSubdivisionScheme.OCTREE) {
-    Check.typeOf.number("options.z", options.z);
+    Check.typeOf.number('options.z', options.z);
   }
   // Check for values that are negative
   if (options.level < 0) {
-    throw new DeveloperError("level must be non-negative");
+    throw new DeveloperError('level must be non-negative');
   }
   if (options.x < 0) {
-    throw new DeveloperError("x must be non-negative");
+    throw new DeveloperError('x must be non-negative');
   }
   if (options.y < 0) {
-    throw new DeveloperError("y must be non-negative");
+    throw new DeveloperError('y must be non-negative');
   }
   if (options.subdivisionScheme === ImplicitSubdivisionScheme.OCTREE) {
     if (options.z < 0) {
-      throw new DeveloperError("z must be non-negative");
+      throw new DeveloperError('z must be non-negative');
     }
   }
 
   // Check for values that are too large
   const dimensionAtLevel = 1 << options.level;
   if (options.x >= dimensionAtLevel) {
-    throw new DeveloperError("x is out of range");
+    throw new DeveloperError('x is out of range');
   }
   if (options.y >= dimensionAtLevel) {
-    throw new DeveloperError("y is out of range");
+    throw new DeveloperError('y is out of range');
   }
   if (options.subdivisionScheme === ImplicitSubdivisionScheme.OCTREE) {
     if (options.z >= dimensionAtLevel) {
-      throw new DeveloperError("z is out of range");
+      throw new DeveloperError('z is out of range');
     }
   }
   //>>includeEnd('debug');
@@ -173,7 +173,7 @@ Object.defineProperties(ImplicitTileCoordinates.prototype, {
       }
 
       return childIndex;
-    },
+    }
   },
 
   /**
@@ -190,7 +190,7 @@ Object.defineProperties(ImplicitTileCoordinates.prototype, {
         return MortonOrder.encode3D(this.x, this.y, this.z);
       }
       return MortonOrder.encode2D(this.x, this.y);
-    },
+    }
   },
 
   /**
@@ -211,8 +211,8 @@ Object.defineProperties(ImplicitTileCoordinates.prototype, {
 
       const mortonIndex = this.mortonIndex;
       return levelOffset + mortonIndex;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -223,10 +223,10 @@ Object.defineProperties(ImplicitTileCoordinates.prototype, {
  */
 function checkMatchingSubtreeShape(a, b) {
   if (a.subdivisionScheme !== b.subdivisionScheme) {
-    throw new DeveloperError("coordinates must have same subdivisionScheme");
+    throw new DeveloperError('coordinates must have same subdivisionScheme');
   }
   if (a.subtreeLevels !== b.subtreeLevels) {
-    throw new DeveloperError("coordinates must have same subtreeLevels");
+    throw new DeveloperError('coordinates must have same subtreeLevels');
   }
 }
 
@@ -241,7 +241,7 @@ ImplicitTileCoordinates.prototype.getDescendantCoordinates = function (
   offsetCoordinates
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("offsetCoordinates", offsetCoordinates);
+  Check.typeOf.object('offsetCoordinates', offsetCoordinates);
   checkMatchingSubtreeShape(this, offsetCoordinates);
   //>>includeEnd('debug');
 
@@ -259,7 +259,7 @@ ImplicitTileCoordinates.prototype.getDescendantCoordinates = function (
       level: descendantLevel,
       x: descendantX,
       y: descendantY,
-      z: descendantZ,
+      z: descendantZ
     });
   }
 
@@ -269,7 +269,7 @@ ImplicitTileCoordinates.prototype.getDescendantCoordinates = function (
     subtreeLevels: this.subtreeLevels,
     level: descendantLevel,
     x: descendantX,
-    y: descendantY,
+    y: descendantY
   });
 };
 
@@ -284,12 +284,12 @@ ImplicitTileCoordinates.prototype.getAncestorCoordinates = function (
   offsetLevels
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("offsetLevels", offsetLevels);
+  Check.typeOf.number('offsetLevels', offsetLevels);
   if (offsetLevels < 0) {
-    throw new DeveloperError("offsetLevels must be non-negative");
+    throw new DeveloperError('offsetLevels must be non-negative');
   }
   if (offsetLevels > this.level) {
-    throw new DeveloperError("ancestor cannot be above the tileset root");
+    throw new DeveloperError('ancestor cannot be above the tileset root');
   }
   //>>includeEnd('debug');
 
@@ -307,7 +307,7 @@ ImplicitTileCoordinates.prototype.getAncestorCoordinates = function (
       level: ancestorLevel,
       x: ancestorX,
       y: ancestorY,
-      z: ancestorZ,
+      z: ancestorZ
     });
   }
 
@@ -317,7 +317,7 @@ ImplicitTileCoordinates.prototype.getAncestorCoordinates = function (
     subtreeLevels: this.subtreeLevels,
     level: ancestorLevel,
     x: ancestorX,
-    y: ancestorY,
+    y: ancestorY
   });
 };
 
@@ -331,12 +331,12 @@ ImplicitTileCoordinates.prototype.getOffsetCoordinates = function (
   descendantCoordinates
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("descendantCoordinates", descendantCoordinates);
+  Check.typeOf.object('descendantCoordinates', descendantCoordinates);
   if (
     !this.isEqual(descendantCoordinates) &&
     !this.isAncestor(descendantCoordinates)
   ) {
-    throw new DeveloperError("this is not an ancestor of descendant");
+    throw new DeveloperError('this is not an ancestor of descendant');
   }
   checkMatchingSubtreeShape(this, descendantCoordinates);
   //>>includeEnd('debug');
@@ -356,7 +356,7 @@ ImplicitTileCoordinates.prototype.getOffsetCoordinates = function (
       level: offsetLevel,
       x: offsetX,
       y: offsetY,
-      z: offsetZ,
+      z: offsetZ
     });
   }
 
@@ -366,7 +366,7 @@ ImplicitTileCoordinates.prototype.getOffsetCoordinates = function (
     subtreeLevels: this.subtreeLevels,
     level: offsetLevel,
     x: offsetX,
-    y: offsetY,
+    y: offsetY
   });
 };
 
@@ -380,7 +380,7 @@ ImplicitTileCoordinates.prototype.getOffsetCoordinates = function (
  */
 ImplicitTileCoordinates.prototype.getChildCoordinates = function (childIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("childIndex", childIndex);
+  Check.typeOf.number('childIndex', childIndex);
   const branchingFactor = ImplicitSubdivisionScheme.getBranchingFactor(
     this.subdivisionScheme
   );
@@ -403,7 +403,7 @@ ImplicitTileCoordinates.prototype.getChildCoordinates = function (childIndex) {
       level: level,
       x: x,
       y: y,
-      z: z,
+      z: z
     });
   }
 
@@ -413,7 +413,7 @@ ImplicitTileCoordinates.prototype.getChildCoordinates = function (childIndex) {
     subtreeLevels: this.subtreeLevels,
     level: level,
     x: x,
-    y: y,
+    y: y
   });
 };
 
@@ -451,7 +451,7 @@ ImplicitTileCoordinates.prototype.isAncestor = function (
   descendantCoordinates
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("descendantCoordinates", descendantCoordinates);
+  Check.typeOf.object('descendantCoordinates', descendantCoordinates);
   checkMatchingSubtreeShape(this, descendantCoordinates);
   //>>includeEnd('debug');
 
@@ -484,7 +484,7 @@ ImplicitTileCoordinates.prototype.isAncestor = function (
  */
 ImplicitTileCoordinates.prototype.isEqual = function (otherCoordinates) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("otherCoordinates", otherCoordinates);
+  Check.typeOf.object('otherCoordinates', otherCoordinates);
   //>>includeEnd('debug');
 
   return (
@@ -539,7 +539,7 @@ ImplicitTileCoordinates.prototype.getTemplateValues = function () {
   const values = {
     level: this.level,
     x: this.x,
-    y: this.y,
+    y: this.y
   };
   if (this.subdivisionScheme === ImplicitSubdivisionScheme.OCTREE) {
     values.z = this.z;
@@ -579,7 +579,7 @@ ImplicitTileCoordinates.fromMortonIndex = function (
       level: level,
       x: coordinatesArray[0],
       y: coordinatesArray[1],
-      z: coordinatesArray[2],
+      z: coordinatesArray[2]
     });
   }
 
@@ -589,7 +589,7 @@ ImplicitTileCoordinates.fromMortonIndex = function (
     subtreeLevels: subtreeLevels,
     level: level,
     x: coordinatesArray[0],
-    y: coordinatesArray[1],
+    y: coordinatesArray[1]
   });
 };
 

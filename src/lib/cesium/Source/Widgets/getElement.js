@@ -1,4 +1,4 @@
-import DeveloperError from "../Core/DeveloperError.js";
+import DeveloperError from '../Core/DeveloperError.js';
 
 /**
  * If element is a string, look up the element in the DOM by ID.  Otherwise return element.
@@ -8,7 +8,7 @@ import DeveloperError from "../Core/DeveloperError.js";
  * @exception {DeveloperError} Element with id "id" does not exist in the document.
  */
 function getElement(element) {
-  if (typeof element === "string") {
+  if (typeof element === 'string') {
     const foundElement = document.getElementById(element);
 
     //>>includeStart('debug', pragmas.debug);

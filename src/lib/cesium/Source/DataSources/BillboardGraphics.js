@@ -1,8 +1,8 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
 
 /**
  * @typedef {Object} BillboardGraphics.ConstructorOptions
@@ -104,7 +104,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -113,14 +113,14 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  show: createPropertyDescriptor("show"),
+  show: createPropertyDescriptor('show'),
 
   /**
    * Gets or sets the Property specifying the Image, URI, or Canvas to use for the billboard.
    * @memberof BillboardGraphics.prototype
    * @type {Property|undefined}
    */
-  image: createPropertyDescriptor("image"),
+  image: createPropertyDescriptor('image'),
 
   /**
    * Gets or sets the numeric Property specifying the uniform scale to apply to the image.
@@ -135,7 +135,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @type {Property|undefined}
    * @default 1.0
    */
-  scale: createPropertyDescriptor("scale"),
+  scale: createPropertyDescriptor('scale'),
 
   /**
    * Gets or sets the {@link Cartesian2} Property specifying the billboard's pixel offset in screen space
@@ -155,7 +155,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @type {Property|undefined}
    * @default Cartesian2.ZERO
    */
-  pixelOffset: createPropertyDescriptor("pixelOffset"),
+  pixelOffset: createPropertyDescriptor('pixelOffset'),
 
   /**
    * Gets or sets the {@link Cartesian3} Property specifying the billboard's offset in eye coordinates.
@@ -180,7 +180,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @type {Property|undefined}
    * @default Cartesian3.ZERO
    */
-  eyeOffset: createPropertyDescriptor("eyeOffset"),
+  eyeOffset: createPropertyDescriptor('eyeOffset'),
 
   /**
    * Gets or sets the Property specifying the {@link HorizontalOrigin}.
@@ -188,7 +188,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @type {Property|undefined}
    * @default HorizontalOrigin.CENTER
    */
-  horizontalOrigin: createPropertyDescriptor("horizontalOrigin"),
+  horizontalOrigin: createPropertyDescriptor('horizontalOrigin'),
 
   /**
    * Gets or sets the Property specifying the {@link VerticalOrigin}.
@@ -196,7 +196,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @type {Property|undefined}
    * @default VerticalOrigin.CENTER
    */
-  verticalOrigin: createPropertyDescriptor("verticalOrigin"),
+  verticalOrigin: createPropertyDescriptor('verticalOrigin'),
 
   /**
    * Gets or sets the Property specifying the {@link HeightReference}.
@@ -204,7 +204,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @type {Property|undefined}
    * @default HeightReference.NONE
    */
-  heightReference: createPropertyDescriptor("heightReference"),
+  heightReference: createPropertyDescriptor('heightReference'),
 
   /**
    * Gets or sets the Property specifying the {@link Color} that is multiplied with the <code>image</code>.
@@ -224,7 +224,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @type {Property|undefined}
    * @default Color.WHITE
    */
-  color: createPropertyDescriptor("color"),
+  color: createPropertyDescriptor('color'),
 
   /**
    * Gets or sets the numeric Property specifying the rotation of the image
@@ -233,7 +233,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @type {Property|undefined}
    * @default 0
    */
-  rotation: createPropertyDescriptor("rotation"),
+  rotation: createPropertyDescriptor('rotation'),
 
   /**
    * Gets or sets the {@link Cartesian3} Property specifying the unit vector axis of rotation
@@ -242,7 +242,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @type {Property|undefined}
    * @default Cartesian3.ZERO
    */
-  alignedAxis: createPropertyDescriptor("alignedAxis"),
+  alignedAxis: createPropertyDescriptor('alignedAxis'),
 
   /**
    * Gets or sets the boolean Property specifying if this billboard's size will be measured in meters.
@@ -250,7 +250,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @type {Property|undefined}
    * @default false
    */
-  sizeInMeters: createPropertyDescriptor("sizeInMeters"),
+  sizeInMeters: createPropertyDescriptor('sizeInMeters'),
 
   /**
    * Gets or sets the numeric Property specifying the width of the billboard in pixels.
@@ -258,7 +258,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @memberof BillboardGraphics.prototype
    * @type {Property|undefined}
    */
-  width: createPropertyDescriptor("width"),
+  width: createPropertyDescriptor('width'),
 
   /**
    * Gets or sets the numeric Property specifying the height of the billboard in pixels.
@@ -266,7 +266,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @memberof BillboardGraphics.prototype
    * @type {Property|undefined}
    */
-  height: createPropertyDescriptor("height"),
+  height: createPropertyDescriptor('height'),
 
   /**
    * Gets or sets {@link NearFarScalar} Property specifying the scale of the billboard based on the distance from the camera.
@@ -277,7 +277,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @memberof BillboardGraphics.prototype
    * @type {Property|undefined}
    */
-  scaleByDistance: createPropertyDescriptor("scaleByDistance"),
+  scaleByDistance: createPropertyDescriptor('scaleByDistance'),
 
   /**
    * Gets or sets {@link NearFarScalar} Property specifying the translucency of the billboard based on the distance from the camera.
@@ -288,7 +288,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @memberof BillboardGraphics.prototype
    * @type {Property|undefined}
    */
-  translucencyByDistance: createPropertyDescriptor("translucencyByDistance"),
+  translucencyByDistance: createPropertyDescriptor('translucencyByDistance'),
 
   /**
    * Gets or sets {@link NearFarScalar} Property specifying the pixel offset of the billboard based on the distance from the camera.
@@ -300,7 +300,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @type {Property|undefined}
    */
   pixelOffsetScaleByDistance: createPropertyDescriptor(
-    "pixelOffsetScaleByDistance"
+    'pixelOffsetScaleByDistance'
   ),
 
   /**
@@ -310,7 +310,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @memberof BillboardGraphics.prototype
    * @type {Property|undefined}
    */
-  imageSubRegion: createPropertyDescriptor("imageSubRegion"),
+  imageSubRegion: createPropertyDescriptor('imageSubRegion'),
 
   /**
    * Gets or sets the {@link DistanceDisplayCondition} Property specifying at what distance from the camera that this billboard will be displayed.
@@ -318,7 +318,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @type {Property|undefined}
    */
   distanceDisplayCondition: createPropertyDescriptor(
-    "distanceDisplayCondition"
+    'distanceDisplayCondition'
   ),
 
   /**
@@ -327,9 +327,7 @@ Object.defineProperties(BillboardGraphics.prototype, {
    * @memberof BillboardGraphics.prototype
    * @type {Property|undefined}
    */
-  disableDepthTestDistance: createPropertyDescriptor(
-    "disableDepthTestDistance"
-  ),
+  disableDepthTestDistance: createPropertyDescriptor('disableDepthTestDistance')
 });
 
 /**
@@ -374,7 +372,7 @@ BillboardGraphics.prototype.clone = function (result) {
 BillboardGraphics.prototype.merge = function (source) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
-    throw new DeveloperError("source is required.");
+    throw new DeveloperError('source is required.');
   }
   //>>includeEnd('debug');
 

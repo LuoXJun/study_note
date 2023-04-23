@@ -1,15 +1,15 @@
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import getAbsoluteUri from "./getAbsoluteUri.js";
-import Resource from "./Resource.js";
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import getAbsoluteUri from './getAbsoluteUri.js';
+import Resource from './Resource.js';
 
 /*global CESIUM_BASE_URL,define,require*/
 
 const cesiumScriptRegex = /((?:.*\/)|^)Cesium\.js(?:\?|\#|$)/;
 function getBaseUrlFromCesiumScript() {
-  const scripts = document.getElementsByTagName("script");
+  const scripts = document.getElementsByTagName('script');
   for (let i = 0, len = scripts.length; i < len; ++i) {
-    const src = scripts[i].getAttribute("src");
+    const src = scripts[i].getAttribute('src');
     const result = cesiumScriptRegex.exec(src);
     if (result !== null) {
       return result[1];
@@ -20,13 +20,13 @@ function getBaseUrlFromCesiumScript() {
 
 let a;
 function tryMakeAbsolute(url) {
-  if (typeof document === "undefined") {
+  if (typeof document === 'undefined') {
     //Node.js and Web Workers. In both cases, the URL will already be absolute.
     return url;
   }
 
   if (!defined(a)) {
-    a = document.createElement("a");
+    a = document.createElement('a');
   }
   a.href = url;
 
@@ -43,17 +43,17 @@ function getCesiumBaseUrl() {
   }
 
   let baseUrlString;
-  if (typeof CESIUM_BASE_URL !== "undefined") {
+  if (typeof CESIUM_BASE_URL !== 'undefined') {
     baseUrlString = CESIUM_BASE_URL;
   } else if (
-    typeof define === "object" &&
+    typeof define === 'object' &&
     defined(define.amd) &&
     !define.amd.toUrlUndefined &&
     defined(require.toUrl)
   ) {
     baseUrlString = getAbsoluteUri(
-      "..",
-      buildModuleUrl("Core/buildModuleUrl.js")
+      '..',
+      buildModuleUrl('Core/buildModuleUrl.js')
     );
   } else {
     baseUrlString = getBaseUrlFromCesiumScript();
@@ -62,13 +62,13 @@ function getCesiumBaseUrl() {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(baseUrlString)) {
     throw new DeveloperError(
-      "Unable to determine Cesium base URL automatically, try defining a global variable called CESIUM_BASE_URL."
+      'Unable to determine Cesium base URL automatically, try defining a global variable called CESIUM_BASE_URL.'
     );
   }
   //>>includeEnd('debug');
 
   baseResource = new Resource({
-    url: tryMakeAbsolute(baseUrlString),
+    url: tryMakeAbsolute(baseUrlString)
   });
   baseResource.appendForwardSlash();
 
@@ -82,7 +82,7 @@ function buildModuleUrlFromRequireToUrl(moduleID) {
 
 function buildModuleUrlFromBaseUrl(moduleID) {
   const resource = getCesiumBaseUrl().getDerivedResource({
-    url: moduleID,
+    url: moduleID
   });
   return resource.url;
 }
@@ -108,7 +108,7 @@ function buildModuleUrl(relativeUrl) {
   if (!defined(implementation)) {
     //select implementation
     if (
-      typeof define === "object" &&
+      typeof define === 'object' &&
       defined(define.amd) &&
       !define.amd.toUrlUndefined &&
       defined(require.toUrl)
@@ -136,7 +136,7 @@ buildModuleUrl._clearBaseResource = function () {
  */
 buildModuleUrl.setBaseUrl = function (value) {
   baseResource = Resource.DEFAULT.getDerivedResource({
-    url: value,
+    url: value
   });
 };
 

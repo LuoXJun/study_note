@@ -1,5 +1,5 @@
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Converts an object representing a set of name/value pairs into a query string,
@@ -25,11 +25,11 @@ import DeveloperError from "./DeveloperError.js";
 function objectToQuery(obj) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(obj)) {
-    throw new DeveloperError("obj is required.");
+    throw new DeveloperError('obj is required.');
   }
   //>>includeEnd('debug');
 
-  let result = "";
+  let result = '';
   for (const propName in obj) {
     if (obj.hasOwnProperty(propName)) {
       const value = obj[propName];

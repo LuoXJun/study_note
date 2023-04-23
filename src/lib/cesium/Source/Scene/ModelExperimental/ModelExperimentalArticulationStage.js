@@ -1,10 +1,10 @@
-import ArticulationStageType from "../../Core/ArticulationStageType.js";
-import Cartesian3 from "../../Core/Cartesian3.js";
-import CesiumMath from "../../Core/Math.js";
-import Check from "../../Core/Check.js";
-import defaultValue from "../../Core/defaultValue.js";
-import Matrix3 from "../../Core/Matrix3.js";
-import Matrix4 from "../../Core/Matrix4.js";
+import ArticulationStageType from '../../Core/ArticulationStageType.js';
+import Cartesian3 from '../../Core/Cartesian3.js';
+import CesiumMath from '../../Core/Math.js';
+import Check from '../../Core/Check.js';
+import defaultValue from '../../Core/defaultValue.js';
+import Matrix3 from '../../Core/Matrix3.js';
+import Matrix4 from '../../Core/Matrix4.js';
 
 const articulationEpsilon = CesiumMath.EPSILON16;
 
@@ -27,8 +27,8 @@ export default function ModelExperimentalArticulationStage(options) {
   const stage = options.stage;
   const runtimeArticulation = options.runtimeArticulation;
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.stage", stage);
-  Check.typeOf.object("options.runtimeArticulation", runtimeArticulation);
+  Check.typeOf.object('options.stage', stage);
+  Check.typeOf.object('options.runtimeArticulation', runtimeArticulation);
   //>>includeEnd('debug');
 
   this._stage = stage;
@@ -54,7 +54,7 @@ Object.defineProperties(ModelExperimentalArticulationStage.prototype, {
   stage: {
     get: function () {
       return this._stage;
-    },
+    }
   },
 
   /**
@@ -69,7 +69,7 @@ Object.defineProperties(ModelExperimentalArticulationStage.prototype, {
   runtimeArticulation: {
     get: function () {
       return this._runtimeArticulation;
-    },
+    }
   },
 
   /**
@@ -84,7 +84,7 @@ Object.defineProperties(ModelExperimentalArticulationStage.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
 
   /**
@@ -100,7 +100,7 @@ Object.defineProperties(ModelExperimentalArticulationStage.prototype, {
   type: {
     get: function () {
       return this._type;
-    },
+    }
   },
 
   /**
@@ -115,7 +115,7 @@ Object.defineProperties(ModelExperimentalArticulationStage.prototype, {
   minimumValue: {
     get: function () {
       return this._minimumValue;
-    },
+    }
   },
 
   /**
@@ -130,7 +130,7 @@ Object.defineProperties(ModelExperimentalArticulationStage.prototype, {
   maximumValue: {
     get: function () {
       return this._maximumValue;
-    },
+    }
   },
 
   /**
@@ -147,7 +147,7 @@ Object.defineProperties(ModelExperimentalArticulationStage.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number("value", value);
+      Check.typeOf.number('value', value);
       //>>includeEnd('debug');
 
       value = CesiumMath.clamp(value, this.minimumValue, this.maximumValue);
@@ -161,8 +161,8 @@ Object.defineProperties(ModelExperimentalArticulationStage.prototype, {
         this._currentValue = value;
         this.runtimeArticulation._dirty = true;
       }
-    },
-  },
+    }
+  }
 });
 
 const scratchArticulationCartesian = new Cartesian3();
@@ -185,7 +185,7 @@ ModelExperimentalArticulationStage.prototype.applyStageToMatrix = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   const type = this.type;

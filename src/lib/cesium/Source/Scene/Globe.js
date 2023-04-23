@@ -1,33 +1,33 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import buildModuleUrl from "../Core/buildModuleUrl.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import EllipsoidTerrainProvider from "../Core/EllipsoidTerrainProvider.js";
-import Event from "../Core/Event.js";
-import IntersectionTests from "../Core/IntersectionTests.js";
-import NearFarScalar from "../Core/NearFarScalar.js";
-import Ray from "../Core/Ray.js";
-import Rectangle from "../Core/Rectangle.js";
-import Resource from "../Core/Resource.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import Texture from "../Renderer/Texture.js";
-import GlobeFS from "../Shaders/GlobeFS.js";
-import GlobeVS from "../Shaders/GlobeVS.js";
-import AtmosphereCommon from "../Shaders/AtmosphereCommon.js";
-import GroundAtmosphere from "../Shaders/GroundAtmosphere.js";
-import GlobeSurfaceShaderSet from "./GlobeSurfaceShaderSet.js";
-import GlobeSurfaceTileProvider from "./GlobeSurfaceTileProvider.js";
-import GlobeTranslucency from "./GlobeTranslucency.js";
-import ImageryLayerCollection from "./ImageryLayerCollection.js";
-import QuadtreePrimitive from "./QuadtreePrimitive.js";
-import SceneMode from "./SceneMode.js";
-import ShadowMode from "./ShadowMode.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import buildModuleUrl from '../Core/buildModuleUrl.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import EllipsoidTerrainProvider from '../Core/EllipsoidTerrainProvider.js';
+import Event from '../Core/Event.js';
+import IntersectionTests from '../Core/IntersectionTests.js';
+import NearFarScalar from '../Core/NearFarScalar.js';
+import Ray from '../Core/Ray.js';
+import Rectangle from '../Core/Rectangle.js';
+import Resource from '../Core/Resource.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import Texture from '../Renderer/Texture.js';
+import GlobeFS from '../Shaders/GlobeFS.js';
+import GlobeVS from '../Shaders/GlobeVS.js';
+import AtmosphereCommon from '../Shaders/AtmosphereCommon.js';
+import GroundAtmosphere from '../Shaders/GroundAtmosphere.js';
+import GlobeSurfaceShaderSet from './GlobeSurfaceShaderSet.js';
+import GlobeSurfaceTileProvider from './GlobeSurfaceTileProvider.js';
+import GlobeTranslucency from './GlobeTranslucency.js';
+import ImageryLayerCollection from './ImageryLayerCollection.js';
+import QuadtreePrimitive from './QuadtreePrimitive.js';
+import SceneMode from './SceneMode.js';
+import ShadowMode from './ShadowMode.js';
 
 /**
  * The globe rendered in the scene, including its terrain ({@link Globe#terrainProvider})
@@ -42,7 +42,7 @@ import ShadowMode from "./ShadowMode.js";
 function Globe(ellipsoid) {
   ellipsoid = defaultValue(ellipsoid, Ellipsoid.WGS84);
   const terrainProvider = new EllipsoidTerrainProvider({
-    ellipsoid: ellipsoid,
+    ellipsoid: ellipsoid
   });
   const imageryLayerCollection = new ImageryLayerCollection();
 
@@ -56,8 +56,8 @@ function Globe(ellipsoid) {
     tileProvider: new GlobeSurfaceTileProvider({
       terrainProvider: terrainProvider,
       imageryLayers: imageryLayerCollection,
-      surfaceShaderSet: this._surfaceShaderSet,
-    }),
+      surfaceShaderSet: this._surfaceShaderSet
+    })
   });
 
   this._terrainProvider = terrainProvider;
@@ -85,7 +85,7 @@ function Globe(ellipsoid) {
 
   this._oceanNormalMapResourceDirty = true;
   this._oceanNormalMapResource = new Resource({
-    url: buildModuleUrl("Assets/Textures/waterNormalsSmall.jpg"),
+    url: buildModuleUrl('Assets/Textures/waterNormalsSmall.jpg')
   });
 
   /**
@@ -390,7 +390,7 @@ Object.defineProperties(Globe.prototype, {
   ellipsoid: {
     get: function () {
       return this._ellipsoid;
-    },
+    }
   },
   /**
    * Gets the collection of image layers that will be rendered on this globe.
@@ -400,7 +400,7 @@ Object.defineProperties(Globe.prototype, {
   imageryLayers: {
     get: function () {
       return this._imageryLayerCollection;
-    },
+    }
   },
   /**
    * Gets an event that's raised when an imagery layer is added, shown, hidden, moved, or removed.
@@ -412,7 +412,7 @@ Object.defineProperties(Globe.prototype, {
   imageryLayersUpdatedEvent: {
     get: function () {
       return this._surface.tileProvider.imageryLayersUpdatedEvent;
-    },
+    }
   },
   /**
    * Returns <code>true</code> when the tile load queue is empty, <code>false</code> otherwise.  When the load queue is empty,
@@ -432,7 +432,7 @@ Object.defineProperties(Globe.prototype, {
         this._surface._tileLoadQueueMedium.length === 0 &&
         this._surface._tileLoadQueueLow.length === 0
       );
-    },
+    }
   },
   /**
    * Gets or sets the color of the globe when no imagery is available.
@@ -445,7 +445,7 @@ Object.defineProperties(Globe.prototype, {
     },
     set: function (value) {
       this._surface.tileProvider.baseColor = value;
-    },
+    }
   },
   /**
    * A property specifying a {@link ClippingPlaneCollection} used to selectively disable rendering on the outside of each plane.
@@ -459,7 +459,7 @@ Object.defineProperties(Globe.prototype, {
     },
     set: function (value) {
       this._surface.tileProvider.clippingPlanes = value;
-    },
+    }
   },
   /**
    * A property specifying a {@link Rectangle} used to limit globe rendering to a cartographic area.
@@ -478,7 +478,7 @@ Object.defineProperties(Globe.prototype, {
         value = Rectangle.clone(Rectangle.MAX_VALUE);
       }
       this._surface.tileProvider.cartographicLimitRectangle = value;
-    },
+    }
   },
   /**
    * The normal map to use for rendering waves in the ocean.  Setting this property will
@@ -494,7 +494,7 @@ Object.defineProperties(Globe.prototype, {
     set: function (value) {
       this._oceanNormalMapResource.url = value;
       this._oceanNormalMapResourceDirty = true;
-    },
+    }
   },
   /**
    * The terrain provider providing surface geometry for this globe.
@@ -516,7 +516,7 @@ Object.defineProperties(Globe.prototype, {
           makeShadersDirty(this);
         }
       }
-    },
+    }
   },
   /**
    * Gets an event that's raised when the terrain provider is changed
@@ -528,7 +528,7 @@ Object.defineProperties(Globe.prototype, {
   terrainProviderChanged: {
     get: function () {
       return this._terrainProviderChanged;
-    },
+    }
   },
   /**
    * Gets an event that's raised when the length of the tile load queue has changed since the last render frame.  When the load queue is empty,
@@ -540,7 +540,7 @@ Object.defineProperties(Globe.prototype, {
   tileLoadProgressEvent: {
     get: function () {
       return this._surface.tileLoadProgressEvent;
-    },
+    }
   },
 
   /**
@@ -558,7 +558,7 @@ Object.defineProperties(Globe.prototype, {
         this._material = material;
         makeShadersDirty(this);
       }
-    },
+    }
   },
 
   /**
@@ -579,7 +579,7 @@ Object.defineProperties(Globe.prototype, {
     },
     set: function (value) {
       this._undergroundColor = Color.clone(value, this._undergroundColor);
-    },
+    }
   },
 
   /**
@@ -607,7 +607,7 @@ Object.defineProperties(Globe.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (defined(value) && value.far < value.near) {
         throw new DeveloperError(
-          "far distance must be greater than near distance."
+          'far distance must be greater than near distance.'
         );
       }
       //>>includeEnd('debug');
@@ -615,7 +615,7 @@ Object.defineProperties(Globe.prototype, {
         value,
         this._undergroundColorAlphaByDistance
       );
-    },
+    }
   },
 
   /**
@@ -627,8 +627,8 @@ Object.defineProperties(Globe.prototype, {
   translucency: {
     get: function () {
       return this._translucency;
-    },
-  },
+    }
+  }
 });
 
 function makeShadersDirty(globe) {
@@ -637,7 +637,7 @@ function makeShadersDirty(globe) {
   const requireNormals =
     defined(globe._material) &&
     (globe._material.shaderSource.match(/slope/) ||
-      globe._material.shaderSource.match("normalEC"));
+      globe._material.shaderSource.match('normalEC'));
 
   const fragmentSources = [AtmosphereCommon, GroundAtmosphere];
   if (
@@ -645,7 +645,7 @@ function makeShadersDirty(globe) {
     (!requireNormals || globe._terrainProvider.requestVertexNormals)
   ) {
     fragmentSources.push(globe._material.shaderSource);
-    defines.push("APPLY_MATERIAL");
+    defines.push('APPLY_MATERIAL');
     globe._surface._tileProvider.materialUniformMap = globe._material._uniforms;
   } else {
     globe._surface._tileProvider.materialUniformMap = undefined;
@@ -654,12 +654,12 @@ function makeShadersDirty(globe) {
 
   globe._surfaceShaderSet.baseVertexShaderSource = new ShaderSource({
     sources: [AtmosphereCommon, GroundAtmosphere, GlobeVS],
-    defines: defines,
+    defines: defines
   });
 
   globe._surfaceShaderSet.baseFragmentShaderSource = new ShaderSource({
     sources: fragmentSources,
-    defines: defines,
+    defines: defines
   });
   globe._surfaceShaderSet.material = globe._material;
 }
@@ -682,7 +682,7 @@ function createComparePickTileFunction(rayOrigin) {
 const scratchArray = [];
 const scratchSphereIntersectionResult = {
   start: 0.0,
-  stop: 0.0,
+  stop: 0.0
 };
 
 /**
@@ -704,10 +704,10 @@ Globe.prototype.pickWorldCoordinates = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(ray)) {
-    throw new DeveloperError("ray is required");
+    throw new DeveloperError('ray is required');
   }
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required");
+    throw new DeveloperError('scene is required');
   }
   //>>includeEnd('debug');
 
@@ -735,13 +735,14 @@ Globe.prototype.pickWorldCoordinates = function (
 
     let boundingVolume = surfaceTile.pickBoundingSphere;
     if (mode !== SceneMode.SCENE3D) {
-      surfaceTile.pickBoundingSphere = boundingVolume = BoundingSphere.fromRectangleWithHeights2D(
-        tile.rectangle,
-        projection,
-        surfaceTile.tileBoundingRegion.minimumHeight,
-        surfaceTile.tileBoundingRegion.maximumHeight,
-        boundingVolume
-      );
+      surfaceTile.pickBoundingSphere = boundingVolume =
+        BoundingSphere.fromRectangleWithHeights2D(
+          tile.rectangle,
+          projection,
+          surfaceTile.tileBoundingRegion.minimumHeight,
+          surfaceTile.tileBoundingRegion.maximumHeight,
+          boundingVolume
+        );
       Cartesian3.fromElements(
         boundingVolume.center.z,
         boundingVolume.center.x,
@@ -833,7 +834,7 @@ function tileIfContainsCartographic(tile, cartographic) {
 Globe.prototype.getHeight = function (cartographic) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(cartographic)) {
-    throw new DeveloperError("cartographic is required");
+    throw new DeveloperError('cartographic is required');
   }
   //>>includeEnd('debug');
 
@@ -995,7 +996,7 @@ Globe.prototype.beginFrame = function (frameState) {
           that._oceanNormalMap && that._oceanNormalMap.destroy();
         that._oceanNormalMap = new Texture({
           context: frameState.context,
-          source: image,
+          source: image
         });
       });
     } else {
@@ -1031,12 +1032,15 @@ Globe.prototype.beginFrame = function (frameState) {
     tileProvider.oceanNormalMap = this._oceanNormalMap;
     tileProvider.enableLighting = this.enableLighting;
     tileProvider.dynamicAtmosphereLighting = this.dynamicAtmosphereLighting;
-    tileProvider.dynamicAtmosphereLightingFromSun = this.dynamicAtmosphereLightingFromSun;
+    tileProvider.dynamicAtmosphereLightingFromSun =
+      this.dynamicAtmosphereLightingFromSun;
     tileProvider.showGroundAtmosphere = this.showGroundAtmosphere;
     tileProvider.atmosphereLightIntensity = this.atmosphereLightIntensity;
-    tileProvider.atmosphereRayleighCoefficient = this.atmosphereRayleighCoefficient;
+    tileProvider.atmosphereRayleighCoefficient =
+      this.atmosphereRayleighCoefficient;
     tileProvider.atmosphereMieCoefficient = this.atmosphereMieCoefficient;
-    tileProvider.atmosphereRayleighScaleHeight = this.atmosphereRayleighScaleHeight;
+    tileProvider.atmosphereRayleighScaleHeight =
+      this.atmosphereRayleighScaleHeight;
     tileProvider.atmosphereMieScaleHeight = this.atmosphereMieScaleHeight;
     tileProvider.atmosphereMieAnisotropy = this.atmosphereMieAnisotropy;
     tileProvider.shadows = this.shadows;
@@ -1047,7 +1051,8 @@ Globe.prototype.beginFrame = function (frameState) {
     tileProvider.showSkirts = this.showSkirts;
     tileProvider.backFaceCulling = this.backFaceCulling;
     tileProvider.undergroundColor = this._undergroundColor;
-    tileProvider.undergroundColorAlphaByDistance = this._undergroundColorAlphaByDistance;
+    tileProvider.undergroundColorAlphaByDistance =
+      this._undergroundColorAlphaByDistance;
     tileProvider.lambertDiffuseMultiplier = this.lambertDiffuseMultiplier;
     surface.beginFrame(frameState);
   }

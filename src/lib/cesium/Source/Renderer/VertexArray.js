@@ -1,16 +1,16 @@
-import Check from "../Core/Check.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Geometry from "../Core/Geometry.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import CesiumMath from "../Core/Math.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import Buffer from "./Buffer.js";
-import BufferUsage from "./BufferUsage.js";
-import ContextLimits from "./ContextLimits.js";
+import Check from '../Core/Check.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Geometry from '../Core/Geometry.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import CesiumMath from '../Core/Math.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import Buffer from './Buffer.js';
+import BufferUsage from './BufferUsage.js';
+import ContextLimits from './ContextLimits.js';
 
 function addAttribute(attributes, attribute, index, context) {
   const hasVertexBuffer = defined(attribute.vertexBuffer);
@@ -21,11 +21,11 @@ function addAttribute(attributes, attribute, index, context) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!hasVertexBuffer && !hasValue) {
-    throw new DeveloperError("attribute must have a vertexBuffer or a value.");
+    throw new DeveloperError('attribute must have a vertexBuffer or a value.');
   }
   if (hasVertexBuffer && hasValue) {
     throw new DeveloperError(
-      "attribute cannot have both a vertexBuffer and a value.  It must have either a vertexBuffer property defining per-vertex data or a value property defining data for all vertices."
+      'attribute cannot have both a vertexBuffer and a value.  It must have either a vertexBuffer property defining per-vertex data or a value property defining data for all vertices.'
     );
   }
   if (
@@ -36,12 +36,12 @@ function addAttribute(attributes, attribute, index, context) {
   ) {
     if (hasValue) {
       throw new DeveloperError(
-        "attribute.value.length must be in the range [1, 4]."
+        'attribute.value.length must be in the range [1, 4].'
       );
     }
 
     throw new DeveloperError(
-      "attribute.componentsPerAttribute must be in the range [1, 4]."
+      'attribute.componentsPerAttribute must be in the range [1, 4].'
     );
   }
   if (
@@ -49,13 +49,13 @@ function addAttribute(attributes, attribute, index, context) {
     !ComponentDatatype.validate(attribute.componentDatatype)
   ) {
     throw new DeveloperError(
-      "attribute must have a valid componentDatatype or not specify it."
+      'attribute must have a valid componentDatatype or not specify it.'
     );
   }
   if (defined(attribute.strideInBytes) && attribute.strideInBytes > 255) {
     // WebGL limit.  Not in GL ES.
     throw new DeveloperError(
-      "attribute must have a strideInBytes less than or equal to 255 or not specify it."
+      'attribute must have a strideInBytes less than or equal to 255 or not specify it.'
     );
   }
   if (
@@ -63,16 +63,16 @@ function addAttribute(attributes, attribute, index, context) {
     attribute.instanceDivisor > 0 &&
     !context.instancedArrays
   ) {
-    throw new DeveloperError("instanced arrays is not supported");
+    throw new DeveloperError('instanced arrays is not supported');
   }
   if (defined(attribute.instanceDivisor) && attribute.instanceDivisor < 0) {
     throw new DeveloperError(
-      "attribute must have an instanceDivisor greater than or equal to zero"
+      'attribute must have an instanceDivisor greater than or equal to zero'
     );
   }
   if (defined(attribute.instanceDivisor) && hasValue) {
     throw new DeveloperError(
-      "attribute cannot have have an instanceDivisor if it is not backed by a buffer"
+      'attribute cannot have have an instanceDivisor if it is not backed by a buffer'
     );
   }
   if (
@@ -81,7 +81,7 @@ function addAttribute(attributes, attribute, index, context) {
     attribute.index === 0
   ) {
     throw new DeveloperError(
-      "attribute zero cannot have an instanceDivisor greater than 0"
+      'attribute zero cannot have an instanceDivisor greater than 0'
     );
   }
   //>>includeEnd('debug');
@@ -100,7 +100,7 @@ function addAttribute(attributes, attribute, index, context) {
     normalize: defaultValue(attribute.normalize, false),
     offsetInBytes: defaultValue(attribute.offsetInBytes, 0),
     strideInBytes: defaultValue(attribute.strideInBytes, 0),
-    instanceDivisor: defaultValue(attribute.instanceDivisor, 0),
+    instanceDivisor: defaultValue(attribute.instanceDivisor, 0)
   };
 
   if (hasVertexBuffer) {
@@ -290,8 +290,8 @@ function VertexArray(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.context", options.context);
-  Check.defined("options.attributes", options.attributes);
+  Check.defined('options.context', options.context);
+  Check.defined('options.attributes', options.attributes);
   //>>includeEnd('debug');
 
   const context = options.context;
@@ -420,8 +420,8 @@ function interleaveAttributes(attributes) {
       if (currentNumberOfVertices !== numberOfVertices) {
         throw new RuntimeError(
           `${
-            "Each attribute list must have the same number of vertices.  " +
-            "Attribute "
+            'Each attribute list must have the same number of vertices.  ' +
+            'Attribute '
           }${names[j]} has a different number of vertices ` +
             `(${currentNumberOfVertices.toString()})` +
             ` than attribute ${names[0]} (${numberOfVertices.toString()}).`
@@ -480,7 +480,7 @@ function interleaveAttributes(attributes) {
           buffer
         ),
         index: offsetsInBytes[name] / sizeInBytes, // Offset in ComponentType
-        strideInComponentType: vertexSizeInBytes / sizeInBytes,
+        strideInComponentType: vertexSizeInBytes / sizeInBytes
       };
     }
 
@@ -506,7 +506,7 @@ function interleaveAttributes(attributes) {
     return {
       buffer: buffer,
       offsetsInBytes: offsetsInBytes,
-      vertexSizeInBytes: vertexSizeInBytes,
+      vertexSizeInBytes: vertexSizeInBytes
     };
   }
 
@@ -574,7 +574,7 @@ VertexArray.fromGeometry = function (options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.context", options.context);
+  Check.defined('options.context', options.context);
   //>>includeEnd('debug');
 
   const context = options.context;
@@ -605,7 +605,7 @@ VertexArray.fromGeometry = function (options) {
       vertexBuffer = Buffer.createVertexBuffer({
         context: context,
         typedArray: interleavedAttributes.buffer,
-        usage: bufferUsage,
+        usage: bufferUsage
       });
       const offsetsInBytes = interleavedAttributes.offsetsInBytes;
       const strideInBytes = interleavedAttributes.vertexSizeInBytes;
@@ -623,7 +623,7 @@ VertexArray.fromGeometry = function (options) {
               componentsPerAttribute: attribute.componentsPerAttribute,
               normalize: attribute.normalize,
               offsetInBytes: offsetsInBytes[name],
-              strideInBytes: strideInBytes,
+              strideInBytes: strideInBytes
             });
           } else {
             // Constant attribute for all vertices
@@ -631,7 +631,7 @@ VertexArray.fromGeometry = function (options) {
               index: attributeLocations[name],
               value: attribute.value,
               componentDatatype: attribute.componentDatatype,
-              normalize: attribute.normalize,
+              normalize: attribute.normalize
             });
           }
         }
@@ -656,7 +656,7 @@ VertexArray.fromGeometry = function (options) {
               componentDatatype,
               attribute.values
             ),
-            usage: bufferUsage,
+            usage: bufferUsage
           });
         }
 
@@ -666,7 +666,7 @@ VertexArray.fromGeometry = function (options) {
           value: attribute.value,
           componentDatatype: componentDatatype,
           componentsPerAttribute: attribute.componentsPerAttribute,
-          normalize: attribute.normalize,
+          normalize: attribute.normalize
         });
       }
     }
@@ -684,14 +684,14 @@ VertexArray.fromGeometry = function (options) {
         context: context,
         typedArray: new Uint32Array(indices),
         usage: bufferUsage,
-        indexDatatype: IndexDatatype.UNSIGNED_INT,
+        indexDatatype: IndexDatatype.UNSIGNED_INT
       });
     } else {
       indexBuffer = Buffer.createIndexBuffer({
         context: context,
         typedArray: new Uint16Array(indices),
         usage: bufferUsage,
-        indexDatatype: IndexDatatype.UNSIGNED_SHORT,
+        indexDatatype: IndexDatatype.UNSIGNED_SHORT
       });
     }
   }
@@ -699,7 +699,7 @@ VertexArray.fromGeometry = function (options) {
   return new VertexArray({
     context: context,
     attributes: vaAttributes,
-    indexBuffer: indexBuffer,
+    indexBuffer: indexBuffer
   });
 };
 
@@ -707,18 +707,18 @@ Object.defineProperties(VertexArray.prototype, {
   numberOfAttributes: {
     get: function () {
       return this._attributes.length;
-    },
+    }
   },
   numberOfVertices: {
     get: function () {
       return this._numberOfVertices;
-    },
+    }
   },
   indexBuffer: {
     get: function () {
       return this._indexBuffer;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -726,7 +726,7 @@ Object.defineProperties(VertexArray.prototype, {
  */
 VertexArray.prototype.getAttribute = function (index) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("index", index);
+  Check.defined('index', index);
   //>>includeEnd('debug');
 
   return this._attributes[index];

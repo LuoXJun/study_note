@@ -1,8 +1,8 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
 
 const defaultSize = new Cartesian2(1.0, 1.0);
 
@@ -110,7 +110,7 @@ Object.defineProperties(Particle.prototype, {
   age: {
     get: function () {
       return this._age;
-    },
+    }
   },
   /**
    * Gets the age normalized to a value in the range [0.0, 1.0].
@@ -120,8 +120,8 @@ Object.defineProperties(Particle.prototype, {
   normalizedAge: {
     get: function () {
       return this._normalizedAge;
-    },
-  },
+    }
+  }
 });
 
 const deltaScratch = new Cartesian3();

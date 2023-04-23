@@ -1,27 +1,27 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import EllipsoidGeometry from "../Core/EllipsoidGeometry.js";
-import GeometryPipeline from "../Core/GeometryPipeline.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import VertexFormat from "../Core/VertexFormat.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import VertexArray from "../Renderer/VertexArray.js";
-import AtmosphereCommon from "../Shaders/AtmosphereCommon.js";
-import SkyAtmosphereCommon from "../Shaders/SkyAtmosphereCommon.js";
-import SkyAtmosphereFS from "../Shaders/SkyAtmosphereFS.js";
-import SkyAtmosphereVS from "../Shaders/SkyAtmosphereVS.js";
-import Axis from "./Axis.js";
-import BlendingState from "./BlendingState.js";
-import CullFace from "./CullFace.js";
-import SceneMode from "./SceneMode.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import EllipsoidGeometry from '../Core/EllipsoidGeometry.js';
+import GeometryPipeline from '../Core/GeometryPipeline.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import VertexFormat from '../Core/VertexFormat.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import VertexArray from '../Renderer/VertexArray.js';
+import AtmosphereCommon from '../Shaders/AtmosphereCommon.js';
+import SkyAtmosphereCommon from '../Shaders/SkyAtmosphereCommon.js';
+import SkyAtmosphereFS from '../Shaders/SkyAtmosphereFS.js';
+import SkyAtmosphereVS from '../Shaders/SkyAtmosphereVS.js';
+import Axis from './Axis.js';
+import BlendingState from './BlendingState.js';
+import CullFace from './CullFace.js';
+import SceneMode from './SceneMode.js';
 
 /**
  * An atmosphere drawn around the limb of the provided ellipsoid. Based on
@@ -73,7 +73,7 @@ function SkyAtmosphere(ellipsoid) {
 
   this._command = new DrawCommand({
     owner: this,
-    modelMatrix: this._modelMatrix,
+    modelMatrix: this._modelMatrix
   });
   this._spSkyFromSpace = undefined;
   this._spSkyFromAtmosphere = undefined;
@@ -197,7 +197,7 @@ function SkyAtmosphere(ellipsoid) {
     },
     u_atmosphereMieAnisotropy: function () {
       return that.atmosphereMieAnisotropy;
-    },
+    }
   };
 }
 
@@ -212,8 +212,8 @@ Object.defineProperties(SkyAtmosphere.prototype, {
   ellipsoid: {
     get: function () {
       return this._ellipsoid;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -281,22 +281,22 @@ SkyAtmosphere.prototype.update = function (frameState, globe) {
         radii: new Cartesian3(1.0, 1.0, 1.0),
         slicePartitions: 256,
         stackPartitions: 256,
-        vertexFormat: VertexFormat.POSITION_ONLY,
+        vertexFormat: VertexFormat.POSITION_ONLY
       })
     );
     command.vertexArray = VertexArray.fromGeometry({
       context: context,
       geometry: geometry,
       attributeLocations: GeometryPipeline.createAttributeLocations(geometry),
-      bufferUsage: BufferUsage.STATIC_DRAW,
+      bufferUsage: BufferUsage.STATIC_DRAW
     });
     command.renderState = RenderState.fromCache({
       cull: {
         enabled: true,
-        face: CullFace.FRONT,
+        face: CullFace.FRONT
       },
       blending: BlendingState.ALPHA_BLEND,
-      depthMask: false,
+      depthMask: false
     });
   }
 
@@ -309,31 +309,31 @@ SkyAtmosphere.prototype.update = function (frameState, globe) {
     const defines = [];
 
     if (colorCorrect) {
-      defines.push("COLOR_CORRECT");
+      defines.push('COLOR_CORRECT');
     }
 
     if (perFragmentAtmosphere) {
-      defines.push("PER_FRAGMENT_ATMOSPHERE");
+      defines.push('PER_FRAGMENT_ATMOSPHERE');
     }
 
     if (translucent) {
-      defines.push("GLOBE_TRANSLUCENT");
+      defines.push('GLOBE_TRANSLUCENT');
     }
 
     const vs = new ShaderSource({
       defines: defines,
-      sources: [AtmosphereCommon, SkyAtmosphereCommon, SkyAtmosphereVS],
+      sources: [AtmosphereCommon, SkyAtmosphereCommon, SkyAtmosphereVS]
     });
 
     const fs = new ShaderSource({
       defines: defines,
-      sources: [AtmosphereCommon, SkyAtmosphereCommon, SkyAtmosphereFS],
+      sources: [AtmosphereCommon, SkyAtmosphereCommon, SkyAtmosphereFS]
     });
 
     this._spSkyAtmosphere = ShaderProgram.fromCache({
       context: context,
       vertexShaderSource: vs,
-      fragmentShaderSource: fs,
+      fragmentShaderSource: fs
     });
 
     command.shaderProgram = this._spSkyAtmosphere;

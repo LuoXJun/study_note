@@ -1,11 +1,11 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import PolygonHierarchy from "../Core/PolygonHierarchy.js";
-import ConstantProperty from "./ConstantProperty.js";
-import createMaterialPropertyDescriptor from "./createMaterialPropertyDescriptor.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import PolygonHierarchy from '../Core/PolygonHierarchy.js';
+import ConstantProperty from './ConstantProperty.js';
+import createMaterialPropertyDescriptor from './createMaterialPropertyDescriptor.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
 
 function createPolygonHierarchyProperty(value) {
   if (Array.isArray(value)) {
@@ -118,7 +118,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -127,7 +127,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  show: createPropertyDescriptor("show"),
+  show: createPropertyDescriptor('show'),
 
   /**
    * Gets or sets the Property specifying the {@link PolygonHierarchy}.
@@ -135,7 +135,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {Property|undefined}
    */
   hierarchy: createPropertyDescriptor(
-    "hierarchy",
+    'hierarchy',
     undefined,
     createPolygonHierarchyProperty
   ),
@@ -146,7 +146,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {Property|undefined}
    * @default 0.0
    */
-  height: createPropertyDescriptor("height"),
+  height: createPropertyDescriptor('height'),
 
   /**
    * Gets or sets the Property specifying the {@link HeightReference}.
@@ -154,7 +154,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {Property|undefined}
    * @default HeightReference.NONE
    */
-  heightReference: createPropertyDescriptor("heightReference"),
+  heightReference: createPropertyDescriptor('heightReference'),
 
   /**
    * Gets or sets the numeric Property specifying the altitude of the polygon extrusion.
@@ -163,7 +163,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @memberof PolygonGraphics.prototype
    * @type {Property|undefined}
    */
-  extrudedHeight: createPropertyDescriptor("extrudedHeight"),
+  extrudedHeight: createPropertyDescriptor('extrudedHeight'),
 
   /**
    * Gets or sets the Property specifying the extruded {@link HeightReference}.
@@ -171,7 +171,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {Property|undefined}
    * @default HeightReference.NONE
    */
-  extrudedHeightReference: createPropertyDescriptor("extrudedHeightReference"),
+  extrudedHeightReference: createPropertyDescriptor('extrudedHeightReference'),
 
   /**
    * Gets or sets the numeric property specifying the rotation of the polygon texture counter-clockwise from north. Only has an effect if textureCoordinates is not defined.
@@ -179,7 +179,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {Property|undefined}
    * @default 0
    */
-  stRotation: createPropertyDescriptor("stRotation"),
+  stRotation: createPropertyDescriptor('stRotation'),
 
   /**
    * Gets or sets the numeric Property specifying the angular distance between points on the polygon.
@@ -187,7 +187,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {Property|undefined}
    * @default {CesiumMath.RADIANS_PER_DEGREE}
    */
-  granularity: createPropertyDescriptor("granularity"),
+  granularity: createPropertyDescriptor('granularity'),
 
   /**
    * Gets or sets the boolean Property specifying whether the polygon is filled with the provided material.
@@ -195,7 +195,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  fill: createPropertyDescriptor("fill"),
+  fill: createPropertyDescriptor('fill'),
 
   /**
    * Gets or sets the Property specifying the material used to fill the polygon.
@@ -203,7 +203,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {MaterialProperty}
    * @default Color.WHITE
    */
-  material: createMaterialPropertyDescriptor("material"),
+  material: createMaterialPropertyDescriptor('material'),
 
   /**
    * Gets or sets the Property specifying whether the polygon is outlined.
@@ -211,7 +211,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {Property|undefined}
    * @default false
    */
-  outline: createPropertyDescriptor("outline"),
+  outline: createPropertyDescriptor('outline'),
 
   /**
    * Gets or sets the Property specifying the {@link Color} of the outline.
@@ -219,7 +219,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {Property|undefined}
    * @default Color.BLACK
    */
-  outlineColor: createPropertyDescriptor("outlineColor"),
+  outlineColor: createPropertyDescriptor('outlineColor'),
 
   /**
    * Gets or sets the numeric Property specifying the width of the outline.
@@ -230,7 +230,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {Property|undefined}
    * @default 1.0
    */
-  outlineWidth: createPropertyDescriptor("outlineWidth"),
+  outlineWidth: createPropertyDescriptor('outlineWidth'),
 
   /**
    * Gets or sets the boolean specifying whether or not the the height of each position is used.
@@ -239,21 +239,21 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @memberof PolygonGraphics.prototype
    * @type {Property|undefined}
    */
-  perPositionHeight: createPropertyDescriptor("perPositionHeight"),
+  perPositionHeight: createPropertyDescriptor('perPositionHeight'),
 
   /**
    * Gets or sets a boolean specifying whether or not the top of an extruded polygon is included.
    * @memberof PolygonGraphics.prototype
    * @type {Property|undefined}
    */
-  closeTop: createPropertyDescriptor("closeTop"),
+  closeTop: createPropertyDescriptor('closeTop'),
 
   /**
    * Gets or sets a boolean specifying whether or not the bottom of an extruded polygon is included.
    * @memberof PolygonGraphics.prototype
    * @type {Property|undefined}
    */
-  closeBottom: createPropertyDescriptor("closeBottom"),
+  closeBottom: createPropertyDescriptor('closeBottom'),
 
   /**
    * Gets or sets the {@link ArcType} Property specifying the type of lines the polygon edges use.
@@ -261,7 +261,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {Property|undefined}
    * @default ArcType.GEODESIC
    */
-  arcType: createPropertyDescriptor("arcType"),
+  arcType: createPropertyDescriptor('arcType'),
 
   /**
    * Get or sets the enum Property specifying whether the polygon
@@ -270,7 +270,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {Property|undefined}
    * @default ShadowMode.DISABLED
    */
-  shadows: createPropertyDescriptor("shadows"),
+  shadows: createPropertyDescriptor('shadows'),
 
   /**
    * Gets or sets the {@link DistanceDisplayCondition} Property specifying at what distance from the camera that this polygon will be displayed.
@@ -278,7 +278,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {Property|undefined}
    */
   distanceDisplayCondition: createPropertyDescriptor(
-    "distanceDisplayCondition"
+    'distanceDisplayCondition'
   ),
 
   /**
@@ -287,7 +287,7 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {Property|undefined}
    * @default ClassificationType.BOTH
    */
-  classificationType: createPropertyDescriptor("classificationType"),
+  classificationType: createPropertyDescriptor('classificationType'),
 
   /**
    * Gets or sets the zIndex Prperty specifying the ordering of ground geometry.  Only has an effect if the polygon is constant and neither height or extrudedHeight are specified.
@@ -295,14 +295,14 @@ Object.defineProperties(PolygonGraphics.prototype, {
    * @type {ConstantProperty|undefined}
    * @default 0
    */
-  zIndex: createPropertyDescriptor("zIndex"),
+  zIndex: createPropertyDescriptor('zIndex'),
 
   /**
    *  A Property specifying texture coordinates as a {@link PolygonHierarchy} of {@link Cartesian2} points. Has no effect for ground primitives.
    * @memberof PolygonGraphics.prototype
    * @type {Property|undefined}
    */
-  textureCoordinates: createPropertyDescriptor("textureCoordinates"),
+  textureCoordinates: createPropertyDescriptor('textureCoordinates')
 });
 
 /**
@@ -349,7 +349,7 @@ PolygonGraphics.prototype.clone = function (result) {
 PolygonGraphics.prototype.merge = function (source) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
-    throw new DeveloperError("source is required.");
+    throw new DeveloperError('source is required.');
   }
   //>>includeEnd('debug');
 

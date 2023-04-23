@@ -1,9 +1,9 @@
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import CesiumMath from "../Core/Math.js";
-import ClearCommand from "../Renderer/ClearCommand.js";
-import FramebufferManager from "../Renderer/FramebufferManager.js";
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import CesiumMath from '../Core/Math.js';
+import ClearCommand from '../Renderer/ClearCommand.js';
+import FramebufferManager from '../Renderer/FramebufferManager.js';
 
 /**
  * Creates a minimal amount of textures and framebuffers.
@@ -55,7 +55,7 @@ function getStageDependencies(
     const uniformNamesLength = uniformNames.length;
     for (let i = 0; i < uniformNamesLength; ++i) {
       const value = uniforms[uniformNames[i]];
-      if (typeof value === "string") {
+      if (typeof value === 'string') {
         const dependent = collection.getStageByName(value);
         if (defined(dependent)) {
           stageDependencies[getLastStageName(dependent)] = true;
@@ -246,9 +246,9 @@ function getFramebuffer(cache, stageName, dependencies) {
     stages: [stageName],
     buffer: new FramebufferManager({
       pixelFormat: pixelFormat,
-      pixelDatatype: pixelDatatype,
+      pixelDatatype: pixelDatatype
     }),
-    clear: undefined,
+    clear: undefined
   };
 
   framebuffers.push(framebuffer);
@@ -302,7 +302,7 @@ function updateFramebuffers(cache, context) {
     framebuffer.buffer.update(context, textureWidth, textureHeight);
     framebuffer.clear = new ClearCommand({
       color: framebuffer.clearColor,
-      framebuffer: framebuffer.buffer.framebuffer,
+      framebuffer: framebuffer.buffer.framebuffer
     });
   }
 }

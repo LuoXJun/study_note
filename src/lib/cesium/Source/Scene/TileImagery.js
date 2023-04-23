@@ -1,5 +1,5 @@
-import defined from "../Core/defined.js";
-import ImageryState from "./ImageryState.js";
+import defined from '../Core/defined.js';
+import ImageryState from './ImageryState.js';
 
 /**
  * The assocation between a terrain tile and an imagery tile.
@@ -63,10 +63,8 @@ TileImagery.prototype.processStateMachine = function (
     }
     this.readyImagery = this.loadingImagery;
     this.loadingImagery = undefined;
-    this.textureTranslationAndScale = imageryLayer._calculateTextureTranslationAndScale(
-      tile,
-      this
-    );
+    this.textureTranslationAndScale =
+      imageryLayer._calculateTextureTranslationAndScale(tile, this);
     return true; // done loading
   }
 
@@ -98,10 +96,8 @@ TileImagery.prototype.processStateMachine = function (
 
     if (defined(ancestor)) {
       ancestor.addReference();
-      this.textureTranslationAndScale = imageryLayer._calculateTextureTranslationAndScale(
-        tile,
-        this
-      );
+      this.textureTranslationAndScale =
+        imageryLayer._calculateTextureTranslationAndScale(tile, this);
     }
   }
 

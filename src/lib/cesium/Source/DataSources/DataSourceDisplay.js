@@ -1,24 +1,24 @@
-import ApproximateTerrainHeights from "../Core/ApproximateTerrainHeights.js";
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import EventHelper from "../Core/EventHelper.js";
-import GroundPolylinePrimitive from "../Scene/GroundPolylinePrimitive.js";
-import GroundPrimitive from "../Scene/GroundPrimitive.js";
-import OrderedGroundPrimitiveCollection from "../Scene/OrderedGroundPrimitiveCollection.js";
-import PrimitiveCollection from "../Scene/PrimitiveCollection.js";
-import BillboardVisualizer from "./BillboardVisualizer.js";
-import BoundingSphereState from "./BoundingSphereState.js";
-import CustomDataSource from "./CustomDataSource.js";
-import GeometryVisualizer from "./GeometryVisualizer.js";
-import LabelVisualizer from "./LabelVisualizer.js";
-import ModelVisualizer from "./ModelVisualizer.js";
-import Cesium3DTilesetVisualizer from "./Cesium3DTilesetVisualizer.js";
-import PathVisualizer from "./PathVisualizer.js";
-import PointVisualizer from "./PointVisualizer.js";
-import PolylineVisualizer from "./PolylineVisualizer.js";
+import ApproximateTerrainHeights from '../Core/ApproximateTerrainHeights.js';
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import EventHelper from '../Core/EventHelper.js';
+import GroundPolylinePrimitive from '../Scene/GroundPolylinePrimitive.js';
+import GroundPrimitive from '../Scene/GroundPrimitive.js';
+import OrderedGroundPrimitiveCollection from '../Scene/OrderedGroundPrimitiveCollection.js';
+import PrimitiveCollection from '../Scene/PrimitiveCollection.js';
+import BillboardVisualizer from './BillboardVisualizer.js';
+import BoundingSphereState from './BoundingSphereState.js';
+import CustomDataSource from './CustomDataSource.js';
+import GeometryVisualizer from './GeometryVisualizer.js';
+import LabelVisualizer from './LabelVisualizer.js';
+import ModelVisualizer from './ModelVisualizer.js';
+import Cesium3DTilesetVisualizer from './Cesium3DTilesetVisualizer.js';
+import PathVisualizer from './PathVisualizer.js';
+import PointVisualizer from './PointVisualizer.js';
+import PolylineVisualizer from './PolylineVisualizer.js';
 
 /**
  * Visualizes a collection of {@link DataSource} instances.
@@ -34,10 +34,10 @@ import PolylineVisualizer from "./PolylineVisualizer.js";
  */
 function DataSourceDisplay(options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options", options);
-  Check.typeOf.object("options.scene", options.scene);
+  Check.typeOf.object('options', options);
+  Check.typeOf.object('options.scene', options.scene);
   Check.typeOf.object(
-    "options.dataSourceCollection",
+    'options.dataSourceCollection',
     options.dataSourceCollection
   );
   //>>includeEnd('debug');
@@ -106,12 +106,12 @@ function DataSourceDisplay(options) {
       that._removeDefaultDataSourceListener = undefined;
       that._removeDataSourceCollectionListener = undefined;
     };
-    removeDefaultDataSourceListener = defaultDataSource.entities.collectionChanged.addEventListener(
-      addPrimitives
-    );
-    removeDataSourceCollectionListener = dataSourceCollection.dataSourceAdded.addEventListener(
-      addPrimitives
-    );
+    removeDefaultDataSourceListener =
+      defaultDataSource.entities.collectionChanged.addEventListener(
+        addPrimitives
+      );
+    removeDataSourceCollectionListener =
+      dataSourceCollection.dataSourceAdded.addEventListener(addPrimitives);
   }
 
   this._removeDefaultDataSourceListener = removeDefaultDataSourceListener;
@@ -150,7 +150,7 @@ DataSourceDisplay.defaultVisualizersCallback = function (
       entities,
       dataSource._primitives,
       dataSource._groundPrimitives
-    ),
+    )
   ];
 };
 
@@ -163,7 +163,7 @@ Object.defineProperties(DataSourceDisplay.prototype, {
   scene: {
     get: function () {
       return this._scene;
-    },
+    }
   },
   /**
    * Gets the collection of data sources to display.
@@ -173,7 +173,7 @@ Object.defineProperties(DataSourceDisplay.prototype, {
   dataSources: {
     get: function () {
       return this._dataSourceCollection;
-    },
+    }
   },
   /**
    * Gets the default data source instance which can be used to
@@ -186,7 +186,7 @@ Object.defineProperties(DataSourceDisplay.prototype, {
   defaultDataSource: {
     get: function () {
       return this._defaultDataSource;
-    },
+    }
   },
 
   /**
@@ -198,8 +198,8 @@ Object.defineProperties(DataSourceDisplay.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -263,7 +263,7 @@ DataSourceDisplay.prototype.destroy = function () {
  */
 DataSourceDisplay.prototype.update = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
   //>>includeEnd('debug');
 
   if (!ApproximateTerrainHeights.initialized) {
@@ -349,9 +349,9 @@ DataSourceDisplay.prototype.getBoundingSphere = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("entity", entity);
-  Check.typeOf.bool("allowPartial", allowPartial);
-  Check.defined("result", result);
+  Check.defined('entity', entity);
+  Check.typeOf.bool('allowPartial', allowPartial);
+  Check.defined('result', result);
   //>>includeEnd('debug');
 
   if (!this._ready) {

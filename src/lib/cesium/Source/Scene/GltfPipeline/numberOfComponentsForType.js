@@ -1,5 +1,3 @@
-
-
 /**
  * Utility function for retrieving the number of components in a given type.
  *
@@ -10,18 +8,18 @@
  */
 function numberOfComponentsForType(type) {
   switch (type) {
-    case "SCALAR":
+    case 'SCALAR':
       return 1;
-    case "VEC2":
+    case 'VEC2':
       return 2;
-    case "VEC3":
+    case 'VEC3':
       return 3;
-    case "VEC4":
-    case "MAT2":
+    case 'VEC4':
+    case 'MAT2':
       return 4;
-    case "MAT3":
+    case 'MAT3':
       return 9;
-    case "MAT4":
+    case 'MAT4':
       return 16;
   }
 }

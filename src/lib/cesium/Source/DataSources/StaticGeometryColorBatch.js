@@ -1,17 +1,17 @@
-import AssociativeArray from "../Core/AssociativeArray.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import defined from "../Core/defined.js";
-import DistanceDisplayCondition from "../Core/DistanceDisplayCondition.js";
-import DistanceDisplayConditionGeometryInstanceAttribute from "../Core/DistanceDisplayConditionGeometryInstanceAttribute.js";
-import OffsetGeometryInstanceAttribute from "../Core/OffsetGeometryInstanceAttribute.js";
-import ShowGeometryInstanceAttribute from "../Core/ShowGeometryInstanceAttribute.js";
-import Primitive from "../Scene/Primitive.js";
-import BoundingSphereState from "./BoundingSphereState.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import MaterialProperty from "./MaterialProperty.js";
-import Property from "./Property.js";
+import AssociativeArray from '../Core/AssociativeArray.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import defined from '../Core/defined.js';
+import DistanceDisplayCondition from '../Core/DistanceDisplayCondition.js';
+import DistanceDisplayConditionGeometryInstanceAttribute from '../Core/DistanceDisplayConditionGeometryInstanceAttribute.js';
+import OffsetGeometryInstanceAttribute from '../Core/OffsetGeometryInstanceAttribute.js';
+import ShowGeometryInstanceAttribute from '../Core/ShowGeometryInstanceAttribute.js';
+import Primitive from '../Scene/Primitive.js';
+import BoundingSphereState from './BoundingSphereState.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import MaterialProperty from './MaterialProperty.js';
+import Property from './Property.js';
 
 const colorScratch = new Color();
 const distanceDisplayConditionScratch = new DistanceDisplayCondition();
@@ -51,10 +51,11 @@ function Batch(
 
   let removeMaterialSubscription;
   if (defined(depthFailMaterialProperty)) {
-    removeMaterialSubscription = depthFailMaterialProperty.definitionChanged.addEventListener(
-      Batch.prototype.onMaterialChanged,
-      this
-    );
+    removeMaterialSubscription =
+      depthFailMaterialProperty.definitionChanged.addEventListener(
+        Batch.prototype.onMaterialChanged,
+        this
+      );
   }
   this.removeMaterialSubscription = removeMaterialSubscription;
 }
@@ -97,7 +98,7 @@ Batch.prototype.add = function (updater, instance) {
         newValue,
         oldValue
       ) {
-        if (propertyName === "isShowing") {
+        if (propertyName === 'isShowing') {
           that.showsUpdated.set(updater.id, updater);
         }
       })
@@ -152,7 +153,7 @@ Batch.prototype.update = function (time) {
         depthFailAppearance = new this.depthFailAppearanceType({
           material: this.depthFailMaterial,
           translucent: this.translucent,
-          closed: this.closed,
+          closed: this.closed
         });
       }
 
@@ -162,10 +163,10 @@ Batch.prototype.update = function (time) {
         geometryInstances: geometries.slice(),
         appearance: new this.appearanceType({
           translucent: this.translucent,
-          closed: this.closed,
+          closed: this.closed
         }),
         depthFailAppearance: depthFailAppearance,
-        shadows: this.shadows,
+        shadows: this.shadows
       });
       primitives.add(primitive);
       isUpdated = false;
@@ -293,14 +294,16 @@ Batch.prototype.update = function (time) {
             attributes._lastDistanceDisplayCondition
           )
         ) {
-          attributes._lastDistanceDisplayCondition = DistanceDisplayCondition.clone(
-            distanceDisplayCondition,
-            attributes._lastDistanceDisplayCondition
-          );
-          attributes.distanceDisplayCondition = DistanceDisplayConditionGeometryInstanceAttribute.toValue(
-            distanceDisplayCondition,
-            attributes.distanceDisplayCondition
-          );
+          attributes._lastDistanceDisplayCondition =
+            DistanceDisplayCondition.clone(
+              distanceDisplayCondition,
+              attributes._lastDistanceDisplayCondition
+            );
+          attributes.distanceDisplayCondition =
+            DistanceDisplayConditionGeometryInstanceAttribute.toValue(
+              distanceDisplayCondition,
+              attributes.distanceDisplayCondition
+            );
         }
       }
 

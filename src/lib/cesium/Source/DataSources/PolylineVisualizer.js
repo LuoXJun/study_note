@@ -1,20 +1,20 @@
-import AssociativeArray from "../Core/AssociativeArray.js";
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import ClassificationType from "../Scene/ClassificationType.js";
-import PolylineColorAppearance from "../Scene/PolylineColorAppearance.js";
-import PolylineMaterialAppearance from "../Scene/PolylineMaterialAppearance.js";
-import ShadowMode from "../Scene/ShadowMode.js";
-import BoundingSphereState from "./BoundingSphereState.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import DynamicGeometryBatch from "./DynamicGeometryBatch.js";
-import PolylineGeometryUpdater from "./PolylineGeometryUpdater.js";
-import StaticGeometryColorBatch from "./StaticGeometryColorBatch.js";
-import StaticGeometryPerMaterialBatch from "./StaticGeometryPerMaterialBatch.js";
-import StaticGroundPolylinePerMaterialBatch from "./StaticGroundPolylinePerMaterialBatch.js";
+import AssociativeArray from '../Core/AssociativeArray.js';
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import ClassificationType from '../Scene/ClassificationType.js';
+import PolylineColorAppearance from '../Scene/PolylineColorAppearance.js';
+import PolylineMaterialAppearance from '../Scene/PolylineMaterialAppearance.js';
+import ShadowMode from '../Scene/ShadowMode.js';
+import BoundingSphereState from './BoundingSphereState.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import DynamicGeometryBatch from './DynamicGeometryBatch.js';
+import PolylineGeometryUpdater from './PolylineGeometryUpdater.js';
+import StaticGeometryColorBatch from './StaticGeometryColorBatch.js';
+import StaticGeometryPerMaterialBatch from './StaticGeometryPerMaterialBatch.js';
+import StaticGroundPolylinePerMaterialBatch from './StaticGroundPolylinePerMaterialBatch.js';
 
 const emptyArray = [];
 
@@ -35,9 +35,8 @@ function insertUpdaterIntoBatch(that, time, updater) {
 
   if (updater.clampToGround && updater.fillEnabled) {
     // Also checks for support
-    const classificationType = updater.classificationTypeProperty.getValue(
-      time
-    );
+    const classificationType =
+      updater.classificationTypeProperty.getValue(time);
     that._groundBatches[classificationType].add(time, updater);
     return;
   }
@@ -86,8 +85,8 @@ function PolylineVisualizer(
   groundPrimitives
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("scene", scene);
-  Check.defined("entityCollection", entityCollection);
+  Check.defined('scene', scene);
+  Check.defined('entityCollection', entityCollection);
   //>>includeEnd('debug');
 
   groundPrimitives = defaultValue(groundPrimitives, scene.groundPrimitives);
@@ -128,34 +127,31 @@ function PolylineVisualizer(
       false,
       i
     ); //depth fail appearance variations
-    this._materialBatches[
-      i + numberOfShadowModes
-    ] = new StaticGeometryPerMaterialBatch(
-      primitives,
-      PolylineMaterialAppearance,
-      PolylineColorAppearance,
-      false,
-      i
-    );
+    this._materialBatches[i + numberOfShadowModes] =
+      new StaticGeometryPerMaterialBatch(
+        primitives,
+        PolylineMaterialAppearance,
+        PolylineColorAppearance,
+        false,
+        i
+      );
 
-    this._colorBatches[
-      i + numberOfShadowModes * 2
-    ] = new StaticGeometryColorBatch(
-      primitives,
-      PolylineColorAppearance,
-      PolylineMaterialAppearance,
-      false,
-      i
-    );
-    this._materialBatches[
-      i + numberOfShadowModes * 2
-    ] = new StaticGeometryPerMaterialBatch(
-      primitives,
-      PolylineMaterialAppearance,
-      PolylineMaterialAppearance,
-      false,
-      i
-    );
+    this._colorBatches[i + numberOfShadowModes * 2] =
+      new StaticGeometryColorBatch(
+        primitives,
+        PolylineColorAppearance,
+        PolylineMaterialAppearance,
+        false,
+        i
+      );
+    this._materialBatches[i + numberOfShadowModes * 2] =
+      new StaticGeometryPerMaterialBatch(
+        primitives,
+        PolylineMaterialAppearance,
+        PolylineMaterialAppearance,
+        false,
+        i
+      );
   }
 
   this._dynamicBatch = new DynamicGeometryBatch(primitives, groundPrimitives);
@@ -202,7 +198,7 @@ function PolylineVisualizer(
  */
 PolylineVisualizer.prototype.update = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
   //>>includeEnd('debug');
 
   const addedObjects = this._addedObjects;
@@ -292,8 +288,8 @@ const getBoundingSphereBoundingSphereScratch = new BoundingSphere();
  */
 PolylineVisualizer.prototype.getBoundingSphere = function (entity, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("entity", entity);
-  Check.defined("result", result);
+  Check.defined('entity', entity);
+  Check.defined('result', result);
   //>>includeEnd('debug');
 
   const boundingSpheres = getBoundingSphereArrayScratch;

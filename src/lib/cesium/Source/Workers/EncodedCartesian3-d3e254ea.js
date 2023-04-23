@@ -1,5 +1,11 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultValue-94c3e563'], (function (exports, Matrix2, RuntimeError, defaultValue) { 'use strict';
+define([
+  'exports',
+  './Matrix2-fc7e9822',
+  './RuntimeError-c581ca93',
+  './defaultValue-94c3e563'
+], function (exports, Matrix2, RuntimeError, defaultValue) {
+  'use strict';
 
   /**
    * A fixed-point encoding of a {@link Cartesian3} with 64-bit floating-point components, as two {@link Cartesian3}
@@ -50,13 +56,13 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    */
   EncodedCartesian3.encode = function (value, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("value", value);
+    RuntimeError.Check.typeOf.number('value', value);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
       result = {
         high: 0.0,
-        low: 0.0,
+        low: 0.0
       };
     }
 
@@ -76,7 +82,7 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
 
   const scratchEncode = {
     high: 0.0,
-    low: 0.0,
+    low: 0.0
   };
 
   /**
@@ -96,7 +102,7 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    */
   EncodedCartesian3.fromCartesian = function (cartesian, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("cartesian", cartesian);
+    RuntimeError.Check.typeOf.object('cartesian', cartesian);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -148,11 +154,15 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    *   j += 6;
    * }
    */
-  EncodedCartesian3.writeElements = function (cartesian, cartesianArray, index) {
+  EncodedCartesian3.writeElements = function (
+    cartesian,
+    cartesianArray,
+    index
+  ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("cartesianArray", cartesianArray);
-    RuntimeError.Check.typeOf.number("index", index);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("index", index, 0);
+    RuntimeError.Check.defined('cartesianArray', cartesianArray);
+    RuntimeError.Check.typeOf.number('index', index);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals('index', index, 0);
     //>>includeEnd('debug');
 
     EncodedCartesian3.fromCartesian(cartesian, encodedP);
@@ -168,5 +178,4 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
   };
 
   exports.EncodedCartesian3 = EncodedCartesian3;
-
-}));
+});

@@ -29,6 +29,6 @@ const Intersect = {
    * @type {Number}
    * @constant
    */
-  INSIDE: 1,
+  INSIDE: 1
 };
 export default Object.freeze(Intersect);

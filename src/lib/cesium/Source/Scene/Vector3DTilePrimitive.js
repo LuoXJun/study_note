@@ -1,31 +1,31 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Color from "../Core/Color.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import Matrix4 from "../Core/Matrix4.js";
-import PrimitiveType from "../Core/PrimitiveType.js";
-import Buffer from "../Renderer/Buffer.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import Pass from "../Renderer/Pass.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import VertexArray from "../Renderer/VertexArray.js";
-import ShadowVolumeFS from "../Shaders/ShadowVolumeFS.js";
-import VectorTileVS from "../Shaders/VectorTileVS.js";
-import BlendingState from "./BlendingState.js";
-import Cesium3DTileFeature from "./Cesium3DTileFeature.js";
-import ClassificationType from "./ClassificationType.js";
-import DepthFunction from "./DepthFunction.js";
-import Expression from "./Expression.js";
-import StencilConstants from "./StencilConstants.js";
-import StencilFunction from "./StencilFunction.js";
-import StencilOperation from "./StencilOperation.js";
-import Vector3DTileBatch from "./Vector3DTileBatch.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Color from '../Core/Color.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import Matrix4 from '../Core/Matrix4.js';
+import PrimitiveType from '../Core/PrimitiveType.js';
+import Buffer from '../Renderer/Buffer.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import Pass from '../Renderer/Pass.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import VertexArray from '../Renderer/VertexArray.js';
+import ShadowVolumeFS from '../Shaders/ShadowVolumeFS.js';
+import VectorTileVS from '../Shaders/VectorTileVS.js';
+import BlendingState from './BlendingState.js';
+import Cesium3DTileFeature from './Cesium3DTileFeature.js';
+import ClassificationType from './ClassificationType.js';
+import DepthFunction from './DepthFunction.js';
+import Expression from './Expression.js';
+import StencilConstants from './StencilConstants.js';
+import StencilFunction from './StencilFunction.js';
+import StencilOperation from './StencilOperation.js';
+import Vector3DTileBatch from './Vector3DTileBatch.js';
 
 /**
  * Creates a batch of classification meshes.
@@ -162,7 +162,7 @@ Object.defineProperties(Vector3DTilePrimitive.prototype, {
   trianglesLength: {
     get: function () {
       return this._trianglesLength;
-    },
+    }
   },
 
   /**
@@ -176,13 +176,13 @@ Object.defineProperties(Vector3DTilePrimitive.prototype, {
   geometryByteLength: {
     get: function () {
       return this._geometryByteLength;
-    },
-  },
+    }
+  }
 });
 
 const defaultAttributeLocations = {
   position: 0,
-  a_batchId: 1,
+  a_batchId: 1
 };
 
 function createVertexArray(primitive, context) {
@@ -193,12 +193,12 @@ function createVertexArray(primitive, context) {
   const positionBuffer = Buffer.createVertexBuffer({
     context: context,
     typedArray: primitive._positions,
-    usage: BufferUsage.STATIC_DRAW,
+    usage: BufferUsage.STATIC_DRAW
   });
   const idBuffer = Buffer.createVertexBuffer({
     context: context,
     typedArray: primitive._vertexBatchIds,
-    usage: BufferUsage.STATIC_DRAW,
+    usage: BufferUsage.STATIC_DRAW
   });
   const indexBuffer = Buffer.createIndexBuffer({
     context: context,
@@ -207,7 +207,7 @@ function createVertexArray(primitive, context) {
     indexDatatype:
       primitive._indices.BYTES_PER_ELEMENT === 2
         ? IndexDatatype.UNSIGNED_SHORT
-        : IndexDatatype.UNSIGNED_INT,
+        : IndexDatatype.UNSIGNED_INT
   });
 
   const vertexAttributes = [
@@ -215,7 +215,7 @@ function createVertexArray(primitive, context) {
       index: 0,
       vertexBuffer: positionBuffer,
       componentDatatype: ComponentDatatype.fromTypedArray(primitive._positions),
-      componentsPerAttribute: 3,
+      componentsPerAttribute: 3
     },
     {
       index: 1,
@@ -223,14 +223,14 @@ function createVertexArray(primitive, context) {
       componentDatatype: ComponentDatatype.fromTypedArray(
         primitive._vertexBatchIds
       ),
-      componentsPerAttribute: 1,
-    },
+      componentsPerAttribute: 1
+    }
   ];
 
   primitive._va = new VertexArray({
     context: context,
     attributes: vertexAttributes,
-    indexBuffer: indexBuffer,
+    indexBuffer: indexBuffer
   });
 
   if (context.webgl2) {
@@ -241,8 +241,8 @@ function createVertexArray(primitive, context) {
         context: context,
         sizeInBytes: indexBuffer.sizeInBytes,
         usage: BufferUsage.DYNAMIC_DRAW,
-        indexDatatype: indexBuffer.indexDatatype,
-      }),
+        indexDatatype: indexBuffer.indexDatatype
+      })
     });
   }
 
@@ -271,13 +271,13 @@ function createShaders(primitive, context) {
       context: context,
       vertexShaderSource: vertexShaderSource,
       fragmentShaderSource: fragmentShaderSource,
-      attributeLocations: attributeLocations,
+      attributeLocations: attributeLocations
     });
     primitive._spStencil = primitive._sp;
 
     fragmentShaderSource = ShaderSource.replaceMain(
       fragmentShaderSource,
-      "czm_non_pick_main"
+      'czm_non_pick_main'
     );
     fragmentShaderSource =
       `${fragmentShaderSource}void main() \n` +
@@ -289,14 +289,14 @@ function createShaders(primitive, context) {
       context: context,
       vertexShaderSource: vertexShaderSource,
       fragmentShaderSource: fragmentShaderSource,
-      attributeLocations: attributeLocations,
+      attributeLocations: attributeLocations
     });
     return;
   }
 
   const vsSource = batchTable.getVertexShaderCallback(
     false,
-    "a_batchId",
+    'a_batchId',
     undefined
   )(VectorTileVS);
   let fsSource = batchTable.getFragmentShaderCallback(
@@ -308,36 +308,36 @@ function createShaders(primitive, context) {
   pickId = batchTable.getPickId();
 
   let vs = new ShaderSource({
-    sources: [vsSource],
+    sources: [vsSource]
   });
   let fs = new ShaderSource({
-    defines: ["VECTOR_TILE"],
-    sources: [fsSource],
+    defines: ['VECTOR_TILE'],
+    sources: [fsSource]
   });
 
   primitive._sp = ShaderProgram.fromCache({
     context: context,
     vertexShaderSource: vs,
     fragmentShaderSource: fs,
-    attributeLocations: attributeLocations,
+    attributeLocations: attributeLocations
   });
 
   vs = new ShaderSource({
-    sources: [VectorTileVS],
+    sources: [VectorTileVS]
   });
   fs = new ShaderSource({
-    defines: ["VECTOR_TILE"],
-    sources: [ShadowVolumeFS],
+    defines: ['VECTOR_TILE'],
+    sources: [ShadowVolumeFS]
   });
 
   primitive._spStencil = ShaderProgram.fromCache({
     context: context,
     vertexShaderSource: vs,
     fragmentShaderSource: fs,
-    attributeLocations: attributeLocations,
+    attributeLocations: attributeLocations
   });
 
-  fsSource = ShaderSource.replaceMain(fsSource, "czm_non_pick_main");
+  fsSource = ShaderSource.replaceMain(fsSource, 'czm_non_pick_main');
   fsSource =
     `${fsSource}\n` +
     `void main() \n` +
@@ -347,17 +347,17 @@ function createShaders(primitive, context) {
     `} \n`;
 
   const pickVS = new ShaderSource({
-    sources: [vsSource],
+    sources: [vsSource]
   });
   const pickFS = new ShaderSource({
-    defines: ["VECTOR_TILE"],
-    sources: [fsSource],
+    defines: ['VECTOR_TILE'],
+    sources: [fsSource]
   });
   primitive._spPick = ShaderProgram.fromCache({
     context: context,
     vertexShaderSource: pickVS,
     fragmentShaderSource: pickFS,
-    attributeLocations: attributeLocations,
+    attributeLocations: attributeLocations
   });
 }
 
@@ -370,7 +370,7 @@ function getStencilDepthRenderState(mask3DTiles) {
       red: false,
       green: false,
       blue: false,
-      alpha: false,
+      alpha: false
     },
     stencilTest: {
       enabled: true,
@@ -378,23 +378,23 @@ function getStencilDepthRenderState(mask3DTiles) {
       frontOperation: {
         fail: StencilOperation.KEEP,
         zFail: StencilOperation.DECREMENT_WRAP,
-        zPass: StencilOperation.KEEP,
+        zPass: StencilOperation.KEEP
       },
       backFunction: stencilFunction,
       backOperation: {
         fail: StencilOperation.KEEP,
         zFail: StencilOperation.INCREMENT_WRAP,
-        zPass: StencilOperation.KEEP,
+        zPass: StencilOperation.KEEP
       },
       reference: StencilConstants.CESIUM_3D_TILE_MASK,
-      mask: StencilConstants.CESIUM_3D_TILE_MASK,
+      mask: StencilConstants.CESIUM_3D_TILE_MASK
     },
     stencilMask: StencilConstants.CLASSIFICATION_MASK,
     depthTest: {
       enabled: true,
-      func: DepthFunction.LESS_OR_EQUAL,
+      func: DepthFunction.LESS_OR_EQUAL
     },
-    depthMask: false,
+    depthMask: false
   };
 }
 
@@ -405,23 +405,23 @@ const colorRenderState = {
     frontOperation: {
       fail: StencilOperation.ZERO,
       zFail: StencilOperation.ZERO,
-      zPass: StencilOperation.ZERO,
+      zPass: StencilOperation.ZERO
     },
     backFunction: StencilFunction.NOT_EQUAL,
     backOperation: {
       fail: StencilOperation.ZERO,
       zFail: StencilOperation.ZERO,
-      zPass: StencilOperation.ZERO,
+      zPass: StencilOperation.ZERO
     },
     reference: 0,
-    mask: StencilConstants.CLASSIFICATION_MASK,
+    mask: StencilConstants.CLASSIFICATION_MASK
   },
   stencilMask: StencilConstants.CLASSIFICATION_MASK,
   depthTest: {
-    enabled: false,
+    enabled: false
   },
   depthMask: false,
-  blending: BlendingState.PRE_MULTIPLIED_ALPHA_BLEND,
+  blending: BlendingState.PRE_MULTIPLIED_ALPHA_BLEND
 };
 
 const pickRenderState = {
@@ -431,22 +431,22 @@ const pickRenderState = {
     frontOperation: {
       fail: StencilOperation.ZERO,
       zFail: StencilOperation.ZERO,
-      zPass: StencilOperation.ZERO,
+      zPass: StencilOperation.ZERO
     },
     backFunction: StencilFunction.NOT_EQUAL,
     backOperation: {
       fail: StencilOperation.ZERO,
       zFail: StencilOperation.ZERO,
-      zPass: StencilOperation.ZERO,
+      zPass: StencilOperation.ZERO
     },
     reference: 0,
-    mask: StencilConstants.CLASSIFICATION_MASK,
+    mask: StencilConstants.CLASSIFICATION_MASK
   },
   stencilMask: StencilConstants.CLASSIFICATION_MASK,
   depthTest: {
-    enabled: false,
+    enabled: false
   },
-  depthMask: false,
+  depthMask: false
 };
 
 function createRenderStates(primitive) {
@@ -496,12 +496,11 @@ function createUniformMap(primitive, context) {
     },
     u_highlightColor: function () {
       return primitive._highlightColor;
-    },
+    }
   };
 
-  primitive._uniformMap = primitive._batchTable.getUniformMapCallback()(
-    uniformMap
-  );
+  primitive._uniformMap =
+    primitive._batchTable.getUniformMapCallback()(uniformMap);
 }
 
 function copyIndicesCPU(
@@ -782,7 +781,7 @@ function createColorCommands(primitive, context) {
     let stencilDepthCommand = commands[j * 2];
     if (!defined(stencilDepthCommand)) {
       stencilDepthCommand = commands[j * 2] = new DrawCommand({
-        owner: primitive,
+        owner: primitive
       });
     }
 
@@ -809,7 +808,7 @@ function createColorCommands(primitive, context) {
     let colorCommand = commands[j * 2 + 1];
     if (!defined(colorCommand)) {
       colorCommand = commands[j * 2 + 1] = new DrawCommand({
-        owner: primitive,
+        owner: primitive
       });
     }
 
@@ -892,7 +891,7 @@ function createPickCommands(primitive) {
     if (!defined(stencilDepthCommand)) {
       stencilDepthCommand = pickCommands[j * 2] = new DrawCommand({
         owner: primitive,
-        pickOnly: true,
+        pickOnly: true
       });
     }
 
@@ -919,7 +918,7 @@ function createPickCommands(primitive) {
     if (!defined(colorCommand)) {
       colorCommand = pickCommands[j * 2 + 1] = new DrawCommand({
         owner: primitive,
-        pickOnly: true,
+        pickOnly: true
       });
     }
 
@@ -1091,7 +1090,7 @@ Vector3DTilePrimitive.prototype.updateCommands = function (batchId, color) {
       color: Color.clone(color),
       offset: offset,
       count: count,
-      batchIds: [batchId],
+      batchIds: [batchId]
     })
   );
 
@@ -1122,7 +1121,7 @@ Vector3DTilePrimitive.prototype.updateCommands = function (batchId, color) {
         offset: offset + count,
         count:
           batchedIndices[i].offset + batchedIndices[i].count - (offset + count),
-        batchIds: endIds,
+        batchIds: endIds
       })
     );
   }

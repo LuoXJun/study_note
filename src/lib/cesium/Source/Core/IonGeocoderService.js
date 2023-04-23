@@ -1,10 +1,10 @@
-import Check from "./Check.js";
-import Credit from "./Credit.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Ion from "./Ion.js";
-import PeliasGeocoderService from "./PeliasGeocoderService.js";
-import Resource from "./Resource.js";
+import Check from './Check.js';
+import Credit from './Credit.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Ion from './Ion.js';
+import PeliasGeocoderService from './PeliasGeocoderService.js';
+import Resource from './Resource.js';
 
 /**
  * Provides geocoding through Cesium ion.
@@ -22,7 +22,7 @@ function IonGeocoderService(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.scene", options.scene);
+  Check.typeOf.object('options.scene', options.scene);
   //>>includeEnd('debug');
 
   const accessToken = defaultValue(options.accessToken, Ion.defaultAccessToken);
@@ -39,7 +39,7 @@ function IonGeocoderService(options) {
   }
 
   const searchEndpoint = server.getDerivedResource({
-    url: "v1/geocode",
+    url: 'v1/geocode'
   });
 
   if (defined(accessToken)) {

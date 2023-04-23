@@ -1,6 +1,6 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
 
 /**
  * A property table for use with the <code>EXT_structural_metadata</code> extension or
@@ -39,7 +39,7 @@ function PropertyTable(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("options.count", options.count);
+  Check.typeOf.number('options.count', options.count);
   //>>includeEnd('debug');
 
   this._name = options.name;
@@ -64,7 +64,7 @@ Object.defineProperties(PropertyTable.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
   /**
    * An identifier for this table. Useful for debugging.
@@ -77,7 +77,7 @@ Object.defineProperties(PropertyTable.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
   /**
    * The number of features in the table.
@@ -90,7 +90,7 @@ Object.defineProperties(PropertyTable.prototype, {
   count: {
     get: function () {
       return this._count;
-    },
+    }
   },
 
   /**
@@ -107,7 +107,7 @@ Object.defineProperties(PropertyTable.prototype, {
       }
 
       return undefined;
-    },
+    }
   },
 
   /**
@@ -121,7 +121,7 @@ Object.defineProperties(PropertyTable.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -135,7 +135,7 @@ Object.defineProperties(PropertyTable.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
+    }
   },
 
   /**
@@ -159,8 +159,8 @@ Object.defineProperties(PropertyTable.prototype, {
       }
 
       return totalByteLength;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -173,8 +173,8 @@ Object.defineProperties(PropertyTable.prototype, {
  */
 PropertyTable.prototype.hasProperty = function (index, propertyId) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("index", index);
-  Check.typeOf.string("propertyId", propertyId);
+  Check.typeOf.number('index', index);
+  Check.typeOf.string('propertyId', propertyId);
   //>>includeEnd('debug');
 
   if (
@@ -210,8 +210,8 @@ PropertyTable.prototype.hasProperty = function (index, propertyId) {
  */
 PropertyTable.prototype.hasPropertyBySemantic = function (index, semantic) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("index", index);
-  Check.typeOf.string("semantic", semantic);
+  Check.typeOf.number('index', index);
+  Check.typeOf.string('semantic', semantic);
   //>>includeEnd('debug');
 
   if (defined(this._metadataTable)) {
@@ -232,7 +232,7 @@ PropertyTable.prototype.hasPropertyBySemantic = function (index, semantic) {
  */
 PropertyTable.prototype.propertyExists = function (propertyId) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("propertyId", propertyId);
+  Check.typeOf.string('propertyId', propertyId);
   //>>includeEnd('debug');
 
   if (
@@ -268,7 +268,7 @@ PropertyTable.prototype.propertyExists = function (propertyId) {
  */
 PropertyTable.prototype.propertyExistsBySemantic = function (semantic) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("semantic", semantic);
+  Check.typeOf.string('semantic', semantic);
   //>>includeEnd('debug');
 
   if (defined(this._metadataTable)) {
@@ -449,7 +449,7 @@ PropertyTable.prototype.setPropertyBySemantic = function (
  */
 PropertyTable.prototype.getPropertyTypedArray = function (propertyId) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("propertyId", propertyId);
+  Check.typeOf.string('propertyId', propertyId);
   //>>includeEnd('debug');
 
   if (defined(this._metadataTable)) {
@@ -474,7 +474,7 @@ PropertyTable.prototype.getPropertyTypedArray = function (propertyId) {
  */
 PropertyTable.prototype.getPropertyTypedArrayBySemantic = function (semantic) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("semantic", semantic);
+  Check.typeOf.string('semantic', semantic);
   //>>includeEnd('debug');
 
   if (defined(this._metadataTable)) {

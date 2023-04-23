@@ -1,6 +1,6 @@
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
 
 /**
  * A set of curvilinear 3-dimensional coordinates.
@@ -42,7 +42,7 @@ function Spherical(clock, cone, magnitude) {
  */
 Spherical.fromCartesian3 = function (cartesian3, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("cartesian3", cartesian3);
+  Check.typeOf.object('cartesian3', cartesian3);
   //>>includeEnd('debug');
 
   const x = cartesian3.x;
@@ -91,7 +91,7 @@ Spherical.clone = function (spherical, result) {
  */
 Spherical.normalize = function (spherical, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("spherical", spherical);
+  Check.typeOf.object('spherical', spherical);
   //>>includeEnd('debug');
 
   if (!defined(result)) {

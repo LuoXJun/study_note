@@ -23,7 +23,38 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './ComponentDatatype-4eeb6d9b', './defaultValue-97284df2', './EllipseGeometryLibrary-dac95924', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './GeometryInstance-3db1d31b', './GeometryOffsetAttribute-59b14f45', './GeometryPipeline-d7363877', './IndexDatatype-f228f5fd', './VertexFormat-563ab2cc'], (function (exports, Transforms, Matrix2, RuntimeError, ComponentDatatype, defaultValue, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, GeometryInstance, GeometryOffsetAttribute, GeometryPipeline, IndexDatatype, VertexFormat) { 'use strict';
+define([
+  'exports',
+  './Transforms-273eeb44',
+  './Matrix2-9e1c22e2',
+  './RuntimeError-4f8ec8a2',
+  './ComponentDatatype-4eeb6d9b',
+  './defaultValue-97284df2',
+  './EllipseGeometryLibrary-dac95924',
+  './GeometryAttribute-9be2d2e5',
+  './GeometryAttributes-734a3446',
+  './GeometryInstance-3db1d31b',
+  './GeometryOffsetAttribute-59b14f45',
+  './GeometryPipeline-d7363877',
+  './IndexDatatype-f228f5fd',
+  './VertexFormat-563ab2cc'
+], function (
+  exports,
+  Transforms,
+  Matrix2,
+  RuntimeError,
+  ComponentDatatype,
+  defaultValue,
+  EllipseGeometryLibrary,
+  GeometryAttribute,
+  GeometryAttributes,
+  GeometryInstance,
+  GeometryOffsetAttribute,
+  GeometryPipeline,
+  IndexDatatype,
+  VertexFormat
+) {
+  'use strict';
 
   const scratchCartesian1 = new Matrix2.Cartesian3();
   const scratchCartesian2 = new Matrix2.Cartesian3();
@@ -57,7 +88,9 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     const textureCoordinates = vertexFormat.st
       ? new Float32Array(size * 2)
       : undefined;
-    const normals = vertexFormat.normal ? new Float32Array(size * 3) : undefined;
+    const normals = vertexFormat.normal
+      ? new Float32Array(size * 3)
+      : undefined;
     const tangents = vertexFormat.tangent
       ? new Float32Array(size * 3)
       : undefined;
@@ -65,7 +98,9 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       ? new Float32Array(size * 3)
       : undefined;
 
-    const extrudeNormals = shadowVolume ? new Float32Array(size * 3) : undefined;
+    const extrudeNormals = shadowVolume
+      ? new Float32Array(size * 3)
+      : undefined;
 
     let textureCoordIndex = 0;
 
@@ -104,8 +139,14 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       );
       tangentMatrix = Matrix2.Matrix3.fromQuaternion(rotation, tangentMatrix);
     } else {
-      textureMatrix = Matrix2.Matrix3.clone(Matrix2.Matrix3.IDENTITY, textureMatrix);
-      tangentMatrix = Matrix2.Matrix3.clone(Matrix2.Matrix3.IDENTITY, tangentMatrix);
+      textureMatrix = Matrix2.Matrix3.clone(
+        Matrix2.Matrix3.IDENTITY,
+        textureMatrix
+      );
+      tangentMatrix = Matrix2.Matrix3.clone(
+        Matrix2.Matrix3.IDENTITY,
+        tangentMatrix
+      );
     }
 
     const minTexCoord = Matrix2.Cartesian2.fromElements(
@@ -125,7 +166,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     for (let i = 0; i < length; i += 3) {
       const i1 = i + 1;
       const i2 = i + 2;
-      const position = Matrix2.Cartesian3.fromArray(positions, i, scratchCartesian1);
+      const position = Matrix2.Cartesian3.fromArray(
+        positions,
+        i,
+        scratchCartesian1
+      );
 
       if (vertexFormat.st) {
         const rotatedPoint = Matrix2.Matrix3.multiplyByVector(
@@ -137,7 +182,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
           ellipsoid.cartesianToCartographic(rotatedPoint, scratchCartographic),
           scratchCartesian3
         );
-        Matrix2.Cartesian3.subtract(projectedPoint, projectedCenter, projectedPoint);
+        Matrix2.Cartesian3.subtract(
+          projectedPoint,
+          projectedCenter,
+          projectedPoint
+        );
 
         texCoordScratch.x =
           (projectedPoint.x + semiMajorAxis) / (2.0 * semiMajorAxis);
@@ -180,7 +229,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         ) {
           if (vertexFormat.tangent || vertexFormat.bitangent) {
             tangent = Matrix2.Cartesian3.normalize(
-              Matrix2.Cartesian3.cross(Matrix2.Cartesian3.UNIT_Z, normal, tangent),
+              Matrix2.Cartesian3.cross(
+                Matrix2.Cartesian3.UNIT_Z,
+                normal,
+                tangent
+              ),
               tangent
             );
             Matrix2.Matrix3.multiplyByVector(tangentMatrix, tangent, tangent);
@@ -240,15 +293,16 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     const attributes = new GeometryAttributes.GeometryAttributes();
 
     if (vertexFormat.position) {
-      const finalPositions = EllipseGeometryLibrary.EllipseGeometryLibrary.raisePositionsToHeight(
-        positions,
-        options,
-        extrude
-      );
+      const finalPositions =
+        EllipseGeometryLibrary.EllipseGeometryLibrary.raisePositionsToHeight(
+          positions,
+          options,
+          extrude
+        );
       attributes.position = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: finalPositions,
+        values: finalPositions
       });
     }
 
@@ -256,7 +310,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       attributes.st = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 2,
-        values: textureCoordinates,
+        values: textureCoordinates
       });
     }
 
@@ -264,7 +318,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       attributes.normal = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: normals,
+        values: normals
       });
     }
 
@@ -272,7 +326,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       attributes.tangent = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: tangents,
+        values: tangents
       });
     }
 
@@ -280,7 +334,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       attributes.bitangent = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: bitangents,
+        values: bitangents
       });
     }
 
@@ -288,24 +342,30 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       attributes.extrudeDirection = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: extrudeNormals,
+        values: extrudeNormals
       });
     }
 
     if (extrude && defaultValue.defined(options.offsetAttribute)) {
       let offsetAttribute = new Uint8Array(size);
-      if (options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
+      if (
+        options.offsetAttribute ===
+        GeometryOffsetAttribute.GeometryOffsetAttribute.TOP
+      ) {
         offsetAttribute = offsetAttribute.fill(1, 0, size / 2);
       } else {
         const offsetValue =
-          options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
+          options.offsetAttribute ===
+          GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
+            ? 0
+            : 1;
         offsetAttribute = offsetAttribute.fill(offsetValue);
       }
 
       attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,
-        values: offsetAttribute,
+        values: offsetAttribute
       });
     }
 
@@ -431,20 +491,24 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       boundingSphereCenter,
       options.semiMajorAxis
     );
-    const cep = EllipseGeometryLibrary.EllipseGeometryLibrary.computeEllipsePositions(
-      options,
-      true,
-      false
-    );
+    const cep =
+      EllipseGeometryLibrary.EllipseGeometryLibrary.computeEllipsePositions(
+        options,
+        true,
+        false
+      );
     const positions = cep.positions;
     const numPts = cep.numPts;
     const attributes = computeTopBottomAttributes(positions, options, false);
     let indices = topIndices(numPts);
-    indices = IndexDatatype.IndexDatatype.createTypedArray(positions.length / 3, indices);
+    indices = IndexDatatype.IndexDatatype.createTypedArray(
+      positions.length / 3,
+      indices
+    );
     return {
       boundingSphere: boundingSphere,
       attributes: attributes,
-      indices: indices,
+      indices: indices
     };
   }
 
@@ -463,7 +527,9 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     const textureCoordinates = vertexFormat.st
       ? new Float32Array(size * 2)
       : undefined;
-    const normals = vertexFormat.normal ? new Float32Array(size * 3) : undefined;
+    const normals = vertexFormat.normal
+      ? new Float32Array(size * 3)
+      : undefined;
     const tangents = vertexFormat.tangent
       ? new Float32Array(size * 3)
       : undefined;
@@ -472,7 +538,9 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       : undefined;
 
     const shadowVolume = options.shadowVolume;
-    const extrudeNormals = shadowVolume ? new Float32Array(size * 3) : undefined;
+    const extrudeNormals = shadowVolume
+      ? new Float32Array(size * 3)
+      : undefined;
 
     let textureCoordIndex = 0;
 
@@ -498,7 +566,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       stRotation,
       quaternionScratch
     );
-    const textureMatrix = Matrix2.Matrix3.fromQuaternion(rotation, textureMatrixScratch);
+    const textureMatrix = Matrix2.Matrix3.fromQuaternion(
+      rotation,
+      textureMatrixScratch
+    );
 
     const minTexCoord = Matrix2.Cartesian2.fromElements(
       Number.POSITIVE_INFINITY,
@@ -516,7 +587,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     for (let i = 0; i < length; i += 3) {
       const i1 = i + 1;
       const i2 = i + 2;
-      let position = Matrix2.Cartesian3.fromArray(positions, i, scratchCartesian1);
+      let position = Matrix2.Cartesian3.fromArray(
+        positions,
+        i,
+        scratchCartesian1
+      );
       let extrudedPosition;
 
       if (vertexFormat.st) {
@@ -529,7 +604,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
           ellipsoid.cartesianToCartographic(rotatedPoint, scratchCartographic),
           scratchCartesian3
         );
-        Matrix2.Cartesian3.subtract(projectedPoint, projectedCenter, projectedPoint);
+        Matrix2.Cartesian3.subtract(
+          projectedPoint,
+          projectedCenter,
+          projectedPoint
+        );
 
         texCoordScratch.x =
           (projectedPoint.x + semiMajorAxis) / (2.0 * semiMajorAxis);
@@ -542,7 +621,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         maxTexCoord.y = Math.max(texCoordScratch.y, maxTexCoord.y);
 
         textureCoordinates[textureCoordIndex + stOffset] = texCoordScratch.x;
-        textureCoordinates[textureCoordIndex + 1 + stOffset] = texCoordScratch.y;
+        textureCoordinates[textureCoordIndex + 1 + stOffset] =
+          texCoordScratch.y;
 
         textureCoordinates[textureCoordIndex++] = texCoordScratch.x;
         textureCoordinates[textureCoordIndex++] = texCoordScratch.y;
@@ -585,7 +665,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         finalPositions[i2] = position.z;
       }
 
-      if (vertexFormat.normal || vertexFormat.tangent || vertexFormat.bitangent) {
+      if (
+        vertexFormat.normal ||
+        vertexFormat.tangent ||
+        vertexFormat.bitangent
+      ) {
         bitangent = Matrix2.Cartesian3.clone(normal, bitangent);
         const next = Matrix2.Cartesian3.fromArray(
           positions,
@@ -658,7 +742,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       attributes.position = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: finalPositions,
+        values: finalPositions
       });
     }
 
@@ -666,7 +750,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       attributes.st = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 2,
-        values: textureCoordinates,
+        values: textureCoordinates
       });
     }
 
@@ -674,7 +758,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       attributes.normal = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: normals,
+        values: normals
       });
     }
 
@@ -682,7 +766,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       attributes.tangent = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: tangents,
+        values: tangents
       });
     }
 
@@ -690,7 +774,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       attributes.bitangent = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: bitangents,
+        values: bitangents
       });
     }
 
@@ -698,23 +782,29 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       attributes.extrudeDirection = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: extrudeNormals,
+        values: extrudeNormals
       });
     }
 
     if (defaultValue.defined(options.offsetAttribute)) {
       let offsetAttribute = new Uint8Array(size);
-      if (options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
+      if (
+        options.offsetAttribute ===
+        GeometryOffsetAttribute.GeometryOffsetAttribute.TOP
+      ) {
         offsetAttribute = offsetAttribute.fill(1, 0, size / 2);
       } else {
         const offsetValue =
-          options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
+          options.offsetAttribute ===
+          GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
+            ? 0
+            : 1;
         offsetAttribute = offsetAttribute.fill(offsetValue);
       }
       attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,
-        values: offsetAttribute,
+        values: offsetAttribute
       });
     }
 
@@ -723,7 +813,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
 
   function computeWallIndices(positions) {
     const length = positions.length / 3;
-    const indices = IndexDatatype.IndexDatatype.createTypedArray(length, length * 6);
+    const indices = IndexDatatype.IndexDatatype.createTypedArray(
+      length,
+      length * 6
+    );
     let index = 0;
     for (let i = 0; i < length; i++) {
       const UL = i;
@@ -772,11 +865,12 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     );
     bottomBoundingSphere.radius = semiMajorAxis;
 
-    const cep = EllipseGeometryLibrary.EllipseGeometryLibrary.computeEllipsePositions(
-      options,
-      true,
-      true
-    );
+    const cep =
+      EllipseGeometryLibrary.EllipseGeometryLibrary.computeEllipsePositions(
+        options,
+        true,
+        true
+      );
     const positions = cep.positions;
     const numPts = cep.numPts;
     const outerPositions = cep.outerPositions;
@@ -807,7 +901,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     const topBottomGeo = new GeometryAttribute.Geometry({
       attributes: topBottomAttributes,
       indices: topBottomIndices,
-      primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES,
+      primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES
     });
 
     const wallAttributes = computeWallAttributes(outerPositions, options);
@@ -820,22 +914,22 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     const wallGeo = new GeometryAttribute.Geometry({
       attributes: wallAttributes,
       indices: wallIndices,
-      primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES,
+      primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES
     });
 
     const geo = GeometryPipeline.GeometryPipeline.combineInstances([
       new GeometryInstance.GeometryInstance({
-        geometry: topBottomGeo,
+        geometry: topBottomGeo
       }),
       new GeometryInstance.GeometryInstance({
-        geometry: wallGeo,
-      }),
+        geometry: wallGeo
+      })
     ]);
 
     return {
       boundingSphere: boundingSphere,
       attributes: geo[0].attributes,
-      indices: geo[0].indices,
+      indices: geo[0].indices
     };
   }
 
@@ -848,34 +942,41 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     ellipsoid,
     result
   ) {
-    const cep = EllipseGeometryLibrary.EllipseGeometryLibrary.computeEllipsePositions(
-      {
-        center: center,
-        semiMajorAxis: semiMajorAxis,
-        semiMinorAxis: semiMinorAxis,
-        rotation: rotation,
-        granularity: granularity,
-      },
-      false,
-      true
-    );
+    const cep =
+      EllipseGeometryLibrary.EllipseGeometryLibrary.computeEllipsePositions(
+        {
+          center: center,
+          semiMajorAxis: semiMajorAxis,
+          semiMinorAxis: semiMinorAxis,
+          rotation: rotation,
+          granularity: granularity
+        },
+        false,
+        true
+      );
     const positionsFlat = cep.outerPositions;
     const positionsCount = positionsFlat.length / 3;
     const positions = new Array(positionsCount);
     for (let i = 0; i < positionsCount; ++i) {
       positions[i] = Matrix2.Cartesian3.fromArray(positionsFlat, i * 3);
     }
-    const rectangle = Matrix2.Rectangle.fromCartesianArray(positions, ellipsoid, result);
+    const rectangle = Matrix2.Rectangle.fromCartesianArray(
+      positions,
+      ellipsoid,
+      result
+    );
     // Rectangle width goes beyond 180 degrees when the ellipse crosses a pole.
     // When this happens, make the rectangle into a "circle" around the pole
     if (rectangle.width > ComponentDatatype.CesiumMath.PI) {
       rectangle.north =
         rectangle.north > 0.0
-          ? ComponentDatatype.CesiumMath.PI_OVER_TWO - ComponentDatatype.CesiumMath.EPSILON7
+          ? ComponentDatatype.CesiumMath.PI_OVER_TWO -
+            ComponentDatatype.CesiumMath.EPSILON7
           : rectangle.north;
       rectangle.south =
         rectangle.south < 0.0
-          ? ComponentDatatype.CesiumMath.EPSILON7 - ComponentDatatype.CesiumMath.PI_OVER_TWO
+          ? ComponentDatatype.CesiumMath.EPSILON7 -
+            ComponentDatatype.CesiumMath.PI_OVER_TWO
           : rectangle.south;
       rectangle.east = ComponentDatatype.CesiumMath.PI;
       rectangle.west = -ComponentDatatype.CesiumMath.PI;
@@ -919,34 +1020,48 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * @see EllipseGeometry.createGeometry
    */
   function EllipseGeometry(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     const center = options.center;
-    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    const ellipsoid = defaultValue.defaultValue(
+      options.ellipsoid,
+      Matrix2.Ellipsoid.WGS84
+    );
     const semiMajorAxis = options.semiMajorAxis;
     const semiMinorAxis = options.semiMinorAxis;
     const granularity = defaultValue.defaultValue(
       options.granularity,
       ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
     );
-    const vertexFormat = defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
+    const vertexFormat = defaultValue.defaultValue(
+      options.vertexFormat,
+      VertexFormat.VertexFormat.DEFAULT
+    );
 
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("options.center", center);
-    RuntimeError.Check.typeOf.number("options.semiMajorAxis", semiMajorAxis);
-    RuntimeError.Check.typeOf.number("options.semiMinorAxis", semiMinorAxis);
+    RuntimeError.Check.defined('options.center', center);
+    RuntimeError.Check.typeOf.number('options.semiMajorAxis', semiMajorAxis);
+    RuntimeError.Check.typeOf.number('options.semiMinorAxis', semiMinorAxis);
     if (semiMajorAxis < semiMinorAxis) {
       throw new RuntimeError.DeveloperError(
-        "semiMajorAxis must be greater than or equal to the semiMinorAxis."
+        'semiMajorAxis must be greater than or equal to the semiMinorAxis.'
       );
     }
     if (granularity <= 0.0) {
-      throw new RuntimeError.DeveloperError("granularity must be greater than zero.");
+      throw new RuntimeError.DeveloperError(
+        'granularity must be greater than zero.'
+      );
     }
     //>>includeEnd('debug');
 
     const height = defaultValue.defaultValue(options.height, 0.0);
-    const extrudedHeight = defaultValue.defaultValue(options.extrudedHeight, height);
+    const extrudedHeight = defaultValue.defaultValue(
+      options.extrudedHeight,
+      height
+    );
 
     this._center = Matrix2.Cartesian3.clone(center);
     this._semiMajorAxis = semiMajorAxis;
@@ -959,7 +1074,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     this._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat);
     this._extrudedHeight = Math.min(extrudedHeight, height);
     this._shadowVolume = defaultValue.defaultValue(options.shadowVolume, false);
-    this._workerName = "createEllipseGeometry";
+    this._workerName = 'createEllipseGeometry';
     this._offsetAttribute = options.offsetAttribute;
 
     this._rectangle = undefined;
@@ -987,8 +1102,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    */
   EllipseGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -1010,7 +1125,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     array[startingIndex++] = value._granularity;
     array[startingIndex++] = value._extrudedHeight;
     array[startingIndex++] = value._shadowVolume ? 1.0 : 0.0;
-    array[startingIndex] = defaultValue.defaultValue(value._offsetAttribute, -1);
+    array[startingIndex] = defaultValue.defaultValue(
+      value._offsetAttribute,
+      -1
+    );
 
     return array;
   };
@@ -1030,7 +1148,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     granularity: undefined,
     extrudedHeight: undefined,
     shadowVolume: undefined,
-    offsetAttribute: undefined,
+    offsetAttribute: undefined
   };
 
   /**
@@ -1043,15 +1161,23 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    */
   EllipseGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
-    const center = Matrix2.Cartesian3.unpack(array, startingIndex, scratchCenter);
+    const center = Matrix2.Cartesian3.unpack(
+      array,
+      startingIndex,
+      scratchCenter
+    );
     startingIndex += Matrix2.Cartesian3.packedLength;
 
-    const ellipsoid = Matrix2.Ellipsoid.unpack(array, startingIndex, scratchEllipsoid);
+    const ellipsoid = Matrix2.Ellipsoid.unpack(
+      array,
+      startingIndex,
+      scratchEllipsoid
+    );
     startingIndex += Matrix2.Ellipsoid.packedLength;
 
     const vertexFormat = VertexFormat.VertexFormat.unpack(
@@ -1088,7 +1214,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
 
     result._center = Matrix2.Cartesian3.clone(center, result._center);
     result._ellipsoid = Matrix2.Ellipsoid.clone(ellipsoid, result._ellipsoid);
-    result._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat, result._vertexFormat);
+    result._vertexFormat = VertexFormat.VertexFormat.clone(
+      vertexFormat,
+      result._vertexFormat
+    );
     result._semiMajorAxis = semiMajorAxis;
     result._semiMinorAxis = semiMinorAxis;
     result._rotation = rotation;
@@ -1118,10 +1247,16 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * @returns {Rectangle} The result rectangle
    */
   EllipseGeometry.computeRectangle = function (options, result) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     const center = options.center;
-    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    const ellipsoid = defaultValue.defaultValue(
+      options.ellipsoid,
+      Matrix2.Ellipsoid.WGS84
+    );
     const semiMajorAxis = options.semiMajorAxis;
     const semiMinorAxis = options.semiMinorAxis;
     const granularity = defaultValue.defaultValue(
@@ -1131,16 +1266,18 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     const rotation = defaultValue.defaultValue(options.rotation, 0.0);
 
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("options.center", center);
-    RuntimeError.Check.typeOf.number("options.semiMajorAxis", semiMajorAxis);
-    RuntimeError.Check.typeOf.number("options.semiMinorAxis", semiMinorAxis);
+    RuntimeError.Check.defined('options.center', center);
+    RuntimeError.Check.typeOf.number('options.semiMajorAxis', semiMajorAxis);
+    RuntimeError.Check.typeOf.number('options.semiMinorAxis', semiMinorAxis);
     if (semiMajorAxis < semiMinorAxis) {
       throw new RuntimeError.DeveloperError(
-        "semiMajorAxis must be greater than or equal to the semiMinorAxis."
+        'semiMajorAxis must be greater than or equal to the semiMinorAxis.'
       );
     }
     if (granularity <= 0.0) {
-      throw new RuntimeError.DeveloperError("granularity must be greater than zero.");
+      throw new RuntimeError.DeveloperError(
+        'granularity must be greater than zero.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -1191,7 +1328,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       height: height,
       granularity: ellipseGeometry._granularity,
       vertexFormat: ellipseGeometry._vertexFormat,
-      stRotation: ellipseGeometry._stRotation,
+      stRotation: ellipseGeometry._stRotation
     };
     let geometry;
     if (extrude) {
@@ -1205,15 +1342,18 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       if (defaultValue.defined(ellipseGeometry._offsetAttribute)) {
         const length = geometry.attributes.position.values.length;
         const offsetValue =
-          ellipseGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
+          ellipseGeometry._offsetAttribute ===
+          GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
             ? 0
             : 1;
         const applyOffset = new Uint8Array(length / 3).fill(offsetValue);
-        geometry.attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
-          componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
-          componentsPerAttribute: 1,
-          values: applyOffset,
-        });
+        geometry.attributes.applyOffset =
+          new GeometryAttribute.GeometryAttribute({
+            componentDatatype:
+              ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
+            componentsPerAttribute: 1,
+            values: applyOffset
+          });
       }
     }
 
@@ -1222,7 +1362,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       indices: geometry.indices,
       primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES,
       boundingSphere: geometry.boundingSphere,
-      offsetAttribute: ellipseGeometry._offsetAttribute,
+      offsetAttribute: ellipseGeometry._offsetAttribute
     });
   };
 
@@ -1251,7 +1391,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       extrudedHeight: minHeight,
       height: maxHeight,
       vertexFormat: VertexFormat.VertexFormat.POSITION_ONLY,
-      shadowVolume: true,
+      shadowVolume: true
     });
   };
 
@@ -1261,17 +1401,18 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       return [0, 0, 0, 1, 1, 0];
     }
 
-    const cep = EllipseGeometryLibrary.EllipseGeometryLibrary.computeEllipsePositions(
-      {
-        center: ellipseGeometry._center,
-        semiMajorAxis: ellipseGeometry._semiMajorAxis,
-        semiMinorAxis: ellipseGeometry._semiMinorAxis,
-        rotation: ellipseGeometry._rotation,
-        granularity: ellipseGeometry._granularity,
-      },
-      false,
-      true
-    );
+    const cep =
+      EllipseGeometryLibrary.EllipseGeometryLibrary.computeEllipsePositions(
+        {
+          center: ellipseGeometry._center,
+          semiMajorAxis: ellipseGeometry._semiMajorAxis,
+          semiMinorAxis: ellipseGeometry._semiMinorAxis,
+          rotation: ellipseGeometry._rotation,
+          granularity: ellipseGeometry._granularity
+        },
+        false,
+        true
+      );
     const positionsFlat = cep.outerPositions;
     const positionsCount = positionsFlat.length / 3;
     const positions = new Array(positionsCount);
@@ -1306,7 +1447,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
           );
         }
         return this._rectangle;
-      },
+      }
     },
     /**
      * For remapping texture coordinates when rendering EllipseGeometries as GroundPrimitives.
@@ -1315,16 +1456,14 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     textureCoordinateRotationPoints: {
       get: function () {
         if (!defaultValue.defined(this._textureCoordinateRotationPoints)) {
-          this._textureCoordinateRotationPoints = textureCoordinateRotationPoints(
-            this
-          );
+          this._textureCoordinateRotationPoints =
+            textureCoordinateRotationPoints(this);
         }
         return this._textureCoordinateRotationPoints;
-      },
-    },
+      }
+    }
   });
 
   exports.EllipseGeometry = EllipseGeometry;
-
-}));
+});
 //# sourceMappingURL=EllipseGeometry-83f433c5.js.map

@@ -1,28 +1,28 @@
-import ApproximateTerrainHeights from "./ApproximateTerrainHeights.js";
-import ArcType from "./ArcType.js";
-import arrayRemoveDuplicates from "./arrayRemoveDuplicates.js";
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import EllipsoidGeodesic from "./EllipsoidGeodesic.js";
-import EllipsoidRhumbLine from "./EllipsoidRhumbLine.js";
-import EncodedCartesian3 from "./EncodedCartesian3.js";
-import GeographicProjection from "./GeographicProjection.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import IntersectionTests from "./IntersectionTests.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
-import Plane from "./Plane.js";
-import Quaternion from "./Quaternion.js";
-import Rectangle from "./Rectangle.js";
-import WebMercatorProjection from "./WebMercatorProjection.js";
+import ApproximateTerrainHeights from './ApproximateTerrainHeights.js';
+import ArcType from './ArcType.js';
+import arrayRemoveDuplicates from './arrayRemoveDuplicates.js';
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import EllipsoidGeodesic from './EllipsoidGeodesic.js';
+import EllipsoidRhumbLine from './EllipsoidRhumbLine.js';
+import EncodedCartesian3 from './EncodedCartesian3.js';
+import GeographicProjection from './GeographicProjection.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import IntersectionTests from './IntersectionTests.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
+import Plane from './Plane.js';
+import Quaternion from './Quaternion.js';
+import Rectangle from './Rectangle.js';
+import WebMercatorProjection from './WebMercatorProjection.js';
 
 const PROJECTIONS = [GeographicProjection, WebMercatorProjection];
 const PROJECTION_COUNT = PROJECTIONS.length;
@@ -77,7 +77,7 @@ function GroundPolylineGeometry(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(positions) || positions.length < 2) {
-    throw new DeveloperError("At least two positions are required.");
+    throw new DeveloperError('At least two positions are required.');
   }
   if (
     defined(options.arcType) &&
@@ -85,7 +85,7 @@ function GroundPolylineGeometry(options) {
     options.arcType !== ArcType.RHUMB
   ) {
     throw new DeveloperError(
-      "Valid options for arcType are ArcType.GEODESIC and ArcType.RHUMB."
+      'Valid options for arcType are ArcType.GEODESIC and ArcType.RHUMB.'
     );
   }
   //>>includeEnd('debug');
@@ -125,7 +125,7 @@ function GroundPolylineGeometry(options) {
 
   // MapProjections can't be packed, so store the index to a known MapProjection.
   this._projectionIndex = 0;
-  this._workerName = "createGroundPolylineGeometry";
+  this._workerName = 'createGroundPolylineGeometry';
 
   // Used by GroundPolylinePrimitive to signal worker that scenemode is 3D only.
   this._scene3DOnly = false;
@@ -151,8 +151,8 @@ Object.defineProperties(GroundPolylineGeometry.prototype, {
         1.0 +
         1.0
       );
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -242,10 +242,11 @@ function interpolateSegment(
   const pointsToAdd = segments - 1;
   let packIndex = normalsArray.length;
   for (let i = 0; i < pointsToAdd; i++) {
-    const interpolatedCartographic = ellipsoidLine.interpolateUsingSurfaceDistance(
-      distanceFromStart,
-      interpolatedCartographicScratch
-    );
+    const interpolatedCartographic =
+      ellipsoidLine.interpolateUsingSurfaceDistance(
+        distanceFromStart,
+        interpolatedCartographicScratch
+      );
     const interpolatedBottom = getPosition(
       ellipsoid,
       interpolatedCartographic,
@@ -292,8 +293,8 @@ function getPosition(ellipsoid, cartographic, height, result) {
  */
 GroundPolylineGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   let index = defaultValue(startingIndex, 0);
@@ -331,7 +332,7 @@ GroundPolylineGeometry.pack = function (value, array, startingIndex) {
  */
 GroundPolylineGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   let index = defaultValue(startingIndex, 0);
@@ -355,7 +356,7 @@ GroundPolylineGeometry.unpack = function (array, startingIndex, result) {
 
   if (!defined(result)) {
     result = new GroundPolylineGeometry({
-      positions: positions,
+      positions: positions
     });
   }
 
@@ -977,7 +978,7 @@ const segmentEndNormalScratch = new Cartesian3();
 
 const getHeightCartographics = [
   startCartographicScratch,
-  endCartographicScratch,
+  endCartographicScratch
 ];
 const getHeightRectangleScratch = new Rectangle();
 
@@ -1044,7 +1045,7 @@ const REFERENCE_INDICES = [
   2,
   3,
   7,
-  6, // top
+  6 // top
 ];
 const REFERENCE_INDICES_LENGTH = REFERENCE_INDICES.length;
 
@@ -1428,9 +1429,8 @@ function generateGeometryAttributes(
       if (texcoordNormalization === 0.0 && topBottomSide < 0.0) {
         texcoordNormalization = 9.0; // some value greater than 1.0
       }
-      rightNormalAndTextureCoordinateNormalizationY[
-        wIndex
-      ] = texcoordNormalization;
+      rightNormalAndTextureCoordinateNormalizationY[wIndex] =
+        texcoordNormalization;
 
       // 2D
       if (compute2dAttributes) {
@@ -1595,7 +1595,7 @@ function generateGeometryAttributes(
       componentDatatype: ComponentDatatype.DOUBLE,
       componentsPerAttribute: 3,
       normalize: false,
-      values: positionsArray,
+      values: positionsArray
     }),
     startHiAndForwardOffsetX: getVec4GeometryAttribute(
       startHiAndForwardOffsetX
@@ -1611,7 +1611,7 @@ function generateGeometryAttributes(
     ),
     rightNormalAndTextureCoordinateNormalizationY: getVec4GeometryAttribute(
       rightNormalAndTextureCoordinateNormalizationY
-    ),
+    )
   };
 
   if (compute2dAttributes) {
@@ -1622,14 +1622,14 @@ function generateGeometryAttributes(
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 2,
       normalize: false,
-      values: texcoordNormalization2D,
+      values: texcoordNormalization2D
     });
   }
 
   return new Geometry({
     attributes: attributes,
     indices: indices,
-    boundingSphere: boundingSphere,
+    boundingSphere: boundingSphere
   });
 }
 
@@ -1638,7 +1638,7 @@ function getVec4GeometryAttribute(typedArray) {
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: 4,
     normalize: false,
-    values: typedArray,
+    values: typedArray
   });
 }
 

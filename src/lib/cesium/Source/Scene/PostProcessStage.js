@@ -1,24 +1,24 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import combine from "../Core/combine.js";
-import createGuid from "../Core/createGuid.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import Resource from "../Core/Resource.js";
-import PassState from "../Renderer/PassState.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import RenderState from "../Renderer/RenderState.js";
-import Sampler from "../Renderer/Sampler.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import Texture from "../Renderer/Texture.js";
-import TextureMagnificationFilter from "../Renderer/TextureMagnificationFilter.js";
-import TextureMinificationFilter from "../Renderer/TextureMinificationFilter.js";
-import TextureWrap from "../Renderer/TextureWrap.js";
-import PostProcessStageSampleMode from "./PostProcessStageSampleMode.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import combine from '../Core/combine.js';
+import createGuid from '../Core/createGuid.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import Resource from '../Core/Resource.js';
+import PassState from '../Renderer/PassState.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import RenderState from '../Renderer/RenderState.js';
+import Sampler from '../Renderer/Sampler.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import Texture from '../Renderer/Texture.js';
+import TextureMagnificationFilter from '../Renderer/TextureMagnificationFilter.js';
+import TextureMinificationFilter from '../Renderer/TextureMinificationFilter.js';
+import TextureWrap from '../Renderer/TextureWrap.js';
+import PostProcessStageSampleMode from './PostProcessStageSampleMode.js';
 
 /**
  * Runs a post-process stage on either the texture rendered by the scene or the output of a previous post-process stage.
@@ -98,15 +98,15 @@ function PostProcessStage(options) {
   const pixelFormat = defaultValue(options.pixelFormat, PixelFormat.RGBA);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("options.fragmentShader", fragmentShader);
-  Check.typeOf.number.greaterThan("options.textureScale", textureScale, 0.0);
+  Check.typeOf.string('options.fragmentShader', fragmentShader);
+  Check.typeOf.number.greaterThan('options.textureScale', textureScale, 0.0);
   Check.typeOf.number.lessThanOrEquals(
-    "options.textureScale",
+    'options.textureScale',
     textureScale,
     1.0
   );
   if (!PixelFormat.isColorFormat(pixelFormat)) {
-    throw new DeveloperError("options.pixelFormat must be a color format.");
+    throw new DeveloperError('options.pixelFormat must be a color format.');
   }
   //>>includeEnd('debug');
 
@@ -143,7 +143,7 @@ function PostProcessStage(options) {
     enabled: true,
     rectangle: defined(options.scissorRectangle)
       ? BoundingRectangle.clone(options.scissorRectangle)
-      : new BoundingRectangle(),
+      : new BoundingRectangle()
   };
   this._passState = passState;
 
@@ -195,7 +195,7 @@ Object.defineProperties(PostProcessStage.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
   /**
    * The unique name of this post-process stage for reference by other stages in a {@link PostProcessStageComposite}.
@@ -207,7 +207,7 @@ Object.defineProperties(PostProcessStage.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
   /**
    * The fragment shader to use when execute this post-process stage.
@@ -227,7 +227,7 @@ Object.defineProperties(PostProcessStage.prototype, {
   fragmentShader: {
     get: function () {
       return this._fragmentShader;
-    },
+    }
   },
   /**
    * An object whose properties are used to set the uniforms of the fragment shader.
@@ -250,7 +250,7 @@ Object.defineProperties(PostProcessStage.prototype, {
   uniforms: {
     get: function () {
       return this._uniforms;
-    },
+    }
   },
   /**
    * A number in the range (0.0, 1.0] used to scale the output texture dimensions. A scale of 1.0 will render this post-process stage to a texture the size of the viewport.
@@ -262,7 +262,7 @@ Object.defineProperties(PostProcessStage.prototype, {
   textureScale: {
     get: function () {
       return this._textureScale;
-    },
+    }
   },
   /**
    * Whether or not to force the output texture dimensions to be both equal powers of two. The power of two will be the next power of two of the minimum of the dimensions.
@@ -274,7 +274,7 @@ Object.defineProperties(PostProcessStage.prototype, {
   forcePowerOfTwo: {
     get: function () {
       return this._forcePowerOfTwo;
-    },
+    }
   },
   /**
    * How to sample the input color texture.
@@ -286,7 +286,7 @@ Object.defineProperties(PostProcessStage.prototype, {
   sampleMode: {
     get: function () {
       return this._sampleMode;
-    },
+    }
   },
   /**
    * The color pixel format of the output texture.
@@ -298,7 +298,7 @@ Object.defineProperties(PostProcessStage.prototype, {
   pixelFormat: {
     get: function () {
       return this._pixelFormat;
-    },
+    }
   },
   /**
    * The pixel data type of the output texture.
@@ -310,7 +310,7 @@ Object.defineProperties(PostProcessStage.prototype, {
   pixelDatatype: {
     get: function () {
       return this._pixelDatatype;
-    },
+    }
   },
   /**
    * The color to clear the output texture to.
@@ -322,7 +322,7 @@ Object.defineProperties(PostProcessStage.prototype, {
   clearColor: {
     get: function () {
       return this._clearColor;
-    },
+    }
   },
   /**
    * The {@link BoundingRectangle} to use for the scissor test. A default bounding rectangle will disable the scissor test.
@@ -334,7 +334,7 @@ Object.defineProperties(PostProcessStage.prototype, {
   scissorRectangle: {
     get: function () {
       return this._passState.scissorTest.rectangle;
-    },
+    }
   },
   /**
    * A reference to the texture written to when executing this post process stage.
@@ -353,7 +353,7 @@ Object.defineProperties(PostProcessStage.prototype, {
         }
       }
       return undefined;
-    },
+    }
   },
   /**
    * The features selected for applying the post-process.
@@ -378,7 +378,7 @@ Object.defineProperties(PostProcessStage.prototype, {
     },
     set: function (value) {
       this._selected = value;
-    },
+    }
   },
   /**
    * @private
@@ -389,8 +389,8 @@ Object.defineProperties(PostProcessStage.prototype, {
     },
     set: function (value) {
       this._parentSelected = value;
-    },
-  },
+    }
+  }
 });
 
 const depthTextureRegex = /uniform\s+sampler2D\s+depthTexture/g;
@@ -405,7 +405,7 @@ PostProcessStage.prototype._isSupported = function (context) {
 function getUniformValueGetterAndSetter(stage, uniforms, name) {
   const currentValue = uniforms[name];
   if (
-    typeof currentValue === "string" ||
+    typeof currentValue === 'string' ||
     currentValue instanceof HTMLCanvasElement ||
     currentValue instanceof HTMLImageElement ||
     currentValue instanceof HTMLVideoElement ||
@@ -440,7 +440,7 @@ function getUniformValueGetterAndSetter(stage, uniforms, name) {
       }
 
       if (
-        typeof value === "string" ||
+        typeof value === 'string' ||
         value instanceof HTMLCanvasElement ||
         value instanceof HTMLImageElement ||
         value instanceof HTMLVideoElement ||
@@ -450,14 +450,14 @@ function getUniformValueGetterAndSetter(stage, uniforms, name) {
       } else {
         actualUniforms[name] = value;
       }
-    },
+    }
   };
 }
 
 function getUniformMapFunction(stage, name) {
   return function () {
     const value = stage._actualUniforms[name];
-    if (typeof value === "function") {
+    if (typeof value === 'function') {
       return value();
     }
     return value;
@@ -485,7 +485,7 @@ function createUniformMap(stage) {
   const actualUniforms = stage._actualUniforms;
   for (const name in uniforms) {
     if (uniforms.hasOwnProperty(name)) {
-      if (typeof uniforms[name] !== "function") {
+      if (typeof uniforms[name] !== 'function') {
         uniformMap[name] = getUniformMapFunction(stage, name);
         newUniforms[name] = getUniformValueGetterAndSetter(
           stage,
@@ -501,7 +501,7 @@ function createUniformMap(stage) {
 
       const value = uniformMap[name]();
       if (
-        typeof value === "string" ||
+        typeof value === 'string' ||
         value instanceof Texture ||
         value instanceof HTMLImageElement ||
         value instanceof HTMLCanvasElement ||
@@ -539,7 +539,7 @@ function createUniformMap(stage) {
     },
     czm_selectedIdTextureStep: function () {
       return 1.0 / stage._selectedIdTexture.width;
-    },
+    }
   });
 }
 
@@ -556,19 +556,19 @@ function createDrawCommand(stage, context) {
   if (defined(stage._selectedIdTexture)) {
     const width = stage._selectedIdTexture.width;
 
-    fs = fs.replace(/varying\s+vec2\s+v_textureCoordinates;/g, "");
+    fs = fs.replace(/varying\s+vec2\s+v_textureCoordinates;/g, '');
     fs =
       `${
-        "#define CZM_SELECTED_FEATURE \n" +
-        "uniform sampler2D czm_idTexture; \n" +
-        "uniform sampler2D czm_selectedIdTexture; \n" +
-        "uniform float czm_selectedIdTextureStep; \n" +
-        "varying vec2 v_textureCoordinates; \n" +
-        "bool czm_selected(vec2 offset) \n" +
-        "{ \n" +
-        "    bool selected = false;\n" +
-        "    vec4 id = texture2D(czm_idTexture, v_textureCoordinates + offset); \n" +
-        "    for (int i = 0; i < "
+        '#define CZM_SELECTED_FEATURE \n' +
+        'uniform sampler2D czm_idTexture; \n' +
+        'uniform sampler2D czm_selectedIdTexture; \n' +
+        'uniform float czm_selectedIdTextureStep; \n' +
+        'varying vec2 v_textureCoordinates; \n' +
+        'bool czm_selected(vec2 offset) \n' +
+        '{ \n' +
+        '    bool selected = false;\n' +
+        '    vec4 id = texture2D(czm_idTexture, v_textureCoordinates + offset); \n' +
+        '    for (int i = 0; i < '
       }${width}; ++i) \n` +
       `    { \n` +
       `        vec4 selectedId = texture2D(czm_selectedIdTexture, vec2((float(i) + 0.5) * czm_selectedIdTextureStep, 0.5)); \n` +
@@ -586,12 +586,12 @@ function createDrawCommand(stage, context) {
   }
 
   const fragmentShader = new ShaderSource({
-    defines: [stage._useLogDepth ? "LOG_DEPTH" : ""],
-    sources: [fs],
+    defines: [stage._useLogDepth ? 'LOG_DEPTH' : ''],
+    sources: [fs]
   });
   stage._command = context.createViewportQuadCommand(fragmentShader, {
     uniformMap: stage._uniformMap,
-    owner: stage,
+    owner: stage
   });
 }
 
@@ -619,7 +619,7 @@ function createSampler(stage) {
       wrapS: TextureWrap.CLAMP_TO_EDGE,
       wrapT: TextureWrap.CLAMP_TO_EDGE,
       minificationFilter: minFilter,
-      magnificationFilter: magFilter,
+      magnificationFilter: magFilter
     });
   }
 }
@@ -628,7 +628,7 @@ function createLoadImageFunction(stage, name) {
   return function (image) {
     stage._texturesToCreate.push({
       name: name,
-      source: image,
+      source: image
     });
   };
 }
@@ -660,7 +660,7 @@ function updateUniformTextures(stage, context) {
     const source = textureToCreate.source;
     stage._actualUniforms[name] = new Texture({
       context: context,
-      source: source,
+      source: source
     });
   }
   texturesToCreate.length = 0;
@@ -681,17 +681,16 @@ function updateUniformTextures(stage, context) {
   for (i = 0; i < length; ++i) {
     name = dirtyUniforms[i];
     const stageNameUrlOrImage = uniforms[name];
-    const stageWithName = stage._textureCache.getStageByName(
-      stageNameUrlOrImage
-    );
+    const stageWithName =
+      stage._textureCache.getStageByName(stageNameUrlOrImage);
     if (defined(stageWithName)) {
       stage._actualUniforms[name] = createStageOutputTextureFunction(
         stage,
         stageNameUrlOrImage
       );
-    } else if (typeof stageNameUrlOrImage === "string") {
+    } else if (typeof stageNameUrlOrImage === 'string') {
       const resource = new Resource({
-        url: stageNameUrlOrImage,
+        url: stageNameUrlOrImage
       });
 
       promises.push(
@@ -700,7 +699,7 @@ function updateUniformTextures(stage, context) {
     } else {
       stage._texturesToCreate.push({
         name: name,
-        source: stageNameUrlOrImage,
+        source: stageNameUrlOrImage
       });
     }
   }
@@ -826,9 +825,9 @@ function createSelectedTexture(stage, context) {
       source: {
         arrayBufferView: empty,
         width: 1,
-        height: 1,
+        height: 1
       },
-      sampler: Sampler.NEAREST,
+      sampler: Sampler.NEAREST
     });
     return;
   }
@@ -866,9 +865,9 @@ function createSelectedTexture(stage, context) {
     source: {
       arrayBufferView: ids,
       width: textureLength,
-      height: 1,
+      height: 1
     },
-    sampler: Sampler.NEAREST,
+    sampler: Sampler.NEAREST
   });
 }
 
@@ -938,7 +937,7 @@ PostProcessStage.prototype.update = function (context, useLogDepth) {
           0,
           colorTexture.width,
           colorTexture.height
-        ),
+        )
       });
     }
   }

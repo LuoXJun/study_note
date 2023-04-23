@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "/**\n\
+export default '/**\n\
  * Get default parameters for physically based rendering. These defaults\n\
  * describe a rough dielectric (non-metal) surface (e.g. rough plastic).\n\
  *\n\
@@ -15,4 +15,4 @@ czm_pbrParameters czm_defaultPbrMaterial()\n\
     results.f0 = REFLECTANCE_DIELECTRIC;\n\
     return results;\n\
 }\n\
-";
+';

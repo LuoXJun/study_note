@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "void legacyInstancingStage(\n\
+export default 'void legacyInstancingStage(\n\
     inout ProcessedAttributes attributes,\n\
     out mat4 instanceModelView,\n\
     out mat3 instanceModelViewInverseTranspose)\n\
@@ -18,4 +18,4 @@ export default "void legacyInstancingStage(\n\
     attributes.position2D = (instancingTransform2D * vec4(positionMC, 1.0)).xyz;\n\
     #endif\n\
 }\n\
-";
+';

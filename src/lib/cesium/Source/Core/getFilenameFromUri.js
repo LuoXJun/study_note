@@ -1,6 +1,6 @@
-import Uri from "../ThirdParty/Uri.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import Uri from '../ThirdParty/Uri.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Given a URI, returns the last segment of the URI, removing any path or query information.
@@ -16,14 +16,14 @@ import DeveloperError from "./DeveloperError.js";
 function getFilenameFromUri(uri) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(uri)) {
-    throw new DeveloperError("uri is required.");
+    throw new DeveloperError('uri is required.');
   }
   //>>includeEnd('debug');
 
   const uriObject = new Uri(uri);
   uriObject.normalize();
   let path = uriObject.path();
-  const index = path.lastIndexOf("/");
+  const index = path.lastIndexOf('/');
   if (index !== -1) {
     path = path.substr(index + 1);
   }

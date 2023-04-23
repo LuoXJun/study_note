@@ -1,7 +1,7 @@
-import Check from "../Core/Check.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
+import Check from '../Core/Check.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
 
 /**
  * An enum describing the x, y, and z axes and helper conversion functions.
@@ -31,7 +31,7 @@ const Axis = {
    * @type {Number}
    * @constant
    */
-  Z: 2,
+  Z: 2
 };
 
 /**
@@ -102,7 +102,7 @@ Axis.Y_UP_TO_X_UP = Matrix4.fromRotationTranslation(
  */
 Axis.fromName = function (name) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("name", name);
+  Check.typeOf.string('name', name);
   //>>includeEnd('debug');
 
   return Axis[name];

@@ -1,9 +1,9 @@
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Event from "../Core/Event.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
-import Property from "./Property.js";
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Event from '../Core/Event.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
+import Property from './Property.js';
 
 const defaultColor = Color.WHITE;
 const defaultGlowPower = 0.25;
@@ -48,7 +48,7 @@ Object.defineProperties(PolylineGlowMaterialProperty.prototype, {
       return (
         Property.isConstant(this._color) && Property.isConstant(this._glow)
       );
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -61,28 +61,28 @@ Object.defineProperties(PolylineGlowMaterialProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   /**
    * Gets or sets the Property specifying the {@link Color} of the line.
    * @memberof PolylineGlowMaterialProperty.prototype
    * @type {Property|undefined}
    */
-  color: createPropertyDescriptor("color"),
+  color: createPropertyDescriptor('color'),
 
   /**
    * Gets or sets the numeric Property specifying the strength of the glow, as a percentage of the total line width (less than 1.0).
    * @memberof PolylineGlowMaterialProperty.prototype
    * @type {Property|undefined}
    */
-  glowPower: createPropertyDescriptor("glowPower"),
+  glowPower: createPropertyDescriptor('glowPower'),
 
   /**
    * Gets or sets the numeric Property specifying the strength of the tapering effect, as a percentage of the total line length.  If 1.0 or higher, no taper effect is used.
    * @memberof PolylineGlowMaterialProperty.prototype
    * @type {Property|undefined}
    */
-  taperPower: createPropertyDescriptor("taperPower"),
+  taperPower: createPropertyDescriptor('taperPower')
 });
 
 /**
@@ -92,7 +92,7 @@ Object.defineProperties(PolylineGlowMaterialProperty.prototype, {
  * @returns {String} The type of material.
  */
 PolylineGlowMaterialProperty.prototype.getType = function (time) {
-  return "PolylineGlow";
+  return 'PolylineGlow';
 };
 
 /**

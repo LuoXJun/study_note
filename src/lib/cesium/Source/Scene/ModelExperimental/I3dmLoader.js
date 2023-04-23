@@ -1,36 +1,36 @@
-import AttributeCompression from "../../Core/AttributeCompression.js";
-import Axis from "../Axis.js";
-import Cartesian3 from "../../Core/Cartesian3.js";
-import Cesium3DTileFeatureTable from "../Cesium3DTileFeatureTable.js";
-import Check from "../../Core/Check.js";
-import ComponentDatatype from "../../Core/ComponentDatatype.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import Ellipsoid from "../../Core/Ellipsoid.js";
-import StructuralMetadata from "../StructuralMetadata.js";
-import getStringFromTypedArray from "../../Core/getStringFromTypedArray.js";
-import GltfLoader from "../GltfLoader.js";
-import I3dmParser from "../I3dmParser.js";
-import Matrix3 from "../../Core/Matrix3.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import MetadataClass from "../MetadataClass.js";
-import ModelComponents from "../ModelComponents.js";
-import parseBatchTable from "../parseBatchTable.js";
-import PropertyTable from "../PropertyTable.js";
-import Quaternion from "../../Core/Quaternion.js";
-import ResourceLoader from "../ResourceLoader.js";
-import RuntimeError from "../../Core/RuntimeError.js";
-import Transforms from "../../Core/Transforms.js";
-import InstanceAttributeSemantic from "../InstanceAttributeSemantic.js";
-import AttributeType from "../AttributeType.js";
-import BoundingSphere from "../../Core/BoundingSphere.js";
+import AttributeCompression from '../../Core/AttributeCompression.js';
+import Axis from '../Axis.js';
+import Cartesian3 from '../../Core/Cartesian3.js';
+import Cesium3DTileFeatureTable from '../Cesium3DTileFeatureTable.js';
+import Check from '../../Core/Check.js';
+import ComponentDatatype from '../../Core/ComponentDatatype.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import Ellipsoid from '../../Core/Ellipsoid.js';
+import StructuralMetadata from '../StructuralMetadata.js';
+import getStringFromTypedArray from '../../Core/getStringFromTypedArray.js';
+import GltfLoader from '../GltfLoader.js';
+import I3dmParser from '../I3dmParser.js';
+import Matrix3 from '../../Core/Matrix3.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import MetadataClass from '../MetadataClass.js';
+import ModelComponents from '../ModelComponents.js';
+import parseBatchTable from '../parseBatchTable.js';
+import PropertyTable from '../PropertyTable.js';
+import Quaternion from '../../Core/Quaternion.js';
+import ResourceLoader from '../ResourceLoader.js';
+import RuntimeError from '../../Core/RuntimeError.js';
+import Transforms from '../../Core/Transforms.js';
+import InstanceAttributeSemantic from '../InstanceAttributeSemantic.js';
+import AttributeType from '../AttributeType.js';
+import BoundingSphere from '../../Core/BoundingSphere.js';
 
 const I3dmLoaderState = {
   UNLOADED: 0,
   LOADING: 1,
   PROCESSING: 2,
   READY: 3,
-  FAILED: 4,
+  FAILED: 4
 };
 
 const Attribute = ModelComponents.Attribute;
@@ -86,8 +86,8 @@ function I3dmLoader(options) {
   );
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.i3dmResource", i3dmResource);
-  Check.typeOf.object("options.arrayBuffer", arrayBuffer);
+  Check.typeOf.object('options.i3dmResource', i3dmResource);
+  Check.typeOf.object('options.arrayBuffer', arrayBuffer);
   //>>includeEnd('debug');
 
   baseResource = defined(baseResource) ? baseResource : i3dmResource.clone();
@@ -133,7 +133,7 @@ Object.defineProperties(I3dmLoader.prototype, {
   promise: {
     get: function () {
       return this._promise;
-    },
+    }
   },
 
   /**
@@ -150,7 +150,7 @@ Object.defineProperties(I3dmLoader.prototype, {
   texturesLoadedPromise: {
     get: function () {
       return this._gltfLoader.texturesLoadedPromise;
-    },
+    }
   },
   /**
    * The cache key of the resource
@@ -164,7 +164,7 @@ Object.defineProperties(I3dmLoader.prototype, {
   cacheKey: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -180,8 +180,8 @@ Object.defineProperties(I3dmLoader.prototype, {
   components: {
     get: function () {
       return this._components;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -207,18 +207,18 @@ I3dmLoader.prototype.load = function () {
   this._featureTable = featureTable;
 
   // Get the number of instances in the i3dm.
-  const instancesLength = featureTable.getGlobalProperty("INSTANCES_LENGTH");
+  const instancesLength = featureTable.getGlobalProperty('INSTANCES_LENGTH');
   featureTable.featuresLength = instancesLength;
   if (!defined(instancesLength)) {
     throw new RuntimeError(
-      "Feature table global property: INSTANCES_LENGTH must be defined"
+      'Feature table global property: INSTANCES_LENGTH must be defined'
     );
   }
   this._instancesLength = instancesLength;
 
   // Get the RTC center, if available, and set the loader's transform.
   const rtcCenter = featureTable.getGlobalProperty(
-    "RTC_CENTER",
+    'RTC_CENTER',
     ComponentDatatype.FLOAT,
     3
   );
@@ -229,7 +229,7 @@ I3dmLoader.prototype.load = function () {
   // Save the batch table section to use for StructuralMetadata generation.
   this._batchTable = {
     json: batchTableJson,
-    binary: batchTableBinary,
+    binary: batchTableBinary
   };
 
   const loaderOptions = {
@@ -238,7 +238,7 @@ I3dmLoader.prototype.load = function () {
     releaseGltfJson: this._releaseGltfJson,
     incrementallyLoadTextures: this._incrementallyLoadTextures,
     loadAttributesAsTypedArray: this._loadAttributesAsTypedArray,
-    loadIndicesForWireframe: this._loadIndicesForWireframe,
+    loadIndicesForWireframe: this._loadIndicesForWireframe
   };
 
   if (gltfFormat === 0) {
@@ -246,9 +246,9 @@ I3dmLoader.prototype.load = function () {
 
     // We need to remove padding from the end of the model URL in case this tile was part of a composite tile.
     // This removes all white space and null characters from the end of the string.
-    gltfUrl = gltfUrl.replace(/[\s\0]+$/, "");
+    gltfUrl = gltfUrl.replace(/[\s\0]+$/, '');
     const gltfResource = this._baseResource.getDerivedResource({
-      url: gltfUrl,
+      url: gltfUrl
     });
     loaderOptions.gltfResource = gltfResource;
     loaderOptions.baseResource = gltfResource;
@@ -293,14 +293,14 @@ I3dmLoader.prototype.load = function () {
 function handleError(i3dmLoader, error) {
   i3dmLoader.unload();
   i3dmLoader._state = I3dmLoaderState.FAILED;
-  const errorMessage = "Failed to load i3dm";
+  const errorMessage = 'Failed to load i3dm';
   error = i3dmLoader.getError(errorMessage, error);
   return Promise.reject(error);
 }
 
 I3dmLoader.prototype.process = function (frameState) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("frameState", frameState);
+  Check.typeOf.object('frameState', frameState);
   //>>includeEnd('debug');
 
   if (this._state === I3dmLoaderState.LOADING) {
@@ -326,17 +326,17 @@ function createStructuralMetadata(loader, components) {
     structuralMetadata = parseBatchTable({
       count: instancesLength,
       batchTable: batchTable.json,
-      binaryBody: batchTable.binary,
+      binaryBody: batchTable.binary
     });
   } else {
     // If batch table is not defined, create a property table without any properties.
     const emptyPropertyTable = new PropertyTable({
       name: MetadataClass.BATCH_TABLE_CLASS_NAME,
-      count: instancesLength,
+      count: instancesLength
     });
     structuralMetadata = new StructuralMetadata({
       schema: {},
-      propertyTables: [emptyPropertyTable],
+      propertyTables: [emptyPropertyTable]
     });
   }
 
@@ -355,20 +355,20 @@ function createInstances(loader, components) {
   }
 
   const rtcCenter = featureTable.getGlobalProperty(
-    "RTC_CENTER",
+    'RTC_CENTER',
     ComponentDatatype.FLOAT,
     3
   );
 
-  const eastNorthUp = featureTable.getGlobalProperty("EAST_NORTH_UP");
+  const eastNorthUp = featureTable.getGlobalProperty('EAST_NORTH_UP');
   const hasRotation =
-    featureTable.hasProperty("NORMAL_UP") ||
-    featureTable.hasProperty("NORMAL_UP_OCT32P") ||
+    featureTable.hasProperty('NORMAL_UP') ||
+    featureTable.hasProperty('NORMAL_UP_OCT32P') ||
     eastNorthUp;
 
   const hasScale =
-    featureTable.hasProperty("SCALE") ||
-    featureTable.hasProperty("SCALE_NON_UNIFORM");
+    featureTable.hasProperty('SCALE') ||
+    featureTable.hasProperty('SCALE_NON_UNIFORM');
 
   const translationTypedArray = getPositions(featureTable, instancesLength);
   let rotationTypedArray;
@@ -464,7 +464,7 @@ function createInstances(loader, components) {
 
     // Get the batchId
     let batchId = featureTable.getProperty(
-      "BATCH_ID",
+      'BATCH_ID',
       ComponentDatatype.UNSIGNED_SHORT,
       1,
       i
@@ -482,7 +482,7 @@ function createInstances(loader, components) {
 
   // Create translation vertex attribute.
   const translationAttribute = new Attribute();
-  translationAttribute.name = "Instance Translation";
+  translationAttribute.name = 'Instance Translation';
   translationAttribute.semantic = InstanceAttributeSemantic.TRANSLATION;
   translationAttribute.componentDatatype = ComponentDatatype.FLOAT;
   translationAttribute.type = AttributeType.VEC3;
@@ -493,7 +493,7 @@ function createInstances(loader, components) {
   // Create rotation vertex attribute.
   if (hasRotation) {
     const rotationAttribute = new Attribute();
-    rotationAttribute.name = "Instance Rotation";
+    rotationAttribute.name = 'Instance Rotation';
     rotationAttribute.semantic = InstanceAttributeSemantic.ROTATION;
     rotationAttribute.componentDatatype = ComponentDatatype.FLOAT;
     rotationAttribute.type = AttributeType.VEC4;
@@ -505,7 +505,7 @@ function createInstances(loader, components) {
   // Create scale vertex attribute.
   if (hasScale) {
     const scaleAttribute = new Attribute();
-    scaleAttribute.name = "Instance Scale";
+    scaleAttribute.name = 'Instance Scale';
     scaleAttribute.semantic = InstanceAttributeSemantic.SCALE;
     scaleAttribute.componentDatatype = ComponentDatatype.FLOAT;
     scaleAttribute.type = AttributeType.VEC3;
@@ -516,7 +516,7 @@ function createInstances(loader, components) {
 
   // Create feature ID vertex attribute.
   const featureIdAttribute = new Attribute();
-  featureIdAttribute.name = "Instance Feature ID";
+  featureIdAttribute.name = 'Instance Feature ID';
   featureIdAttribute.setIndex = 0;
   featureIdAttribute.semantic = InstanceAttributeSemantic.FEATURE_ID;
   featureIdAttribute.componentDatatype = ComponentDatatype.FLOAT;
@@ -529,7 +529,7 @@ function createInstances(loader, components) {
   const featureIdInstanceAttribute = new FeatureIdAttribute();
   featureIdInstanceAttribute.propertyTableId = 0;
   featureIdInstanceAttribute.setIndex = 0;
-  featureIdInstanceAttribute.positionalLabel = "instanceFeatureId_0";
+  featureIdInstanceAttribute.positionalLabel = 'instanceFeatureId_0';
   instances.featureIds.push(featureIdInstanceAttribute);
 
   // Apply instancing to every node that has at least one primitive.
@@ -548,40 +548,40 @@ function createInstances(loader, components) {
  * @private
  */
 function getPositions(featureTable, instancesLength) {
-  if (featureTable.hasProperty("POSITION")) {
+  if (featureTable.hasProperty('POSITION')) {
     // Handle positions.
     return featureTable.getPropertyArray(
-      "POSITION",
+      'POSITION',
       ComponentDatatype.FLOAT,
       3
     );
-  } else if (featureTable.hasProperty("POSITION_QUANTIZED")) {
+  } else if (featureTable.hasProperty('POSITION_QUANTIZED')) {
     // Handle quantized positions.
     const quantizedPositions = featureTable.getPropertyArray(
-      "POSITION_QUANTIZED",
+      'POSITION_QUANTIZED',
       ComponentDatatype.UNSIGNED_SHORT,
       3
     );
 
     const quantizedVolumeOffset = featureTable.getGlobalProperty(
-      "QUANTIZED_VOLUME_OFFSET",
+      'QUANTIZED_VOLUME_OFFSET',
       ComponentDatatype.FLOAT,
       3
     );
     if (!defined(quantizedVolumeOffset)) {
       throw new RuntimeError(
-        "Global property: QUANTIZED_VOLUME_OFFSET must be defined for quantized positions."
+        'Global property: QUANTIZED_VOLUME_OFFSET must be defined for quantized positions.'
       );
     }
 
     const quantizedVolumeScale = featureTable.getGlobalProperty(
-      "QUANTIZED_VOLUME_SCALE",
+      'QUANTIZED_VOLUME_SCALE',
       ComponentDatatype.FLOAT,
       3
     );
     if (!defined(quantizedVolumeScale)) {
       throw new RuntimeError(
-        "Global property: QUANTIZED_VOLUME_SCALE must be defined for quantized positions."
+        'Global property: QUANTIZED_VOLUME_SCALE must be defined for quantized positions.'
       );
     }
 
@@ -599,7 +599,7 @@ function getPositions(featureTable, instancesLength) {
     // eslint-disable-next-line no-else-return
   } else {
     throw new RuntimeError(
-      "Either POSITION or POSITION_QUANTIZED must be defined for each instance."
+      'Either POSITION or POSITION_QUANTIZED must be defined for each instance.'
     );
   }
 }
@@ -619,14 +619,14 @@ function processRotation(
 ) {
   // Get the instance rotation
   const normalUp = featureTable.getProperty(
-    "NORMAL_UP",
+    'NORMAL_UP',
     ComponentDatatype.FLOAT,
     3,
     i,
     propertyScratch1
   );
   const normalRight = featureTable.getProperty(
-    "NORMAL_RIGHT",
+    'NORMAL_RIGHT',
     ComponentDatatype.FLOAT,
     3,
     i,
@@ -636,7 +636,7 @@ function processRotation(
   if (defined(normalUp)) {
     if (!defined(normalRight)) {
       throw new RuntimeError(
-        "To define a custom orientation, both NORMAL_UP and NORMAL_RIGHT must be defined."
+        'To define a custom orientation, both NORMAL_UP and NORMAL_RIGHT must be defined.'
       );
     }
     Cartesian3.unpack(normalUp, 0, instanceNormalUp);
@@ -644,14 +644,14 @@ function processRotation(
     hasCustomOrientation = true;
   } else {
     const octNormalUp = featureTable.getProperty(
-      "NORMAL_UP_OCT32P",
+      'NORMAL_UP_OCT32P',
       ComponentDatatype.UNSIGNED_SHORT,
       2,
       i,
       propertyScratch1
     );
     const octNormalRight = featureTable.getProperty(
-      "NORMAL_RIGHT_OCT32P",
+      'NORMAL_RIGHT_OCT32P',
       ComponentDatatype.UNSIGNED_SHORT,
       2,
       i,
@@ -660,7 +660,7 @@ function processRotation(
     if (defined(octNormalUp)) {
       if (!defined(octNormalRight)) {
         throw new RuntimeError(
-          "To define a custom orientation with oct-encoded vectors, both NORMAL_UP_OCT32P and NORMAL_RIGHT_OCT32P must be defined."
+          'To define a custom orientation with oct-encoded vectors, both NORMAL_UP_OCT32P and NORMAL_RIGHT_OCT32P must be defined.'
         );
       }
       AttributeCompression.octDecodeInRange(
@@ -714,7 +714,7 @@ function processRotation(
 function processScale(featureTable, i, instanceScale) {
   instanceScale = Cartesian3.fromElements(1.0, 1.0, 1.0, instanceScale);
   const scale = featureTable.getProperty(
-    "SCALE",
+    'SCALE',
     ComponentDatatype.FLOAT,
     1,
     i
@@ -723,7 +723,7 @@ function processScale(featureTable, i, instanceScale) {
     Cartesian3.multiplyByScalar(instanceScale, scale, instanceScale);
   }
   const nonUniformScale = featureTable.getProperty(
-    "SCALE_NON_UNIFORM",
+    'SCALE_NON_UNIFORM',
     ComponentDatatype.FLOAT,
     3,
     i,

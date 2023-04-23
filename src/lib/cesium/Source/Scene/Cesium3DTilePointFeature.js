@@ -1,10 +1,10 @@
-import Cartographic from "../Core/Cartographic.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import deprecationWarning from "../Core/deprecationWarning.js";
-import Cesium3DTileFeature from "./Cesium3DTileFeature.js";
-import createBillboardPointCallback from "./createBillboardPointCallback.js";
+import Cartographic from '../Core/Cartographic.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import deprecationWarning from '../Core/deprecationWarning.js';
+import Cesium3DTileFeature from './Cesium3DTileFeature.js';
+import createBillboardPointCallback from './createBillboardPointCallback.js';
 
 /**
  * A point feature of a {@link Cesium3DTileset}.
@@ -93,7 +93,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
       this._label.show = value;
       this._billboard.show = value;
       this._polyline.show = value;
-    },
+    }
   },
 
   /**
@@ -113,7 +113,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     set: function (value) {
       this._color = Color.clone(value, this._color);
       setBillboardImage(this);
-    },
+    }
   },
 
   /**
@@ -133,7 +133,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     set: function (value) {
       this._pointSize = value;
       setBillboardImage(this);
-    },
+    }
   },
 
   /**
@@ -153,7 +153,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     set: function (value) {
       this._pointOutlineColor = Color.clone(value, this._pointOutlineColor);
       setBillboardImage(this);
-    },
+    }
   },
 
   /**
@@ -173,7 +173,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     set: function (value) {
       this._pointOutlineWidth = value;
       setBillboardImage(this);
-    },
+    }
   },
 
   /**
@@ -193,7 +193,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     set: function (value) {
       this._label.fillColor = value;
       this._polyline.show = this._label.show && value.alpha > 0.0;
-    },
+    }
   },
 
   /**
@@ -212,7 +212,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     },
     set: function (value) {
       this._label.outlineColor = value;
-    },
+    }
   },
 
   /**
@@ -231,7 +231,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     },
     set: function (value) {
       this._label.outlineWidth = value;
-    },
+    }
   },
 
   /**
@@ -250,7 +250,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     },
     set: function (value) {
       this._label.font = value;
-    },
+    }
   },
 
   /**
@@ -269,7 +269,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     },
     set: function (value) {
       this._label.style = value;
-    },
+    }
   },
 
   /**
@@ -285,10 +285,10 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     },
     set: function (value) {
       if (!defined(value)) {
-        value = "";
+        value = '';
       }
       this._label.text = value;
-    },
+    }
   },
 
   /**
@@ -307,7 +307,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     },
     set: function (value) {
       this._label.backgroundColor = value;
-    },
+    }
   },
 
   /**
@@ -326,7 +326,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     },
     set: function (value) {
       this._label.backgroundPadding = value;
-    },
+    }
   },
 
   /**
@@ -345,7 +345,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     },
     set: function (value) {
       this._label.showBackground = value;
-    },
+    }
   },
 
   /**
@@ -362,7 +362,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     set: function (value) {
       this._label.scaleByDistance = value;
       this._billboard.scaleByDistance = value;
-    },
+    }
   },
 
   /**
@@ -379,7 +379,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     set: function (value) {
       this._label.translucencyByDistance = value;
       this._billboard.translucencyByDistance = value;
-    },
+    }
   },
 
   /**
@@ -397,7 +397,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
       this._label.distanceDisplayCondition = value;
       this._polyline.distanceDisplayCondition = value;
       this._billboard.distanceDisplayCondition = value;
-    },
+    }
   },
 
   /**
@@ -427,7 +427,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
       this._polyline.positions = [this._polyline.positions[0], newPosition];
 
       this._heightOffset = value;
-    },
+    }
   },
 
   /**
@@ -446,7 +446,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     },
     set: function (value) {
       this._polyline.show = value;
-    },
+    }
   },
 
   /**
@@ -468,7 +468,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
         value,
         this._polyline.material.uniforms.color
       );
-    },
+    }
   },
 
   /**
@@ -488,7 +488,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
       if (imageChanged) {
         setBillboardImage(this);
       }
-    },
+    }
   },
 
   /**
@@ -505,7 +505,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     set: function (value) {
       this._label.disableDepthTestDistance = value;
       this._billboard.disableDepthTestDistance = value;
-    },
+    }
   },
 
   /**
@@ -522,7 +522,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     },
     set: function (value) {
       this._billboard.horizontalOrigin = value;
-    },
+    }
   },
 
   /**
@@ -539,7 +539,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     },
     set: function (value) {
       this._billboard.verticalOrigin = value;
-    },
+    }
   },
 
   /**
@@ -556,7 +556,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     },
     set: function (value) {
       this._label.horizontalOrigin = value;
-    },
+    }
   },
 
   /**
@@ -573,7 +573,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
     },
     set: function (value) {
       this._label.verticalOrigin = value;
-    },
+    }
   },
 
   /**
@@ -589,7 +589,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
   content: {
     get: function () {
       return this._content;
-    },
+    }
   },
 
   /**
@@ -604,7 +604,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
   tileset: {
     get: function () {
       return this._content.tileset;
-    },
+    }
   },
 
   /**
@@ -620,7 +620,7 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
   primitive: {
     get: function () {
       return this._content.tileset;
-    },
+    }
   },
 
   /**
@@ -633,8 +633,8 @@ Object.defineProperties(Cesium3DTilePointFeature.prototype, {
       ids[1] = this._label.pickId;
       ids[2] = this._polyline.pickId;
       return ids;
-    },
-  },
+    }
+  }
 });
 
 Cesium3DTilePointFeature.defaultColor = Color.WHITE;
@@ -699,7 +699,7 @@ function setBillboardImage(feature) {
     cssColor,
     newPointSize,
     cssOutlineColor,
-    newOutlineWidth,
+    newOutlineWidth
   ]);
 
   b.setImage(
@@ -740,8 +740,8 @@ Cesium3DTilePointFeature.prototype.hasProperty = function (name) {
  */
 Cesium3DTilePointFeature.prototype.getPropertyNames = function (results) {
   deprecationWarning(
-    "Cesium3DTilePointFeature.getPropertyNames",
-    "Cesium3DTilePointFeature.getPropertyNames is deprecated in CesiumJS 1.95, and will be removed in 1.98. Use Cesium3DTilePointFeature.getPropertyIds instead"
+    'Cesium3DTilePointFeature.getPropertyNames',
+    'Cesium3DTilePointFeature.getPropertyNames is deprecated in CesiumJS 1.95, and will be removed in 1.98. Use Cesium3DTilePointFeature.getPropertyIds instead'
   );
   return this._content.batchTable.getPropertyIds(this._batchId, results);
 };

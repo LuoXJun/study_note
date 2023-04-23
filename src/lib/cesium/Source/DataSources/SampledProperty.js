@@ -1,12 +1,12 @@
-import binarySearch from "../Core/binarySearch.js";
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import ExtrapolationType from "../Core/ExtrapolationType.js";
-import JulianDate from "../Core/JulianDate.js";
-import LinearApproximation from "../Core/LinearApproximation.js";
+import binarySearch from '../Core/binarySearch.js';
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import ExtrapolationType from '../Core/ExtrapolationType.js';
+import JulianDate from '../Core/JulianDate.js';
+import LinearApproximation from '../Core/LinearApproximation.js';
 
 const PackableNumber = {
   packedLength: 1,
@@ -17,7 +17,7 @@ const PackableNumber = {
   unpack: function (array, startingIndex, result) {
     startingIndex = defaultValue(startingIndex, 0);
     return array[startingIndex];
-  },
+  }
 };
 
 //We can't use splice for inserting new elements because function apply can't handle
@@ -45,7 +45,7 @@ function convertDate(date, epoch) {
   if (date instanceof JulianDate) {
     return date;
   }
-  if (typeof date === "string") {
+  if (typeof date === 'string') {
     return JulianDate.fromIso8601(date);
   }
   return JulianDate.addSeconds(epoch, date, new JulianDate());
@@ -158,7 +158,7 @@ function mergeNewSamples(epoch, times, values, newData, packedLength) {
  */
 function SampledProperty(type, derivativeTypes) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("type", type);
+  Check.defined('type', type);
   //>>includeEnd('debug');
 
   let innerType = type;
@@ -227,7 +227,7 @@ Object.defineProperties(SampledProperty.prototype, {
   isConstant: {
     get: function () {
       return this._values.length === 0;
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -241,7 +241,7 @@ Object.defineProperties(SampledProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   /**
    * Gets the type of property.
@@ -251,7 +251,7 @@ Object.defineProperties(SampledProperty.prototype, {
   type: {
     get: function () {
       return this._type;
-    },
+    }
   },
   /**
    * Gets the derivative types used by this property.
@@ -261,7 +261,7 @@ Object.defineProperties(SampledProperty.prototype, {
   derivativeTypes: {
     get: function () {
       return this._derivativeTypes;
-    },
+    }
   },
   /**
    * Gets the degree of interpolation to perform when retrieving a value.
@@ -272,7 +272,7 @@ Object.defineProperties(SampledProperty.prototype, {
   interpolationDegree: {
     get: function () {
       return this._interpolationDegree;
-    },
+    }
   },
   /**
    * Gets the interpolation algorithm to use when retrieving a value.
@@ -283,7 +283,7 @@ Object.defineProperties(SampledProperty.prototype, {
   interpolationAlgorithm: {
     get: function () {
       return this._interpolationAlgorithm;
-    },
+    }
   },
   /**
    * Gets or sets the type of extrapolation to perform when a value
@@ -301,7 +301,7 @@ Object.defineProperties(SampledProperty.prototype, {
         this._forwardExtrapolationType = value;
         this._definitionChanged.raiseEvent(this);
       }
-    },
+    }
   },
   /**
    * Gets or sets the amount of time to extrapolate forward before
@@ -319,7 +319,7 @@ Object.defineProperties(SampledProperty.prototype, {
         this._forwardExtrapolationDuration = value;
         this._definitionChanged.raiseEvent(this);
       }
-    },
+    }
   },
   /**
    * Gets or sets the type of extrapolation to perform when a value
@@ -337,7 +337,7 @@ Object.defineProperties(SampledProperty.prototype, {
         this._backwardExtrapolationType = value;
         this._definitionChanged.raiseEvent(this);
       }
-    },
+    }
   },
   /**
    * Gets or sets the amount of time to extrapolate backward
@@ -355,8 +355,8 @@ Object.defineProperties(SampledProperty.prototype, {
         this._backwardExtrapolationDuration = value;
         this._definitionChanged.raiseEvent(this);
       }
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -368,7 +368,7 @@ Object.defineProperties(SampledProperty.prototype, {
  */
 SampledProperty.prototype.getValue = function (time, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
   //>>includeEnd('debug');
 
   const times = this._times;
@@ -583,10 +583,10 @@ SampledProperty.prototype.addSample = function (time, value, derivatives) {
   const hasDerivatives = defined(innerDerivativeTypes);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
-  Check.defined("value", value);
+  Check.defined('time', time);
+  Check.defined('value', value);
   if (hasDerivatives) {
-    Check.defined("derivatives", derivatives);
+    Check.defined('derivatives', derivatives);
   }
   //>>includeEnd('debug');
 
@@ -631,17 +631,17 @@ SampledProperty.prototype.addSamples = function (
   const hasDerivatives = defined(innerDerivativeTypes);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("times", times);
-  Check.defined("values", values);
+  Check.defined('times', times);
+  Check.defined('values', values);
   if (times.length !== values.length) {
-    throw new DeveloperError("times and values must be the same length.");
+    throw new DeveloperError('times and values must be the same length.');
   }
   if (
     hasDerivatives &&
     (!defined(derivativeValues) || derivativeValues.length !== times.length)
   ) {
     throw new DeveloperError(
-      "times and derivativeValues must be the same length."
+      'times and derivativeValues must be the same length.'
     );
   }
   //>>includeEnd('debug');
@@ -684,7 +684,7 @@ SampledProperty.prototype.addSamplesPackedArray = function (
   epoch
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("packedSamples", packedSamples);
+  Check.defined('packedSamples', packedSamples);
   //>>includeEnd('debug');
 
   mergeNewSamples(
@@ -706,7 +706,7 @@ SampledProperty.prototype.addSamplesPackedArray = function (
  */
 SampledProperty.prototype.removeSample = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
   //>>includeEnd('debug');
 
   const index = binarySearch(this._times, time, JulianDate.compare);
@@ -735,7 +735,7 @@ function removeSamples(property, startIndex, numberToRemove) {
  */
 SampledProperty.prototype.removeSamples = function (timeInterval) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("timeInterval", timeInterval);
+  Check.defined('timeInterval', timeInterval);
   //>>includeEnd('debug');
 
   const times = this._times;

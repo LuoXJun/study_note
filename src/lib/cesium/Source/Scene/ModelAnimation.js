@@ -1,8 +1,8 @@
-import defaultValue from "../Core/defaultValue.js";
-import Event from "../Core/Event.js";
-import JulianDate from "../Core/JulianDate.js";
-import ModelAnimationLoop from "./ModelAnimationLoop.js";
-import ModelAnimationState from "./ModelAnimationState.js";
+import defaultValue from '../Core/defaultValue.js';
+import Event from '../Core/Event.js';
+import JulianDate from '../Core/JulianDate.js';
+import ModelAnimationLoop from './ModelAnimationLoop.js';
+import ModelAnimationState from './ModelAnimationState.js';
 
 /**
  * An active glTF animation.  A glTF asset can contain animations.  An active animation
@@ -127,7 +127,7 @@ Object.defineProperties(ModelAnimation.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
 
   /**
@@ -144,7 +144,7 @@ Object.defineProperties(ModelAnimation.prototype, {
   startTime: {
     get: function () {
       return this._startTime;
-    },
+    }
   },
 
   /**
@@ -160,7 +160,7 @@ Object.defineProperties(ModelAnimation.prototype, {
   delay: {
     get: function () {
       return this._delay;
-    },
+    }
   },
 
   /**
@@ -178,7 +178,7 @@ Object.defineProperties(ModelAnimation.prototype, {
   stopTime: {
     get: function () {
       return this._stopTime;
-    },
+    }
   },
   /**
    * Values greater than <code>1.0</code> increase the speed that the animation is played relative
@@ -197,7 +197,7 @@ Object.defineProperties(ModelAnimation.prototype, {
   multiplier: {
     get: function () {
       return this._multiplier;
-    },
+    }
   },
 
   /**
@@ -213,7 +213,7 @@ Object.defineProperties(ModelAnimation.prototype, {
   reverse: {
     get: function () {
       return this._reverse;
-    },
+    }
   },
 
   /**
@@ -229,7 +229,7 @@ Object.defineProperties(ModelAnimation.prototype, {
   loop: {
     get: function () {
       return this._loop;
-    },
+    }
   },
 
   /**
@@ -244,8 +244,8 @@ Object.defineProperties(ModelAnimation.prototype, {
   animationTime: {
     get: function () {
       return this._animationTime;
-    },
-  },
+    }
+  }
 });
 /**
  * A function used to compute the local animation time for a ModelAnimation.

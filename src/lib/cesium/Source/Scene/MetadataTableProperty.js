@@ -1,15 +1,15 @@
-import Check from "../Core/Check.js";
-import clone from "../Core/clone.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import FeatureDetection from "../Core/FeatureDetection.js";
-import getStringFromTypedArray from "../Core/getStringFromTypedArray.js";
-import oneTimeWarning from "../Core/oneTimeWarning.js";
-import MetadataComponentType from "./MetadataComponentType.js";
-import MetadataClassProperty from "./MetadataClassProperty.js";
-import MetadataType from "./MetadataType.js";
+import Check from '../Core/Check.js';
+import clone from '../Core/clone.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import FeatureDetection from '../Core/FeatureDetection.js';
+import getStringFromTypedArray from '../Core/getStringFromTypedArray.js';
+import oneTimeWarning from '../Core/oneTimeWarning.js';
+import MetadataComponentType from './MetadataComponentType.js';
+import MetadataClassProperty from './MetadataClassProperty.js';
+import MetadataType from './MetadataType.js';
 
 /**
  * A binary property in a {@MetadataTable}
@@ -39,10 +39,10 @@ function MetadataTableProperty(options) {
   const bufferViews = options.bufferViews;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number.greaterThan("options.count", count, 0);
-  Check.typeOf.object("options.property", property);
-  Check.typeOf.object("options.classProperty", classProperty);
-  Check.typeOf.object("options.bufferViews", bufferViews);
+  Check.typeOf.number.greaterThan('options.count', count, 0);
+  Check.typeOf.object('options.property', property);
+  Check.typeOf.object('options.classProperty', classProperty);
+  Check.typeOf.object('options.bufferViews', bufferViews);
   //>>includeEnd('debug');
 
   const type = classProperty.type;
@@ -233,7 +233,7 @@ Object.defineProperties(MetadataTableProperty.prototype, {
   hasValueTransform: {
     get: function () {
       return this._hasValueTransform;
-    },
+    }
   },
 
   /**
@@ -247,7 +247,7 @@ Object.defineProperties(MetadataTableProperty.prototype, {
   offset: {
     get: function () {
       return this._offset;
-    },
+    }
   },
 
   /**
@@ -261,7 +261,7 @@ Object.defineProperties(MetadataTableProperty.prototype, {
   scale: {
     get: function () {
       return this._scale;
-    },
+    }
   },
 
   /**
@@ -275,7 +275,7 @@ Object.defineProperties(MetadataTableProperty.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -289,7 +289,7 @@ Object.defineProperties(MetadataTableProperty.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
+    }
   },
 
   /**
@@ -303,8 +303,8 @@ Object.defineProperties(MetadataTableProperty.prototype, {
   byteLength: {
     get: function () {
       return this._byteLength;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -346,7 +346,7 @@ MetadataTableProperty.prototype.set = function (index, value) {
   const classProperty = this._classProperty;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("value", value);
+  Check.defined('value', value);
   checkIndex(this, index);
   const errorMessage = classProperty.validate(value);
   if (defined(errorMessage)) {
@@ -763,7 +763,7 @@ function BufferView(bufferView, componentType, length) {
   if (componentType === MetadataComponentType.INT64) {
     if (!FeatureDetection.supportsBigInt()) {
       oneTimeWarning(
-        "INT64 type is not fully supported on this platform. Values greater than 2^53 - 1 or less than -(2^53 - 1) may lose precision when read."
+        'INT64 type is not fully supported on this platform. Values greater than 2^53 - 1 or less than -(2^53 - 1) may lose precision when read.'
       );
       typedArray = new Uint8Array(
         bufferView.buffer,
@@ -797,7 +797,7 @@ function BufferView(bufferView, componentType, length) {
   } else if (componentType === MetadataComponentType.UINT64) {
     if (!FeatureDetection.supportsBigInt()) {
       oneTimeWarning(
-        "UINT64 type is not fully supported on this platform. Values greater than 2^53 - 1 may lose precision when read."
+        'UINT64 type is not fully supported on this platform. Values greater than 2^53 - 1 may lose precision when read.'
       );
       typedArray = new Uint8Array(
         bufferView.buffer,

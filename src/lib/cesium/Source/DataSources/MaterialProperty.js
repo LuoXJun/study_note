@@ -1,7 +1,7 @@
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Material from "../Scene/Material.js";
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Material from '../Scene/Material.js';
 
 /**
  * The interface for all {@link Property} objects that represent {@link Material} uniforms.
@@ -33,7 +33,7 @@ Object.defineProperties(MaterialProperty.prototype, {
    * @readonly
    */
   isConstant: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -45,8 +45,8 @@ Object.defineProperties(MaterialProperty.prototype, {
    * @readonly
    */
   definitionChanged: {
-    get: DeveloperError.throwInstantiationError,
-  },
+    get: DeveloperError.throwInstantiationError
+  }
 });
 
 /**

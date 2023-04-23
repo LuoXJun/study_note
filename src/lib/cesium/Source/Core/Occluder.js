@@ -1,12 +1,12 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import CesiumMath from "./Math.js";
-import Rectangle from "./Rectangle.js";
-import Visibility from "./Visibility.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import CesiumMath from './Math.js';
+import Rectangle from './Rectangle.js';
+import Visibility from './Visibility.js';
 
 /**
  * Creates an Occluder derived from an object's position and radius, as well as the camera position.
@@ -29,10 +29,10 @@ import Visibility from "./Visibility.js";
 function Occluder(occluderBoundingSphere, cameraPosition) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(occluderBoundingSphere)) {
-    throw new DeveloperError("occluderBoundingSphere is required.");
+    throw new DeveloperError('occluderBoundingSphere is required.');
   }
   if (!defined(cameraPosition)) {
-    throw new DeveloperError("camera position is required.");
+    throw new DeveloperError('camera position is required.');
   }
   //>>includeEnd('debug');
 
@@ -59,7 +59,7 @@ Object.defineProperties(Occluder.prototype, {
   position: {
     get: function () {
       return this._occluderPosition;
-    },
+    }
   },
 
   /**
@@ -70,7 +70,7 @@ Object.defineProperties(Occluder.prototype, {
   radius: {
     get: function () {
       return this._occluderRadius;
-    },
+    }
   },
 
   /**
@@ -82,7 +82,7 @@ Object.defineProperties(Occluder.prototype, {
     set: function (cameraPosition) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(cameraPosition)) {
-        throw new DeveloperError("cameraPosition is required.");
+        throw new DeveloperError('cameraPosition is required.');
       }
       //>>includeEnd('debug');
 
@@ -93,9 +93,8 @@ Object.defineProperties(Occluder.prototype, {
         cameraPosition,
         scratchCartesian3
       );
-      let invCameraToOccluderDistance = Cartesian3.magnitudeSquared(
-        cameraToOccluderVec
-      );
+      let invCameraToOccluderDistance =
+        Cartesian3.magnitudeSquared(cameraToOccluderVec);
       const occluderRadiusSqrd = this._occluderRadius * this._occluderRadius;
 
       let horizonDistance;
@@ -131,8 +130,8 @@ Object.defineProperties(Occluder.prototype, {
       this._horizonPlaneNormal = horizonPlaneNormal;
       this._horizonPlanePosition = horizonPlanePosition;
       this._cameraPosition = cameraPosition;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -150,11 +149,11 @@ Occluder.fromBoundingSphere = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(occluderBoundingSphere)) {
-    throw new DeveloperError("occluderBoundingSphere is required.");
+    throw new DeveloperError('occluderBoundingSphere is required.');
   }
 
   if (!defined(cameraPosition)) {
-    throw new DeveloperError("camera position is required.");
+    throw new DeveloperError('camera position is required.');
   }
   //>>includeEnd('debug');
 
@@ -307,7 +306,7 @@ const tempScratch = new Cartesian3();
 Occluder.prototype.computeVisibility = function (occludeeBS) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(occludeeBS)) {
-    throw new DeveloperError("occludeeBS is required.");
+    throw new DeveloperError('occludeeBS is required.');
   }
   //>>includeEnd('debug');
 
@@ -411,13 +410,13 @@ Occluder.computeOccludeePoint = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(occluderBoundingSphere)) {
-    throw new DeveloperError("occluderBoundingSphere is required.");
+    throw new DeveloperError('occluderBoundingSphere is required.');
   }
   if (!defined(positions)) {
-    throw new DeveloperError("positions is required.");
+    throw new DeveloperError('positions is required.');
   }
   if (positions.length === 0) {
-    throw new DeveloperError("positions must contain at least one element");
+    throw new DeveloperError('positions must contain at least one element');
   }
   //>>includeEnd('debug');
 
@@ -429,7 +428,7 @@ Occluder.computeOccludeePoint = function (
   //>>includeStart('debug', pragmas.debug);
   if (Cartesian3.equals(occluderPosition, occludeePosition)) {
     throw new DeveloperError(
-      "occludeePosition must be different than occluderBoundingSphere.center"
+      'occludeePosition must be different than occluderBoundingSphere.center'
     );
   }
   //>>includeEnd('debug');
@@ -505,7 +504,7 @@ const computeOccludeePointFromRectangleScratch = [];
 Occluder.computeOccludeePointFromRectangle = function (rectangle, ellipsoid) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(rectangle)) {
-    throw new DeveloperError("rectangle is required.");
+    throw new DeveloperError('rectangle is required.');
   }
   //>>includeEnd('debug');
 
@@ -641,9 +640,8 @@ Occluder._horizonToPlaneNormalDotProduct = function (
     pos,
     posScratch2
   );
-  const occluderToPositionDistanceSquared = Cartesian3.magnitudeSquared(
-    positionToOccluder
-  );
+  const occluderToPositionDistanceSquared =
+    Cartesian3.magnitudeSquared(positionToOccluder);
   const occluderRadiusSquared = occluderRadius * occluderRadius;
   if (occluderToPositionDistanceSquared < occluderRadiusSquared) {
     return false;

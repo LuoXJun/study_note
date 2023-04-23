@@ -1,5 +1,20 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./ComponentDatatype-4a60b8d6', './defaultValue-94c3e563', './IndexDatatype-db156785', './RuntimeError-c581ca93', './createTaskProcessorWorker', './WebGLConstants-7dccdc96'], (function (ComponentDatatype, defaultValue, IndexDatatype, RuntimeError, createTaskProcessorWorker, WebGLConstants) { 'use strict';
+define([
+  './ComponentDatatype-4a60b8d6',
+  './defaultValue-94c3e563',
+  './IndexDatatype-db156785',
+  './RuntimeError-c581ca93',
+  './createTaskProcessorWorker',
+  './WebGLConstants-7dccdc96'
+], function (
+  ComponentDatatype,
+  defaultValue,
+  IndexDatatype,
+  RuntimeError,
+  createTaskProcessorWorker,
+  WebGLConstants
+) {
+  'use strict';
 
   /* global require */
 
@@ -10,7 +25,10 @@ define(['./ComponentDatatype-4a60b8d6', './defaultValue-94c3e563', './IndexDatat
     const numFaces = dracoGeometry.num_faces();
     const faceIndices = new draco.DracoInt32Array();
     const numIndices = numFaces * 3;
-    const indexArray = IndexDatatype.IndexDatatype.createTypedArray(numPoints, numIndices);
+    const indexArray = IndexDatatype.IndexDatatype.createTypedArray(
+      numPoints,
+      numIndices
+    );
 
     let offset = 0;
     for (let i = 0; i < numFaces; ++i) {
@@ -26,7 +44,7 @@ define(['./ComponentDatatype-4a60b8d6', './defaultValue-94c3e563', './IndexDatat
 
     return {
       typedArray: indexArray,
-      numberOfIndices: numIndices,
+      numberOfIndices: numIndices
     };
   }
 
@@ -168,7 +186,7 @@ define(['./ComponentDatatype-4a60b8d6', './defaultValue-94c3e563', './IndexDatat
         quantizationBits: transform.quantization_bits(),
         minValues: minValues,
         range: transform.range(),
-        octEncoded: false,
+        octEncoded: false
       };
     }
     draco.destroy(transform);
@@ -177,7 +195,7 @@ define(['./ComponentDatatype-4a60b8d6', './defaultValue-94c3e563', './IndexDatat
     if (transform.InitFromAttribute(dracoAttribute)) {
       quantization = {
         quantizationBits: transform.quantization_bits(),
-        octEncoded: true,
+        octEncoded: true
       };
     }
     draco.destroy(transform);
@@ -201,7 +219,8 @@ define(['./ComponentDatatype-4a60b8d6', './defaultValue-94c3e563', './IndexDatat
       );
     }
 
-    const componentDatatype = ComponentDatatype.ComponentDatatype.fromTypedArray(vertexArray);
+    const componentDatatype =
+      ComponentDatatype.ComponentDatatype.fromTypedArray(vertexArray);
 
     return {
       array: vertexArray,
@@ -210,10 +229,12 @@ define(['./ComponentDatatype-4a60b8d6', './defaultValue-94c3e563', './IndexDatat
         componentDatatype: componentDatatype,
         byteOffset: dracoAttribute.byte_offset(),
         byteStride:
-          ComponentDatatype.ComponentDatatype.getSizeInBytes(componentDatatype) * numComponents,
+          ComponentDatatype.ComponentDatatype.getSizeInBytes(
+            componentDatatype
+          ) * numComponents,
         normalized: dracoAttribute.normalized(),
-        quantization: quantization,
-      },
+        quantization: quantization
+      }
     };
   }
 
@@ -230,7 +251,9 @@ define(['./ComponentDatatype-4a60b8d6', './defaultValue-94c3e563', './IndexDatat
 
     const geometryType = dracoDecoder.GetEncodedGeometryType(buffer);
     if (geometryType !== draco.POINT_CLOUD) {
-      throw new RuntimeError.RuntimeError("Draco geometry type must be POINT_CLOUD.");
+      throw new RuntimeError.RuntimeError(
+        'Draco geometry type must be POINT_CLOUD.'
+      );
     }
 
     const dracoPointCloud = new draco.PointCloud();
@@ -252,7 +275,7 @@ define(['./ComponentDatatype-4a60b8d6', './defaultValue-94c3e563', './IndexDatat
     for (const propertyName in properties) {
       if (properties.hasOwnProperty(propertyName)) {
         let dracoAttribute;
-        if (propertyName === "POSITION" || propertyName === "NORMAL") {
+        if (propertyName === 'POSITION' || propertyName === 'NORMAL') {
           const dracoAttributeId = dracoDecoder.GetAttributeId(
             dracoPointCloud,
             draco[propertyName]
@@ -286,7 +309,7 @@ define(['./ComponentDatatype-4a60b8d6', './defaultValue-94c3e563', './IndexDatat
     const dracoDecoder = new draco.Decoder();
 
     // Skip all parameter types except generic
-    const attributesToSkip = ["POSITION", "NORMAL", "COLOR", "TEX_COORD"];
+    const attributesToSkip = ['POSITION', 'NORMAL', 'COLOR', 'TEX_COORD'];
     if (parameters.dequantizeInShader) {
       for (let i = 0; i < attributesToSkip.length; ++i) {
         dracoDecoder.SkipAttributeTransform(draco[attributesToSkip[i]]);
@@ -299,11 +322,16 @@ define(['./ComponentDatatype-4a60b8d6', './defaultValue-94c3e563', './IndexDatat
 
     const geometryType = dracoDecoder.GetEncodedGeometryType(buffer);
     if (geometryType !== draco.TRIANGULAR_MESH) {
-      throw new RuntimeError.RuntimeError("Unsupported draco mesh geometry type.");
+      throw new RuntimeError.RuntimeError(
+        'Unsupported draco mesh geometry type.'
+      );
     }
 
     const dracoGeometry = new draco.Mesh();
-    const decodingStatus = dracoDecoder.DecodeBufferToMesh(buffer, dracoGeometry);
+    const decodingStatus = dracoDecoder.DecodeBufferToMesh(
+      buffer,
+      dracoGeometry
+    );
     if (!decodingStatus.ok() || dracoGeometry.ptr === 0) {
       throw new RuntimeError.RuntimeError(
         `Error decoding draco mesh geometry: ${decodingStatus.error_msg()}`
@@ -332,7 +360,7 @@ define(['./ComponentDatatype-4a60b8d6', './defaultValue-94c3e563', './IndexDatat
 
     const result = {
       indexArray: decodeIndexArray(dracoGeometry, dracoDecoder),
-      attributeData: attributeData,
+      attributeData: attributeData
     };
 
     draco.destroy(dracoGeometry);
@@ -378,5 +406,4 @@ define(['./ComponentDatatype-4a60b8d6', './defaultValue-94c3e563', './IndexDatat
   }
 
   return decodeDraco;
-
-}));
+});

@@ -1,11 +1,11 @@
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import EventHelper from "../../Core/EventHelper.js";
-import OrthographicFrustum from "../../Core/OrthographicFrustum.js";
-import SceneMode from "../../Scene/SceneMode.js";
-import knockout from "../../ThirdParty/knockout.js";
-import createCommand from "../createCommand.js";
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import EventHelper from '../../Core/EventHelper.js';
+import OrthographicFrustum from '../../Core/OrthographicFrustum.js';
+import SceneMode from '../../Scene/SceneMode.js';
+import knockout from '../../ThirdParty/knockout.js';
+import createCommand from '../createCommand.js';
 
 /**
  * The view model for {@link ProjectionPicker}.
@@ -17,7 +17,7 @@ import createCommand from "../createCommand.js";
 function ProjectionPickerViewModel(scene) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required.");
+    throw new DeveloperError('scene is required.');
   }
   //>>includeEnd('debug');
 
@@ -37,14 +37,14 @@ function ProjectionPickerViewModel(scene) {
    * @type {String}
    * @default 'Perspective Projection'
    */
-  this.tooltipPerspective = "Perspective Projection";
+  this.tooltipPerspective = 'Perspective Projection';
 
   /**
    * Gets or sets the orthographic projection tooltip.  This property is observable.
    * @type {String}
    * @default 'Orthographic Projection'
    */
-  this.tooltipOrthographic = "Orthographic Projection";
+  this.tooltipOrthographic = 'Orthographic Projection';
 
   /**
    * Gets the currently active tooltip.  This property is observable.
@@ -59,16 +59,16 @@ function ProjectionPickerViewModel(scene) {
   this.sceneMode = scene.mode;
 
   knockout.track(this, [
-    "_orthographic",
-    "_flightInProgress",
-    "sceneMode",
-    "dropDownVisible",
-    "tooltipPerspective",
-    "tooltipOrthographic",
+    '_orthographic',
+    '_flightInProgress',
+    'sceneMode',
+    'dropDownVisible',
+    'tooltipPerspective',
+    'tooltipOrthographic'
   ]);
 
   const that = this;
-  knockout.defineProperty(this, "selectedTooltip", function () {
+  knockout.defineProperty(this, 'selectedTooltip', function () {
     if (that._orthographic) {
       return that.tooltipOrthographic;
     }
@@ -84,17 +84,15 @@ function ProjectionPickerViewModel(scene) {
   });
 
   this._eventHelper = new EventHelper();
-  this._eventHelper.add(scene.morphComplete, function (
-    transitioner,
-    oldMode,
-    newMode,
-    isMorphing
-  ) {
-    that.sceneMode = newMode;
-    that._orthographic =
-      newMode === SceneMode.SCENE2D ||
-      that._scene.camera.frustum instanceof OrthographicFrustum;
-  });
+  this._eventHelper.add(
+    scene.morphComplete,
+    function (transitioner, oldMode, newMode, isMorphing) {
+      that.sceneMode = newMode;
+      that._orthographic =
+        newMode === SceneMode.SCENE2D ||
+        that._scene.camera.frustum instanceof OrthographicFrustum;
+    }
+  );
   this._eventHelper.add(scene.preRender, function () {
     that._flightInProgress = defined(scene.camera._currentFlight);
   });
@@ -132,7 +130,7 @@ Object.defineProperties(ProjectionPickerViewModel.prototype, {
   scene: {
     get: function () {
       return this._scene;
-    },
+    }
   },
 
   /**
@@ -144,7 +142,7 @@ Object.defineProperties(ProjectionPickerViewModel.prototype, {
   toggleDropDown: {
     get: function () {
       return this._toggleDropDown;
-    },
+    }
   },
 
   /**
@@ -156,7 +154,7 @@ Object.defineProperties(ProjectionPickerViewModel.prototype, {
   switchToPerspective: {
     get: function () {
       return this._switchToPerspective;
-    },
+    }
   },
 
   /**
@@ -168,7 +166,7 @@ Object.defineProperties(ProjectionPickerViewModel.prototype, {
   switchToOrthographic: {
     get: function () {
       return this._switchToOrthographic;
-    },
+    }
   },
 
   /**
@@ -180,8 +178,8 @@ Object.defineProperties(ProjectionPickerViewModel.prototype, {
   isOrthographicProjection: {
     get: function () {
       return this._orthographic;
-    },
-  },
+    }
+  }
 });
 
 /**

@@ -1,6 +1,6 @@
-import defined from "./defined.js";
-import IndexDatatype from "./IndexDatatype.js";
-import PrimitiveType from "./PrimitiveType.js";
+import defined from './defined.js';
+import IndexDatatype from './IndexDatatype.js';
+import PrimitiveType from './PrimitiveType.js';
 
 /**
  * Functions for generating indices for model wireframes. The indices are

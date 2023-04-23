@@ -1,15 +1,15 @@
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
-import deprecationWarning from "../Core/deprecationWarning.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import BatchTableHierarchy from "./BatchTableHierarchy.js";
-import StructuralMetadata from "./StructuralMetadata.js";
-import PropertyTable from "./PropertyTable.js";
-import getBinaryAccessor from "./getBinaryAccessor.js";
-import JsonMetadataTable from "./JsonMetadataTable.js";
-import MetadataClass from "./MetadataClass.js";
-import MetadataSchema from "./MetadataSchema.js";
-import MetadataTable from "./MetadataTable.js";
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
+import deprecationWarning from '../Core/deprecationWarning.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import BatchTableHierarchy from './BatchTableHierarchy.js';
+import StructuralMetadata from './StructuralMetadata.js';
+import PropertyTable from './PropertyTable.js';
+import getBinaryAccessor from './getBinaryAccessor.js';
+import JsonMetadataTable from './JsonMetadataTable.js';
+import MetadataClass from './MetadataClass.js';
+import MetadataSchema from './MetadataSchema.js';
+import MetadataTable from './MetadataTable.js';
 
 /**
  * An object that parses the the 3D Tiles 1.0 batch table and transcodes it to
@@ -29,8 +29,8 @@ import MetadataTable from "./MetadataTable.js";
  */
 export default function parseBatchTable(options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("options.count", options.count);
-  Check.typeOf.object("options.batchTable", options.batchTable);
+  Check.typeOf.number('options.count', options.count);
+  Check.typeOf.object('options.batchTable', options.batchTable);
   //>>includeEnd('debug');
 
   const featureCount = options.count;
@@ -42,7 +42,7 @@ export default function parseBatchTable(options) {
 
   const jsonMetadataTable = new JsonMetadataTable({
     count: featureCount,
-    properties: partitionResults.jsonProperties,
+    properties: partitionResults.jsonProperties
   });
 
   const hierarchy = initializeHierarchy(partitionResults.hierarchy, binaryBody);
@@ -62,23 +62,23 @@ export default function parseBatchTable(options) {
     count: featureTableJson.count,
     properties: featureTableJson.properties,
     class: binaryResults.transcodedClass,
-    bufferViews: binaryResults.bufferViewsU8,
+    bufferViews: binaryResults.bufferViewsU8
   });
 
   const propertyTable = new PropertyTable({
     id: 0,
-    name: "Batch Table",
+    name: 'Batch Table',
     count: featureTableJson.count,
     metadataTable: metadataTable,
     jsonMetadataTable: jsonMetadataTable,
-    batchTableHierarchy: hierarchy,
+    batchTableHierarchy: hierarchy
   });
 
   return new StructuralMetadata({
     schema: binaryResults.transcodedSchema,
     propertyTables: [propertyTable],
     extensions: partitionResults.extensions,
-    extras: partitionResults.extras,
+    extras: partitionResults.extras
   });
 }
 
@@ -99,12 +99,12 @@ function partitionProperties(batchTable) {
   let hierarchyExtension;
   if (defined(legacyHierarchy)) {
     parseBatchTable._deprecationWarning(
-      "batchTableHierarchyExtension",
-      "The batch table HIERARCHY property has been moved to an extension. Use extensions.3DTILES_batch_table_hierarchy instead."
+      'batchTableHierarchyExtension',
+      'The batch table HIERARCHY property has been moved to an extension. Use extensions.3DTILES_batch_table_hierarchy instead.'
     );
     hierarchyExtension = legacyHierarchy;
   } else if (defined(extensions)) {
-    hierarchyExtension = extensions["3DTILES_batch_table_hierarchy"];
+    hierarchyExtension = extensions['3DTILES_batch_table_hierarchy'];
   }
 
   const jsonProperties = {};
@@ -113,9 +113,9 @@ function partitionProperties(batchTable) {
     if (
       !batchTable.hasOwnProperty(propertyId) ||
       // these cases were handled above;
-      propertyId === "HIERARCHY" ||
-      propertyId === "extensions" ||
-      propertyId === "extras"
+      propertyId === 'HIERARCHY' ||
+      propertyId === 'extensions' ||
+      propertyId === 'extras'
     ) {
       continue;
     }
@@ -133,7 +133,7 @@ function partitionProperties(batchTable) {
     jsonProperties: jsonProperties,
     hierarchy: hierarchyExtension,
     extras: extras,
-    extensions: extensions,
+    extensions: extensions
   };
 }
 
@@ -174,7 +174,7 @@ function transcodeBinaryProperties(
     const binaryAccessor = getBinaryAccessor(property);
 
     featureTableProperties[propertyId] = {
-      bufferView: bufferViewCount,
+      bufferView: bufferViewCount
     };
 
     classProperties[propertyId] = transcodePropertyType(property);
@@ -189,10 +189,10 @@ function transcodeBinaryProperties(
   }
 
   const schemaJson = {
-    classes: {},
+    classes: {}
   };
   schemaJson.classes[className] = {
-    properties: classProperties,
+    properties: classProperties
   };
 
   const transcodedSchema = new MetadataSchema(schemaJson);
@@ -200,14 +200,14 @@ function transcodeBinaryProperties(
   const featureTableJson = {
     class: className,
     count: featureCount,
-    properties: featureTableProperties,
+    properties: featureTableProperties
   };
 
   return {
     featureTableJson: featureTableJson,
     bufferViewsU8: bufferViewsU8,
     transcodedSchema: transcodedSchema,
-    transcodedClass: transcodedSchema.classes[className],
+    transcodedClass: transcodedSchema.classes[className]
   };
 }
 
@@ -224,7 +224,7 @@ function transcodePropertyType(property) {
 
   return {
     type: property.type,
-    componentType: componentType,
+    componentType: componentType
   };
 }
 
@@ -239,22 +239,22 @@ function transcodePropertyType(property) {
  */
 function transcodeComponentType(componentType) {
   switch (componentType) {
-    case "BYTE":
-      return "INT8";
-    case "UNSIGNED_BYTE":
-      return "UINT8";
-    case "SHORT":
-      return "INT16";
-    case "UNSIGNED_SHORT":
-      return "UINT16";
-    case "INT":
-      return "INT32";
-    case "UNSIGNED_INT":
-      return "UINT32";
-    case "FLOAT":
-      return "FLOAT32";
-    case "DOUBLE":
-      return "FLOAT64";
+    case 'BYTE':
+      return 'INT8';
+    case 'UNSIGNED_BYTE':
+      return 'UINT8';
+    case 'SHORT':
+      return 'INT16';
+    case 'UNSIGNED_SHORT':
+      return 'UINT16';
+    case 'INT':
+      return 'INT32';
+    case 'UNSIGNED_INT':
+      return 'UINT32';
+    case 'FLOAT':
+      return 'FLOAT32';
+    case 'DOUBLE':
+      return 'FLOAT64';
   }
 }
 
@@ -271,7 +271,7 @@ function initializeHierarchy(hierarchyExtension, binaryBody) {
   if (defined(hierarchyExtension)) {
     return new BatchTableHierarchy({
       extension: hierarchyExtension,
-      binaryBody: binaryBody,
+      binaryBody: binaryBody
     });
   }
 

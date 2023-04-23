@@ -1,10 +1,10 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import ReferenceFrame from "../Core/ReferenceFrame.js";
-import PositionProperty from "./PositionProperty.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import ReferenceFrame from '../Core/ReferenceFrame.js';
+import PositionProperty from './PositionProperty.js';
 
 /**
  * A {@link PositionProperty} whose value does not change in respect to the
@@ -36,7 +36,7 @@ Object.defineProperties(ConstantPositionProperty.prototype, {
       return (
         !defined(this._value) || this._referenceFrame === ReferenceFrame.FIXED
       );
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -50,7 +50,7 @@ Object.defineProperties(ConstantPositionProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   /**
    * Gets the reference frame in which the position is defined.
@@ -61,8 +61,8 @@ Object.defineProperties(ConstantPositionProperty.prototype, {
   referenceFrame: {
     get: function () {
       return this._referenceFrame;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -112,10 +112,10 @@ ConstantPositionProperty.prototype.getValueInReferenceFrame = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required.");
+    throw new DeveloperError('time is required.');
   }
   if (!defined(referenceFrame)) {
-    throw new DeveloperError("referenceFrame is required.");
+    throw new DeveloperError('referenceFrame is required.');
   }
   //>>includeEnd('debug');
 

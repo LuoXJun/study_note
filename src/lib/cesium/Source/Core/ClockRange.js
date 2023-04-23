@@ -34,6 +34,6 @@ const ClockRange = {
    * @type {Number}
    * @constant
    */
-  LOOP_STOP: 2,
+  LOOP_STOP: 2
 };
 export default Object.freeze(ClockRange);

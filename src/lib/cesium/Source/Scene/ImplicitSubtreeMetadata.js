@@ -1,7 +1,7 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import MetadataEntity from "./MetadataEntity.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import MetadataEntity from './MetadataEntity.js';
 
 /**
  * Metadata about an implicit subtree.
@@ -24,8 +24,8 @@ function ImplicitSubtreeMetadata(options) {
   const metadataClass = options.class;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.subtreeMetadata", subtreeMetadata);
-  Check.typeOf.object("options.class", metadataClass);
+  Check.typeOf.object('options.subtreeMetadata', subtreeMetadata);
+  Check.typeOf.object('options.class', metadataClass);
   //>>includeEnd('debug');
 
   const properties = defined(subtreeMetadata.properties)
@@ -50,7 +50,7 @@ Object.defineProperties(ImplicitSubtreeMetadata.prototype, {
   class: {
     get: function () {
       return this._class;
-    },
+    }
   },
 
   /**
@@ -64,7 +64,7 @@ Object.defineProperties(ImplicitSubtreeMetadata.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -78,8 +78,8 @@ Object.defineProperties(ImplicitSubtreeMetadata.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
-  },
+    }
+  }
 });
 
 /**

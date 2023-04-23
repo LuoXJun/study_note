@@ -1,20 +1,20 @@
-import buildModuleUrl from "../Core/buildModuleUrl.js";
-import Check from "../Core/Check.js";
-import Credit from "../Core/Credit.js";
-import defaultValue from "../Core/defaultValue.js";
-import defer from "../Core/defer.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import CesiumMath from "../Core/Math.js";
-import Rectangle from "../Core/Rectangle.js";
-import Resource from "../Core/Resource.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import TileProviderError from "../Core/TileProviderError.js";
-import WebMercatorTilingScheme from "../Core/WebMercatorTilingScheme.js";
-import BingMapsStyle from "./BingMapsStyle.js";
-import DiscardEmptyTilePolicy from "./DiscardEmptyTileImagePolicy.js";
-import ImageryProvider from "./ImageryProvider.js";
+import buildModuleUrl from '../Core/buildModuleUrl.js';
+import Check from '../Core/Check.js';
+import Credit from '../Core/Credit.js';
+import defaultValue from '../Core/defaultValue.js';
+import defer from '../Core/defer.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import CesiumMath from '../Core/Math.js';
+import Rectangle from '../Core/Rectangle.js';
+import Resource from '../Core/Resource.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import TileProviderError from '../Core/TileProviderError.js';
+import WebMercatorTilingScheme from '../Core/WebMercatorTilingScheme.js';
+import BingMapsStyle from './BingMapsStyle.js';
+import DiscardEmptyTilePolicy from './DiscardEmptyTileImagePolicy.js';
+import ImageryProvider from './ImageryProvider.js';
 
 /**
  * @typedef {Object} BingMapsImageryProvider.ConstructorOptions
@@ -71,10 +71,10 @@ function BingMapsImageryProvider(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.url)) {
-    throw new DeveloperError("options.url is required.");
+    throw new DeveloperError('options.url is required.');
   }
   if (!defined(accessKey)) {
-    throw new DeveloperError("options.key is required.");
+    throw new DeveloperError('options.key is required.');
   }
   //>>includeEnd('debug');
 
@@ -169,7 +169,7 @@ function BingMapsImageryProvider(options) {
   this._resource.appendForwardSlash();
   this._tileProtocol = options.tileProtocol;
   this._mapStyle = defaultValue(options.mapStyle, BingMapsStyle.AERIAL);
-  this._culture = defaultValue(options.culture, "");
+  this._culture = defaultValue(options.culture, '');
 
   this._tileDiscardPolicy = options.tileDiscardPolicy;
   if (!defined(this._tileDiscardPolicy)) {
@@ -184,7 +184,7 @@ function BingMapsImageryProvider(options) {
   this._tilingScheme = new WebMercatorTilingScheme({
     numberOfLevelZeroTilesX: 2,
     numberOfLevelZeroTilesY: 2,
-    ellipsoid: options.ellipsoid,
+    ellipsoid: options.ellipsoid
   });
 
   this._tileWidth = undefined;
@@ -205,23 +205,23 @@ function BingMapsImageryProvider(options) {
   if (defined(tileProtocol)) {
     if (
       tileProtocol.length > 0 &&
-      tileProtocol[tileProtocol.length - 1] === ":"
+      tileProtocol[tileProtocol.length - 1] === ':'
     ) {
       tileProtocol = tileProtocol.substr(0, tileProtocol.length - 1);
     }
   } else {
     // use http if the document's protocol is http, otherwise use https
     const documentProtocol = document.location.protocol;
-    tileProtocol = documentProtocol === "http:" ? "http" : "https";
+    tileProtocol = documentProtocol === 'http:' ? 'http' : 'https';
   }
 
   const metadataResource = this._resource.getDerivedResource({
     url: `REST/v1/Imagery/Metadata/${this._mapStyle}`,
     queryParameters: {
-      incl: "ImageryProviders",
+      incl: 'ImageryProviders',
       key: this._key,
-      uriScheme: tileProtocol,
-    },
+      uriScheme: tileProtocol
+    }
   });
   const that = this;
   let metadataError;
@@ -299,7 +299,7 @@ function BingMapsImageryProvider(options) {
 
   const cacheKey = metadataResource.url;
   function requestMetadata() {
-    const promise = metadataResource.fetchJsonp("jsonp");
+    const promise = metadataResource.fetchJsonp('jsonp');
     BingMapsImageryProvider._metadataCache[cacheKey] = promise;
     promise.then(metadataSuccess).catch(metadataFailure);
   }
@@ -322,7 +322,7 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
   url: {
     get: function () {
       return this._resource.url;
-    },
+    }
   },
 
   /**
@@ -334,7 +334,7 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
   proxy: {
     get: function () {
       return this._resource.proxy;
-    },
+    }
   },
 
   /**
@@ -346,7 +346,7 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
   key: {
     get: function () {
       return this._key;
-    },
+    }
   },
 
   /**
@@ -358,7 +358,7 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
   mapStyle: {
     get: function () {
       return this._mapStyle;
-    },
+    }
   },
 
   /**
@@ -372,7 +372,7 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
   culture: {
     get: function () {
       return this._culture;
-    },
+    }
   },
 
   /**
@@ -387,13 +387,13 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileWidth must not be called before the imagery provider is ready."
+          'tileWidth must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tileWidth;
-    },
+    }
   },
 
   /**
@@ -408,13 +408,13 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileHeight must not be called before the imagery provider is ready."
+          'tileHeight must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tileHeight;
-    },
+    }
   },
 
   /**
@@ -429,13 +429,13 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "maximumLevel must not be called before the imagery provider is ready."
+          'maximumLevel must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._maximumLevel;
-    },
+    }
   },
 
   /**
@@ -450,13 +450,13 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "minimumLevel must not be called before the imagery provider is ready."
+          'minimumLevel must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return 0;
-    },
+    }
   },
 
   /**
@@ -471,13 +471,13 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tilingScheme must not be called before the imagery provider is ready."
+          'tilingScheme must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tilingScheme;
-    },
+    }
   },
 
   /**
@@ -492,13 +492,13 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "rectangle must not be called before the imagery provider is ready."
+          'rectangle must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tilingScheme.rectangle;
-    },
+    }
   },
 
   /**
@@ -515,13 +515,13 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tileDiscardPolicy must not be called before the imagery provider is ready."
+          'tileDiscardPolicy must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tileDiscardPolicy;
-    },
+    }
   },
 
   /**
@@ -535,7 +535,7 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._errorEvent;
-    },
+    }
   },
 
   /**
@@ -547,7 +547,7 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -559,7 +559,7 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise.promise;
-    },
+    }
   },
 
   /**
@@ -572,7 +572,7 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
   credit: {
     get: function () {
       return this._credit;
-    },
+    }
   },
 
   /**
@@ -588,8 +588,8 @@ Object.defineProperties(BingMapsImageryProvider.prototype, {
   hasAlphaChannel: {
     get: function () {
       return false;
-    },
-  },
+    }
+  }
 });
 
 const rectangleScratch = new Rectangle();
@@ -608,7 +608,7 @@ BingMapsImageryProvider.prototype.getTileCredits = function (x, y, level) {
   //>>includeStart('debug', pragmas.debug);
   if (!this._ready) {
     throw new DeveloperError(
-      "getTileCredits must not be called before the imagery provider is ready."
+      'getTileCredits must not be called before the imagery provider is ready.'
     );
   }
   //>>includeEnd('debug');
@@ -650,7 +650,7 @@ BingMapsImageryProvider.prototype.requestImage = function (
   //>>includeStart('debug', pragmas.debug);
   if (!this._ready) {
     throw new DeveloperError(
-      "requestImage must not be called before the imagery provider is ready."
+      'requestImage must not be called before the imagery provider is ready.'
     );
   }
   //>>includeEnd('debug');
@@ -708,7 +708,7 @@ BingMapsImageryProvider.prototype.pickFeatures = function (
  * @see BingMapsImageryProvider#quadKeyToTileXY
  */
 BingMapsImageryProvider.tileXYToQuadKey = function (x, y, level) {
-  let quadkey = "";
+  let quadkey = '';
   for (let i = level; i >= 0; --i) {
     const bitmask = 1 << i;
     let digit = 0;
@@ -754,7 +754,7 @@ BingMapsImageryProvider.quadKeyToTileXY = function (quadkey) {
   return {
     x: x,
     y: y,
-    level: level,
+    level: level
   };
 };
 
@@ -770,19 +770,19 @@ Object.defineProperties(BingMapsImageryProvider, {
     get: function () {
       if (!defined(BingMapsImageryProvider._logoUrl)) {
         BingMapsImageryProvider._logoUrl = buildModuleUrl(
-          "Assets/Images/bing_maps_credit.png"
+          'Assets/Images/bing_maps_credit.png'
         );
       }
       return BingMapsImageryProvider._logoUrl;
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.defined("value", value);
+      Check.defined('value', value);
       //>>includeEnd('debug');
 
       BingMapsImageryProvider._logoUrl = value;
-    },
-  },
+    }
+  }
 });
 
 function buildImageResource(imageryProvider, x, y, level, request) {
@@ -797,13 +797,13 @@ function buildImageResource(imageryProvider, x, y, level, request) {
     templateValues: {
       quadkey: BingMapsImageryProvider.tileXYToQuadKey(x, y, level),
       subdomain: subdomains[subdomainIndex],
-      culture: imageryProvider._culture,
+      culture: imageryProvider._culture
     },
     queryParameters: {
       // this parameter tells the Bing servers to send a zero-length response
       // instead of a placeholder image for missing tiles.
-      n: "z",
-    },
+      n: 'z'
+    }
   });
 }
 

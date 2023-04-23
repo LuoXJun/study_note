@@ -1,4 +1,4 @@
-import WebGLConstants from "../Core/WebGLConstants.js";
+import WebGLConstants from '../Core/WebGLConstants.js';
 
 /**
  * Enumerates all possible filters used when minifying WebGL textures.
@@ -66,7 +66,7 @@ const TextureMinificationFilter = {
    * @type {Number}
    * @constant
    */
-  LINEAR_MIPMAP_LINEAR: WebGLConstants.LINEAR_MIPMAP_LINEAR,
+  LINEAR_MIPMAP_LINEAR: WebGLConstants.LINEAR_MIPMAP_LINEAR
 };
 
 /**

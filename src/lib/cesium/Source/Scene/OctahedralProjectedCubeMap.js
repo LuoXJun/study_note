@@ -1,23 +1,23 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defer from "../Core/defer.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import loadKTX2 from "../Core/loadKTX2.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import Buffer from "../Renderer/Buffer.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import ComputeCommand from "../Renderer/ComputeCommand.js";
-import CubeMap from "../Renderer/CubeMap.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import Texture from "../Renderer/Texture.js";
-import VertexArray from "../Renderer/VertexArray.js";
-import OctahedralProjectionAtlasFS from "../Shaders/OctahedralProjectionAtlasFS.js";
-import OctahedralProjectionFS from "../Shaders/OctahedralProjectionFS.js";
-import OctahedralProjectionVS from "../Shaders/OctahedralProjectionVS.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defer from '../Core/defer.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import loadKTX2 from '../Core/loadKTX2.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import Buffer from '../Renderer/Buffer.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import ComputeCommand from '../Renderer/ComputeCommand.js';
+import CubeMap from '../Renderer/CubeMap.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import Texture from '../Renderer/Texture.js';
+import VertexArray from '../Renderer/VertexArray.js';
+import OctahedralProjectionAtlasFS from '../Shaders/OctahedralProjectionAtlasFS.js';
+import OctahedralProjectionFS from '../Shaders/OctahedralProjectionFS.js';
+import OctahedralProjectionVS from '../Shaders/OctahedralProjectionVS.js';
 
 /**
  * Packs all mip levels of a cube map into a 2D texture atlas.
@@ -56,7 +56,7 @@ Object.defineProperties(OctahedralProjectedCubeMap.prototype, {
   url: {
     get: function () {
       return this._url;
-    },
+    }
   },
   /**
    * A texture containing all the packed convolutions.
@@ -67,7 +67,7 @@ Object.defineProperties(OctahedralProjectedCubeMap.prototype, {
   texture: {
     get: function () {
       return this._texture;
-    },
+    }
   },
   /**
    * The maximum number of mip levels.
@@ -78,7 +78,7 @@ Object.defineProperties(OctahedralProjectedCubeMap.prototype, {
   maximumMipmapLevel: {
     get: function () {
       return this._maximumMipmapLevel;
-    },
+    }
   },
   /**
    * Determines if the texture atlas is complete and ready to use.
@@ -89,7 +89,7 @@ Object.defineProperties(OctahedralProjectedCubeMap.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
   /**
    * Gets a promise that resolves when the texture atlas is ready to use.
@@ -100,8 +100,8 @@ Object.defineProperties(OctahedralProjectedCubeMap.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise.promise;
-    },
-  },
+    }
+  }
 });
 
 OctahedralProjectedCubeMap.isSupported = function (context) {
@@ -147,7 +147,7 @@ const flatPositions = new Float32Array([
   -1.0,
   -1.0, // bottom left
   1.0,
-  -1.0, // bottom right
+  -1.0 // bottom right
 ]);
 const indices = new Uint16Array([
   0,
@@ -173,25 +173,25 @@ const indices = new Uint16Array([
   6, // right, bottom right, bottom,
   3,
   4,
-  6, //center, right, bottom
+  6 //center, right, bottom
 ]);
 
 function createVertexArray(context) {
   const positionBuffer = Buffer.createVertexBuffer({
     context: context,
     typedArray: flatPositions,
-    usage: BufferUsage.STATIC_DRAW,
+    usage: BufferUsage.STATIC_DRAW
   });
   const cubeMapCoordinatesBuffer = Buffer.createVertexBuffer({
     context: context,
     typedArray: flatCubeMapCoordinates,
-    usage: BufferUsage.STATIC_DRAW,
+    usage: BufferUsage.STATIC_DRAW
   });
   const indexBuffer = Buffer.createIndexBuffer({
     context: context,
     typedArray: indices,
     usage: BufferUsage.STATIC_DRAW,
-    indexDatatype: IndexDatatype.UNSIGNED_SHORT,
+    indexDatatype: IndexDatatype.UNSIGNED_SHORT
   });
 
   const attributes = [
@@ -199,19 +199,19 @@ function createVertexArray(context) {
       index: 0,
       vertexBuffer: positionBuffer,
       componentsPerAttribute: 2,
-      componentDatatype: ComponentDatatype.FLOAT,
+      componentDatatype: ComponentDatatype.FLOAT
     },
     {
       index: 1,
       vertexBuffer: cubeMapCoordinatesBuffer,
       componentsPerAttribute: 3,
-      componentDatatype: ComponentDatatype.FLOAT,
-    },
+      componentDatatype: ComponentDatatype.FLOAT
+    }
   ];
   return new VertexArray({
     context: context,
     attributes: attributes,
-    indexBuffer: indexBuffer,
+    indexBuffer: indexBuffer
   });
 }
 
@@ -313,13 +313,13 @@ OctahedralProjectedCubeMap.prototype.update = function (frameState) {
       ? PixelDatatype.HALF_FLOAT
       : PixelDatatype.FLOAT;
   } else {
-    defines.push("RGBA_NORMALIZED");
+    defines.push('RGBA_NORMALIZED');
   }
   const pixelFormat = PixelFormat.RGBA;
 
   const fs = new ShaderSource({
     defines: defines,
-    sources: [OctahedralProjectionFS],
+    sources: [OctahedralProjectionFS]
   });
 
   this._va = createVertexArray(context);
@@ -329,8 +329,8 @@ OctahedralProjectedCubeMap.prototype.update = function (frameState) {
     fragmentShaderSource: fs,
     attributeLocations: {
       position: 0,
-      cubeMapCoordinates: 1,
-    },
+      cubeMapCoordinates: 1
+    }
   });
 
   // We only need up to 6 mip levels to avoid artifacts.
@@ -342,7 +342,7 @@ OctahedralProjectedCubeMap.prototype.update = function (frameState) {
   const uniformMap = {
     originalSize: function () {
       return originalSize;
-    },
+    }
   };
 
   // First we project each cubemap onto a flat octahedron, and write that to a texture.
@@ -355,7 +355,7 @@ OctahedralProjectedCubeMap.prototype.update = function (frameState) {
     const cubeMap = (cubeMaps[i] = new CubeMap({
       context: context,
       source: cubeMapBuffers[i],
-      pixelDatatype: pixelDatatype,
+      pixelDatatype: pixelDatatype
     }));
     const size = cubeMaps[i].width * 2;
 
@@ -364,18 +364,18 @@ OctahedralProjectedCubeMap.prototype.update = function (frameState) {
       width: size,
       height: size,
       pixelDatatype: pixelDatatype,
-      pixelFormat: pixelFormat,
+      pixelFormat: pixelFormat
     }));
 
     const command = new ComputeCommand({
       vertexArray: this._va,
       shaderProgram: this._sp,
       uniformMap: {
-        cubeMap: createUniformTexture(cubeMap),
+        cubeMap: createUniformTexture(cubeMap)
       },
       outputTexture: mipTexture,
       persists: true,
-      owner: this,
+      owner: this
     });
     frameState.commandList.push(command);
 
@@ -387,7 +387,7 @@ OctahedralProjectedCubeMap.prototype.update = function (frameState) {
     width: originalSize * 1.5 + 2.0, // We add a 1 pixel border to avoid linear sampling artifacts.
     height: originalSize,
     pixelDatatype: pixelDatatype,
-    pixelFormat: pixelFormat,
+    pixelFormat: pixelFormat
   });
 
   this._texture.maximumMipmapLevel = this._maximumMipmapLevel;
@@ -398,7 +398,7 @@ OctahedralProjectedCubeMap.prototype.update = function (frameState) {
     uniformMap: uniformMap,
     outputTexture: this._texture,
     persists: false,
-    owner: this,
+    owner: this
   });
   frameState.commandList.push(atlasCommand);
 

@@ -1,5 +1,5 @@
-import defaultValue from "../Core/defaultValue.js";
-import Pass from "./Pass.js";
+import defaultValue from '../Core/defaultValue.js';
+import Pass from './Pass.js';
 
 /**
  * Represents a command to the renderer for GPU Compute (using old-school GPGPU).

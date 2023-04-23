@@ -1,4 +1,4 @@
-import DeveloperError from "../Core/DeveloperError.js";
+import DeveloperError from '../Core/DeveloperError.js';
 
 /**
  * Defines the interface for data sources, which turn arbitrary data into a
@@ -21,7 +21,7 @@ Object.defineProperties(DataSource.prototype, {
    * @type {String}
    */
   name: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
   /**
    * Gets the preferred clock settings for this data source.
@@ -29,7 +29,7 @@ Object.defineProperties(DataSource.prototype, {
    * @type {DataSourceClock}
    */
   clock: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
   /**
    * Gets the collection of {@link Entity} instances.
@@ -37,7 +37,7 @@ Object.defineProperties(DataSource.prototype, {
    * @type {EntityCollection}
    */
   entities: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
   /**
    * Gets a value indicating if the data source is currently loading data.
@@ -45,7 +45,7 @@ Object.defineProperties(DataSource.prototype, {
    * @type {Boolean}
    */
   isLoading: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
   /**
    * Gets an event that will be raised when the underlying data changes.
@@ -53,7 +53,7 @@ Object.defineProperties(DataSource.prototype, {
    * @type {Event}
    */
   changedEvent: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
   /**
    * Gets an event that will be raised if an error is encountered during processing.
@@ -61,7 +61,7 @@ Object.defineProperties(DataSource.prototype, {
    * @type {Event<function(this, RequestErrorEvent)>}
    */
   errorEvent: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
   /**
    * Gets an event that will be raised when the value of isLoading changes.
@@ -69,7 +69,7 @@ Object.defineProperties(DataSource.prototype, {
    * @type {Event<function(this, boolean)>}
    */
   loadingEvent: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
   /**
    * Gets whether or not this data source should be displayed.
@@ -77,7 +77,7 @@ Object.defineProperties(DataSource.prototype, {
    * @type {Boolean}
    */
   show: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -87,8 +87,8 @@ Object.defineProperties(DataSource.prototype, {
    * @type {EntityCluster}
    */
   clustering: {
-    get: DeveloperError.throwInstantiationError,
-  },
+    get: DeveloperError.throwInstantiationError
+  }
 });
 
 /**

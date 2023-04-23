@@ -1,4 +1,4 @@
-import defined from "./defined.js";
+import defined from './defined.js';
 
 let a;
 
@@ -9,7 +9,7 @@ let a;
  */
 function isCrossOriginUrl(url) {
   if (!defined(a)) {
-    a = document.createElement("a");
+    a = document.createElement('a');
   }
 
   // copy window location into the anchor to get consistent results

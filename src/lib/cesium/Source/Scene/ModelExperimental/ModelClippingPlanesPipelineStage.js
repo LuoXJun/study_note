@@ -1,9 +1,9 @@
-import Cartesian2 from "../../Core/Cartesian2.js";
-import ClippingPlaneCollection from "../ClippingPlaneCollection.js";
-import combine from "../../Core/combine.js";
-import Color from "../../Core/Color.js";
-import ModelClippingPlanesStageFS from "../../Shaders/ModelExperimental/ModelClippingPlanesStageFS.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
+import Cartesian2 from '../../Core/Cartesian2.js';
+import ClippingPlaneCollection from '../ClippingPlaneCollection.js';
+import combine from '../../Core/combine.js';
+import Color from '../../Core/Color.js';
+import ModelClippingPlanesStageFS from '../../Shaders/ModelExperimental/ModelClippingPlanesStageFS.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
 
 /**
  * The model clipping planes stage is responsible for applying clipping planes to the model.
@@ -13,7 +13,7 @@ import ShaderDestination from "../../Renderer/ShaderDestination.js";
  * @private
  */
 const ModelClippingPlanesPipelineStage = {};
-ModelClippingPlanesPipelineStage.name = "ModelClippingPlanesPipelineStage"; // Helps with debugging
+ModelClippingPlanesPipelineStage.name = 'ModelClippingPlanesPipelineStage'; // Helps with debugging
 
 const textureResolutionScratch = new Cartesian2();
 /**
@@ -42,20 +42,20 @@ ModelClippingPlanesPipelineStage.process = function (
   const shaderBuilder = renderResources.shaderBuilder;
 
   shaderBuilder.addDefine(
-    "HAS_CLIPPING_PLANES",
+    'HAS_CLIPPING_PLANES',
     undefined,
     ShaderDestination.FRAGMENT
   );
 
   shaderBuilder.addDefine(
-    "CLIPPING_PLANES_LENGTH",
+    'CLIPPING_PLANES_LENGTH',
     clippingPlanes.length,
     ShaderDestination.FRAGMENT
   );
 
   if (clippingPlanes.unionClippingRegions) {
     shaderBuilder.addDefine(
-      "UNION_CLIPPING_REGIONS",
+      'UNION_CLIPPING_REGIONS',
       undefined,
       ShaderDestination.FRAGMENT
     );
@@ -63,7 +63,7 @@ ModelClippingPlanesPipelineStage.process = function (
 
   if (ClippingPlaneCollection.useFloatTexture(context)) {
     shaderBuilder.addDefine(
-      "USE_CLIPPING_PLANES_FLOAT_TEXTURE",
+      'USE_CLIPPING_PLANES_FLOAT_TEXTURE',
       undefined,
       ShaderDestination.FRAGMENT
     );
@@ -76,30 +76,30 @@ ModelClippingPlanesPipelineStage.process = function (
   );
 
   shaderBuilder.addDefine(
-    "CLIPPING_PLANES_TEXTURE_WIDTH",
+    'CLIPPING_PLANES_TEXTURE_WIDTH',
     textureResolution.x,
     ShaderDestination.FRAGMENT
   );
 
   shaderBuilder.addDefine(
-    "CLIPPING_PLANES_TEXTURE_HEIGHT",
+    'CLIPPING_PLANES_TEXTURE_HEIGHT',
     textureResolution.y,
     ShaderDestination.FRAGMENT
   );
 
   shaderBuilder.addUniform(
-    "sampler2D",
-    "model_clippingPlanes",
+    'sampler2D',
+    'model_clippingPlanes',
     ShaderDestination.FRAGMENT
   );
   shaderBuilder.addUniform(
-    "vec4",
-    "model_clippingPlanesEdgeStyle",
+    'vec4',
+    'model_clippingPlanesEdgeStyle',
     ShaderDestination.FRAGMENT
   );
   shaderBuilder.addUniform(
-    "mat4",
-    "model_clippingPlanesMatrix",
+    'mat4',
+    'model_clippingPlanesMatrix',
     ShaderDestination.FRAGMENT
   );
 
@@ -116,7 +116,7 @@ ModelClippingPlanesPipelineStage.process = function (
     },
     model_clippingPlanesMatrix: function () {
       return model._clippingPlanesMatrix;
-    },
+    }
   };
 
   renderResources.uniformMap = combine(uniformMap, renderResources.uniformMap);

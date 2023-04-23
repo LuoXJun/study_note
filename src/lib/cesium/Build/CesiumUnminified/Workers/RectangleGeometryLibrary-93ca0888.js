@@ -23,7 +23,22 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeError-4f8ec8a2', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b'], (function (exports, Matrix2, defaultValue, RuntimeError, Transforms, ComponentDatatype) { 'use strict';
+define([
+  'exports',
+  './Matrix2-9e1c22e2',
+  './defaultValue-97284df2',
+  './RuntimeError-4f8ec8a2',
+  './Transforms-273eeb44',
+  './ComponentDatatype-4eeb6d9b'
+], function (
+  exports,
+  Matrix2,
+  defaultValue,
+  RuntimeError,
+  Transforms,
+  ComponentDatatype
+) {
+  'use strict';
 
   const cos = Math.cos;
   const sin = Math.sin;
@@ -86,8 +101,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
           row * computedOptions.stGranYSin +
           col * computedOptions.stGranXCos;
 
-        st.x = (stLongitude - computedOptions.stWest) * computedOptions.lonScalar;
-        st.y = (stLatitude - computedOptions.stSouth) * computedOptions.latScalar;
+        st.x =
+          (stLongitude - computedOptions.stWest) * computedOptions.lonScalar;
+        st.y =
+          (stLatitude - computedOptions.stSouth) * computedOptions.latScalar;
       } else {
         st.x = (stLongitude - rectangle.west) * computedOptions.lonScalar;
         st.y = (stLatitude - rectangle.south) * computedOptions.latScalar;
@@ -120,14 +137,25 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
 
     nwCartesian = proj.project(nwCorner, nwCartesian);
 
-    nwCartesian = Matrix2.Cartesian3.subtract(nwCartesian, centerCartesian, nwCartesian);
-    const rotationMatrix = Matrix2.Matrix2.fromRotation(rotation, rotationMatrixScratch);
+    nwCartesian = Matrix2.Cartesian3.subtract(
+      nwCartesian,
+      centerCartesian,
+      nwCartesian
+    );
+    const rotationMatrix = Matrix2.Matrix2.fromRotation(
+      rotation,
+      rotationMatrixScratch
+    );
     nwCartesian = Matrix2.Matrix2.multiplyByVector(
       rotationMatrix,
       nwCartesian,
       nwCartesian
     );
-    nwCartesian = Matrix2.Cartesian3.add(nwCartesian, centerCartesian, nwCartesian);
+    nwCartesian = Matrix2.Cartesian3.add(
+      nwCartesian,
+      centerCartesian,
+      nwCartesian
+    );
     nwCorner = proj.unproject(nwCartesian, nwCorner);
 
     width -= 1;
@@ -158,7 +186,7 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
       granYSin: granYSin,
       granXCos: granXCos,
       granXSin: granXSin,
-      nwCorner: nwCorner,
+      nwCorner: nwCorner
     };
   }
 
@@ -231,7 +259,7 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
       width: width,
       height: height,
       northCap: northCap,
-      southCap: southCap,
+      southCap: southCap
     };
 
     if (rotation !== 0) {
@@ -257,7 +285,7 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
         south > ComponentDatatype.CesiumMath.PI_OVER_TWO
       ) {
         throw new RuntimeError.DeveloperError(
-          "Rotated rectangle is invalid.  It crosses over either the north or south pole."
+          'Rotated rectangle is invalid.  It crosses over either the north or south pole.'
         );
       }
       //>>includeEnd('debug')
@@ -275,7 +303,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
 
     if (stRotation !== 0) {
       rotation = rotation - stRotation;
-      const stNwCorner = Matrix2.Rectangle.northwest(boundingRectangle, stNwCornerResult);
+      const stNwCorner = Matrix2.Rectangle.northwest(
+        boundingRectangle,
+        stNwCornerResult
+      );
 
       const stRotationOptions = getRotationOptions(
         stNwCorner,
@@ -300,6 +331,5 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
   };
 
   exports.RectangleGeometryLibrary = RectangleGeometryLibrary;
-
-}));
+});
 //# sourceMappingURL=RectangleGeometryLibrary-93ca0888.js.map

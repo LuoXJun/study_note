@@ -1,9 +1,9 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DracoLoader from "./DracoLoader.js";
-import ResourceLoader from "./ResourceLoader.js";
-import ResourceLoaderState from "./ResourceLoaderState.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DracoLoader from './DracoLoader.js';
+import ResourceLoader from './ResourceLoader.js';
+import ResourceLoaderState from './ResourceLoaderState.js';
 
 /**
  * Load a draco buffer from a glTF.
@@ -35,11 +35,11 @@ export default function GltfDracoLoader(options) {
   const cacheKey = options.cacheKey;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.func("options.resourceCache", resourceCache);
-  Check.typeOf.object("options.gltf", gltf);
-  Check.typeOf.object("options.draco", draco);
-  Check.typeOf.object("options.gltfResource", gltfResource);
-  Check.typeOf.object("options.baseResource", baseResource);
+  Check.typeOf.func('options.resourceCache', resourceCache);
+  Check.typeOf.object('options.gltf', gltf);
+  Check.typeOf.object('options.draco', draco);
+  Check.typeOf.object('options.gltfResource', gltfResource);
+  Check.typeOf.object('options.baseResource', baseResource);
   //>>includeEnd('debug');
 
   this._resourceCache = resourceCache;
@@ -75,7 +75,7 @@ Object.defineProperties(GltfDracoLoader.prototype, {
   promise: {
     get: function () {
       return this._promise;
-    },
+    }
   },
   /**
    * The cache key of the resource.
@@ -89,7 +89,7 @@ Object.defineProperties(GltfDracoLoader.prototype, {
   cacheKey: {
     get: function () {
       return this._cacheKey;
-    },
+    }
   },
   /**
    * The decoded data.
@@ -103,8 +103,8 @@ Object.defineProperties(GltfDracoLoader.prototype, {
   decodedData: {
     get: function () {
       return this._decodedData;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -118,7 +118,7 @@ GltfDracoLoader.prototype.load = function () {
     gltf: this._gltf,
     bufferViewId: this._draco.bufferView,
     gltfResource: this._gltfResource,
-    baseResource: this._baseResource,
+    baseResource: this._baseResource
   });
 
   this._bufferViewLoader = bufferViewLoader;
@@ -151,7 +151,7 @@ GltfDracoLoader.prototype.load = function () {
         array: new Uint8Array(loader._bufferViewTypedArray),
         bufferView: bufferView,
         compressedAttributes: compressedAttributes,
-        dequantizeInShader: true,
+        dequantizeInShader: true
       };
 
       const decodePromise = DracoLoader.decodeBufferView(decodeOptions);
@@ -173,7 +173,7 @@ GltfDracoLoader.prototype.load = function () {
 
           loader._decodedData = {
             indices: results.indexArray,
-            vertexAttributes: results.attributeData,
+            vertexAttributes: results.attributeData
           };
           loader._state = ResourceLoaderState.READY;
           resolve(loader);
@@ -214,7 +214,7 @@ GltfDracoLoader.prototype.load = function () {
 function handleError(dracoLoader, error) {
   dracoLoader.unload();
   dracoLoader._state = ResourceLoaderState.FAILED;
-  const errorMessage = "Failed to load Draco";
+  const errorMessage = 'Failed to load Draco';
   return Promise.reject(dracoLoader.getError(errorMessage, error));
 }
 
@@ -226,7 +226,7 @@ function handleError(dracoLoader, error) {
  */
 GltfDracoLoader.prototype.process = function (frameState) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("frameState", frameState);
+  Check.typeOf.object('frameState', frameState);
   //>>includeEnd('debug');
 
   return this._process(this, frameState);

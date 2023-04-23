@@ -1,5 +1,5 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
 
 /**
  * Defines a heading angle, pitch angle, and range in a local frame.

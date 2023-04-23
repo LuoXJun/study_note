@@ -1,12 +1,12 @@
-import createGuid from "../Core/createGuid.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import CesiumMath from "../Core/Math.js";
-import Entity from "./Entity.js";
-import EntityCollection from "./EntityCollection.js";
+import createGuid from '../Core/createGuid.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import CesiumMath from '../Core/Math.js';
+import Entity from './Entity.js';
+import EntityCollection from './EntityCollection.js';
 
 const entityOptionsScratch = {
-  id: undefined,
+  id: undefined
 };
 const entityIdScratch = new Array(2);
 
@@ -23,12 +23,11 @@ function clean(entity) {
 function subscribeToEntity(that, eventHash, collectionId, entity) {
   entityIdScratch[0] = collectionId;
   entityIdScratch[1] = entity.id;
-  eventHash[
-    JSON.stringify(entityIdScratch)
-  ] = entity.definitionChanged.addEventListener(
-    CompositeEntityCollection.prototype._onDefinitionChanged,
-    that
-  );
+  eventHash[JSON.stringify(entityIdScratch)] =
+    entity.definitionChanged.addEventListener(
+      CompositeEntityCollection.prototype._onDefinitionChanged,
+      that
+    );
 }
 
 function unsubscribeFromEntity(that, eventHash, collectionId, entity) {
@@ -151,7 +150,7 @@ Object.defineProperties(CompositeEntityCollection.prototype, {
   collectionChanged: {
     get: function () {
       return this._composite._collectionChanged;
-    },
+    }
   },
   /**
    * Gets a globally unique identifier for this collection.
@@ -162,7 +161,7 @@ Object.defineProperties(CompositeEntityCollection.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
   /**
    * Gets the array of Entity instances in the collection.
@@ -174,7 +173,7 @@ Object.defineProperties(CompositeEntityCollection.prototype, {
   values: {
     get: function () {
       return this._composite.values;
-    },
+    }
   },
   /**
    * Gets the owner of this composite entity collection, ie. the data source or composite entity collection which created it.
@@ -185,8 +184,8 @@ Object.defineProperties(CompositeEntityCollection.prototype, {
   owner: {
     get: function () {
       return this._owner;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -205,14 +204,14 @@ CompositeEntityCollection.prototype.addCollection = function (
   const hasIndex = defined(index);
   //>>includeStart('debug', pragmas.debug);
   if (!defined(collection)) {
-    throw new DeveloperError("collection is required.");
+    throw new DeveloperError('collection is required.');
   }
   if (hasIndex) {
     if (index < 0) {
-      throw new DeveloperError("index must be greater than or equal to zero.");
+      throw new DeveloperError('index must be greater than or equal to zero.');
     } else if (index > this._collections.length) {
       throw new DeveloperError(
-        "index must be less than or equal to the number of collections."
+        'index must be less than or equal to the number of collections.'
       );
     }
   }
@@ -291,7 +290,7 @@ CompositeEntityCollection.prototype.indexOfCollection = function (collection) {
 CompositeEntityCollection.prototype.getCollection = function (index) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(index)) {
-    throw new DeveloperError("index is required.", "index");
+    throw new DeveloperError('index is required.', 'index');
   }
   //>>includeEnd('debug');
 
@@ -308,7 +307,7 @@ CompositeEntityCollection.prototype.getCollectionsLength = function () {
 function getCollectionIndex(collections, collection) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(collection)) {
-    throw new DeveloperError("collection is required.");
+    throw new DeveloperError('collection is required.');
   }
   //>>includeEnd('debug');
 
@@ -316,7 +315,7 @@ function getCollectionIndex(collections, collection) {
 
   //>>includeStart('debug', pragmas.debug);
   if (index === -1) {
-    throw new DeveloperError("collection is not in this composite.");
+    throw new DeveloperError('collection is not in this composite.');
   }
   //>>includeEnd('debug');
 
@@ -432,7 +431,7 @@ CompositeEntityCollection.prototype.resumeEvents = function () {
   //>>includeStart('debug', pragmas.debug);
   if (this._suspendCount === 0) {
     throw new DeveloperError(
-      "resumeEvents can not be called before suspendEvents."
+      'resumeEvents can not be called before suspendEvents.'
     );
   }
   //>>includeEnd('debug');

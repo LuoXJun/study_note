@@ -1,6 +1,6 @@
-import Intersect from "../Core/Intersect.js";
-import ManagedArray from "../Core/ManagedArray.js";
-import Cesium3DTileRefine from "./Cesium3DTileRefine.js";
+import Intersect from '../Core/Intersect.js';
+import ManagedArray from '../Core/ManagedArray.js';
+import Cesium3DTileRefine from './Cesium3DTileRefine.js';
 
 /**
  * Traversal that loads all leaves that intersect the camera frustum.
@@ -12,7 +12,7 @@ function Cesium3DTilesetMostDetailedTraversal() {}
 
 const traversal = {
   stack: new ManagedArray(),
-  stackMaximumLength: 0,
+  stackMaximumLength: 0
 };
 
 Cesium3DTilesetMostDetailedTraversal.selectTiles = function (

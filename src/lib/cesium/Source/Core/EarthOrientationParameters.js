@@ -1,13 +1,13 @@
-import binarySearch from "./binarySearch.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import EarthOrientationParametersSample from "./EarthOrientationParametersSample.js";
-import JulianDate from "./JulianDate.js";
-import LeapSecond from "./LeapSecond.js";
-import Resource from "./Resource.js";
-import RuntimeError from "./RuntimeError.js";
-import TimeConstants from "./TimeConstants.js";
-import TimeStandard from "./TimeStandard.js";
+import binarySearch from './binarySearch.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import EarthOrientationParametersSample from './EarthOrientationParametersSample.js';
+import JulianDate from './JulianDate.js';
+import LeapSecond from './LeapSecond.js';
+import Resource from './Resource.js';
+import RuntimeError from './RuntimeError.js';
+import TimeConstants from './TimeConstants.js';
+import TimeStandard from './TimeStandard.js';
 
 /**
  * Specifies Earth polar motion coordinates and the difference between UT1 and UTC.
@@ -92,17 +92,17 @@ function EarthOrientationParameters(options) {
     // Use all zeros for EOP data.
     onDataReady(this, {
       columnNames: [
-        "dateIso8601",
-        "modifiedJulianDateUtc",
-        "xPoleWanderRadians",
-        "yPoleWanderRadians",
-        "ut1MinusUtcSeconds",
-        "lengthOfDayCorrectionSeconds",
-        "xCelestialPoleOffsetRadians",
-        "yCelestialPoleOffsetRadians",
-        "taiMinusUtcSeconds",
+        'dateIso8601',
+        'modifiedJulianDateUtc',
+        'xPoleWanderRadians',
+        'yPoleWanderRadians',
+        'ut1MinusUtcSeconds',
+        'lengthOfDayCorrectionSeconds',
+        'xCelestialPoleOffsetRadians',
+        'yCelestialPoleOffsetRadians',
+        'taiMinusUtcSeconds'
       ],
-      samples: [],
+      samples: []
     });
   }
 }
@@ -125,7 +125,7 @@ EarthOrientationParameters.NONE = Object.freeze({
       result.ut1MinusUtc = 0.0;
     }
     return result;
-  },
+  }
 });
 
 /**
@@ -238,35 +238,31 @@ function compareLeapSecondDates(leapSecond, dateToFind) {
 function onDataReady(eop, eopData) {
   if (!defined(eopData.columnNames)) {
     eop._dataError =
-      "Error in loaded EOP data: The columnNames property is required.";
+      'Error in loaded EOP data: The columnNames property is required.';
     return;
   }
 
   if (!defined(eopData.samples)) {
     eop._dataError =
-      "Error in loaded EOP data: The samples property is required.";
+      'Error in loaded EOP data: The samples property is required.';
     return;
   }
 
-  const dateColumn = eopData.columnNames.indexOf("modifiedJulianDateUtc");
-  const xPoleWanderRadiansColumn = eopData.columnNames.indexOf(
-    "xPoleWanderRadians"
-  );
-  const yPoleWanderRadiansColumn = eopData.columnNames.indexOf(
-    "yPoleWanderRadians"
-  );
-  const ut1MinusUtcSecondsColumn = eopData.columnNames.indexOf(
-    "ut1MinusUtcSeconds"
-  );
+  const dateColumn = eopData.columnNames.indexOf('modifiedJulianDateUtc');
+  const xPoleWanderRadiansColumn =
+    eopData.columnNames.indexOf('xPoleWanderRadians');
+  const yPoleWanderRadiansColumn =
+    eopData.columnNames.indexOf('yPoleWanderRadians');
+  const ut1MinusUtcSecondsColumn =
+    eopData.columnNames.indexOf('ut1MinusUtcSeconds');
   const xCelestialPoleOffsetRadiansColumn = eopData.columnNames.indexOf(
-    "xCelestialPoleOffsetRadians"
+    'xCelestialPoleOffsetRadians'
   );
   const yCelestialPoleOffsetRadiansColumn = eopData.columnNames.indexOf(
-    "yCelestialPoleOffsetRadians"
+    'yCelestialPoleOffsetRadians'
   );
-  const taiMinusUtcSecondsColumn = eopData.columnNames.indexOf(
-    "taiMinusUtcSeconds"
-  );
+  const taiMinusUtcSecondsColumn =
+    eopData.columnNames.indexOf('taiMinusUtcSeconds');
 
   if (
     dateColumn < 0 ||
@@ -278,7 +274,7 @@ function onDataReady(eop, eopData) {
     taiMinusUtcSecondsColumn < 0
   ) {
     eop._dataError =
-      "Error in loaded EOP data: The columnNames property must include modifiedJulianDateUtc, xPoleWanderRadians, yPoleWanderRadians, ut1MinusUtcSeconds, xCelestialPoleOffsetRadians, yCelestialPoleOffsetRadians, and taiMinusUtcSeconds columns";
+      'Error in loaded EOP data: The columnNames property must include modifiedJulianDateUtc, xPoleWanderRadians, yPoleWanderRadians, ut1MinusUtcSeconds, xCelestialPoleOffsetRadians, yCelestialPoleOffsetRadians, and taiMinusUtcSeconds columns';
     return;
   }
 

@@ -1,20 +1,20 @@
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DistanceDisplayConditionGeometryInstanceAttribute from "../Core/DistanceDisplayConditionGeometryInstanceAttribute.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import Iso8601 from "../Core/Iso8601.js";
-import PolylineVolumeGeometry from "../Core/PolylineVolumeGeometry.js";
-import PolylineVolumeOutlineGeometry from "../Core/PolylineVolumeOutlineGeometry.js";
-import ShowGeometryInstanceAttribute from "../Core/ShowGeometryInstanceAttribute.js";
-import MaterialAppearance from "../Scene/MaterialAppearance.js";
-import PerInstanceColorAppearance from "../Scene/PerInstanceColorAppearance.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import DynamicGeometryUpdater from "./DynamicGeometryUpdater.js";
-import GeometryUpdater from "./GeometryUpdater.js";
-import Property from "./Property.js";
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DistanceDisplayConditionGeometryInstanceAttribute from '../Core/DistanceDisplayConditionGeometryInstanceAttribute.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import Iso8601 from '../Core/Iso8601.js';
+import PolylineVolumeGeometry from '../Core/PolylineVolumeGeometry.js';
+import PolylineVolumeOutlineGeometry from '../Core/PolylineVolumeOutlineGeometry.js';
+import ShowGeometryInstanceAttribute from '../Core/ShowGeometryInstanceAttribute.js';
+import MaterialAppearance from '../Scene/MaterialAppearance.js';
+import PerInstanceColorAppearance from '../Scene/PerInstanceColorAppearance.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import DynamicGeometryUpdater from './DynamicGeometryUpdater.js';
+import GeometryUpdater from './GeometryUpdater.js';
+import Property from './Property.js';
 
 const scratchColor = new Color();
 
@@ -41,13 +41,13 @@ function PolylineVolumeGeometryUpdater(entity, scene) {
     entity: entity,
     scene: scene,
     geometryOptions: new PolylineVolumeGeometryOptions(entity),
-    geometryPropertyName: "polylineVolume",
-    observedPropertyNames: ["availability", "polylineVolume"],
+    geometryPropertyName: 'polylineVolume',
+    observedPropertyNames: ['availability', 'polylineVolume']
   });
 
   this._onEntityPropertyChanged(
     entity,
-    "polylineVolume",
+    'polylineVolume',
     entity.polylineVolume,
     undefined
   );
@@ -57,7 +57,8 @@ if (defined(Object.create)) {
   PolylineVolumeGeometryUpdater.prototype = Object.create(
     GeometryUpdater.prototype
   );
-  PolylineVolumeGeometryUpdater.prototype.constructor = PolylineVolumeGeometryUpdater;
+  PolylineVolumeGeometryUpdater.prototype.constructor =
+    PolylineVolumeGeometryUpdater;
 }
 
 /**
@@ -72,11 +73,11 @@ PolylineVolumeGeometryUpdater.prototype.createFillGeometryInstance = function (
   time
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
 
   if (!this._fillEnabled) {
     throw new DeveloperError(
-      "This instance does not represent a filled geometry."
+      'This instance does not represent a filled geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -93,12 +94,12 @@ PolylineVolumeGeometryUpdater.prototype.createFillGeometryInstance = function (
       this._showProperty.getValue(time) &&
       this._fillProperty.getValue(time)
   );
-  const distanceDisplayCondition = this._distanceDisplayConditionProperty.getValue(
-    time
-  );
-  const distanceDisplayConditionAttribute = DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-    distanceDisplayCondition
-  );
+  const distanceDisplayCondition =
+    this._distanceDisplayConditionProperty.getValue(time);
+  const distanceDisplayConditionAttribute =
+    DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+      distanceDisplayCondition
+    );
   if (this._materialProperty instanceof ColorMaterialProperty) {
     let currentColor;
     if (
@@ -114,19 +115,19 @@ PolylineVolumeGeometryUpdater.prototype.createFillGeometryInstance = function (
     attributes = {
       show: show,
       distanceDisplayCondition: distanceDisplayConditionAttribute,
-      color: color,
+      color: color
     };
   } else {
     attributes = {
       show: show,
-      distanceDisplayCondition: distanceDisplayConditionAttribute,
+      distanceDisplayCondition: distanceDisplayConditionAttribute
     };
   }
 
   return new GeometryInstance({
     id: entity,
     geometry: new PolylineVolumeGeometry(this._options),
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -138,48 +139,47 @@ PolylineVolumeGeometryUpdater.prototype.createFillGeometryInstance = function (
  *
  * @exception {DeveloperError} This instance does not represent an outlined geometry.
  */
-PolylineVolumeGeometryUpdater.prototype.createOutlineGeometryInstance = function (
-  time
-) {
-  //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+PolylineVolumeGeometryUpdater.prototype.createOutlineGeometryInstance =
+  function (time) {
+    //>>includeStart('debug', pragmas.debug);
+    Check.defined('time', time);
 
-  if (!this._outlineEnabled) {
-    throw new DeveloperError(
-      "This instance does not represent an outlined geometry."
+    if (!this._outlineEnabled) {
+      throw new DeveloperError(
+        'This instance does not represent an outlined geometry.'
+      );
+    }
+    //>>includeEnd('debug');
+
+    const entity = this._entity;
+    const isAvailable = entity.isAvailable(time);
+    const outlineColor = Property.getValueOrDefault(
+      this._outlineColorProperty,
+      time,
+      Color.BLACK,
+      scratchColor
     );
-  }
-  //>>includeEnd('debug');
+    const distanceDisplayCondition =
+      this._distanceDisplayConditionProperty.getValue(time);
 
-  const entity = this._entity;
-  const isAvailable = entity.isAvailable(time);
-  const outlineColor = Property.getValueOrDefault(
-    this._outlineColorProperty,
-    time,
-    Color.BLACK,
-    scratchColor
-  );
-  const distanceDisplayCondition = this._distanceDisplayConditionProperty.getValue(
-    time
-  );
-
-  return new GeometryInstance({
-    id: entity,
-    geometry: new PolylineVolumeOutlineGeometry(this._options),
-    attributes: {
-      show: new ShowGeometryInstanceAttribute(
-        isAvailable &&
-          entity.isShowing &&
-          this._showProperty.getValue(time) &&
-          this._showOutlineProperty.getValue(time)
-      ),
-      color: ColorGeometryInstanceAttribute.fromColor(outlineColor),
-      distanceDisplayCondition: DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-        distanceDisplayCondition
-      ),
-    },
-  });
-};
+    return new GeometryInstance({
+      id: entity,
+      geometry: new PolylineVolumeOutlineGeometry(this._options),
+      attributes: {
+        show: new ShowGeometryInstanceAttribute(
+          isAvailable &&
+            entity.isShowing &&
+            this._showProperty.getValue(time) &&
+            this._showOutlineProperty.getValue(time)
+        ),
+        color: ColorGeometryInstanceAttribute.fromColor(outlineColor),
+        distanceDisplayCondition:
+          DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+            distanceDisplayCondition
+          )
+      }
+    });
+  };
 
 PolylineVolumeGeometryUpdater.prototype._isHidden = function (
   entity,
@@ -234,7 +234,8 @@ PolylineVolumeGeometryUpdater.prototype._setStaticOptions = function (
     : undefined;
 };
 
-PolylineVolumeGeometryUpdater.DynamicGeometryUpdater = DynamicPolylineVolumeGeometryUpdater;
+PolylineVolumeGeometryUpdater.DynamicGeometryUpdater =
+  DynamicPolylineVolumeGeometryUpdater;
 
 /**
  * @private
@@ -256,7 +257,8 @@ if (defined(Object.create)) {
   DynamicPolylineVolumeGeometryUpdater.prototype = Object.create(
     DynamicGeometryUpdater.prototype
   );
-  DynamicPolylineVolumeGeometryUpdater.prototype.constructor = DynamicPolylineVolumeGeometryUpdater;
+  DynamicPolylineVolumeGeometryUpdater.prototype.constructor =
+    DynamicPolylineVolumeGeometryUpdater;
 }
 
 DynamicPolylineVolumeGeometryUpdater.prototype._isHidden = function (

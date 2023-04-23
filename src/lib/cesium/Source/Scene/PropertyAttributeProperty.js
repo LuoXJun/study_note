@@ -1,6 +1,6 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
 
 /**
  * A property in a property attribute from EXT_structural_metadata.
@@ -25,8 +25,8 @@ export default function PropertyAttributeProperty(options) {
   const classProperty = options.classProperty;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.property", property);
-  Check.typeOf.object("options.classProperty", classProperty);
+  Check.typeOf.object('options.property', property);
+  Check.typeOf.object('options.classProperty', classProperty);
   //>>includeEnd('debug');
 
   this._attribute = property.attribute;
@@ -73,7 +73,7 @@ Object.defineProperties(PropertyAttributeProperty.prototype, {
   attribute: {
     get: function () {
       return this._attribute;
-    },
+    }
   },
 
   /**
@@ -88,7 +88,7 @@ Object.defineProperties(PropertyAttributeProperty.prototype, {
   hasValueTransform: {
     get: function () {
       return this._hasValueTransform;
-    },
+    }
   },
 
   /**
@@ -102,7 +102,7 @@ Object.defineProperties(PropertyAttributeProperty.prototype, {
   offset: {
     get: function () {
       return this._offset;
-    },
+    }
   },
 
   /**
@@ -116,7 +116,7 @@ Object.defineProperties(PropertyAttributeProperty.prototype, {
   scale: {
     get: function () {
       return this._scale;
-    },
+    }
   },
 
   /**
@@ -130,7 +130,7 @@ Object.defineProperties(PropertyAttributeProperty.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -144,6 +144,6 @@ Object.defineProperties(PropertyAttributeProperty.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
-  },
+    }
+  }
 });

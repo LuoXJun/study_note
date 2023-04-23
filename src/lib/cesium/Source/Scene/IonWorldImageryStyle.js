@@ -28,6 +28,6 @@ const IonWorldImageryStyle = {
    * @type {Number}
    * @constant
    */
-  ROAD: 4,
+  ROAD: 4
 };
 export default Object.freeze(IonWorldImageryStyle);

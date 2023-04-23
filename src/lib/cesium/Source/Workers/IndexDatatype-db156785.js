@@ -1,5 +1,18 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93', './ComponentDatatype-4a60b8d6', './WebGLConstants-7dccdc96'], (function (exports, defaultValue, RuntimeError, ComponentDatatype, WebGLConstants) { 'use strict';
+define([
+  'exports',
+  './defaultValue-94c3e563',
+  './RuntimeError-c581ca93',
+  './ComponentDatatype-4a60b8d6',
+  './WebGLConstants-7dccdc96'
+], function (
+  exports,
+  defaultValue,
+  RuntimeError,
+  ComponentDatatype,
+  WebGLConstants
+) {
+  'use strict';
 
   /**
    * Constants for WebGL index datatypes.  These corresponds to the
@@ -33,7 +46,7 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93', './Comp
      * @type {Number}
      * @constant
      */
-    UNSIGNED_INT: WebGLConstants.WebGLConstants.UNSIGNED_INT,
+    UNSIGNED_INT: WebGLConstants.WebGLConstants.UNSIGNED_INT
   };
 
   /**
@@ -58,7 +71,7 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93', './Comp
 
     //>>includeStart('debug', pragmas.debug);
     throw new RuntimeError.DeveloperError(
-      "indexDatatype is required and must be a valid IndexDatatype constant."
+      'indexDatatype is required and must be a valid IndexDatatype constant.'
     );
     //>>includeEnd('debug');
   };
@@ -80,7 +93,7 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93', './Comp
       //>>includeStart('debug', pragmas.debug);
       default:
         throw new RuntimeError.DeveloperError(
-          "Size in bytes cannot be mapped to an IndexDatatype"
+          'Size in bytes cannot be mapped to an IndexDatatype'
         );
       //>>includeEnd('debug');
     }
@@ -123,7 +136,7 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93', './Comp
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(numberOfVertices)) {
-      throw new RuntimeError.DeveloperError("numberOfVertices is required.");
+      throw new RuntimeError.DeveloperError('numberOfVertices is required.');
     }
     //>>includeEnd('debug');
 
@@ -153,13 +166,13 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93', './Comp
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(numberOfVertices)) {
-      throw new RuntimeError.DeveloperError("numberOfVertices is required.");
+      throw new RuntimeError.DeveloperError('numberOfVertices is required.');
     }
     if (!defaultValue.defined(sourceArray)) {
-      throw new RuntimeError.DeveloperError("sourceArray is required.");
+      throw new RuntimeError.DeveloperError('sourceArray is required.');
     }
     if (!defaultValue.defined(byteOffset)) {
-      throw new RuntimeError.DeveloperError("byteOffset is required.");
+      throw new RuntimeError.DeveloperError('byteOffset is required.');
     }
     //>>includeEnd('debug');
 
@@ -189,7 +202,7 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93', './Comp
 
     //>>includeStart('debug', pragmas.debug);
     throw new RuntimeError.DeveloperError(
-      "array must be a Uint8Array, Uint16Array, or Uint32Array."
+      'array must be a Uint8Array, Uint16Array, or Uint32Array.'
     );
     //>>includeEnd('debug');
   };
@@ -197,5 +210,4 @@ define(['exports', './defaultValue-94c3e563', './RuntimeError-c581ca93', './Comp
   var IndexDatatype$1 = Object.freeze(IndexDatatype);
 
   exports.IndexDatatype = IndexDatatype$1;
-
-}));
+});

@@ -23,7 +23,8 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports'], (function (exports) { 'use strict';
+define(['exports'], function (exports) {
+  'use strict';
 
   /**
    * Represents which vertices should have a value of `true` for the `applyOffset` attribute
@@ -32,11 +33,10 @@ define(['exports'], (function (exports) { 'use strict';
   const GeometryOffsetAttribute = {
     NONE: 0,
     TOP: 1,
-    ALL: 2,
+    ALL: 2
   };
   var GeometryOffsetAttribute$1 = Object.freeze(GeometryOffsetAttribute);
 
   exports.GeometryOffsetAttribute = GeometryOffsetAttribute$1;
-
-}));
+});
 //# sourceMappingURL=GeometryOffsetAttribute-59b14f45.js.map

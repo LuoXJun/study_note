@@ -1,8 +1,8 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import ResourceLoader from "./ResourceLoader.js";
-import ResourceLoaderState from "./ResourceLoaderState.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import ResourceLoader from './ResourceLoader.js';
+import ResourceLoaderState from './ResourceLoaderState.js';
 
 /**
  * Loads an embedded or external buffer.
@@ -32,7 +32,7 @@ export default function BufferLoader(options) {
   //>>includeStart('debug', pragmas.debug);
   if (defined(typedArray) === defined(resource)) {
     throw new DeveloperError(
-      "One of options.typedArray and options.resource must be defined."
+      'One of options.typedArray and options.resource must be defined.'
     );
   }
   //>>includeEnd('debug');
@@ -61,7 +61,7 @@ Object.defineProperties(BufferLoader.prototype, {
   promise: {
     get: function () {
       return this._promise;
-    },
+    }
   },
   /**
    * The cache key of the resource.
@@ -74,7 +74,7 @@ Object.defineProperties(BufferLoader.prototype, {
   cacheKey: {
     get: function () {
       return this._cacheKey;
-    },
+    }
   },
   /**
    * The typed array containing the embedded buffer contents.
@@ -87,8 +87,8 @@ Object.defineProperties(BufferLoader.prototype, {
   typedArray: {
     get: function () {
       return this._typedArray;
-    },
-  },
+    }
+  }
 });
 
 /**

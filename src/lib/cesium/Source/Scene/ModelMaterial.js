@@ -1,5 +1,5 @@
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
 
 /**
  * A model's material with modifiable parameters.  A glTF material
@@ -38,7 +38,7 @@ Object.defineProperties(ModelMaterial.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
 
   /**
@@ -52,8 +52,8 @@ Object.defineProperties(ModelMaterial.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -73,7 +73,7 @@ Object.defineProperties(ModelMaterial.prototype, {
 ModelMaterial.prototype.setValue = function (name, value) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(name)) {
-    throw new DeveloperError("name is required.");
+    throw new DeveloperError('name is required.');
   }
   //>>includeEnd('debug');
 
@@ -102,7 +102,7 @@ ModelMaterial.prototype.setValue = function (name, value) {
 ModelMaterial.prototype.getValue = function (name) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(name)) {
-    throw new DeveloperError("name is required.");
+    throw new DeveloperError('name is required.');
   }
   //>>includeEnd('debug');
 

@@ -1,23 +1,23 @@
-import Cartesian2 from "./Cartesian2.js";
-import Credit from "./Credit.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Event from "./Event.js";
-import GeographicTilingScheme from "./GeographicTilingScheme.js";
-import HeightmapEncoding from "./HeightmapEncoding.js";
-import HeightmapTerrainData from "./HeightmapTerrainData.js";
-import Rectangle from "./Rectangle.js";
-import Request from "./Request.js";
-import RequestState from "./RequestState.js";
-import RequestType from "./RequestType.js";
-import Resource from "./Resource.js";
-import RuntimeError from "./RuntimeError.js";
-import TerrainProvider from "./TerrainProvider.js";
-import TileAvailability from "./TileAvailability.js";
-import TileProviderError from "./TileProviderError.js";
-import WebMercatorTilingScheme from "./WebMercatorTilingScheme.js";
+import Cartesian2 from './Cartesian2.js';
+import Credit from './Credit.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import Event from './Event.js';
+import GeographicTilingScheme from './GeographicTilingScheme.js';
+import HeightmapEncoding from './HeightmapEncoding.js';
+import HeightmapTerrainData from './HeightmapTerrainData.js';
+import Rectangle from './Rectangle.js';
+import Request from './Request.js';
+import RequestState from './RequestState.js';
+import RequestType from './RequestType.js';
+import Resource from './Resource.js';
+import RuntimeError from './RuntimeError.js';
+import TerrainProvider from './TerrainProvider.js';
+import TileAvailability from './TileAvailability.js';
+import TileProviderError from './TileProviderError.js';
+import WebMercatorTilingScheme from './WebMercatorTilingScheme.js';
 
 const ALL_CHILDREN = 15;
 
@@ -47,7 +47,7 @@ const ALL_CHILDREN = 15;
 function ArcGISTiledElevationTerrainProvider(options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options) || !defined(options.url)) {
-    throw new DeveloperError("options.url is required.");
+    throw new DeveloperError('options.url is required.');
   }
   //>>includeEnd('debug');
 
@@ -77,16 +77,16 @@ function ArcGISTiledElevationTerrainProvider(options) {
       if (defined(token)) {
         resource = resource.getDerivedResource({
           queryParameters: {
-            token: token,
-          },
+            token: token
+          }
         });
       }
       that._resource = resource;
 
       const metadataResource = resource.getDerivedResource({
         queryParameters: {
-          f: "pjson",
-        },
+          f: 'pjson'
+        }
       });
 
       return metadataResource.fetchJson();
@@ -104,7 +104,7 @@ function ArcGISTiledElevationTerrainProvider(options) {
       );
       const extent = metadata.extent;
       const tilingSchemeOptions = {
-        ellipsoid: ellipsoid,
+        ellipsoid: ellipsoid
       };
       if (wkid === 4326) {
         tilingSchemeOptions.rectangle = Rectangle.fromDegrees(
@@ -125,24 +125,24 @@ function ArcGISTiledElevationTerrainProvider(options) {
         );
         that._tilingScheme = new WebMercatorTilingScheme(tilingSchemeOptions);
       } else {
-        return Promise.reject(new RuntimeError("Invalid spatial reference"));
+        return Promise.reject(new RuntimeError('Invalid spatial reference'));
       }
 
       const tileInfo = metadata.tileInfo;
       if (!defined(tileInfo)) {
-        return Promise.reject(new RuntimeError("tileInfo is required"));
+        return Promise.reject(new RuntimeError('tileInfo is required'));
       }
 
       that._width = tileInfo.rows + 1;
       that._height = tileInfo.cols + 1;
       that._encoding =
-        tileInfo.format === "LERC"
+        tileInfo.format === 'LERC'
           ? HeightmapEncoding.LERC
           : HeightmapEncoding.NONE;
       that._lodCount = tileInfo.lods.length - 1;
 
       const hasAvailability = (that._hasAvailability =
-        metadata.capabilities.indexOf("Tilemap") !== -1);
+        metadata.capabilities.indexOf('Tilemap') !== -1);
       if (hasAvailability) {
         that._tilesAvailable = new TileAvailability(
           that._tilingScheme,
@@ -161,22 +161,23 @@ function ArcGISTiledElevationTerrainProvider(options) {
         );
       }
 
-      that._levelZeroMaximumGeometricError = TerrainProvider.getEstimatedLevelZeroGeometricErrorForAHeightmap(
-        that._tilingScheme.ellipsoid,
-        that._width,
-        that._tilingScheme.getNumberOfXTilesAtLevel(0)
-      );
+      that._levelZeroMaximumGeometricError =
+        TerrainProvider.getEstimatedLevelZeroGeometricErrorForAHeightmap(
+          that._tilingScheme.ellipsoid,
+          that._width,
+          that._tilingScheme.getNumberOfXTilesAtLevel(0)
+        );
 
       if (metadata.bandCount > 1) {
         console.log(
-          "ArcGISTiledElevationTerrainProvider: Terrain data has more than 1 band. Using the first one."
+          'ArcGISTiledElevationTerrainProvider: Terrain data has more than 1 band. Using the first one.'
         );
       }
 
       that._terrainDataStructure = {
         elementMultiplier: 1.0,
         lowestEncodedHeight: metadata.minValues[0],
-        highestEncodedHeight: metadata.maxValues[0],
+        highestEncodedHeight: metadata.maxValues[0]
       };
 
       that._ready = true;
@@ -204,7 +205,7 @@ Object.defineProperties(ArcGISTiledElevationTerrainProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._errorEvent;
-    },
+    }
   },
 
   /**
@@ -219,12 +220,12 @@ Object.defineProperties(ArcGISTiledElevationTerrainProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this.ready) {
         throw new DeveloperError(
-          "credit must not be called before ready returns true."
+          'credit must not be called before ready returns true.'
         );
       }
       //>>includeEnd('debug');
       return this._credit;
-    },
+    }
   },
 
   /**
@@ -239,12 +240,12 @@ Object.defineProperties(ArcGISTiledElevationTerrainProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this.ready) {
         throw new DeveloperError(
-          "tilingScheme must not be called before ready returns true."
+          'tilingScheme must not be called before ready returns true.'
         );
       }
       //>>includeEnd('debug');
       return this._tilingScheme;
-    },
+    }
   },
 
   /**
@@ -256,7 +257,7 @@ Object.defineProperties(ArcGISTiledElevationTerrainProvider.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -268,7 +269,7 @@ Object.defineProperties(ArcGISTiledElevationTerrainProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   /**
@@ -283,7 +284,7 @@ Object.defineProperties(ArcGISTiledElevationTerrainProvider.prototype, {
   hasWaterMask: {
     get: function () {
       return false;
-    },
+    }
   },
 
   /**
@@ -296,7 +297,7 @@ Object.defineProperties(ArcGISTiledElevationTerrainProvider.prototype, {
   hasVertexNormals: {
     get: function () {
       return false;
-    },
+    }
   },
   /**
    * Gets an object that can be used to determine availability of terrain from this provider, such as
@@ -312,13 +313,13 @@ Object.defineProperties(ArcGISTiledElevationTerrainProvider.prototype, {
       //>>includeStart('debug', pragmas.debug)
       if (!this._ready) {
         throw new DeveloperError(
-          "availability must not be called before the terrain provider is ready."
+          'availability must not be called before the terrain provider is ready.'
         );
       }
       //>>includeEnd('debug');
       return this._tilesAvailable;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -343,14 +344,14 @@ ArcGISTiledElevationTerrainProvider.prototype.requestTileGeometry = function (
   //>>includeStart('debug', pragmas.debug)
   if (!this._ready) {
     throw new DeveloperError(
-      "requestTileGeometry must not be called before the terrain provider is ready."
+      'requestTileGeometry must not be called before the terrain provider is ready.'
     );
   }
   //>>includeEnd('debug');
 
   const tileResource = this._resource.getDerivedResource({
     url: `tile/${level}/${y}/${x}`,
-    request: request,
+    request: request
   });
 
   const hasAvailability = this._hasAvailability;
@@ -389,7 +390,7 @@ ArcGISTiledElevationTerrainProvider.prototype.requestTileGeometry = function (
           ? tilesAvailable.computeChildMaskForTile(level, x, y)
           : ALL_CHILDREN,
         structure: that._terrainDataStructure,
-        encoding: that._encoding,
+        encoding: that._encoding
       });
     })
     .catch(function (error) {
@@ -441,19 +442,18 @@ function isTileAvailable(that, level, x, y) {
  * @param {Number} level The tile level for which to get the maximum geometric error.
  * @returns {Number} The maximum geometric error.
  */
-ArcGISTiledElevationTerrainProvider.prototype.getLevelMaximumGeometricError = function (
-  level
-) {
-  //>>includeStart('debug', pragmas.debug);
-  if (!this.ready) {
-    throw new DeveloperError(
-      "getLevelMaximumGeometricError must not be called before ready returns true."
-    );
-  }
-  //>>includeEnd('debug');
+ArcGISTiledElevationTerrainProvider.prototype.getLevelMaximumGeometricError =
+  function (level) {
+    //>>includeStart('debug', pragmas.debug);
+    if (!this.ready) {
+      throw new DeveloperError(
+        'getLevelMaximumGeometricError must not be called before ready returns true.'
+      );
+    }
+    //>>includeEnd('debug');
 
-  return this._levelZeroMaximumGeometricError / (1 << level);
-};
+    return this._levelZeroMaximumGeometricError / (1 << level);
+  };
 
 /**
  * Determines whether data for a tile is available to be loaded.
@@ -490,13 +490,10 @@ ArcGISTiledElevationTerrainProvider.prototype.getTileDataAvailable = function (
  * @param {Number} level The level of the tile for which to request geometry.
  * @returns {undefined} This provider does not support loading availability.
  */
-ArcGISTiledElevationTerrainProvider.prototype.loadTileDataAvailability = function (
-  x,
-  y,
-  level
-) {
-  return undefined;
-};
+ArcGISTiledElevationTerrainProvider.prototype.loadTileDataAvailability =
+  function (x, y, level) {
+    return undefined;
+  };
 
 function findRange(origin, width, height, data) {
   const endCol = width - 1;
@@ -508,7 +505,7 @@ function findRange(origin, width, height, data) {
     startX: origin.x,
     startY: origin.y,
     endX: 0,
-    endY: 0,
+    endY: 0
   };
 
   const corner = new Cartesian2(origin.x + 1, origin.y + 1);
@@ -574,7 +571,7 @@ function findRange(origin, width, height, data) {
   return {
     endingIndices: endingIndices,
     range: range,
-    value: value,
+    value: value
   };
 }
 
@@ -590,7 +587,7 @@ function computeAvailability(x, y, width, height, data) {
         startX: x,
         startY: y,
         endX: x + width - 1,
-        endY: y + height - 1,
+        endY: y + height - 1
       });
     }
 
@@ -641,12 +638,12 @@ function requestAvailability(that, level, x, y) {
   const request = new Request({
     throttle: false,
     throttleByServer: true,
-    type: RequestType.TERRAIN,
+    type: RequestType.TERRAIN
   });
 
   const tilemapResource = that._resource.getDerivedResource({
     url: url,
-    request: request,
+    request: request
   });
 
   let promise = tilemapResource.fetchJson();
@@ -690,7 +687,7 @@ function requestAvailability(that, level, x, y) {
 
   availableCache[url] = {
     promise: promise,
-    request: request,
+    request: request
   };
 
   promise = promise.finally(function (result) {
@@ -701,7 +698,7 @@ function requestAvailability(that, level, x, y) {
 
   return {
     promise: promise,
-    request: request,
+    request: request
   };
 }
 export default ArcGISTiledElevationTerrainProvider;

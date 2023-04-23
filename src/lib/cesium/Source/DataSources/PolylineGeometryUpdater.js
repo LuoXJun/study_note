@@ -1,34 +1,34 @@
-import ArcType from "../Core/ArcType.js";
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DistanceDisplayCondition from "../Core/DistanceDisplayCondition.js";
-import DistanceDisplayConditionGeometryInstanceAttribute from "../Core/DistanceDisplayConditionGeometryInstanceAttribute.js";
-import Event from "../Core/Event.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import GroundPolylineGeometry from "../Core/GroundPolylineGeometry.js";
-import Iso8601 from "../Core/Iso8601.js";
-import oneTimeWarning from "../Core/oneTimeWarning.js";
-import PolylineGeometry from "../Core/PolylineGeometry.js";
-import PolylinePipeline from "../Core/PolylinePipeline.js";
-import ShowGeometryInstanceAttribute from "../Core/ShowGeometryInstanceAttribute.js";
-import Entity from "../DataSources/Entity.js";
-import ClassificationType from "../Scene/ClassificationType.js";
-import GroundPolylinePrimitive from "../Scene/GroundPolylinePrimitive.js";
-import PolylineCollection from "../Scene/PolylineCollection.js";
-import PolylineColorAppearance from "../Scene/PolylineColorAppearance.js";
-import PolylineMaterialAppearance from "../Scene/PolylineMaterialAppearance.js";
-import ShadowMode from "../Scene/ShadowMode.js";
-import BoundingSphereState from "./BoundingSphereState.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import ConstantProperty from "./ConstantProperty.js";
-import MaterialProperty from "./MaterialProperty.js";
-import Property from "./Property.js";
+import ArcType from '../Core/ArcType.js';
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DistanceDisplayCondition from '../Core/DistanceDisplayCondition.js';
+import DistanceDisplayConditionGeometryInstanceAttribute from '../Core/DistanceDisplayConditionGeometryInstanceAttribute.js';
+import Event from '../Core/Event.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import GroundPolylineGeometry from '../Core/GroundPolylineGeometry.js';
+import Iso8601 from '../Core/Iso8601.js';
+import oneTimeWarning from '../Core/oneTimeWarning.js';
+import PolylineGeometry from '../Core/PolylineGeometry.js';
+import PolylinePipeline from '../Core/PolylinePipeline.js';
+import ShowGeometryInstanceAttribute from '../Core/ShowGeometryInstanceAttribute.js';
+import Entity from '../DataSources/Entity.js';
+import ClassificationType from '../Scene/ClassificationType.js';
+import GroundPolylinePrimitive from '../Scene/GroundPolylinePrimitive.js';
+import PolylineCollection from '../Scene/PolylineCollection.js';
+import PolylineColorAppearance from '../Scene/PolylineColorAppearance.js';
+import PolylineMaterialAppearance from '../Scene/PolylineMaterialAppearance.js';
+import ShadowMode from '../Scene/ShadowMode.js';
+import BoundingSphereState from './BoundingSphereState.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import ConstantProperty from './ConstantProperty.js';
+import MaterialProperty from './MaterialProperty.js';
+import Property from './Property.js';
 
 const defaultZIndex = new ConstantProperty(0);
 
@@ -71,10 +71,10 @@ function GroundGeometryOptions() {
 function PolylineGeometryUpdater(entity, scene) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(entity)) {
-    throw new DeveloperError("entity is required");
+    throw new DeveloperError('entity is required');
   }
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required");
+    throw new DeveloperError('scene is required');
   }
   //>>includeEnd('debug');
 
@@ -101,7 +101,7 @@ function PolylineGeometryUpdater(entity, scene) {
 
   this._zIndex = 0;
 
-  this._onEntityPropertyChanged(entity, "polyline", entity.polyline, undefined);
+  this._onEntityPropertyChanged(entity, 'polyline', entity.polyline, undefined);
 }
 
 Object.defineProperties(PolylineGeometryUpdater.prototype, {
@@ -114,7 +114,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
   /**
    * Gets the entity associated with this geometry.
@@ -126,7 +126,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
   entity: {
     get: function () {
       return this._entity;
-    },
+    }
   },
   /**
    * Gets a value indicating if the geometry has a fill component.
@@ -138,7 +138,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
   fillEnabled: {
     get: function () {
       return this._fillEnabled;
-    },
+    }
   },
   /**
    * Gets a value indicating if fill visibility varies with simulation time.
@@ -154,7 +154,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
         (!defined(this._entity.availability) &&
           Property.isConstant(this._showProperty))
       );
-    },
+    }
   },
   /**
    * Gets the material property used to fill the geometry.
@@ -166,7 +166,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
   fillMaterialProperty: {
     get: function () {
       return this._materialProperty;
-    },
+    }
   },
   /**
    * Gets the material property used to fill the geometry when it fails the depth test.
@@ -178,7 +178,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
   depthFailMaterialProperty: {
     get: function () {
       return this._depthFailMaterialProperty;
-    },
+    }
   },
   /**
    * Gets a value indicating if the geometry has an outline component.
@@ -188,7 +188,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
    * @readonly
    */
   outlineEnabled: {
-    value: false,
+    value: false
   },
   /**
    * Gets a value indicating if outline visibility varies with simulation time.
@@ -198,7 +198,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
    * @readonly
    */
   hasConstantOutline: {
-    value: true,
+    value: true
   },
   /**
    * Gets the {@link Color} property for the geometry outline.
@@ -208,7 +208,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
    * @readonly
    */
   outlineColorProperty: {
-    value: undefined,
+    value: undefined
   },
   /**
    * Gets the property specifying whether the geometry
@@ -221,7 +221,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
   shadowsProperty: {
     get: function () {
       return this._shadowsProperty;
-    },
+    }
   },
   /**
    * Gets or sets the {@link DistanceDisplayCondition} Property specifying at what distance from the camera that this geometry will be displayed.
@@ -233,7 +233,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
   distanceDisplayConditionProperty: {
     get: function () {
       return this._distanceDisplayConditionProperty;
-    },
+    }
   },
   /**
    * Gets or sets the {@link ClassificationType} Property specifying if this geometry will classify terrain, 3D Tiles, or both when on the ground.
@@ -245,7 +245,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
   classificationTypeProperty: {
     get: function () {
       return this._classificationTypeProperty;
-    },
+    }
   },
   /**
    * Gets a value indicating if the geometry is time-varying.
@@ -259,7 +259,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
   isDynamic: {
     get: function () {
       return this._dynamic;
-    },
+    }
   },
   /**
    * Gets a value indicating if the geometry is closed.
@@ -270,7 +270,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
    * @readonly
    */
   isClosed: {
-    value: false,
+    value: false
   },
   /**
    * Gets an event that is raised whenever the public properties
@@ -283,7 +283,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
   geometryChanged: {
     get: function () {
       return this._geometryChanged;
-    },
+    }
   },
 
   /**
@@ -296,7 +296,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
   arcType: {
     get: function () {
       return this._arcType;
-    },
+    }
   },
 
   /**
@@ -310,7 +310,7 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
   clampToGround: {
     get: function () {
       return this._clampToGround && this._supportsPolylinesOnTerrain;
-    },
+    }
   },
 
   /**
@@ -322,8 +322,8 @@ Object.defineProperties(PolylineGeometryUpdater.prototype, {
   zIndex: {
     get: function () {
       return this._zIndex;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -362,12 +362,12 @@ PolylineGeometryUpdater.prototype.isFilled = function (time) {
 PolylineGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required.");
+    throw new DeveloperError('time is required.');
   }
 
   if (!this._fillEnabled) {
     throw new DeveloperError(
-      "This instance does not represent a filled geometry."
+      'This instance does not represent a filled geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -377,16 +377,16 @@ PolylineGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
   const show = new ShowGeometryInstanceAttribute(
     isAvailable && entity.isShowing && this._showProperty.getValue(time)
   );
-  const distanceDisplayCondition = this._distanceDisplayConditionProperty.getValue(
-    time
-  );
-  const distanceDisplayConditionAttribute = DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-    distanceDisplayCondition
-  );
+  const distanceDisplayCondition =
+    this._distanceDisplayConditionProperty.getValue(time);
+  const distanceDisplayConditionAttribute =
+    DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+      distanceDisplayCondition
+    );
 
   const attributes = {
     show: show,
-    distanceDisplayCondition: distanceDisplayConditionAttribute,
+    distanceDisplayCondition: distanceDisplayConditionAttribute
   };
 
   let currentColor;
@@ -407,7 +407,7 @@ PolylineGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
     return new GeometryInstance({
       id: entity,
       geometry: new GroundPolylineGeometry(this._groundGeometryOptions),
-      attributes: attributes,
+      attributes: attributes
     });
   }
 
@@ -427,15 +427,14 @@ PolylineGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
     if (!defined(currentColor)) {
       currentColor = Color.WHITE;
     }
-    attributes.depthFailColor = ColorGeometryInstanceAttribute.fromColor(
-      currentColor
-    );
+    attributes.depthFailColor =
+      ColorGeometryInstanceAttribute.fromColor(currentColor);
   }
 
   return new GeometryInstance({
     id: entity,
     geometry: new PolylineGeometry(this._geometryOptions),
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -452,7 +451,7 @@ PolylineGeometryUpdater.prototype.createOutlineGeometryInstance = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   throw new DeveloperError(
-    "This instance does not represent an outlined geometry."
+    'This instance does not represent an outlined geometry.'
   );
   //>>includeEnd('debug');
 };
@@ -482,7 +481,7 @@ PolylineGeometryUpdater.prototype._onEntityPropertyChanged = function (
   newValue,
   oldValue
 ) {
-  if (!(propertyName === "availability" || propertyName === "polyline")) {
+  if (!(propertyName === 'availability' || propertyName === 'polyline')) {
     return;
   }
 
@@ -599,7 +598,7 @@ PolylineGeometryUpdater.prototype._onEntityPropertyChanged = function (
 
     if (!this._clampToGround && defined(zIndex)) {
       oneTimeWarning(
-        "Entity polylines must have clampToGround: true when using zIndex.  zIndex will be ignored."
+        'Entity polylines must have clampToGround: true when using zIndex.  zIndex will be ignored.'
       );
     }
 
@@ -623,12 +622,12 @@ PolylineGeometryUpdater.prototype.createDynamicUpdater = function (
   groundPrimitives
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("primitives", primitives);
-  Check.defined("groundPrimitives", groundPrimitives);
+  Check.defined('primitives', primitives);
+  Check.defined('groundPrimitives', groundPrimitives);
 
   if (!this._dynamic) {
     throw new DeveloperError(
-      "This instance does not represent dynamic geometry."
+      'This instance does not represent dynamic geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -643,7 +642,7 @@ const generateCartesianArcOptions = {
   positions: undefined,
   granularity: undefined,
   height: undefined,
-  ellipsoid: undefined,
+  ellipsoid: undefined
 };
 
 function DynamicGeometryUpdater(primitives, groundPrimitives, geometryUpdater) {
@@ -707,11 +706,8 @@ DynamicGeometryUpdater.prototype.update = function (time) {
     time,
     ArcType.GEODESIC
   );
-  geometryUpdater._groundGeometryOptions.granularity = Property.getValueOrDefault(
-    polyline._granularity,
-    time,
-    9999
-  );
+  geometryUpdater._groundGeometryOptions.granularity =
+    Property.getValueOrDefault(polyline._granularity, time, 9999);
 
   const groundPrimitives = this._groundPrimitives;
 
@@ -745,7 +741,7 @@ DynamicGeometryUpdater.prototype.update = function (time) {
       );
       appearance = new PolylineMaterialAppearance({
         material: material,
-        translucent: material.isTranslucent(),
+        translucent: material.isTranslucent()
       });
       this._material = material;
     }
@@ -754,10 +750,9 @@ DynamicGeometryUpdater.prototype.update = function (time) {
       new GroundPolylinePrimitive({
         geometryInstances: geometryUpdater.createFillGeometryInstance(time),
         appearance: appearance,
-        classificationType: geometryUpdater.classificationTypeProperty.getValue(
-          time
-        ),
-        asynchronous: false,
+        classificationType:
+          geometryUpdater.classificationTypeProperty.getValue(time),
+        asynchronous: false
       }),
       Property.getValueOrUndefined(geometryUpdater.zIndex, time)
     );
@@ -828,7 +823,7 @@ DynamicGeometryUpdater.prototype.update = function (time) {
 
 DynamicGeometryUpdater.prototype.getBoundingSphere = function (result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("result", result);
+  Check.defined('result', result);
   //>>includeEnd('debug');
 
   if (!this._geometryUpdater.clampToGround) {

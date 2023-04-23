@@ -1,9 +1,9 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
 
 /**
  * A cumulus cloud billboard positioned in the 3D scene, that is created and rendered using a {@link CloudCollection}.
@@ -95,14 +95,14 @@ Object.defineProperties(CumulusCloud.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.bool("value", value);
+      Check.typeOf.bool('value', value);
       //>>includeEnd('debug');
 
       if (this._show !== value) {
         this._show = value;
         makeDirty(this, SHOW_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -116,7 +116,7 @@ Object.defineProperties(CumulusCloud.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug)
-      Check.typeOf.object("value", value);
+      Check.typeOf.object('value', value);
       //>>includeEnd('debug');
 
       const position = this._position;
@@ -124,7 +124,7 @@ Object.defineProperties(CumulusCloud.prototype, {
         Cartesian3.clone(value, position);
         makeDirty(this, POSITION_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -158,7 +158,7 @@ Object.defineProperties(CumulusCloud.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug)
-      Check.typeOf.object("value", value);
+      Check.typeOf.object('value', value);
       //>>includeEnd('debug');
 
       const scale = this._scale;
@@ -166,7 +166,7 @@ Object.defineProperties(CumulusCloud.prototype, {
         Cartesian2.clone(value, scale);
         makeDirty(this, SCALE_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -214,7 +214,7 @@ Object.defineProperties(CumulusCloud.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug)
-      Check.typeOf.object("value", value);
+      Check.typeOf.object('value', value);
       //>>includeEnd('debug');
 
       const maximumSize = this._maximumSize;
@@ -222,7 +222,7 @@ Object.defineProperties(CumulusCloud.prototype, {
         Cartesian3.clone(value, maximumSize);
         makeDirty(this, MAXIMUM_SIZE_INDEX);
       }
-    },
+    }
   },
   /**
    * Sets the color of the cloud
@@ -236,7 +236,7 @@ Object.defineProperties(CumulusCloud.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug)
-      Check.typeOf.object("value", value);
+      Check.typeOf.object('value', value);
       //>>includeEnd('debug');
 
       const color = this._color;
@@ -244,7 +244,7 @@ Object.defineProperties(CumulusCloud.prototype, {
         Color.clone(value, color);
         makeDirty(this, COLOR_INDEX);
       }
-    },
+    }
   },
   /**
    * <p>Gets or sets the "slice" of the cloud that is rendered on the billboard, i.e.
@@ -300,7 +300,7 @@ Object.defineProperties(CumulusCloud.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug)
-      Check.typeOf.number("value", value);
+      Check.typeOf.number('value', value);
       //>>includeEnd('debug');
 
       const slice = this._slice;
@@ -308,7 +308,7 @@ Object.defineProperties(CumulusCloud.prototype, {
         this._slice = value;
         makeDirty(this, SLICE_INDEX);
       }
-    },
+    }
   },
 
   /**
@@ -332,7 +332,7 @@ Object.defineProperties(CumulusCloud.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug)
-      Check.typeOf.number("value", value);
+      Check.typeOf.number('value', value);
       //>>includeEnd('debug');
 
       const brightness = this._brightness;
@@ -340,8 +340,8 @@ Object.defineProperties(CumulusCloud.prototype, {
         this._brightness = value;
         makeDirty(this, BRIGHTNESS_INDEX);
       }
-    },
-  },
+    }
+  }
 });
 
 CumulusCloud.prototype._destroy = function () {

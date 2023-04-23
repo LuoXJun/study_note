@@ -1,8 +1,8 @@
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Rectangle from "../Core/Rectangle.js";
-import QuadtreeTileLoadState from "./QuadtreeTileLoadState.js";
-import TileSelectionResult from "./TileSelectionResult.js";
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Rectangle from '../Core/Rectangle.js';
+import QuadtreeTileLoadState from './QuadtreeTileLoadState.js';
+import TileSelectionResult from './TileSelectionResult.js';
 
 /**
  * A single tile in a {@link QuadtreePrimitive}.
@@ -20,24 +20,24 @@ import TileSelectionResult from "./TileSelectionResult.js";
 function QuadtreeTile(options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options)) {
-    throw new DeveloperError("options is required.");
+    throw new DeveloperError('options is required.');
   }
   if (!defined(options.x)) {
-    throw new DeveloperError("options.x is required.");
+    throw new DeveloperError('options.x is required.');
   } else if (!defined(options.y)) {
-    throw new DeveloperError("options.y is required.");
+    throw new DeveloperError('options.y is required.');
   } else if (options.x < 0 || options.y < 0) {
     throw new DeveloperError(
-      "options.x and options.y must be greater than or equal to zero."
+      'options.x and options.y must be greater than or equal to zero.'
     );
   }
   if (!defined(options.level)) {
     throw new DeveloperError(
-      "options.level is required and must be greater than or equal to zero."
+      'options.level is required and must be greater than or equal to zero.'
     );
   }
   if (!defined(options.tilingScheme)) {
-    throw new DeveloperError("options.tilingScheme is required.");
+    throw new DeveloperError('options.tilingScheme is required.');
   }
   //>>includeEnd('debug');
 
@@ -119,7 +119,7 @@ function QuadtreeTile(options) {
 QuadtreeTile.createLevelZeroTiles = function (tilingScheme) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(tilingScheme)) {
-    throw new DeveloperError("tilingScheme is required.");
+    throw new DeveloperError('tilingScheme is required.');
   }
   //>>includeEnd('debug');
 
@@ -135,7 +135,7 @@ QuadtreeTile.createLevelZeroTiles = function (tilingScheme) {
         tilingScheme: tilingScheme,
         x: x,
         y: y,
-        level: 0,
+        level: 0
       });
     }
   }
@@ -198,7 +198,7 @@ Object.defineProperties(QuadtreeTile.prototype, {
   tilingScheme: {
     get: function () {
       return this._tilingScheme;
-    },
+    }
   },
 
   /**
@@ -209,7 +209,7 @@ Object.defineProperties(QuadtreeTile.prototype, {
   x: {
     get: function () {
       return this._x;
-    },
+    }
   },
 
   /**
@@ -220,7 +220,7 @@ Object.defineProperties(QuadtreeTile.prototype, {
   y: {
     get: function () {
       return this._y;
-    },
+    }
   },
 
   /**
@@ -231,7 +231,7 @@ Object.defineProperties(QuadtreeTile.prototype, {
   level: {
     get: function () {
       return this._level;
-    },
+    }
   },
 
   /**
@@ -242,7 +242,7 @@ Object.defineProperties(QuadtreeTile.prototype, {
   parent: {
     get: function () {
       return this._parent;
-    },
+    }
   },
 
   /**
@@ -254,7 +254,7 @@ Object.defineProperties(QuadtreeTile.prototype, {
   rectangle: {
     get: function () {
       return this._rectangle;
-    },
+    }
   },
 
   /**
@@ -268,9 +268,9 @@ Object.defineProperties(QuadtreeTile.prototype, {
         this.northwestChild,
         this.northeastChild,
         this.southwestChild,
-        this.southeastChild,
+        this.southeastChild
       ];
-    },
+    }
   },
 
   /**
@@ -286,11 +286,11 @@ Object.defineProperties(QuadtreeTile.prototype, {
           x: this.x * 2,
           y: this.y * 2 + 1,
           level: this.level + 1,
-          parent: this,
+          parent: this
         });
       }
       return this._southwestChild;
-    },
+    }
   },
 
   /**
@@ -306,11 +306,11 @@ Object.defineProperties(QuadtreeTile.prototype, {
           x: this.x * 2 + 1,
           y: this.y * 2 + 1,
           level: this.level + 1,
-          parent: this,
+          parent: this
         });
       }
       return this._southeastChild;
-    },
+    }
   },
 
   /**
@@ -326,11 +326,11 @@ Object.defineProperties(QuadtreeTile.prototype, {
           x: this.x * 2,
           y: this.y * 2,
           level: this.level + 1,
-          parent: this,
+          parent: this
         });
       }
       return this._northwestChild;
-    },
+    }
   },
 
   /**
@@ -346,11 +346,11 @@ Object.defineProperties(QuadtreeTile.prototype, {
           x: this.x * 2 + 1,
           y: this.y * 2,
           level: this.level + 1,
-          parent: this,
+          parent: this
         });
       }
       return this._northeastChild;
-    },
+    }
   },
 
   /**
@@ -361,7 +361,7 @@ Object.defineProperties(QuadtreeTile.prototype, {
   customData: {
     get: function () {
       return this._customData;
-    },
+    }
   },
 
   /**
@@ -374,7 +374,7 @@ Object.defineProperties(QuadtreeTile.prototype, {
   needsLoading: {
     get: function () {
       return this.state < QuadtreeTileLoadState.DONE;
-    },
+    }
   },
 
   /**
@@ -400,8 +400,8 @@ Object.defineProperties(QuadtreeTile.prototype, {
       }
 
       return result;
-    },
-  },
+    }
+  }
 });
 
 QuadtreeTile.prototype.findLevelZeroTile = function (levelZeroTiles, x, y) {

@@ -1,19 +1,19 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import Check from "../Core/Check.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import EncodedCartesian3 from "../Core/EncodedCartesian3.js";
-import GeometryInstanceAttribute from "../Core/GeometryInstanceAttribute.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import Rectangle from "../Core/Rectangle.js";
-import Transforms from "../Core/Transforms.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import PerInstanceColorAppearance from "../Scene/PerInstanceColorAppearance.js";
-import ShadowVolumeAppearanceFS from "../Shaders/ShadowVolumeAppearanceFS.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import Check from '../Core/Check.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import EncodedCartesian3 from '../Core/EncodedCartesian3.js';
+import GeometryInstanceAttribute from '../Core/GeometryInstanceAttribute.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import Rectangle from '../Core/Rectangle.js';
+import Transforms from '../Core/Transforms.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import PerInstanceColorAppearance from '../Scene/PerInstanceColorAppearance.js';
+import ShadowVolumeAppearanceFS from '../Shaders/ShadowVolumeAppearanceFS.js';
 
 /**
  * Creates shaders for a ClassificationPrimitive to use a given Appearance, as well as for picking.
@@ -25,16 +25,16 @@ import ShadowVolumeAppearanceFS from "../Shaders/ShadowVolumeAppearanceFS.js";
  */
 function ShadowVolumeAppearance(extentsCulling, planarExtents, appearance) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.bool("extentsCulling", extentsCulling);
-  Check.typeOf.bool("planarExtents", planarExtents);
-  Check.typeOf.object("appearance", appearance);
+  Check.typeOf.bool('extentsCulling', extentsCulling);
+  Check.typeOf.bool('planarExtents', planarExtents);
+  Check.typeOf.object('appearance', appearance);
   //>>includeEnd('debug');
 
   this._projectionExtentDefines = {
-    eastMostYhighDefine: "",
-    eastMostYlowDefine: "",
-    westMostYhighDefine: "",
-    westMostYlowDefine: "",
+    eastMostYhighDefine: '',
+    eastMostYlowDefine: '',
+    westMostYhighDefine: '',
+    westMostYlowDefine: ''
   };
 
   // Compute shader dependencies
@@ -53,14 +53,14 @@ function ShadowVolumeAppearance(extentsCulling, planarExtents, appearance) {
     const materialShaderSource = `${appearance.material.shaderSource}\n${appearance.fragmentShaderSource}`;
 
     colorShaderDependencies.normalEC =
-      materialShaderSource.indexOf("materialInput.normalEC") !== -1 ||
-      materialShaderSource.indexOf("czm_getDefaultMaterial") !== -1;
+      materialShaderSource.indexOf('materialInput.normalEC') !== -1 ||
+      materialShaderSource.indexOf('czm_getDefaultMaterial') !== -1;
     colorShaderDependencies.positionToEyeEC =
-      materialShaderSource.indexOf("materialInput.positionToEyeEC") !== -1;
+      materialShaderSource.indexOf('materialInput.positionToEyeEC') !== -1;
     colorShaderDependencies.tangentToEyeMatrix =
-      materialShaderSource.indexOf("materialInput.tangentToEyeMatrix") !== -1;
+      materialShaderSource.indexOf('materialInput.tangentToEyeMatrix') !== -1;
     colorShaderDependencies.st =
-      materialShaderSource.indexOf("materialInput.st") !== -1;
+      materialShaderSource.indexOf('materialInput.st') !== -1;
   }
 
   this._colorShaderDependencies = colorShaderDependencies;
@@ -80,7 +80,7 @@ ShadowVolumeAppearance.prototype.createFragmentShader = function (
   columbusView2D
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.bool("columbusView2D", columbusView2D);
+  Check.typeOf.bool('columbusView2D', columbusView2D);
   //>>includeEnd('debug');
 
   const appearance = this._appearance;
@@ -88,55 +88,55 @@ ShadowVolumeAppearance.prototype.createFragmentShader = function (
 
   const defines = [];
   if (!columbusView2D && !this._planarExtents) {
-    defines.push("SPHERICAL");
+    defines.push('SPHERICAL');
   }
   if (dependencies.requiresEC) {
-    defines.push("REQUIRES_EC");
+    defines.push('REQUIRES_EC');
   }
   if (dependencies.requiresWC) {
-    defines.push("REQUIRES_WC");
+    defines.push('REQUIRES_WC');
   }
   if (dependencies.requiresTextureCoordinates) {
-    defines.push("TEXTURE_COORDINATES");
+    defines.push('TEXTURE_COORDINATES');
   }
   if (this._extentsCulling) {
-    defines.push("CULL_FRAGMENTS");
+    defines.push('CULL_FRAGMENTS');
   }
   if (dependencies.requiresNormalEC) {
-    defines.push("NORMAL_EC");
+    defines.push('NORMAL_EC');
   }
   if (appearance instanceof PerInstanceColorAppearance) {
-    defines.push("PER_INSTANCE_COLOR");
+    defines.push('PER_INSTANCE_COLOR');
   }
 
   // Material inputs. Use of parameters in the material is different
   // from requirement of the parameters in the overall shader, for example,
   // texture coordinates may be used for fragment culling but not for the material itself.
   if (dependencies.normalEC) {
-    defines.push("USES_NORMAL_EC");
+    defines.push('USES_NORMAL_EC');
   }
   if (dependencies.positionToEyeEC) {
-    defines.push("USES_POSITION_TO_EYE_EC");
+    defines.push('USES_POSITION_TO_EYE_EC');
   }
   if (dependencies.tangentToEyeMatrix) {
-    defines.push("USES_TANGENT_TO_EYE");
+    defines.push('USES_TANGENT_TO_EYE');
   }
   if (dependencies.st) {
-    defines.push("USES_ST");
+    defines.push('USES_ST');
   }
 
   if (appearance.flat) {
-    defines.push("FLAT");
+    defines.push('FLAT');
   }
 
-  let materialSource = "";
+  let materialSource = '';
   if (!(appearance instanceof PerInstanceColorAppearance)) {
     materialSource = appearance.material.shaderSource;
   }
 
   return new ShaderSource({
     defines: defines,
-    sources: [materialSource, ShadowVolumeAppearanceFS],
+    sources: [materialSource, ShadowVolumeAppearanceFS]
   });
 };
 
@@ -144,31 +144,31 @@ ShadowVolumeAppearance.prototype.createPickFragmentShader = function (
   columbusView2D
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.bool("columbusView2D", columbusView2D);
+  Check.typeOf.bool('columbusView2D', columbusView2D);
   //>>includeEnd('debug');
 
   const dependencies = this._pickShaderDependencies;
 
-  const defines = ["PICK"];
+  const defines = ['PICK'];
   if (!columbusView2D && !this._planarExtents) {
-    defines.push("SPHERICAL");
+    defines.push('SPHERICAL');
   }
   if (dependencies.requiresEC) {
-    defines.push("REQUIRES_EC");
+    defines.push('REQUIRES_EC');
   }
   if (dependencies.requiresWC) {
-    defines.push("REQUIRES_WC");
+    defines.push('REQUIRES_WC');
   }
   if (dependencies.requiresTextureCoordinates) {
-    defines.push("TEXTURE_COORDINATES");
+    defines.push('TEXTURE_COORDINATES');
   }
   if (this._extentsCulling) {
-    defines.push("CULL_FRAGMENTS");
+    defines.push('CULL_FRAGMENTS');
   }
   return new ShaderSource({
     defines: defines,
     sources: [ShadowVolumeAppearanceFS],
-    pickColorQualifier: "varying",
+    pickColorQualifier: 'varying'
   });
 };
 
@@ -188,10 +188,10 @@ ShadowVolumeAppearance.prototype.createVertexShader = function (
   mapProjection
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("defines", defines);
-  Check.typeOf.string("vertexShaderSource", vertexShaderSource);
-  Check.typeOf.bool("columbusView2D", columbusView2D);
-  Check.defined("mapProjection", mapProjection);
+  Check.defined('defines', defines);
+  Check.typeOf.string('vertexShaderSource', vertexShaderSource);
+  Check.typeOf.bool('columbusView2D', columbusView2D);
+  Check.defined('mapProjection', mapProjection);
   //>>includeEnd('debug');
   return createShadowVolumeAppearanceVS(
     this._colorShaderDependencies,
@@ -221,10 +221,10 @@ ShadowVolumeAppearance.prototype.createPickVertexShader = function (
   mapProjection
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("defines", defines);
-  Check.typeOf.string("vertexShaderSource", vertexShaderSource);
-  Check.typeOf.bool("columbusView2D", columbusView2D);
-  Check.defined("mapProjection", mapProjection);
+  Check.defined('defines', defines);
+  Check.typeOf.string('vertexShaderSource', vertexShaderSource);
+  Check.typeOf.bool('columbusView2D', columbusView2D);
+  Check.defined('mapProjection', mapProjection);
   //>>includeEnd('debug');
   return createShadowVolumeAppearanceVS(
     this._pickShaderDependencies,
@@ -242,7 +242,7 @@ const longitudeExtentsCartesianScratch = new Cartesian3();
 const longitudeExtentsCartographicScratch = new Cartographic();
 const longitudeExtentsEncodeScratch = {
   high: 0.0,
-  low: 0.0,
+  low: 0.0
 };
 function createShadowVolumeAppearanceVS(
   shaderDependencies,
@@ -256,7 +256,7 @@ function createShadowVolumeAppearanceVS(
 ) {
   const allDefines = defines.slice();
 
-  if (projectionExtentDefines.eastMostYhighDefine === "") {
+  if (projectionExtentDefines.eastMostYhighDefine === '') {
     const eastMostCartographic = longitudeExtentsCartographicScratch;
     eastMostCartographic.longitude = CesiumMath.PI;
     eastMostCartographic.latitude = 0.0;
@@ -304,21 +304,21 @@ function createShadowVolumeAppearanceVS(
   }
 
   if (defined(appearance) && appearance instanceof PerInstanceColorAppearance) {
-    allDefines.push("PER_INSTANCE_COLOR");
+    allDefines.push('PER_INSTANCE_COLOR');
   }
   if (shaderDependencies.requiresTextureCoordinates) {
-    allDefines.push("TEXTURE_COORDINATES");
+    allDefines.push('TEXTURE_COORDINATES');
     if (!(planarExtents || columbusView2D)) {
-      allDefines.push("SPHERICAL");
+      allDefines.push('SPHERICAL');
     }
     if (columbusView2D) {
-      allDefines.push("COLUMBUS_VIEW_2D");
+      allDefines.push('COLUMBUS_VIEW_2D');
     }
   }
 
   return new ShaderSource({
     defines: allDefines,
-    sources: [vertexShaderSource],
+    sources: [vertexShaderSource]
   });
 }
 
@@ -346,7 +346,7 @@ Object.defineProperties(ShaderDependencies.prototype, {
     },
     set: function (value) {
       this._requiresEC = value || this._requiresEC;
-    },
+    }
   },
   requiresWC: {
     get: function () {
@@ -355,7 +355,7 @@ Object.defineProperties(ShaderDependencies.prototype, {
     set: function (value) {
       this._requiresWC = value || this._requiresWC;
       this.requiresEC = this._requiresWC;
-    },
+    }
   },
   requiresNormalEC: {
     get: function () {
@@ -364,7 +364,7 @@ Object.defineProperties(ShaderDependencies.prototype, {
     set: function (value) {
       this._requiresNormalEC = value || this._requiresNormalEC;
       this.requiresEC = this._requiresNormalEC;
-    },
+    }
   },
   requiresTextureCoordinates: {
     get: function () {
@@ -374,7 +374,7 @@ Object.defineProperties(ShaderDependencies.prototype, {
       this._requiresTextureCoordinates =
         value || this._requiresTextureCoordinates;
       this.requiresWC = this._requiresTextureCoordinates;
-    },
+    }
   },
   // Get/Set when assessing material hookups
   normalEC: {
@@ -384,7 +384,7 @@ Object.defineProperties(ShaderDependencies.prototype, {
     },
     get: function () {
       return this._usesNormalEC;
-    },
+    }
   },
   tangentToEyeMatrix: {
     set: function (value) {
@@ -394,7 +394,7 @@ Object.defineProperties(ShaderDependencies.prototype, {
     },
     get: function () {
       return this._usesTangentToEyeMat;
-    },
+    }
   },
   positionToEyeEC: {
     set: function (value) {
@@ -403,7 +403,7 @@ Object.defineProperties(ShaderDependencies.prototype, {
     },
     get: function () {
       return this._usesPositionToEyeEC;
-    },
+    }
   },
   st: {
     set: function (value) {
@@ -412,8 +412,8 @@ Object.defineProperties(ShaderDependencies.prototype, {
     },
     get: function () {
       return this._usesSt;
-    },
-  },
+    }
+  }
 });
 
 function pointLineDistance(point1, point2, point) {
@@ -431,7 +431,7 @@ const points2DScratch = [
   new Cartesian2(),
   new Cartesian2(),
   new Cartesian2(),
-  new Cartesian2(),
+  new Cartesian2()
 ];
 
 // textureCoordinateRotationPoints form 2 lines in the computed UV space that remap to desired texture coordinates.
@@ -462,7 +462,7 @@ function addTextureCoordinateRotationAttributes(
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: 4,
     normalize: false,
-    value: [maxYCorner.x, maxYCorner.y, maxXCorner.x, maxXCorner.y],
+    value: [maxYCorner.x, maxYCorner.y, maxXCorner.x, maxXCorner.y]
   });
 
   const inverseExtentX =
@@ -474,7 +474,7 @@ function addTextureCoordinateRotationAttributes(
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: 4,
     normalize: false,
-    value: [minXYCorner.x, minXYCorner.y, inverseExtentX, inverseExtentY],
+    value: [minXYCorner.x, minXYCorner.y, inverseExtentX, inverseExtentY]
   });
 }
 
@@ -530,14 +530,14 @@ function add2DTextureCoordinateAttributes(rectangle, projection, attributes) {
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: 4,
     normalize: false,
-    value: valuesHigh,
+    value: valuesHigh
   });
 
   attributes.planes2D_LOW = new GeometryInstanceAttribute({
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: 4,
     normalize: false,
-    value: valuesLow,
+    value: valuesLow
   });
 }
 
@@ -553,7 +553,7 @@ const pointsCartographicScratch = [
   new Cartographic(),
   new Cartographic(),
   new Cartographic(),
-  new Cartographic(),
+  new Cartographic()
 ];
 /**
  * When computing planes to bound the rectangle,
@@ -689,13 +689,13 @@ ShadowVolumeAppearance.getPlanarTextureCoordinateAttributes = function (
   height
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("boundingRectangle", boundingRectangle);
+  Check.typeOf.object('boundingRectangle', boundingRectangle);
   Check.defined(
-    "textureCoordinateRotationPoints",
+    'textureCoordinateRotationPoints',
     textureCoordinateRotationPoints
   );
-  Check.typeOf.object("ellipsoid", ellipsoid);
-  Check.typeOf.object("projection", projection);
+  Check.typeOf.object('ellipsoid', ellipsoid);
+  Check.typeOf.object('projection', projection);
   //>>includeEnd('debug');
 
   const corner = cornerScratch;
@@ -722,25 +722,25 @@ ShadowVolumeAppearance.getPlanarTextureCoordinateAttributes = function (
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: 3,
     normalize: false,
-    value: Cartesian3.pack(encoded.high, [0, 0, 0]),
+    value: Cartesian3.pack(encoded.high, [0, 0, 0])
   });
   attributes.southWest_LOW = new GeometryInstanceAttribute({
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: 3,
     normalize: false,
-    value: Cartesian3.pack(encoded.low, [0, 0, 0]),
+    value: Cartesian3.pack(encoded.low, [0, 0, 0])
   });
   attributes.eastward = new GeometryInstanceAttribute({
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: 3,
     normalize: false,
-    value: Cartesian3.pack(eastward, [0, 0, 0]),
+    value: Cartesian3.pack(eastward, [0, 0, 0])
   });
   attributes.northward = new GeometryInstanceAttribute({
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: 3,
     normalize: false,
-    value: Cartesian3.pack(northward, [0, 0, 0]),
+    value: Cartesian3.pack(northward, [0, 0, 0])
   });
 
   add2DTextureCoordinateAttributes(boundingRectangle, projection, attributes);
@@ -805,13 +805,13 @@ ShadowVolumeAppearance.getSphericalExtentGeometryInstanceAttributes = function (
   projection
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("boundingRectangle", boundingRectangle);
+  Check.typeOf.object('boundingRectangle', boundingRectangle);
   Check.defined(
-    "textureCoordinateRotationPoints",
+    'textureCoordinateRotationPoints',
     textureCoordinateRotationPoints
   );
-  Check.typeOf.object("ellipsoid", ellipsoid);
-  Check.typeOf.object("projection", projection);
+  Check.typeOf.object('ellipsoid', ellipsoid);
+  Check.typeOf.object('projection', projection);
   //>>includeEnd('debug');
 
   // rectangle cartographic coords !== spherical because it's on an ellipsoid
@@ -857,14 +857,14 @@ ShadowVolumeAppearance.getSphericalExtentGeometryInstanceAttributes = function (
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 4,
       normalize: false,
-      value: [south, west, latitudeRangeInverse, longitudeRangeInverse],
+      value: [south, west, latitudeRangeInverse, longitudeRangeInverse]
     }),
     longitudeRotation: new GeometryInstanceAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 1,
       normalize: false,
-      value: [rotationRadians],
-    }),
+      value: [rotationRadians]
+    })
   };
 
   addTextureCoordinateRotationAttributes(
@@ -919,7 +919,7 @@ function shouldUseSpherical(rectangle) {
  */
 ShadowVolumeAppearance.shouldUseSphericalCoordinates = function (rectangle) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.object('rectangle', rectangle);
   //>>includeEnd('debug');
 
   return shouldUseSpherical(rectangle);

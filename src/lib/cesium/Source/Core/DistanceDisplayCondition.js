@@ -1,6 +1,6 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Determines visibility based on the distance to the camera.
@@ -36,7 +36,7 @@ Object.defineProperties(DistanceDisplayCondition.prototype, {
     },
     set: function (value) {
       this._near = value;
-    },
+    }
   },
   /**
    * The largest distance in the interval where the object is visible.
@@ -50,8 +50,8 @@ Object.defineProperties(DistanceDisplayCondition.prototype, {
     },
     set: function (value) {
       this._far = value;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -72,10 +72,10 @@ DistanceDisplayCondition.packedLength = 2;
 DistanceDisplayCondition.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(value)) {
-    throw new DeveloperError("value is required");
+    throw new DeveloperError('value is required');
   }
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -98,7 +98,7 @@ DistanceDisplayCondition.pack = function (value, array, startingIndex) {
 DistanceDisplayCondition.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 

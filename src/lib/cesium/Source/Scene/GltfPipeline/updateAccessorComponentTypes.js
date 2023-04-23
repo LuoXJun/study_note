@@ -1,8 +1,8 @@
-import addBuffer from "./addBuffer.js";
-import ForEach from "./ForEach.js";
-import readAccessorPacked from "./readAccessorPacked.js";
-import ComponentDatatype from "../../Core/ComponentDatatype.js";
-import WebGLConstants from "../../Core/WebGLConstants.js";
+import addBuffer from './addBuffer.js';
+import ForEach from './ForEach.js';
+import readAccessorPacked from './readAccessorPacked.js';
+import ComponentDatatype from '../../Core/ComponentDatatype.js';
+import WebGLConstants from '../../Core/WebGLConstants.js';
 
 /**
  * Update accessors referenced by JOINTS_0 and WEIGHTS_0 attributes to use correct component types.
@@ -14,7 +14,7 @@ import WebGLConstants from "../../Core/WebGLConstants.js";
  */
 function updateAccessorComponentTypes(gltf) {
   let componentType;
-  ForEach.accessorWithSemantic(gltf, "JOINTS_0", function (accessorId) {
+  ForEach.accessorWithSemantic(gltf, 'JOINTS_0', function (accessorId) {
     const accessor = gltf.accessors[accessorId];
     componentType = accessor.componentType;
     if (componentType === WebGLConstants.BYTE) {
@@ -26,7 +26,7 @@ function updateAccessorComponentTypes(gltf) {
       convertType(gltf, accessor, ComponentDatatype.UNSIGNED_SHORT);
     }
   });
-  ForEach.accessorWithSemantic(gltf, "WEIGHTS_0", function (accessorId) {
+  ForEach.accessorWithSemantic(gltf, 'WEIGHTS_0', function (accessorId) {
     const accessor = gltf.accessors[accessorId];
     componentType = accessor.componentType;
     if (componentType === WebGLConstants.BYTE) {

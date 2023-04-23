@@ -1,8 +1,8 @@
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import Matrix3 from "./Matrix3.js";
-import OrientedBoundingBox from "./OrientedBoundingBox.js";
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import Matrix3 from './Matrix3.js';
+import OrientedBoundingBox from './OrientedBoundingBox.js';
 
 /**
  * @private
@@ -17,7 +17,7 @@ const obbScratch = new OrientedBoundingBox();
 
 CoplanarPolygonGeometryLibrary.validOutline = function (positions) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("positions", positions);
+  Check.defined('positions', positions);
   //>>includeEnd('debug');
 
   const orientedBoundingBox = OrientedBoundingBox.fromPoints(
@@ -48,10 +48,10 @@ CoplanarPolygonGeometryLibrary.computeProjectTo2DArguments = function (
   planeAxis2Result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("positions", positions);
-  Check.defined("centerResult", centerResult);
-  Check.defined("planeAxis1Result", planeAxis1Result);
-  Check.defined("planeAxis2Result", planeAxis2Result);
+  Check.defined('positions', positions);
+  Check.defined('centerResult', centerResult);
+  Check.defined('planeAxis1Result', planeAxis1Result);
+  Check.defined('planeAxis2Result', planeAxis2Result);
   //>>includeEnd('debug');
 
   const orientedBoundingBox = OrientedBoundingBox.fromPoints(

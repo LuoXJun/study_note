@@ -1,8 +1,8 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Quaternion from "./Quaternion.js";
-import Spline from "./Spline.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Quaternion from './Quaternion.js';
+import Spline from './Spline.js';
 
 function createEvaluateFunction(spline) {
   const points = spline.points;
@@ -57,15 +57,15 @@ function QuaternionSpline(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(points) || !defined(times)) {
-    throw new DeveloperError("points and times are required.");
+    throw new DeveloperError('points and times are required.');
   }
   if (points.length < 2) {
     throw new DeveloperError(
-      "points.length must be greater than or equal to 2."
+      'points.length must be greater than or equal to 2.'
     );
   }
   if (times.length !== points.length) {
-    throw new DeveloperError("times.length must be equal to points.length.");
+    throw new DeveloperError('times.length must be equal to points.length.');
   }
   //>>includeEnd('debug');
 
@@ -88,7 +88,7 @@ Object.defineProperties(QuaternionSpline.prototype, {
   times: {
     get: function () {
       return this._times;
-    },
+    }
   },
 
   /**
@@ -102,8 +102,8 @@ Object.defineProperties(QuaternionSpline.prototype, {
   points: {
     get: function () {
       return this._points;
-    },
-  },
+    }
+  }
 });
 
 /**

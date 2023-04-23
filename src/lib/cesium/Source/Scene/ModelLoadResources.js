@@ -1,4 +1,4 @@
-import Queue from "../Core/Queue.js";
+import Queue from '../Core/Queue.js';
 
 /**
  * @private
@@ -80,19 +80,22 @@ ModelLoadResources.prototype.finishedTextureCreation = function () {
   return finishedPendingLoads && finishedResourceCreation;
 };
 
-ModelLoadResources.prototype.finishedEverythingButTextureCreation = function () {
-  const finishedPendingLoads =
-    this.pendingBufferLoads === 0 && this.pendingShaderLoads === 0;
-  const finishedResourceCreation =
-    this.vertexBuffersToCreate.length === 0 &&
-    this.indexBuffersToCreate.length === 0 &&
-    this.programsToCreate.length === 0 &&
-    this.pendingBufferViewToImage === 0;
+ModelLoadResources.prototype.finishedEverythingButTextureCreation =
+  function () {
+    const finishedPendingLoads =
+      this.pendingBufferLoads === 0 && this.pendingShaderLoads === 0;
+    const finishedResourceCreation =
+      this.vertexBuffersToCreate.length === 0 &&
+      this.indexBuffersToCreate.length === 0 &&
+      this.programsToCreate.length === 0 &&
+      this.pendingBufferViewToImage === 0;
 
-  return (
-    this.finishedDecoding() && finishedPendingLoads && finishedResourceCreation
-  );
-};
+    return (
+      this.finishedDecoding() &&
+      finishedPendingLoads &&
+      finishedResourceCreation
+    );
+  };
 
 ModelLoadResources.prototype.finishedDecoding = function () {
   return (

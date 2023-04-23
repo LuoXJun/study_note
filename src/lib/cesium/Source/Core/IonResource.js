@@ -1,11 +1,11 @@
-import Uri from "../ThirdParty/Uri.js";
-import Check from "./Check.js";
-import Credit from "./Credit.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Ion from "./Ion.js";
-import Resource from "./Resource.js";
-import RuntimeError from "./RuntimeError.js";
+import Uri from '../ThirdParty/Uri.js';
+import Check from './Check.js';
+import Credit from './Credit.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Ion from './Ion.js';
+import Resource from './Resource.js';
+import RuntimeError from './RuntimeError.js';
 
 /**
  * A {@link Resource} instance that encapsulates Cesium ion asset access.
@@ -25,8 +25,8 @@ import RuntimeError from "./RuntimeError.js";
  */
 function IonResource(endpoint, endpointResource) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("endpoint", endpoint);
-  Check.defined("endpointResource", endpointResource);
+  Check.defined('endpoint', endpoint);
+  Check.defined('endpointResource', endpointResource);
   //>>includeEnd('debug');
 
   let options;
@@ -37,18 +37,18 @@ function IonResource(endpoint, endpointResource) {
     options = {
       url: endpoint.url,
       retryAttempts: 1,
-      retryCallback: retryCallback,
+      retryCallback: retryCallback
     };
   } else if (
-    externalType === "3DTILES" ||
-    externalType === "STK_TERRAIN_SERVER"
+    externalType === '3DTILES' ||
+    externalType === 'STK_TERRAIN_SERVER'
   ) {
     // 3D Tiles and STK Terrain Server external assets can still be represented as an IonResource
     options = { url: endpoint.options.url };
   } else {
     //External imagery assets have additional configuration that can't be represented as a Resource
     throw new RuntimeError(
-      "Ion.createResource does not support external imagery assets; use IonImageryProvider instead."
+      'Ion.createResource does not support external imagery assets; use IonImageryProvider instead.'
     );
   }
 
@@ -134,8 +134,8 @@ Object.defineProperties(IonResource.prototype, {
       );
 
       return this._credits;
-    },
-  },
+    }
+  }
 });
 
 /** @private */
@@ -173,7 +173,7 @@ IonResource.prototype.fetchImage = function (options) {
   if (!this._isExternal) {
     const userOptions = options;
     options = {
-      preferBlob: true,
+      preferBlob: true
     };
     if (defined(userOptions)) {
       options.flipY = userOptions.flipY;
@@ -206,7 +206,7 @@ IonResource.prototype._makeRequest = function (options) {
  */
 IonResource._createEndpointResource = function (assetId, options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("assetId", assetId);
+  Check.defined('assetId', assetId);
   //>>includeEnd('debug');
 
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
@@ -215,7 +215,7 @@ IonResource._createEndpointResource = function (assetId, options) {
   server = Resource.createIfNeeded(server);
 
   const resourceOptions = {
-    url: `v1/assets/${assetId}/endpoint`,
+    url: `v1/assets/${assetId}/endpoint`
   };
 
   if (defined(accessToken)) {
@@ -231,7 +231,7 @@ function retryCallback(that, error) {
 
   // Image is not available in worker threads, so this avoids
   // a ReferenceError
-  const imageDefined = typeof Image !== "undefined";
+  const imageDefined = typeof Image !== 'undefined';
 
   // We only want to retry in the case of invalid credentials (401) or image
   // requests(since Image failures can not provide a status code)

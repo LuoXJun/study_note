@@ -1,95 +1,95 @@
-import ArcType from "../Core/ArcType.js";
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import ClockRange from "../Core/ClockRange.js";
-import ClockStep from "../Core/ClockStep.js";
-import Color from "../Core/Color.js";
-import CornerType from "../Core/CornerType.js";
-import Credit from "../Core/Credit.js";
-import createGuid from "../Core/createGuid.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DistanceDisplayCondition from "../Core/DistanceDisplayCondition.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import Event from "../Core/Event.js";
-import ExtrapolationType from "../Core/ExtrapolationType.js";
-import getFilenameFromUri from "../Core/getFilenameFromUri.js";
-import HermitePolynomialApproximation from "../Core/HermitePolynomialApproximation.js";
-import Iso8601 from "../Core/Iso8601.js";
-import JulianDate from "../Core/JulianDate.js";
-import LagrangePolynomialApproximation from "../Core/LagrangePolynomialApproximation.js";
-import LinearApproximation from "../Core/LinearApproximation.js";
-import CesiumMath from "../Core/Math.js";
-import NearFarScalar from "../Core/NearFarScalar.js";
-import PolygonHierarchy from "../Core/PolygonHierarchy.js";
-import Quaternion from "../Core/Quaternion.js";
-import Rectangle from "../Core/Rectangle.js";
-import ReferenceFrame from "../Core/ReferenceFrame.js";
-import Resource from "../Core/Resource.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import Spherical from "../Core/Spherical.js";
-import TimeInterval from "../Core/TimeInterval.js";
-import TimeIntervalCollection from "../Core/TimeIntervalCollection.js";
-import ClassificationType from "../Scene/ClassificationType.js";
-import ColorBlendMode from "../Scene/ColorBlendMode.js";
-import HeightReference from "../Scene/HeightReference.js";
-import HorizontalOrigin from "../Scene/HorizontalOrigin.js";
-import LabelStyle from "../Scene/LabelStyle.js";
-import ShadowMode from "../Scene/ShadowMode.js";
-import VerticalOrigin from "../Scene/VerticalOrigin.js";
-import Uri from "../ThirdParty/Uri.js";
-import BillboardGraphics from "./BillboardGraphics.js";
-import BoxGraphics from "./BoxGraphics.js";
-import CallbackProperty from "./CallbackProperty.js";
-import CheckerboardMaterialProperty from "./CheckerboardMaterialProperty.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import CompositeMaterialProperty from "./CompositeMaterialProperty.js";
-import CompositePositionProperty from "./CompositePositionProperty.js";
-import CompositeProperty from "./CompositeProperty.js";
-import ConstantPositionProperty from "./ConstantPositionProperty.js";
-import ConstantProperty from "./ConstantProperty.js";
-import CorridorGraphics from "./CorridorGraphics.js";
-import CylinderGraphics from "./CylinderGraphics.js";
-import DataSource from "./DataSource.js";
-import DataSourceClock from "./DataSourceClock.js";
-import EllipseGraphics from "./EllipseGraphics.js";
-import EllipsoidGraphics from "./EllipsoidGraphics.js";
-import EntityCluster from "./EntityCluster.js";
-import EntityCollection from "./EntityCollection.js";
-import GridMaterialProperty from "./GridMaterialProperty.js";
-import ImageMaterialProperty from "./ImageMaterialProperty.js";
-import LabelGraphics from "./LabelGraphics.js";
-import ModelGraphics from "./ModelGraphics.js";
-import NodeTransformationProperty from "./NodeTransformationProperty.js";
-import PathGraphics from "./PathGraphics.js";
-import PointGraphics from "./PointGraphics.js";
-import PolygonGraphics from "./PolygonGraphics.js";
-import PolylineArrowMaterialProperty from "./PolylineArrowMaterialProperty.js";
-import PolylineDashMaterialProperty from "./PolylineDashMaterialProperty.js";
-import PolylineGlowMaterialProperty from "./PolylineGlowMaterialProperty.js";
-import PolylineGraphics from "./PolylineGraphics.js";
-import PolylineOutlineMaterialProperty from "./PolylineOutlineMaterialProperty.js";
-import PolylineVolumeGraphics from "./PolylineVolumeGraphics.js";
-import PositionPropertyArray from "./PositionPropertyArray.js";
-import Property from "./Property.js";
-import PropertyArray from "./PropertyArray.js";
-import PropertyBag from "./PropertyBag.js";
-import RectangleGraphics from "./RectangleGraphics.js";
-import ReferenceProperty from "./ReferenceProperty.js";
-import Rotation from "./Rotation.js";
-import SampledPositionProperty from "./SampledPositionProperty.js";
-import SampledProperty from "./SampledProperty.js";
-import StripeMaterialProperty from "./StripeMaterialProperty.js";
-import StripeOrientation from "./StripeOrientation.js";
-import TimeIntervalCollectionPositionProperty from "./TimeIntervalCollectionPositionProperty.js";
-import TimeIntervalCollectionProperty from "./TimeIntervalCollectionProperty.js";
-import VelocityOrientationProperty from "./VelocityOrientationProperty.js";
-import VelocityVectorProperty from "./VelocityVectorProperty.js";
-import WallGraphics from "./WallGraphics.js";
-import Cesium3DTilesetGraphics from "./Cesium3DTilesetGraphics.js";
+import ArcType from '../Core/ArcType.js';
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import ClockRange from '../Core/ClockRange.js';
+import ClockStep from '../Core/ClockStep.js';
+import Color from '../Core/Color.js';
+import CornerType from '../Core/CornerType.js';
+import Credit from '../Core/Credit.js';
+import createGuid from '../Core/createGuid.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DistanceDisplayCondition from '../Core/DistanceDisplayCondition.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import Event from '../Core/Event.js';
+import ExtrapolationType from '../Core/ExtrapolationType.js';
+import getFilenameFromUri from '../Core/getFilenameFromUri.js';
+import HermitePolynomialApproximation from '../Core/HermitePolynomialApproximation.js';
+import Iso8601 from '../Core/Iso8601.js';
+import JulianDate from '../Core/JulianDate.js';
+import LagrangePolynomialApproximation from '../Core/LagrangePolynomialApproximation.js';
+import LinearApproximation from '../Core/LinearApproximation.js';
+import CesiumMath from '../Core/Math.js';
+import NearFarScalar from '../Core/NearFarScalar.js';
+import PolygonHierarchy from '../Core/PolygonHierarchy.js';
+import Quaternion from '../Core/Quaternion.js';
+import Rectangle from '../Core/Rectangle.js';
+import ReferenceFrame from '../Core/ReferenceFrame.js';
+import Resource from '../Core/Resource.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import Spherical from '../Core/Spherical.js';
+import TimeInterval from '../Core/TimeInterval.js';
+import TimeIntervalCollection from '../Core/TimeIntervalCollection.js';
+import ClassificationType from '../Scene/ClassificationType.js';
+import ColorBlendMode from '../Scene/ColorBlendMode.js';
+import HeightReference from '../Scene/HeightReference.js';
+import HorizontalOrigin from '../Scene/HorizontalOrigin.js';
+import LabelStyle from '../Scene/LabelStyle.js';
+import ShadowMode from '../Scene/ShadowMode.js';
+import VerticalOrigin from '../Scene/VerticalOrigin.js';
+import Uri from '../ThirdParty/Uri.js';
+import BillboardGraphics from './BillboardGraphics.js';
+import BoxGraphics from './BoxGraphics.js';
+import CallbackProperty from './CallbackProperty.js';
+import CheckerboardMaterialProperty from './CheckerboardMaterialProperty.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import CompositeMaterialProperty from './CompositeMaterialProperty.js';
+import CompositePositionProperty from './CompositePositionProperty.js';
+import CompositeProperty from './CompositeProperty.js';
+import ConstantPositionProperty from './ConstantPositionProperty.js';
+import ConstantProperty from './ConstantProperty.js';
+import CorridorGraphics from './CorridorGraphics.js';
+import CylinderGraphics from './CylinderGraphics.js';
+import DataSource from './DataSource.js';
+import DataSourceClock from './DataSourceClock.js';
+import EllipseGraphics from './EllipseGraphics.js';
+import EllipsoidGraphics from './EllipsoidGraphics.js';
+import EntityCluster from './EntityCluster.js';
+import EntityCollection from './EntityCollection.js';
+import GridMaterialProperty from './GridMaterialProperty.js';
+import ImageMaterialProperty from './ImageMaterialProperty.js';
+import LabelGraphics from './LabelGraphics.js';
+import ModelGraphics from './ModelGraphics.js';
+import NodeTransformationProperty from './NodeTransformationProperty.js';
+import PathGraphics from './PathGraphics.js';
+import PointGraphics from './PointGraphics.js';
+import PolygonGraphics from './PolygonGraphics.js';
+import PolylineArrowMaterialProperty from './PolylineArrowMaterialProperty.js';
+import PolylineDashMaterialProperty from './PolylineDashMaterialProperty.js';
+import PolylineGlowMaterialProperty from './PolylineGlowMaterialProperty.js';
+import PolylineGraphics from './PolylineGraphics.js';
+import PolylineOutlineMaterialProperty from './PolylineOutlineMaterialProperty.js';
+import PolylineVolumeGraphics from './PolylineVolumeGraphics.js';
+import PositionPropertyArray from './PositionPropertyArray.js';
+import Property from './Property.js';
+import PropertyArray from './PropertyArray.js';
+import PropertyBag from './PropertyBag.js';
+import RectangleGraphics from './RectangleGraphics.js';
+import ReferenceProperty from './ReferenceProperty.js';
+import Rotation from './Rotation.js';
+import SampledPositionProperty from './SampledPositionProperty.js';
+import SampledProperty from './SampledProperty.js';
+import StripeMaterialProperty from './StripeMaterialProperty.js';
+import StripeOrientation from './StripeOrientation.js';
+import TimeIntervalCollectionPositionProperty from './TimeIntervalCollectionPositionProperty.js';
+import TimeIntervalCollectionProperty from './TimeIntervalCollectionProperty.js';
+import VelocityOrientationProperty from './VelocityOrientationProperty.js';
+import VelocityVectorProperty from './VelocityVectorProperty.js';
+import WallGraphics from './WallGraphics.js';
+import Cesium3DTilesetGraphics from './Cesium3DTilesetGraphics.js';
 
 // A marker type to distinguish CZML properties where we need to end up with a unit vector.
 // The data is still loaded into Cartesian3 objects but they are normalized.
@@ -103,7 +103,7 @@ UnitCartesian3.pack = Cartesian3.pack;
 let currentId;
 
 function createReferenceProperty(entityCollection, referenceString) {
-  if (referenceString[0] === "#") {
+  if (referenceString[0] === '#') {
     referenceString = currentId + referenceString;
   }
   return ReferenceProperty.fromString(entityCollection, referenceString);
@@ -163,7 +163,7 @@ function unwrapColorInterval(czmlInterval) {
       Color.byteToFloat(rgba[0]),
       Color.byteToFloat(rgba[1]),
       Color.byteToFloat(rgba[2]),
-      Color.byteToFloat(rgba[3]),
+      Color.byteToFloat(rgba[3])
     ];
   }
 
@@ -182,7 +182,7 @@ function unwrapUriInterval(czmlInterval, sourceUri) {
   const uri = defaultValue(czmlInterval.uri, czmlInterval);
   if (defined(sourceUri)) {
     return sourceUri.getDerivedResource({
-      url: uri,
+      url: uri
     });
   }
 
@@ -206,7 +206,7 @@ function unwrapRectangleInterval(czmlInterval) {
       CesiumMath.toRadians(wsenDegrees[0]),
       CesiumMath.toRadians(wsenDegrees[1]),
       CesiumMath.toRadians(wsenDegrees[2]),
-      CesiumMath.toRadians(wsenDegrees[3]),
+      CesiumMath.toRadians(wsenDegrees[3])
     ];
   }
 
@@ -435,80 +435,80 @@ function getPropertyType(czmlInterval) {
   // cartesianVelocity is also omitted due to incomplete support for
   // derivative information in CZML properties.
   // (Currently cartesianVelocity is hacked directly into the position processing code)
-  if (typeof czmlInterval === "boolean") {
+  if (typeof czmlInterval === 'boolean') {
     return Boolean;
-  } else if (typeof czmlInterval === "number") {
+  } else if (typeof czmlInterval === 'number') {
     return Number;
-  } else if (typeof czmlInterval === "string") {
+  } else if (typeof czmlInterval === 'string') {
     return String;
-  } else if (czmlInterval.hasOwnProperty("array")) {
+  } else if (czmlInterval.hasOwnProperty('array')) {
     return Array;
-  } else if (czmlInterval.hasOwnProperty("boolean")) {
+  } else if (czmlInterval.hasOwnProperty('boolean')) {
     return Boolean;
-  } else if (czmlInterval.hasOwnProperty("boundingRectangle")) {
+  } else if (czmlInterval.hasOwnProperty('boundingRectangle')) {
     return BoundingRectangle;
-  } else if (czmlInterval.hasOwnProperty("cartesian2")) {
+  } else if (czmlInterval.hasOwnProperty('cartesian2')) {
     return Cartesian2;
   } else if (
-    czmlInterval.hasOwnProperty("cartesian") ||
-    czmlInterval.hasOwnProperty("spherical") ||
-    czmlInterval.hasOwnProperty("cartographicRadians") ||
-    czmlInterval.hasOwnProperty("cartographicDegrees")
+    czmlInterval.hasOwnProperty('cartesian') ||
+    czmlInterval.hasOwnProperty('spherical') ||
+    czmlInterval.hasOwnProperty('cartographicRadians') ||
+    czmlInterval.hasOwnProperty('cartographicDegrees')
   ) {
     return Cartesian3;
   } else if (
-    czmlInterval.hasOwnProperty("unitCartesian") ||
-    czmlInterval.hasOwnProperty("unitSpherical")
+    czmlInterval.hasOwnProperty('unitCartesian') ||
+    czmlInterval.hasOwnProperty('unitSpherical')
   ) {
     return UnitCartesian3;
   } else if (
-    czmlInterval.hasOwnProperty("rgba") ||
-    czmlInterval.hasOwnProperty("rgbaf")
+    czmlInterval.hasOwnProperty('rgba') ||
+    czmlInterval.hasOwnProperty('rgbaf')
   ) {
     return Color;
-  } else if (czmlInterval.hasOwnProperty("arcType")) {
+  } else if (czmlInterval.hasOwnProperty('arcType')) {
     return ArcType;
-  } else if (czmlInterval.hasOwnProperty("classificationType")) {
+  } else if (czmlInterval.hasOwnProperty('classificationType')) {
     return ClassificationType;
-  } else if (czmlInterval.hasOwnProperty("colorBlendMode")) {
+  } else if (czmlInterval.hasOwnProperty('colorBlendMode')) {
     return ColorBlendMode;
-  } else if (czmlInterval.hasOwnProperty("cornerType")) {
+  } else if (czmlInterval.hasOwnProperty('cornerType')) {
     return CornerType;
-  } else if (czmlInterval.hasOwnProperty("heightReference")) {
+  } else if (czmlInterval.hasOwnProperty('heightReference')) {
     return HeightReference;
-  } else if (czmlInterval.hasOwnProperty("horizontalOrigin")) {
+  } else if (czmlInterval.hasOwnProperty('horizontalOrigin')) {
     return HorizontalOrigin;
-  } else if (czmlInterval.hasOwnProperty("date")) {
+  } else if (czmlInterval.hasOwnProperty('date')) {
     return JulianDate;
-  } else if (czmlInterval.hasOwnProperty("labelStyle")) {
+  } else if (czmlInterval.hasOwnProperty('labelStyle')) {
     return LabelStyle;
-  } else if (czmlInterval.hasOwnProperty("number")) {
+  } else if (czmlInterval.hasOwnProperty('number')) {
     return Number;
-  } else if (czmlInterval.hasOwnProperty("nearFarScalar")) {
+  } else if (czmlInterval.hasOwnProperty('nearFarScalar')) {
     return NearFarScalar;
-  } else if (czmlInterval.hasOwnProperty("distanceDisplayCondition")) {
+  } else if (czmlInterval.hasOwnProperty('distanceDisplayCondition')) {
     return DistanceDisplayCondition;
   } else if (
-    czmlInterval.hasOwnProperty("object") ||
-    czmlInterval.hasOwnProperty("value")
+    czmlInterval.hasOwnProperty('object') ||
+    czmlInterval.hasOwnProperty('value')
   ) {
     return Object;
-  } else if (czmlInterval.hasOwnProperty("unitQuaternion")) {
+  } else if (czmlInterval.hasOwnProperty('unitQuaternion')) {
     return Quaternion;
-  } else if (czmlInterval.hasOwnProperty("shadowMode")) {
+  } else if (czmlInterval.hasOwnProperty('shadowMode')) {
     return ShadowMode;
-  } else if (czmlInterval.hasOwnProperty("string")) {
+  } else if (czmlInterval.hasOwnProperty('string')) {
     return String;
-  } else if (czmlInterval.hasOwnProperty("stripeOrientation")) {
+  } else if (czmlInterval.hasOwnProperty('stripeOrientation')) {
     return StripeOrientation;
   } else if (
-    czmlInterval.hasOwnProperty("wsen") ||
-    czmlInterval.hasOwnProperty("wsenDegrees")
+    czmlInterval.hasOwnProperty('wsen') ||
+    czmlInterval.hasOwnProperty('wsenDegrees')
   ) {
     return Rectangle;
-  } else if (czmlInterval.hasOwnProperty("uri")) {
+  } else if (czmlInterval.hasOwnProperty('uri')) {
     return Uri;
-  } else if (czmlInterval.hasOwnProperty("verticalOrigin")) {
+  } else if (czmlInterval.hasOwnProperty('verticalOrigin')) {
     return VerticalOrigin;
   }
   // fallback case
@@ -524,7 +524,7 @@ function unwrapInterval(type, czmlInterval, sourceUri) {
     case Array:
       return czmlInterval.array;
     case Boolean:
-      return defaultValue(czmlInterval["boolean"], czmlInterval);
+      return defaultValue(czmlInterval['boolean'], czmlInterval);
     case BoundingRectangle:
       return czmlInterval.boundingRectangle;
     case Cartesian2:
@@ -605,7 +605,7 @@ function unwrapInterval(type, czmlInterval, sourceUri) {
 const interpolators = {
   HERMITE: HermitePolynomialApproximation,
   LAGRANGE: LagrangePolynomialApproximation,
-  LINEAR: LinearApproximation,
+  LINEAR: LinearApproximation
 };
 
 function updateInterpolationSettings(packetData, property) {
@@ -614,7 +614,7 @@ function updateInterpolationSettings(packetData, property) {
   if (defined(interpolationAlgorithm) || defined(interpolationDegree)) {
     property.setInterpolationOptions({
       interpolationAlgorithm: interpolators[interpolationAlgorithm],
-      interpolationDegree: interpolationDegree,
+      interpolationDegree: interpolationDegree
     });
   }
 
@@ -643,7 +643,7 @@ function updateInterpolationSettings(packetData, property) {
 }
 
 const iso8601Scratch = {
-  iso8601: undefined,
+  iso8601: undefined
 };
 
 function intervalFromString(intervalString) {
@@ -735,14 +735,14 @@ function processProperty(
     unwrappedIntervalLength = defaultValue(unwrappedInterval.length, 1);
     isSampled =
       !defined(packetData.array) &&
-      typeof unwrappedInterval !== "string" &&
+      typeof unwrappedInterval !== 'string' &&
       unwrappedIntervalLength > packedLength &&
       type !== Object;
   }
 
   // Rotation is a special case because it represents a native type (Number)
   // and therefore does not need to be unpacked when loaded as a constant value.
-  const needsUnpacking = typeof type.unpack === "function" && type !== Rotation;
+  const needsUnpacking = typeof type.unpack === 'function' && type !== Rotation;
 
   // Any time a constant value is assigned, it completely blows away anything else.
   if (!isSampled && !hasInterval) {
@@ -1057,9 +1057,8 @@ function processPositionProperty(
       property.intervals.addInterval(combinedInterval);
     } else {
       // Otherwise, create a CompositePositionProperty but preserve the existing data.
-      object[propertyName] = property = convertPositionPropertyToComposite(
-        property
-      );
+      object[propertyName] = property =
+        convertPositionPropertyToComposite(property);
 
       // Change the new data to a ConstantPositionProperty and add it.
       if (isValue) {
@@ -1081,9 +1080,8 @@ function processPositionProperty(
     );
   } else if (!(property instanceof CompositePositionProperty)) {
     // Create a CompositeProperty but preserve the existing data.
-    object[propertyName] = property = convertPositionPropertyToComposite(
-      property
-    );
+    object[propertyName] = property =
+      convertPositionPropertyToComposite(property);
   }
 
   // Check if the interval already exists in the composite.
@@ -1239,7 +1237,7 @@ function processMaterialProperty(
     const thisIntervals = property.intervals;
     existingInterval = thisIntervals.findInterval({
       start: combinedInterval.start,
-      stop: combinedInterval.stop,
+      stop: combinedInterval.stop
     });
     if (defined(existingInterval)) {
       //We have an interval, but we need to make sure the
@@ -1263,7 +1261,7 @@ function processMaterialProperty(
     processPacketData(
       Color,
       existingMaterial,
-      "color",
+      'color',
       materialData.color,
       undefined,
       undefined,
@@ -1277,7 +1275,7 @@ function processMaterialProperty(
     processPacketData(
       Color,
       existingMaterial,
-      "color",
+      'color',
       materialData.color,
       undefined,
       sourceUri,
@@ -1286,7 +1284,7 @@ function processMaterialProperty(
     processPacketData(
       Number,
       existingMaterial,
-      "cellAlpha",
+      'cellAlpha',
       materialData.cellAlpha,
       undefined,
       sourceUri,
@@ -1295,7 +1293,7 @@ function processMaterialProperty(
     processPacketData(
       Cartesian2,
       existingMaterial,
-      "lineCount",
+      'lineCount',
       materialData.lineCount,
       undefined,
       sourceUri,
@@ -1304,7 +1302,7 @@ function processMaterialProperty(
     processPacketData(
       Cartesian2,
       existingMaterial,
-      "lineThickness",
+      'lineThickness',
       materialData.lineThickness,
       undefined,
       sourceUri,
@@ -1313,7 +1311,7 @@ function processMaterialProperty(
     processPacketData(
       Cartesian2,
       existingMaterial,
-      "lineOffset",
+      'lineOffset',
       materialData.lineOffset,
       undefined,
       sourceUri,
@@ -1327,7 +1325,7 @@ function processMaterialProperty(
     processPacketData(
       Image,
       existingMaterial,
-      "image",
+      'image',
       materialData.image,
       undefined,
       sourceUri,
@@ -1336,7 +1334,7 @@ function processMaterialProperty(
     processPacketData(
       Cartesian2,
       existingMaterial,
-      "repeat",
+      'repeat',
       materialData.repeat,
       undefined,
       sourceUri,
@@ -1345,7 +1343,7 @@ function processMaterialProperty(
     processPacketData(
       Color,
       existingMaterial,
-      "color",
+      'color',
       materialData.color,
       undefined,
       sourceUri,
@@ -1354,7 +1352,7 @@ function processMaterialProperty(
     processPacketData(
       Boolean,
       existingMaterial,
-      "transparent",
+      'transparent',
       materialData.transparent,
       undefined,
       sourceUri,
@@ -1368,7 +1366,7 @@ function processMaterialProperty(
     processPacketData(
       StripeOrientation,
       existingMaterial,
-      "orientation",
+      'orientation',
       materialData.orientation,
       undefined,
       sourceUri,
@@ -1377,7 +1375,7 @@ function processMaterialProperty(
     processPacketData(
       Color,
       existingMaterial,
-      "evenColor",
+      'evenColor',
       materialData.evenColor,
       undefined,
       sourceUri,
@@ -1386,7 +1384,7 @@ function processMaterialProperty(
     processPacketData(
       Color,
       existingMaterial,
-      "oddColor",
+      'oddColor',
       materialData.oddColor,
       undefined,
       sourceUri,
@@ -1395,7 +1393,7 @@ function processMaterialProperty(
     processPacketData(
       Number,
       existingMaterial,
-      "offset",
+      'offset',
       materialData.offset,
       undefined,
       sourceUri,
@@ -1404,7 +1402,7 @@ function processMaterialProperty(
     processPacketData(
       Number,
       existingMaterial,
-      "repeat",
+      'repeat',
       materialData.repeat,
       undefined,
       sourceUri,
@@ -1418,7 +1416,7 @@ function processMaterialProperty(
     processPacketData(
       Color,
       existingMaterial,
-      "color",
+      'color',
       materialData.color,
       undefined,
       sourceUri,
@@ -1427,7 +1425,7 @@ function processMaterialProperty(
     processPacketData(
       Color,
       existingMaterial,
-      "outlineColor",
+      'outlineColor',
       materialData.outlineColor,
       undefined,
       sourceUri,
@@ -1436,7 +1434,7 @@ function processMaterialProperty(
     processPacketData(
       Number,
       existingMaterial,
-      "outlineWidth",
+      'outlineWidth',
       materialData.outlineWidth,
       undefined,
       sourceUri,
@@ -1450,7 +1448,7 @@ function processMaterialProperty(
     processPacketData(
       Color,
       existingMaterial,
-      "color",
+      'color',
       materialData.color,
       undefined,
       sourceUri,
@@ -1459,7 +1457,7 @@ function processMaterialProperty(
     processPacketData(
       Number,
       existingMaterial,
-      "glowPower",
+      'glowPower',
       materialData.glowPower,
       undefined,
       sourceUri,
@@ -1468,7 +1466,7 @@ function processMaterialProperty(
     processPacketData(
       Number,
       existingMaterial,
-      "taperPower",
+      'taperPower',
       materialData.taperPower,
       undefined,
       sourceUri,
@@ -1482,7 +1480,7 @@ function processMaterialProperty(
     processPacketData(
       Color,
       existingMaterial,
-      "color",
+      'color',
       materialData.color,
       undefined,
       undefined,
@@ -1496,7 +1494,7 @@ function processMaterialProperty(
     processPacketData(
       Color,
       existingMaterial,
-      "color",
+      'color',
       materialData.color,
       undefined,
       undefined,
@@ -1505,7 +1503,7 @@ function processMaterialProperty(
     processPacketData(
       Color,
       existingMaterial,
-      "gapColor",
+      'gapColor',
       materialData.gapColor,
       undefined,
       undefined,
@@ -1514,7 +1512,7 @@ function processMaterialProperty(
     processPacketData(
       Number,
       existingMaterial,
-      "dashLength",
+      'dashLength',
       materialData.dashLength,
       undefined,
       sourceUri,
@@ -1523,7 +1521,7 @@ function processMaterialProperty(
     processPacketData(
       Number,
       existingMaterial,
-      "dashPattern",
+      'dashPattern',
       materialData.dashPattern,
       undefined,
       sourceUri,
@@ -1537,7 +1535,7 @@ function processMaterialProperty(
     processPacketData(
       Color,
       existingMaterial,
-      "evenColor",
+      'evenColor',
       materialData.evenColor,
       undefined,
       sourceUri,
@@ -1546,7 +1544,7 @@ function processMaterialProperty(
     processPacketData(
       Color,
       existingMaterial,
-      "oddColor",
+      'oddColor',
       materialData.oddColor,
       undefined,
       sourceUri,
@@ -1555,7 +1553,7 @@ function processMaterialProperty(
     processPacketData(
       Cartesian2,
       existingMaterial,
-      "repeat",
+      'repeat',
       materialData.repeat,
       undefined,
       sourceUri,
@@ -1618,7 +1616,7 @@ function processDescription(entity, packet, entityCollection, sourceUri) {
     processPacketData(
       String,
       entity,
-      "description",
+      'description',
       descriptionData,
       undefined,
       sourceUri,
@@ -1632,7 +1630,7 @@ function processPosition(entity, packet, entityCollection, sourceUri) {
   if (defined(positionData)) {
     processPositionPacketData(
       entity,
-      "position",
+      'position',
       positionData,
       undefined,
       sourceUri,
@@ -1647,7 +1645,7 @@ function processViewFrom(entity, packet, entityCollection, sourceUri) {
     processPacketData(
       Cartesian3,
       entity,
-      "viewFrom",
+      'viewFrom',
       viewFromData,
       undefined,
       sourceUri,
@@ -1662,7 +1660,7 @@ function processOrientation(entity, packet, entityCollection, sourceUri) {
     processPacketData(
       Quaternion,
       entity,
-      "orientation",
+      'orientation',
       orientationData,
       undefined,
       sourceUri,
@@ -1897,7 +1895,7 @@ function processPositionArrayOfArraysPacketData(
       const tempObj = {};
       processReferencesArrayPacketData(
         tempObj,
-        "positions",
+        'positions',
         referenceArray,
         packetData.interval,
         entityCollection,
@@ -2017,7 +2015,7 @@ function processAlignedAxis(
   processPacketData(
     UnitCartesian3,
     billboard,
-    "alignedAxis",
+    'alignedAxis',
     packetData,
     interval,
     sourceUri,
@@ -2040,7 +2038,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     billboard,
-    "show",
+    'show',
     billboardData.show,
     interval,
     sourceUri,
@@ -2049,7 +2047,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Image,
     billboard,
-    "image",
+    'image',
     billboardData.image,
     interval,
     sourceUri,
@@ -2058,7 +2056,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     billboard,
-    "scale",
+    'scale',
     billboardData.scale,
     interval,
     sourceUri,
@@ -2067,7 +2065,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Cartesian2,
     billboard,
-    "pixelOffset",
+    'pixelOffset',
     billboardData.pixelOffset,
     interval,
     sourceUri,
@@ -2076,7 +2074,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Cartesian3,
     billboard,
-    "eyeOffset",
+    'eyeOffset',
     billboardData.eyeOffset,
     interval,
     sourceUri,
@@ -2085,7 +2083,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HorizontalOrigin,
     billboard,
-    "horizontalOrigin",
+    'horizontalOrigin',
     billboardData.horizontalOrigin,
     interval,
     sourceUri,
@@ -2094,7 +2092,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     VerticalOrigin,
     billboard,
-    "verticalOrigin",
+    'verticalOrigin',
     billboardData.verticalOrigin,
     interval,
     sourceUri,
@@ -2103,7 +2101,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HeightReference,
     billboard,
-    "heightReference",
+    'heightReference',
     billboardData.heightReference,
     interval,
     sourceUri,
@@ -2112,7 +2110,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     billboard,
-    "color",
+    'color',
     billboardData.color,
     interval,
     sourceUri,
@@ -2121,7 +2119,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Rotation,
     billboard,
-    "rotation",
+    'rotation',
     billboardData.rotation,
     interval,
     sourceUri,
@@ -2137,7 +2135,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     billboard,
-    "sizeInMeters",
+    'sizeInMeters',
     billboardData.sizeInMeters,
     interval,
     sourceUri,
@@ -2146,7 +2144,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     billboard,
-    "width",
+    'width',
     billboardData.width,
     interval,
     sourceUri,
@@ -2155,7 +2153,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     billboard,
-    "height",
+    'height',
     billboardData.height,
     interval,
     sourceUri,
@@ -2164,7 +2162,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     NearFarScalar,
     billboard,
-    "scaleByDistance",
+    'scaleByDistance',
     billboardData.scaleByDistance,
     interval,
     sourceUri,
@@ -2173,7 +2171,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     NearFarScalar,
     billboard,
-    "translucencyByDistance",
+    'translucencyByDistance',
     billboardData.translucencyByDistance,
     interval,
     sourceUri,
@@ -2182,7 +2180,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     NearFarScalar,
     billboard,
-    "pixelOffsetScaleByDistance",
+    'pixelOffsetScaleByDistance',
     billboardData.pixelOffsetScaleByDistance,
     interval,
     sourceUri,
@@ -2191,7 +2189,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     BoundingRectangle,
     billboard,
-    "imageSubRegion",
+    'imageSubRegion',
     billboardData.imageSubRegion,
     interval,
     sourceUri,
@@ -2200,7 +2198,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     DistanceDisplayCondition,
     billboard,
-    "distanceDisplayCondition",
+    'distanceDisplayCondition',
     billboardData.distanceDisplayCondition,
     interval,
     sourceUri,
@@ -2209,7 +2207,7 @@ function processBillboard(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     billboard,
-    "disableDepthTestDistance",
+    'disableDepthTestDistance',
     billboardData.disableDepthTestDistance,
     interval,
     sourceUri,
@@ -2232,7 +2230,7 @@ function processBox(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     box,
-    "show",
+    'show',
     boxData.show,
     interval,
     sourceUri,
@@ -2241,7 +2239,7 @@ function processBox(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Cartesian3,
     box,
-    "dimensions",
+    'dimensions',
     boxData.dimensions,
     interval,
     sourceUri,
@@ -2250,7 +2248,7 @@ function processBox(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HeightReference,
     box,
-    "heightReference",
+    'heightReference',
     boxData.heightReference,
     interval,
     sourceUri,
@@ -2259,7 +2257,7 @@ function processBox(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     box,
-    "fill",
+    'fill',
     boxData.fill,
     interval,
     sourceUri,
@@ -2267,7 +2265,7 @@ function processBox(entity, packet, entityCollection, sourceUri) {
   );
   processMaterialPacketData(
     box,
-    "material",
+    'material',
     boxData.material,
     interval,
     sourceUri,
@@ -2276,7 +2274,7 @@ function processBox(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     box,
-    "outline",
+    'outline',
     boxData.outline,
     interval,
     sourceUri,
@@ -2285,7 +2283,7 @@ function processBox(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     box,
-    "outlineColor",
+    'outlineColor',
     boxData.outlineColor,
     interval,
     sourceUri,
@@ -2294,7 +2292,7 @@ function processBox(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     box,
-    "outlineWidth",
+    'outlineWidth',
     boxData.outlineWidth,
     interval,
     sourceUri,
@@ -2303,7 +2301,7 @@ function processBox(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ShadowMode,
     box,
-    "shadows",
+    'shadows',
     boxData.shadows,
     interval,
     sourceUri,
@@ -2312,7 +2310,7 @@ function processBox(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     DistanceDisplayCondition,
     box,
-    "distanceDisplayCondition",
+    'distanceDisplayCondition',
     boxData.distanceDisplayCondition,
     interval,
     sourceUri,
@@ -2335,7 +2333,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     corridor,
-    "show",
+    'show',
     corridorData.show,
     interval,
     sourceUri,
@@ -2343,14 +2341,14 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   );
   processPositionArray(
     corridor,
-    "positions",
+    'positions',
     corridorData.positions,
     entityCollection
   );
   processPacketData(
     Number,
     corridor,
-    "width",
+    'width',
     corridorData.width,
     interval,
     sourceUri,
@@ -2359,7 +2357,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     corridor,
-    "height",
+    'height',
     corridorData.height,
     interval,
     sourceUri,
@@ -2368,7 +2366,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HeightReference,
     corridor,
-    "heightReference",
+    'heightReference',
     corridorData.heightReference,
     interval,
     sourceUri,
@@ -2377,7 +2375,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     corridor,
-    "extrudedHeight",
+    'extrudedHeight',
     corridorData.extrudedHeight,
     interval,
     sourceUri,
@@ -2386,7 +2384,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HeightReference,
     corridor,
-    "extrudedHeightReference",
+    'extrudedHeightReference',
     corridorData.extrudedHeightReference,
     interval,
     sourceUri,
@@ -2395,7 +2393,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     CornerType,
     corridor,
-    "cornerType",
+    'cornerType',
     corridorData.cornerType,
     interval,
     sourceUri,
@@ -2404,7 +2402,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     corridor,
-    "granularity",
+    'granularity',
     corridorData.granularity,
     interval,
     sourceUri,
@@ -2413,7 +2411,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     corridor,
-    "fill",
+    'fill',
     corridorData.fill,
     interval,
     sourceUri,
@@ -2421,7 +2419,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   );
   processMaterialPacketData(
     corridor,
-    "material",
+    'material',
     corridorData.material,
     interval,
     sourceUri,
@@ -2430,7 +2428,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     corridor,
-    "outline",
+    'outline',
     corridorData.outline,
     interval,
     sourceUri,
@@ -2439,7 +2437,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     corridor,
-    "outlineColor",
+    'outlineColor',
     corridorData.outlineColor,
     interval,
     sourceUri,
@@ -2448,7 +2446,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     corridor,
-    "outlineWidth",
+    'outlineWidth',
     corridorData.outlineWidth,
     interval,
     sourceUri,
@@ -2457,7 +2455,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ShadowMode,
     corridor,
-    "shadows",
+    'shadows',
     corridorData.shadows,
     interval,
     sourceUri,
@@ -2466,7 +2464,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     DistanceDisplayCondition,
     corridor,
-    "distanceDisplayCondition",
+    'distanceDisplayCondition',
     corridorData.distanceDisplayCondition,
     interval,
     sourceUri,
@@ -2475,7 +2473,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ClassificationType,
     corridor,
-    "classificationType",
+    'classificationType',
     corridorData.classificationType,
     interval,
     sourceUri,
@@ -2484,7 +2482,7 @@ function processCorridor(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     corridor,
-    "zIndex",
+    'zIndex',
     corridorData.zIndex,
     interval,
     sourceUri,
@@ -2507,7 +2505,7 @@ function processCylinder(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     cylinder,
-    "show",
+    'show',
     cylinderData.show,
     interval,
     sourceUri,
@@ -2516,7 +2514,7 @@ function processCylinder(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     cylinder,
-    "length",
+    'length',
     cylinderData.length,
     interval,
     sourceUri,
@@ -2525,7 +2523,7 @@ function processCylinder(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     cylinder,
-    "topRadius",
+    'topRadius',
     cylinderData.topRadius,
     interval,
     sourceUri,
@@ -2534,7 +2532,7 @@ function processCylinder(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     cylinder,
-    "bottomRadius",
+    'bottomRadius',
     cylinderData.bottomRadius,
     interval,
     sourceUri,
@@ -2543,7 +2541,7 @@ function processCylinder(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HeightReference,
     cylinder,
-    "heightReference",
+    'heightReference',
     cylinderData.heightReference,
     interval,
     sourceUri,
@@ -2552,7 +2550,7 @@ function processCylinder(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     cylinder,
-    "fill",
+    'fill',
     cylinderData.fill,
     interval,
     sourceUri,
@@ -2560,7 +2558,7 @@ function processCylinder(entity, packet, entityCollection, sourceUri) {
   );
   processMaterialPacketData(
     cylinder,
-    "material",
+    'material',
     cylinderData.material,
     interval,
     sourceUri,
@@ -2569,7 +2567,7 @@ function processCylinder(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     cylinder,
-    "outline",
+    'outline',
     cylinderData.outline,
     interval,
     sourceUri,
@@ -2578,7 +2576,7 @@ function processCylinder(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     cylinder,
-    "outlineColor",
+    'outlineColor',
     cylinderData.outlineColor,
     interval,
     sourceUri,
@@ -2587,7 +2585,7 @@ function processCylinder(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     cylinder,
-    "outlineWidth",
+    'outlineWidth',
     cylinderData.outlineWidth,
     interval,
     sourceUri,
@@ -2596,7 +2594,7 @@ function processCylinder(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     cylinder,
-    "numberOfVerticalLines",
+    'numberOfVerticalLines',
     cylinderData.numberOfVerticalLines,
     interval,
     sourceUri,
@@ -2605,7 +2603,7 @@ function processCylinder(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     cylinder,
-    "slices",
+    'slices',
     cylinderData.slices,
     interval,
     sourceUri,
@@ -2614,7 +2612,7 @@ function processCylinder(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ShadowMode,
     cylinder,
-    "shadows",
+    'shadows',
     cylinderData.shadows,
     interval,
     sourceUri,
@@ -2623,7 +2621,7 @@ function processCylinder(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     DistanceDisplayCondition,
     cylinder,
-    "distanceDisplayCondition",
+    'distanceDisplayCondition',
     cylinderData.distanceDisplayCondition,
     interval,
     sourceUri,
@@ -2634,11 +2632,11 @@ function processCylinder(entity, packet, entityCollection, sourceUri) {
 function processDocument(packet, dataSource) {
   const version = packet.version;
   if (defined(version)) {
-    if (typeof version === "string") {
-      const tokens = version.split(".");
+    if (typeof version === 'string') {
+      const tokens = version.split('.');
       if (tokens.length === 2) {
-        if (tokens[0] !== "1") {
-          throw new RuntimeError("Cesium only supports CZML version 1.");
+        if (tokens[0] !== '1') {
+          throw new RuntimeError('Cesium only supports CZML version 1.');
         }
         dataSource._version = version;
       }
@@ -2647,7 +2645,7 @@ function processDocument(packet, dataSource) {
 
   if (!defined(dataSource._version)) {
     throw new RuntimeError(
-      "CZML version information invalid.  It is expected to be a property on the document object in the <Major>.<Minor> version format."
+      'CZML version information invalid.  It is expected to be a property on the document object in the <Major>.<Minor> version format.'
     );
   }
 
@@ -2666,7 +2664,7 @@ function processDocument(packet, dataSource) {
         currentTime: clockPacket.currentTime,
         range: clockPacket.range,
         step: clockPacket.step,
-        multiplier: clockPacket.multiplier,
+        multiplier: clockPacket.multiplier
       };
     } else {
       clock.interval = defaultValue(clockPacket.interval, clock.interval);
@@ -2696,7 +2694,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     ellipse,
-    "show",
+    'show',
     ellipseData.show,
     interval,
     sourceUri,
@@ -2705,7 +2703,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipse,
-    "semiMajorAxis",
+    'semiMajorAxis',
     ellipseData.semiMajorAxis,
     interval,
     sourceUri,
@@ -2714,7 +2712,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipse,
-    "semiMinorAxis",
+    'semiMinorAxis',
     ellipseData.semiMinorAxis,
     interval,
     sourceUri,
@@ -2723,7 +2721,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipse,
-    "height",
+    'height',
     ellipseData.height,
     interval,
     sourceUri,
@@ -2732,7 +2730,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HeightReference,
     ellipse,
-    "heightReference",
+    'heightReference',
     ellipseData.heightReference,
     interval,
     sourceUri,
@@ -2741,7 +2739,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipse,
-    "extrudedHeight",
+    'extrudedHeight',
     ellipseData.extrudedHeight,
     interval,
     sourceUri,
@@ -2750,7 +2748,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HeightReference,
     ellipse,
-    "extrudedHeightReference",
+    'extrudedHeightReference',
     ellipseData.extrudedHeightReference,
     interval,
     sourceUri,
@@ -2759,7 +2757,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Rotation,
     ellipse,
-    "rotation",
+    'rotation',
     ellipseData.rotation,
     interval,
     sourceUri,
@@ -2768,7 +2766,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Rotation,
     ellipse,
-    "stRotation",
+    'stRotation',
     ellipseData.stRotation,
     interval,
     sourceUri,
@@ -2777,7 +2775,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipse,
-    "granularity",
+    'granularity',
     ellipseData.granularity,
     interval,
     sourceUri,
@@ -2786,7 +2784,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     ellipse,
-    "fill",
+    'fill',
     ellipseData.fill,
     interval,
     sourceUri,
@@ -2794,7 +2792,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   );
   processMaterialPacketData(
     ellipse,
-    "material",
+    'material',
     ellipseData.material,
     interval,
     sourceUri,
@@ -2803,7 +2801,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     ellipse,
-    "outline",
+    'outline',
     ellipseData.outline,
     interval,
     sourceUri,
@@ -2812,7 +2810,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     ellipse,
-    "outlineColor",
+    'outlineColor',
     ellipseData.outlineColor,
     interval,
     sourceUri,
@@ -2821,7 +2819,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipse,
-    "outlineWidth",
+    'outlineWidth',
     ellipseData.outlineWidth,
     interval,
     sourceUri,
@@ -2830,7 +2828,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipse,
-    "numberOfVerticalLines",
+    'numberOfVerticalLines',
     ellipseData.numberOfVerticalLines,
     interval,
     sourceUri,
@@ -2839,7 +2837,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ShadowMode,
     ellipse,
-    "shadows",
+    'shadows',
     ellipseData.shadows,
     interval,
     sourceUri,
@@ -2848,7 +2846,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     DistanceDisplayCondition,
     ellipse,
-    "distanceDisplayCondition",
+    'distanceDisplayCondition',
     ellipseData.distanceDisplayCondition,
     interval,
     sourceUri,
@@ -2857,7 +2855,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ClassificationType,
     ellipse,
-    "classificationType",
+    'classificationType',
     ellipseData.classificationType,
     interval,
     sourceUri,
@@ -2866,7 +2864,7 @@ function processEllipse(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipse,
-    "zIndex",
+    'zIndex',
     ellipseData.zIndex,
     interval,
     sourceUri,
@@ -2889,7 +2887,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     ellipsoid,
-    "show",
+    'show',
     ellipsoidData.show,
     interval,
     sourceUri,
@@ -2898,7 +2896,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Cartesian3,
     ellipsoid,
-    "radii",
+    'radii',
     ellipsoidData.radii,
     interval,
     sourceUri,
@@ -2907,7 +2905,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Cartesian3,
     ellipsoid,
-    "innerRadii",
+    'innerRadii',
     ellipsoidData.innerRadii,
     interval,
     sourceUri,
@@ -2916,7 +2914,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipsoid,
-    "minimumClock",
+    'minimumClock',
     ellipsoidData.minimumClock,
     interval,
     sourceUri,
@@ -2925,7 +2923,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipsoid,
-    "maximumClock",
+    'maximumClock',
     ellipsoidData.maximumClock,
     interval,
     sourceUri,
@@ -2934,7 +2932,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipsoid,
-    "minimumCone",
+    'minimumCone',
     ellipsoidData.minimumCone,
     interval,
     sourceUri,
@@ -2943,7 +2941,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipsoid,
-    "maximumCone",
+    'maximumCone',
     ellipsoidData.maximumCone,
     interval,
     sourceUri,
@@ -2952,7 +2950,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HeightReference,
     ellipsoid,
-    "heightReference",
+    'heightReference',
     ellipsoidData.heightReference,
     interval,
     sourceUri,
@@ -2961,7 +2959,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     ellipsoid,
-    "fill",
+    'fill',
     ellipsoidData.fill,
     interval,
     sourceUri,
@@ -2969,7 +2967,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   );
   processMaterialPacketData(
     ellipsoid,
-    "material",
+    'material',
     ellipsoidData.material,
     interval,
     sourceUri,
@@ -2978,7 +2976,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     ellipsoid,
-    "outline",
+    'outline',
     ellipsoidData.outline,
     interval,
     sourceUri,
@@ -2987,7 +2985,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     ellipsoid,
-    "outlineColor",
+    'outlineColor',
     ellipsoidData.outlineColor,
     interval,
     sourceUri,
@@ -2996,7 +2994,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipsoid,
-    "outlineWidth",
+    'outlineWidth',
     ellipsoidData.outlineWidth,
     interval,
     sourceUri,
@@ -3005,7 +3003,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipsoid,
-    "stackPartitions",
+    'stackPartitions',
     ellipsoidData.stackPartitions,
     interval,
     sourceUri,
@@ -3014,7 +3012,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipsoid,
-    "slicePartitions",
+    'slicePartitions',
     ellipsoidData.slicePartitions,
     interval,
     sourceUri,
@@ -3023,7 +3021,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     ellipsoid,
-    "subdivisions",
+    'subdivisions',
     ellipsoidData.subdivisions,
     interval,
     sourceUri,
@@ -3032,7 +3030,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ShadowMode,
     ellipsoid,
-    "shadows",
+    'shadows',
     ellipsoidData.shadows,
     interval,
     sourceUri,
@@ -3041,7 +3039,7 @@ function processEllipsoid(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     DistanceDisplayCondition,
     ellipsoid,
-    "distanceDisplayCondition",
+    'distanceDisplayCondition',
     ellipsoidData.distanceDisplayCondition,
     interval,
     sourceUri,
@@ -3064,7 +3062,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     label,
-    "show",
+    'show',
     labelData.show,
     interval,
     sourceUri,
@@ -3073,7 +3071,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     String,
     label,
-    "text",
+    'text',
     labelData.text,
     interval,
     sourceUri,
@@ -3082,7 +3080,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     String,
     label,
-    "font",
+    'font',
     labelData.font,
     interval,
     sourceUri,
@@ -3091,7 +3089,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     LabelStyle,
     label,
-    "style",
+    'style',
     labelData.style,
     interval,
     sourceUri,
@@ -3100,7 +3098,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     label,
-    "scale",
+    'scale',
     labelData.scale,
     interval,
     sourceUri,
@@ -3109,7 +3107,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     label,
-    "showBackground",
+    'showBackground',
     labelData.showBackground,
     interval,
     sourceUri,
@@ -3118,7 +3116,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     label,
-    "backgroundColor",
+    'backgroundColor',
     labelData.backgroundColor,
     interval,
     sourceUri,
@@ -3127,7 +3125,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Cartesian2,
     label,
-    "backgroundPadding",
+    'backgroundPadding',
     labelData.backgroundPadding,
     interval,
     sourceUri,
@@ -3136,7 +3134,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Cartesian2,
     label,
-    "pixelOffset",
+    'pixelOffset',
     labelData.pixelOffset,
     interval,
     sourceUri,
@@ -3145,7 +3143,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Cartesian3,
     label,
-    "eyeOffset",
+    'eyeOffset',
     labelData.eyeOffset,
     interval,
     sourceUri,
@@ -3154,7 +3152,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HorizontalOrigin,
     label,
-    "horizontalOrigin",
+    'horizontalOrigin',
     labelData.horizontalOrigin,
     interval,
     sourceUri,
@@ -3163,7 +3161,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     VerticalOrigin,
     label,
-    "verticalOrigin",
+    'verticalOrigin',
     labelData.verticalOrigin,
     interval,
     sourceUri,
@@ -3172,7 +3170,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HeightReference,
     label,
-    "heightReference",
+    'heightReference',
     labelData.heightReference,
     interval,
     sourceUri,
@@ -3181,7 +3179,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     label,
-    "fillColor",
+    'fillColor',
     labelData.fillColor,
     interval,
     sourceUri,
@@ -3190,7 +3188,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     label,
-    "outlineColor",
+    'outlineColor',
     labelData.outlineColor,
     interval,
     sourceUri,
@@ -3199,7 +3197,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     label,
-    "outlineWidth",
+    'outlineWidth',
     labelData.outlineWidth,
     interval,
     sourceUri,
@@ -3208,7 +3206,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     NearFarScalar,
     label,
-    "translucencyByDistance",
+    'translucencyByDistance',
     labelData.translucencyByDistance,
     interval,
     sourceUri,
@@ -3217,7 +3215,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     NearFarScalar,
     label,
-    "pixelOffsetScaleByDistance",
+    'pixelOffsetScaleByDistance',
     labelData.pixelOffsetScaleByDistance,
     interval,
     sourceUri,
@@ -3226,7 +3224,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     NearFarScalar,
     label,
-    "scaleByDistance",
+    'scaleByDistance',
     labelData.scaleByDistance,
     interval,
     sourceUri,
@@ -3235,7 +3233,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     DistanceDisplayCondition,
     label,
-    "distanceDisplayCondition",
+    'distanceDisplayCondition',
     labelData.distanceDisplayCondition,
     interval,
     sourceUri,
@@ -3244,7 +3242,7 @@ function processLabel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     label,
-    "disableDepthTestDistance",
+    'disableDepthTestDistance',
     labelData.disableDepthTestDistance,
     interval,
     sourceUri,
@@ -3267,7 +3265,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     model,
-    "show",
+    'show',
     modelData.show,
     interval,
     sourceUri,
@@ -3276,7 +3274,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Uri,
     model,
-    "uri",
+    'uri',
     modelData.gltf,
     interval,
     sourceUri,
@@ -3285,7 +3283,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     model,
-    "scale",
+    'scale',
     modelData.scale,
     interval,
     sourceUri,
@@ -3294,7 +3292,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     model,
-    "minimumPixelSize",
+    'minimumPixelSize',
     modelData.minimumPixelSize,
     interval,
     sourceUri,
@@ -3303,7 +3301,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     model,
-    "maximumScale",
+    'maximumScale',
     modelData.maximumScale,
     interval,
     sourceUri,
@@ -3312,7 +3310,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     model,
-    "incrementallyLoadTextures",
+    'incrementallyLoadTextures',
     modelData.incrementallyLoadTextures,
     interval,
     sourceUri,
@@ -3321,7 +3319,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     model,
-    "runAnimations",
+    'runAnimations',
     modelData.runAnimations,
     interval,
     sourceUri,
@@ -3330,7 +3328,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     model,
-    "clampAnimations",
+    'clampAnimations',
     modelData.clampAnimations,
     interval,
     sourceUri,
@@ -3339,7 +3337,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ShadowMode,
     model,
-    "shadows",
+    'shadows',
     modelData.shadows,
     interval,
     sourceUri,
@@ -3348,7 +3346,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HeightReference,
     model,
-    "heightReference",
+    'heightReference',
     modelData.heightReference,
     interval,
     sourceUri,
@@ -3357,7 +3355,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     model,
-    "silhouetteColor",
+    'silhouetteColor',
     modelData.silhouetteColor,
     interval,
     sourceUri,
@@ -3366,7 +3364,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     model,
-    "silhouetteSize",
+    'silhouetteSize',
     modelData.silhouetteSize,
     interval,
     sourceUri,
@@ -3375,7 +3373,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     model,
-    "color",
+    'color',
     modelData.color,
     interval,
     sourceUri,
@@ -3384,7 +3382,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ColorBlendMode,
     model,
-    "colorBlendMode",
+    'colorBlendMode',
     modelData.colorBlendMode,
     interval,
     sourceUri,
@@ -3393,7 +3391,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     model,
-    "colorBlendAmount",
+    'colorBlendAmount',
     modelData.colorBlendAmount,
     interval,
     sourceUri,
@@ -3402,7 +3400,7 @@ function processModel(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     DistanceDisplayCondition,
     model,
-    "distanceDisplayCondition",
+    'distanceDisplayCondition',
     modelData.distanceDisplayCondition,
     interval,
     sourceUri,
@@ -3481,7 +3479,7 @@ function processNodeTransformations(
   const nodeNames = Object.keys(nodeTransformationsData);
   for (let i = 0, len = nodeNames.length; i < len; ++i) {
     const nodeName = nodeNames[i];
-    if (nodeName === "interval") {
+    if (nodeName === 'interval') {
       continue;
     }
 
@@ -3500,15 +3498,14 @@ function processNodeTransformations(
 
     let nodeTransformation = nodeTransformations[nodeName];
     if (!defined(nodeTransformation)) {
-      nodeTransformations[
-        nodeName
-      ] = nodeTransformation = new NodeTransformationProperty();
+      nodeTransformations[nodeName] = nodeTransformation =
+        new NodeTransformationProperty();
     }
 
     processPacketData(
       Cartesian3,
       nodeTransformation,
-      "translation",
+      'translation',
       nodeTransformationData.translation,
       combinedInterval,
       sourceUri,
@@ -3517,7 +3514,7 @@ function processNodeTransformations(
     processPacketData(
       Quaternion,
       nodeTransformation,
-      "rotation",
+      'rotation',
       nodeTransformationData.rotation,
       combinedInterval,
       sourceUri,
@@ -3526,7 +3523,7 @@ function processNodeTransformations(
     processPacketData(
       Cartesian3,
       nodeTransformation,
-      "scale",
+      'scale',
       nodeTransformationData.scale,
       combinedInterval,
       sourceUri,
@@ -3559,7 +3556,7 @@ function processArticulations(
   const keys = Object.keys(articulationsData);
   for (let i = 0, len = keys.length; i < len; ++i) {
     const key = keys[i];
-    if (key === "interval") {
+    if (key === 'interval') {
       continue;
     }
 
@@ -3603,7 +3600,7 @@ function processPath(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     path,
-    "show",
+    'show',
     pathData.show,
     interval,
     sourceUri,
@@ -3612,7 +3609,7 @@ function processPath(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     path,
-    "leadTime",
+    'leadTime',
     pathData.leadTime,
     interval,
     sourceUri,
@@ -3621,7 +3618,7 @@ function processPath(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     path,
-    "trailTime",
+    'trailTime',
     pathData.trailTime,
     interval,
     sourceUri,
@@ -3630,7 +3627,7 @@ function processPath(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     path,
-    "width",
+    'width',
     pathData.width,
     interval,
     sourceUri,
@@ -3639,7 +3636,7 @@ function processPath(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     path,
-    "resolution",
+    'resolution',
     pathData.resolution,
     interval,
     sourceUri,
@@ -3647,7 +3644,7 @@ function processPath(entity, packet, entityCollection, sourceUri) {
   );
   processMaterialPacketData(
     path,
-    "material",
+    'material',
     pathData.material,
     interval,
     sourceUri,
@@ -3656,7 +3653,7 @@ function processPath(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     DistanceDisplayCondition,
     path,
-    "distanceDisplayCondition",
+    'distanceDisplayCondition',
     pathData.distanceDisplayCondition,
     interval,
     sourceUri,
@@ -3679,7 +3676,7 @@ function processPoint(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     point,
-    "show",
+    'show',
     pointData.show,
     interval,
     sourceUri,
@@ -3688,7 +3685,7 @@ function processPoint(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     point,
-    "pixelSize",
+    'pixelSize',
     pointData.pixelSize,
     interval,
     sourceUri,
@@ -3697,7 +3694,7 @@ function processPoint(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HeightReference,
     point,
-    "heightReference",
+    'heightReference',
     pointData.heightReference,
     interval,
     sourceUri,
@@ -3706,7 +3703,7 @@ function processPoint(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     point,
-    "color",
+    'color',
     pointData.color,
     interval,
     sourceUri,
@@ -3715,7 +3712,7 @@ function processPoint(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     point,
-    "outlineColor",
+    'outlineColor',
     pointData.outlineColor,
     interval,
     sourceUri,
@@ -3724,7 +3721,7 @@ function processPoint(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     point,
-    "outlineWidth",
+    'outlineWidth',
     pointData.outlineWidth,
     interval,
     sourceUri,
@@ -3733,7 +3730,7 @@ function processPoint(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     NearFarScalar,
     point,
-    "scaleByDistance",
+    'scaleByDistance',
     pointData.scaleByDistance,
     interval,
     sourceUri,
@@ -3742,7 +3739,7 @@ function processPoint(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     NearFarScalar,
     point,
-    "translucencyByDistance",
+    'translucencyByDistance',
     pointData.translucencyByDistance,
     interval,
     sourceUri,
@@ -3751,7 +3748,7 @@ function processPoint(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     DistanceDisplayCondition,
     point,
-    "distanceDisplayCondition",
+    'distanceDisplayCondition',
     pointData.distanceDisplayCondition,
     interval,
     sourceUri,
@@ -3760,7 +3757,7 @@ function processPoint(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     point,
-    "disableDepthTestDistance",
+    'disableDepthTestDistance',
     pointData.disableDepthTestDistance,
     interval,
     sourceUri,
@@ -3782,13 +3779,13 @@ Object.defineProperties(PolygonHierarchyProperty.prototype, {
         (!defined(positions) || positions.isConstant) &&
         (!defined(holes) || holes.isConstant)
       );
-    },
+    }
   },
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
-  },
+    }
+  }
 });
 
 PolygonHierarchyProperty.prototype.getValue = function (time, result) {
@@ -3840,7 +3837,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     polygon,
-    "show",
+    'show',
     polygonData.show,
     interval,
     sourceUri,
@@ -3852,13 +3849,13 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   // to a single property producing PolygonHierarchy
   processPositionArray(
     polygon,
-    "_positions",
+    '_positions',
     polygonData.positions,
     entityCollection
   );
   processPositionArrayOfArrays(
     polygon,
-    "_holes",
+    '_holes',
     polygonData.holes,
     entityCollection
   );
@@ -3869,7 +3866,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     polygon,
-    "height",
+    'height',
     polygonData.height,
     interval,
     sourceUri,
@@ -3878,7 +3875,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HeightReference,
     polygon,
-    "heightReference",
+    'heightReference',
     polygonData.heightReference,
     interval,
     sourceUri,
@@ -3887,7 +3884,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     polygon,
-    "extrudedHeight",
+    'extrudedHeight',
     polygonData.extrudedHeight,
     interval,
     sourceUri,
@@ -3896,7 +3893,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HeightReference,
     polygon,
-    "extrudedHeightReference",
+    'extrudedHeightReference',
     polygonData.extrudedHeightReference,
     interval,
     sourceUri,
@@ -3905,7 +3902,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Rotation,
     polygon,
-    "stRotation",
+    'stRotation',
     polygonData.stRotation,
     interval,
     sourceUri,
@@ -3914,7 +3911,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     polygon,
-    "granularity",
+    'granularity',
     polygonData.granularity,
     interval,
     sourceUri,
@@ -3923,7 +3920,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     polygon,
-    "fill",
+    'fill',
     polygonData.fill,
     interval,
     sourceUri,
@@ -3931,7 +3928,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   );
   processMaterialPacketData(
     polygon,
-    "material",
+    'material',
     polygonData.material,
     interval,
     sourceUri,
@@ -3940,7 +3937,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     polygon,
-    "outline",
+    'outline',
     polygonData.outline,
     interval,
     sourceUri,
@@ -3949,7 +3946,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     polygon,
-    "outlineColor",
+    'outlineColor',
     polygonData.outlineColor,
     interval,
     sourceUri,
@@ -3958,7 +3955,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     polygon,
-    "outlineWidth",
+    'outlineWidth',
     polygonData.outlineWidth,
     interval,
     sourceUri,
@@ -3967,7 +3964,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     polygon,
-    "perPositionHeight",
+    'perPositionHeight',
     polygonData.perPositionHeight,
     interval,
     sourceUri,
@@ -3976,7 +3973,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     polygon,
-    "closeTop",
+    'closeTop',
     polygonData.closeTop,
     interval,
     sourceUri,
@@ -3985,7 +3982,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     polygon,
-    "closeBottom",
+    'closeBottom',
     polygonData.closeBottom,
     interval,
     sourceUri,
@@ -3994,7 +3991,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ArcType,
     polygon,
-    "arcType",
+    'arcType',
     polygonData.arcType,
     interval,
     sourceUri,
@@ -4003,7 +4000,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ShadowMode,
     polygon,
-    "shadows",
+    'shadows',
     polygonData.shadows,
     interval,
     sourceUri,
@@ -4012,7 +4009,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     DistanceDisplayCondition,
     polygon,
-    "distanceDisplayCondition",
+    'distanceDisplayCondition',
     polygonData.distanceDisplayCondition,
     interval,
     sourceUri,
@@ -4021,7 +4018,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ClassificationType,
     polygon,
-    "classificationType",
+    'classificationType',
     polygonData.classificationType,
     interval,
     sourceUri,
@@ -4030,7 +4027,7 @@ function processPolygon(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     polygon,
-    "zIndex",
+    'zIndex',
     polygonData.zIndex,
     interval,
     sourceUri,
@@ -4057,7 +4054,7 @@ function processPolyline(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     polyline,
-    "show",
+    'show',
     polylineData.show,
     interval,
     sourceUri,
@@ -4065,14 +4062,14 @@ function processPolyline(entity, packet, entityCollection, sourceUri) {
   );
   processPositionArray(
     polyline,
-    "positions",
+    'positions',
     polylineData.positions,
     entityCollection
   );
   processPacketData(
     Number,
     polyline,
-    "width",
+    'width',
     polylineData.width,
     interval,
     sourceUri,
@@ -4081,7 +4078,7 @@ function processPolyline(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     polyline,
-    "granularity",
+    'granularity',
     polylineData.granularity,
     interval,
     sourceUri,
@@ -4089,7 +4086,7 @@ function processPolyline(entity, packet, entityCollection, sourceUri) {
   );
   processMaterialPacketData(
     polyline,
-    "material",
+    'material',
     polylineData.material,
     interval,
     sourceUri,
@@ -4097,7 +4094,7 @@ function processPolyline(entity, packet, entityCollection, sourceUri) {
   );
   processMaterialPacketData(
     polyline,
-    "depthFailMaterial",
+    'depthFailMaterial',
     polylineData.depthFailMaterial,
     interval,
     sourceUri,
@@ -4106,7 +4103,7 @@ function processPolyline(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ArcType,
     polyline,
-    "arcType",
+    'arcType',
     polylineData.arcType,
     interval,
     sourceUri,
@@ -4115,7 +4112,7 @@ function processPolyline(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     polyline,
-    "clampToGround",
+    'clampToGround',
     polylineData.clampToGround,
     interval,
     sourceUri,
@@ -4124,7 +4121,7 @@ function processPolyline(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ShadowMode,
     polyline,
-    "shadows",
+    'shadows',
     polylineData.shadows,
     interval,
     sourceUri,
@@ -4133,7 +4130,7 @@ function processPolyline(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     DistanceDisplayCondition,
     polyline,
-    "distanceDisplayCondition",
+    'distanceDisplayCondition',
     polylineData.distanceDisplayCondition,
     interval,
     sourceUri,
@@ -4142,7 +4139,7 @@ function processPolyline(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ClassificationType,
     polyline,
-    "classificationType",
+    'classificationType',
     polylineData.classificationType,
     interval,
     sourceUri,
@@ -4151,7 +4148,7 @@ function processPolyline(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     polyline,
-    "zIndex",
+    'zIndex',
     polylineData.zIndex,
     interval,
     sourceUri,
@@ -4164,7 +4161,7 @@ function processPolyline(entity, packet, entityCollection, sourceUri) {
     processPacketData(
       Boolean,
       tempObj,
-      "followSurface",
+      'followSurface',
       polylineData.followSurface,
       interval,
       sourceUri,
@@ -4191,20 +4188,20 @@ function processPolylineVolume(entity, packet, entityCollection, sourceUri) {
 
   processPositionArray(
     polylineVolume,
-    "positions",
+    'positions',
     polylineVolumeData.positions,
     entityCollection
   );
   processShape(
     polylineVolume,
-    "shape",
+    'shape',
     polylineVolumeData.shape,
     entityCollection
   );
   processPacketData(
     Boolean,
     polylineVolume,
-    "show",
+    'show',
     polylineVolumeData.show,
     interval,
     sourceUri,
@@ -4213,7 +4210,7 @@ function processPolylineVolume(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     CornerType,
     polylineVolume,
-    "cornerType",
+    'cornerType',
     polylineVolumeData.cornerType,
     interval,
     sourceUri,
@@ -4222,7 +4219,7 @@ function processPolylineVolume(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     polylineVolume,
-    "fill",
+    'fill',
     polylineVolumeData.fill,
     interval,
     sourceUri,
@@ -4230,7 +4227,7 @@ function processPolylineVolume(entity, packet, entityCollection, sourceUri) {
   );
   processMaterialPacketData(
     polylineVolume,
-    "material",
+    'material',
     polylineVolumeData.material,
     interval,
     sourceUri,
@@ -4239,7 +4236,7 @@ function processPolylineVolume(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     polylineVolume,
-    "outline",
+    'outline',
     polylineVolumeData.outline,
     interval,
     sourceUri,
@@ -4248,7 +4245,7 @@ function processPolylineVolume(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     polylineVolume,
-    "outlineColor",
+    'outlineColor',
     polylineVolumeData.outlineColor,
     interval,
     sourceUri,
@@ -4257,7 +4254,7 @@ function processPolylineVolume(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     polylineVolume,
-    "outlineWidth",
+    'outlineWidth',
     polylineVolumeData.outlineWidth,
     interval,
     sourceUri,
@@ -4266,7 +4263,7 @@ function processPolylineVolume(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     polylineVolume,
-    "granularity",
+    'granularity',
     polylineVolumeData.granularity,
     interval,
     sourceUri,
@@ -4275,7 +4272,7 @@ function processPolylineVolume(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ShadowMode,
     polylineVolume,
-    "shadows",
+    'shadows',
     polylineVolumeData.shadows,
     interval,
     sourceUri,
@@ -4284,7 +4281,7 @@ function processPolylineVolume(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     DistanceDisplayCondition,
     polylineVolume,
-    "distanceDisplayCondition",
+    'distanceDisplayCondition',
     polylineVolumeData.distanceDisplayCondition,
     interval,
     sourceUri,
@@ -4307,7 +4304,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     rectangle,
-    "show",
+    'show',
     rectangleData.show,
     interval,
     sourceUri,
@@ -4316,7 +4313,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Rectangle,
     rectangle,
-    "coordinates",
+    'coordinates',
     rectangleData.coordinates,
     interval,
     sourceUri,
@@ -4325,7 +4322,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     rectangle,
-    "height",
+    'height',
     rectangleData.height,
     interval,
     sourceUri,
@@ -4334,7 +4331,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HeightReference,
     rectangle,
-    "heightReference",
+    'heightReference',
     rectangleData.heightReference,
     interval,
     sourceUri,
@@ -4343,7 +4340,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     rectangle,
-    "extrudedHeight",
+    'extrudedHeight',
     rectangleData.extrudedHeight,
     interval,
     sourceUri,
@@ -4352,7 +4349,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     HeightReference,
     rectangle,
-    "extrudedHeightReference",
+    'extrudedHeightReference',
     rectangleData.extrudedHeightReference,
     interval,
     sourceUri,
@@ -4361,7 +4358,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Rotation,
     rectangle,
-    "rotation",
+    'rotation',
     rectangleData.rotation,
     interval,
     sourceUri,
@@ -4370,7 +4367,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Rotation,
     rectangle,
-    "stRotation",
+    'stRotation',
     rectangleData.stRotation,
     interval,
     sourceUri,
@@ -4379,7 +4376,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     rectangle,
-    "granularity",
+    'granularity',
     rectangleData.granularity,
     interval,
     sourceUri,
@@ -4388,7 +4385,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     rectangle,
-    "fill",
+    'fill',
     rectangleData.fill,
     interval,
     sourceUri,
@@ -4396,7 +4393,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   );
   processMaterialPacketData(
     rectangle,
-    "material",
+    'material',
     rectangleData.material,
     interval,
     sourceUri,
@@ -4405,7 +4402,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     rectangle,
-    "outline",
+    'outline',
     rectangleData.outline,
     interval,
     sourceUri,
@@ -4414,7 +4411,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     rectangle,
-    "outlineColor",
+    'outlineColor',
     rectangleData.outlineColor,
     interval,
     sourceUri,
@@ -4423,7 +4420,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     rectangle,
-    "outlineWidth",
+    'outlineWidth',
     rectangleData.outlineWidth,
     interval,
     sourceUri,
@@ -4432,7 +4429,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ShadowMode,
     rectangle,
-    "shadows",
+    'shadows',
     rectangleData.shadows,
     interval,
     sourceUri,
@@ -4441,7 +4438,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     DistanceDisplayCondition,
     rectangle,
-    "distanceDisplayCondition",
+    'distanceDisplayCondition',
     rectangleData.distanceDisplayCondition,
     interval,
     sourceUri,
@@ -4450,7 +4447,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ClassificationType,
     rectangle,
-    "classificationType",
+    'classificationType',
     rectangleData.classificationType,
     interval,
     sourceUri,
@@ -4459,7 +4456,7 @@ function processRectangle(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     rectangle,
-    "zIndex",
+    'zIndex',
     rectangleData.zIndex,
     interval,
     sourceUri,
@@ -4482,7 +4479,7 @@ function processTileset(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     tileset,
-    "show",
+    'show',
     tilesetData.show,
     interval,
     sourceUri,
@@ -4491,7 +4488,7 @@ function processTileset(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Uri,
     tileset,
-    "uri",
+    'uri',
     tilesetData.uri,
     interval,
     sourceUri,
@@ -4500,7 +4497,7 @@ function processTileset(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     tileset,
-    "maximumScreenSpaceError",
+    'maximumScreenSpaceError',
     tilesetData.maximumScreenSpaceError,
     interval,
     sourceUri,
@@ -4523,29 +4520,29 @@ function processWall(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     wall,
-    "show",
+    'show',
     wallData.show,
     interval,
     sourceUri,
     entityCollection
   );
-  processPositionArray(wall, "positions", wallData.positions, entityCollection);
+  processPositionArray(wall, 'positions', wallData.positions, entityCollection);
   processArray(
     wall,
-    "minimumHeights",
+    'minimumHeights',
     wallData.minimumHeights,
     entityCollection
   );
   processArray(
     wall,
-    "maximumHeights",
+    'maximumHeights',
     wallData.maximumHeights,
     entityCollection
   );
   processPacketData(
     Number,
     wall,
-    "granularity",
+    'granularity',
     wallData.granularity,
     interval,
     sourceUri,
@@ -4554,7 +4551,7 @@ function processWall(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     wall,
-    "fill",
+    'fill',
     wallData.fill,
     interval,
     sourceUri,
@@ -4562,7 +4559,7 @@ function processWall(entity, packet, entityCollection, sourceUri) {
   );
   processMaterialPacketData(
     wall,
-    "material",
+    'material',
     wallData.material,
     interval,
     sourceUri,
@@ -4571,7 +4568,7 @@ function processWall(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Boolean,
     wall,
-    "outline",
+    'outline',
     wallData.outline,
     interval,
     sourceUri,
@@ -4580,7 +4577,7 @@ function processWall(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Color,
     wall,
-    "outlineColor",
+    'outlineColor',
     wallData.outlineColor,
     interval,
     sourceUri,
@@ -4589,7 +4586,7 @@ function processWall(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     Number,
     wall,
-    "outlineWidth",
+    'outlineWidth',
     wallData.outlineWidth,
     interval,
     sourceUri,
@@ -4598,7 +4595,7 @@ function processWall(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     ShadowMode,
     wall,
-    "shadows",
+    'shadows',
     wallData.shadows,
     interval,
     sourceUri,
@@ -4607,7 +4604,7 @@ function processWall(entity, packet, entityCollection, sourceUri) {
   processPacketData(
     DistanceDisplayCondition,
     wall,
-    "distanceDisplayCondition",
+    'distanceDisplayCondition',
     wallData.distanceDisplayCondition,
     interval,
     sourceUri,
@@ -4629,15 +4626,15 @@ function processCzmlPacket(
 
   currentId = objectId;
 
-  if (!defined(dataSource._version) && objectId !== "document") {
+  if (!defined(dataSource._version) && objectId !== 'document') {
     throw new RuntimeError(
-      "The first CZML packet is required to be the document object."
+      'The first CZML packet is required to be the document object.'
     );
   }
 
-  if (packet["delete"] === true) {
+  if (packet['delete'] === true) {
     entityCollection.removeById(objectId);
-  } else if (objectId === "document") {
+  } else if (objectId === 'document') {
     processDocument(packet, dataSource);
   } else {
     const entity = entityCollection.getOrCreateEntity(objectId);
@@ -4729,7 +4726,7 @@ function updateClock(dataSource) {
 function load(dataSource, czml, options, clear) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(czml)) {
-    throw new DeveloperError("czml is required.");
+    throw new DeveloperError('czml is required.');
   }
   //>>includeEnd('debug');
 
@@ -4740,13 +4737,13 @@ function load(dataSource, czml, options, clear) {
 
   // User specified credit
   let credit = options.credit;
-  if (typeof credit === "string") {
+  if (typeof credit === 'string') {
     credit = new Credit(credit);
   }
   dataSource._credit = credit;
 
   // If the czml is a URL
-  if (typeof czml === "string" || czml instanceof Resource) {
+  if (typeof czml === 'string' || czml instanceof Resource) {
     czml = Resource.createIfNeeded(czml);
     promise = czml.fetchJson();
     sourceUri = defaultValue(sourceUri, czml.clone());
@@ -4877,7 +4874,7 @@ Object.defineProperties(CzmlDataSource.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
   /**
    * Gets the clock settings defined by the loaded CZML.  If no clock is explicitly
@@ -4889,7 +4886,7 @@ Object.defineProperties(CzmlDataSource.prototype, {
   clock: {
     get: function () {
       return this._clock;
-    },
+    }
   },
   /**
    * Gets the collection of {@link Entity} instances.
@@ -4899,7 +4896,7 @@ Object.defineProperties(CzmlDataSource.prototype, {
   entities: {
     get: function () {
       return this._entityCollection;
-    },
+    }
   },
   /**
    * Gets a value indicating if the data source is currently loading data.
@@ -4909,7 +4906,7 @@ Object.defineProperties(CzmlDataSource.prototype, {
   isLoading: {
     get: function () {
       return this._isLoading;
-    },
+    }
   },
   /**
    * Gets an event that will be raised when the underlying data changes.
@@ -4919,7 +4916,7 @@ Object.defineProperties(CzmlDataSource.prototype, {
   changedEvent: {
     get: function () {
       return this._changed;
-    },
+    }
   },
   /**
    * Gets an event that will be raised if an error is encountered during processing.
@@ -4929,7 +4926,7 @@ Object.defineProperties(CzmlDataSource.prototype, {
   errorEvent: {
     get: function () {
       return this._error;
-    },
+    }
   },
   /**
    * Gets an event that will be raised when the data source either starts or stops loading.
@@ -4939,7 +4936,7 @@ Object.defineProperties(CzmlDataSource.prototype, {
   loadingEvent: {
     get: function () {
       return this._loading;
-    },
+    }
   },
   /**
    * Gets whether or not this data source should be displayed.
@@ -4952,7 +4949,7 @@ Object.defineProperties(CzmlDataSource.prototype, {
     },
     set: function (value) {
       this._entityCollection.show = value;
-    },
+    }
   },
 
   /**
@@ -4968,11 +4965,11 @@ Object.defineProperties(CzmlDataSource.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(value)) {
-        throw new DeveloperError("value must be defined.");
+        throw new DeveloperError('value must be defined.');
       }
       //>>includeEnd('debug');
       this._entityCluster = value;
-    },
+    }
   },
   /**
    * Gets the credit that will be displayed for the data source
@@ -4982,8 +4979,8 @@ Object.defineProperties(CzmlDataSource.prototype, {
   credit: {
     get: function () {
       return this._credit;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -5026,7 +5023,7 @@ CzmlDataSource.updaters = [
   processViewFrom, //
   processWall, //
   processOrientation, //
-  processAvailability,
+  processAvailability
 ];
 
 /**

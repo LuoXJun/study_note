@@ -1,13 +1,13 @@
-import BatchTexture from "../BatchTexture.js";
-import Cesium3DTileFeature from "../Cesium3DTileFeature.js";
-import Check from "../../Core/Check.js";
-import Color from "../../Core/Color.js";
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import ModelFeature from "./ModelFeature.js";
-import defaultValue from "../../Core/defaultValue.js";
-import StyleCommandsNeeded from "./StyleCommandsNeeded.js";
-import ModelExperimentalType from "./ModelExperimentalType.js";
+import BatchTexture from '../BatchTexture.js';
+import Cesium3DTileFeature from '../Cesium3DTileFeature.js';
+import Check from '../../Core/Check.js';
+import Color from '../../Core/Color.js';
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import ModelFeature from './ModelFeature.js';
+import defaultValue from '../../Core/defaultValue.js';
+import StyleCommandsNeeded from './StyleCommandsNeeded.js';
+import ModelExperimentalType from './ModelExperimentalType.js';
 
 /**
  * Manages the {@link ModelFeature}s in a {@link ModelExperimental}.
@@ -28,8 +28,8 @@ export default function ModelFeatureTable(options) {
   const propertyTable = options.propertyTable;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("propertyTable", propertyTable);
-  Check.typeOf.object("model", model);
+  Check.typeOf.object('propertyTable', propertyTable);
+  Check.typeOf.object('model', model);
   //>>includeEnd('debug');
 
   this._propertyTable = propertyTable;
@@ -60,7 +60,7 @@ Object.defineProperties(ModelFeatureTable.prototype, {
   batchTexture: {
     get: function () {
       return this._batchTexture;
-    },
+    }
   },
 
   /**
@@ -76,7 +76,7 @@ Object.defineProperties(ModelFeatureTable.prototype, {
   featuresLength: {
     get: function () {
       return this._featuresLength;
-    },
+    }
   },
 
   /**
@@ -97,7 +97,7 @@ Object.defineProperties(ModelFeatureTable.prototype, {
       }
 
       return 0;
-    },
+    }
   },
 
   /**
@@ -113,8 +113,8 @@ Object.defineProperties(ModelFeatureTable.prototype, {
   styleCommandsNeededDirty: {
     get: function () {
       return this._styleCommandsNeededDirty;
-    },
-  },
+    }
+  }
 });
 
 function initialize(modelFeatureTable) {
@@ -138,7 +138,7 @@ function initialize(modelFeatureTable) {
       features[i] = new ModelFeature({
         model: model,
         featureId: i,
-        featureTable: modelFeatureTable,
+        featureTable: modelFeatureTable
       });
     }
   }
@@ -149,7 +149,7 @@ function initialize(modelFeatureTable) {
   modelFeatureTable._batchTexture = new BatchTexture({
     featuresLength: featuresLength,
     owner: modelFeatureTable,
-    statistics: is3DTiles ? model.content.tileset.statistics : undefined,
+    statistics: is3DTiles ? model.content.tileset.statistics : undefined
   });
 }
 

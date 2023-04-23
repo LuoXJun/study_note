@@ -1,18 +1,18 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import CylinderGeometryLibrary from "./CylinderGeometryLibrary.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import GeometryOffsetAttribute from "./GeometryOffsetAttribute.js";
-import IndexDatatype from "./IndexDatatype.js";
-import PrimitiveType from "./PrimitiveType.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import CylinderGeometryLibrary from './CylinderGeometryLibrary.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import GeometryOffsetAttribute from './GeometryOffsetAttribute.js';
+import IndexDatatype from './IndexDatatype.js';
+import PrimitiveType from './PrimitiveType.js';
 
 const radiusScratch = new Cartesian2();
 
@@ -59,16 +59,16 @@ function CylinderOutlineGeometry(options) {
   );
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("options.positions", length);
-  Check.typeOf.number("options.topRadius", topRadius);
-  Check.typeOf.number("options.bottomRadius", bottomRadius);
-  Check.typeOf.number.greaterThanOrEquals("options.slices", slices, 3);
+  Check.typeOf.number('options.positions', length);
+  Check.typeOf.number('options.topRadius', topRadius);
+  Check.typeOf.number('options.bottomRadius', bottomRadius);
+  Check.typeOf.number.greaterThanOrEquals('options.slices', slices, 3);
   if (
     defined(options.offsetAttribute) &&
     options.offsetAttribute === GeometryOffsetAttribute.TOP
   ) {
     throw new DeveloperError(
-      "GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry."
+      'GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -79,7 +79,7 @@ function CylinderOutlineGeometry(options) {
   this._slices = slices;
   this._numberOfVerticalLines = numberOfVerticalLines;
   this._offsetAttribute = options.offsetAttribute;
-  this._workerName = "createCylinderOutlineGeometry";
+  this._workerName = 'createCylinderOutlineGeometry';
 }
 
 /**
@@ -99,8 +99,8 @@ CylinderOutlineGeometry.packedLength = 6;
  */
 CylinderOutlineGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -121,7 +121,7 @@ const scratchOptions = {
   bottomRadius: undefined,
   slices: undefined,
   numberOfVerticalLines: undefined,
-  offsetAttribute: undefined,
+  offsetAttribute: undefined
 };
 
 /**
@@ -134,7 +134,7 @@ const scratchOptions = {
  */
 CylinderOutlineGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -233,7 +233,7 @@ CylinderOutlineGeometry.createGeometry = function (cylinderGeometry) {
   attributes.position = new GeometryAttribute({
     componentDatatype: ComponentDatatype.DOUBLE,
     componentsPerAttribute: 3,
-    values: positions,
+    values: positions
   });
 
   radiusScratch.x = length * 0.5;
@@ -254,7 +254,7 @@ CylinderOutlineGeometry.createGeometry = function (cylinderGeometry) {
     attributes.applyOffset = new GeometryAttribute({
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 1,
-      values: applyOffset,
+      values: applyOffset
     });
   }
 
@@ -263,7 +263,7 @@ CylinderOutlineGeometry.createGeometry = function (cylinderGeometry) {
     indices: indices,
     primitiveType: PrimitiveType.LINES,
     boundingSphere: boundingSphere,
-    offsetAttribute: cylinderGeometry._offsetAttribute,
+    offsetAttribute: cylinderGeometry._offsetAttribute
   });
 };
 export default CylinderOutlineGeometry;

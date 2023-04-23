@@ -1,8 +1,8 @@
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import Event from "../Core/Event.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
-import Property from "./Property.js";
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import Event from '../Core/Event.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
+import Property from './Property.js';
 
 /**
  * A {@link MaterialProperty} that maps to solid color {@link Material} uniforms.
@@ -32,7 +32,7 @@ Object.defineProperties(ColorMaterialProperty.prototype, {
   isConstant: {
     get: function () {
       return Property.isConstant(this._color);
-    },
+    }
   },
 
   /**
@@ -47,7 +47,7 @@ Object.defineProperties(ColorMaterialProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -56,7 +56,7 @@ Object.defineProperties(ColorMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default Color.WHITE
    */
-  color: createPropertyDescriptor("color"),
+  color: createPropertyDescriptor('color')
 });
 
 /**
@@ -66,7 +66,7 @@ Object.defineProperties(ColorMaterialProperty.prototype, {
  * @returns {String} The type of material.
  */
 ColorMaterialProperty.prototype.getType = function (time) {
-  return "Color";
+  return 'Color';
 };
 
 /**

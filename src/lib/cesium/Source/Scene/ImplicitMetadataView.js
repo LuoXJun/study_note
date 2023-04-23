@@ -1,5 +1,5 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
 
 /**
  * This class represents a single entity in the <code>MetadataTable</code> owned by an implicit subtree. The entity is specified by the entityId.
@@ -26,10 +26,10 @@ export default function ImplicitMetadataView(options) {
   const propertyTableJson = options.propertyTableJson;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.metadataTable", metadataTable);
-  Check.typeOf.object("options.class", metadataClass);
-  Check.typeOf.number("options.entityId", entityId);
-  Check.typeOf.object("options.propertyTableJson", propertyTableJson);
+  Check.typeOf.object('options.metadataTable', metadataTable);
+  Check.typeOf.object('options.class', metadataClass);
+  Check.typeOf.number('options.entityId', entityId);
+  Check.typeOf.object('options.propertyTableJson', propertyTableJson);
 
   //>>includeEnd('debug');
 
@@ -52,7 +52,7 @@ Object.defineProperties(ImplicitMetadataView.prototype, {
   class: {
     get: function () {
       return this._class;
-    },
+    }
   },
 
   /**
@@ -65,7 +65,7 @@ Object.defineProperties(ImplicitMetadataView.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -78,8 +78,8 @@ Object.defineProperties(ImplicitMetadataView.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
-  },
+    }
+  }
 });
 
 /**

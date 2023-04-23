@@ -1,25 +1,25 @@
-import buildModuleUrl from "../../Core/buildModuleUrl.js";
-import Cartesian3 from "../../Core/Cartesian3.js";
-import Clock from "../../Core/Clock.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import Ellipsoid from "../../Core/Ellipsoid.js";
-import FeatureDetection from "../../Core/FeatureDetection.js";
-import formatError from "../../Core/formatError.js";
-import requestAnimationFrame from "../../Core/requestAnimationFrame.js";
-import ScreenSpaceEventHandler from "../../Core/ScreenSpaceEventHandler.js";
-import createWorldImagery from "../../Scene/createWorldImagery.js";
-import Globe from "../../Scene/Globe.js";
-import Moon from "../../Scene/Moon.js";
-import Scene from "../../Scene/Scene.js";
-import SceneMode from "../../Scene/SceneMode.js";
-import ShadowMode from "../../Scene/ShadowMode.js";
-import SkyAtmosphere from "../../Scene/SkyAtmosphere.js";
-import SkyBox from "../../Scene/SkyBox.js";
-import Sun from "../../Scene/Sun.js";
-import getElement from "../getElement.js";
+import buildModuleUrl from '../../Core/buildModuleUrl.js';
+import Cartesian3 from '../../Core/Cartesian3.js';
+import Clock from '../../Core/Clock.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import Ellipsoid from '../../Core/Ellipsoid.js';
+import FeatureDetection from '../../Core/FeatureDetection.js';
+import formatError from '../../Core/formatError.js';
+import requestAnimationFrame from '../../Core/requestAnimationFrame.js';
+import ScreenSpaceEventHandler from '../../Core/ScreenSpaceEventHandler.js';
+import createWorldImagery from '../../Scene/createWorldImagery.js';
+import Globe from '../../Scene/Globe.js';
+import Moon from '../../Scene/Moon.js';
+import Scene from '../../Scene/Scene.js';
+import SceneMode from '../../Scene/SceneMode.js';
+import ShadowMode from '../../Scene/ShadowMode.js';
+import SkyAtmosphere from '../../Scene/SkyAtmosphere.js';
+import SkyBox from '../../Scene/SkyBox.js';
+import Sun from '../../Scene/Sun.js';
+import getElement from '../getElement.js';
 
 function getDefaultSkyBoxUrl(suffix) {
   return buildModuleUrl(`Assets/Textures/SkyBox/tycho2t3_80_${suffix}.jpg`);
@@ -57,7 +57,7 @@ function startRenderLoop(widget) {
         widget._renderLoopRunning = false;
         if (widget._showRenderLoopErrors) {
           const title =
-            "An error occurred while rendering.  Rendering has stopped.";
+            'An error occurred while rendering.  Rendering has stopped.';
           widget.showErrorPanel(title, undefined, error);
         }
       }
@@ -181,7 +181,7 @@ function configureCameraFrustum(widget) {
 function CesiumWidget(container, options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(container)) {
-    throw new DeveloperError("container is required.");
+    throw new DeveloperError('container is required.');
   }
   //>>includeEnd('debug');
 
@@ -190,12 +190,13 @@ function CesiumWidget(container, options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //Configure the widget DOM elements
-  const element = document.createElement("div");
-  element.className = "cesium-widget";
+  const element = document.createElement('div');
+  element.className = 'cesium-widget';
   container.appendChild(element);
 
-  const canvas = document.createElement("canvas");
-  const supportsImageRenderingPixelated = FeatureDetection.supportsImageRenderingPixelated();
+  const canvas = document.createElement('canvas');
+  const supportsImageRenderingPixelated =
+    FeatureDetection.supportsImageRenderingPixelated();
   this._supportsImageRenderingPixelated = supportsImageRenderingPixelated;
   if (supportsImageRenderingPixelated) {
     canvas.style.imageRendering = FeatureDetection.imageRenderingValue();
@@ -217,13 +218,13 @@ function CesiumWidget(container, options) {
       canvas.ownerDocument.activeElement.blur();
     }
   }
-  canvas.addEventListener("mousedown", blurActiveElement);
-  canvas.addEventListener("pointerdown", blurActiveElement);
+  canvas.addEventListener('mousedown', blurActiveElement);
+  canvas.addEventListener('pointerdown', blurActiveElement);
 
   element.appendChild(canvas);
 
-  const innerCreditContainer = document.createElement("div");
-  innerCreditContainer.className = "cesium-widget-credits";
+  const innerCreditContainer = document.createElement('div');
+  innerCreditContainer.className = 'cesium-widget-credits';
 
   const creditContainer = defined(options.creditContainer)
     ? getElement(options.creditContainer)
@@ -274,7 +275,7 @@ function CesiumWidget(container, options) {
       requestRenderMode: options.requestRenderMode,
       maximumRenderTimeChange: options.maximumRenderTimeChange,
       depthPlaneEllipsoidOffset: options.depthPlaneEllipsoidOffset,
-      msaaSamples: options.msaaSamples,
+      msaaSamples: options.msaaSamples
     });
     this._scene = scene;
 
@@ -304,13 +305,13 @@ function CesiumWidget(container, options) {
     if (!defined(skyBox)) {
       skyBox = new SkyBox({
         sources: {
-          positiveX: getDefaultSkyBoxUrl("px"),
-          negativeX: getDefaultSkyBoxUrl("mx"),
-          positiveY: getDefaultSkyBoxUrl("py"),
-          negativeY: getDefaultSkyBoxUrl("my"),
-          positiveZ: getDefaultSkyBoxUrl("pz"),
-          negativeZ: getDefaultSkyBoxUrl("mz"),
-        },
+          positiveX: getDefaultSkyBoxUrl('px'),
+          negativeX: getDefaultSkyBoxUrl('mx'),
+          positiveY: getDefaultSkyBoxUrl('py'),
+          negativeY: getDefaultSkyBoxUrl('my'),
+          positiveZ: getDefaultSkyBoxUrl('pz'),
+          negativeZ: getDefaultSkyBoxUrl('mz')
+        }
       });
     }
     if (skyBox !== false) {
@@ -370,14 +371,14 @@ function CesiumWidget(container, options) {
       that._renderLoopRunning = false;
       if (that._showRenderLoopErrors) {
         const title =
-          "An error occurred while rendering.  Rendering has stopped.";
+          'An error occurred while rendering.  Rendering has stopped.';
         that.showErrorPanel(title, undefined, error);
       }
     };
     scene.renderError.addEventListener(this._onRenderError);
   } catch (error) {
     if (showRenderLoopErrors) {
-      const title = "Error constructing CesiumWidget.";
+      const title = 'Error constructing CesiumWidget.';
       const message =
         'Visit <a href="http://get.webgl.org">http://get.webgl.org</a> to verify that your web browser and hardware support WebGL.  Consider trying a different web browser or updating your video drivers.  Detailed error information is below:';
       this.showErrorPanel(title, message, error);
@@ -397,7 +398,7 @@ Object.defineProperties(CesiumWidget.prototype, {
   container: {
     get: function () {
       return this._container;
-    },
+    }
   },
 
   /**
@@ -410,7 +411,7 @@ Object.defineProperties(CesiumWidget.prototype, {
   canvas: {
     get: function () {
       return this._canvas;
-    },
+    }
   },
 
   /**
@@ -423,7 +424,7 @@ Object.defineProperties(CesiumWidget.prototype, {
   creditContainer: {
     get: function () {
       return this._creditContainer;
-    },
+    }
   },
 
   /**
@@ -436,7 +437,7 @@ Object.defineProperties(CesiumWidget.prototype, {
   creditViewport: {
     get: function () {
       return this._creditViewport;
-    },
+    }
   },
 
   /**
@@ -449,7 +450,7 @@ Object.defineProperties(CesiumWidget.prototype, {
   scene: {
     get: function () {
       return this._scene;
-    },
+    }
   },
 
   /**
@@ -462,7 +463,7 @@ Object.defineProperties(CesiumWidget.prototype, {
   imageryLayers: {
     get: function () {
       return this._scene.imageryLayers;
-    },
+    }
   },
 
   /**
@@ -477,7 +478,7 @@ Object.defineProperties(CesiumWidget.prototype, {
     },
     set: function (terrainProvider) {
       this._scene.terrainProvider = terrainProvider;
-    },
+    }
   },
 
   /**
@@ -490,7 +491,7 @@ Object.defineProperties(CesiumWidget.prototype, {
   camera: {
     get: function () {
       return this._scene.camera;
-    },
+    }
   },
 
   /**
@@ -503,7 +504,7 @@ Object.defineProperties(CesiumWidget.prototype, {
   clock: {
     get: function () {
       return this._clock;
-    },
+    }
   },
 
   /**
@@ -516,7 +517,7 @@ Object.defineProperties(CesiumWidget.prototype, {
   screenSpaceEventHandler: {
     get: function () {
       return this._screenSpaceEventHandler;
-    },
+    }
   },
 
   /**
@@ -536,12 +537,12 @@ Object.defineProperties(CesiumWidget.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (value <= 0) {
         throw new DeveloperError(
-          "targetFrameRate must be greater than 0, or undefined."
+          'targetFrameRate must be greater than 0, or undefined.'
         );
       }
       //>>includeEnd('debug');
       this._targetFrameRate = value;
-    },
+    }
   },
 
   /**
@@ -569,7 +570,7 @@ Object.defineProperties(CesiumWidget.prototype, {
           startRenderLoop(this);
         }
       }
-    },
+    }
   },
 
   /**
@@ -591,14 +592,14 @@ Object.defineProperties(CesiumWidget.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (value <= 0) {
-        throw new DeveloperError("resolutionScale must be greater than 0.");
+        throw new DeveloperError('resolutionScale must be greater than 0.');
       }
       //>>includeEnd('debug');
       if (this._resolutionScale !== value) {
         this._resolutionScale = value;
         this._forceResize = true;
       }
-    },
+    }
   },
 
   /**
@@ -622,8 +623,8 @@ Object.defineProperties(CesiumWidget.prototype, {
         this._useBrowserRecommendedResolution = value;
         this._forceResize = true;
       }
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -638,20 +639,20 @@ Object.defineProperties(CesiumWidget.prototype, {
  */
 CesiumWidget.prototype.showErrorPanel = function (title, message, error) {
   const element = this._element;
-  const overlay = document.createElement("div");
-  overlay.className = "cesium-widget-errorPanel";
+  const overlay = document.createElement('div');
+  overlay.className = 'cesium-widget-errorPanel';
 
-  const content = document.createElement("div");
-  content.className = "cesium-widget-errorPanel-content";
+  const content = document.createElement('div');
+  content.className = 'cesium-widget-errorPanel-content';
   overlay.appendChild(content);
 
-  const errorHeader = document.createElement("div");
-  errorHeader.className = "cesium-widget-errorPanel-header";
+  const errorHeader = document.createElement('div');
+  errorHeader.className = 'cesium-widget-errorPanel-header';
   errorHeader.appendChild(document.createTextNode(title));
   content.appendChild(errorHeader);
 
-  const errorPanelScroller = document.createElement("div");
-  errorPanelScroller.className = "cesium-widget-errorPanel-scroll";
+  const errorPanelScroller = document.createElement('div');
+  errorPanelScroller.className = 'cesium-widget-errorPanel-scroll';
   content.appendChild(errorPanelScroller);
   function resizeCallback() {
     errorPanelScroller.style.maxHeight = `${Math.max(
@@ -661,51 +662,51 @@ CesiumWidget.prototype.showErrorPanel = function (title, message, error) {
   }
   resizeCallback();
   if (defined(window.addEventListener)) {
-    window.addEventListener("resize", resizeCallback, false);
+    window.addEventListener('resize', resizeCallback, false);
   }
 
   const hasMessage = defined(message);
   const hasError = defined(error);
 
   if (hasMessage || hasError) {
-    const errorMessage = document.createElement("div");
-    errorMessage.className = "cesium-widget-errorPanel-message";
+    const errorMessage = document.createElement('div');
+    errorMessage.className = 'cesium-widget-errorPanel-message';
     errorPanelScroller.appendChild(errorMessage);
 
     if (hasError) {
       let errorDetails = formatError(error);
       if (!hasMessage) {
-        if (typeof error === "string") {
+        if (typeof error === 'string') {
           error = new Error(error);
         }
 
         message = formatError({
           name: error.name,
-          message: error.message,
+          message: error.message
         });
         errorDetails = error.stack;
       }
 
       //IE8 does not have a console object unless the dev tools are open.
-      if (typeof console !== "undefined") {
+      if (typeof console !== 'undefined') {
         console.error(`${title}\n${message}\n${errorDetails}`);
       }
 
-      const errorMessageDetails = document.createElement("div");
+      const errorMessageDetails = document.createElement('div');
       errorMessageDetails.className =
-        "cesium-widget-errorPanel-message-details collapsed";
+        'cesium-widget-errorPanel-message-details collapsed';
 
-      const moreDetails = document.createElement("span");
-      moreDetails.className = "cesium-widget-errorPanel-more-details";
-      moreDetails.appendChild(document.createTextNode("See more..."));
+      const moreDetails = document.createElement('span');
+      moreDetails.className = 'cesium-widget-errorPanel-more-details';
+      moreDetails.appendChild(document.createTextNode('See more...'));
       errorMessageDetails.appendChild(moreDetails);
 
       errorMessageDetails.onclick = function (e) {
         errorMessageDetails.removeChild(moreDetails);
         errorMessageDetails.appendChild(document.createTextNode(errorDetails));
         errorMessageDetails.className =
-          "cesium-widget-errorPanel-message-details";
-        content.className = "cesium-widget-errorPanel-content expanded";
+          'cesium-widget-errorPanel-message-details';
+        content.className = 'cesium-widget-errorPanel-content expanded';
         errorMessageDetails.onclick = undefined;
       };
 
@@ -715,17 +716,17 @@ CesiumWidget.prototype.showErrorPanel = function (title, message, error) {
     errorMessage.innerHTML = `<p>${message}</p>`;
   }
 
-  const buttonPanel = document.createElement("div");
-  buttonPanel.className = "cesium-widget-errorPanel-buttonPanel";
+  const buttonPanel = document.createElement('div');
+  buttonPanel.className = 'cesium-widget-errorPanel-buttonPanel';
   content.appendChild(buttonPanel);
 
-  const okButton = document.createElement("button");
-  okButton.setAttribute("type", "button");
-  okButton.className = "cesium-button";
-  okButton.appendChild(document.createTextNode("OK"));
+  const okButton = document.createElement('button');
+  okButton.setAttribute('type', 'button');
+  okButton.className = 'cesium-button';
+  okButton.appendChild(document.createTextNode('OK'));
   okButton.onclick = function () {
     if (defined(resizeCallback) && defined(window.removeEventListener)) {
-      window.removeEventListener("resize", resizeCallback, false);
+      window.removeEventListener('resize', resizeCallback, false);
     }
     element.removeChild(overlay);
   };

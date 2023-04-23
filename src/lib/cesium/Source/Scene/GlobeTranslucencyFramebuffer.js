@@ -1,12 +1,12 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import ClearCommand from "../Renderer/ClearCommand.js";
-import FramebufferManager from "../Renderer/FramebufferManager.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import RenderState from "../Renderer/RenderState.js";
-import PassThroughDepth from "../Shaders/PostProcessStages/PassThroughDepth.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import ClearCommand from '../Renderer/ClearCommand.js';
+import FramebufferManager from '../Renderer/FramebufferManager.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import RenderState from '../Renderer/RenderState.js';
+import PassThroughDepth from '../Shaders/PostProcessStages/PassThroughDepth.js';
 
 /**
  * @private
@@ -14,7 +14,7 @@ import PassThroughDepth from "../Shaders/PostProcessStages/PassThroughDepth.js";
 function GlobeTranslucencyFramebuffer() {
   this._framebuffer = new FramebufferManager({
     depthStencil: true,
-    supportsDepthTexture: true,
+    supportsDepthTexture: true
   });
   this._packedDepthFramebuffer = new FramebufferManager();
 
@@ -34,35 +34,35 @@ Object.defineProperties(GlobeTranslucencyFramebuffer.prototype, {
   classificationTexture: {
     get: function () {
       return this._framebuffer.getColorTexture();
-    },
+    }
   },
   classificationFramebuffer: {
     get: function () {
       return this._framebuffer.framebuffer;
-    },
+    }
   },
   // Exposed for testing
   packedDepthFramebuffer: {
     get: function () {
       return this._packedDepthFramebuffer.framebuffer;
-    },
+    }
   },
   depthStencilTexture: {
     get: function () {
       return this._framebuffer.getDepthStencilTexture();
-    },
+    }
   },
   // Exposed for testing
   depthStencilRenderbuffer: {
     get: function () {
       return this._framebuffer.getDepthStencilRenderbuffer();
-    },
+    }
   },
   packedDepthTexture: {
     get: function () {
       return this._packedDepthFramebuffer.getColorTexture();
-    },
-  },
+    }
+  }
 });
 
 function destroyResources(globeTranslucency) {
@@ -122,8 +122,8 @@ function updateCommands(globeTranslucency, context, width, height, passState) {
       viewport: globeTranslucency._viewport,
       scissorTest: {
         enabled: globeTranslucency._useScissorTest,
-        rectangle: globeTranslucency._scissorRectangle,
-      },
+        rectangle: globeTranslucency._scissorRectangle
+      }
     });
   }
 
@@ -134,9 +134,9 @@ function updateCommands(globeTranslucency, context, width, height, passState) {
         uniformMap: {
           u_depthTexture: function () {
             return globeTranslucency.depthStencilTexture;
-          },
+          }
         },
-        owner: globeTranslucency,
+        owner: globeTranslucency
       }
     );
   }
@@ -146,7 +146,7 @@ function updateCommands(globeTranslucency, context, width, height, passState) {
       color: new Color(0.0, 0.0, 0.0, 0.0),
       depth: 1.0,
       stencil: 0.0,
-      owner: globeTranslucency,
+      owner: globeTranslucency
     });
   }
 

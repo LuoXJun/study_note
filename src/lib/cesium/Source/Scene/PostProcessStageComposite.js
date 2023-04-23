@@ -1,8 +1,8 @@
-import Check from "../Core/Check.js";
-import createGuid from "../Core/createGuid.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
+import Check from '../Core/Check.js';
+import createGuid from '../Core/createGuid.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
 
 /**
  * A collection of {@link PostProcessStage}s or other post-process composite stages that execute together logically.
@@ -77,9 +77,9 @@ function PostProcessStageComposite(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.stages", options.stages);
+  Check.defined('options.stages', options.stages);
   Check.typeOf.number.greaterThan(
-    "options.stages.length",
+    'options.stages.length',
     options.stages.length,
     0
   );
@@ -132,7 +132,7 @@ Object.defineProperties(PostProcessStageComposite.prototype, {
         }
       }
       return true;
-    },
+    }
   },
   /**
    * The unique name of this post-process stage for reference by other stages in a PostProcessStageComposite.
@@ -144,7 +144,7 @@ Object.defineProperties(PostProcessStageComposite.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
   /**
    * Whether or not to execute this post-process stage when ready.
@@ -162,7 +162,7 @@ Object.defineProperties(PostProcessStageComposite.prototype, {
       for (let i = 0; i < length; ++i) {
         stages[i].enabled = value;
       }
-    },
+    }
   },
   /**
    * An alias to the uniform values of the post-process stages. May be <code>undefined</code>; in which case, get each stage to set uniform values.
@@ -172,7 +172,7 @@ Object.defineProperties(PostProcessStageComposite.prototype, {
   uniforms: {
     get: function () {
       return this._uniforms;
-    },
+    }
   },
   /**
    * All post-process stages are executed in the order of the array. The input texture changes based on the value of <code>inputPreviousStageTexture</code>.
@@ -187,7 +187,7 @@ Object.defineProperties(PostProcessStageComposite.prototype, {
   inputPreviousStageTexture: {
     get: function () {
       return this._inputPreviousStageTexture;
-    },
+    }
   },
   /**
    * The number of post-process stages in this composite.
@@ -199,7 +199,7 @@ Object.defineProperties(PostProcessStageComposite.prototype, {
   length: {
     get: function () {
       return this._stages.length;
-    },
+    }
   },
   /**
    * The features selected for applying the post-process.
@@ -213,7 +213,7 @@ Object.defineProperties(PostProcessStageComposite.prototype, {
     },
     set: function (value) {
       this._selected = value;
-    },
+    }
   },
   /**
    * @private
@@ -224,8 +224,8 @@ Object.defineProperties(PostProcessStageComposite.prototype, {
     },
     set: function (value) {
       this._parentSelected = value;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -253,8 +253,8 @@ PostProcessStageComposite.prototype._isSupported = function (context) {
  */
 PostProcessStageComposite.prototype.get = function (index) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number.greaterThanOrEquals("index", index, 0);
-  Check.typeOf.number.lessThan("index", index, this.length);
+  Check.typeOf.number.greaterThanOrEquals('index', index, 0);
+  Check.typeOf.number.lessThan('index', index, this.length);
   //>>includeEnd('debug');
   return this._stages[index];
 };

@@ -1,8 +1,8 @@
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import EllipsoidOutlineGeometry from "./EllipsoidOutlineGeometry.js";
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import EllipsoidOutlineGeometry from './EllipsoidOutlineGeometry.js';
 
 /**
  * A description of the outline of a sphere.
@@ -35,11 +35,11 @@ function SphereOutlineGeometry(options) {
     radii: radii,
     stackPartitions: options.stackPartitions,
     slicePartitions: options.slicePartitions,
-    subdivisions: options.subdivisions,
+    subdivisions: options.subdivisions
   };
 
   this._ellipsoidGeometry = new EllipsoidOutlineGeometry(ellipsoidOptions);
-  this._workerName = "createSphereOutlineGeometry";
+  this._workerName = 'createSphereOutlineGeometry';
 }
 
 /**
@@ -59,7 +59,7 @@ SphereOutlineGeometry.packedLength = EllipsoidOutlineGeometry.packedLength;
  */
 SphereOutlineGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
+  Check.typeOf.object('value', value);
   //>>includeEnd('debug');
 
   return EllipsoidOutlineGeometry.pack(
@@ -75,7 +75,7 @@ const scratchOptions = {
   radii: new Cartesian3(),
   stackPartitions: undefined,
   slicePartitions: undefined,
-  subdivisions: undefined,
+  subdivisions: undefined
 };
 
 /**

@@ -23,7 +23,13 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './OrientedBoundingBox-a82b3552'], (function (exports, Matrix2, RuntimeError, OrientedBoundingBox) { 'use strict';
+define([
+  'exports',
+  './Matrix2-9e1c22e2',
+  './RuntimeError-4f8ec8a2',
+  './OrientedBoundingBox-a82b3552'
+], function (exports, Matrix2, RuntimeError, OrientedBoundingBox) {
+  'use strict';
 
   /**
    * @private
@@ -38,13 +44,11 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './OrientedB
 
   CoplanarPolygonGeometryLibrary.validOutline = function (positions) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("positions", positions);
+    RuntimeError.Check.defined('positions', positions);
     //>>includeEnd('debug');
 
-    const orientedBoundingBox = OrientedBoundingBox.OrientedBoundingBox.fromPoints(
-      positions,
-      obbScratch
-    );
+    const orientedBoundingBox =
+      OrientedBoundingBox.OrientedBoundingBox.fromPoints(positions, obbScratch);
     const halfAxes = orientedBoundingBox.halfAxes;
     const xAxis = Matrix2.Matrix3.getColumn(halfAxes, 0, scratchXAxis);
     const yAxis = Matrix2.Matrix3.getColumn(halfAxes, 1, scratchYAxis);
@@ -69,16 +73,14 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './OrientedB
     planeAxis2Result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("positions", positions);
-    RuntimeError.Check.defined("centerResult", centerResult);
-    RuntimeError.Check.defined("planeAxis1Result", planeAxis1Result);
-    RuntimeError.Check.defined("planeAxis2Result", planeAxis2Result);
+    RuntimeError.Check.defined('positions', positions);
+    RuntimeError.Check.defined('centerResult', centerResult);
+    RuntimeError.Check.defined('planeAxis1Result', planeAxis1Result);
+    RuntimeError.Check.defined('planeAxis2Result', planeAxis2Result);
     //>>includeEnd('debug');
 
-    const orientedBoundingBox = OrientedBoundingBox.OrientedBoundingBox.fromPoints(
-      positions,
-      obbScratch
-    );
+    const orientedBoundingBox =
+      OrientedBoundingBox.OrientedBoundingBox.fromPoints(positions, obbScratch);
     const halfAxes = orientedBoundingBox.halfAxes;
     const xAxis = Matrix2.Matrix3.getColumn(halfAxes, 0, scratchXAxis);
     const yAxis = Matrix2.Matrix3.getColumn(halfAxes, 1, scratchYAxis);
@@ -119,7 +121,11 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './OrientedB
   };
 
   function projectTo2D(position, center, axis1, axis2, result) {
-    const v = Matrix2.Cartesian3.subtract(position, center, scratchIntersectionPoint);
+    const v = Matrix2.Cartesian3.subtract(
+      position,
+      center,
+      scratchIntersectionPoint
+    );
     const x = Matrix2.Cartesian3.dot(axis1, v);
     const y = Matrix2.Cartesian3.dot(axis2, v);
 
@@ -152,6 +158,5 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './OrientedB
   };
 
   exports.CoplanarPolygonGeometryLibrary = CoplanarPolygonGeometryLibrary;
-
-}));
+});
 //# sourceMappingURL=CoplanarPolygonGeometryLibrary-ecf852df.js.map

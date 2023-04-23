@@ -1,36 +1,36 @@
-import Uri from "../ThirdParty/Uri.js";
-import appendForwardSlash from "./appendForwardSlash.js";
-import Check from "./Check.js";
-import clone from "./clone.js";
-import combine from "./combine.js";
-import defaultValue from "./defaultValue.js";
-import defer from "./defer.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import getAbsoluteUri from "./getAbsoluteUri.js";
-import getBaseUri from "./getBaseUri.js";
-import getExtensionFromUri from "./getExtensionFromUri.js";
-import getImagePixels from "./getImagePixels.js";
-import isBlobUri from "./isBlobUri.js";
-import isCrossOriginUrl from "./isCrossOriginUrl.js";
-import isDataUri from "./isDataUri.js";
-import loadAndExecuteScript from "./loadAndExecuteScript.js";
-import CesiumMath from "./Math.js";
-import objectToQuery from "./objectToQuery.js";
-import queryToObject from "./queryToObject.js";
-import Request from "./Request.js";
-import RequestErrorEvent from "./RequestErrorEvent.js";
-import RequestScheduler from "./RequestScheduler.js";
-import RequestState from "./RequestState.js";
-import RuntimeError from "./RuntimeError.js";
-import TrustedServers from "./TrustedServers.js";
+import Uri from '../ThirdParty/Uri.js';
+import appendForwardSlash from './appendForwardSlash.js';
+import Check from './Check.js';
+import clone from './clone.js';
+import combine from './combine.js';
+import defaultValue from './defaultValue.js';
+import defer from './defer.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import getAbsoluteUri from './getAbsoluteUri.js';
+import getBaseUri from './getBaseUri.js';
+import getExtensionFromUri from './getExtensionFromUri.js';
+import getImagePixels from './getImagePixels.js';
+import isBlobUri from './isBlobUri.js';
+import isCrossOriginUrl from './isCrossOriginUrl.js';
+import isDataUri from './isDataUri.js';
+import loadAndExecuteScript from './loadAndExecuteScript.js';
+import CesiumMath from './Math.js';
+import objectToQuery from './objectToQuery.js';
+import queryToObject from './queryToObject.js';
+import Request from './Request.js';
+import RequestErrorEvent from './RequestErrorEvent.js';
+import RequestScheduler from './RequestScheduler.js';
+import RequestState from './RequestState.js';
+import RuntimeError from './RuntimeError.js';
+import TrustedServers from './TrustedServers.js';
 
 const xhrBlobSupported = (function () {
   try {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "#", true);
-    xhr.responseType = "blob";
-    return xhr.responseType === "blob";
+    xhr.open('GET', '#', true);
+    xhr.responseType = 'blob';
+    return xhr.responseType === 'blob';
   } catch (e) {
     return false;
   }
@@ -54,7 +54,7 @@ function parseQuery(uri, resource, merge, preserveQueryParameters) {
 
   let query;
   // Special case we run into where the querystring is just a string, not key/value pairs
-  if (queryString.indexOf("=") === -1) {
+  if (queryString.indexOf('=') === -1) {
     const result = {};
     result[queryString] = undefined;
     query = result;
@@ -71,7 +71,7 @@ function parseQuery(uri, resource, merge, preserveQueryParameters) {
   } else {
     resource._queryParameters = query;
   }
-  uri.search("");
+  uri.search('');
 }
 
 /**
@@ -125,7 +125,7 @@ function checkAndResetRequest(request) {
     request.state === RequestState.ISSUED ||
     request.state === RequestState.ACTIVE
   ) {
-    throw new RuntimeError("The Resource is already being fetched.");
+    throw new RuntimeError('The Resource is already being fetched.');
   }
 
   request.state = RequestState.UNISSUED;
@@ -269,14 +269,14 @@ function combineQueryParameters(q1, q2, preserveQueryParameters) {
  */
 function Resource(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
-  if (typeof options === "string") {
+  if (typeof options === 'string') {
     options = {
-      url: options,
+      url: options
     };
   }
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("options.url", options.url);
+  Check.typeOf.string('options.url', options.url);
   //>>includeEnd('debug');
 
   this._url = undefined;
@@ -323,7 +323,7 @@ function Resource(options) {
   parseQuery(uri, this, true, true);
 
   // Remove the fragment as it's not sent with a request
-  uri.fragment("");
+  uri.fragment('');
 
   this._url = uri.toString();
 }
@@ -344,16 +344,16 @@ Resource.createIfNeeded = function (resource) {
     //  are managed outside of the providers, by the tile loading code, we want to keep the request property the same so if it is changed
     //  in the underlying tiling code the requests for this resource will use it.
     return resource.getDerivedResource({
-      request: resource.request,
+      request: resource.request
     });
   }
 
-  if (typeof resource !== "string") {
+  if (typeof resource !== 'string') {
     return resource;
   }
 
   return new Resource({
-    url: resource,
+    url: resource
   });
 };
 
@@ -380,26 +380,26 @@ Resource.supportsImageBitmapOptions = function () {
     return supportsImageBitmapOptionsPromise;
   }
 
-  if (typeof createImageBitmap !== "function") {
+  if (typeof createImageBitmap !== 'function') {
     supportsImageBitmapOptionsPromise = Promise.resolve(false);
     return supportsImageBitmapOptionsPromise;
   }
 
   const imageDataUri =
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAABGdBTUEAAE4g3rEiDgAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAADElEQVQI12Ng6GAAAAEUAIngE3ZiAAAAAElFTkSuQmCC";
+    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAABGdBTUEAAE4g3rEiDgAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAADElEQVQI12Ng6GAAAAEUAIngE3ZiAAAAAElFTkSuQmCC';
 
   supportsImageBitmapOptionsPromise = Resource.fetchBlob({
-    url: imageDataUri,
+    url: imageDataUri
   })
     .then(function (blob) {
       const imageBitmapOptions = {
-        imageOrientation: "flipY", // default is "none"
-        premultiplyAlpha: "none", // default is "default"
-        colorSpaceConversion: "none", // default is "default"
+        imageOrientation: 'flipY', // default is "none"
+        premultiplyAlpha: 'none', // default is "default"
+        colorSpaceConversion: 'none' // default is "default"
       };
       return Promise.all([
         createImageBitmap(blob, imageBitmapOptions),
-        createImageBitmap(blob),
+        createImageBitmap(blob)
       ]);
     })
     .then(function (imageBitmaps) {
@@ -427,8 +427,8 @@ Object.defineProperties(Resource, {
   isBlobSupported: {
     get: function () {
       return xhrBlobSupported;
-    },
-  },
+    }
+  }
 });
 
 Object.defineProperties(Resource.prototype, {
@@ -443,7 +443,7 @@ Object.defineProperties(Resource.prototype, {
   queryParameters: {
     get: function () {
       return this._queryParameters;
-    },
+    }
   },
 
   /**
@@ -457,7 +457,7 @@ Object.defineProperties(Resource.prototype, {
   templateValues: {
     get: function () {
       return this._templateValues;
-    },
+    }
   },
 
   /**
@@ -476,10 +476,10 @@ Object.defineProperties(Resource.prototype, {
       parseQuery(uri, this, false);
 
       // Remove the fragment as it's not sent with a request
-      uri.fragment("");
+      uri.fragment('');
 
       this._url = uri.toString();
-    },
+    }
   },
 
   /**
@@ -493,7 +493,7 @@ Object.defineProperties(Resource.prototype, {
   extension: {
     get: function () {
       return getExtensionFromUri(this._url);
-    },
+    }
   },
 
   /**
@@ -505,7 +505,7 @@ Object.defineProperties(Resource.prototype, {
   isDataUri: {
     get: function () {
       return isDataUri(this._url);
-    },
+    }
   },
 
   /**
@@ -517,7 +517,7 @@ Object.defineProperties(Resource.prototype, {
   isBlobUri: {
     get: function () {
       return isBlobUri(this._url);
-    },
+    }
   },
 
   /**
@@ -529,7 +529,7 @@ Object.defineProperties(Resource.prototype, {
   isCrossOriginUrl: {
     get: function () {
       return isCrossOriginUrl(this._url);
-    },
+    }
   },
 
   /**
@@ -541,8 +541,8 @@ Object.defineProperties(Resource.prototype, {
   hasHeaders: {
     get: function () {
       return Object.keys(this.headers).length > 0;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -575,7 +575,7 @@ Resource.prototype.getUrlComponent = function (query, proxy) {
   }
 
   // objectToQuery escapes the placeholders.  Undo that.
-  let url = uri.toString().replace(/%7B/g, "{").replace(/%7D/g, "}");
+  let url = uri.toString().replace(/%7B/g, '{').replace(/%7D/g, '}');
 
   const templateValues = this._templateValues;
   url = url.replace(/{(.*?)}/g, function (match, key) {
@@ -676,9 +676,9 @@ Resource.prototype.getDerivedResource = function (options) {
     parseQuery(uri, resource, true, preserveQueryParameters);
 
     // Remove the fragment as it's not sent with a request
-    uri.fragment("");
+    uri.fragment('');
 
-    if (uri.scheme() !== "") {
+    if (uri.scheme() !== '') {
       resource._url = uri.toString();
     } else {
       resource._url = uri
@@ -730,7 +730,7 @@ Resource.prototype.getDerivedResource = function (options) {
 Resource.prototype.retryOnError = function (error) {
   const retryCallback = this.retryCallback;
   if (
-    typeof retryCallback !== "function" ||
+    typeof retryCallback !== 'function' ||
     this._retryCount >= this.retryAttempts
   ) {
     return Promise.resolve(false);
@@ -754,7 +754,7 @@ Resource.prototype.retryOnError = function (error) {
 Resource.prototype.clone = function (result) {
   if (!defined(result)) {
     result = new Resource({
-      url: this._url,
+      url: this._url
     });
   }
 
@@ -810,7 +810,7 @@ Resource.prototype.appendForwardSlash = function () {
  */
 Resource.prototype.fetchArrayBuffer = function () {
   return this.fetch({
-    responseType: "arraybuffer",
+    responseType: 'arraybuffer'
   });
 };
 
@@ -854,7 +854,7 @@ Resource.fetchArrayBuffer = function (options) {
  */
 Resource.prototype.fetchBlob = function () {
   return this.fetch({
-    responseType: "blob",
+    responseType: 'blob'
   });
 };
 
@@ -932,7 +932,7 @@ Resource.prototype.fetchImage = function (options) {
       resource: this,
       flipY: flipY,
       skipColorSpaceConversion: skipColorSpaceConversion,
-      preferImageBitmap: preferImageBitmap,
+      preferImageBitmap: preferImageBitmap
     });
   }
 
@@ -960,19 +960,19 @@ Resource.prototype.fetchImage = function (options) {
         return Resource.createImageBitmapFromBlob(blob, {
           flipY: flipY,
           premultiplyAlpha: false,
-          skipColorSpaceConversion: skipColorSpaceConversion,
+          skipColorSpaceConversion: skipColorSpaceConversion
         });
       }
       const blobUrl = window.URL.createObjectURL(blob);
       generatedBlobResource = new Resource({
-        url: blobUrl,
+        url: blobUrl
       });
 
       return fetchImage({
         resource: generatedBlobResource,
         flipY: flipY,
         skipColorSpaceConversion: skipColorSpaceConversion,
-        preferImageBitmap: false,
+        preferImageBitmap: false
       });
     })
     .then(function (image) {
@@ -1065,7 +1065,7 @@ function fetchImage(options) {
           resource: resource,
           flipY: flipY,
           skipColorSpaceConversion: skipColorSpaceConversion,
-          preferImageBitmap: preferImageBitmap,
+          preferImageBitmap: preferImageBitmap
         });
       }
       return Promise.reject(e);
@@ -1097,7 +1097,7 @@ Resource.fetchImage = function (options) {
     flipY: options.flipY,
     skipColorSpaceConversion: options.skipColorSpaceConversion,
     preferBlob: options.preferBlob,
-    preferImageBitmap: options.preferImageBitmap,
+    preferImageBitmap: options.preferImageBitmap
   });
 };
 
@@ -1129,7 +1129,7 @@ Resource.fetchImage = function (options) {
  */
 Resource.prototype.fetchText = function () {
   return this.fetch({
-    responseType: "text",
+    responseType: 'text'
   });
 };
 
@@ -1176,10 +1176,10 @@ Resource.fetchText = function (options) {
  */
 Resource.prototype.fetchJson = function () {
   const promise = this.fetch({
-    responseType: "text",
+    responseType: 'text',
     headers: {
-      Accept: "application/json,*/*;q=0.01",
-    },
+      Accept: 'application/json,*/*;q=0.01'
+    }
   });
 
   if (!defined(promise)) {
@@ -1238,8 +1238,8 @@ Resource.fetchJson = function (options) {
  */
 Resource.prototype.fetchXML = function () {
   return this.fetch({
-    responseType: "document",
-    overrideMimeType: "text/xml",
+    responseType: 'document',
+    overrideMimeType: 'text/xml'
   });
 };
 
@@ -1280,7 +1280,7 @@ Resource.fetchXML = function (options) {
  * @see {@link http://wiki.commonjs.org/wiki/Promises/A|CommonJS Promises/A}
  */
 Resource.prototype.fetchJsonp = function (callbackParameterName) {
-  callbackParameterName = defaultValue(callbackParameterName, "callback");
+  callbackParameterName = defaultValue(callbackParameterName, 'callback');
 
   checkAndResetRequest(this.request);
 
@@ -1454,7 +1454,7 @@ function decodeDataUriArrayBuffer(isBase64, data) {
 }
 
 function decodeDataUri(dataUriRegexResult, responseType) {
-  responseType = defaultValue(responseType, "");
+  responseType = defaultValue(responseType, '');
   const mimeType = dataUriRegexResult[1];
   const isBase64 = !!dataUriRegexResult[2];
   const data = dataUriRegexResult[3];
@@ -1462,23 +1462,23 @@ function decodeDataUri(dataUriRegexResult, responseType) {
   let parser;
 
   switch (responseType) {
-    case "":
-    case "text":
+    case '':
+    case 'text':
       return decodeDataUriText(isBase64, data);
-    case "arraybuffer":
+    case 'arraybuffer':
       return decodeDataUriArrayBuffer(isBase64, data);
-    case "blob":
+    case 'blob':
       buffer = decodeDataUriArrayBuffer(isBase64, data);
       return new Blob([buffer], {
-        type: mimeType,
+        type: mimeType
       });
-    case "document":
+    case 'document':
       parser = new DOMParser();
       return parser.parseFromString(
         decodeDataUriText(isBase64, data),
         mimeType
       );
-    case "json":
+    case 'json':
       return JSON.parse(decodeDataUriText(isBase64, data));
     default:
       //>>includeStart('debug', pragmas.debug);
@@ -1514,7 +1514,7 @@ function decodeDataUri(dataUriRegexResult, responseType) {
  */
 Resource.prototype.fetch = function (options) {
   options = defaultClone(options, {});
-  options.method = "GET";
+  options.method = 'GET';
 
   return this._makeRequest(options);
 };
@@ -1540,7 +1540,7 @@ Resource.fetch = function (options) {
   return resource.fetch({
     // Make copy of just the needed fields because headers can be passed to both the constructor and to fetch
     responseType: options.responseType,
-    overrideMimeType: options.overrideMimeType,
+    overrideMimeType: options.overrideMimeType
   });
 };
 
@@ -1570,7 +1570,7 @@ Resource.fetch = function (options) {
  */
 Resource.prototype.delete = function (options) {
   options = defaultClone(options, {});
-  options.method = "DELETE";
+  options.method = 'DELETE';
 
   return this._makeRequest(options);
 };
@@ -1598,7 +1598,7 @@ Resource.delete = function (options) {
     // Make copy of just the needed fields because headers can be passed to both the constructor and to fetch
     responseType: options.responseType,
     overrideMimeType: options.overrideMimeType,
-    data: options.data,
+    data: options.data
   });
 };
 
@@ -1628,7 +1628,7 @@ Resource.delete = function (options) {
  */
 Resource.prototype.head = function (options) {
   options = defaultClone(options, {});
-  options.method = "HEAD";
+  options.method = 'HEAD';
 
   return this._makeRequest(options);
 };
@@ -1654,7 +1654,7 @@ Resource.head = function (options) {
   return resource.head({
     // Make copy of just the needed fields because headers can be passed to both the constructor and to fetch
     responseType: options.responseType,
-    overrideMimeType: options.overrideMimeType,
+    overrideMimeType: options.overrideMimeType
   });
 };
 
@@ -1684,7 +1684,7 @@ Resource.head = function (options) {
  */
 Resource.prototype.options = function (options) {
   options = defaultClone(options, {});
-  options.method = "OPTIONS";
+  options.method = 'OPTIONS';
 
   return this._makeRequest(options);
 };
@@ -1710,7 +1710,7 @@ Resource.options = function (options) {
   return resource.options({
     // Make copy of just the needed fields because headers can be passed to both the constructor and to fetch
     responseType: options.responseType,
-    overrideMimeType: options.overrideMimeType,
+    overrideMimeType: options.overrideMimeType
   });
 };
 
@@ -1741,10 +1741,10 @@ Resource.options = function (options) {
  * @see {@link http://wiki.commonjs.org/wiki/Promises/A|CommonJS Promises/A}
  */
 Resource.prototype.post = function (data, options) {
-  Check.defined("data", data);
+  Check.defined('data', data);
 
   options = defaultClone(options, {});
-  options.method = "POST";
+  options.method = 'POST';
   options.data = data;
 
   return this._makeRequest(options);
@@ -1772,7 +1772,7 @@ Resource.post = function (options) {
   return resource.post(options.data, {
     // Make copy of just the needed fields because headers can be passed to both the constructor and to post
     responseType: options.responseType,
-    overrideMimeType: options.overrideMimeType,
+    overrideMimeType: options.overrideMimeType
   });
 };
 
@@ -1802,10 +1802,10 @@ Resource.post = function (options) {
  * @see {@link http://wiki.commonjs.org/wiki/Promises/A|CommonJS Promises/A}
  */
 Resource.prototype.put = function (data, options) {
-  Check.defined("data", data);
+  Check.defined('data', data);
 
   options = defaultClone(options, {});
-  options.method = "PUT";
+  options.method = 'PUT';
   options.data = data;
 
   return this._makeRequest(options);
@@ -1833,7 +1833,7 @@ Resource.put = function (options) {
   return resource.put(options.data, {
     // Make copy of just the needed fields because headers can be passed to both the constructor and to post
     responseType: options.responseType,
-    overrideMimeType: options.overrideMimeType,
+    overrideMimeType: options.overrideMimeType
   });
 };
 
@@ -1863,10 +1863,10 @@ Resource.put = function (options) {
  * @see {@link http://wiki.commonjs.org/wiki/Promises/A|CommonJS Promises/A}
  */
 Resource.prototype.patch = function (data, options) {
-  Check.defined("data", data);
+  Check.defined('data', data);
 
   options = defaultClone(options, {});
-  options.method = "PATCH";
+  options.method = 'PATCH';
   options.data = data;
 
   return this._makeRequest(options);
@@ -1894,7 +1894,7 @@ Resource.patch = function (options) {
   return resource.patch(options.data, {
     // Make copy of just the needed fields because headers can be passed to both the constructor and to post
     responseType: options.responseType,
-    overrideMimeType: options.overrideMimeType,
+    overrideMimeType: options.overrideMimeType
   });
 };
 
@@ -1940,9 +1940,9 @@ Resource._Implementations.loadImageElement = function (
 
   if (crossOrigin) {
     if (TrustedServers.contains(url)) {
-      image.crossOrigin = "use-credentials";
+      image.crossOrigin = 'use-credentials';
     } else {
-      image.crossOrigin = "";
+      image.crossOrigin = '';
     }
   }
 
@@ -1971,8 +1971,8 @@ Resource._Implementations.createImage = function (
         Resource._Implementations.loadImageElement(url, crossOrigin, deferred);
         return;
       }
-      const responseType = "blob";
-      const method = "GET";
+      const responseType = 'blob';
+      const method = 'GET';
       const xhrDeferred = defer();
       const xhr = Resource._Implementations.loadWithXhr(
         url,
@@ -2005,7 +2005,7 @@ Resource._Implementations.createImage = function (
           return Resource.createImageBitmapFromBlob(blob, {
             flipY: flipY,
             premultiplyAlpha: false,
-            skipColorSpaceConversion: skipColorSpaceConversion,
+            skipColorSpaceConversion: skipColorSpaceConversion
           });
         })
         .then(function (image) {
@@ -2023,27 +2023,27 @@ Resource._Implementations.createImage = function (
  * @private
  */
 Resource.createImageBitmapFromBlob = function (blob, options) {
-  Check.defined("options", options);
-  Check.typeOf.bool("options.flipY", options.flipY);
-  Check.typeOf.bool("options.premultiplyAlpha", options.premultiplyAlpha);
+  Check.defined('options', options);
+  Check.typeOf.bool('options.flipY', options.flipY);
+  Check.typeOf.bool('options.premultiplyAlpha', options.premultiplyAlpha);
   Check.typeOf.bool(
-    "options.skipColorSpaceConversion",
+    'options.skipColorSpaceConversion',
     options.skipColorSpaceConversion
   );
 
   return createImageBitmap(blob, {
-    imageOrientation: options.flipY ? "flipY" : "none",
-    premultiplyAlpha: options.premultiplyAlpha ? "premultiply" : "none",
-    colorSpaceConversion: options.skipColorSpaceConversion ? "none" : "default",
+    imageOrientation: options.flipY ? 'flipY' : 'none',
+    premultiplyAlpha: options.premultiplyAlpha ? 'premultiply' : 'none',
+    colorSpaceConversion: options.skipColorSpaceConversion ? 'none' : 'default'
   });
 };
 
 function decodeResponse(loadWithHttpResponse, responseType) {
   switch (responseType) {
-    case "text":
-      return loadWithHttpResponse.toString("utf8");
-    case "json":
-      return JSON.parse(loadWithHttpResponse.toString("utf8"));
+    case 'text':
+      return loadWithHttpResponse.toString('utf8');
+    case 'json':
+      return JSON.parse(loadWithHttpResponse.toString('utf8'));
     default:
       return new Uint8Array(loadWithHttpResponse).buffer;
   }
@@ -2060,9 +2060,9 @@ function loadWithHttpRequest(
 ) {
   // Note: only the 'json' and 'text' responseTypes transforms the loaded buffer
   /* eslint-disable no-undef */
-  const URL = require("url").parse(url);
-  const http = URL.protocol === "https:" ? require("https") : require("http");
-  const zlib = require("zlib");
+  const URL = require('url').parse(url);
+  const http = URL.protocol === 'https:' ? require('https') : require('http');
+  const zlib = require('zlib');
   /* eslint-enable no-undef */
 
   const options = {
@@ -2072,12 +2072,12 @@ function loadWithHttpRequest(
     path: URL.path,
     query: URL.query,
     method: method,
-    headers: headers,
+    headers: headers
   };
 
   http
     .request(options)
-    .on("response", function (res) {
+    .on('response', function (res) {
       if (res.statusCode < 200 || res.statusCode >= 300) {
         deferred.reject(
           new RequestErrorEvent(res.statusCode, res, res.headers)
@@ -2086,18 +2086,18 @@ function loadWithHttpRequest(
       }
 
       const chunkArray = [];
-      res.on("data", function (chunk) {
+      res.on('data', function (chunk) {
         chunkArray.push(chunk);
       });
 
-      res.on("end", function () {
+      res.on('end', function () {
         // eslint-disable-next-line no-undef
         const result = Buffer.concat(chunkArray);
-        if (res.headers["content-encoding"] === "gzip") {
+        if (res.headers['content-encoding'] === 'gzip') {
           zlib.gunzip(result, function (error, resultUnzipped) {
             if (error) {
               deferred.reject(
-                new RuntimeError("Error decompressing response.")
+                new RuntimeError('Error decompressing response.')
               );
             } else {
               deferred.resolve(decodeResponse(resultUnzipped, responseType));
@@ -2108,13 +2108,13 @@ function loadWithHttpRequest(
         }
       });
     })
-    .on("error", function (e) {
+    .on('error', function (e) {
       deferred.reject(new RequestErrorEvent());
     })
     .end();
 }
 
-const noXMLHttpRequest = typeof XMLHttpRequest === "undefined";
+const noXMLHttpRequest = typeof XMLHttpRequest === 'undefined';
 Resource._Implementations.loadWithXhr = function (
   url,
   responseType,
@@ -2169,10 +2169,10 @@ Resource._Implementations.loadWithXhr = function (
 
   // While non-standard, file protocol always returns a status of 0 on success
   let localFile = false;
-  if (typeof url === "string") {
+  if (typeof url === 'string') {
     localFile =
-      url.indexOf("file://") === 0 ||
-      (typeof window !== "undefined" && window.location.origin === "file://");
+      url.indexOf('file://') === 0 ||
+      (typeof window !== 'undefined' && window.location.origin === 'file://');
   }
 
   xhr.onload = function () {
@@ -2193,15 +2193,15 @@ Resource._Implementations.loadWithXhr = function (
     const response = xhr.response;
     const browserResponseType = xhr.responseType;
 
-    if (method === "HEAD" || method === "OPTIONS") {
+    if (method === 'HEAD' || method === 'OPTIONS') {
       const responseHeaderString = xhr.getAllResponseHeaders();
       const splitHeaders = responseHeaderString.trim().split(/[\r\n]+/);
 
       const responseHeaders = {};
       splitHeaders.forEach(function (line) {
-        const parts = line.split(": ");
+        const parts = line.split(': ');
         const header = parts.shift();
-        responseHeaders[header] = parts.join(": ");
+        responseHeaders[header] = parts.join(': ');
       });
 
       deferred.resolve(responseHeaders);
@@ -2219,26 +2219,26 @@ Resource._Implementations.loadWithXhr = function (
       (!defined(responseType) || browserResponseType === responseType)
     ) {
       deferred.resolve(response);
-    } else if (responseType === "json" && typeof response === "string") {
+    } else if (responseType === 'json' && typeof response === 'string') {
       try {
         deferred.resolve(JSON.parse(response));
       } catch (e) {
         deferred.reject(e);
       }
     } else if (
-      (browserResponseType === "" || browserResponseType === "document") &&
+      (browserResponseType === '' || browserResponseType === 'document') &&
       defined(xhr.responseXML) &&
       xhr.responseXML.hasChildNodes()
     ) {
       deferred.resolve(xhr.responseXML);
     } else if (
-      (browserResponseType === "" || browserResponseType === "text") &&
+      (browserResponseType === '' || browserResponseType === 'text') &&
       defined(xhr.responseText)
     ) {
       deferred.resolve(xhr.responseText);
     } else {
       deferred.reject(
-        new RuntimeError("Invalid XMLHttpRequest response type.")
+        new RuntimeError('Invalid XMLHttpRequest response type.')
       );
     }
   };
@@ -2284,9 +2284,9 @@ Resource._DefaultImplementations.loadAndExecuteScript =
 Resource.DEFAULT = Object.freeze(
   new Resource({
     url:
-      typeof document === "undefined"
-        ? ""
-        : document.location.href.split("?")[0],
+      typeof document === 'undefined'
+        ? ''
+        : document.location.href.split('?')[0]
   })
 );
 

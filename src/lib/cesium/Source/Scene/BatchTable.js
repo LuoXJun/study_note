@@ -1,16 +1,16 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import combine from "../Core/combine.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import ContextLimits from "../Renderer/ContextLimits.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import Sampler from "../Renderer/Sampler.js";
-import Texture from "../Renderer/Texture.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import combine from '../Core/combine.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import ContextLimits from '../Renderer/ContextLimits.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import Sampler from '../Renderer/Sampler.js';
+import Texture from '../Renderer/Texture.js';
 
 /**
  * Creates a texture to look up per instance attributes for batched primitives. For example, store each primitive's pick color in the texture.
@@ -62,13 +62,13 @@ import Texture from "../Renderer/Texture.js";
 function BatchTable(context, attributes, numberOfInstances) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(context)) {
-    throw new DeveloperError("context is required");
+    throw new DeveloperError('context is required');
   }
   if (!defined(attributes)) {
-    throw new DeveloperError("attributes is required");
+    throw new DeveloperError('attributes is required');
   }
   if (!defined(numberOfInstances)) {
-    throw new DeveloperError("numberOfInstances is required");
+    throw new DeveloperError('numberOfInstances is required');
   }
   //>>includeEnd('debug');
 
@@ -137,7 +137,7 @@ Object.defineProperties(BatchTable.prototype, {
   attributes: {
     get: function () {
       return this._attributes;
-    },
+    }
   },
   /**
    * The number of instances.
@@ -148,8 +148,8 @@ Object.defineProperties(BatchTable.prototype, {
   numberOfInstances: {
     get: function () {
       return this._numberOfInstances;
-    },
-  },
+    }
+  }
 });
 
 function getDatatype(attributes) {
@@ -262,10 +262,10 @@ BatchTable.prototype.getBatchedAttribute = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (instanceIndex < 0 || instanceIndex >= this._numberOfInstances) {
-    throw new DeveloperError("instanceIndex is out of range.");
+    throw new DeveloperError('instanceIndex is out of range.');
   }
   if (attributeIndex < 0 || attributeIndex >= this._attributes.length) {
-    throw new DeveloperError("attributeIndex is out of range");
+    throw new DeveloperError('attributeIndex is out of range');
   }
   //>>includeEnd('debug');
 
@@ -308,7 +308,7 @@ const setAttributeScratchValues = [
   undefined,
   new Cartesian2(),
   new Cartesian3(),
-  new Cartesian4(),
+  new Cartesian4()
 ];
 const setAttributeScratchCartesian4 = new Cartesian4();
 
@@ -329,13 +329,13 @@ BatchTable.prototype.setBatchedAttribute = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (instanceIndex < 0 || instanceIndex >= this._numberOfInstances) {
-    throw new DeveloperError("instanceIndex is out of range.");
+    throw new DeveloperError('instanceIndex is out of range.');
   }
   if (attributeIndex < 0 || attributeIndex >= this._attributes.length) {
-    throw new DeveloperError("attributeIndex is out of range");
+    throw new DeveloperError('attributeIndex is out of range');
   }
   if (!defined(value)) {
-    throw new DeveloperError("value is required.");
+    throw new DeveloperError('value is required.');
   }
   //>>includeEnd('debug');
 
@@ -388,7 +388,7 @@ function createTexture(batchTable, context) {
     width: dimensions.x,
     height: dimensions.y,
     sampler: Sampler.NEAREST,
-    flipY: false,
+    flipY: false
   });
 }
 
@@ -398,8 +398,8 @@ function updateTexture(batchTable) {
     source: {
       width: dimensions.x,
       height: dimensions.y,
-      arrayBufferView: batchTable._batchValues,
-    },
+      arrayBufferView: batchTable._batchValues
+    }
   });
 }
 
@@ -446,7 +446,7 @@ BatchTable.prototype.getUniformMapCallback = function () {
       },
       batchTextureStep: function () {
         return that._textureStep;
-      },
+      }
     };
     return combine(uniformMap, batchUniformMap);
   };
@@ -459,12 +459,12 @@ function getGlslComputeSt(batchTable) {
   if (batchTable._textureDimensions.y === 1) {
     return (
       `${
-        "uniform vec4 batchTextureStep; \n" +
-        "vec2 computeSt(float batchId) \n" +
-        "{ \n" +
-        "    float stepX = batchTextureStep.x; \n" +
-        "    float centerX = batchTextureStep.y; \n" +
-        "    float numberOfAttributes = float("
+        'uniform vec4 batchTextureStep; \n' +
+        'vec2 computeSt(float batchId) \n' +
+        '{ \n' +
+        '    float stepX = batchTextureStep.x; \n' +
+        '    float centerX = batchTextureStep.y; \n' +
+        '    float numberOfAttributes = float('
       }${stride}); \n` +
       `    return vec2(centerX + (batchId * numberOfAttributes * stepX), 0.5); \n` +
       `} \n`
@@ -473,15 +473,15 @@ function getGlslComputeSt(batchTable) {
 
   return (
     `${
-      "uniform vec4 batchTextureStep; \n" +
-      "uniform vec2 batchTextureDimensions; \n" +
-      "vec2 computeSt(float batchId) \n" +
-      "{ \n" +
-      "    float stepX = batchTextureStep.x; \n" +
-      "    float centerX = batchTextureStep.y; \n" +
-      "    float stepY = batchTextureStep.z; \n" +
-      "    float centerY = batchTextureStep.w; \n" +
-      "    float numberOfAttributes = float("
+      'uniform vec4 batchTextureStep; \n' +
+      'uniform vec2 batchTextureDimensions; \n' +
+      'vec2 computeSt(float batchId) \n' +
+      '{ \n' +
+      '    float stepX = batchTextureStep.x; \n' +
+      '    float centerX = batchTextureStep.y; \n' +
+      '    float stepY = batchTextureStep.z; \n' +
+      '    float centerY = batchTextureStep.w; \n' +
+      '    float numberOfAttributes = float('
     }${stride}); \n` +
     `    float xId = mod(batchId * numberOfAttributes, batchTextureDimensions.x); \n` +
     `    float yId = floor(batchId * numberOfAttributes / batchTextureDimensions.x); \n` +
@@ -492,20 +492,20 @@ function getGlslComputeSt(batchTable) {
 
 function getComponentType(componentsPerAttribute) {
   if (componentsPerAttribute === 1) {
-    return "float";
+    return 'float';
   }
   return `vec${componentsPerAttribute}`;
 }
 
 function getComponentSwizzle(componentsPerAttribute) {
   if (componentsPerAttribute === 1) {
-    return ".x";
+    return '.x';
   } else if (componentsPerAttribute === 2) {
-    return ".xy";
+    return '.xy';
   } else if (componentsPerAttribute === 3) {
-    return ".xyz";
+    return '.xyz';
   }
-  return "";
+  return '';
 }
 
 function getGlslAttributeFunction(batchTable, attributeIndex) {
@@ -529,13 +529,13 @@ function getGlslAttributeFunction(batchTable, attributeIndex) {
     attribute.componentDatatype !== PixelDatatype.UNSIGNED_BYTE
   ) {
     glslFunction +=
-      "vec4 textureValue; \n" +
-      "textureValue.x = czm_unpackFloat(texture2D(batchTexture, st)); \n" +
-      "textureValue.y = czm_unpackFloat(texture2D(batchTexture, st + vec2(batchTextureStep.x, 0.0))); \n" +
-      "textureValue.z = czm_unpackFloat(texture2D(batchTexture, st + vec2(batchTextureStep.x * 2.0, 0.0))); \n" +
-      "textureValue.w = czm_unpackFloat(texture2D(batchTexture, st + vec2(batchTextureStep.x * 3.0, 0.0))); \n";
+      'vec4 textureValue; \n' +
+      'textureValue.x = czm_unpackFloat(texture2D(batchTexture, st)); \n' +
+      'textureValue.y = czm_unpackFloat(texture2D(batchTexture, st + vec2(batchTextureStep.x, 0.0))); \n' +
+      'textureValue.z = czm_unpackFloat(texture2D(batchTexture, st + vec2(batchTextureStep.x * 2.0, 0.0))); \n' +
+      'textureValue.w = czm_unpackFloat(texture2D(batchTexture, st + vec2(batchTextureStep.x * 3.0, 0.0))); \n';
   } else {
-    glslFunction += "    vec4 textureValue = texture2D(batchTexture, st); \n";
+    glslFunction += '    vec4 textureValue = texture2D(batchTexture, st); \n';
   }
 
   glslFunction += `    ${functionReturnType} value = textureValue${functionReturnValue}; \n`;
@@ -545,16 +545,16 @@ function getGlslAttributeFunction(batchTable, attributeIndex) {
     attribute.componentDatatype === ComponentDatatype.UNSIGNED_BYTE &&
     !attribute.normalize
   ) {
-    glslFunction += "value *= 255.0; \n";
+    glslFunction += 'value *= 255.0; \n';
   } else if (
     batchTable._pixelDatatype === PixelDatatype.FLOAT &&
     attribute.componentDatatype === ComponentDatatype.UNSIGNED_BYTE &&
     attribute.normalize
   ) {
-    glslFunction += "value /= 255.0; \n";
+    glslFunction += 'value /= 255.0; \n';
   }
 
-  glslFunction += "    return value; \n" + "} \n";
+  glslFunction += '    return value; \n' + '} \n';
   return glslFunction;
 }
 
@@ -571,7 +571,7 @@ BatchTable.prototype.getVertexShaderCallback = function () {
     };
   }
 
-  let batchTableShader = "uniform highp sampler2D batchTexture; \n";
+  let batchTableShader = 'uniform highp sampler2D batchTexture; \n';
   batchTableShader += `${getGlslComputeSt(this)}\n`;
 
   const length = attributes.length;
@@ -580,7 +580,7 @@ BatchTable.prototype.getVertexShaderCallback = function () {
   }
 
   return function (source) {
-    const mainIndex = source.indexOf("void main");
+    const mainIndex = source.indexOf('void main');
     const beforeMain = source.substring(0, mainIndex);
     const afterMain = source.substring(mainIndex);
     return `${beforeMain}\n${batchTableShader}\n${afterMain}`;

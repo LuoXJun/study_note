@@ -1,4 +1,4 @@
-import defaultValue from "../Core/defaultValue.js";
+import defaultValue from '../Core/defaultValue.js';
 
 /**
  * Image formats supported by the browser.

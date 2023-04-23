@@ -1,10 +1,10 @@
-import defaultValue from "../Core/defaultValue.js";
-import VertexFormat from "../Core/VertexFormat.js";
-import PerInstanceColorAppearanceFS from "../Shaders/Appearances/PerInstanceColorAppearanceFS.js";
-import PerInstanceColorAppearanceVS from "../Shaders/Appearances/PerInstanceColorAppearanceVS.js";
-import PerInstanceFlatColorAppearanceFS from "../Shaders/Appearances/PerInstanceFlatColorAppearanceFS.js";
-import PerInstanceFlatColorAppearanceVS from "../Shaders/Appearances/PerInstanceFlatColorAppearanceVS.js";
-import Appearance from "./Appearance.js";
+import defaultValue from '../Core/defaultValue.js';
+import VertexFormat from '../Core/VertexFormat.js';
+import PerInstanceColorAppearanceFS from '../Shaders/Appearances/PerInstanceColorAppearanceFS.js';
+import PerInstanceColorAppearanceVS from '../Shaders/Appearances/PerInstanceColorAppearanceVS.js';
+import PerInstanceFlatColorAppearanceFS from '../Shaders/Appearances/PerInstanceFlatColorAppearanceFS.js';
+import PerInstanceFlatColorAppearanceVS from '../Shaders/Appearances/PerInstanceFlatColorAppearanceVS.js';
+import Appearance from './Appearance.js';
 
 /**
  * An appearance for {@link GeometryInstance} instances with color attributes.
@@ -131,7 +131,7 @@ Object.defineProperties(PerInstanceColorAppearance.prototype, {
   vertexShaderSource: {
     get: function () {
       return this._vertexShaderSource;
-    },
+    }
   },
 
   /**
@@ -145,7 +145,7 @@ Object.defineProperties(PerInstanceColorAppearance.prototype, {
   fragmentShaderSource: {
     get: function () {
       return this._fragmentShaderSource;
-    },
+    }
   },
 
   /**
@@ -164,7 +164,7 @@ Object.defineProperties(PerInstanceColorAppearance.prototype, {
   renderState: {
     get: function () {
       return this._renderState;
-    },
+    }
   },
 
   /**
@@ -182,7 +182,7 @@ Object.defineProperties(PerInstanceColorAppearance.prototype, {
   closed: {
     get: function () {
       return this._closed;
-    },
+    }
   },
 
   /**
@@ -198,7 +198,7 @@ Object.defineProperties(PerInstanceColorAppearance.prototype, {
   vertexFormat: {
     get: function () {
       return this._vertexFormat;
-    },
+    }
   },
 
   /**
@@ -215,7 +215,7 @@ Object.defineProperties(PerInstanceColorAppearance.prototype, {
   flat: {
     get: function () {
       return this._flat;
-    },
+    }
   },
 
   /**
@@ -234,8 +234,8 @@ Object.defineProperties(PerInstanceColorAppearance.prototype, {
   faceForward: {
     get: function () {
       return this._faceForward;
-    },
-  },
+    }
+  }
 });
 
 /**

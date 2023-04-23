@@ -1,23 +1,23 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import getTimestamp from "../Core/getTimestamp.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import OrthographicFrustum from "../Core/OrthographicFrustum.js";
-import OrthographicOffCenterFrustum from "../Core/OrthographicOffCenterFrustum.js";
-import Ray from "../Core/Ray.js";
-import Rectangle from "../Core/Rectangle.js";
-import Visibility from "../Core/Visibility.js";
-import QuadtreeOccluders from "./QuadtreeOccluders.js";
-import QuadtreeTile from "./QuadtreeTile.js";
-import QuadtreeTileLoadState from "./QuadtreeTileLoadState.js";
-import SceneMode from "./SceneMode.js";
-import TileReplacementQueue from "./TileReplacementQueue.js";
-import TileSelectionResult from "./TileSelectionResult.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import getTimestamp from '../Core/getTimestamp.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import OrthographicFrustum from '../Core/OrthographicFrustum.js';
+import OrthographicOffCenterFrustum from '../Core/OrthographicOffCenterFrustum.js';
+import Ray from '../Core/Ray.js';
+import Rectangle from '../Core/Rectangle.js';
+import Visibility from '../Core/Visibility.js';
+import QuadtreeOccluders from './QuadtreeOccluders.js';
+import QuadtreeTile from './QuadtreeTile.js';
+import QuadtreeTileLoadState from './QuadtreeTileLoadState.js';
+import SceneMode from './SceneMode.js';
+import TileReplacementQueue from './TileReplacementQueue.js';
+import TileSelectionResult from './TileSelectionResult.js';
 
 /**
  * Renders massive sets of data by utilizing level-of-detail and culling.  The globe surface is divided into
@@ -43,11 +43,11 @@ import TileSelectionResult from "./TileSelectionResult.js";
 function QuadtreePrimitive(options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options) || !defined(options.tileProvider)) {
-    throw new DeveloperError("options.tileProvider is required.");
+    throw new DeveloperError('options.tileProvider is required.');
   }
   if (defined(options.tileProvider.quadtree)) {
     throw new DeveloperError(
-      "A QuadtreeTileProvider can only be used with a single QuadtreePrimitive"
+      'A QuadtreeTileProvider can only be used with a single QuadtreePrimitive'
     );
   }
   //>>includeEnd('debug');
@@ -72,7 +72,7 @@ function QuadtreePrimitive(options) {
     lastTilesRendered: -1,
     lastTilesWaitingForChildren: -1,
 
-    suspendLodUpdate: false,
+    suspendLodUpdate: false
   };
 
   const tilingScheme = this._tileProvider.tilingScheme;
@@ -156,7 +156,7 @@ function QuadtreePrimitive(options) {
   this.preloadSiblings = false;
 
   this._occluders = new QuadtreeOccluders({
-    ellipsoid: ellipsoid,
+    ellipsoid: ellipsoid
   });
 
   this._tileLoadProgressEvent = new Event();
@@ -174,7 +174,7 @@ Object.defineProperties(QuadtreePrimitive.prototype, {
   tileProvider: {
     get: function () {
       return this._tileProvider;
-    },
+    }
   },
   /**
    * Gets an event that's raised when the length of the tile load queue has changed since the last render frame.  When the load queue is empty,
@@ -186,14 +186,14 @@ Object.defineProperties(QuadtreePrimitive.prototype, {
   tileLoadProgressEvent: {
     get: function () {
       return this._tileLoadProgressEvent;
-    },
+    }
   },
 
   occluders: {
     get: function () {
       return this._occluders;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -283,7 +283,7 @@ QuadtreePrimitive.prototype.updateHeight = function (cartographic, callback) {
     positionOnEllipsoidSurface: undefined,
     positionCartographic: cartographic,
     level: -1,
-    callback: callback,
+    callback: callback
   };
 
   object.removeFunc = function () {
@@ -520,9 +520,8 @@ function selectTilesForRendering(primitive, frameState) {
   if (!defined(primitive._levelZeroTiles)) {
     if (tileProvider.ready) {
       const tilingScheme = tileProvider.tilingScheme;
-      primitive._levelZeroTiles = QuadtreeTile.createLevelZeroTiles(
-        tilingScheme
-      );
+      primitive._levelZeroTiles =
+        QuadtreeTile.createLevelZeroTiles(tilingScheme);
       const numberOfRootTiles = primitive._levelZeroTiles.length;
       if (rootTraversalDetails.length < numberOfRootTiles) {
         rootTraversalDetails = new Array(numberOfRootTiles);
@@ -573,10 +572,11 @@ function selectTilesForRendering(primitive, frameState) {
     camera.transform,
     cameraOriginScratch
   );
-  primitive._cameraReferenceFrameOriginCartographic = primitive.tileProvider.tilingScheme.ellipsoid.cartesianToCartographic(
-    cameraFrameOrigin,
-    primitive._cameraReferenceFrameOriginCartographic
-  );
+  primitive._cameraReferenceFrameOriginCartographic =
+    primitive.tileProvider.tilingScheme.ellipsoid.cartesianToCartographic(
+      cameraFrameOrigin,
+      primitive._cameraReferenceFrameOriginCartographic
+    );
 
   // Traverse in depth-first, near-to-far order.
   for (i = 0, len = levelZeroTiles.length; i < len; ++i) {
@@ -1249,9 +1249,8 @@ function screenSpaceError(primitive, frameState, tile) {
     return screenSpaceError2D(primitive, frameState, tile);
   }
 
-  const maxGeometricError = primitive._tileProvider.getLevelMaximumGeometricError(
-    tile.level
-  );
+  const maxGeometricError =
+    primitive._tileProvider.getLevelMaximumGeometricError(tile.level);
 
   const distance = tile._distance;
   const height = frameState.context.drawingBufferHeight;
@@ -1280,9 +1279,8 @@ function screenSpaceError2D(primitive, frameState, tile) {
   const width = context.drawingBufferWidth;
   const height = context.drawingBufferHeight;
 
-  const maxGeometricError = primitive._tileProvider.getLevelMaximumGeometricError(
-    tile.level
-  );
+  const maxGeometricError =
+    primitive._tileProvider.getLevelMaximumGeometricError(tile.level);
   const pixelSize =
     Math.max(frustum.top - frustum.bottom, frustum.right - frustum.left) /
     Math.max(width, height);

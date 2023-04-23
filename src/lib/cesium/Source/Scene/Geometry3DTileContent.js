@@ -1,13 +1,13 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import getJsonFromTypedArray from "../Core/getJsonFromTypedArray.js";
-import Matrix4 from "../Core/Matrix4.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import Cesium3DTileBatchTable from "./Cesium3DTileBatchTable.js";
-import Vector3DTileGeometry from "./Vector3DTileGeometry.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import getJsonFromTypedArray from '../Core/getJsonFromTypedArray.js';
+import Matrix4 from '../Core/Matrix4.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import Cesium3DTileBatchTable from './Cesium3DTileBatchTable.js';
+import Vector3DTileGeometry from './Vector3DTileGeometry.js';
 
 /**
  * <p>
@@ -49,13 +49,13 @@ Object.defineProperties(Geometry3DTileContent.prototype, {
   featuresLength: {
     get: function () {
       return defined(this._batchTable) ? this._batchTable.featuresLength : 0;
-    },
+    }
   },
 
   pointsLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   trianglesLength: {
@@ -64,7 +64,7 @@ Object.defineProperties(Geometry3DTileContent.prototype, {
         return this._geometries.trianglesLength;
       }
       return 0;
-    },
+    }
   },
 
   geometryByteLength: {
@@ -73,13 +73,13 @@ Object.defineProperties(Geometry3DTileContent.prototype, {
         return this._geometries.geometryByteLength;
       }
       return 0;
-    },
+    }
   },
 
   texturesByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   batchTableByteLength: {
@@ -87,37 +87,37 @@ Object.defineProperties(Geometry3DTileContent.prototype, {
       return defined(this._batchTable)
         ? this._batchTable.batchTableByteLength
         : 0;
-    },
+    }
   },
 
   innerContents: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   tileset: {
     get: function () {
       return this._tileset;
-    },
+    }
   },
 
   tile: {
     get: function () {
       return this._tile;
-    },
+    }
   },
 
   url: {
     get: function () {
       return this._resource.getUrlComponent(true);
-    },
+    }
   },
 
   metadata: {
@@ -126,13 +126,13 @@ Object.defineProperties(Geometry3DTileContent.prototype, {
     },
     set: function (value) {
       this._metadata = value;
-    },
+    }
   },
 
   batchTable: {
     get: function () {
       return this._batchTable;
-    },
+    }
   },
 
   group: {
@@ -141,8 +141,8 @@ Object.defineProperties(Geometry3DTileContent.prototype, {
     },
     set: function (value) {
       this._group = value;
-    },
-  },
+    }
+  }
 });
 
 function createColorChangedCallback(content) {
@@ -224,7 +224,7 @@ function getBatchIds(featureTableJson, featureTableBinary) {
 
   if (atLeastOneDefined && atLeastOneUndefined) {
     throw new RuntimeError(
-      "If one group of batch ids is defined, then all batch ids must be defined."
+      'If one group of batch ids is defined, then all batch ids must be defined.'
     );
   }
 
@@ -265,7 +265,7 @@ function getBatchIds(featureTableJson, featureTableBinary) {
     boxes: boxBatchIds,
     cylinders: cylinderBatchIds,
     ellipsoids: ellipsoidBatchIds,
-    spheres: sphereBatchIds,
+    spheres: sphereBatchIds
   };
 }
 
@@ -299,7 +299,7 @@ function initialize(content, arrayBuffer, byteOffset) {
 
   if (featureTableJSONByteLength === 0) {
     throw new RuntimeError(
-      "Feature table must have a byte length greater than zero"
+      'Feature table must have a byte length greater than zero'
     );
   }
 
@@ -448,7 +448,7 @@ function initialize(content, arrayBuffer, byteOffset) {
       center: center,
       modelMatrix: modelMatrix,
       batchTable: batchTable,
-      boundingVolume: content.tile.boundingVolume.boundingVolume,
+      boundingVolume: content.tile.boundingVolume.boundingVolume
     });
 
     return content._geometries.readyPromise.then(function () {

@@ -1,6 +1,6 @@
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import ImageryState from "./ImageryState.js";
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import ImageryState from './ImageryState.js';
 
 /**
  * Stores details about a tile of imagery.

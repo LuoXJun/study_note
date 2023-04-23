@@ -1,20 +1,20 @@
-import Check from "../Core/Check.js";
-import combine from "../Core/combine.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import Event from "../Core/Event.js";
-import getTimestamp from "../Core/getTimestamp.js";
-import JulianDate from "../Core/JulianDate.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import Resource from "../Core/Resource.js";
-import ClippingPlaneCollection from "./ClippingPlaneCollection.js";
-import PointCloud from "./PointCloud.js";
-import PointCloudEyeDomeLighting from "./PointCloudEyeDomeLighting.js";
-import PointCloudShading from "./PointCloudShading.js";
-import SceneMode from "./SceneMode.js";
-import ShadowMode from "./ShadowMode.js";
+import Check from '../Core/Check.js';
+import combine from '../Core/combine.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import Event from '../Core/Event.js';
+import getTimestamp from '../Core/getTimestamp.js';
+import JulianDate from '../Core/JulianDate.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import Resource from '../Core/Resource.js';
+import ClippingPlaneCollection from './ClippingPlaneCollection.js';
+import PointCloud from './PointCloud.js';
+import PointCloudEyeDomeLighting from './PointCloudEyeDomeLighting.js';
+import PointCloudShading from './PointCloudShading.js';
+import SceneMode from './SceneMode.js';
+import ShadowMode from './ShadowMode.js';
 
 /**
  * Provides playback of time-dynamic point cloud data.
@@ -42,8 +42,8 @@ function TimeDynamicPointCloud(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.clock", options.clock);
-  Check.typeOf.object("options.intervals", options.intervals);
+  Check.typeOf.object('options.clock', options.clock);
+  Check.typeOf.object('options.intervals', options.intervals);
   //>>includeEnd('debug');
 
   /**
@@ -208,8 +208,8 @@ Object.defineProperties(TimeDynamicPointCloud.prototype, {
       return this._clippingPlanes;
     },
     set: function (value) {
-      ClippingPlaneCollection.setOwner(value, this, "_clippingPlanes");
-    },
+      ClippingPlaneCollection.setOwner(value, this, '_clippingPlanes');
+    }
   },
 
   /**
@@ -225,7 +225,7 @@ Object.defineProperties(TimeDynamicPointCloud.prototype, {
   totalMemoryUsageInBytes: {
     get: function () {
       return this._totalMemoryUsageInBytes;
-    },
+    }
   },
 
   /**
@@ -242,7 +242,7 @@ Object.defineProperties(TimeDynamicPointCloud.prototype, {
         return this._lastRenderedFrame.pointCloud.boundingSphere;
       }
       return undefined;
-    },
+    }
   },
 
   /**
@@ -256,8 +256,8 @@ Object.defineProperties(TimeDynamicPointCloud.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
-  },
+    }
+  }
 });
 
 function getFragmentShaderLoaded(fs) {
@@ -269,13 +269,13 @@ function getUniformMapLoaded(stream) {
     return combine(uniformMap, {
       czm_pickColor: function () {
         return stream._pickId.color;
-      },
+      }
     });
   };
 }
 
 function getPickIdLoaded() {
-  return "czm_pickColor";
+  return 'czm_pickColor';
 }
 
 /**
@@ -369,7 +369,7 @@ function handleFrameFailure(that, uri) {
     if (that.frameFailed.numberOfListeners > 0) {
       that.frameFailed.raiseEvent({
         uri: uri,
-        message: message,
+        message: message
       });
     } else {
       console.log(`A frame failed to load: ${uri}`);
@@ -394,11 +394,11 @@ function requestFrame(that, interval, frameState) {
       timestamp: getTimestamp(),
       sequential: true,
       ready: false,
-      touchedFrameNumber: frameState.frameNumber,
+      touchedFrameNumber: frameState.frameNumber
     };
     frames[index] = frame;
     Resource.fetchArrayBuffer({
-      url: uri,
+      url: uri
     })
       .then(function (arrayBuffer) {
         // PERFORMANCE_IDEA: share a memory pool, render states, shaders, and other resources among all
@@ -408,7 +408,7 @@ function requestFrame(that, interval, frameState) {
           cull: true,
           fragmentShaderLoaded: getFragmentShaderLoaded,
           uniformMapLoaded: getUniformMapLoaded(that),
-          pickIdLoaded: getPickIdLoaded,
+          pickIdLoaded: getPickIdLoaded
         });
         return frame.pointCloud.readyPromise;
       })
@@ -619,7 +619,7 @@ function setFramesDirty(that, clippingPlanesDirty, styleDirty) {
 const updateState = {
   timeSinceLoad: 0,
   isClipped: false,
-  clippingPlanesDirty: false,
+  clippingPlanesDirty: false
 };
 
 /**
@@ -636,7 +636,7 @@ TimeDynamicPointCloud.prototype.update = function (frameState) {
 
   if (!defined(this._pickId)) {
     this._pickId = frameState.context.createPickId({
-      primitive: this,
+      primitive: this
     });
   }
 

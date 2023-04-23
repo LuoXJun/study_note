@@ -1,18 +1,18 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import ConstantSpline from "../Core/ConstantSpline.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import LinearSpline from "../Core/LinearSpline.js";
-import Matrix4 from "../Core/Matrix4.js";
-import MorphWeightSpline from "../Core/MorphWeightSpline.js";
-import Quaternion from "../Core/Quaternion.js";
-import QuaternionSpline from "../Core/QuaternionSpline.js";
-import Spline from "../Core/Spline.js";
-import WebGLConstants from "../Core/WebGLConstants.js";
-import getAccessorByteStride from "./GltfPipeline/getAccessorByteStride.js";
-import numberOfComponentsForType from "./GltfPipeline/numberOfComponentsForType.js";
-import AttributeType from "./AttributeType.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import ConstantSpline from '../Core/ConstantSpline.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import LinearSpline from '../Core/LinearSpline.js';
+import Matrix4 from '../Core/Matrix4.js';
+import MorphWeightSpline from '../Core/MorphWeightSpline.js';
+import Quaternion from '../Core/Quaternion.js';
+import QuaternionSpline from '../Core/QuaternionSpline.js';
+import Spline from '../Core/Spline.js';
+import WebGLConstants from '../Core/WebGLConstants.js';
+import getAccessorByteStride from './GltfPipeline/getAccessorByteStride.js';
+import numberOfComponentsForType from './GltfPipeline/numberOfComponentsForType.js';
+import AttributeType from './AttributeType.js';
 
 /**
  * @private
@@ -32,7 +32,7 @@ function getAccessorKey(model, accessor) {
   const byteOffset = bufferView.byteOffset + accessor.byteOffset;
   const byteLength = accessor.count * numberOfComponentsForType(accessor.type);
 
-  const uriKey = dataUriRegex.test(buffer.uri) ? "" : buffer.uri;
+  const uriKey = dataUriRegex.test(buffer.uri) ? '' : buffer.uri;
   return `${model.cacheKey}//${uriKey}/${byteOffset}/${byteLength}`;
 }
 
@@ -70,11 +70,11 @@ ModelAnimationCache.getAnimationParameterValues = function (model, accessor) {
         source.byteOffset + byteOffset,
         numberOfComponents
       );
-      if (type === "SCALAR") {
+      if (type === 'SCALAR') {
         values[i] = typedArrayView[0];
-      } else if (type === "VEC3") {
+      } else if (type === 'VEC3') {
         values[i] = Cartesian3.fromArray(typedArrayView);
-      } else if (type === "VEC4") {
+      } else if (type === 'VEC4') {
         values[i] = Quaternion.unpack(typedArrayView);
       }
       byteOffset += byteStride;
@@ -114,8 +114,8 @@ Object.defineProperties(SteppedSpline.prototype, {
   times: {
     get: function () {
       return this._spline.times;
-    },
-  },
+    }
+  }
 });
 SteppedSpline.prototype.wrapTime = function (time) {
   return this._spline.wrapTime(time);
@@ -144,27 +144,27 @@ ModelAnimationCache.getAnimationSpline = function (
     if (times.length === 1 && controlPoints.length === 1) {
       spline = new ConstantSpline(controlPoints[0]);
     } else if (
-      sampler.interpolation === "LINEAR" ||
-      sampler.interpolation === "STEP"
+      sampler.interpolation === 'LINEAR' ||
+      sampler.interpolation === 'STEP'
     ) {
-      if (path === "translation" || path === "scale") {
+      if (path === 'translation' || path === 'scale') {
         spline = new LinearSpline({
           times: times,
-          points: controlPoints,
+          points: controlPoints
         });
-      } else if (path === "rotation") {
+      } else if (path === 'rotation') {
         spline = new QuaternionSpline({
           times: times,
-          points: controlPoints,
+          points: controlPoints
         });
-      } else if (path === "weights") {
+      } else if (path === 'weights') {
         spline = new MorphWeightSpline({
           times: times,
-          weights: controlPoints,
+          weights: controlPoints
         });
       }
 
-      if (defined(spline) && sampler.interpolation === "STEP") {
+      if (defined(spline) && sampler.interpolation === 'STEP') {
         spline = new SteppedSpline(spline);
       }
     }

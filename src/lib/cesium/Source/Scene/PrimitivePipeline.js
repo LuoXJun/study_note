@@ -1,18 +1,18 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import GeographicProjection from "../Core/GeographicProjection.js";
-import Geometry from "../Core/Geometry.js";
-import GeometryAttribute from "../Core/GeometryAttribute.js";
-import GeometryAttributes from "../Core/GeometryAttributes.js";
-import GeometryPipeline from "../Core/GeometryPipeline.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import Matrix4 from "../Core/Matrix4.js";
-import OffsetGeometryInstanceAttribute from "../Core/OffsetGeometryInstanceAttribute.js";
-import WebMercatorProjection from "../Core/WebMercatorProjection.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import GeographicProjection from '../Core/GeographicProjection.js';
+import Geometry from '../Core/Geometry.js';
+import GeometryAttribute from '../Core/GeometryAttribute.js';
+import GeometryAttributes from '../Core/GeometryAttributes.js';
+import GeometryPipeline from '../Core/GeometryPipeline.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import Matrix4 from '../Core/Matrix4.js';
+import OffsetGeometryInstanceAttribute from '../Core/OffsetGeometryInstanceAttribute.js';
+import WebMercatorProjection from '../Core/WebMercatorProjection.js';
 
 function transformToWorldCoordinates(
   instances,
@@ -59,7 +59,7 @@ function addGeometryBatchId(geometry, batchId) {
   attributes.batchId = new GeometryAttribute({
     componentDatatype: ComponentDatatype.FLOAT,
     componentsPerAttribute: 1,
-    values: new Float32Array(numberOfComponents),
+    values: new Float32Array(numberOfComponents)
   });
 
   const values = attributes.batchId.values;
@@ -113,7 +113,7 @@ function geometryPipeline(parameters) {
       instances[i].geometry.primitiveType !== primitiveType
     ) {
       throw new DeveloperError(
-        "All instance geometries must have the same primitiveType."
+        'All instance geometries must have the same primitiveType.'
       );
     }
   }
@@ -187,7 +187,7 @@ function geometryPipeline(parameters) {
             name2D,
             projection
           );
-          if (defined(geometry.boundingSphere) && name === "position") {
+          if (defined(geometry.boundingSphere) && name === 'position') {
             geometry.boundingSphereCV = BoundingSphere.fromVertices(
               geometry.attributes.position2D.values
             );
@@ -281,7 +281,7 @@ function createPickOffsets(instances, geometryName, geometries, pickOffsets) {
     pickOffsets.push({
       index: geometryIndex,
       offset: offset,
-      count: count,
+      count: count
     });
     offset += count;
   }
@@ -289,16 +289,16 @@ function createPickOffsets(instances, geometryName, geometries, pickOffsets) {
 
 function createInstancePickOffsets(instances, geometries) {
   const pickOffsets = [];
-  createPickOffsets(instances, "geometry", geometries, pickOffsets);
+  createPickOffsets(instances, 'geometry', geometries, pickOffsets);
   createPickOffsets(
     instances,
-    "westHemisphereGeometry",
+    'westHemisphereGeometry',
     geometries,
     pickOffsets
   );
   createPickOffsets(
     instances,
-    "eastHemisphereGeometry",
+    'eastHemisphereGeometry',
     geometries,
     pickOffsets
   );
@@ -385,7 +385,7 @@ PrimitivePipeline.combineGeometry = function (parameters) {
     pickOffsets: pickOffsets,
     offsetInstanceExtend: offsetInstanceExtend,
     boundingSpheres: boundingSpheres,
-    boundingSpheresCV: boundingSpheresCV,
+    boundingSpheresCV: boundingSpheresCV
   };
 };
 
@@ -535,7 +535,7 @@ PrimitivePipeline.packCreateGeometryResults = function (
 
   return {
     stringTable: stringTable,
-    packedData: packedData,
+    packedData: packedData
   };
 };
 
@@ -611,7 +611,7 @@ PrimitivePipeline.unpackCreateGeometryResults = function (
         componentDatatype: componentDatatype,
         componentsPerAttribute: componentsPerAttribute,
         normalize: normalize,
-        values: values,
+        values: values
       });
     }
 
@@ -633,7 +633,7 @@ PrimitivePipeline.unpackCreateGeometryResults = function (
       boundingSphereCV: boundingSphereCV,
       indices: indices,
       attributes: attributes,
-      offsetAttribute: offsetAttribute,
+      offsetAttribute: offsetAttribute
     });
   }
 
@@ -678,14 +678,14 @@ function unpackInstancesForCombine(data) {
           packedInstances[i],
           packedInstances[i + 1],
           packedInstances[i + 2]
-        ),
+        )
       };
     }
     i += 3;
 
     result[count++] = {
       modelMatrix: modelMatrix,
-      attributes: attributes,
+      attributes: attributes
     };
   }
 
@@ -719,7 +719,7 @@ PrimitivePipeline.packCombineGeometryParameters = function (
     vertexCacheOptimize: parameters.vertexCacheOptimize,
     compressVertices: parameters.compressVertices,
     modelMatrix: parameters.modelMatrix,
-    createPickOffsets: parameters.createPickOffsets,
+    createPickOffsets: parameters.createPickOffsets
   };
 };
 
@@ -765,7 +765,7 @@ PrimitivePipeline.unpackCombineGeometryParameters = function (
     vertexCacheOptimize: packedParameters.vertexCacheOptimize,
     compressVertices: packedParameters.compressVertices,
     modelMatrix: Matrix4.clone(packedParameters.modelMatrix),
-    createPickOffsets: packedParameters.createPickOffsets,
+    createPickOffsets: packedParameters.createPickOffsets
   };
 };
 
@@ -834,7 +834,7 @@ PrimitivePipeline.packCombineGeometryResults = function (
     pickOffsets: results.pickOffsets,
     offsetInstanceExtend: results.offsetInstanceExtend,
     boundingSpheres: packedBoundingSpheres,
-    boundingSpheresCV: packedBoundingSpheresCV,
+    boundingSpheresCV: packedBoundingSpheresCV
   };
 };
 
@@ -849,7 +849,7 @@ PrimitivePipeline.unpackCombineGeometryResults = function (packedResult) {
     pickOffsets: packedResult.pickOffsets,
     offsetInstanceExtend: packedResult.offsetInstanceExtend,
     boundingSpheres: unpackBoundingSpheres(packedResult.boundingSpheres),
-    boundingSpheresCV: unpackBoundingSpheres(packedResult.boundingSpheresCV),
+    boundingSpheresCV: unpackBoundingSpheres(packedResult.boundingSpheresCV)
   };
 };
 export default PrimitivePipeline;

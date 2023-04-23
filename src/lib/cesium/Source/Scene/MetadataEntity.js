@@ -1,7 +1,7 @@
-import Check from "../Core/Check.js";
-import clone from "../Core/clone.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
+import Check from '../Core/Check.js';
+import clone from '../Core/clone.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
 
 /**
  * An entity containing metadata.
@@ -33,8 +33,8 @@ Object.defineProperties(MetadataEntity.prototype, {
     // eslint-disable-next-line getter-return
     get: function () {
       DeveloperError.throwInstantiationError();
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -138,9 +138,9 @@ MetadataEntity.hasProperty = function (
   classDefinition
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("propertyId", propertyId);
-  Check.typeOf.object("properties", properties);
-  Check.typeOf.object("classDefinition", classDefinition);
+  Check.typeOf.string('propertyId', propertyId);
+  Check.typeOf.object('properties', properties);
+  Check.typeOf.object('classDefinition', classDefinition);
   //>>includeEnd('debug');
 
   if (defined(properties[propertyId])) {
@@ -176,9 +176,9 @@ MetadataEntity.hasPropertyBySemantic = function (
   classDefinition
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("semantic", semantic);
-  Check.typeOf.object("properties", properties);
-  Check.typeOf.object("classDefinition", classDefinition);
+  Check.typeOf.string('semantic', semantic);
+  Check.typeOf.object('properties', properties);
+  Check.typeOf.object('classDefinition', classDefinition);
   //>>includeEnd('debug');
 
   const propertiesBySemantic = classDefinition.propertiesBySemantic;
@@ -206,8 +206,8 @@ MetadataEntity.getPropertyIds = function (
   results
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("properties", properties);
-  Check.typeOf.object("classDefinition", classDefinition);
+  Check.typeOf.object('properties', properties);
+  Check.typeOf.object('classDefinition', classDefinition);
   //>>includeEnd('debug');
 
   results = defined(results) ? results : [];
@@ -259,9 +259,9 @@ MetadataEntity.getProperty = function (
   classDefinition
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("propertyId", propertyId);
-  Check.typeOf.object("properties", properties);
-  Check.typeOf.object("classDefinition", classDefinition);
+  Check.typeOf.string('propertyId', propertyId);
+  Check.typeOf.object('properties', properties);
+  Check.typeOf.object('classDefinition', classDefinition);
 
   if (!defined(classDefinition.properties[propertyId])) {
     throw new DeveloperError(`Class definition missing property ${propertyId}`);
@@ -316,10 +316,10 @@ MetadataEntity.setProperty = function (
   classDefinition
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("propertyId", propertyId);
-  Check.defined("value", value);
-  Check.typeOf.object("properties", properties);
-  Check.typeOf.object("classDefinition", classDefinition);
+  Check.typeOf.string('propertyId', propertyId);
+  Check.defined('value', value);
+  Check.typeOf.object('properties', properties);
+  Check.typeOf.object('classDefinition', classDefinition);
   //>>includeEnd('debug');
 
   if (!defined(properties[propertyId])) {
@@ -364,9 +364,9 @@ MetadataEntity.getPropertyBySemantic = function (
   classDefinition
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("semantic", semantic);
-  Check.typeOf.object("properties", properties);
-  Check.typeOf.object("classDefinition", classDefinition);
+  Check.typeOf.string('semantic', semantic);
+  Check.typeOf.object('properties', properties);
+  Check.typeOf.object('classDefinition', classDefinition);
   //>>includeEnd('debug');
 
   const propertiesBySemantic = classDefinition.propertiesBySemantic;
@@ -398,10 +398,10 @@ MetadataEntity.setPropertyBySemantic = function (
   classDefinition
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("semantic", semantic);
-  Check.defined("value", value);
-  Check.typeOf.object("properties", properties);
-  Check.typeOf.object("classDefinition", classDefinition);
+  Check.typeOf.string('semantic', semantic);
+  Check.defined('value', value);
+  Check.typeOf.object('properties', properties);
+  Check.typeOf.object('classDefinition', classDefinition);
   //>>includeEnd('debug');
 
   const propertiesBySemantic = classDefinition.propertiesBySemantic;

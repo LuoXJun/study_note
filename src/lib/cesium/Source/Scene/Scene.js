@@ -1,74 +1,74 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import BoundingSphere from "../Core/BoundingSphere.js";
-import BoxGeometry from "../Core/BoxGeometry.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import clone from "../Core/clone.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import createGuid from "../Core/createGuid.js";
-import CullingVolume from "../Core/CullingVolume.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import EllipsoidGeometry from "../Core/EllipsoidGeometry.js";
-import Event from "../Core/Event.js";
-import GeographicProjection from "../Core/GeographicProjection.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import GeometryPipeline from "../Core/GeometryPipeline.js";
-import Intersect from "../Core/Intersect.js";
-import JulianDate from "../Core/JulianDate.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import mergeSort from "../Core/mergeSort.js";
-import Occluder from "../Core/Occluder.js";
-import OrthographicFrustum from "../Core/OrthographicFrustum.js";
-import OrthographicOffCenterFrustum from "../Core/OrthographicOffCenterFrustum.js";
-import PerspectiveFrustum from "../Core/PerspectiveFrustum.js";
-import PerspectiveOffCenterFrustum from "../Core/PerspectiveOffCenterFrustum.js";
-import RequestScheduler from "../Core/RequestScheduler.js";
-import TaskProcessor from "../Core/TaskProcessor.js";
-import Transforms from "../Core/Transforms.js";
-import ClearCommand from "../Renderer/ClearCommand.js";
-import ComputeEngine from "../Renderer/ComputeEngine.js";
-import Context from "../Renderer/Context.js";
-import ContextLimits from "../Renderer/ContextLimits.js";
-import Pass from "../Renderer/Pass.js";
-import RenderState from "../Renderer/RenderState.js";
-import BrdfLutGenerator from "./BrdfLutGenerator.js";
-import Camera from "./Camera.js";
-import Cesium3DTilePass from "./Cesium3DTilePass.js";
-import Cesium3DTilePassState from "./Cesium3DTilePassState.js";
-import CreditDisplay from "./CreditDisplay.js";
-import DebugCameraPrimitive from "./DebugCameraPrimitive.js";
-import DepthPlane from "./DepthPlane.js";
-import DerivedCommand from "./DerivedCommand.js";
-import DeviceOrientationCameraController from "./DeviceOrientationCameraController.js";
-import Fog from "./Fog.js";
-import FrameState from "./FrameState.js";
-import GlobeTranslucencyState from "./GlobeTranslucencyState.js";
-import InvertClassification from "./InvertClassification.js";
-import JobScheduler from "./JobScheduler.js";
-import MapMode2D from "./MapMode2D.js";
-import OctahedralProjectedCubeMap from "./OctahedralProjectedCubeMap.js";
-import PerformanceDisplay from "./PerformanceDisplay.js";
-import PerInstanceColorAppearance from "./PerInstanceColorAppearance.js";
-import Picking from "./Picking.js";
-import PostProcessStageCollection from "./PostProcessStageCollection.js";
-import Primitive from "./Primitive.js";
-import PrimitiveCollection from "./PrimitiveCollection.js";
-import SceneMode from "./SceneMode.js";
-import SceneTransforms from "./SceneTransforms.js";
-import SceneTransitioner from "./SceneTransitioner.js";
-import ScreenSpaceCameraController from "./ScreenSpaceCameraController.js";
-import ShadowMap from "./ShadowMap.js";
-import StencilConstants from "./StencilConstants.js";
-import SunLight from "./SunLight.js";
-import SunPostProcess from "./SunPostProcess.js";
-import TweenCollection from "./TweenCollection.js";
-import View from "./View.js";
-import DebugInspector from "./DebugInspector.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import BoundingSphere from '../Core/BoundingSphere.js';
+import BoxGeometry from '../Core/BoxGeometry.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import clone from '../Core/clone.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import createGuid from '../Core/createGuid.js';
+import CullingVolume from '../Core/CullingVolume.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import EllipsoidGeometry from '../Core/EllipsoidGeometry.js';
+import Event from '../Core/Event.js';
+import GeographicProjection from '../Core/GeographicProjection.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import GeometryPipeline from '../Core/GeometryPipeline.js';
+import Intersect from '../Core/Intersect.js';
+import JulianDate from '../Core/JulianDate.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import mergeSort from '../Core/mergeSort.js';
+import Occluder from '../Core/Occluder.js';
+import OrthographicFrustum from '../Core/OrthographicFrustum.js';
+import OrthographicOffCenterFrustum from '../Core/OrthographicOffCenterFrustum.js';
+import PerspectiveFrustum from '../Core/PerspectiveFrustum.js';
+import PerspectiveOffCenterFrustum from '../Core/PerspectiveOffCenterFrustum.js';
+import RequestScheduler from '../Core/RequestScheduler.js';
+import TaskProcessor from '../Core/TaskProcessor.js';
+import Transforms from '../Core/Transforms.js';
+import ClearCommand from '../Renderer/ClearCommand.js';
+import ComputeEngine from '../Renderer/ComputeEngine.js';
+import Context from '../Renderer/Context.js';
+import ContextLimits from '../Renderer/ContextLimits.js';
+import Pass from '../Renderer/Pass.js';
+import RenderState from '../Renderer/RenderState.js';
+import BrdfLutGenerator from './BrdfLutGenerator.js';
+import Camera from './Camera.js';
+import Cesium3DTilePass from './Cesium3DTilePass.js';
+import Cesium3DTilePassState from './Cesium3DTilePassState.js';
+import CreditDisplay from './CreditDisplay.js';
+import DebugCameraPrimitive from './DebugCameraPrimitive.js';
+import DepthPlane from './DepthPlane.js';
+import DerivedCommand from './DerivedCommand.js';
+import DeviceOrientationCameraController from './DeviceOrientationCameraController.js';
+import Fog from './Fog.js';
+import FrameState from './FrameState.js';
+import GlobeTranslucencyState from './GlobeTranslucencyState.js';
+import InvertClassification from './InvertClassification.js';
+import JobScheduler from './JobScheduler.js';
+import MapMode2D from './MapMode2D.js';
+import OctahedralProjectedCubeMap from './OctahedralProjectedCubeMap.js';
+import PerformanceDisplay from './PerformanceDisplay.js';
+import PerInstanceColorAppearance from './PerInstanceColorAppearance.js';
+import Picking from './Picking.js';
+import PostProcessStageCollection from './PostProcessStageCollection.js';
+import Primitive from './Primitive.js';
+import PrimitiveCollection from './PrimitiveCollection.js';
+import SceneMode from './SceneMode.js';
+import SceneTransforms from './SceneTransforms.js';
+import SceneTransitioner from './SceneTransitioner.js';
+import ScreenSpaceCameraController from './ScreenSpaceCameraController.js';
+import ShadowMap from './ShadowMap.js';
+import StencilConstants from './StencilConstants.js';
+import SunLight from './SunLight.js';
+import SunPostProcess from './SunPostProcess.js';
+import TweenCollection from './TweenCollection.js';
+import View from './View.js';
+import DebugInspector from './DebugInspector.js';
 
 const requestRenderAfterFrame = function (scene) {
   return function () {
@@ -166,24 +166,24 @@ function Scene(options) {
   }
   contextOptions.webgl.powerPreference = defaultValue(
     contextOptions.webgl.powerPreference,
-    "high-performance"
+    'high-performance'
   );
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(canvas)) {
-    throw new DeveloperError("options and options.canvas are required.");
+    throw new DeveloperError('options and options.canvas are required.');
   }
   //>>includeEnd('debug');
   const hasCreditContainer = defined(creditContainer);
   const context = new Context(canvas, contextOptions);
   if (!hasCreditContainer) {
-    creditContainer = document.createElement("div");
-    creditContainer.style.position = "absolute";
-    creditContainer.style.bottom = "0";
-    creditContainer.style["text-shadow"] = "0 0 2px #000000";
-    creditContainer.style.color = "#ffffff";
-    creditContainer.style["font-size"] = "10px";
-    creditContainer.style["padding-right"] = "5px";
+    creditContainer = document.createElement('div');
+    creditContainer.style.position = 'absolute';
+    creditContainer.style.bottom = '0';
+    creditContainer.style['text-shadow'] = '0 0 2px #000000';
+    creditContainer.style.color = '#ffffff';
+    creditContainer.style['font-size'] = '10px';
+    creditContainer.style['padding-right'] = '5px';
     canvas.parentNode.appendChild(creditContainer);
   }
   if (!defined(creditViewport)) {
@@ -194,7 +194,7 @@ function Scene(options) {
   this._jobScheduler = new JobScheduler();
   this._frameState = new FrameState(
     context,
-    new CreditDisplay(creditContainer, " • ", creditViewport),
+    new CreditDisplay(creditContainer, ' • ', creditViewport),
     this._jobScheduler
   );
   this._frameState.scene3DOnly = defaultValue(options.scene3DOnly, false);
@@ -232,20 +232,20 @@ function Scene(options) {
   this._clearColorCommand = new ClearCommand({
     color: new Color(),
     stencil: 0,
-    owner: this,
+    owner: this
   });
   this._depthClearCommand = new ClearCommand({
     depth: 1.0,
-    owner: this,
+    owner: this
   });
   this._stencilClearCommand = new ClearCommand({
-    stencil: 0,
+    stencil: 0
   });
   this._classificationStencilClearCommand = new ClearCommand({
     stencil: 0,
     renderState: RenderState.fromCache({
-      stencilMask: StencilConstants.CLASSIFICATION_MASK,
-    }),
+      stencilMask: StencilConstants.CLASSIFICATION_MASK
+    })
   });
 
   this._depthOnlyRenderStateCache = {};
@@ -556,7 +556,7 @@ function Scene(options) {
   this.shadowMap = new ShadowMap({
     context: context,
     lightCamera: this._shadowMapCamera,
-    enabled: defaultValue(options.shadows, false),
+    enabled: defaultValue(options.shadows, false)
   });
 
   /**
@@ -634,7 +634,7 @@ function Scene(options) {
     useInvertClassification: false,
     usePostProcess: false,
     usePostProcessSelected: false,
-    useWebVR: false,
+    useWebVR: false
   };
 
   this._useWebVR = false;
@@ -678,12 +678,14 @@ function Scene(options) {
   this._lastRenderTime = undefined;
   this._frameRateMonitor = undefined;
 
-  this._removeRequestListenerCallback = RequestScheduler.requestCompletedEvent.addEventListener(
-    requestRenderAfterFrame(this)
-  );
-  this._removeTaskProcessorListenerCallback = TaskProcessor.taskCompletedEvent.addEventListener(
-    requestRenderAfterFrame(this)
-  );
+  this._removeRequestListenerCallback =
+    RequestScheduler.requestCompletedEvent.addEventListener(
+      requestRenderAfterFrame(this)
+    );
+  this._removeTaskProcessorListenerCallback =
+    TaskProcessor.taskCompletedEvent.addEventListener(
+      requestRenderAfterFrame(this)
+    );
   this._removeGlobeCallbacks = [];
 
   const viewport = new BoundingRectangle(
@@ -780,7 +782,7 @@ Object.defineProperties(Scene.prototype, {
   canvas: {
     get: function () {
       return this._canvas;
-    },
+    }
   },
 
   /**
@@ -795,7 +797,7 @@ Object.defineProperties(Scene.prototype, {
   drawingBufferHeight: {
     get: function () {
       return this._context.drawingBufferHeight;
-    },
+    }
   },
 
   /**
@@ -810,7 +812,7 @@ Object.defineProperties(Scene.prototype, {
   drawingBufferWidth: {
     get: function () {
       return this._context.drawingBufferWidth;
-    },
+    }
   },
 
   /**
@@ -825,7 +827,7 @@ Object.defineProperties(Scene.prototype, {
   maximumAliasedLineWidth: {
     get: function () {
       return ContextLimits.maximumAliasedLineWidth;
-    },
+    }
   },
 
   /**
@@ -840,7 +842,7 @@ Object.defineProperties(Scene.prototype, {
   maximumCubeMapSize: {
     get: function () {
       return ContextLimits.maximumCubeMapSize;
-    },
+    }
   },
 
   /**
@@ -855,7 +857,7 @@ Object.defineProperties(Scene.prototype, {
   pickPositionSupported: {
     get: function () {
       return this._context.depthTexture;
-    },
+    }
   },
 
   /**
@@ -871,7 +873,7 @@ Object.defineProperties(Scene.prototype, {
   sampleHeightSupported: {
     get: function () {
       return this._context.depthTexture;
-    },
+    }
   },
 
   /**
@@ -887,7 +889,7 @@ Object.defineProperties(Scene.prototype, {
   clampToHeightSupported: {
     get: function () {
       return this._context.depthTexture;
-    },
+    }
   },
 
   /**
@@ -902,7 +904,7 @@ Object.defineProperties(Scene.prototype, {
   invertClassificationSupported: {
     get: function () {
       return this._context.depthTexture;
-    },
+    }
   },
 
   /**
@@ -917,7 +919,7 @@ Object.defineProperties(Scene.prototype, {
   specularEnvironmentMapsSupported: {
     get: function () {
       return OctahedralProjectedCubeMap.isSupported(this._context);
-    },
+    }
   },
 
   /**
@@ -936,7 +938,7 @@ Object.defineProperties(Scene.prototype, {
       this._globe = globe;
 
       updateGlobeListeners(this, globe);
-    },
+    }
   },
 
   /**
@@ -949,7 +951,7 @@ Object.defineProperties(Scene.prototype, {
   primitives: {
     get: function () {
       return this._primitives;
-    },
+    }
   },
 
   /**
@@ -962,7 +964,7 @@ Object.defineProperties(Scene.prototype, {
   groundPrimitives: {
     get: function () {
       return this._groundPrimitives;
-    },
+    }
   },
 
   /**
@@ -979,7 +981,7 @@ Object.defineProperties(Scene.prototype, {
     set: function (camera) {
       // For internal use only. Documentation is still @readonly.
       this._view.camera = camera;
-    },
+    }
   },
 
   /**
@@ -998,7 +1000,7 @@ Object.defineProperties(Scene.prototype, {
     set: function (view) {
       // For internal use only. Documentation is still @readonly.
       this._view = view;
-    },
+    }
   },
 
   /**
@@ -1013,7 +1015,7 @@ Object.defineProperties(Scene.prototype, {
   defaultView: {
     get: function () {
       return this._defaultView;
-    },
+    }
   },
 
   /**
@@ -1028,7 +1030,7 @@ Object.defineProperties(Scene.prototype, {
   picking: {
     get: function () {
       return this._picking;
-    },
+    }
   },
 
   /**
@@ -1041,7 +1043,7 @@ Object.defineProperties(Scene.prototype, {
   screenSpaceCameraController: {
     get: function () {
       return this._screenSpaceCameraController;
-    },
+    }
   },
 
   /**
@@ -1056,7 +1058,7 @@ Object.defineProperties(Scene.prototype, {
   mapProjection: {
     get: function () {
       return this._mapProjection;
-    },
+    }
   },
 
   /**
@@ -1070,7 +1072,7 @@ Object.defineProperties(Scene.prototype, {
   jobScheduler: {
     get: function () {
       return this._jobScheduler;
-    },
+    }
   },
 
   /**
@@ -1086,7 +1088,7 @@ Object.defineProperties(Scene.prototype, {
   frameState: {
     get: function () {
       return this._frameState;
-    },
+    }
   },
 
   /**
@@ -1101,7 +1103,7 @@ Object.defineProperties(Scene.prototype, {
   environmentState: {
     get: function () {
       return this._environmentState;
-    },
+    }
   },
 
   /**
@@ -1116,7 +1118,7 @@ Object.defineProperties(Scene.prototype, {
   tweens: {
     get: function () {
       return this._tweens;
-    },
+    }
   },
 
   /**
@@ -1133,7 +1135,7 @@ Object.defineProperties(Scene.prototype, {
       }
 
       return this.globe.imageryLayers;
-    },
+    }
   },
 
   /**
@@ -1154,7 +1156,7 @@ Object.defineProperties(Scene.prototype, {
       if (defined(this.globe)) {
         this.globe.terrainProvider = terrainProvider;
       }
-    },
+    }
   },
 
   /**
@@ -1171,7 +1173,7 @@ Object.defineProperties(Scene.prototype, {
       }
 
       return this.globe.terrainProviderChanged;
-    },
+    }
   },
 
   /**
@@ -1190,7 +1192,7 @@ Object.defineProperties(Scene.prototype, {
   preUpdate: {
     get: function () {
       return this._preUpdate;
-    },
+    }
   },
 
   /**
@@ -1210,7 +1212,7 @@ Object.defineProperties(Scene.prototype, {
   postUpdate: {
     get: function () {
       return this._postUpdate;
-    },
+    }
   },
 
   /**
@@ -1226,7 +1228,7 @@ Object.defineProperties(Scene.prototype, {
   renderError: {
     get: function () {
       return this._renderError;
-    },
+    }
   },
 
   /**
@@ -1246,7 +1248,7 @@ Object.defineProperties(Scene.prototype, {
   preRender: {
     get: function () {
       return this._preRender;
-    },
+    }
   },
 
   /**
@@ -1265,7 +1267,7 @@ Object.defineProperties(Scene.prototype, {
   postRender: {
     get: function () {
       return this._postRender;
-    },
+    }
   },
 
   /**
@@ -1279,7 +1281,7 @@ Object.defineProperties(Scene.prototype, {
   lastRenderTime: {
     get: function () {
       return this._lastRenderTime;
-    },
+    }
   },
 
   /**
@@ -1290,7 +1292,7 @@ Object.defineProperties(Scene.prototype, {
   context: {
     get: function () {
       return this._context;
-    },
+    }
   },
 
   /**
@@ -1314,7 +1316,7 @@ Object.defineProperties(Scene.prototype, {
   debugFrustumStatistics: {
     get: function () {
       return this._view.debugFrustumStatistics;
-    },
+    }
   },
 
   /**
@@ -1326,7 +1328,7 @@ Object.defineProperties(Scene.prototype, {
   scene3DOnly: {
     get: function () {
       return this._frameState.scene3DOnly;
-    },
+    }
   },
 
   /**
@@ -1340,7 +1342,7 @@ Object.defineProperties(Scene.prototype, {
   orderIndependentTranslucency: {
     get: function () {
       return this._useOIT;
-    },
+    }
   },
 
   /**
@@ -1352,7 +1354,7 @@ Object.defineProperties(Scene.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
 
   /**
@@ -1369,7 +1371,7 @@ Object.defineProperties(Scene.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (this.scene3DOnly && value !== SceneMode.SCENE3D) {
         throw new DeveloperError(
-          "Only SceneMode.SCENE3D is valid when scene3DOnly is true."
+          'Only SceneMode.SCENE3D is valid when scene3DOnly is true.'
         );
       }
       //>>includeEnd('debug');
@@ -1382,12 +1384,12 @@ Object.defineProperties(Scene.prototype, {
         //>>includeStart('debug', pragmas.debug);
       } else {
         throw new DeveloperError(
-          "value must be a valid SceneMode enumeration."
+          'value must be a valid SceneMode enumeration.'
         );
         //>>includeEnd('debug');
       }
       this._mode = value;
-    },
+    }
   },
 
   /**
@@ -1400,7 +1402,7 @@ Object.defineProperties(Scene.prototype, {
   frustumCommandsList: {
     get: function () {
       return this._view.frustumCommandsList;
-    },
+    }
   },
 
   /**
@@ -1413,7 +1415,7 @@ Object.defineProperties(Scene.prototype, {
   numberOfFrustums: {
     get: function () {
       return this._view.frustumCommandsList.length;
-    },
+    }
   },
 
   /**
@@ -1431,23 +1433,22 @@ Object.defineProperties(Scene.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (this.camera.frustum instanceof OrthographicFrustum) {
         throw new DeveloperError(
-          "VR is unsupported with an orthographic projection."
+          'VR is unsupported with an orthographic projection.'
         );
       }
       //>>includeEnd('debug');
       this._useWebVR = value;
       if (this._useWebVR) {
-        this._frameState.creditDisplay.container.style.visibility = "hidden";
+        this._frameState.creditDisplay.container.style.visibility = 'hidden';
         this._cameraVR = new Camera(this);
         if (!defined(this._deviceOrientationCameraController)) {
-          this._deviceOrientationCameraController = new DeviceOrientationCameraController(
-            this
-          );
+          this._deviceOrientationCameraController =
+            new DeviceOrientationCameraController(this);
         }
 
         this._aspectRatioVR = this.camera.frustum.aspectRatio;
       } else {
-        this._frameState.creditDisplay.container.style.visibility = "visible";
+        this._frameState.creditDisplay.container.style.visibility = 'visible';
         this._cameraVR = undefined;
         this._deviceOrientationCameraController =
           this._deviceOrientationCameraController &&
@@ -1457,7 +1458,7 @@ Object.defineProperties(Scene.prototype, {
         this.camera.frustum.aspectRatio = this._aspectRatioVR;
         this.camera.frustum.xOffset = 0.0;
       }
-    },
+    }
   },
 
   /**
@@ -1469,7 +1470,7 @@ Object.defineProperties(Scene.prototype, {
   mapMode2D: {
     get: function () {
       return this._mapMode2D;
-    },
+    }
   },
 
   /**
@@ -1484,7 +1485,7 @@ Object.defineProperties(Scene.prototype, {
     },
     set: function (value) {
       this._frameState.splitPosition = value;
-    },
+    }
   },
 
   /**
@@ -1504,12 +1505,12 @@ Object.defineProperties(Scene.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(value) || value < 0.0) {
         throw new DeveloperError(
-          "minimumDisableDepthTestDistance must be greater than or equal to 0.0."
+          'minimumDisableDepthTestDistance must be greater than or equal to 0.0.'
         );
       }
       //>>includeEnd('debug');
       this._minimumDisableDepthTestDistance = value;
-    },
+    }
   },
 
   /**
@@ -1528,7 +1529,7 @@ Object.defineProperties(Scene.prototype, {
         this._logDepthBuffer = value;
         this._logDepthBufferDirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -1543,7 +1544,7 @@ Object.defineProperties(Scene.prototype, {
     },
     set: function (value) {
       this._context.uniformState.gamma = value;
-    },
+    }
   },
 
   /**
@@ -1564,7 +1565,7 @@ Object.defineProperties(Scene.prototype, {
         (context.colorBufferFloat || context.colorBufferHalfFloat);
       this._hdrDirty = hdr !== this._hdr;
       this._hdr = hdr;
-    },
+    }
   },
 
   /**
@@ -1581,7 +1582,7 @@ Object.defineProperties(Scene.prototype, {
         context.depthTexture &&
         (context.colorBufferFloat || context.colorBufferHalfFloat)
       );
-    },
+    }
   },
 
   /**
@@ -1594,7 +1595,7 @@ Object.defineProperties(Scene.prototype, {
   cameraUnderground: {
     get: function () {
       return this._cameraUnderground;
-    },
+    }
   },
 
   /**
@@ -1610,7 +1611,7 @@ Object.defineProperties(Scene.prototype, {
     set: function (value) {
       value = Math.min(value, ContextLimits.maximumSamples);
       this._msaaSamples = value;
-    },
+    }
   },
 
   /**
@@ -1622,7 +1623,7 @@ Object.defineProperties(Scene.prototype, {
   msaaSupported: {
     get: function () {
       return this._context.msaa;
-    },
+    }
   },
 
   /**
@@ -1640,7 +1641,7 @@ Object.defineProperties(Scene.prototype, {
     },
     set: function (value) {
       this._frameState.pixelRatio = value;
-    },
+    }
   },
 
   /**
@@ -1649,7 +1650,7 @@ Object.defineProperties(Scene.prototype, {
   opaqueFrustumNearOffset: {
     get: function () {
       return 0.9999;
-    },
+    }
   },
 
   /**
@@ -1658,8 +1659,8 @@ Object.defineProperties(Scene.prototype, {
   globeHeight: {
     get: function () {
       return this._globeHeight;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -1670,17 +1671,17 @@ Object.defineProperties(Scene.prototype, {
 Scene.prototype.getCompressedTextureFormatSupported = function (format) {
   const context = this.context;
   return (
-    ((format === "WEBGL_compressed_texture_s3tc" || format === "s3tc") &&
+    ((format === 'WEBGL_compressed_texture_s3tc' || format === 's3tc') &&
       context.s3tc) ||
-    ((format === "WEBGL_compressed_texture_pvrtc" || format === "pvrtc") &&
+    ((format === 'WEBGL_compressed_texture_pvrtc' || format === 'pvrtc') &&
       context.pvrtc) ||
-    ((format === "WEBGL_compressed_texture_etc" || format === "etc") &&
+    ((format === 'WEBGL_compressed_texture_etc' || format === 'etc') &&
       context.etc) ||
-    ((format === "WEBGL_compressed_texture_etc1" || format === "etc1") &&
+    ((format === 'WEBGL_compressed_texture_etc1' || format === 'etc1') &&
       context.etc1) ||
-    ((format === "WEBGL_compressed_texture_astc" || format === "astc") &&
+    ((format === 'WEBGL_compressed_texture_astc' || format === 'astc') &&
       context.astc) ||
-    ((format === "EXT_texture_compression_bptc" || format === "bc7") &&
+    ((format === 'EXT_texture_compression_bptc' || format === 'bc7') &&
       context.bc7)
   );
 };
@@ -1825,19 +1826,19 @@ Scene.prototype.updateDerivedCommands = function (command) {
 };
 
 const renderTilesetPassState = new Cesium3DTilePassState({
-  pass: Cesium3DTilePass.RENDER,
+  pass: Cesium3DTilePass.RENDER
 });
 
 const preloadTilesetPassState = new Cesium3DTilePassState({
-  pass: Cesium3DTilePass.PRELOAD,
+  pass: Cesium3DTilePass.PRELOAD
 });
 
 const preloadFlightTilesetPassState = new Cesium3DTilePassState({
-  pass: Cesium3DTilePass.PRELOAD_FLIGHT,
+  pass: Cesium3DTilePass.PRELOAD_FLIGHT
 });
 
 const requestRenderModeDeferCheckPassState = new Cesium3DTilePassState({
-  pass: Cesium3DTilePass.REQUEST_RENDER_MODE_DEFER_CHECK,
+  pass: Cesium3DTilePass.REQUEST_RENDER_MODE_DEFER_CHECK
 });
 
 const scratchOccluderBoundingSphere = new BoundingSphere();
@@ -1908,7 +1909,8 @@ Scene.prototype.updateFrameState = function () {
   );
   frameState.occluder = getOccluder(this);
   frameState.minimumTerrainHeight = 0.0;
-  frameState.minimumDisableDepthTestDistance = this._minimumDisableDepthTestDistance;
+  frameState.minimumDisableDepthTestDistance =
+    this._minimumDisableDepthTestDistance;
   frameState.invertClassification = this.invertClassification;
   frameState.useLogDepth =
     this._logDepthBuffer &&
@@ -1922,15 +1924,18 @@ Scene.prototype.updateFrameState = function () {
 
   if (defined(this.globe)) {
     frameState.terrainExaggeration = this.globe.terrainExaggeration;
-    frameState.terrainExaggerationRelativeHeight = this.globe.terrainExaggerationRelativeHeight;
+    frameState.terrainExaggerationRelativeHeight =
+      this.globe.terrainExaggerationRelativeHeight;
   }
 
   if (
     defined(this._specularEnvironmentMapAtlas) &&
     this._specularEnvironmentMapAtlas.ready
   ) {
-    frameState.specularEnvironmentMaps = this._specularEnvironmentMapAtlas.texture;
-    frameState.specularEnvironmentMapsMaximumLOD = this._specularEnvironmentMapAtlas.maximumMipmapLevel;
+    frameState.specularEnvironmentMaps =
+      this._specularEnvironmentMapAtlas.texture;
+    frameState.specularEnvironmentMapsMaximumLOD =
+      this._specularEnvironmentMapAtlas.maximumMipmapLevel;
   } else {
     frameState.specularEnvironmentMaps = undefined;
     frameState.specularEnvironmentMapsMaximumLOD = undefined;
@@ -2026,7 +2031,7 @@ function debugShowBoundingVolume(command, scene, passState, debugFramebuffer) {
       EllipsoidGeometry.createGeometry(
         new EllipsoidGeometry({
           radii: new Cartesian3(radius, radius, radius),
-          vertexFormat: PerInstanceColorAppearance.FLAT_VERTEX_FORMAT,
+          vertexFormat: PerInstanceColorAppearance.FLAT_VERTEX_FORMAT
         })
       )
     );
@@ -2036,14 +2041,14 @@ function debugShowBoundingVolume(command, scene, passState, debugFramebuffer) {
         geometry: geometry,
         modelMatrix: Matrix4.fromTranslation(center),
         attributes: {
-          color: new ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 1.0),
-        },
+          color: new ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 1.0)
+        }
       }),
       appearance: new PerInstanceColorAppearance({
         flat: true,
-        translucent: false,
+        translucent: false
       }),
-      asynchronous: false,
+      asynchronous: false
     });
   } else {
     const halfAxes = boundingVolume.halfAxes;
@@ -2052,7 +2057,7 @@ function debugShowBoundingVolume(command, scene, passState, debugFramebuffer) {
       BoxGeometry.createGeometry(
         BoxGeometry.fromDimensions({
           dimensions: new Cartesian3(2.0, 2.0, 2.0),
-          vertexFormat: PerInstanceColorAppearance.FLAT_VERTEX_FORMAT,
+          vertexFormat: PerInstanceColorAppearance.FLAT_VERTEX_FORMAT
         })
       )
     );
@@ -2066,14 +2071,14 @@ function debugShowBoundingVolume(command, scene, passState, debugFramebuffer) {
           new Matrix4()
         ),
         attributes: {
-          color: new ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 1.0),
-        },
+          color: new ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 1.0)
+        }
       }),
       appearance: new PerInstanceColorAppearance({
         flat: true,
-        translucent: false,
+        translucent: false
       }),
-      asynchronous: false,
+      asynchronous: false
     });
   }
 
@@ -3292,7 +3297,7 @@ function updateDebugFrustumPlanes(scene) {
       scene._debugFrustumPlanes = new DebugCameraPrimitive({
         camera: scene.camera,
         updateOnChange: false,
-        frustumSplits: frameState.frustumSplits,
+        frustumSplits: frameState.frustumSplits
       });
     } else {
       scene._debugFrustumPlanes =
@@ -3406,9 +3411,8 @@ function updateAndClearFramebuffers(scene, passState, clearColor) {
 
   // Update globe depth rendering based on the current context and clear the globe depth framebuffer.
   // Globe depth is copied for the pick pass to support picking batched geometries in GroundPrimitives.
-  const useGlobeDepthFramebuffer = (environmentState.useGlobeDepthFramebuffer = defined(
-    view.globeDepth
-  ));
+  const useGlobeDepthFramebuffer = (environmentState.useGlobeDepthFramebuffer =
+    defined(view.globeDepth));
   if (useGlobeDepthFramebuffer) {
     view.globeDepth.update(
       context,
@@ -3662,13 +3666,13 @@ Scene.prototype.initializeFrame = function () {
 function updateDebugShowFramesPerSecond(scene, renderedThisFrame) {
   if (scene.debugShowFramesPerSecond) {
     if (!defined(scene._performanceDisplay)) {
-      const performanceContainer = document.createElement("div");
+      const performanceContainer = document.createElement('div');
       performanceContainer.className =
-        "cesium-performanceDisplay-defaultContainer";
+        'cesium-performanceDisplay-defaultContainer';
       const container = scene._canvas.parentNode;
       container.appendChild(performanceContainer);
       const performanceDisplay = new PerformanceDisplay({
-        container: performanceContainer,
+        container: performanceContainer
       });
       scene._performanceDisplay = performanceDisplay;
       scene._performanceContainer = performanceContainer;

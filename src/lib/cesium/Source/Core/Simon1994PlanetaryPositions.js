@@ -1,11 +1,11 @@
-import Cartesian3 from "./Cartesian3.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import JulianDate from "./JulianDate.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
-import TimeConstants from "./TimeConstants.js";
-import TimeStandard from "./TimeStandard.js";
+import Cartesian3 from './Cartesian3.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import JulianDate from './JulianDate.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
+import TimeConstants from './TimeConstants.js';
+import TimeStandard from './TimeStandard.js';
 
 /**
  * Contains functions for finding the Cartesian coordinates of the sun and the moon in the
@@ -78,7 +78,7 @@ function elementsToCartesian(
   //>>includeStart('debug', pragmas.debug);
   if (inclination < 0 || inclination > CesiumMath.PI) {
     throw new DeveloperError(
-      "The inclination is out of range. Inclination must be greater than or equal to zero and less than or equal to Pi radians."
+      'The inclination is out of range. Inclination must be greater than or equal to zero and less than or equal to Pi radians.'
     );
   }
   //>>includeEnd('debug')
@@ -94,12 +94,12 @@ function elementsToCartesian(
 
   //>>includeStart('debug', pragmas.debug);
   if (
-    type === "Hyperbolic" &&
+    type === 'Hyperbolic' &&
     Math.abs(CesiumMath.negativePiToPi(trueAnomaly)) >=
       Math.acos(-1.0 / eccentricity)
   ) {
     throw new DeveloperError(
-      "The true anomaly of the hyperbolic orbit lies outside of the bounds of the hyperbola."
+      'The true anomaly of the hyperbolic orbit lies outside of the bounds of the hyperbola.'
     );
   }
   //>>includeEnd('debug')
@@ -118,7 +118,7 @@ function elementsToCartesian(
 
   //>>includeStart('debug', pragmas.debug);
   if (denom <= CesiumMath.Epsilon10) {
-    throw new DeveloperError("elements cannot be converted to cartesian");
+    throw new DeveloperError('elements cannot be converted to cartesian');
   }
   //>>includeEnd('debug')
 
@@ -137,25 +137,25 @@ function elementsToCartesian(
 function chooseOrbit(eccentricity, tolerance) {
   //>>includeStart('debug', pragmas.debug);
   if (eccentricity < 0) {
-    throw new DeveloperError("eccentricity cannot be negative.");
+    throw new DeveloperError('eccentricity cannot be negative.');
   }
   //>>includeEnd('debug')
 
   if (eccentricity <= tolerance) {
-    return "Circular";
+    return 'Circular';
   } else if (eccentricity < 1.0 - tolerance) {
-    return "Elliptical";
+    return 'Elliptical';
   } else if (eccentricity <= 1.0 + tolerance) {
-    return "Parabolic";
+    return 'Parabolic';
   }
-  return "Hyperbolic";
+  return 'Hyperbolic';
 }
 
 // Calculates the true anomaly given the mean anomaly and the eccentricity.
 function meanAnomalyToTrueAnomaly(meanAnomaly, eccentricity) {
   //>>includeStart('debug', pragmas.debug);
   if (eccentricity < 0.0 || eccentricity >= 1.0) {
-    throw new DeveloperError("eccentricity out of range.");
+    throw new DeveloperError('eccentricity out of range.');
   }
   //>>includeEnd('debug')
 
@@ -172,7 +172,7 @@ const keplerEqConvergence = CesiumMath.EPSILON8;
 function meanAnomalyToEccentricAnomaly(meanAnomaly, eccentricity) {
   //>>includeStart('debug', pragmas.debug);
   if (eccentricity < 0.0 || eccentricity >= 1.0) {
-    throw new DeveloperError("eccentricity out of range.");
+    throw new DeveloperError('eccentricity out of range.');
   }
   //>>includeEnd('debug')
 
@@ -208,7 +208,7 @@ function meanAnomalyToEccentricAnomaly(meanAnomaly, eccentricity) {
 
   //>>includeStart('debug', pragmas.debug);
   if (count >= maxIterationCount) {
-    throw new DeveloperError("Kepler equation did not converge");
+    throw new DeveloperError('Kepler equation did not converge');
     // STK Components uses a numerical method to find the eccentric anomaly in the case that Kepler's
     // equation does not converge. We don't expect that to ever be necessary for the reasonable orbits used here.
   }
@@ -222,7 +222,7 @@ function meanAnomalyToEccentricAnomaly(meanAnomaly, eccentricity) {
 function eccentricAnomalyToTrueAnomaly(eccentricAnomaly, eccentricity) {
   //>>includeStart('debug', pragmas.debug);
   if (eccentricity < 0.0 || eccentricity >= 1.0) {
-    throw new DeveloperError("eccentricity out of range.");
+    throw new DeveloperError('eccentricity out of range.');
   }
   //>>includeEnd('debug')
 
@@ -261,7 +261,7 @@ function perifocalToCartesianMatrix(
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (inclination < 0 || inclination > CesiumMath.PI) {
-    throw new DeveloperError("inclination out of range");
+    throw new DeveloperError('inclination out of range');
   }
   //>>includeEnd('debug')
 

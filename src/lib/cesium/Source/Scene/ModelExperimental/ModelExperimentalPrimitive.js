@@ -1,28 +1,28 @@
-import Check from "../../Core/Check.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import PrimitiveType from "../../Core/PrimitiveType.js";
-import AlphaPipelineStage from "./AlphaPipelineStage.js";
-import BatchTexturePipelineStage from "./BatchTexturePipelineStage.js";
-import CustomShaderMode from "./CustomShaderMode.js";
-import CustomShaderPipelineStage from "./CustomShaderPipelineStage.js";
-import FeatureIdPipelineStage from "./FeatureIdPipelineStage.js";
-import CPUStylingPipelineStage from "./CPUStylingPipelineStage.js";
-import DequantizationPipelineStage from "./DequantizationPipelineStage.js";
-import GeometryPipelineStage from "./GeometryPipelineStage.js";
-import LightingPipelineStage from "./LightingPipelineStage.js";
-import MaterialPipelineStage from "./MaterialPipelineStage.js";
-import MetadataPipelineStage from "./MetadataPipelineStage.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
-import MorphTargetsPipelineStage from "./MorphTargetsPipelineStage.js";
-import PickingPipelineStage from "./PickingPipelineStage.js";
-import PointCloudAttenuationPipelineStage from "./PointCloudAttenuationPipelineStage.js";
-import PrimitiveStatisticsPipelineStage from "./PrimitiveStatisticsPipelineStage.js";
-import SceneMode from "../SceneMode.js";
-import SceneMode2DPipelineStage from "./SceneMode2DPipelineStage.js";
-import SelectedFeatureIdPipelineStage from "./SelectedFeatureIdPipelineStage.js";
-import SkinningPipelineStage from "./SkinningPipelineStage.js";
-import WireframePipelineStage from "./WireframePipelineStage.js";
+import Check from '../../Core/Check.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import PrimitiveType from '../../Core/PrimitiveType.js';
+import AlphaPipelineStage from './AlphaPipelineStage.js';
+import BatchTexturePipelineStage from './BatchTexturePipelineStage.js';
+import CustomShaderMode from './CustomShaderMode.js';
+import CustomShaderPipelineStage from './CustomShaderPipelineStage.js';
+import FeatureIdPipelineStage from './FeatureIdPipelineStage.js';
+import CPUStylingPipelineStage from './CPUStylingPipelineStage.js';
+import DequantizationPipelineStage from './DequantizationPipelineStage.js';
+import GeometryPipelineStage from './GeometryPipelineStage.js';
+import LightingPipelineStage from './LightingPipelineStage.js';
+import MaterialPipelineStage from './MaterialPipelineStage.js';
+import MetadataPipelineStage from './MetadataPipelineStage.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
+import MorphTargetsPipelineStage from './MorphTargetsPipelineStage.js';
+import PickingPipelineStage from './PickingPipelineStage.js';
+import PointCloudAttenuationPipelineStage from './PointCloudAttenuationPipelineStage.js';
+import PrimitiveStatisticsPipelineStage from './PrimitiveStatisticsPipelineStage.js';
+import SceneMode from '../SceneMode.js';
+import SceneMode2DPipelineStage from './SceneMode2DPipelineStage.js';
+import SelectedFeatureIdPipelineStage from './SelectedFeatureIdPipelineStage.js';
+import SkinningPipelineStage from './SkinningPipelineStage.js';
+import WireframePipelineStage from './WireframePipelineStage.js';
 
 /**
  * In memory representation of a single primitive, that is, a primitive
@@ -45,9 +45,9 @@ export default function ModelExperimentalPrimitive(options) {
   const node = options.node;
   const model = options.model;
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.primitive", primitive);
-  Check.typeOf.object("options.node", node);
-  Check.typeOf.object("options.model", model);
+  Check.typeOf.object('options.primitive', primitive);
+  Check.typeOf.object('options.node', node);
+  Check.typeOf.object('options.model', model);
   //>>includeEnd('debug');
 
   /**
@@ -256,7 +256,7 @@ function inspectFeatureIds(model, node, primitive) {
     if (defined(featureIds)) {
       return {
         hasFeatureIds: true,
-        hasPropertyTable: defined(featureIds.propertyTableId),
+        hasPropertyTable: defined(featureIds.propertyTableId)
       };
     }
   }
@@ -268,12 +268,12 @@ function inspectFeatureIds(model, node, primitive) {
   if (defined(featureIds)) {
     return {
       hasFeatureIds: true,
-      hasPropertyTable: defined(featureIds.propertyTableId),
+      hasPropertyTable: defined(featureIds.propertyTableId)
     };
   }
 
   return {
     hasFeatureIds: false,
-    hasPropertyTable: false,
+    hasPropertyTable: false
   };
 }

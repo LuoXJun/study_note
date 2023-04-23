@@ -1,10 +1,10 @@
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import EllipseGeometry from "./EllipseGeometry.js";
-import Ellipsoid from "./Ellipsoid.js";
-import VertexFormat from "./VertexFormat.js";
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import EllipseGeometry from './EllipseGeometry.js';
+import Ellipsoid from './Ellipsoid.js';
+import VertexFormat from './VertexFormat.js';
 
 /**
  * A description of a circle on the ellipsoid. Circle geometry can be rendered with both {@link Primitive} and {@link GroundPrimitive}.
@@ -41,7 +41,7 @@ function CircleGeometry(options) {
   const radius = options.radius;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("radius", radius);
+  Check.typeOf.number('radius', radius);
   //>>includeEnd('debug');
 
   const ellipseGeometryOptions = {
@@ -54,10 +54,10 @@ function CircleGeometry(options) {
     granularity: options.granularity,
     vertexFormat: options.vertexFormat,
     stRotation: options.stRotation,
-    shadowVolume: options.shadowVolume,
+    shadowVolume: options.shadowVolume
   };
   this._ellipseGeometry = new EllipseGeometry(ellipseGeometryOptions);
-  this._workerName = "createCircleGeometry";
+  this._workerName = 'createCircleGeometry';
 }
 
 /**
@@ -77,7 +77,7 @@ CircleGeometry.packedLength = EllipseGeometry.packedLength;
  */
 CircleGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
+  Check.typeOf.object('value', value);
   //>>includeEnd('debug');
   return EllipseGeometry.pack(value._ellipseGeometry, array, startingIndex);
 };
@@ -85,7 +85,7 @@ CircleGeometry.pack = function (value, array, startingIndex) {
 const scratchEllipseGeometry = new EllipseGeometry({
   center: new Cartesian3(),
   semiMajorAxis: 1.0,
-  semiMinorAxis: 1.0,
+  semiMinorAxis: 1.0
 });
 const scratchOptions = {
   center: new Cartesian3(),
@@ -98,7 +98,7 @@ const scratchOptions = {
   stRotation: undefined,
   semiMajorAxis: undefined,
   semiMinorAxis: undefined,
-  shadowVolume: undefined,
+  shadowVolume: undefined
 };
 
 /**
@@ -177,7 +177,7 @@ CircleGeometry.createShadowVolume = function (
     extrudedHeight: minHeight,
     height: maxHeight,
     vertexFormat: VertexFormat.POSITION_ONLY,
-    shadowVolume: true,
+    shadowVolume: true
   });
 };
 
@@ -188,7 +188,7 @@ Object.defineProperties(CircleGeometry.prototype, {
   rectangle: {
     get: function () {
       return this._ellipseGeometry.rectangle;
-    },
+    }
   },
   /**
    * For remapping texture coordinates when rendering CircleGeometries as GroundPrimitives.
@@ -197,7 +197,7 @@ Object.defineProperties(CircleGeometry.prototype, {
   textureCoordinateRotationPoints: {
     get: function () {
       return this._ellipseGeometry.textureCoordinateRotationPoints;
-    },
-  },
+    }
+  }
 });
 export default CircleGeometry;

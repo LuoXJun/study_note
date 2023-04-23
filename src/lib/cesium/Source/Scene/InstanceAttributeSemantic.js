@@ -1,4 +1,4 @@
-import Check from "../Core/Check.js";
+import Check from '../Core/Check.js';
 
 /**
  * An enum describing the built-in instance attribute semantics.
@@ -14,7 +14,7 @@ const InstanceAttributeSemantic = {
    * @type {String}
    * @constant
    */
-  TRANSLATION: "TRANSLATION",
+  TRANSLATION: 'TRANSLATION',
 
   /**
    * Per-instance rotation.
@@ -22,7 +22,7 @@ const InstanceAttributeSemantic = {
    * @type {String}
    * @constant
    */
-  ROTATION: "ROTATION",
+  ROTATION: 'ROTATION',
 
   /**
    * Per-instance scale.
@@ -30,7 +30,7 @@ const InstanceAttributeSemantic = {
    * @type {String}
    * @constant
    */
-  SCALE: "SCALE",
+  SCALE: 'SCALE',
 
   /**
    * Per-instance feature ID.
@@ -38,7 +38,7 @@ const InstanceAttributeSemantic = {
    * @type {String}
    * @constant
    */
-  FEATURE_ID: "_FEATURE_ID",
+  FEATURE_ID: '_FEATURE_ID'
 };
 
 /**
@@ -50,7 +50,7 @@ const InstanceAttributeSemantic = {
  */
 InstanceAttributeSemantic.fromGltfSemantic = function (gltfSemantic) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("gltfSemantic", gltfSemantic);
+  Check.typeOf.string('gltfSemantic', gltfSemantic);
   //>>includeEnd('debug')
 
   let semantic = gltfSemantic;
@@ -63,13 +63,13 @@ InstanceAttributeSemantic.fromGltfSemantic = function (gltfSemantic) {
   }
 
   switch (semantic) {
-    case "TRANSLATION":
+    case 'TRANSLATION':
       return InstanceAttributeSemantic.TRANSLATION;
-    case "ROTATION":
+    case 'ROTATION':
       return InstanceAttributeSemantic.ROTATION;
-    case "SCALE":
+    case 'SCALE':
       return InstanceAttributeSemantic.SCALE;
-    case "_FEATURE_ID":
+    case '_FEATURE_ID':
       return InstanceAttributeSemantic.FEATURE_ID;
   }
 

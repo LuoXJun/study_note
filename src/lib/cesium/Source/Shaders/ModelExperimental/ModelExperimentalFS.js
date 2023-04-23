@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "#if defined(HAS_NORMALS) && !defined(HAS_TANGENTS) && !defined(LIGHTING_UNLIT)\n\
+export default '#if defined(HAS_NORMALS) && !defined(HAS_TANGENTS) && !defined(LIGHTING_UNLIT)\n\
     #ifdef GL_OES_standard_derivatives\n\
     #extension GL_OES_standard_derivatives : enable\n\
     #endif\n\
@@ -85,4 +85,4 @@ void main()\n\
 \n\
     gl_FragColor = color;\n\
 }\n\
-";
+';

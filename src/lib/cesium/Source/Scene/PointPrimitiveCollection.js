@@ -1,29 +1,29 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Color from "../Core/Color.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import EncodedCartesian3 from "../Core/EncodedCartesian3.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import PrimitiveType from "../Core/PrimitiveType.js";
-import WebGLConstants from "../Core/WebGLConstants.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import ContextLimits from "../Renderer/ContextLimits.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import Pass from "../Renderer/Pass.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import VertexArrayFacade from "../Renderer/VertexArrayFacade.js";
-import PointPrimitiveCollectionFS from "../Shaders/PointPrimitiveCollectionFS.js";
-import PointPrimitiveCollectionVS from "../Shaders/PointPrimitiveCollectionVS.js";
-import BlendingState from "./BlendingState.js";
-import BlendOption from "./BlendOption.js";
-import PointPrimitive from "./PointPrimitive.js";
-import SceneMode from "./SceneMode.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Color from '../Core/Color.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import EncodedCartesian3 from '../Core/EncodedCartesian3.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import PrimitiveType from '../Core/PrimitiveType.js';
+import WebGLConstants from '../Core/WebGLConstants.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import ContextLimits from '../Renderer/ContextLimits.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import Pass from '../Renderer/Pass.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import VertexArrayFacade from '../Renderer/VertexArrayFacade.js';
+import PointPrimitiveCollectionFS from '../Shaders/PointPrimitiveCollectionFS.js';
+import PointPrimitiveCollectionVS from '../Shaders/PointPrimitiveCollectionVS.js';
+import BlendingState from './BlendingState.js';
+import BlendOption from './BlendOption.js';
+import PointPrimitive from './PointPrimitive.js';
+import SceneMode from './SceneMode.js';
 
 const SHOW_INDEX = PointPrimitive.SHOW_INDEX;
 const POSITION_INDEX = PointPrimitive.POSITION_INDEX;
@@ -46,7 +46,7 @@ const attributeLocations = {
   compressedAttribute0: 2, // color, outlineColor, pick color
   compressedAttribute1: 3, // show, translucency by distance, some free space
   scaleByDistance: 4,
-  distanceDisplayConditionAndDisableDepth: 5,
+  distanceDisplayConditionAndDisableDepth: 5
 };
 
 /**
@@ -215,14 +215,14 @@ function PointPrimitiveCollection(options) {
     BufferUsage.STATIC_DRAW, // PIXEL_SIZE_INDEX
     BufferUsage.STATIC_DRAW, // SCALE_BY_DISTANCE_INDEX
     BufferUsage.STATIC_DRAW, // TRANSLUCENCY_BY_DISTANCE_INDEX
-    BufferUsage.STATIC_DRAW, // DISTANCE_DISPLAY_CONDITION_INDEX
+    BufferUsage.STATIC_DRAW // DISTANCE_DISPLAY_CONDITION_INDEX
   ];
 
   const that = this;
   this._uniforms = {
     u_maxTotalPointSize: function () {
       return that._maxTotalPointSize;
-    },
+    }
   };
 }
 
@@ -238,8 +238,8 @@ Object.defineProperties(PointPrimitiveCollection.prototype, {
     get: function () {
       removePointPrimitives(this);
       return this._pointPrimitives.length;
-    },
-  },
+    }
+  }
 });
 
 function destroyPointPrimitives(pointPrimitives) {
@@ -382,9 +382,8 @@ PointPrimitiveCollection.prototype._updatePointPrimitive = function (
   propertyChanged
 ) {
   if (!pointPrimitive._dirty) {
-    this._pointPrimitivesToUpdate[
-      this._pointPrimitivesToUpdateIndex++
-    ] = pointPrimitive;
+    this._pointPrimitivesToUpdate[this._pointPrimitivesToUpdateIndex++] =
+      pointPrimitive;
   }
 
   ++this._propertiesChanged[propertyChanged];
@@ -434,7 +433,7 @@ PointPrimitiveCollection.prototype.contains = function (pointPrimitive) {
 PointPrimitiveCollection.prototype.get = function (index) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(index)) {
-    throw new DeveloperError("index is required.");
+    throw new DeveloperError('index is required.');
   }
   //>>includeEnd('debug');
 
@@ -465,38 +464,38 @@ function createVAF(context, numberOfPointPrimitives, buffersUsage) {
         index: attributeLocations.positionHighAndSize,
         componentsPerAttribute: 4,
         componentDatatype: ComponentDatatype.FLOAT,
-        usage: buffersUsage[POSITION_INDEX],
+        usage: buffersUsage[POSITION_INDEX]
       },
       {
         index: attributeLocations.positionLowAndShow,
         componentsPerAttribute: 4,
         componentDatatype: ComponentDatatype.FLOAT,
-        usage: buffersUsage[POSITION_INDEX],
+        usage: buffersUsage[POSITION_INDEX]
       },
       {
         index: attributeLocations.compressedAttribute0,
         componentsPerAttribute: 4,
         componentDatatype: ComponentDatatype.FLOAT,
-        usage: buffersUsage[COLOR_INDEX],
+        usage: buffersUsage[COLOR_INDEX]
       },
       {
         index: attributeLocations.compressedAttribute1,
         componentsPerAttribute: 4,
         componentDatatype: ComponentDatatype.FLOAT,
-        usage: buffersUsage[TRANSLUCENCY_BY_DISTANCE_INDEX],
+        usage: buffersUsage[TRANSLUCENCY_BY_DISTANCE_INDEX]
       },
       {
         index: attributeLocations.scaleByDistance,
         componentsPerAttribute: 4,
         componentDatatype: ComponentDatatype.FLOAT,
-        usage: buffersUsage[SCALE_BY_DISTANCE_INDEX],
+        usage: buffersUsage[SCALE_BY_DISTANCE_INDEX]
       },
       {
         index: attributeLocations.distanceDisplayConditionAndDisableDepth,
         componentsPerAttribute: 3,
         componentDatatype: ComponentDatatype.FLOAT,
-        usage: buffersUsage[DISTANCE_DISPLAY_CONDITION_INDEX],
-      },
+        usage: buffersUsage[DISTANCE_DISPLAY_CONDITION_INDEX]
+      }
     ],
     numberOfPointPrimitives
   ); // 1 vertex per pointPrimitive
@@ -1011,9 +1010,9 @@ PointPrimitiveCollection.prototype.update = function (frameState) {
       this._rsOpaque = RenderState.fromCache({
         depthTest: {
           enabled: true,
-          func: WebGLConstants.LEQUAL,
+          func: WebGLConstants.LEQUAL
         },
-        depthMask: true,
+        depthMask: true
       });
     } else {
       this._rsOpaque = undefined;
@@ -1026,10 +1025,10 @@ PointPrimitiveCollection.prototype.update = function (frameState) {
       this._rsTranslucent = RenderState.fromCache({
         depthTest: {
           enabled: true,
-          func: WebGLConstants.LEQUAL,
+          func: WebGLConstants.LEQUAL
         },
         depthMask: false,
-        blending: BlendingState.ALPHA_BLEND,
+        blending: BlendingState.ALPHA_BLEND
       });
     } else {
       this._rsTranslucent = undefined;
@@ -1053,76 +1052,78 @@ PointPrimitiveCollection.prototype.update = function (frameState) {
       this._compiledShaderDisableDepthDistance
   ) {
     vs = new ShaderSource({
-      sources: [PointPrimitiveCollectionVS],
+      sources: [PointPrimitiveCollectionVS]
     });
     if (this._shaderScaleByDistance) {
-      vs.defines.push("EYE_DISTANCE_SCALING");
+      vs.defines.push('EYE_DISTANCE_SCALING');
     }
     if (this._shaderTranslucencyByDistance) {
-      vs.defines.push("EYE_DISTANCE_TRANSLUCENCY");
+      vs.defines.push('EYE_DISTANCE_TRANSLUCENCY');
     }
     if (this._shaderDistanceDisplayCondition) {
-      vs.defines.push("DISTANCE_DISPLAY_CONDITION");
+      vs.defines.push('DISTANCE_DISPLAY_CONDITION');
     }
     if (this._shaderDisableDepthDistance) {
-      vs.defines.push("DISABLE_DEPTH_DISTANCE");
+      vs.defines.push('DISABLE_DEPTH_DISTANCE');
     }
 
     if (this._blendOption === BlendOption.OPAQUE_AND_TRANSLUCENT) {
       fs = new ShaderSource({
-        defines: ["OPAQUE"],
-        sources: [PointPrimitiveCollectionFS],
+        defines: ['OPAQUE'],
+        sources: [PointPrimitiveCollectionFS]
       });
       this._sp = ShaderProgram.replaceCache({
         context: context,
         shaderProgram: this._sp,
         vertexShaderSource: vs,
         fragmentShaderSource: fs,
-        attributeLocations: attributeLocations,
+        attributeLocations: attributeLocations
       });
 
       fs = new ShaderSource({
-        defines: ["TRANSLUCENT"],
-        sources: [PointPrimitiveCollectionFS],
+        defines: ['TRANSLUCENT'],
+        sources: [PointPrimitiveCollectionFS]
       });
       this._spTranslucent = ShaderProgram.replaceCache({
         context: context,
         shaderProgram: this._spTranslucent,
         vertexShaderSource: vs,
         fragmentShaderSource: fs,
-        attributeLocations: attributeLocations,
+        attributeLocations: attributeLocations
       });
     }
 
     if (this._blendOption === BlendOption.OPAQUE) {
       fs = new ShaderSource({
-        sources: [PointPrimitiveCollectionFS],
+        sources: [PointPrimitiveCollectionFS]
       });
       this._sp = ShaderProgram.replaceCache({
         context: context,
         shaderProgram: this._sp,
         vertexShaderSource: vs,
         fragmentShaderSource: fs,
-        attributeLocations: attributeLocations,
+        attributeLocations: attributeLocations
       });
     }
 
     if (this._blendOption === BlendOption.TRANSLUCENT) {
       fs = new ShaderSource({
-        sources: [PointPrimitiveCollectionFS],
+        sources: [PointPrimitiveCollectionFS]
       });
       this._spTranslucent = ShaderProgram.replaceCache({
         context: context,
         shaderProgram: this._spTranslucent,
         vertexShaderSource: vs,
         fragmentShaderSource: fs,
-        attributeLocations: attributeLocations,
+        attributeLocations: attributeLocations
       });
     }
 
     this._compiledShaderScaleByDistance = this._shaderScaleByDistance;
-    this._compiledShaderTranslucencyByDistance = this._shaderTranslucencyByDistance;
-    this._compiledShaderDistanceDisplayCondition = this._shaderDistanceDisplayCondition;
+    this._compiledShaderTranslucencyByDistance =
+      this._shaderTranslucencyByDistance;
+    this._compiledShaderDistanceDisplayCondition =
+      this._shaderDistanceDisplayCondition;
     this._compiledShaderDisableDepthDistance = this._shaderDisableDepthDistance;
   }
 
@@ -1168,7 +1169,7 @@ PointPrimitiveCollection.prototype.update = function (frameState) {
         ? this._rsOpaque
         : this._rsTranslucent;
       command.debugShowBoundingVolume = this.debugShowBoundingVolume;
-      command.pickId = "v_pickColor";
+      command.pickId = 'v_pickColor';
 
       commandList.push(command);
     }

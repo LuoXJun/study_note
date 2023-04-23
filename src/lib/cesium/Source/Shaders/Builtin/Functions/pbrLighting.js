@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "vec3 lambertianDiffuse(vec3 diffuseColor)\n\
+export default 'vec3 lambertianDiffuse(vec3 diffuseColor)\n\
 {\n\
     return diffuseColor / czm_pi;\n\
 }\n\
@@ -98,4 +98,4 @@ vec3 czm_pbrLighting(\n\
     // Lo = (diffuse + specular) * Li * NdotL\n\
     return (diffuseContribution + specularContribution) * NdotL * lightColorHdr;\n\
 }\n\
-";
+';

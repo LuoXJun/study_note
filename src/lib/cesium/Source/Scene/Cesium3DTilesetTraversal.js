@@ -1,8 +1,8 @@
-import defined from "../Core/defined.js";
-import Intersect from "../Core/Intersect.js";
-import ManagedArray from "../Core/ManagedArray.js";
-import Cesium3DTileOptimizationHint from "./Cesium3DTileOptimizationHint.js";
-import Cesium3DTileRefine from "./Cesium3DTileRefine.js";
+import defined from '../Core/defined.js';
+import Intersect from '../Core/Intersect.js';
+import ManagedArray from '../Core/ManagedArray.js';
+import Cesium3DTileOptimizationHint from './Cesium3DTileOptimizationHint.js';
+import Cesium3DTileRefine from './Cesium3DTileRefine.js';
 
 /**
  * @private
@@ -15,24 +15,24 @@ function isVisible(tile) {
 
 const traversal = {
   stack: new ManagedArray(),
-  stackMaximumLength: 0,
+  stackMaximumLength: 0
 };
 
 const emptyTraversal = {
   stack: new ManagedArray(),
-  stackMaximumLength: 0,
+  stackMaximumLength: 0
 };
 
 const descendantTraversal = {
   stack: new ManagedArray(),
-  stackMaximumLength: 0,
+  stackMaximumLength: 0
 };
 
 const selectionTraversal = {
   stack: new ManagedArray(),
   stackMaximumLength: 0,
   ancestorStack: new ManagedArray(),
-  ancestorStackMaximumLength: 0,
+  ancestorStackMaximumLength: 0
 };
 
 const descendantSelectionDepth = 2;

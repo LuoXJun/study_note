@@ -1,8 +1,8 @@
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Event from "../Core/Event.js";
-import GeographicTilingScheme from "../Core/GeographicTilingScheme.js";
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Event from '../Core/Event.js';
+import GeographicTilingScheme from '../Core/GeographicTilingScheme.js';
 
 /**
  * @typedef {Object} TileCoordinatesImageryProvider.ConstructorOptions
@@ -137,7 +137,7 @@ Object.defineProperties(TileCoordinatesImageryProvider.prototype, {
   proxy: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -150,7 +150,7 @@ Object.defineProperties(TileCoordinatesImageryProvider.prototype, {
   tileWidth: {
     get: function () {
       return this._tileWidth;
-    },
+    }
   },
 
   /**
@@ -163,7 +163,7 @@ Object.defineProperties(TileCoordinatesImageryProvider.prototype, {
   tileHeight: {
     get: function () {
       return this._tileHeight;
-    },
+    }
   },
 
   /**
@@ -176,7 +176,7 @@ Object.defineProperties(TileCoordinatesImageryProvider.prototype, {
   maximumLevel: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -189,7 +189,7 @@ Object.defineProperties(TileCoordinatesImageryProvider.prototype, {
   minimumLevel: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -202,7 +202,7 @@ Object.defineProperties(TileCoordinatesImageryProvider.prototype, {
   tilingScheme: {
     get: function () {
       return this._tilingScheme;
-    },
+    }
   },
 
   /**
@@ -215,7 +215,7 @@ Object.defineProperties(TileCoordinatesImageryProvider.prototype, {
   rectangle: {
     get: function () {
       return this._tilingScheme.rectangle;
-    },
+    }
   },
 
   /**
@@ -230,7 +230,7 @@ Object.defineProperties(TileCoordinatesImageryProvider.prototype, {
   tileDiscardPolicy: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -244,7 +244,7 @@ Object.defineProperties(TileCoordinatesImageryProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._errorEvent;
-    },
+    }
   },
 
   /**
@@ -256,7 +256,7 @@ Object.defineProperties(TileCoordinatesImageryProvider.prototype, {
   ready: {
     get: function () {
       return true;
-    },
+    }
   },
 
   /**
@@ -268,7 +268,7 @@ Object.defineProperties(TileCoordinatesImageryProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   /**
@@ -281,7 +281,7 @@ Object.defineProperties(TileCoordinatesImageryProvider.prototype, {
   credit: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -297,8 +297,8 @@ Object.defineProperties(TileCoordinatesImageryProvider.prototype, {
   hasAlphaChannel: {
     get: function () {
       return true;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -335,10 +335,10 @@ TileCoordinatesImageryProvider.prototype.requestImage = function (
   level,
   request
 ) {
-  const canvas = document.createElement("canvas");
+  const canvas = document.createElement('canvas');
   canvas.width = 256;
   canvas.height = 256;
-  const context = canvas.getContext("2d");
+  const context = canvas.getContext('2d');
 
   const cssColor = this._color.toCssColorString();
 
@@ -346,8 +346,8 @@ TileCoordinatesImageryProvider.prototype.requestImage = function (
   context.lineWidth = 2;
   context.strokeRect(1, 1, 255, 255);
 
-  context.font = "bold 25px Arial";
-  context.textAlign = "center";
+  context.font = 'bold 25px Arial';
+  context.textAlign = 'center';
   context.fillStyle = cssColor;
   context.fillText(`L: ${level}`, 124, 86);
   context.fillText(`X: ${x}`, 124, 136);

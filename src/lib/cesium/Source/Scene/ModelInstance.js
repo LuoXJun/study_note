@@ -1,4 +1,4 @@
-import Matrix4 from "../Core/Matrix4.js";
+import Matrix4 from '../Core/Matrix4.js';
 
 /**
  * @private
@@ -13,12 +13,12 @@ Object.defineProperties(ModelInstance.prototype, {
   instanceId: {
     get: function () {
       return this._instanceId;
-    },
+    }
   },
   model: {
     get: function () {
       return this.primitive._model;
-    },
+    }
   },
   modelMatrix: {
     get: function () {
@@ -28,7 +28,7 @@ Object.defineProperties(ModelInstance.prototype, {
       Matrix4.clone(value, this._modelMatrix);
       this.primitive.expandBoundingSphere(this._modelMatrix);
       this.primitive._dirty = true;
-    },
-  },
+    }
+  }
 });
 export default ModelInstance;

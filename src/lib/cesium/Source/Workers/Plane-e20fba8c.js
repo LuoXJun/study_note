@@ -1,5 +1,12 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultValue-94c3e563', './ComponentDatatype-4a60b8d6'], (function (exports, Matrix2, RuntimeError, defaultValue, ComponentDatatype) { 'use strict';
+define([
+  'exports',
+  './Matrix2-fc7e9822',
+  './RuntimeError-c581ca93',
+  './defaultValue-94c3e563',
+  './ComponentDatatype-4a60b8d6'
+], function (exports, Matrix2, RuntimeError, defaultValue, ComponentDatatype) {
+  'use strict';
 
   /**
    * A plane in Hessian Normal Form defined by
@@ -28,7 +35,7 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    */
   function Plane(normal, distance) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("normal", normal);
+    RuntimeError.Check.typeOf.object('normal', normal);
     if (
       !ComponentDatatype.CesiumMath.equalsEpsilon(
         Matrix2.Cartesian3.magnitude(normal),
@@ -36,9 +43,9 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
         ComponentDatatype.CesiumMath.EPSILON6
       )
     ) {
-      throw new RuntimeError.DeveloperError("normal must be normalized.");
+      throw new RuntimeError.DeveloperError('normal must be normalized.');
     }
-    RuntimeError.Check.typeOf.number("distance", distance);
+    RuntimeError.Check.typeOf.number('distance', distance);
     //>>includeEnd('debug');
 
     /**
@@ -77,8 +84,8 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    */
   Plane.fromPointNormal = function (point, normal, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("point", point);
-    RuntimeError.Check.typeOf.object("normal", normal);
+    RuntimeError.Check.typeOf.object('point', point);
+    RuntimeError.Check.typeOf.object('normal', normal);
     if (
       !ComponentDatatype.CesiumMath.equalsEpsilon(
         Matrix2.Cartesian3.magnitude(normal),
@@ -86,7 +93,7 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
         ComponentDatatype.CesiumMath.EPSILON6
       )
     ) {
-      throw new RuntimeError.DeveloperError("normal must be normalized.");
+      throw new RuntimeError.DeveloperError('normal must be normalized.');
     }
     //>>includeEnd('debug');
 
@@ -113,10 +120,13 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    */
   Plane.fromCartesian4 = function (coefficients, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("coefficients", coefficients);
+    RuntimeError.Check.typeOf.object('coefficients', coefficients);
     //>>includeEnd('debug');
 
-    const normal = Matrix2.Cartesian3.fromCartesian4(coefficients, scratchNormal);
+    const normal = Matrix2.Cartesian3.fromCartesian4(
+      coefficients,
+      scratchNormal
+    );
     const distance = coefficients.w;
 
     //>>includeStart('debug', pragmas.debug);
@@ -127,7 +137,7 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
         ComponentDatatype.CesiumMath.EPSILON6
       )
     ) {
-      throw new RuntimeError.DeveloperError("normal must be normalized.");
+      throw new RuntimeError.DeveloperError('normal must be normalized.');
     }
     //>>includeEnd('debug');
 
@@ -152,8 +162,8 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    */
   Plane.getPointDistance = function (plane, point) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("plane", plane);
-    RuntimeError.Check.typeOf.object("point", point);
+    RuntimeError.Check.typeOf.object('plane', plane);
+    RuntimeError.Check.typeOf.object('point', point);
     //>>includeEnd('debug');
 
     return Matrix2.Cartesian3.dot(plane.normal, point) + plane.distance;
@@ -169,8 +179,8 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    */
   Plane.projectPointOntoPlane = function (plane, point, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("plane", plane);
-    RuntimeError.Check.typeOf.object("point", point);
+    RuntimeError.Check.typeOf.object('plane', plane);
+    RuntimeError.Check.typeOf.object('point', point);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -201,8 +211,8 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    */
   Plane.transform = function (plane, transform, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("plane", plane);
-    RuntimeError.Check.typeOf.object("transform", transform);
+    RuntimeError.Check.typeOf.object('plane', plane);
+    RuntimeError.Check.typeOf.object('transform', transform);
     //>>includeEnd('debug');
 
     const normal = plane.normal;
@@ -248,7 +258,7 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    */
   Plane.clone = function (plane, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("plane", plane);
+    RuntimeError.Check.typeOf.object('plane', plane);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -271,8 +281,8 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    */
   Plane.equals = function (left, right) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("left", left);
-    RuntimeError.Check.typeOf.object("right", right);
+    RuntimeError.Check.typeOf.object('left', left);
+    RuntimeError.Check.typeOf.object('right', right);
     //>>includeEnd('debug');
 
     return (
@@ -287,7 +297,9 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    * @type {Plane}
    * @constant
    */
-  Plane.ORIGIN_XY_PLANE = Object.freeze(new Plane(Matrix2.Cartesian3.UNIT_Z, 0.0));
+  Plane.ORIGIN_XY_PLANE = Object.freeze(
+    new Plane(Matrix2.Cartesian3.UNIT_Z, 0.0)
+  );
 
   /**
    * A constant initialized to the YZ plane passing through the origin, with normal in positive X.
@@ -295,7 +307,9 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    * @type {Plane}
    * @constant
    */
-  Plane.ORIGIN_YZ_PLANE = Object.freeze(new Plane(Matrix2.Cartesian3.UNIT_X, 0.0));
+  Plane.ORIGIN_YZ_PLANE = Object.freeze(
+    new Plane(Matrix2.Cartesian3.UNIT_X, 0.0)
+  );
 
   /**
    * A constant initialized to the ZX plane passing through the origin, with normal in positive Y.
@@ -303,8 +317,9 @@ define(['exports', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultVa
    * @type {Plane}
    * @constant
    */
-  Plane.ORIGIN_ZX_PLANE = Object.freeze(new Plane(Matrix2.Cartesian3.UNIT_Y, 0.0));
+  Plane.ORIGIN_ZX_PLANE = Object.freeze(
+    new Plane(Matrix2.Cartesian3.UNIT_Y, 0.0)
+  );
 
   exports.Plane = Plane;
-
-}));
+});

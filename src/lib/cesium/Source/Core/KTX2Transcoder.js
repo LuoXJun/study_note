@@ -1,7 +1,7 @@
-import Check from "./Check.js";
-import CompressedTextureBuffer from "./CompressedTextureBuffer.js";
-import defined from "./defined.js";
-import TaskProcessor from "./TaskProcessor.js";
+import Check from './Check.js';
+import CompressedTextureBuffer from './CompressedTextureBuffer.js';
+import defined from './defined.js';
+import TaskProcessor from './TaskProcessor.js';
 
 /**
  * Transcodes KTX2 textures using web workers.
@@ -11,7 +11,7 @@ import TaskProcessor from "./TaskProcessor.js";
 function KTX2Transcoder() {}
 
 KTX2Transcoder._transcodeTaskProcessor = new TaskProcessor(
-  "transcodeKTX2",
+  'transcodeKTX2',
   Number.POSITIVE_INFINITY // KTX2 transcoding is used in place of Resource.fetchImage, so it can't reject as "just soooo busy right now"
 );
 
@@ -20,8 +20,8 @@ KTX2Transcoder._readyPromise = undefined;
 function makeReadyPromise() {
   const readyPromise = KTX2Transcoder._transcodeTaskProcessor
     .initWebAssemblyModule({
-      modulePath: "ThirdParty/Workers/basis_transcoder.js",
-      wasmBinaryFile: "ThirdParty/basis_transcoder.wasm",
+      modulePath: 'ThirdParty/Workers/basis_transcoder.js',
+      wasmBinaryFile: 'ThirdParty/basis_transcoder.wasm'
     })
     .then(function () {
       return KTX2Transcoder._transcodeTaskProcessor;
@@ -31,7 +31,7 @@ function makeReadyPromise() {
 
 KTX2Transcoder.transcode = function (ktx2Buffer, supportedTargetFormats) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("supportedTargetFormats", supportedTargetFormats);
+  Check.defined('supportedTargetFormats', supportedTargetFormats);
   //>>includeEnd('debug');
 
   if (!defined(KTX2Transcoder._readyPromise)) {
@@ -45,13 +45,13 @@ KTX2Transcoder.transcode = function (ktx2Buffer, supportedTargetFormats) {
         const view = new Uint8Array(ktx2Buffer);
         parameters = {
           supportedTargetFormats: supportedTargetFormats,
-          ktx2Buffer: view,
+          ktx2Buffer: view
         };
         return taskProcessor.scheduleTask(parameters, [ktx2Buffer]);
       }
       parameters = {
         supportedTargetFormats: supportedTargetFormats,
-        ktx2Buffer: ktx2Buffer,
+        ktx2Buffer: ktx2Buffer
       };
       return taskProcessor.scheduleTask(parameters, [ktx2Buffer.buffer]);
     })

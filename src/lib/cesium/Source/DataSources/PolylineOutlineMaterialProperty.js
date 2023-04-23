@@ -1,9 +1,9 @@
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Event from "../Core/Event.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
-import Property from "./Property.js";
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Event from '../Core/Event.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
+import Property from './Property.js';
 
 const defaultColor = Color.WHITE;
 const defaultOutlineColor = Color.BLACK;
@@ -51,7 +51,7 @@ Object.defineProperties(PolylineOutlineMaterialProperty.prototype, {
         Property.isConstant(this._outlineColor) &&
         Property.isConstant(this._outlineWidth)
       );
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -65,7 +65,7 @@ Object.defineProperties(PolylineOutlineMaterialProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   /**
    * Gets or sets the Property specifying the {@link Color} of the line.
@@ -73,7 +73,7 @@ Object.defineProperties(PolylineOutlineMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default Color.WHITE
    */
-  color: createPropertyDescriptor("color"),
+  color: createPropertyDescriptor('color'),
 
   /**
    * Gets or sets the Property specifying the {@link Color} of the outline.
@@ -81,7 +81,7 @@ Object.defineProperties(PolylineOutlineMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default Color.BLACK
    */
-  outlineColor: createPropertyDescriptor("outlineColor"),
+  outlineColor: createPropertyDescriptor('outlineColor'),
 
   /**
    * Gets or sets the numeric Property specifying the width of the outline.
@@ -89,7 +89,7 @@ Object.defineProperties(PolylineOutlineMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default 1.0
    */
-  outlineWidth: createPropertyDescriptor("outlineWidth"),
+  outlineWidth: createPropertyDescriptor('outlineWidth')
 });
 
 /**
@@ -99,7 +99,7 @@ Object.defineProperties(PolylineOutlineMaterialProperty.prototype, {
  * @returns {String} The type of material.
  */
 PolylineOutlineMaterialProperty.prototype.getType = function (time) {
-  return "PolylineOutline";
+  return 'PolylineOutline';
 };
 
 /**

@@ -1,21 +1,21 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Cartographic from "../Core/Cartographic.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import EncodedCartesian3 from "../Core/EncodedCartesian3.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
-import OrthographicFrustum from "../Core/OrthographicFrustum.js";
-import Simon1994PlanetaryPositions from "../Core/Simon1994PlanetaryPositions.js";
-import Transforms from "../Core/Transforms.js";
-import SceneMode from "../Scene/SceneMode.js";
-import SunLight from "../Scene/SunLight.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Cartographic from '../Core/Cartographic.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import EncodedCartesian3 from '../Core/EncodedCartesian3.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
+import OrthographicFrustum from '../Core/OrthographicFrustum.js';
+import Simon1994PlanetaryPositions from '../Core/Simon1994PlanetaryPositions.js';
+import Transforms from '../Core/Transforms.js';
+import SceneMode from '../Scene/SceneMode.js';
+import SunLight from '../Scene/SunLight.js';
 
 /**
  * @private
@@ -176,7 +176,7 @@ Object.defineProperties(UniformState.prototype, {
   frameState: {
     get: function () {
       return this._frameState;
-    },
+    }
   },
   /**
    * @memberof UniformState.prototype
@@ -199,7 +199,7 @@ Object.defineProperties(UniformState.prototype, {
 
         this._viewportDirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -209,21 +209,21 @@ Object.defineProperties(UniformState.prototype, {
   viewportCartesian4: {
     get: function () {
       return this._viewportCartesian4;
-    },
+    }
   },
 
   viewportOrthographic: {
     get: function () {
       cleanViewport(this);
       return this._viewportOrthographicMatrix;
-    },
+    }
   },
 
   viewportTransformation: {
     get: function () {
       cleanViewport(this);
       return this._viewportTransformation;
-    },
+    }
   },
 
   /**
@@ -254,7 +254,7 @@ Object.defineProperties(UniformState.prototype, {
       this._normal3DDirty = true;
       this._inverseNormal3DDirty = true;
       this._encodedCameraPositionMCDirty = true;
-    },
+    }
   },
 
   /**
@@ -270,7 +270,7 @@ Object.defineProperties(UniformState.prototype, {
       }
 
       return this._inverseModel;
-    },
+    }
   },
 
   /**
@@ -288,7 +288,7 @@ Object.defineProperties(UniformState.prototype, {
       }
 
       return m;
-    },
+    }
   },
 
   /**
@@ -298,7 +298,7 @@ Object.defineProperties(UniformState.prototype, {
   view: {
     get: function () {
       return this._view;
-    },
+    }
   },
 
   /**
@@ -312,7 +312,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       updateView3D(this);
       return this._view3D;
-    },
+    }
   },
 
   /**
@@ -324,7 +324,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       updateView3D(this);
       return this._viewRotation;
-    },
+    }
   },
 
   /**
@@ -335,7 +335,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       updateView3D(this);
       return this._viewRotation3D;
-    },
+    }
   },
 
   /**
@@ -345,7 +345,7 @@ Object.defineProperties(UniformState.prototype, {
   inverseView: {
     get: function () {
       return this._inverseView;
-    },
+    }
   },
 
   /**
@@ -359,7 +359,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       updateInverseView3D(this);
       return this._inverseView3D;
-    },
+    }
   },
 
   /**
@@ -369,7 +369,7 @@ Object.defineProperties(UniformState.prototype, {
   inverseViewRotation: {
     get: function () {
       return this._inverseViewRotation;
-    },
+    }
   },
 
   /**
@@ -381,7 +381,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       updateInverseView3D(this);
       return this._inverseViewRotation3D;
-    },
+    }
   },
 
   /**
@@ -391,7 +391,7 @@ Object.defineProperties(UniformState.prototype, {
   projection: {
     get: function () {
       return this._projection;
-    },
+    }
   },
 
   /**
@@ -402,7 +402,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanInverseProjection(this);
       return this._inverseProjection;
-    },
+    }
   },
 
   /**
@@ -412,7 +412,7 @@ Object.defineProperties(UniformState.prototype, {
   infiniteProjection: {
     get: function () {
       return this._infiniteProjection;
-    },
+    }
   },
 
   /**
@@ -423,7 +423,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanModelView(this);
       return this._modelView;
-    },
+    }
   },
 
   /**
@@ -436,7 +436,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanModelView3D(this);
       return this._modelView3D;
-    },
+    }
   },
 
   /**
@@ -449,7 +449,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanModelViewRelativeToEye(this);
       return this._modelViewRelativeToEye;
-    },
+    }
   },
 
   /**
@@ -460,7 +460,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanInverseModelView(this);
       return this._inverseModelView;
-    },
+    }
   },
 
   /**
@@ -473,7 +473,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanInverseModelView3D(this);
       return this._inverseModelView3D;
-    },
+    }
   },
 
   /**
@@ -484,7 +484,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanViewProjection(this);
       return this._viewProjection;
-    },
+    }
   },
 
   /**
@@ -495,7 +495,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanInverseViewProjection(this);
       return this._inverseViewProjection;
-    },
+    }
   },
 
   /**
@@ -506,7 +506,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanModelViewProjection(this);
       return this._modelViewProjection;
-    },
+    }
   },
 
   /**
@@ -517,7 +517,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanInverseModelViewProjection(this);
       return this._inverseModelViewProjection;
-    },
+    }
   },
 
   /**
@@ -530,7 +530,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanModelViewProjectionRelativeToEye(this);
       return this._modelViewProjectionRelativeToEye;
-    },
+    }
   },
 
   /**
@@ -541,7 +541,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanModelViewInfiniteProjection(this);
       return this._modelViewInfiniteProjection;
-    },
+    }
   },
 
   /**
@@ -554,7 +554,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanNormal(this);
       return this._normal;
-    },
+    }
   },
 
   /**
@@ -569,7 +569,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanNormal3D(this);
       return this._normal3D;
-    },
+    }
   },
 
   /**
@@ -582,7 +582,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanInverseNormal(this);
       return this._inverseNormal;
-    },
+    }
   },
 
   /**
@@ -597,7 +597,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanInverseNormal3D(this);
       return this._inverseNormal3D;
-    },
+    }
   },
 
   /**
@@ -609,7 +609,7 @@ Object.defineProperties(UniformState.prototype, {
   entireFrustum: {
     get: function () {
       return this._entireFrustum;
-    },
+    }
   },
 
   /**
@@ -621,7 +621,7 @@ Object.defineProperties(UniformState.prototype, {
   currentFrustum: {
     get: function () {
       return this._currentFrustum;
-    },
+    }
   },
 
   /**
@@ -633,7 +633,7 @@ Object.defineProperties(UniformState.prototype, {
   frustumPlanes: {
     get: function () {
       return this._frustumPlanes;
-    },
+    }
   },
 
   /**
@@ -645,7 +645,7 @@ Object.defineProperties(UniformState.prototype, {
   farDepthFromNearPlusOne: {
     get: function () {
       return this._farDepthFromNearPlusOne;
-    },
+    }
   },
 
   /**
@@ -657,7 +657,7 @@ Object.defineProperties(UniformState.prototype, {
   log2FarDepthFromNearPlusOne: {
     get: function () {
       return this._log2FarDepthFromNearPlusOne;
-    },
+    }
   },
 
   /**
@@ -669,7 +669,7 @@ Object.defineProperties(UniformState.prototype, {
   oneOverLog2FarDepthFromNearPlusOne: {
     get: function () {
       return this._oneOverLog2FarDepthFromNearPlusOne;
-    },
+    }
   },
 
   /**
@@ -680,7 +680,7 @@ Object.defineProperties(UniformState.prototype, {
   eyeHeight: {
     get: function () {
       return this._eyeHeight;
-    },
+    }
   },
 
   /**
@@ -693,7 +693,7 @@ Object.defineProperties(UniformState.prototype, {
   eyeHeight2D: {
     get: function () {
       return this._eyeHeight2D;
-    },
+    }
   },
 
   /**
@@ -704,7 +704,7 @@ Object.defineProperties(UniformState.prototype, {
   sunPositionWC: {
     get: function () {
       return this._sunPositionWC;
-    },
+    }
   },
 
   /**
@@ -715,7 +715,7 @@ Object.defineProperties(UniformState.prototype, {
   sunPositionColumbusView: {
     get: function () {
       return this._sunPositionColumbusView;
-    },
+    }
   },
 
   /**
@@ -727,7 +727,7 @@ Object.defineProperties(UniformState.prototype, {
   sunDirectionWC: {
     get: function () {
       return this._sunDirectionWC;
-    },
+    }
   },
 
   /**
@@ -740,7 +740,7 @@ Object.defineProperties(UniformState.prototype, {
   sunDirectionEC: {
     get: function () {
       return this._sunDirectionEC;
-    },
+    }
   },
 
   /**
@@ -753,7 +753,7 @@ Object.defineProperties(UniformState.prototype, {
   moonDirectionEC: {
     get: function () {
       return this._moonDirectionEC;
-    },
+    }
   },
 
   /**
@@ -765,7 +765,7 @@ Object.defineProperties(UniformState.prototype, {
   lightDirectionWC: {
     get: function () {
       return this._lightDirectionWC;
-    },
+    }
   },
 
   /**
@@ -778,7 +778,7 @@ Object.defineProperties(UniformState.prototype, {
   lightDirectionEC: {
     get: function () {
       return this._lightDirectionEC;
-    },
+    }
   },
 
   /**
@@ -791,7 +791,7 @@ Object.defineProperties(UniformState.prototype, {
   lightColor: {
     get: function () {
       return this._lightColor;
-    },
+    }
   },
 
   /**
@@ -803,7 +803,7 @@ Object.defineProperties(UniformState.prototype, {
   lightColorHdr: {
     get: function () {
       return this._lightColorHdr;
-    },
+    }
   },
 
   /**
@@ -815,7 +815,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanEncodedCameraPositionMC(this);
       return this._encodedCameraPositionMC.high;
-    },
+    }
   },
 
   /**
@@ -827,7 +827,7 @@ Object.defineProperties(UniformState.prototype, {
     get: function () {
       cleanEncodedCameraPositionMC(this);
       return this._encodedCameraPositionMC.low;
-    },
+    }
   },
 
   /**
@@ -839,7 +839,7 @@ Object.defineProperties(UniformState.prototype, {
   temeToPseudoFixedMatrix: {
     get: function () {
       return this._temeToPseudoFixed;
-    },
+    }
   },
 
   /**
@@ -851,7 +851,7 @@ Object.defineProperties(UniformState.prototype, {
   pixelRatio: {
     get: function () {
       return this._pixelRatio;
-    },
+    }
   },
 
   /**
@@ -862,7 +862,7 @@ Object.defineProperties(UniformState.prototype, {
   fogDensity: {
     get: function () {
       return this._fogDensity;
-    },
+    }
   },
 
   /**
@@ -873,7 +873,7 @@ Object.defineProperties(UniformState.prototype, {
   geometricToleranceOverMeter: {
     get: function () {
       return this._geometricToleranceOverMeter;
-    },
+    }
   },
 
   /**
@@ -883,7 +883,7 @@ Object.defineProperties(UniformState.prototype, {
   pass: {
     get: function () {
       return this._pass;
-    },
+    }
   },
 
   /**
@@ -894,7 +894,7 @@ Object.defineProperties(UniformState.prototype, {
   backgroundColor: {
     get: function () {
       return this._backgroundColor;
-    },
+    }
   },
 
   /**
@@ -905,7 +905,7 @@ Object.defineProperties(UniformState.prototype, {
   brdfLut: {
     get: function () {
       return this._brdfLut;
-    },
+    }
   },
 
   /**
@@ -916,7 +916,7 @@ Object.defineProperties(UniformState.prototype, {
   environmentMap: {
     get: function () {
       return this._environmentMap;
-    },
+    }
   },
 
   /**
@@ -927,7 +927,7 @@ Object.defineProperties(UniformState.prototype, {
   sphericalHarmonicCoefficients: {
     get: function () {
       return this._sphericalHarmonicCoefficients;
-    },
+    }
   },
 
   /**
@@ -938,7 +938,7 @@ Object.defineProperties(UniformState.prototype, {
   specularEnvironmentMaps: {
     get: function () {
       return this._specularEnvironmentMaps;
-    },
+    }
   },
 
   /**
@@ -949,7 +949,7 @@ Object.defineProperties(UniformState.prototype, {
   specularEnvironmentMapsDimensions: {
     get: function () {
       return this._specularEnvironmentMapsDimensions;
-    },
+    }
   },
 
   /**
@@ -960,7 +960,7 @@ Object.defineProperties(UniformState.prototype, {
   specularEnvironmentMapsMaximumLOD: {
     get: function () {
       return this._specularEnvironmentMapsMaximumLOD;
-    },
+    }
   },
 
   /**
@@ -971,7 +971,7 @@ Object.defineProperties(UniformState.prototype, {
   splitPosition: {
     get: function () {
       return this._splitPosition;
-    },
+    }
   },
 
   /**
@@ -985,7 +985,7 @@ Object.defineProperties(UniformState.prototype, {
   minimumDisableDepthTestDistance: {
     get: function () {
       return this._minimumDisableDepthTestDistance;
-    },
+    }
   },
 
   /**
@@ -997,7 +997,7 @@ Object.defineProperties(UniformState.prototype, {
   invertClassificationColor: {
     get: function () {
       return this._invertClassificationColor;
-    },
+    }
   },
 
   /**
@@ -1009,7 +1009,7 @@ Object.defineProperties(UniformState.prototype, {
   orthographicIn3D: {
     get: function () {
       return this._orthographicIn3D;
-    },
+    }
   },
 
   /**
@@ -1021,8 +1021,8 @@ Object.defineProperties(UniformState.prototype, {
   ellipsoid: {
     get: function () {
       return defaultValue(this._ellipsoid, Ellipsoid.WGS84);
-    },
-  },
+    }
+  }
 });
 
 function setView(uniformState, matrix) {
@@ -1098,10 +1098,11 @@ function setSunAndMoonDirections(uniformState, frameState) {
     );
   }
 
-  let position = Simon1994PlanetaryPositions.computeSunPositionInEarthInertialFrame(
-    frameState.time,
-    uniformState._sunPositionWC
-  );
+  let position =
+    Simon1994PlanetaryPositions.computeSunPositionInEarthInertialFrame(
+      frameState.time,
+      uniformState._sunPositionWC
+    );
   Matrix3.multiplyByVector(transformMatrix, position, position);
 
   Cartesian3.normalize(position, uniformState._sunDirectionWC);
@@ -1113,10 +1114,11 @@ function setSunAndMoonDirections(uniformState, frameState) {
   );
   Cartesian3.normalize(position, position);
 
-  position = Simon1994PlanetaryPositions.computeMoonPositionInEarthInertialFrame(
-    frameState.time,
-    uniformState._moonDirectionEC
-  );
+  position =
+    Simon1994PlanetaryPositions.computeMoonPositionInEarthInertialFrame(
+      frameState.time,
+      uniformState._moonDirectionEC
+    );
   Matrix3.multiplyByVector(transformMatrix, position, position);
   Matrix3.multiplyByVector(uniformState.viewRotation3D, position, position);
   Cartesian3.normalize(position, position);
@@ -1323,7 +1325,8 @@ UniformState.prototype.update = function (frameState) {
 
   this._minimumDisableDepthTestDistance =
     frameState.minimumDisableDepthTestDistance;
-  this._minimumDisableDepthTestDistance *= this._minimumDisableDepthTestDistance;
+  this._minimumDisableDepthTestDistance *=
+    this._minimumDisableDepthTestDistance;
   if (this._minimumDisableDepthTestDistance === Number.POSITIVE_INFINITY) {
     this._minimumDisableDepthTestDistance = -1.0;
   }

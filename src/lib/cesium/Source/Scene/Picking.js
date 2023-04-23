@@ -1,43 +1,43 @@
-import ApproximateTerrainHeights from "../Core/ApproximateTerrainHeights.js";
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defer from "../Core/defer.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Matrix4 from "../Core/Matrix4.js";
-import OrthographicFrustum from "../Core/OrthographicFrustum.js";
-import OrthographicOffCenterFrustum from "../Core/OrthographicOffCenterFrustum.js";
-import PerspectiveFrustum from "../Core/PerspectiveFrustum.js";
-import PerspectiveOffCenterFrustum from "../Core/PerspectiveOffCenterFrustum.js";
-import Ray from "../Core/Ray.js";
-import ShowGeometryInstanceAttribute from "../Core/ShowGeometryInstanceAttribute.js";
-import Camera from "./Camera.js";
-import Cesium3DTileFeature from "./Cesium3DTileFeature.js";
-import Cesium3DTilePass from "./Cesium3DTilePass.js";
-import Cesium3DTilePassState from "./Cesium3DTilePassState.js";
-import PickDepth from "./PickDepth.js";
-import PrimitiveCollection from "./PrimitiveCollection.js";
-import SceneMode from "./SceneMode.js";
-import SceneTransforms from "./SceneTransforms.js";
-import View from "./View.js";
+import ApproximateTerrainHeights from '../Core/ApproximateTerrainHeights.js';
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defer from '../Core/defer.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Matrix4 from '../Core/Matrix4.js';
+import OrthographicFrustum from '../Core/OrthographicFrustum.js';
+import OrthographicOffCenterFrustum from '../Core/OrthographicOffCenterFrustum.js';
+import PerspectiveFrustum from '../Core/PerspectiveFrustum.js';
+import PerspectiveOffCenterFrustum from '../Core/PerspectiveOffCenterFrustum.js';
+import Ray from '../Core/Ray.js';
+import ShowGeometryInstanceAttribute from '../Core/ShowGeometryInstanceAttribute.js';
+import Camera from './Camera.js';
+import Cesium3DTileFeature from './Cesium3DTileFeature.js';
+import Cesium3DTilePass from './Cesium3DTilePass.js';
+import Cesium3DTilePassState from './Cesium3DTilePassState.js';
+import PickDepth from './PickDepth.js';
+import PrimitiveCollection from './PrimitiveCollection.js';
+import SceneMode from './SceneMode.js';
+import SceneTransforms from './SceneTransforms.js';
+import View from './View.js';
 
 const offscreenDefaultWidth = 0.1;
 
 const mostDetailedPreloadTilesetPassState = new Cesium3DTilePassState({
-  pass: Cesium3DTilePass.MOST_DETAILED_PRELOAD,
+  pass: Cesium3DTilePass.MOST_DETAILED_PRELOAD
 });
 
 const mostDetailedPickTilesetPassState = new Cesium3DTilePassState({
-  pass: Cesium3DTilePass.MOST_DETAILED_PICK,
+  pass: Cesium3DTilePass.MOST_DETAILED_PICK
 });
 
 const pickTilesetPassState = new Cesium3DTilePassState({
-  pass: Cesium3DTilePass.PICK,
+  pass: Cesium3DTilePass.PICK
 });
 
 /**
@@ -54,7 +54,7 @@ function Picking(scene) {
   pickOffscreenCamera.frustum = new OrthographicFrustum({
     width: offscreenDefaultWidth,
     aspectRatio: 1.0,
-    near: 0.1,
+    near: 0.1
   });
 
   this._pickOffscreenView = new View(
@@ -239,7 +239,7 @@ const scratchColorZero = new Color(0.0, 0.0, 0.0, 0.0);
 Picking.prototype.pick = function (scene, windowPosition, width, height) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(windowPosition)) {
-    throw new DeveloperError("windowPosition is undefined.");
+    throw new DeveloperError('windowPosition is undefined.');
   }
   //>>includeEnd('debug');
 
@@ -364,11 +364,11 @@ Picking.prototype.pickPositionWorldCoordinates = function (
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(windowPosition)) {
-    throw new DeveloperError("windowPosition is undefined.");
+    throw new DeveloperError('windowPosition is undefined.');
   }
   if (!scene.context.depthTexture) {
     throw new DeveloperError(
-      "Picking from the depth buffer is not supported. Check pickPositionSupported."
+      'Picking from the depth buffer is not supported. Check pickPositionSupported.'
     );
   }
   //>>includeEnd('debug');
@@ -525,7 +525,7 @@ function drillPick(limit, pickCallback) {
     let hasShowAttribute = false;
 
     // If the picked object has a show attribute, use it.
-    if (typeof primitive.getGeometryInstanceAttributes === "function") {
+    if (typeof primitive.getGeometryInstanceAttributes === 'function') {
       if (defined(object.id)) {
         attributes = primitive.getGeometryInstanceAttributes(object.id);
         if (defined(attributes) && defined(attributes.show)) {
@@ -588,7 +588,7 @@ Picking.prototype.drillPick = function (
       return {
         object: object,
         position: undefined,
-        exclude: false,
+        exclude: false
       };
     }
   };
@@ -806,7 +806,7 @@ function getRayIntersection(
       position: position,
       exclude:
         (!defined(position) && requirePosition) ||
-        isExcluded(object, objectsToExclude),
+        isExcluded(object, objectsToExclude)
     };
   }
 }
@@ -901,10 +901,10 @@ function deferPromiseUntilPostRender(scene, promise) {
 
 Picking.prototype.pickFromRay = function (scene, ray, objectsToExclude, width) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("ray", ray);
+  Check.defined('ray', ray);
   if (scene.mode !== SceneMode.SCENE3D) {
     throw new DeveloperError(
-      "Ray intersections are only supported in 3D mode."
+      'Ray intersections are only supported in 3D mode.'
     );
   }
   //>>includeEnd('debug');
@@ -920,10 +920,10 @@ Picking.prototype.drillPickFromRay = function (
   width
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("ray", ray);
+  Check.defined('ray', ray);
   if (scene.mode !== SceneMode.SCENE3D) {
     throw new DeveloperError(
-      "Ray intersections are only supported in 3D mode."
+      'Ray intersections are only supported in 3D mode.'
     );
   }
   //>>includeEnd('debug');
@@ -947,10 +947,10 @@ Picking.prototype.pickFromRayMostDetailed = function (
   width
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("ray", ray);
+  Check.defined('ray', ray);
   if (scene.mode !== SceneMode.SCENE3D) {
     throw new DeveloperError(
-      "Ray intersections are only supported in 3D mode."
+      'Ray intersections are only supported in 3D mode.'
     );
   }
   //>>includeEnd('debug');
@@ -991,10 +991,10 @@ Picking.prototype.drillPickFromRayMostDetailed = function (
   width
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("ray", ray);
+  Check.defined('ray', ray);
   if (scene.mode !== SceneMode.SCENE3D) {
     throw new DeveloperError(
-      "Ray intersections are only supported in 3D mode."
+      'Ray intersections are only supported in 3D mode.'
     );
   }
   //>>includeEnd('debug');
@@ -1153,13 +1153,13 @@ Picking.prototype.sampleHeight = function (
   width
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("position", position);
+  Check.defined('position', position);
   if (scene.mode !== SceneMode.SCENE3D) {
-    throw new DeveloperError("sampleHeight is only supported in 3D mode.");
+    throw new DeveloperError('sampleHeight is only supported in 3D mode.');
   }
   if (!scene.sampleHeightSupported) {
     throw new DeveloperError(
-      "sampleHeight requires depth texture support. Check sampleHeightSupported."
+      'sampleHeight requires depth texture support. Check sampleHeightSupported.'
     );
   }
   //>>includeEnd('debug');
@@ -1187,13 +1187,13 @@ Picking.prototype.clampToHeight = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("cartesian", cartesian);
+  Check.defined('cartesian', cartesian);
   if (scene.mode !== SceneMode.SCENE3D) {
-    throw new DeveloperError("clampToHeight is only supported in 3D mode.");
+    throw new DeveloperError('clampToHeight is only supported in 3D mode.');
   }
   if (!scene.clampToHeightSupported) {
     throw new DeveloperError(
-      "clampToHeight requires depth texture support. Check clampToHeightSupported."
+      'clampToHeight requires depth texture support. Check clampToHeightSupported.'
     );
   }
   //>>includeEnd('debug');
@@ -1220,15 +1220,15 @@ Picking.prototype.sampleHeightMostDetailed = function (
   width
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("positions", positions);
+  Check.defined('positions', positions);
   if (scene.mode !== SceneMode.SCENE3D) {
     throw new DeveloperError(
-      "sampleHeightMostDetailed is only supported in 3D mode."
+      'sampleHeightMostDetailed is only supported in 3D mode.'
     );
   }
   if (!scene.sampleHeightSupported) {
     throw new DeveloperError(
-      "sampleHeightMostDetailed requires depth texture support. Check sampleHeightSupported."
+      'sampleHeightMostDetailed requires depth texture support. Check sampleHeightSupported.'
     );
   }
   //>>includeEnd('debug');
@@ -1266,15 +1266,15 @@ Picking.prototype.clampToHeightMostDetailed = function (
   width
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("cartesians", cartesians);
+  Check.defined('cartesians', cartesians);
   if (scene.mode !== SceneMode.SCENE3D) {
     throw new DeveloperError(
-      "clampToHeightMostDetailed is only supported in 3D mode."
+      'clampToHeightMostDetailed is only supported in 3D mode.'
     );
   }
   if (!scene.clampToHeightSupported) {
     throw new DeveloperError(
-      "clampToHeightMostDetailed requires depth texture support. Check clampToHeightSupported."
+      'clampToHeightMostDetailed requires depth texture support. Check clampToHeightSupported.'
     );
   }
   //>>includeEnd('debug');

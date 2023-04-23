@@ -1,23 +1,23 @@
-import AttributeCompression from "../Core/AttributeCompression.js";
-import binarySearch from "../Core/binarySearch.js";
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Cartographic from "../Core/Cartographic.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import HeightmapTerrainData from "../Core/HeightmapTerrainData.js";
-import CesiumMath from "../Core/Math.js";
-import OrientedBoundingBox from "../Core/OrientedBoundingBox.js";
-import Queue from "../Core/Queue.js";
-import Rectangle from "../Core/Rectangle.js";
-import TerrainEncoding from "../Core/TerrainEncoding.js";
-import TerrainMesh from "../Core/TerrainMesh.js";
-import TileEdge from "../Core/TileEdge.js";
-import WebMercatorProjection from "../Core/WebMercatorProjection.js";
-import GlobeSurfaceTile from "./GlobeSurfaceTile.js";
-import TileSelectionResult from "./TileSelectionResult.js";
+import AttributeCompression from '../Core/AttributeCompression.js';
+import binarySearch from '../Core/binarySearch.js';
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Cartographic from '../Core/Cartographic.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import HeightmapTerrainData from '../Core/HeightmapTerrainData.js';
+import CesiumMath from '../Core/Math.js';
+import OrientedBoundingBox from '../Core/OrientedBoundingBox.js';
+import Queue from '../Core/Queue.js';
+import Rectangle from '../Core/Rectangle.js';
+import TerrainEncoding from '../Core/TerrainEncoding.js';
+import TerrainMesh from '../Core/TerrainMesh.js';
+import TileEdge from '../Core/TileEdge.js';
+import WebMercatorProjection from '../Core/WebMercatorProjection.js';
+import GlobeSurfaceTile from './GlobeSurfaceTile.js';
+import TileSelectionResult from './TileSelectionResult.js';
 
 function TerrainFillMesh(tile) {
   this.tile = tile;
@@ -459,7 +459,7 @@ function visitRenderedTiles(
       );
       break;
     default:
-      throw new DeveloperError("Invalid edge");
+      throw new DeveloperError('Invalid edge');
   }
 }
 
@@ -800,7 +800,7 @@ function fillMissingCorner(
 
 const heightRangeScratch = {
   minimumHeight: 0.0,
-  maximumHeight: 0.0,
+  maximumHeight: 0.0
 };
 
 const scratchCenter = new Cartesian3();
@@ -809,7 +809,7 @@ const seVertexScratch = new HeightAndNormal();
 const nwVertexScratch = new HeightAndNormal();
 const neVertexScratch = new HeightAndNormal();
 const heightmapBuffer =
-  typeof Uint8Array !== "undefined" ? new Uint8Array(9 * 9) : undefined;
+  typeof Uint8Array !== 'undefined' ? new Uint8Array(9 * 9) : undefined;
 
 const scratchCreateMeshSyncOptions = {
   tilingScheme: undefined,
@@ -817,7 +817,7 @@ const scratchCreateMeshSyncOptions = {
   y: 0,
   level: 0,
   exaggeration: 1.0,
-  exaggerationRelativeHeight: 0.0,
+  exaggerationRelativeHeight: 0.0
 };
 function createFillMesh(tileProvider, frameState, tile, vertexArraysToDestroy) {
   GlobeSurfaceTile.initialize(
@@ -987,8 +987,8 @@ function createFillMesh(tileProvider, frameState, tile, vertexArraysToDestroy) {
       structure: {
         // Use the maximum as the constant height so that this tile's skirt
         // covers any cracks with adjacent tiles.
-        heightOffset: maximumHeight,
-      },
+        heightOffset: maximumHeight
+      }
     });
 
     const createMeshSyncOptions = scratchCreateMeshSyncOptions;
@@ -997,7 +997,8 @@ function createFillMesh(tileProvider, frameState, tile, vertexArraysToDestroy) {
     createMeshSyncOptions.y = tile.y;
     createMeshSyncOptions.level = tile.level;
     createMeshSyncOptions.exaggeration = exaggeration;
-    createMeshSyncOptions.exaggerationRelativeHeight = exaggerationRelativeHeight;
+    createMeshSyncOptions.exaggerationRelativeHeight =
+      exaggerationRelativeHeight;
 
     fill.mesh = terrainData._createMeshSync(createMeshSyncOptions);
   } else {
@@ -1171,9 +1172,8 @@ function createFillMesh(tileProvider, frameState, tile, vertexArraysToDestroy) {
     );
 
     // Add a single vertex at the center of the tile.
-    const southMercatorY = WebMercatorProjection.geodeticLatitudeToMercatorAngle(
-      rectangle.south
-    );
+    const southMercatorY =
+      WebMercatorProjection.geodeticLatitudeToMercatorAngle(rectangle.south);
     const oneOverMercatorHeight =
       1.0 /
       (WebMercatorProjection.geodeticLatitudeToMercatorAngle(rectangle.north) -
@@ -2100,31 +2100,32 @@ function getCornerFromEdge(
       }
 
       // The last vertex is not the one we need, try binary searching for the right one.
-      vertexIndexIndex = binarySearch(edgeVertices, compareU ? u : v, function (
-        vertexIndex,
-        textureCoordinate
-      ) {
-        sourceMesh.encoding.decodeTextureCoordinates(
-          sourceMesh.vertices,
-          vertexIndex,
-          uvScratch
-        );
-        const targetUv = transformTextureCoordinates(
-          sourceTile,
-          terrainFillMesh.tile,
-          uvScratch,
-          uvScratch
-        );
-        if (increasing) {
-          if (compareU) {
-            return targetUv.x - u;
+      vertexIndexIndex = binarySearch(
+        edgeVertices,
+        compareU ? u : v,
+        function (vertexIndex, textureCoordinate) {
+          sourceMesh.encoding.decodeTextureCoordinates(
+            sourceMesh.vertices,
+            vertexIndex,
+            uvScratch
+          );
+          const targetUv = transformTextureCoordinates(
+            sourceTile,
+            terrainFillMesh.tile,
+            uvScratch,
+            uvScratch
+          );
+          if (increasing) {
+            if (compareU) {
+              return targetUv.x - u;
+            }
+            return targetUv.y - v;
+          } else if (compareU) {
+            return u - targetUv.x;
           }
-          return targetUv.y - v;
-        } else if (compareU) {
-          return u - targetUv.x;
+          return v - targetUv.y;
         }
-        return v - targetUv.y;
-      });
+      );
 
       if (vertexIndexIndex < 0) {
         vertexIndexIndex = ~vertexIndexIndex;
@@ -2166,7 +2167,7 @@ const cornerPositionsScratch = [
   new Cartesian3(),
   new Cartesian3(),
   new Cartesian3(),
-  new Cartesian3(),
+  new Cartesian3()
 ];
 
 function computeOccludeePoint(

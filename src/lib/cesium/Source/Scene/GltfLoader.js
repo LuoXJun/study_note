@@ -1,29 +1,29 @@
-import ArticulationStageType from "../Core/ArticulationStageType.js";
-import AttributeType from "./AttributeType.js";
-import Axis from "./Axis.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Check from "../Core/Check.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import Credit from "../Core/Credit.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import FeatureDetection from "../Core/FeatureDetection.js";
-import getAccessorByteStride from "./GltfPipeline/getAccessorByteStride.js";
-import getComponentReader from "./GltfPipeline/getComponentReader.js";
-import GltfLoaderUtil from "./GltfLoaderUtil.js";
-import GltfStructuralMetadataLoader from "./GltfStructuralMetadataLoader.js";
-import InstanceAttributeSemantic from "./InstanceAttributeSemantic.js";
-import InterpolationType from "../Core/InterpolationType.js";
-import Matrix4 from "../Core/Matrix4.js";
-import ModelComponents from "./ModelComponents.js";
-import numberOfComponentsForType from "./GltfPipeline/numberOfComponentsForType.js";
-import Quaternion from "../Core/Quaternion.js";
-import ResourceCache from "./ResourceCache.js";
-import ResourceLoader from "./ResourceLoader.js";
-import Sampler from "../Renderer/Sampler.js";
-import SupportedImageFormats from "./SupportedImageFormats.js";
-import VertexAttributeSemantic from "./VertexAttributeSemantic.js";
+import ArticulationStageType from '../Core/ArticulationStageType.js';
+import AttributeType from './AttributeType.js';
+import Axis from './Axis.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Check from '../Core/Check.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import Credit from '../Core/Credit.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import FeatureDetection from '../Core/FeatureDetection.js';
+import getAccessorByteStride from './GltfPipeline/getAccessorByteStride.js';
+import getComponentReader from './GltfPipeline/getComponentReader.js';
+import GltfLoaderUtil from './GltfLoaderUtil.js';
+import GltfStructuralMetadataLoader from './GltfStructuralMetadataLoader.js';
+import InstanceAttributeSemantic from './InstanceAttributeSemantic.js';
+import InterpolationType from '../Core/InterpolationType.js';
+import Matrix4 from '../Core/Matrix4.js';
+import ModelComponents from './ModelComponents.js';
+import numberOfComponentsForType from './GltfPipeline/numberOfComponentsForType.js';
+import Quaternion from '../Core/Quaternion.js';
+import ResourceCache from './ResourceCache.js';
+import ResourceLoader from './ResourceLoader.js';
+import Sampler from '../Renderer/Sampler.js';
+import SupportedImageFormats from './SupportedImageFormats.js';
+import VertexAttributeSemantic from './VertexAttributeSemantic.js';
 
 const Attribute = ModelComponents.Attribute;
 const Indices = ModelComponents.Indices;
@@ -56,7 +56,7 @@ const GltfLoaderState = {
   PROCESSING: 3,
   PROCESSED: 4,
   READY: 4,
-  FAILED: 5,
+  FAILED: 5
 };
 
 /**
@@ -113,7 +113,7 @@ export default function GltfLoader(options) {
   );
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.gltfResource", gltfResource);
+  Check.typeOf.object('options.gltfResource', gltfResource);
   //>>includeEnd('debug');
 
   baseResource = defined(baseResource) ? baseResource : gltfResource.clone();
@@ -176,7 +176,7 @@ Object.defineProperties(GltfLoader.prototype, {
   promise: {
     get: function () {
       return this._promise;
-    },
+    }
   },
   /**
    * The cache key of the resource.
@@ -190,7 +190,7 @@ Object.defineProperties(GltfLoader.prototype, {
   cacheKey: {
     get: function () {
       return undefined;
-    },
+    }
   },
   /**
    * The loaded components.
@@ -204,7 +204,7 @@ Object.defineProperties(GltfLoader.prototype, {
   components: {
     get: function () {
       return this._components;
-    },
+    }
   },
 
   /**
@@ -221,8 +221,8 @@ Object.defineProperties(GltfLoader.prototype, {
   texturesLoadedPromise: {
     get: function () {
       return this._texturesLoadedPromise;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -235,7 +235,7 @@ GltfLoader.prototype.load = function () {
     gltfResource: this._gltfResource,
     baseResource: this._baseResource,
     typedArray: this._typedArray,
-    gltfJson: this._gltfJson,
+    gltfJson: this._gltfJson
   });
 
   this._gltfJsonLoader = gltfJsonLoader;
@@ -260,7 +260,7 @@ GltfLoader.prototype.load = function () {
 
           const supportedImageFormats = new SupportedImageFormats({
             webp: FeatureDetection.supportsWebP(),
-            basis: frameState.context.supportsBasis,
+            basis: frameState.context.supportsBasis
           });
 
           let gltf;
@@ -360,7 +360,7 @@ GltfLoader.prototype.load = function () {
 
 function handleError(gltfLoader, error) {
   gltfLoader.unload();
-  const errorMessage = "Failed to load glTF";
+  const errorMessage = 'Failed to load glTF';
   error = gltfLoader.getError(errorMessage, error);
   return Promise.reject(error);
 }
@@ -392,7 +392,7 @@ function processLoaders(loader, frameState) {
  */
 GltfLoader.prototype.process = function (frameState) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("frameState", frameState);
+  Check.typeOf.object('frameState', frameState);
   //>>includeEnd('debug');
 
   this._process(this, frameState);
@@ -424,7 +424,7 @@ function loadVertexBuffer(
     asynchronous: loader._asynchronous,
     dequantize: dequantize,
     loadBuffer: loadBuffer,
-    loadTypedArray: loadTypedArray,
+    loadTypedArray: loadTypedArray
   });
 
   loader._geometryLoaders.push(vertexBufferLoader);
@@ -450,7 +450,7 @@ function loadIndexBuffer(loader, gltf, accessorId, draco, frameState) {
     draco: draco,
     asynchronous: loader._asynchronous,
     loadBuffer: loadBuffer,
-    loadTypedArray: loadTypedArray,
+    loadTypedArray: loadTypedArray
   });
 
   loader._geometryLoaders.push(indexBufferLoader);
@@ -463,7 +463,7 @@ function loadBufferView(loader, gltf, bufferViewId) {
     gltf: gltf,
     bufferViewId: bufferViewId,
     gltfResource: loader._gltfResource,
-    baseResource: loader._baseResource,
+    baseResource: loader._baseResource
   });
 
   loader._bufferViewLoaders.push(bufferViewLoader);
@@ -543,9 +543,8 @@ function loadAccessorValues(accessor, packedTypedArray, values, useQuaternion) {
     }
   } else {
     const MathType = AttributeType.getMathType(accessorType);
-    const numberOfComponents = AttributeType.getNumberOfComponents(
-      accessorType
-    );
+    const numberOfComponents =
+      AttributeType.getNumberOfComponents(accessorType);
 
     for (let i = 0; i < accessorCount; i++) {
       values[i] = MathType.unpack(packedTypedArray, i * numberOfComponents);
@@ -642,7 +641,7 @@ function getSetIndex(gltfSemantic) {
 const scratchSemanticInfo = {
   gltfSemantic: undefined,
   renamedSemantic: undefined,
-  modelSemantic: undefined,
+  modelSemantic: undefined
 };
 
 function getSemanticInfo(loader, semanticType, gltfSemantic) {
@@ -651,9 +650,9 @@ function getSemanticInfo(loader, semanticType, gltfSemantic) {
   let renamedSemantic = gltfSemantic;
   if (
     loader._renameBatchIdSemantic &&
-    (gltfSemantic === "_BATCHID" || gltfSemantic === "BATCHID")
+    (gltfSemantic === '_BATCHID' || gltfSemantic === 'BATCHID')
   ) {
-    renamedSemantic = "_FEATURE_ID_0";
+    renamedSemantic = '_FEATURE_ID_0';
   }
 
   const modelSemantic = semanticType.fromGltfSemantic(renamedSemantic);
@@ -884,7 +883,7 @@ function loadTexture(
   const imageId = GltfLoaderUtil.getImageIdFromTexture({
     gltf: gltf,
     textureId: textureInfo.index,
-    supportedImageFormats: supportedImageFormats,
+    supportedImageFormats: supportedImageFormats
   });
 
   if (!defined(imageId)) {
@@ -897,13 +896,13 @@ function loadTexture(
     gltfResource: loader._gltfResource,
     baseResource: loader._baseResource,
     supportedImageFormats: supportedImageFormats,
-    asynchronous: loader._asynchronous,
+    asynchronous: loader._asynchronous
   });
 
   loader._textureLoaders.push(textureLoader);
 
   const textureReader = GltfLoaderUtil.createModelTextureReader({
-    textureInfo: textureInfo,
+    textureInfo: textureInfo
   });
 
   const promise = textureLoader.promise.then(function (textureLoader) {
@@ -1123,9 +1122,9 @@ function loadFeatureIdTexture(
   // is more useful for generating shader code.
   const channelString = textureInfo.channels
     .map(function (channelIndex) {
-      return "rgba".charAt(channelIndex);
+      return 'rgba'.charAt(channelIndex);
     })
-    .join("");
+    .join('');
   featureIdTexture.textureReader.channels = channelString;
 
   return featureIdTexture;
@@ -1338,9 +1337,8 @@ function loadPrimitiveFeaturesLegacy(
     for (let i = 0; i < featureIdAttributesLength; ++i) {
       const featureIdAttribute = featureIdAttributes[i];
       const featureTableId = featureIdAttribute.featureTable;
-      const propertyTableId = loader._sortedPropertyTableIds.indexOf(
-        featureTableId
-      );
+      const propertyTableId =
+        loader._sortedPropertyTableIds.indexOf(featureTableId);
       const featureCount = featureTables[featureTableId].count;
       const label = `featureId_${nextFeatureIdIndex}`;
       nextFeatureIdIndex++;
@@ -1372,9 +1370,8 @@ function loadPrimitiveFeaturesLegacy(
     for (let i = 0; i < featureIdTexturesLength; ++i) {
       const featureIdTexture = featureIdTextures[i];
       const featureTableId = featureIdTexture.featureTable;
-      const propertyTableId = loader._sortedPropertyTableIds.indexOf(
-        featureTableId
-      );
+      const propertyTableId =
+        loader._sortedPropertyTableIds.indexOf(featureTableId);
       const featureCount = featureTables[featureTableId].count;
       const featureIdLabel = `featureId_${nextFeatureIdIndex}`;
       nextFeatureIdIndex++;
@@ -1713,7 +1710,7 @@ function loadStructuralMetadata(
     gltfResource: loader._gltfResource,
     baseResource: loader._baseResource,
     supportedImageFormats: supportedImageFormats,
-    asynchronous: loader._asynchronous,
+    asynchronous: loader._asynchronous
   });
   structuralMetadataLoader.load();
 
@@ -1930,7 +1927,7 @@ function parse(
   const asset = new Asset();
   const copyright = gltf.asset.copyright;
   if (defined(copyright)) {
-    const credits = copyright.split(";").map(function (string) {
+    const credits = copyright.split(';').map(function (string) {
       return new Credit(string.trim());
     });
     asset.credits = credits;

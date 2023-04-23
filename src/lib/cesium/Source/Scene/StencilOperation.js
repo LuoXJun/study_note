@@ -1,4 +1,4 @@
-import WebGLConstants from "../Core/WebGLConstants.js";
+import WebGLConstants from '../Core/WebGLConstants.js';
 
 /**
  * Determines the action taken based on the result of the stencil test.
@@ -68,6 +68,6 @@ const StencilOperation = {
    * @type {Number}
    * @constant
    */
-  DECREMENT_WRAP: WebGLConstants.DECR_WRAP,
+  DECREMENT_WRAP: WebGLConstants.DECR_WRAP
 };
 export default Object.freeze(StencilOperation);

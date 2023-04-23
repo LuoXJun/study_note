@@ -1,4 +1,4 @@
-import CesiumMath from "./Math.js";
+import CesiumMath from './Math.js';
 
 /**
  * Resizes an image to ensure both width and height are powers of 2.
@@ -11,10 +11,10 @@ import CesiumMath from "./Math.js";
  * @private
  */
 function resizeImageToNextPowerOfTwo(image) {
-  const canvas = document.createElement("canvas");
+  const canvas = document.createElement('canvas');
   canvas.width = CesiumMath.nextPowerOfTwo(image.width);
   canvas.height = CesiumMath.nextPowerOfTwo(image.height);
-  const canvasContext = canvas.getContext("2d");
+  const canvasContext = canvas.getContext('2d');
   canvasContext.drawImage(
     image,
     0,

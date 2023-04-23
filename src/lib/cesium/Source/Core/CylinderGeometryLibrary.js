@@ -1,4 +1,4 @@
-import CesiumMath from "./Math.js";
+import CesiumMath from './Math.js';
 
 /**
  * @private

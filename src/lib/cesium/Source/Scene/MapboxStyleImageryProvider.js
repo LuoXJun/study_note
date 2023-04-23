@@ -1,9 +1,9 @@
-import Credit from "../Core/Credit.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Resource from "../Core/Resource.js";
-import UrlTemplateImageryProvider from "./UrlTemplateImageryProvider.js";
+import Credit from '../Core/Credit.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Resource from '../Core/Resource.js';
+import UrlTemplateImageryProvider from './UrlTemplateImageryProvider.js';
 
 const trailingSlashRegex = /\/$/;
 const defaultCredit = new Credit(
@@ -53,14 +53,14 @@ function MapboxStyleImageryProvider(options) {
   const styleId = options.styleId;
   //>>includeStart('debug', pragmas.debug);
   if (!defined(styleId)) {
-    throw new DeveloperError("options.styleId is required.");
+    throw new DeveloperError('options.styleId is required.');
   }
   //>>includeEnd('debug');
 
   const accessToken = options.accessToken;
   //>>includeStart('debug', pragmas.debug);
   if (!defined(accessToken)) {
-    throw new DeveloperError("options.accessToken is required.");
+    throw new DeveloperError('options.accessToken is required.');
   }
   //>>includeEnd('debug');
 
@@ -151,7 +151,7 @@ function MapboxStyleImageryProvider(options) {
   this.defaultMagnificationFilter = undefined;
 
   const resource = Resource.createIfNeeded(
-    defaultValue(options.url, "https://api.mapbox.com/styles/v1/")
+    defaultValue(options.url, 'https://api.mapbox.com/styles/v1/')
   );
 
   this._styleId = styleId;
@@ -160,26 +160,26 @@ function MapboxStyleImageryProvider(options) {
   const tilesize = defaultValue(options.tilesize, 512);
   this._tilesize = tilesize;
 
-  const username = defaultValue(options.username, "mapbox");
+  const username = defaultValue(options.username, 'mapbox');
   this._username = username;
 
-  const scaleFactor = defined(options.scaleFactor) ? "@2x" : "";
+  const scaleFactor = defined(options.scaleFactor) ? '@2x' : '';
 
   let templateUrl = resource.getUrlComponent();
   if (!trailingSlashRegex.test(templateUrl)) {
-    templateUrl += "/";
+    templateUrl += '/';
   }
   templateUrl += `${this._username}/${styleId}/tiles/${this._tilesize}/{z}/{x}/{y}${scaleFactor}`;
   resource.url = templateUrl;
 
   resource.setQueryParameters({
-    access_token: accessToken,
+    access_token: accessToken
   });
 
   let credit;
   if (defined(options.credit)) {
     credit = options.credit;
-    if (typeof credit === "string") {
+    if (typeof credit === 'string') {
       credit = new Credit(credit);
     }
   } else {
@@ -193,7 +193,7 @@ function MapboxStyleImageryProvider(options) {
     ellipsoid: options.ellipsoid,
     minimumLevel: options.minimumLevel,
     maximumLevel: options.maximumLevel,
-    rectangle: options.rectangle,
+    rectangle: options.rectangle
   });
 }
 
@@ -207,7 +207,7 @@ Object.defineProperties(MapboxStyleImageryProvider.prototype, {
   url: {
     get: function () {
       return this._imageryProvider.url;
-    },
+    }
   },
 
   /**
@@ -219,7 +219,7 @@ Object.defineProperties(MapboxStyleImageryProvider.prototype, {
   ready: {
     get: function () {
       return this._imageryProvider.ready;
-    },
+    }
   },
 
   /**
@@ -231,7 +231,7 @@ Object.defineProperties(MapboxStyleImageryProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._imageryProvider.readyPromise;
-    },
+    }
   },
 
   /**
@@ -244,7 +244,7 @@ Object.defineProperties(MapboxStyleImageryProvider.prototype, {
   rectangle: {
     get: function () {
       return this._imageryProvider.rectangle;
-    },
+    }
   },
 
   /**
@@ -257,7 +257,7 @@ Object.defineProperties(MapboxStyleImageryProvider.prototype, {
   tileWidth: {
     get: function () {
       return this._imageryProvider.tileWidth;
-    },
+    }
   },
 
   /**
@@ -270,7 +270,7 @@ Object.defineProperties(MapboxStyleImageryProvider.prototype, {
   tileHeight: {
     get: function () {
       return this._imageryProvider.tileHeight;
-    },
+    }
   },
 
   /**
@@ -283,7 +283,7 @@ Object.defineProperties(MapboxStyleImageryProvider.prototype, {
   maximumLevel: {
     get: function () {
       return this._imageryProvider.maximumLevel;
-    },
+    }
   },
 
   /**
@@ -300,7 +300,7 @@ Object.defineProperties(MapboxStyleImageryProvider.prototype, {
   minimumLevel: {
     get: function () {
       return this._imageryProvider.minimumLevel;
-    },
+    }
   },
 
   /**
@@ -313,7 +313,7 @@ Object.defineProperties(MapboxStyleImageryProvider.prototype, {
   tilingScheme: {
     get: function () {
       return this._imageryProvider.tilingScheme;
-    },
+    }
   },
 
   /**
@@ -328,7 +328,7 @@ Object.defineProperties(MapboxStyleImageryProvider.prototype, {
   tileDiscardPolicy: {
     get: function () {
       return this._imageryProvider.tileDiscardPolicy;
-    },
+    }
   },
 
   /**
@@ -342,7 +342,7 @@ Object.defineProperties(MapboxStyleImageryProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._imageryProvider.errorEvent;
-    },
+    }
   },
 
   /**
@@ -356,7 +356,7 @@ Object.defineProperties(MapboxStyleImageryProvider.prototype, {
   credit: {
     get: function () {
       return this._imageryProvider.credit;
-    },
+    }
   },
 
   /**
@@ -368,7 +368,7 @@ Object.defineProperties(MapboxStyleImageryProvider.prototype, {
   proxy: {
     get: function () {
       return this._imageryProvider.proxy;
-    },
+    }
   },
 
   /**
@@ -384,8 +384,8 @@ Object.defineProperties(MapboxStyleImageryProvider.prototype, {
   hasAlphaChannel: {
     get: function () {
       return this._imageryProvider.hasAlphaChannel;
-    },
-  },
+    }
+  }
 });
 
 /**

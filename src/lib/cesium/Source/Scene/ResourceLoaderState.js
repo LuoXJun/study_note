@@ -43,6 +43,6 @@ const ResourceLoaderState = {
    * @constant
    * @private
    */
-  FAILED: 4,
+  FAILED: 4
 };
 export default Object.freeze(ResourceLoaderState);

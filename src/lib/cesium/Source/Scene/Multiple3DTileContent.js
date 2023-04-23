@@ -1,17 +1,17 @@
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Request from "../Core/Request.js";
-import RequestScheduler from "../Core/RequestScheduler.js";
-import RequestState from "../Core/RequestState.js";
-import RequestType from "../Core/RequestType.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import Cesium3DContentGroup from "./Cesium3DContentGroup.js";
-import Cesium3DTileContentType from "./Cesium3DTileContentType.js";
-import Cesium3DTileContentFactory from "./Cesium3DTileContentFactory.js";
-import findContentMetadata from "./findContentMetadata.js";
-import findGroupMetadata from "./findGroupMetadata.js";
-import preprocess3DTileContent from "./preprocess3DTileContent.js";
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Request from '../Core/Request.js';
+import RequestScheduler from '../Core/RequestScheduler.js';
+import RequestState from '../Core/RequestState.js';
+import RequestType from '../Core/RequestType.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import Cesium3DContentGroup from './Cesium3DContentGroup.js';
+import Cesium3DTileContentType from './Cesium3DTileContentType.js';
+import Cesium3DTileContentFactory from './Cesium3DTileContentFactory.js';
+import findContentMetadata from './findContentMetadata.js';
+import findGroupMetadata from './findGroupMetadata.js';
+import preprocess3DTileContent from './preprocess3DTileContent.js';
 
 /**
  * A collection of contents for tiles that have multiple contents, either via the tile JSON (3D Tiles 1.1) or the <code>3DTILES_multiple_contents</code> extension.
@@ -64,7 +64,7 @@ export default function Multiple3DTileContent(
 
   for (let i = 0; i < contentCount; i++) {
     const contentResource = tilesetResource.getDerivedResource({
-      url: contentHeaders[i].uri,
+      url: contentHeaders[i].uri
     });
 
     const serverKey = RequestScheduler.getServerKey(
@@ -106,7 +106,7 @@ Object.defineProperties(Multiple3DTileContent.prototype, {
       for (let i = 0; i < length; ++i) {
         contents[i].featurePropertiesDirty = value;
       }
-    },
+    }
   },
 
   /**
@@ -118,7 +118,7 @@ Object.defineProperties(Multiple3DTileContent.prototype, {
   featuresLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   /**
@@ -130,7 +130,7 @@ Object.defineProperties(Multiple3DTileContent.prototype, {
   pointsLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   /**
@@ -142,7 +142,7 @@ Object.defineProperties(Multiple3DTileContent.prototype, {
   trianglesLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   /**
@@ -154,7 +154,7 @@ Object.defineProperties(Multiple3DTileContent.prototype, {
   geometryByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   /**
@@ -166,7 +166,7 @@ Object.defineProperties(Multiple3DTileContent.prototype, {
   texturesByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   /**
@@ -178,13 +178,13 @@ Object.defineProperties(Multiple3DTileContent.prototype, {
   batchTableByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   innerContents: {
     get: function () {
       return this._contents;
-    },
+    }
   },
 
   readyPromise: {
@@ -197,19 +197,19 @@ Object.defineProperties(Multiple3DTileContent.prototype, {
       return Promise.all(readyPromises).then(function () {
         return that;
       });
-    },
+    }
   },
 
   tileset: {
     get: function () {
       return this._tileset;
-    },
+    }
   },
 
   tile: {
     get: function () {
       return this._tile;
-    },
+    }
   },
 
   /**
@@ -225,7 +225,7 @@ Object.defineProperties(Multiple3DTileContent.prototype, {
   url: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -240,9 +240,9 @@ Object.defineProperties(Multiple3DTileContent.prototype, {
     },
     set: function () {
       //>>includeStart('debug', pragmas.debug);
-      throw new DeveloperError("Multiple3DTileContent cannot have metadata");
+      throw new DeveloperError('Multiple3DTileContent cannot have metadata');
       //>>includeEnd('debug');
-    },
+    }
   },
 
   /**
@@ -254,7 +254,7 @@ Object.defineProperties(Multiple3DTileContent.prototype, {
   batchTable: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -270,10 +270,10 @@ Object.defineProperties(Multiple3DTileContent.prototype, {
     set: function () {
       //>>includeStart('debug', pragmas.debug);
       throw new DeveloperError(
-        "Multiple3DTileContent cannot have group metadata"
+        'Multiple3DTileContent cannot have group metadata'
       );
       //>>includeEnd('debug');
-    },
+    }
   },
 
   /**
@@ -291,7 +291,7 @@ Object.defineProperties(Multiple3DTileContent.prototype, {
       return this._innerContentHeaders.map(function (contentHeader) {
         return contentHeader.uri;
       });
-    },
+    }
   },
 
   /**
@@ -306,13 +306,14 @@ Object.defineProperties(Multiple3DTileContent.prototype, {
   contentsFetchedPromise: {
     get: function () {
       return this._contentsFetchedPromise;
-    },
-  },
+    }
+  }
 });
 
 function updatePendingRequests(multipleContents, deltaRequestCount) {
   multipleContents._requestsInFlight += deltaRequestCount;
-  multipleContents.tileset.statistics.numberOfPendingRequests += deltaRequestCount;
+  multipleContents.tileset.statistics.numberOfPendingRequests +=
+    deltaRequestCount;
 }
 
 function cancelPendingRequests(multipleContents, originalContentState) {
@@ -406,9 +407,8 @@ function requestInnerContent(
 ) {
   // it is important to clone here. The fetchArrayBuffer() below here uses
   // throttling, but other uses of the resources do not.
-  const contentResource = multipleContents._innerContentResources[
-    index
-  ].clone();
+  const contentResource =
+    multipleContents._innerContentResources[index].clone();
   const tile = multipleContents.tile;
 
   // Always create a new request. If the tile gets canceled, this
@@ -422,7 +422,7 @@ function requestInnerContent(
     throttleByServer: true,
     type: RequestType.TILES3D,
     priorityFunction: priorityFunction,
-    serverKey: serverKey,
+    serverKey: serverKey
   });
   contentResource.request = request;
   multipleContents._requests[index] = request;
@@ -482,7 +482,7 @@ function createInnerContent(multipleContents, arrayBuffer, index) {
 
   if (preprocessed.contentType === Cesium3DTileContentType.EXTERNAL_TILESET) {
     const error = new RuntimeError(
-      "External tilesets are disallowed inside multiple contents"
+      'External tilesets are disallowed inside multiple contents'
     );
 
     return handleInnerContentFailed(multipleContents, index, error);
@@ -525,7 +525,7 @@ function createInnerContent(multipleContents, arrayBuffer, index) {
   const groupMetadata = findGroupMetadata(tileset, contentHeader);
   if (defined(groupMetadata)) {
     content.group = new Cesium3DContentGroup({
-      metadata: groupMetadata,
+      metadata: groupMetadata
     });
   }
   return content;
@@ -538,7 +538,7 @@ function handleInnerContentFailed(multipleContents, index, error) {
   if (tileset.tileFailed.numberOfListeners > 0) {
     tileset.tileFailed.raiseEvent({
       url: url,
-      message: message,
+      message: message
     });
   } else {
     console.log(`A content failed to load: ${url}`);

@@ -1,18 +1,18 @@
-import Credit from "./Credit.js";
-import defaultValue from "./defaultValue.js";
-import defer from "./defer.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Event from "./Event.js";
-import GeographicTilingScheme from "./GeographicTilingScheme.js";
-import getImagePixels from "./getImagePixels.js";
-import HeightmapTerrainData from "./HeightmapTerrainData.js";
-import CesiumMath from "./Math.js";
-import Rectangle from "./Rectangle.js";
-import Resource from "./Resource.js";
-import TerrainProvider from "./TerrainProvider.js";
-import TileProviderError from "./TileProviderError.js";
+import Credit from './Credit.js';
+import defaultValue from './defaultValue.js';
+import defer from './defer.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import Event from './Event.js';
+import GeographicTilingScheme from './GeographicTilingScheme.js';
+import getImagePixels from './getImagePixels.js';
+import HeightmapTerrainData from './HeightmapTerrainData.js';
+import CesiumMath from './Math.js';
+import Rectangle from './Rectangle.js';
+import Resource from './Resource.js';
+import TerrainProvider from './TerrainProvider.js';
+import TileProviderError from './TileProviderError.js';
 
 function DataRectangle(rectangle, maxLevel) {
   this.rectangle = rectangle;
@@ -45,7 +45,7 @@ function VRTheWorldTerrainProvider(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.url)) {
-    throw new DeveloperError("options.url is required.");
+    throw new DeveloperError('options.url is required.');
   }
   //>>includeEnd('debug');
 
@@ -65,11 +65,11 @@ function VRTheWorldTerrainProvider(options) {
     elementMultiplier: 256.0,
     isBigEndian: true,
     lowestEncodedHeight: 0,
-    highestEncodedHeight: 256 * 256 * 256 - 1,
+    highestEncodedHeight: 256 * 256 * 256 - 1
   };
 
   let credit = options.credit;
-  if (typeof credit === "string") {
+  if (typeof credit === 'string') {
     credit = new Credit(credit);
   }
   this._credit = credit;
@@ -82,41 +82,42 @@ function VRTheWorldTerrainProvider(options) {
   const ellipsoid = defaultValue(options.ellipsoid, Ellipsoid.WGS84);
 
   function metadataSuccess(xml) {
-    const srs = xml.getElementsByTagName("SRS")[0].textContent;
-    if (srs === "EPSG:4326") {
+    const srs = xml.getElementsByTagName('SRS')[0].textContent;
+    if (srs === 'EPSG:4326') {
       that._tilingScheme = new GeographicTilingScheme({ ellipsoid: ellipsoid });
     } else {
       metadataFailure(`SRS ${srs} is not supported.`);
       return;
     }
 
-    const tileFormat = xml.getElementsByTagName("TileFormat")[0];
-    that._heightmapWidth = parseInt(tileFormat.getAttribute("width"), 10);
-    that._heightmapHeight = parseInt(tileFormat.getAttribute("height"), 10);
-    that._levelZeroMaximumGeometricError = TerrainProvider.getEstimatedLevelZeroGeometricErrorForAHeightmap(
-      ellipsoid,
-      Math.min(that._heightmapWidth, that._heightmapHeight),
-      that._tilingScheme.getNumberOfXTilesAtLevel(0)
-    );
+    const tileFormat = xml.getElementsByTagName('TileFormat')[0];
+    that._heightmapWidth = parseInt(tileFormat.getAttribute('width'), 10);
+    that._heightmapHeight = parseInt(tileFormat.getAttribute('height'), 10);
+    that._levelZeroMaximumGeometricError =
+      TerrainProvider.getEstimatedLevelZeroGeometricErrorForAHeightmap(
+        ellipsoid,
+        Math.min(that._heightmapWidth, that._heightmapHeight),
+        that._tilingScheme.getNumberOfXTilesAtLevel(0)
+      );
 
-    const dataRectangles = xml.getElementsByTagName("DataExtent");
+    const dataRectangles = xml.getElementsByTagName('DataExtent');
 
     for (let i = 0; i < dataRectangles.length; ++i) {
       const dataRectangle = dataRectangles[i];
 
       const west = CesiumMath.toRadians(
-        parseFloat(dataRectangle.getAttribute("minx"))
+        parseFloat(dataRectangle.getAttribute('minx'))
       );
       const south = CesiumMath.toRadians(
-        parseFloat(dataRectangle.getAttribute("miny"))
+        parseFloat(dataRectangle.getAttribute('miny'))
       );
       const east = CesiumMath.toRadians(
-        parseFloat(dataRectangle.getAttribute("maxx"))
+        parseFloat(dataRectangle.getAttribute('maxx'))
       );
       const north = CesiumMath.toRadians(
-        parseFloat(dataRectangle.getAttribute("maxy"))
+        parseFloat(dataRectangle.getAttribute('maxy'))
       );
-      const maxLevel = parseInt(dataRectangle.getAttribute("maxlevel"), 10);
+      const maxLevel = parseInt(dataRectangle.getAttribute('maxlevel'), 10);
 
       that._rectangles.push(
         new DataRectangle(new Rectangle(west, south, east, north), maxLevel)
@@ -163,7 +164,7 @@ Object.defineProperties(VRTheWorldTerrainProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._errorEvent;
-    },
+    }
   },
 
   /**
@@ -176,7 +177,7 @@ Object.defineProperties(VRTheWorldTerrainProvider.prototype, {
   credit: {
     get: function () {
       return this._credit;
-    },
+    }
   },
 
   /**
@@ -191,13 +192,13 @@ Object.defineProperties(VRTheWorldTerrainProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this.ready) {
         throw new DeveloperError(
-          "requestTileGeometry must not be called before ready returns true."
+          'requestTileGeometry must not be called before ready returns true.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tilingScheme;
-    },
+    }
   },
 
   /**
@@ -209,7 +210,7 @@ Object.defineProperties(VRTheWorldTerrainProvider.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -221,7 +222,7 @@ Object.defineProperties(VRTheWorldTerrainProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise.promise;
-    },
+    }
   },
 
   /**
@@ -236,7 +237,7 @@ Object.defineProperties(VRTheWorldTerrainProvider.prototype, {
   hasWaterMask: {
     get: function () {
       return false;
-    },
+    }
   },
 
   /**
@@ -249,7 +250,7 @@ Object.defineProperties(VRTheWorldTerrainProvider.prototype, {
   hasVertexNormals: {
     get: function () {
       return false;
-    },
+    }
   },
   /**
    * Gets an object that can be used to determine availability of terrain from this provider, such as
@@ -263,8 +264,8 @@ Object.defineProperties(VRTheWorldTerrainProvider.prototype, {
   availability: {
     get: function () {
       return undefined;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -289,7 +290,7 @@ VRTheWorldTerrainProvider.prototype.requestTileGeometry = function (
   //>>includeStart('debug', pragmas.debug);
   if (!this.ready) {
     throw new DeveloperError(
-      "requestTileGeometry must not be called before ready returns true."
+      'requestTileGeometry must not be called before ready returns true.'
     );
   }
   //>>includeEnd('debug');
@@ -298,12 +299,12 @@ VRTheWorldTerrainProvider.prototype.requestTileGeometry = function (
   const resource = this._resource.getDerivedResource({
     url: `${level}/${x}/${yTiles - y - 1}.tif`,
     queryParameters: {
-      cesium: true,
+      cesium: true
     },
-    request: request,
+    request: request
   });
   const promise = resource.fetchImage({
-    preferImageBitmap: true,
+    preferImageBitmap: true
   });
   if (!defined(promise)) {
     return undefined;
@@ -316,7 +317,7 @@ VRTheWorldTerrainProvider.prototype.requestTileGeometry = function (
       width: that._heightmapWidth,
       height: that._heightmapHeight,
       childTileMask: getChildMask(that, x, y, level),
-      structure: that._terrainDataStructure,
+      structure: that._terrainDataStructure
     });
   });
 };
@@ -333,7 +334,7 @@ VRTheWorldTerrainProvider.prototype.getLevelMaximumGeometricError = function (
   //>>includeStart('debug', pragmas.debug);
   if (!this.ready) {
     throw new DeveloperError(
-      "requestTileGeometry must not be called before ready returns true."
+      'requestTileGeometry must not be called before ready returns true.'
     );
   }
   //>>includeEnd('debug');

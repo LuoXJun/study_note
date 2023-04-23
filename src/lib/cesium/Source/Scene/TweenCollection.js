@@ -1,11 +1,11 @@
-import clone from "../Core/clone.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import EasingFunction from "../Core/EasingFunction.js";
-import getTimestamp from "../Core/getTimestamp.js";
-import TimeConstants from "../Core/TimeConstants.js";
-import TweenJS from "../ThirdParty/Tween.js";
+import clone from '../Core/clone.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import EasingFunction from '../Core/EasingFunction.js';
+import getTimestamp from '../Core/getTimestamp.js';
+import TimeConstants from '../Core/TimeConstants.js';
+import TweenJS from '../ThirdParty/Tween.js';
 
 /**
  * A tween is an animation that interpolates the properties of two objects using an {@link EasingFunction}.  Create
@@ -66,7 +66,7 @@ Object.defineProperties(Tween.prototype, {
   startObject: {
     get: function () {
       return this._startObject;
-    },
+    }
   },
 
   /**
@@ -79,7 +79,7 @@ Object.defineProperties(Tween.prototype, {
   stopObject: {
     get: function () {
       return this._stopObject;
-    },
+    }
   },
 
   /**
@@ -92,7 +92,7 @@ Object.defineProperties(Tween.prototype, {
   duration: {
     get: function () {
       return this._duration;
-    },
+    }
   },
 
   /**
@@ -105,7 +105,7 @@ Object.defineProperties(Tween.prototype, {
   delay: {
     get: function () {
       return this._delay;
-    },
+    }
   },
 
   /**
@@ -118,7 +118,7 @@ Object.defineProperties(Tween.prototype, {
   easingFunction: {
     get: function () {
       return this._easingFunction;
-    },
+    }
   },
 
   /**
@@ -131,7 +131,7 @@ Object.defineProperties(Tween.prototype, {
   update: {
     get: function () {
       return this._update;
-    },
+    }
   },
 
   /**
@@ -144,7 +144,7 @@ Object.defineProperties(Tween.prototype, {
   complete: {
     get: function () {
       return this._complete;
-    },
+    }
   },
 
   /**
@@ -155,8 +155,8 @@ Object.defineProperties(Tween.prototype, {
   tweenjs: {
     get: function () {
       return this._tweenjs;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -190,8 +190,8 @@ Object.defineProperties(TweenCollection.prototype, {
   length: {
     get: function () {
       return this._tweens.length;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -217,13 +217,13 @@ TweenCollection.prototype.add = function (options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.startObject) || !defined(options.stopObject)) {
     throw new DeveloperError(
-      "options.startObject and options.stopObject are required."
+      'options.startObject and options.stopObject are required.'
     );
   }
 
   if (!defined(options.duration) || options.duration < 0.0) {
     throw new DeveloperError(
-      "options.duration is required and must be positive."
+      'options.duration is required and must be positive.'
     );
   }
   //>>includeEnd('debug');
@@ -303,17 +303,17 @@ TweenCollection.prototype.addProperty = function (options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(object) || !defined(options.property)) {
     throw new DeveloperError(
-      "options.object and options.property are required."
+      'options.object and options.property are required.'
     );
   }
   if (!defined(object[property])) {
     throw new DeveloperError(
-      "options.object must have the specified property."
+      'options.object must have the specified property.'
     );
   }
   if (!defined(startValue) || !defined(stopValue)) {
     throw new DeveloperError(
-      "options.startValue and options.stopValue are required."
+      'options.startValue and options.stopValue are required.'
     );
   }
   //>>includeEnd('debug');
@@ -324,10 +324,10 @@ TweenCollection.prototype.addProperty = function (options) {
 
   return this.add({
     startObject: {
-      value: startValue,
+      value: startValue
     },
     stopObject: {
-      value: stopValue,
+      value: stopValue
     },
     duration: defaultValue(options.duration, 3.0),
     delay: options.delay,
@@ -335,7 +335,7 @@ TweenCollection.prototype.addProperty = function (options) {
     update: update,
     complete: options.complete,
     cancel: options.cancel,
-    _repeat: options._repeat,
+    _repeat: options._repeat
   });
 };
 
@@ -365,7 +365,7 @@ TweenCollection.prototype.addAlpha = function (options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(material)) {
-    throw new DeveloperError("options.material is required.");
+    throw new DeveloperError('options.material is required.');
   }
   //>>includeEnd('debug');
 
@@ -384,7 +384,7 @@ TweenCollection.prototype.addAlpha = function (options) {
   //>>includeStart('debug', pragmas.debug);
   if (properties.length === 0) {
     throw new DeveloperError(
-      "material has no properties with alpha components."
+      'material has no properties with alpha components.'
     );
   }
   //>>includeEnd('debug');
@@ -398,17 +398,17 @@ TweenCollection.prototype.addAlpha = function (options) {
 
   return this.add({
     startObject: {
-      alpha: defaultValue(options.startValue, 0.0), // Default to fade in
+      alpha: defaultValue(options.startValue, 0.0) // Default to fade in
     },
     stopObject: {
-      alpha: defaultValue(options.stopValue, 1.0),
+      alpha: defaultValue(options.stopValue, 1.0)
     },
     duration: defaultValue(options.duration, 3.0),
     delay: options.delay,
     easingFunction: options.easingFunction,
     update: update,
     complete: options.complete,
-    cancel: options.cancel,
+    cancel: options.cancel
   });
 };
 
@@ -437,17 +437,17 @@ TweenCollection.prototype.addOffsetIncrement = function (options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(material)) {
-    throw new DeveloperError("material is required.");
+    throw new DeveloperError('material is required.');
   }
   if (!defined(material.uniforms.offset)) {
-    throw new DeveloperError("material.uniforms must have an offset property.");
+    throw new DeveloperError('material.uniforms must have an offset property.');
   }
   //>>includeEnd('debug');
 
   const uniforms = material.uniforms;
   return this.addProperty({
     object: uniforms,
-    property: "offset",
+    property: 'offset',
     startValue: uniforms.offset,
     stopValue: uniforms.offset + 1,
     duration: options.duration,
@@ -455,7 +455,7 @@ TweenCollection.prototype.addOffsetIncrement = function (options) {
     easingFunction: options.easingFunction,
     update: options.update,
     cancel: options.cancel,
-    _repeat: Infinity,
+    _repeat: Infinity
   });
 };
 
@@ -535,7 +535,7 @@ TweenCollection.prototype.contains = function (tween) {
 TweenCollection.prototype.get = function (index) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(index)) {
-    throw new DeveloperError("index is required.");
+    throw new DeveloperError('index is required.');
   }
   //>>includeEnd('debug');
 

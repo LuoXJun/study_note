@@ -1,4 +1,4 @@
-import DeveloperError from "./DeveloperError.js";
+import DeveloperError from './DeveloperError.js';
 
 /**
  * A tiling scheme for geometry or imagery on the surface of an ellipsoid.  At level-of-detail zero,
@@ -16,7 +16,7 @@ import DeveloperError from "./DeveloperError.js";
 function TilingScheme(options) {
   //>>includeStart('debug', pragmas.debug);
   throw new DeveloperError(
-    "This type should not be instantiated directly.  Instead, use WebMercatorTilingScheme or GeographicTilingScheme."
+    'This type should not be instantiated directly.  Instead, use WebMercatorTilingScheme or GeographicTilingScheme.'
   );
   //>>includeEnd('debug');
 }
@@ -28,7 +28,7 @@ Object.defineProperties(TilingScheme.prototype, {
    * @type {Ellipsoid}
    */
   ellipsoid: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -37,7 +37,7 @@ Object.defineProperties(TilingScheme.prototype, {
    * @type {Rectangle}
    */
   rectangle: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
 
   /**
@@ -46,8 +46,8 @@ Object.defineProperties(TilingScheme.prototype, {
    * @type {MapProjection}
    */
   projection: {
-    get: DeveloperError.throwInstantiationError,
-  },
+    get: DeveloperError.throwInstantiationError
+  }
 });
 
 /**

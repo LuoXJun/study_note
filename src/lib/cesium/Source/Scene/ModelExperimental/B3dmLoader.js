@@ -1,28 +1,28 @@
-import Axis from "../Axis.js";
-import B3dmParser from "../B3dmParser.js";
-import Cartesian3 from "../../Core/Cartesian3.js";
-import Cesium3DTileFeatureTable from "../Cesium3DTileFeatureTable.js";
-import Check from "../../Core/Check.js";
-import ComponentDatatype from "../../Core/ComponentDatatype.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import StructuralMetadata from "../StructuralMetadata.js";
-import GltfLoader from "../GltfLoader.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import MetadataClass from "../MetadataClass.js";
-import ModelComponents from "../ModelComponents.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
-import parseBatchTable from "../parseBatchTable.js";
-import PropertyTable from "../PropertyTable.js";
-import ResourceLoader from "../ResourceLoader.js";
-import VertexAttributeSemantic from "../VertexAttributeSemantic.js";
+import Axis from '../Axis.js';
+import B3dmParser from '../B3dmParser.js';
+import Cartesian3 from '../../Core/Cartesian3.js';
+import Cesium3DTileFeatureTable from '../Cesium3DTileFeatureTable.js';
+import Check from '../../Core/Check.js';
+import ComponentDatatype from '../../Core/ComponentDatatype.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import StructuralMetadata from '../StructuralMetadata.js';
+import GltfLoader from '../GltfLoader.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import MetadataClass from '../MetadataClass.js';
+import ModelComponents from '../ModelComponents.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
+import parseBatchTable from '../parseBatchTable.js';
+import PropertyTable from '../PropertyTable.js';
+import ResourceLoader from '../ResourceLoader.js';
+import VertexAttributeSemantic from '../VertexAttributeSemantic.js';
 
 const B3dmLoaderState = {
   UNLOADED: 0,
   LOADING: 1,
   PROCESSING: 2,
   READY: 3,
-  FAILED: 4,
+  FAILED: 4
 };
 
 const FeatureIdAttribute = ModelComponents.FeatureIdAttribute;
@@ -78,8 +78,8 @@ function B3dmLoader(options) {
   );
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.b3dmResource", b3dmResource);
-  Check.typeOf.object("options.arrayBuffer", arrayBuffer);
+  Check.typeOf.object('options.b3dmResource', b3dmResource);
+  Check.typeOf.object('options.arrayBuffer', arrayBuffer);
   //>>includeEnd('debug');
 
   baseResource = defined(baseResource) ? baseResource : b3dmResource.clone();
@@ -131,7 +131,7 @@ Object.defineProperties(B3dmLoader.prototype, {
   promise: {
     get: function () {
       return this._promise;
-    },
+    }
   },
 
   /**
@@ -148,7 +148,7 @@ Object.defineProperties(B3dmLoader.prototype, {
   texturesLoadedPromise: {
     get: function () {
       return this._gltfLoader.texturesLoadedPromise;
-    },
+    }
   },
   /**
    * The cache key of the resource
@@ -162,7 +162,7 @@ Object.defineProperties(B3dmLoader.prototype, {
   cacheKey: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   /**
@@ -177,8 +177,8 @@ Object.defineProperties(B3dmLoader.prototype, {
   components: {
     get: function () {
       return this._components;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -199,12 +199,12 @@ B3dmLoader.prototype.load = function () {
     featureTableJson,
     featureTableBinary
   );
-  batchLength = featureTable.getGlobalProperty("BATCH_LENGTH");
+  batchLength = featureTable.getGlobalProperty('BATCH_LENGTH');
   // Set batch length.
   this._batchLength = batchLength;
   // Set the RTC Center transform, if present.
   const rtcCenter = featureTable.getGlobalProperty(
-    "RTC_CENTER",
+    'RTC_CENTER',
     ComponentDatatype.FLOAT,
     3
   );
@@ -214,7 +214,7 @@ B3dmLoader.prototype.load = function () {
 
   this._batchTable = {
     json: batchTableJson,
-    binary: batchTableBinary,
+    binary: batchTableBinary
   };
 
   const gltfLoader = new GltfLoader({
@@ -228,7 +228,7 @@ B3dmLoader.prototype.load = function () {
     loadAttributesAsTypedArray: this._loadAttributesAsTypedArray,
     loadAttributesFor2D: this._loadAttributesFor2D,
     loadIndicesForWireframe: this._loadIndicesForWireframe,
-    renameBatchIdSemantic: true,
+    renameBatchIdSemantic: true
   });
 
   this._gltfLoader = gltfLoader;
@@ -263,14 +263,14 @@ B3dmLoader.prototype.load = function () {
 function handleError(b3dmLoader, error) {
   b3dmLoader.unload();
   b3dmLoader._state = B3dmLoaderState.FAILED;
-  const errorMessage = "Failed to load b3dm";
+  const errorMessage = 'Failed to load b3dm';
   error = b3dmLoader.getError(errorMessage, error);
   return Promise.reject(error);
 }
 
 B3dmLoader.prototype.process = function (frameState) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("frameState", frameState);
+  Check.typeOf.object('frameState', frameState);
   //>>includeEnd('debug');
 
   if (this._state === B3dmLoaderState.LOADING) {
@@ -296,17 +296,17 @@ function createStructuralMetadata(loader, components) {
     structuralMetadata = parseBatchTable({
       count: batchLength,
       batchTable: batchTable.json,
-      binaryBody: batchTable.binary,
+      binaryBody: batchTable.binary
     });
   } else {
     // If batch table is not defined, create a property table without any properties.
     const emptyPropertyTable = new PropertyTable({
       name: MetadataClass.BATCH_TABLE_CLASS_NAME,
-      count: batchLength,
+      count: batchLength
     });
     structuralMetadata = new StructuralMetadata({
       schema: {},
-      propertyTables: [emptyPropertyTable],
+      propertyTables: [emptyPropertyTable]
     });
   }
 
@@ -329,16 +329,17 @@ function processNode(node) {
   const primitivesLength = node.primitives.length;
   for (let i = 0; i < primitivesLength; i++) {
     const primitive = node.primitives[i];
-    const featureIdVertexAttribute = ModelExperimentalUtility.getAttributeBySemantic(
-      primitive,
-      VertexAttributeSemantic.FEATURE_ID
-    );
+    const featureIdVertexAttribute =
+      ModelExperimentalUtility.getAttributeBySemantic(
+        primitive,
+        VertexAttributeSemantic.FEATURE_ID
+      );
     if (defined(featureIdVertexAttribute)) {
       featureIdVertexAttribute.setIndex = 0;
       const featureIdAttribute = new FeatureIdAttribute();
       featureIdAttribute.propertyTableId = 0;
       featureIdAttribute.setIndex = 0;
-      featureIdAttribute.positionalLabel = "featureId_0";
+      featureIdAttribute.positionalLabel = 'featureId_0';
       primitive.featureIds.push(featureIdAttribute);
     }
   }

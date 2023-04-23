@@ -1,18 +1,18 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import getJsonFromTypedArray from "../Core/getJsonFromTypedArray.js";
-import getMagic from "../Core/getMagic.js";
-import isDataUri from "../Core/isDataUri.js";
-import Resource from "../Core/Resource.js";
-import addDefaults from "./GltfPipeline/addDefaults.js";
-import addPipelineExtras from "./GltfPipeline/addPipelineExtras.js";
-import ForEach from "./GltfPipeline/ForEach.js";
-import parseGlb from "./GltfPipeline/parseGlb.js";
-import removePipelineExtras from "./GltfPipeline/removePipelineExtras.js";
-import updateVersion from "./GltfPipeline/updateVersion.js";
-import ResourceLoader from "./ResourceLoader.js";
-import ResourceLoaderState from "./ResourceLoaderState.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import getJsonFromTypedArray from '../Core/getJsonFromTypedArray.js';
+import getMagic from '../Core/getMagic.js';
+import isDataUri from '../Core/isDataUri.js';
+import Resource from '../Core/Resource.js';
+import addDefaults from './GltfPipeline/addDefaults.js';
+import addPipelineExtras from './GltfPipeline/addPipelineExtras.js';
+import ForEach from './GltfPipeline/ForEach.js';
+import parseGlb from './GltfPipeline/parseGlb.js';
+import removePipelineExtras from './GltfPipeline/removePipelineExtras.js';
+import updateVersion from './GltfPipeline/updateVersion.js';
+import ResourceLoader from './ResourceLoader.js';
+import ResourceLoaderState from './ResourceLoaderState.js';
 
 /**
  * Loads a glTF JSON from a glTF or glb.
@@ -44,9 +44,9 @@ export default function GltfJsonLoader(options) {
   const cacheKey = options.cacheKey;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.func("options.resourceCache", resourceCache);
-  Check.typeOf.object("options.gltfResource", gltfResource);
-  Check.typeOf.object("options.baseResource", baseResource);
+  Check.typeOf.func('options.resourceCache', resourceCache);
+  Check.typeOf.object('options.gltfResource', gltfResource);
+  Check.typeOf.object('options.baseResource', baseResource);
   //>>includeEnd('debug');
 
   this._resourceCache = resourceCache;
@@ -79,7 +79,7 @@ Object.defineProperties(GltfJsonLoader.prototype, {
   promise: {
     get: function () {
       return this._promise;
-    },
+    }
   },
   /**
    * The cache key of the resource.
@@ -93,7 +93,7 @@ Object.defineProperties(GltfJsonLoader.prototype, {
   cacheKey: {
     get: function () {
       return this._cacheKey;
-    },
+    }
   },
   /**
    * The glTF JSON.
@@ -107,8 +107,8 @@ Object.defineProperties(GltfJsonLoader.prototype, {
   gltf: {
     get: function () {
       return this._gltf;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -166,7 +166,7 @@ function handleError(gltfJsonLoader, error) {
 }
 
 function upgradeVersion(gltfJsonLoader, gltf) {
-  if (gltf.asset.version === "2.0") {
+  if (gltf.asset.version === '2.0') {
     return Promise.resolve();
   }
 
@@ -179,11 +179,11 @@ function upgradeVersion(gltfJsonLoader, gltf) {
       defined(buffer.uri)
     ) {
       const resource = gltfJsonLoader._baseResource.getDerivedResource({
-        url: buffer.uri,
+        url: buffer.uri
       });
       const resourceCache = gltfJsonLoader._resourceCache;
       const bufferLoader = resourceCache.loadExternalBuffer({
-        resource: resource,
+        resource: resource
       });
 
       gltfJsonLoader._bufferLoaders.push(bufferLoader);
@@ -230,7 +230,7 @@ function loadEmbeddedBuffers(gltfJsonLoader, gltf) {
       const bufferLoader = resourceCache.loadEmbeddedBuffer({
         parentResource: gltfJsonLoader._gltfResource,
         bufferId: bufferId,
-        typedArray: source,
+        typedArray: source
       });
 
       gltfJsonLoader._bufferLoaders.push(bufferLoader);
@@ -259,7 +259,7 @@ function processGltfJson(gltfJsonLoader, gltf) {
 
 function processGltfTypedArray(gltfJsonLoader, typedArray) {
   let gltf;
-  if (getMagic(typedArray) === "glTF") {
+  if (getMagic(typedArray) === 'glTF') {
     gltf = parseGlb(typedArray);
   } else {
     gltf = getJsonFromTypedArray(typedArray);

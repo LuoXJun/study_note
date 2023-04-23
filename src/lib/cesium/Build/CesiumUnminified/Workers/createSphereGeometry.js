@@ -23,7 +23,38 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './EllipsoidGeometry-c9dbbf37', './VertexFormat-563ab2cc', './ComponentDatatype-4eeb6d9b', './WebGLConstants-6da700a2', './Transforms-273eeb44', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './GeometryOffsetAttribute-59b14f45', './IndexDatatype-f228f5fd'], (function (defaultValue, Matrix2, RuntimeError, EllipsoidGeometry, VertexFormat, ComponentDatatype, WebGLConstants, Transforms, _commonjsHelpers3aae1032, combine, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype) { 'use strict';
+define([
+  './defaultValue-97284df2',
+  './Matrix2-9e1c22e2',
+  './RuntimeError-4f8ec8a2',
+  './EllipsoidGeometry-c9dbbf37',
+  './VertexFormat-563ab2cc',
+  './ComponentDatatype-4eeb6d9b',
+  './WebGLConstants-6da700a2',
+  './Transforms-273eeb44',
+  './_commonjsHelpers-3aae1032-65601a27',
+  './combine-d11b1f00',
+  './GeometryAttribute-9be2d2e5',
+  './GeometryAttributes-734a3446',
+  './GeometryOffsetAttribute-59b14f45',
+  './IndexDatatype-f228f5fd'
+], function (
+  defaultValue,
+  Matrix2,
+  RuntimeError,
+  EllipsoidGeometry,
+  VertexFormat,
+  ComponentDatatype,
+  WebGLConstants,
+  Transforms,
+  _commonjsHelpers3aae1032,
+  combine,
+  GeometryAttribute,
+  GeometryAttributes,
+  GeometryOffsetAttribute,
+  IndexDatatype
+) {
+  'use strict';
 
   /**
    * A description of a sphere centered at the origin.
@@ -56,18 +87,21 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a
       radii: radii,
       stackPartitions: options.stackPartitions,
       slicePartitions: options.slicePartitions,
-      vertexFormat: options.vertexFormat,
+      vertexFormat: options.vertexFormat
     };
 
-    this._ellipsoidGeometry = new EllipsoidGeometry.EllipsoidGeometry(ellipsoidOptions);
-    this._workerName = "createSphereGeometry";
+    this._ellipsoidGeometry = new EllipsoidGeometry.EllipsoidGeometry(
+      ellipsoidOptions
+    );
+    this._workerName = 'createSphereGeometry';
   }
 
   /**
    * The number of elements used to pack the object into an array.
    * @type {Number}
    */
-  SphereGeometry.packedLength = EllipsoidGeometry.EllipsoidGeometry.packedLength;
+  SphereGeometry.packedLength =
+    EllipsoidGeometry.EllipsoidGeometry.packedLength;
 
   /**
    * Stores the provided instance into the provided array.
@@ -80,10 +114,14 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a
    */
   SphereGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
+    RuntimeError.Check.typeOf.object('value', value);
     //>>includeEnd('debug');
 
-    return EllipsoidGeometry.EllipsoidGeometry.pack(value._ellipsoidGeometry, array, startingIndex);
+    return EllipsoidGeometry.EllipsoidGeometry.pack(
+      value._ellipsoidGeometry,
+      array,
+      startingIndex
+    );
   };
 
   const scratchEllipsoidGeometry = new EllipsoidGeometry.EllipsoidGeometry();
@@ -92,7 +130,7 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a
     radii: new Matrix2.Cartesian3(),
     vertexFormat: new VertexFormat.VertexFormat(),
     stackPartitions: undefined,
-    slicePartitions: undefined,
+    slicePartitions: undefined
   };
 
   /**
@@ -122,7 +160,9 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a
     }
 
     Matrix2.Cartesian3.clone(ellipsoidGeometry._radii, scratchOptions.radii);
-    result._ellipsoidGeometry = new EllipsoidGeometry.EllipsoidGeometry(scratchOptions);
+    result._ellipsoidGeometry = new EllipsoidGeometry.EllipsoidGeometry(
+      scratchOptions
+    );
     return result;
   };
 
@@ -133,7 +173,9 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a
    * @returns {Geometry|undefined} The computed vertices and indices.
    */
   SphereGeometry.createGeometry = function (sphereGeometry) {
-    return EllipsoidGeometry.EllipsoidGeometry.createGeometry(sphereGeometry._ellipsoidGeometry);
+    return EllipsoidGeometry.EllipsoidGeometry.createGeometry(
+      sphereGeometry._ellipsoidGeometry
+    );
   };
 
   function createSphereGeometry(sphereGeometry, offset) {
@@ -144,6 +186,5 @@ define(['./defaultValue-97284df2', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a
   }
 
   return createSphereGeometry;
-
-}));
+});
 //# sourceMappingURL=createSphereGeometry.js.map

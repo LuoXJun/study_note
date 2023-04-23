@@ -1,4 +1,4 @@
-import WebGLConstants from "../Core/WebGLConstants.js";
+import WebGLConstants from '../Core/WebGLConstants.js';
 
 /**
  * Determines the function used to compare two depths for the depth test.
@@ -68,6 +68,6 @@ const DepthFunction = {
    * @type {Number}
    * @constant
    */
-  ALWAYS: WebGLConstants.ALWAYS,
+  ALWAYS: WebGLConstants.ALWAYS
 };
 export default Object.freeze(DepthFunction);

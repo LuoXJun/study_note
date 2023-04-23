@@ -1,10 +1,10 @@
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import combine from "./combine.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Rectangle from "./Rectangle.js";
-import Resource from "./Resource.js";
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import combine from './combine.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Rectangle from './Rectangle.js';
+import Resource from './Resource.js';
 
 /**
  * Provides geocoding via a {@link https://opencagedata.com/|OpenCage} server.
@@ -36,10 +36,10 @@ import Resource from "./Resource.js";
  */
 function OpenCageGeocoderService(url, apiKey, params) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("url", url);
-  Check.defined("apiKey", apiKey);
+  Check.defined('url', url);
+  Check.defined('apiKey', apiKey);
   if (defined(params)) {
-    Check.typeOf.object("params", params);
+    Check.typeOf.object('params', params);
   }
   //>>includeEnd('debug');
 
@@ -60,7 +60,7 @@ Object.defineProperties(OpenCageGeocoderService.prototype, {
   url: {
     get: function () {
       return this._url;
-    },
+    }
   },
   /**
    * Optional params passed to OpenCage in order to customize geocoding
@@ -71,8 +71,8 @@ Object.defineProperties(OpenCageGeocoderService.prototype, {
   params: {
     get: function () {
       return this._params;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -83,12 +83,12 @@ Object.defineProperties(OpenCageGeocoderService.prototype, {
  */
 OpenCageGeocoderService.prototype.geocode = function (query) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("query", query);
+  Check.typeOf.string('query', query);
   //>>includeEnd('debug');
 
   const resource = this._url.getDerivedResource({
-    url: "json",
-    queryParameters: combine(this._params, { q: query }),
+    url: 'json',
+    queryParameters: combine(this._params, { q: query })
   });
   return resource.fetchJson().then(function (response) {
     return response.results.map(function (resultObject) {
@@ -110,7 +110,7 @@ OpenCageGeocoderService.prototype.geocode = function (query) {
 
       return {
         displayName: resultObject.formatted,
-        destination: destination,
+        destination: destination
       };
     });
   });

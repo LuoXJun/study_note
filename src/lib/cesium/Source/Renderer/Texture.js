@@ -1,18 +1,18 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Check from "../Core/Check.js";
-import createGuid from "../Core/createGuid.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import CesiumMath from "../Core/Math.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import ContextLimits from "./ContextLimits.js";
-import MipmapHint from "./MipmapHint.js";
-import PixelDatatype from "./PixelDatatype.js";
-import Sampler from "./Sampler.js";
-import TextureMagnificationFilter from "./TextureMagnificationFilter.js";
-import TextureMinificationFilter from "./TextureMinificationFilter.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Check from '../Core/Check.js';
+import createGuid from '../Core/createGuid.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import CesiumMath from '../Core/Math.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import ContextLimits from './ContextLimits.js';
+import MipmapHint from './MipmapHint.js';
+import PixelDatatype from './PixelDatatype.js';
+import Sampler from './Sampler.js';
+import TextureMagnificationFilter from './TextureMagnificationFilter.js';
+import TextureMinificationFilter from './TextureMinificationFilter.js';
 
 /**
  * @private
@@ -21,7 +21,7 @@ function Texture(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.context", options.context);
+  Check.defined('options.context', options.context);
   //>>includeEnd('debug');
 
   const context = options.context;
@@ -54,11 +54,11 @@ function Texture(options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(width) || !defined(height)) {
     throw new DeveloperError(
-      "options requires a source field to create an initialized texture or width and height fields to create a blank texture."
+      'options requires a source field to create an initialized texture or width and height fields to create a blank texture.'
     );
   }
 
-  Check.typeOf.number.greaterThan("width", width, 0);
+  Check.typeOf.number.greaterThan('width', width, 0);
 
   if (width > ContextLimits.maximumTextureSize) {
     throw new DeveloperError(
@@ -66,7 +66,7 @@ function Texture(options) {
     );
   }
 
-  Check.typeOf.number.greaterThan("height", height, 0);
+  Check.typeOf.number.greaterThan('height', height, 0);
 
   if (height > ContextLimits.maximumTextureSize) {
     throw new DeveloperError(
@@ -75,11 +75,11 @@ function Texture(options) {
   }
 
   if (!PixelFormat.validate(pixelFormat)) {
-    throw new DeveloperError("Invalid options.pixelFormat.");
+    throw new DeveloperError('Invalid options.pixelFormat.');
   }
 
   if (!isCompressed && !PixelDatatype.validate(pixelDatatype)) {
-    throw new DeveloperError("Invalid options.pixelDatatype.");
+    throw new DeveloperError('Invalid options.pixelDatatype.');
   }
 
   if (
@@ -88,7 +88,7 @@ function Texture(options) {
     pixelDatatype !== PixelDatatype.UNSIGNED_INT
   ) {
     throw new DeveloperError(
-      "When options.pixelFormat is DEPTH_COMPONENT, options.pixelDatatype must be UNSIGNED_SHORT or UNSIGNED_INT."
+      'When options.pixelFormat is DEPTH_COMPONENT, options.pixelDatatype must be UNSIGNED_SHORT or UNSIGNED_INT.'
     );
   }
 
@@ -97,13 +97,13 @@ function Texture(options) {
     pixelDatatype !== PixelDatatype.UNSIGNED_INT_24_8
   ) {
     throw new DeveloperError(
-      "When options.pixelFormat is DEPTH_STENCIL, options.pixelDatatype must be UNSIGNED_INT_24_8."
+      'When options.pixelFormat is DEPTH_STENCIL, options.pixelDatatype must be UNSIGNED_INT_24_8.'
     );
   }
 
   if (pixelDatatype === PixelDatatype.FLOAT && !context.floatingPointTexture) {
     throw new DeveloperError(
-      "When options.pixelDatatype is FLOAT, this WebGL implementation must support the OES_texture_float extension.  Check context.floatingPointTexture."
+      'When options.pixelDatatype is FLOAT, this WebGL implementation must support the OES_texture_float extension.  Check context.floatingPointTexture.'
     );
   }
 
@@ -112,20 +112,20 @@ function Texture(options) {
     !context.halfFloatingPointTexture
   ) {
     throw new DeveloperError(
-      "When options.pixelDatatype is HALF_FLOAT, this WebGL implementation must support the OES_texture_half_float extension. Check context.halfFloatingPointTexture."
+      'When options.pixelDatatype is HALF_FLOAT, this WebGL implementation must support the OES_texture_half_float extension. Check context.halfFloatingPointTexture.'
     );
   }
 
   if (PixelFormat.isDepthFormat(pixelFormat)) {
     if (defined(source)) {
       throw new DeveloperError(
-        "When options.pixelFormat is DEPTH_COMPONENT or DEPTH_STENCIL, source cannot be provided."
+        'When options.pixelFormat is DEPTH_COMPONENT or DEPTH_STENCIL, source cannot be provided.'
       );
     }
 
     if (!context.depthTexture) {
       throw new DeveloperError(
-        "When options.pixelFormat is DEPTH_COMPONENT or DEPTH_STENCIL, this WebGL implementation must support WEBGL_depth_texture.  Check context.depthTexture."
+        'When options.pixelFormat is DEPTH_COMPONENT or DEPTH_STENCIL, this WebGL implementation must support WEBGL_depth_texture.  Check context.depthTexture.'
       );
     }
   }
@@ -133,33 +133,33 @@ function Texture(options) {
   if (isCompressed) {
     if (!defined(source) || !defined(source.arrayBufferView)) {
       throw new DeveloperError(
-        "When options.pixelFormat is compressed, options.source.arrayBufferView must be defined."
+        'When options.pixelFormat is compressed, options.source.arrayBufferView must be defined.'
       );
     }
 
     if (PixelFormat.isDXTFormat(internalFormat) && !context.s3tc) {
       throw new DeveloperError(
-        "When options.pixelFormat is S3TC compressed, this WebGL implementation must support the WEBGL_compressed_texture_s3tc extension. Check context.s3tc."
+        'When options.pixelFormat is S3TC compressed, this WebGL implementation must support the WEBGL_compressed_texture_s3tc extension. Check context.s3tc.'
       );
     } else if (PixelFormat.isPVRTCFormat(internalFormat) && !context.pvrtc) {
       throw new DeveloperError(
-        "When options.pixelFormat is PVRTC compressed, this WebGL implementation must support the WEBGL_compressed_texture_pvrtc extension. Check context.pvrtc."
+        'When options.pixelFormat is PVRTC compressed, this WebGL implementation must support the WEBGL_compressed_texture_pvrtc extension. Check context.pvrtc.'
       );
     } else if (PixelFormat.isASTCFormat(internalFormat) && !context.astc) {
       throw new DeveloperError(
-        "When options.pixelFormat is ASTC compressed, this WebGL implementation must support the WEBGL_compressed_texture_astc extension. Check context.astc."
+        'When options.pixelFormat is ASTC compressed, this WebGL implementation must support the WEBGL_compressed_texture_astc extension. Check context.astc.'
       );
     } else if (PixelFormat.isETC2Format(internalFormat) && !context.etc) {
       throw new DeveloperError(
-        "When options.pixelFormat is ETC2 compressed, this WebGL implementation must support the WEBGL_compressed_texture_etc extension. Check context.etc."
+        'When options.pixelFormat is ETC2 compressed, this WebGL implementation must support the WEBGL_compressed_texture_etc extension. Check context.etc.'
       );
     } else if (PixelFormat.isETC1Format(internalFormat) && !context.etc1) {
       throw new DeveloperError(
-        "When options.pixelFormat is ETC1 compressed, this WebGL implementation must support the WEBGL_compressed_texture_etc1 extension. Check context.etc1."
+        'When options.pixelFormat is ETC1 compressed, this WebGL implementation must support the WEBGL_compressed_texture_etc1 extension. Check context.etc1.'
       );
     } else if (PixelFormat.isBC7Format(internalFormat) && !context.bc7) {
       throw new DeveloperError(
-        "When options.pixelFormat is BC7 compressed, this WebGL implementation must support the EXT_texture_compression_bptc extension. Check context.bc7."
+        'When options.pixelFormat is BC7 compressed, this WebGL implementation must support the EXT_texture_compression_bptc extension. Check context.bc7.'
       );
     }
 
@@ -171,7 +171,7 @@ function Texture(options) {
       ) !== source.arrayBufferView.byteLength
     ) {
       throw new DeveloperError(
-        "The byte length of the array buffer is invalid for the compressed texture with the given width and height."
+        'The byte length of the array buffer is invalid for the compressed texture with the given width and height.'
       );
     }
   }
@@ -444,7 +444,7 @@ Texture.fromFramebuffer = function (options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.context", options.context);
+  Check.defined('options.context', options.context);
   //>>includeEnd('debug');
 
   const context = options.context;
@@ -459,35 +459,35 @@ Texture.fromFramebuffer = function (options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!PixelFormat.validate(pixelFormat)) {
-    throw new DeveloperError("Invalid pixelFormat.");
+    throw new DeveloperError('Invalid pixelFormat.');
   }
   if (
     PixelFormat.isDepthFormat(pixelFormat) ||
     PixelFormat.isCompressedFormat(pixelFormat)
   ) {
     throw new DeveloperError(
-      "pixelFormat cannot be DEPTH_COMPONENT, DEPTH_STENCIL or a compressed format."
+      'pixelFormat cannot be DEPTH_COMPONENT, DEPTH_STENCIL or a compressed format.'
     );
   }
-  Check.defined("options.context", options.context);
+  Check.defined('options.context', options.context);
   Check.typeOf.number.greaterThanOrEquals(
-    "framebufferXOffset",
+    'framebufferXOffset',
     framebufferXOffset,
     0
   );
   Check.typeOf.number.greaterThanOrEquals(
-    "framebufferYOffset",
+    'framebufferYOffset',
     framebufferYOffset,
     0
   );
   if (framebufferXOffset + width > gl.drawingBufferWidth) {
     throw new DeveloperError(
-      "framebufferXOffset + width must be less than or equal to drawingBufferWidth"
+      'framebufferXOffset + width must be less than or equal to drawingBufferWidth'
     );
   }
   if (framebufferYOffset + height > gl.drawingBufferHeight) {
     throw new DeveloperError(
-      "framebufferYOffset + height must be less than or equal to drawingBufferHeight."
+      'framebufferYOffset + height must be less than or equal to drawingBufferHeight.'
     );
   }
   //>>includeEnd('debug');
@@ -504,8 +504,8 @@ Texture.fromFramebuffer = function (options) {
       xOffset: framebufferXOffset,
       yOffset: framebufferYOffset,
       width: width,
-      height: height,
-    },
+      height: height
+    }
   });
 
   return texture;
@@ -522,7 +522,7 @@ Object.defineProperties(Texture.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
   /**
    * The sampler to use when sampling this texture.
@@ -593,42 +593,42 @@ Object.defineProperties(Texture.prototype, {
       gl.bindTexture(target, null);
 
       this._sampler = sampler;
-    },
+    }
   },
   pixelFormat: {
     get: function () {
       return this._pixelFormat;
-    },
+    }
   },
   pixelDatatype: {
     get: function () {
       return this._pixelDatatype;
-    },
+    }
   },
   dimensions: {
     get: function () {
       return this._dimensions;
-    },
+    }
   },
   preMultiplyAlpha: {
     get: function () {
       return this._preMultiplyAlpha;
-    },
+    }
   },
   flipY: {
     get: function () {
       return this._flipY;
-    },
+    }
   },
   width: {
     get: function () {
       return this._width;
-    },
+    }
   },
   height: {
     get: function () {
       return this._height;
-    },
+    }
   },
   sizeInBytes: {
     get: function () {
@@ -636,13 +636,13 @@ Object.defineProperties(Texture.prototype, {
         return Math.floor((this._sizeInBytes * 4) / 3);
       }
       return this._sizeInBytes;
-    },
+    }
   },
   _target: {
     get: function () {
       return this._textureTarget;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -674,33 +674,33 @@ Object.defineProperties(Texture.prototype, {
  */
 Texture.prototype.copyFrom = function (options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options", options);
+  Check.defined('options', options);
   //>>includeEnd('debug');
 
   const xOffset = defaultValue(options.xOffset, 0);
   const yOffset = defaultValue(options.yOffset, 0);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.source", options.source);
+  Check.defined('options.source', options.source);
   if (PixelFormat.isDepthFormat(this._pixelFormat)) {
     throw new DeveloperError(
-      "Cannot call copyFrom when the texture pixel format is DEPTH_COMPONENT or DEPTH_STENCIL."
+      'Cannot call copyFrom when the texture pixel format is DEPTH_COMPONENT or DEPTH_STENCIL.'
     );
   }
   if (PixelFormat.isCompressedFormat(this._pixelFormat)) {
     throw new DeveloperError(
-      "Cannot call copyFrom with a compressed texture pixel format."
+      'Cannot call copyFrom with a compressed texture pixel format.'
     );
   }
-  Check.typeOf.number.greaterThanOrEquals("xOffset", xOffset, 0);
-  Check.typeOf.number.greaterThanOrEquals("yOffset", yOffset, 0);
+  Check.typeOf.number.greaterThanOrEquals('xOffset', xOffset, 0);
+  Check.typeOf.number.greaterThanOrEquals('yOffset', yOffset, 0);
   Check.typeOf.number.lessThanOrEquals(
-    "xOffset + options.source.width",
+    'xOffset + options.source.width',
     xOffset + options.source.width,
     this._width
   );
   Check.typeOf.number.lessThanOrEquals(
-    "yOffset + options.source.height",
+    'yOffset + options.source.height',
     yOffset + options.source.height,
     this._height
   );
@@ -909,44 +909,44 @@ Texture.prototype.copyFromFramebuffer = function (
   //>>includeStart('debug', pragmas.debug);
   if (PixelFormat.isDepthFormat(this._pixelFormat)) {
     throw new DeveloperError(
-      "Cannot call copyFromFramebuffer when the texture pixel format is DEPTH_COMPONENT or DEPTH_STENCIL."
+      'Cannot call copyFromFramebuffer when the texture pixel format is DEPTH_COMPONENT or DEPTH_STENCIL.'
     );
   }
   if (this._pixelDatatype === PixelDatatype.FLOAT) {
     throw new DeveloperError(
-      "Cannot call copyFromFramebuffer when the texture pixel data type is FLOAT."
+      'Cannot call copyFromFramebuffer when the texture pixel data type is FLOAT.'
     );
   }
   if (this._pixelDatatype === PixelDatatype.HALF_FLOAT) {
     throw new DeveloperError(
-      "Cannot call copyFromFramebuffer when the texture pixel data type is HALF_FLOAT."
+      'Cannot call copyFromFramebuffer when the texture pixel data type is HALF_FLOAT.'
     );
   }
   if (PixelFormat.isCompressedFormat(this._pixelFormat)) {
     throw new DeveloperError(
-      "Cannot call copyFrom with a compressed texture pixel format."
+      'Cannot call copyFrom with a compressed texture pixel format.'
     );
   }
 
-  Check.typeOf.number.greaterThanOrEquals("xOffset", xOffset, 0);
-  Check.typeOf.number.greaterThanOrEquals("yOffset", yOffset, 0);
+  Check.typeOf.number.greaterThanOrEquals('xOffset', xOffset, 0);
+  Check.typeOf.number.greaterThanOrEquals('yOffset', yOffset, 0);
   Check.typeOf.number.greaterThanOrEquals(
-    "framebufferXOffset",
+    'framebufferXOffset',
     framebufferXOffset,
     0
   );
   Check.typeOf.number.greaterThanOrEquals(
-    "framebufferYOffset",
+    'framebufferYOffset',
     framebufferYOffset,
     0
   );
   Check.typeOf.number.lessThanOrEquals(
-    "xOffset + width",
+    'xOffset + width',
     xOffset + width,
     this._width
   );
   Check.typeOf.number.lessThanOrEquals(
-    "yOffset + height",
+    'yOffset + height',
     yOffset + height,
     this._height
   );
@@ -987,28 +987,28 @@ Texture.prototype.generateMipmap = function (hint) {
   //>>includeStart('debug', pragmas.debug);
   if (PixelFormat.isDepthFormat(this._pixelFormat)) {
     throw new DeveloperError(
-      "Cannot call generateMipmap when the texture pixel format is DEPTH_COMPONENT or DEPTH_STENCIL."
+      'Cannot call generateMipmap when the texture pixel format is DEPTH_COMPONENT or DEPTH_STENCIL.'
     );
   }
   if (PixelFormat.isCompressedFormat(this._pixelFormat)) {
     throw new DeveloperError(
-      "Cannot call generateMipmap with a compressed pixel format."
+      'Cannot call generateMipmap with a compressed pixel format.'
     );
   }
   if (!this._context.webgl2) {
     if (this._width > 1 && !CesiumMath.isPowerOfTwo(this._width)) {
       throw new DeveloperError(
-        "width must be a power of two to call generateMipmap() in a WebGL1 context."
+        'width must be a power of two to call generateMipmap() in a WebGL1 context.'
       );
     }
     if (this._height > 1 && !CesiumMath.isPowerOfTwo(this._height)) {
       throw new DeveloperError(
-        "height must be a power of two to call generateMipmap() in a WebGL1 context."
+        'height must be a power of two to call generateMipmap() in a WebGL1 context.'
       );
     }
   }
   if (!MipmapHint.validate(hint)) {
-    throw new DeveloperError("hint is invalid.");
+    throw new DeveloperError('hint is invalid.');
   }
   //>>includeEnd('debug');
 

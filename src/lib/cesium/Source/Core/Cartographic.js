@@ -1,9 +1,9 @@
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import CesiumMath from "./Math.js";
-import scaleToGeodeticSurface from "./scaleToGeodeticSurface.js";
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import CesiumMath from './Math.js';
+import scaleToGeodeticSurface from './scaleToGeodeticSurface.js';
 
 /**
  * A position defined by longitude, latitude, and height.
@@ -51,8 +51,8 @@ function Cartographic(longitude, latitude, height) {
  */
 Cartographic.fromRadians = function (longitude, latitude, height, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("longitude", longitude);
-  Check.typeOf.number("latitude", latitude);
+  Check.typeOf.number('longitude', longitude);
+  Check.typeOf.number('latitude', latitude);
   //>>includeEnd('debug');
 
   height = defaultValue(height, 0.0);
@@ -80,8 +80,8 @@ Cartographic.fromRadians = function (longitude, latitude, height, result) {
  */
 Cartographic.fromDegrees = function (longitude, latitude, height, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("longitude", longitude);
-  Check.typeOf.number("latitude", latitude);
+  Check.typeOf.number('longitude', longitude);
+  Check.typeOf.number('latitude', latitude);
   //>>includeEnd('debug');
   longitude = CesiumMath.toRadians(longitude);
   latitude = CesiumMath.toRadians(latitude);
@@ -171,7 +171,7 @@ Cartographic.fromCartesian = function (cartesian, ellipsoid, result) {
  */
 Cartographic.toCartesian = function (cartographic, ellipsoid, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("cartographic", cartographic);
+  Check.defined('cartographic', cartographic);
   //>>includeEnd('debug');
 
   return Cartesian3.fromRadians(

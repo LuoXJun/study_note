@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "precision highp float;\n\
+export default 'precision highp float;\n\
 \n\
 czm_modelVertexOutput defaultVertexOutput(vec3 positionMC) {\n\
     czm_modelVertexOutput vsOutput;\n\
@@ -111,4 +111,4 @@ void main() \n\
         #endif\n\
     #endif\n\
 }\n\
-";
+';

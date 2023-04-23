@@ -1,9 +1,9 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Matrix3 from "../Core/Matrix3.js";
-import ReferenceFrame from "../Core/ReferenceFrame.js";
-import Transforms from "../Core/Transforms.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Matrix3 from '../Core/Matrix3.js';
+import ReferenceFrame from '../Core/ReferenceFrame.js';
+import Transforms from '../Core/Transforms.js';
 
 /**
  * The interface for all {@link Property} objects that define a world
@@ -33,7 +33,7 @@ Object.defineProperties(PositionProperty.prototype, {
    * @readonly
    */
   isConstant: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -45,7 +45,7 @@ Object.defineProperties(PositionProperty.prototype, {
    * @readonly
    */
   definitionChanged: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
   /**
    * Gets the reference frame that the position is defined in.
@@ -53,8 +53,8 @@ Object.defineProperties(PositionProperty.prototype, {
    * @type {ReferenceFrame}
    */
   referenceFrame: {
-    get: DeveloperError.throwInstantiationError,
-  },
+    get: DeveloperError.throwInstantiationError
+  }
 });
 
 /**

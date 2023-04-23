@@ -1,10 +1,10 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Event from "../Core/Event.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
-import Property from "./Property.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Event from '../Core/Event.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
+import Property from './Property.js';
 
 const defaultEvenColor = Color.WHITE;
 const defaultOddColor = Color.BLACK;
@@ -52,7 +52,7 @@ Object.defineProperties(CheckerboardMaterialProperty.prototype, {
         Property.isConstant(this._oddColor) && //
         Property.isConstant(this._repeat)
       );
-    },
+    }
   },
 
   /**
@@ -67,7 +67,7 @@ Object.defineProperties(CheckerboardMaterialProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -76,7 +76,7 @@ Object.defineProperties(CheckerboardMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default Color.WHITE
    */
-  evenColor: createPropertyDescriptor("evenColor"),
+  evenColor: createPropertyDescriptor('evenColor'),
 
   /**
    * Gets or sets the Property specifying the second {@link Color}.
@@ -84,7 +84,7 @@ Object.defineProperties(CheckerboardMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default Color.BLACK
    */
-  oddColor: createPropertyDescriptor("oddColor"),
+  oddColor: createPropertyDescriptor('oddColor'),
 
   /**
    * Gets or sets the {@link Cartesian2} Property specifying how many times the tiles repeat in each direction.
@@ -92,7 +92,7 @@ Object.defineProperties(CheckerboardMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default new Cartesian2(2.0, 2.0)
    */
-  repeat: createPropertyDescriptor("repeat"),
+  repeat: createPropertyDescriptor('repeat')
 });
 
 /**
@@ -102,7 +102,7 @@ Object.defineProperties(CheckerboardMaterialProperty.prototype, {
  * @returns {String} The type of material.
  */
 CheckerboardMaterialProperty.prototype.getType = function (time) {
-  return "Checkerboard";
+  return 'Checkerboard';
 };
 
 /**

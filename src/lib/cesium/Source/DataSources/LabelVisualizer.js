@@ -1,22 +1,22 @@
-import AssociativeArray from "../Core/AssociativeArray.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DistanceDisplayCondition from "../Core/DistanceDisplayCondition.js";
-import NearFarScalar from "../Core/NearFarScalar.js";
-import HeightReference from "../Scene/HeightReference.js";
-import HorizontalOrigin from "../Scene/HorizontalOrigin.js";
-import LabelStyle from "../Scene/LabelStyle.js";
-import VerticalOrigin from "../Scene/VerticalOrigin.js";
-import BoundingSphereState from "./BoundingSphereState.js";
-import Property from "./Property.js";
+import AssociativeArray from '../Core/AssociativeArray.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DistanceDisplayCondition from '../Core/DistanceDisplayCondition.js';
+import NearFarScalar from '../Core/NearFarScalar.js';
+import HeightReference from '../Scene/HeightReference.js';
+import HorizontalOrigin from '../Scene/HorizontalOrigin.js';
+import LabelStyle from '../Scene/LabelStyle.js';
+import VerticalOrigin from '../Scene/VerticalOrigin.js';
+import BoundingSphereState from './BoundingSphereState.js';
+import Property from './Property.js';
 
 const defaultScale = 1.0;
-const defaultFont = "30px sans-serif";
+const defaultFont = '30px sans-serif';
 const defaultStyle = LabelStyle.FILL;
 const defaultFillColor = Color.WHITE;
 const defaultOutlineColor = Color.BLACK;
@@ -60,10 +60,10 @@ function EntityData(entity) {
 function LabelVisualizer(entityCluster, entityCollection) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(entityCluster)) {
-    throw new DeveloperError("entityCluster is required.");
+    throw new DeveloperError('entityCluster is required.');
   }
   if (!defined(entityCollection)) {
-    throw new DeveloperError("entityCollection is required.");
+    throw new DeveloperError('entityCollection is required.');
   }
   //>>includeEnd('debug');
 
@@ -89,7 +89,7 @@ function LabelVisualizer(entityCluster, entityCollection) {
 LabelVisualizer.prototype.update = function (time) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required.");
+    throw new DeveloperError('time is required.');
   }
   //>>includeEnd('debug');
 
@@ -269,10 +269,10 @@ LabelVisualizer.prototype.update = function (time) {
 LabelVisualizer.prototype.getBoundingSphere = function (entity, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(entity)) {
-    throw new DeveloperError("entity is required.");
+    throw new DeveloperError('entity is required.');
   }
   if (!defined(result)) {
-    throw new DeveloperError("result is required.");
+    throw new DeveloperError('result is required.');
   }
   //>>includeEnd('debug');
 

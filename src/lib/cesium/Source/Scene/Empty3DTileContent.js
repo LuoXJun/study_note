@@ -1,5 +1,5 @@
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
 
 /**
  * Represents empty content for tiles in a
@@ -25,67 +25,67 @@ Object.defineProperties(Empty3DTileContent.prototype, {
   featuresLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   pointsLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   trianglesLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   geometryByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   texturesByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   batchTableByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   innerContents: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   readyPromise: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   tileset: {
     get: function () {
       return this._tileset;
-    },
+    }
   },
 
   tile: {
     get: function () {
       return this._tile;
-    },
+    }
   },
 
   url: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   metadata: {
@@ -95,16 +95,16 @@ Object.defineProperties(Empty3DTileContent.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       throw new DeveloperError(
-        "Empty3DTileContent cannot have content metadata"
+        'Empty3DTileContent cannot have content metadata'
       );
       //>>includeEnd('debug');
-    },
+    }
   },
 
   batchTable: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   group: {
@@ -113,10 +113,10 @@ Object.defineProperties(Empty3DTileContent.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      throw new DeveloperError("Empty3DTileContent cannot have group metadata");
+      throw new DeveloperError('Empty3DTileContent cannot have group metadata');
       //>>includeEnd('debug');
-    },
-  },
+    }
+  }
 });
 
 /**

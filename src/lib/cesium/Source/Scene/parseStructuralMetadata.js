@@ -1,11 +1,11 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import PropertyTable from "./PropertyTable.js";
-import PropertyTexture from "./PropertyTexture.js";
-import PropertyAttribute from "./PropertyAttribute.js";
-import StructuralMetadata from "./StructuralMetadata.js";
-import MetadataTable from "./MetadataTable.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import PropertyTable from './PropertyTable.js';
+import PropertyTexture from './PropertyTexture.js';
+import PropertyAttribute from './PropertyAttribute.js';
+import StructuralMetadata from './StructuralMetadata.js';
+import MetadataTable from './MetadataTable.js';
 
 /**
  * Parse the <code>EXT_structural_metadata</code> glTF extension to create a
@@ -29,8 +29,8 @@ export default function parseStructuralMetadata(options) {
   const schema = options.schema;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.extension", extension);
-  Check.typeOf.object("options.schema", schema);
+  Check.typeOf.object('options.extension', extension);
+  Check.typeOf.object('options.schema', schema);
   //>>includeEnd('debug');
 
   const propertyTables = [];
@@ -42,7 +42,7 @@ export default function parseStructuralMetadata(options) {
         count: propertyTable.count,
         properties: propertyTable.properties,
         class: classDefinition,
-        bufferViews: options.bufferViews,
+        bufferViews: options.bufferViews
       });
       propertyTables.push(
         new PropertyTable({
@@ -51,7 +51,7 @@ export default function parseStructuralMetadata(options) {
           count: propertyTable.count,
           metadataTable: metadataTable,
           extras: propertyTable.extras,
-          extensions: propertyTable.extensions,
+          extensions: propertyTable.extensions
         })
       );
     }
@@ -67,7 +67,7 @@ export default function parseStructuralMetadata(options) {
           name: propertyTexture.name,
           propertyTexture: propertyTexture,
           class: schema.classes[propertyTexture.class],
-          textures: options.textures,
+          textures: options.textures
         })
       );
     }
@@ -82,7 +82,7 @@ export default function parseStructuralMetadata(options) {
           id: i,
           name: propertyAttribute.name,
           class: schema.classes[propertyAttribute.class],
-          propertyAttribute: propertyAttribute,
+          propertyAttribute: propertyAttribute
         })
       );
     }
@@ -95,6 +95,6 @@ export default function parseStructuralMetadata(options) {
     propertyAttributes: propertyAttributes,
     statistics: extension.statistics,
     extras: extension.extras,
-    extensions: extension.extensions,
+    extensions: extension.extensions
   });
 }

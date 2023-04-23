@@ -1,15 +1,15 @@
-import combine from "../Core/combine.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import NearFarScalar from "../Core/NearFarScalar.js";
-import Rectangle from "../Core/Rectangle.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import Pass from "../Renderer/Pass.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import BlendingState from "./BlendingState.js";
-import CullFace from "./CullFace.js";
-import SceneMode from "./SceneMode.js";
+import combine from '../Core/combine.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import NearFarScalar from '../Core/NearFarScalar.js';
+import Rectangle from '../Core/Rectangle.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import Pass from '../Renderer/Pass.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import BlendingState from './BlendingState.js';
+import CullFace from './CullFace.js';
+import SceneMode from './SceneMode.js';
 
 const DerivedCommandType = {
   OPAQUE_FRONT_FACE: 0,
@@ -23,24 +23,24 @@ const DerivedCommandType = {
   TRANSLUCENT_BACK_FACE_MANUAL_DEPTH_TEST: 8,
   PICK_FRONT_FACE: 9,
   PICK_BACK_FACE: 10,
-  DERIVED_COMMANDS_MAXIMUM_LENGTH: 11,
+  DERIVED_COMMANDS_MAXIMUM_LENGTH: 11
 };
 
 const derivedCommandsMaximumLength =
   DerivedCommandType.DERIVED_COMMANDS_MAXIMUM_LENGTH;
 
 const DerivedCommandNames = [
-  "opaqueFrontFaceCommand",
-  "opaqueBackFaceCommand",
-  "depthOnlyFrontFaceCommand",
-  "depthOnlyBackFaceCommand",
-  "depthOnlyFrontAndBackFaceCommand",
-  "translucentFrontFaceCommand",
-  "translucentBackFaceCommand",
-  "translucentFrontFaceManualDepthTestCommand",
-  "translucentBackFaceManualDepthTestCommand",
-  "pickFrontFaceCommand",
-  "pickBackFaceCommand",
+  'opaqueFrontFaceCommand',
+  'opaqueBackFaceCommand',
+  'depthOnlyFrontFaceCommand',
+  'depthOnlyBackFaceCommand',
+  'depthOnlyFrontAndBackFaceCommand',
+  'translucentFrontFaceCommand',
+  'translucentBackFaceCommand',
+  'translucentFrontFaceManualDepthTestCommand',
+  'translucentBackFaceManualDepthTestCommand',
+  'pickFrontFaceCommand',
+  'pickBackFaceCommand'
 ];
 
 /**
@@ -79,43 +79,43 @@ Object.defineProperties(GlobeTranslucencyState.prototype, {
   frontFaceAlphaByDistance: {
     get: function () {
       return this._frontFaceAlphaByDistance;
-    },
+    }
   },
   backFaceAlphaByDistance: {
     get: function () {
       return this._backFaceAlphaByDistance;
-    },
+    }
   },
   translucent: {
     get: function () {
       return this._frontFaceTranslucent;
-    },
+    }
   },
   sunVisibleThroughGlobe: {
     get: function () {
       return this._sunVisibleThroughGlobe;
-    },
+    }
   },
   environmentVisible: {
     get: function () {
       return this._environmentVisible;
-    },
+    }
   },
   useDepthPlane: {
     get: function () {
       return this._useDepthPlane;
-    },
+    }
   },
   numberOfTextureUniforms: {
     get: function () {
       return this._numberOfTextureUniforms;
-    },
+    }
   },
   rectangle: {
     get: function () {
       return this._rectangle;
-    },
-  },
+    }
+  }
 });
 
 GlobeTranslucencyState.prototype.update = function (scene) {
@@ -378,30 +378,30 @@ function hasDefine(defines, define) {
 }
 
 function getOpaqueFrontFaceShaderProgram(vs, fs) {
-  removeDefine(vs.defines, "TRANSLUCENT");
-  removeDefine(fs.defines, "TRANSLUCENT");
+  removeDefine(vs.defines, 'TRANSLUCENT');
+  removeDefine(fs.defines, 'TRANSLUCENT');
 }
 
 function getOpaqueBackFaceShaderProgram(vs, fs) {
-  removeDefine(vs.defines, "GROUND_ATMOSPHERE");
-  removeDefine(fs.defines, "GROUND_ATMOSPHERE");
-  removeDefine(vs.defines, "FOG");
-  removeDefine(fs.defines, "FOG");
-  removeDefine(vs.defines, "TRANSLUCENT");
-  removeDefine(fs.defines, "TRANSLUCENT");
+  removeDefine(vs.defines, 'GROUND_ATMOSPHERE');
+  removeDefine(fs.defines, 'GROUND_ATMOSPHERE');
+  removeDefine(vs.defines, 'FOG');
+  removeDefine(fs.defines, 'FOG');
+  removeDefine(vs.defines, 'TRANSLUCENT');
+  removeDefine(fs.defines, 'TRANSLUCENT');
 }
 
 function getDepthOnlyShaderProgram(vs, fs) {
   if (
-    hasDefine(fs.defines, "TILE_LIMIT_RECTANGLE") ||
-    hasDefine(fs.defines, "ENABLE_CLIPPING_PLANES")
+    hasDefine(fs.defines, 'TILE_LIMIT_RECTANGLE') ||
+    hasDefine(fs.defines, 'ENABLE_CLIPPING_PLANES')
   ) {
     // Need to execute the full shader if discard is called
     return;
   }
 
   const depthOnlyShader =
-    "void main() \n" + "{ \n" + "    gl_FragColor = vec4(1.0); \n" + "} \n";
+    'void main() \n' + '{ \n' + '    gl_FragColor = vec4(1.0); \n' + '} \n';
 
   fs.sources = [depthOnlyShader];
 }
@@ -412,74 +412,74 @@ function getTranslucentShaderProgram(vs, fs) {
   for (let i = 0; i < length; ++i) {
     sources[i] = ShaderSource.replaceMain(
       sources[i],
-      "czm_globe_translucency_main"
+      'czm_globe_translucency_main'
     );
   }
 
   const globeTranslucencyMain =
-    "\n\n" +
-    "uniform sampler2D u_classificationTexture; \n" +
-    "void main() \n" +
-    "{ \n" +
-    "    vec2 st = gl_FragCoord.xy / czm_viewport.zw; \n" +
-    "#ifdef MANUAL_DEPTH_TEST \n" +
-    "    float logDepthOrDepth = czm_unpackDepth(texture2D(czm_globeDepthTexture, st)); \n" +
-    "    if (logDepthOrDepth != 0.0) \n" +
-    "    { \n" +
-    "        vec4 eyeCoordinate = czm_windowToEyeCoordinates(gl_FragCoord.xy, logDepthOrDepth); \n" +
-    "        float depthEC = eyeCoordinate.z / eyeCoordinate.w; \n" +
-    "        if (v_positionEC.z < depthEC) \n" +
-    "        { \n" +
-    "            discard; \n" +
-    "        } \n" +
-    "    } \n" +
-    "#endif \n" +
-    "    czm_globe_translucency_main(); \n" +
-    "    vec4 classificationColor = texture2D(u_classificationTexture, st); \n" +
-    "    if (classificationColor.a > 0.0) \n" +
-    "    { \n" +
-    "        // Reverse premultiplication process to get the correct composited result of the classification primitives \n" +
-    "        classificationColor.rgb /= classificationColor.a; \n" +
-    "    } \n" +
-    "    gl_FragColor = classificationColor * vec4(classificationColor.aaa, 1.0) + gl_FragColor * (1.0 - classificationColor.a); \n" +
-    "} \n";
+    '\n\n' +
+    'uniform sampler2D u_classificationTexture; \n' +
+    'void main() \n' +
+    '{ \n' +
+    '    vec2 st = gl_FragCoord.xy / czm_viewport.zw; \n' +
+    '#ifdef MANUAL_DEPTH_TEST \n' +
+    '    float logDepthOrDepth = czm_unpackDepth(texture2D(czm_globeDepthTexture, st)); \n' +
+    '    if (logDepthOrDepth != 0.0) \n' +
+    '    { \n' +
+    '        vec4 eyeCoordinate = czm_windowToEyeCoordinates(gl_FragCoord.xy, logDepthOrDepth); \n' +
+    '        float depthEC = eyeCoordinate.z / eyeCoordinate.w; \n' +
+    '        if (v_positionEC.z < depthEC) \n' +
+    '        { \n' +
+    '            discard; \n' +
+    '        } \n' +
+    '    } \n' +
+    '#endif \n' +
+    '    czm_globe_translucency_main(); \n' +
+    '    vec4 classificationColor = texture2D(u_classificationTexture, st); \n' +
+    '    if (classificationColor.a > 0.0) \n' +
+    '    { \n' +
+    '        // Reverse premultiplication process to get the correct composited result of the classification primitives \n' +
+    '        classificationColor.rgb /= classificationColor.a; \n' +
+    '    } \n' +
+    '    gl_FragColor = classificationColor * vec4(classificationColor.aaa, 1.0) + gl_FragColor * (1.0 - classificationColor.a); \n' +
+    '} \n';
 
   sources.push(globeTranslucencyMain);
 }
 
 function getTranslucentBackFaceShaderProgram(vs, fs) {
   getTranslucentShaderProgram(vs, fs);
-  removeDefine(vs.defines, "GROUND_ATMOSPHERE");
-  removeDefine(fs.defines, "GROUND_ATMOSPHERE");
-  removeDefine(vs.defines, "FOG");
-  removeDefine(fs.defines, "FOG");
+  removeDefine(vs.defines, 'GROUND_ATMOSPHERE');
+  removeDefine(fs.defines, 'GROUND_ATMOSPHERE');
+  removeDefine(vs.defines, 'FOG');
+  removeDefine(fs.defines, 'FOG');
 }
 
 function getTranslucentFrontFaceManualDepthTestShaderProgram(vs, fs) {
   getTranslucentShaderProgram(vs, fs);
-  vs.defines.push("GENERATE_POSITION");
-  fs.defines.push("MANUAL_DEPTH_TEST");
+  vs.defines.push('GENERATE_POSITION');
+  fs.defines.push('MANUAL_DEPTH_TEST');
 }
 
 function getTranslucentBackFaceManualDepthTestShaderProgram(vs, fs) {
   getTranslucentBackFaceShaderProgram(vs, fs);
-  vs.defines.push("GENERATE_POSITION");
-  fs.defines.push("MANUAL_DEPTH_TEST");
+  vs.defines.push('GENERATE_POSITION');
+  fs.defines.push('MANUAL_DEPTH_TEST');
 }
 
 function getPickShaderProgram(vs, fs) {
   const pickShader =
-    "uniform sampler2D u_classificationTexture; \n" +
-    "void main() \n" +
-    "{ \n" +
-    "    vec2 st = gl_FragCoord.xy / czm_viewport.zw; \n" +
-    "    vec4 pickColor = texture2D(u_classificationTexture, st); \n" +
-    "    if (pickColor == vec4(0.0)) \n" +
-    "    { \n" +
-    "        discard; \n" +
-    "    } \n" +
-    "    gl_FragColor = pickColor; \n" +
-    "} \n";
+    'uniform sampler2D u_classificationTexture; \n' +
+    'void main() \n' +
+    '{ \n' +
+    '    vec2 st = gl_FragCoord.xy / czm_viewport.zw; \n' +
+    '    vec4 pickColor = texture2D(u_classificationTexture, st); \n' +
+    '    if (pickColor == vec4(0.0)) \n' +
+    '    { \n' +
+    '        discard; \n' +
+    '    } \n' +
+    '    gl_FragColor = pickColor; \n' +
+    '} \n';
 
   fs.sources = [pickShader];
 }
@@ -519,7 +519,7 @@ function getDerivedShaderProgram(
       {
         vertexShaderSource: vs,
         fragmentShaderSource: fs,
-        attributeLocations: attributeLocations,
+        attributeLocations: attributeLocations
       }
     );
   }
@@ -544,7 +544,7 @@ function getDepthOnlyFrontFaceRenderState(renderState) {
     red: false,
     green: false,
     blue: false,
-    alpha: false,
+    alpha: false
   };
 }
 
@@ -555,7 +555,7 @@ function getDepthOnlyBackFaceRenderState(renderState) {
     red: false,
     green: false,
     blue: false,
-    alpha: false,
+    alpha: false
   };
 }
 
@@ -565,7 +565,7 @@ function getDepthOnlyFrontAndBackFaceRenderState(renderState) {
     red: false,
     green: false,
     blue: false,
-    alpha: false,
+    alpha: false
   };
 }
 
@@ -625,7 +625,7 @@ function getTranslucencyUniformMap(state) {
   return {
     u_classificationTexture: function () {
       return state._globeTranslucencyFramebuffer.classificationTexture;
-    },
+    }
   };
 }
 
@@ -664,7 +664,7 @@ function createDerivedCommandPacks() {
       pickOnly: false,
       getShaderProgramFunction: getOpaqueFrontFaceShaderProgram,
       getRenderStateFunction: getOpaqueFrontFaceRenderState,
-      getUniformMapFunction: undefined,
+      getUniformMapFunction: undefined
     }),
     // opaqueBackFaceCommand
     new DerivedCommandPack({
@@ -672,7 +672,7 @@ function createDerivedCommandPacks() {
       pickOnly: false,
       getShaderProgramFunction: getOpaqueBackFaceShaderProgram,
       getRenderStateFunction: getOpaqueBackFaceRenderState,
-      getUniformMapFunction: undefined,
+      getUniformMapFunction: undefined
     }),
     // depthOnlyFrontFaceCommand
     new DerivedCommandPack({
@@ -680,7 +680,7 @@ function createDerivedCommandPacks() {
       pickOnly: false,
       getShaderProgramFunction: getDepthOnlyShaderProgram,
       getRenderStateFunction: getDepthOnlyFrontFaceRenderState,
-      getUniformMapFunction: undefined,
+      getUniformMapFunction: undefined
     }),
     // depthOnlyBackFaceCommand
     new DerivedCommandPack({
@@ -688,7 +688,7 @@ function createDerivedCommandPacks() {
       pickOnly: false,
       getShaderProgramFunction: getDepthOnlyShaderProgram,
       getRenderStateFunction: getDepthOnlyBackFaceRenderState,
-      getUniformMapFunction: undefined,
+      getUniformMapFunction: undefined
     }),
     // depthOnlyFrontAndBackFaceCommand
     new DerivedCommandPack({
@@ -696,7 +696,7 @@ function createDerivedCommandPacks() {
       pickOnly: false,
       getShaderProgramFunction: getDepthOnlyShaderProgram,
       getRenderStateFunction: getDepthOnlyFrontAndBackFaceRenderState,
-      getUniformMapFunction: undefined,
+      getUniformMapFunction: undefined
     }),
     // translucentFrontFaceCommand
     new DerivedCommandPack({
@@ -704,7 +704,7 @@ function createDerivedCommandPacks() {
       pickOnly: false,
       getShaderProgramFunction: getTranslucentShaderProgram,
       getRenderStateFunction: getTranslucentFrontFaceRenderState,
-      getUniformMapFunction: getTranslucencyUniformMap,
+      getUniformMapFunction: getTranslucencyUniformMap
     }),
     // translucentBackFaceCommand
     new DerivedCommandPack({
@@ -712,23 +712,25 @@ function createDerivedCommandPacks() {
       pickOnly: false,
       getShaderProgramFunction: getTranslucentBackFaceShaderProgram,
       getRenderStateFunction: getTranslucentBackFaceRenderState,
-      getUniformMapFunction: getTranslucencyUniformMap,
+      getUniformMapFunction: getTranslucencyUniformMap
     }),
     // translucentFrontFaceManualDepthTestCommand
     new DerivedCommandPack({
       pass: Pass.TRANSLUCENT,
       pickOnly: false,
-      getShaderProgramFunction: getTranslucentFrontFaceManualDepthTestShaderProgram,
+      getShaderProgramFunction:
+        getTranslucentFrontFaceManualDepthTestShaderProgram,
       getRenderStateFunction: getTranslucentFrontFaceRenderState,
-      getUniformMapFunction: getTranslucencyUniformMap,
+      getUniformMapFunction: getTranslucencyUniformMap
     }),
     // translucentBackFaceManualDepthTestCommand
     new DerivedCommandPack({
       pass: Pass.TRANSLUCENT,
       pickOnly: false,
-      getShaderProgramFunction: getTranslucentBackFaceManualDepthTestShaderProgram,
+      getShaderProgramFunction:
+        getTranslucentBackFaceManualDepthTestShaderProgram,
       getRenderStateFunction: getTranslucentBackFaceRenderState,
-      getUniformMapFunction: getTranslucencyUniformMap,
+      getUniformMapFunction: getTranslucencyUniformMap
     }),
     // pickFrontFaceCommand
     new DerivedCommandPack({
@@ -736,7 +738,7 @@ function createDerivedCommandPacks() {
       pickOnly: true,
       getShaderProgramFunction: getPickShaderProgram,
       getRenderStateFunction: getPickFrontFaceRenderState,
-      getUniformMapFunction: getTranslucencyUniformMap,
+      getUniformMapFunction: getTranslucencyUniformMap
     }),
     // pickBackFaceCommand
     new DerivedCommandPack({
@@ -744,8 +746,8 @@ function createDerivedCommandPacks() {
       pickOnly: true,
       getShaderProgramFunction: getPickShaderProgram,
       getRenderStateFunction: getPickBackFaceRenderState,
-      getUniformMapFunction: getTranslucencyUniformMap,
-    }),
+      getUniformMapFunction: getTranslucencyUniformMap
+    })
   ];
 }
 
@@ -994,12 +996,12 @@ function executeCommands(
 
 const opaqueTypes = [
   DerivedCommandType.OPAQUE_FRONT_FACE,
-  DerivedCommandType.OPAQUE_BACK_FACE,
+  DerivedCommandType.OPAQUE_BACK_FACE
 ];
 const depthOnlyTypes = [
   DerivedCommandType.DEPTH_ONLY_FRONT_FACE,
   DerivedCommandType.DEPTH_ONLY_BACK_FACE,
-  DerivedCommandType.DEPTH_ONLY_FRONT_AND_BACK_FACE,
+  DerivedCommandType.DEPTH_ONLY_FRONT_AND_BACK_FACE
 ];
 
 GlobeTranslucencyState.prototype.executeGlobeCommands = function (

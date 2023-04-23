@@ -1,20 +1,20 @@
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import ClearCommand from "../Renderer/ClearCommand.js";
-import FramebufferManager from "../Renderer/FramebufferManager.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import Renderbuffer from "../Renderer/Renderbuffer.js";
-import RenderbufferFormat from "../Renderer/RenderbufferFormat.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import Texture from "../Renderer/Texture.js";
-import PassThrough from "../Shaders/PostProcessStages/PassThrough.js";
-import BlendingState from "./BlendingState.js";
-import StencilConstants from "./StencilConstants.js";
-import StencilFunction from "./StencilFunction.js";
-import StencilOperation from "./StencilOperation.js";
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import ClearCommand from '../Renderer/ClearCommand.js';
+import FramebufferManager from '../Renderer/FramebufferManager.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import Renderbuffer from '../Renderer/Renderbuffer.js';
+import RenderbufferFormat from '../Renderer/RenderbufferFormat.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import Texture from '../Renderer/Texture.js';
+import PassThrough from '../Shaders/PostProcessStages/PassThrough.js';
+import BlendingState from './BlendingState.js';
+import StencilConstants from './StencilConstants.js';
+import StencilFunction from './StencilFunction.js';
+import StencilOperation from './StencilOperation.js';
 
 /**
  * @private
@@ -28,11 +28,11 @@ function InvertClassification() {
   this._depthStencilRenderbuffer = undefined;
   this._fbo = new FramebufferManager({
     depthStencil: true,
-    createDepthAttachments: false,
+    createDepthAttachments: false
   });
   this._fboClassified = new FramebufferManager({
     depthStencil: true,
-    createDepthAttachments: false,
+    createDepthAttachments: false
   });
 
   this._rsUnclassified = undefined;
@@ -44,12 +44,12 @@ function InvertClassification() {
 
   this._clearColorCommand = new ClearCommand({
     color: new Color(0.0, 0.0, 0.0, 0.0),
-    owner: this,
+    owner: this
   });
   this._clearCommand = new ClearCommand({
     color: new Color(0.0, 0.0, 0.0, 0.0),
     depth: 1.0,
-    stencil: 0,
+    stencil: 0
   });
 
   const that = this;
@@ -62,7 +62,7 @@ function InvertClassification() {
     },
     classifiedTexture: function () {
       return that._fboClassified.getColorTexture();
-    },
+    }
   };
 }
 
@@ -70,8 +70,8 @@ Object.defineProperties(InvertClassification.prototype, {
   unclassifiedCommand: {
     get: function () {
       return this._unclassifiedCommand;
-    },
-  },
+    }
+  }
 });
 
 InvertClassification.isTranslucencySupported = function (context) {
@@ -86,13 +86,13 @@ const rsUnclassified = {
     frontOperation: {
       fail: StencilOperation.KEEP,
       zFail: StencilOperation.KEEP,
-      zPass: StencilOperation.KEEP,
+      zPass: StencilOperation.KEEP
     },
     backFunction: StencilFunction.NEVER,
     reference: 0,
-    mask: StencilConstants.CLASSIFICATION_MASK,
+    mask: StencilConstants.CLASSIFICATION_MASK
   },
-  blending: BlendingState.ALPHA_BLEND,
+  blending: BlendingState.ALPHA_BLEND
 };
 
 const rsClassified = {
@@ -103,13 +103,13 @@ const rsClassified = {
     frontOperation: {
       fail: StencilOperation.KEEP,
       zFail: StencilOperation.KEEP,
-      zPass: StencilOperation.KEEP,
+      zPass: StencilOperation.KEEP
     },
     backFunction: StencilFunction.NEVER,
     reference: 0,
-    mask: StencilConstants.CLASSIFICATION_MASK,
+    mask: StencilConstants.CLASSIFICATION_MASK
   },
-  blending: BlendingState.ALPHA_BLEND,
+  blending: BlendingState.ALPHA_BLEND
 };
 
 // Set the 3D Tiles bit when rendering back into the scene's framebuffer. This is only needed if
@@ -118,60 +118,60 @@ const rsClassified = {
 const rsDefault = {
   depthMask: true,
   depthTest: {
-    enabled: true,
+    enabled: true
   },
   stencilTest: StencilConstants.setCesium3DTileBit(),
   stencilMask: StencilConstants.CESIUM_3D_TILE_MASK,
-  blending: BlendingState.ALPHA_BLEND,
+  blending: BlendingState.ALPHA_BLEND
 };
 
 const translucentFS =
-  "#extension GL_EXT_frag_depth : enable\n" +
-  "uniform sampler2D colorTexture;\n" +
-  "uniform sampler2D depthTexture;\n" +
-  "uniform sampler2D classifiedTexture;\n" +
-  "varying vec2 v_textureCoordinates;\n" +
-  "void main()\n" +
-  "{\n" +
-  "    vec4 color = texture2D(colorTexture, v_textureCoordinates);\n" +
-  "    if (color.a == 0.0)\n" +
-  "    {\n" +
-  "        discard;\n" +
-  "    }\n" +
-  "    bool isClassified = all(equal(texture2D(classifiedTexture, v_textureCoordinates), vec4(0.0)));\n" +
-  "#ifdef UNCLASSIFIED\n" +
-  "    vec4 highlightColor = czm_invertClassificationColor;\n" +
-  "    if (isClassified)\n" +
-  "    {\n" +
-  "        discard;\n" +
-  "    }\n" +
-  "#else\n" +
-  "    vec4 highlightColor = vec4(1.0);\n" +
-  "    if (!isClassified)\n" +
-  "    {\n" +
-  "        discard;\n" +
-  "    }\n" +
-  "#endif\n" +
-  "    gl_FragColor = color * highlightColor;\n" +
-  "    gl_FragDepthEXT = texture2D(depthTexture, v_textureCoordinates).r;\n" +
-  "}\n";
+  '#extension GL_EXT_frag_depth : enable\n' +
+  'uniform sampler2D colorTexture;\n' +
+  'uniform sampler2D depthTexture;\n' +
+  'uniform sampler2D classifiedTexture;\n' +
+  'varying vec2 v_textureCoordinates;\n' +
+  'void main()\n' +
+  '{\n' +
+  '    vec4 color = texture2D(colorTexture, v_textureCoordinates);\n' +
+  '    if (color.a == 0.0)\n' +
+  '    {\n' +
+  '        discard;\n' +
+  '    }\n' +
+  '    bool isClassified = all(equal(texture2D(classifiedTexture, v_textureCoordinates), vec4(0.0)));\n' +
+  '#ifdef UNCLASSIFIED\n' +
+  '    vec4 highlightColor = czm_invertClassificationColor;\n' +
+  '    if (isClassified)\n' +
+  '    {\n' +
+  '        discard;\n' +
+  '    }\n' +
+  '#else\n' +
+  '    vec4 highlightColor = vec4(1.0);\n' +
+  '    if (!isClassified)\n' +
+  '    {\n' +
+  '        discard;\n' +
+  '    }\n' +
+  '#endif\n' +
+  '    gl_FragColor = color * highlightColor;\n' +
+  '    gl_FragDepthEXT = texture2D(depthTexture, v_textureCoordinates).r;\n' +
+  '}\n';
 
 const opaqueFS =
-  "uniform sampler2D colorTexture;\n" +
-  "varying vec2 v_textureCoordinates;\n" +
-  "void main()\n" +
-  "{\n" +
-  "    vec4 color = texture2D(colorTexture, v_textureCoordinates);\n" +
-  "    if (color.a == 0.0)\n" +
-  "    {\n" +
-  "        discard;\n" +
-  "    }\n" +
-  "#ifdef UNCLASSIFIED\n" +
-  "    gl_FragColor = color * czm_invertClassificationColor;\n" +
-  "#else\n" +
-  "    gl_FragColor = color;\n" +
-  "#endif\n" +
-  "}\n";
+  'uniform sampler2D colorTexture;\n' +
+  'varying vec2 v_textureCoordinates;\n' +
+  'void main()\n' +
+  '{\n' +
+  '    vec4 color = texture2D(colorTexture, v_textureCoordinates);\n' +
+  '    if (color.a == 0.0)\n' +
+  '    {\n' +
+  '        discard;\n' +
+  '    }\n' +
+  '#ifdef UNCLASSIFIED\n' +
+  '    gl_FragColor = color * czm_invertClassificationColor;\n' +
+  '#else\n' +
+  '    gl_FragColor = color;\n' +
+  '#endif\n' +
+  '}\n';
 
 InvertClassification.prototype.update = function (
   context,
@@ -203,7 +203,7 @@ InvertClassification.prototype.update = function (
         width: width,
         height: height,
         pixelFormat: PixelFormat.DEPTH_STENCIL,
-        pixelDatatype: PixelDatatype.UNSIGNED_INT_24_8,
+        pixelDatatype: PixelDatatype.UNSIGNED_INT_24_8
       });
       if (numSamples > 1) {
         this._depthStencilRenderbuffer = new Renderbuffer({
@@ -211,7 +211,7 @@ InvertClassification.prototype.update = function (
           width: width,
           height: height,
           format: RenderbufferFormat.DEPTH24_STENCIL8,
-          numSamples: numSamples,
+          numSamples: numSamples
         });
       }
     }
@@ -270,11 +270,11 @@ InvertClassification.prototype.update = function (
 
     const fs = defined(this._previousFramebuffer) ? opaqueFS : translucentFS;
     const unclassifiedFSSource = new ShaderSource({
-      defines: ["UNCLASSIFIED"],
-      sources: [fs],
+      defines: ['UNCLASSIFIED'],
+      sources: [fs]
     });
     const classifiedFSSource = new ShaderSource({
-      sources: [fs],
+      sources: [fs]
     });
     this._unclassifiedCommand = context.createViewportQuadCommand(
       unclassifiedFSSource,
@@ -283,7 +283,7 @@ InvertClassification.prototype.update = function (
           ? this._rsUnclassified
           : this._rsDefault,
         uniformMap: this._uniformMap,
-        owner: this,
+        owner: this
       }
     );
     this._classifiedCommand = context.createViewportQuadCommand(
@@ -293,7 +293,7 @@ InvertClassification.prototype.update = function (
           ? this._rsClassified
           : this._rsDefault,
         uniformMap: this._uniformMap,
-        owner: this,
+        owner: this
       }
     );
 
@@ -308,7 +308,7 @@ InvertClassification.prototype.update = function (
         {
           renderState: this._rsUnclassified,
           uniformMap: this._uniformMap,
-          owner: this,
+          owner: this
         }
       );
     }

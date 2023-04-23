@@ -1,20 +1,20 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import IndexDatatype from "./IndexDatatype.js";
-import Intersections2D from "./Intersections2D.js";
-import CesiumMath from "./Math.js";
-import OrientedBoundingBox from "./OrientedBoundingBox.js";
-import QuantizedMeshTerrainData from "./QuantizedMeshTerrainData.js";
-import Rectangle from "./Rectangle.js";
-import TaskProcessor from "./TaskProcessor.js";
-import TerrainData from "./TerrainData.js";
-import TerrainEncoding from "./TerrainEncoding.js";
-import TerrainMesh from "./TerrainMesh.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import IndexDatatype from './IndexDatatype.js';
+import Intersections2D from './Intersections2D.js';
+import CesiumMath from './Math.js';
+import OrientedBoundingBox from './OrientedBoundingBox.js';
+import QuantizedMeshTerrainData from './QuantizedMeshTerrainData.js';
+import Rectangle from './Rectangle.js';
+import TaskProcessor from './TaskProcessor.js';
+import TerrainData from './TerrainData.js';
+import TerrainEncoding from './TerrainEncoding.js';
+import TerrainMesh from './TerrainMesh.js';
 
 /**
  * Terrain data for a single tile from a Google Earth Enterprise server.
@@ -57,13 +57,13 @@ import TerrainMesh from "./TerrainMesh.js";
 function GoogleEarthEnterpriseTerrainData(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.buffer", options.buffer);
+  Check.typeOf.object('options.buffer', options.buffer);
   Check.typeOf.number(
-    "options.negativeAltitudeExponentBias",
+    'options.negativeAltitudeExponentBias',
     options.negativeAltitudeExponentBias
   );
   Check.typeOf.number(
-    "options.negativeElevationThreshold",
+    'options.negativeElevationThreshold',
     options.negativeElevationThreshold
   );
   //>>includeEnd('debug');
@@ -101,7 +101,7 @@ Object.defineProperties(GoogleEarthEnterpriseTerrainData.prototype, {
   credits: {
     get: function () {
       return this._credits;
-    },
+    }
   },
   /**
    * The water mask included in this terrain data, if any.  A water mask is a rectangular
@@ -113,11 +113,11 @@ Object.defineProperties(GoogleEarthEnterpriseTerrainData.prototype, {
   waterMask: {
     get: function () {
       return undefined;
-    },
-  },
+    }
+  }
 });
 
-const createMeshTaskName = "createVerticesFromGoogleEarthEnterpriseBuffer";
+const createMeshTaskName = 'createVerticesFromGoogleEarthEnterpriseBuffer';
 const createMeshTaskProcessorNoThrottle = new TaskProcessor(createMeshTaskName);
 const createMeshTaskProcessorThrottle = new TaskProcessor(
   createMeshTaskName,
@@ -148,10 +148,10 @@ GoogleEarthEnterpriseTerrainData.prototype.createMesh = function (options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.tilingScheme", options.tilingScheme);
-  Check.typeOf.number("options.x", options.x);
-  Check.typeOf.number("options.y", options.y);
-  Check.typeOf.number("options.level", options.level);
+  Check.typeOf.object('options.tilingScheme', options.tilingScheme);
+  Check.typeOf.number('options.x', options.x);
+  Check.typeOf.number('options.y', options.y);
+  Check.typeOf.number('options.level', options.level);
   //>>includeEnd('debug');
 
   const tilingScheme = options.tilingScheme;
@@ -193,7 +193,7 @@ GoogleEarthEnterpriseTerrainData.prototype.createMesh = function (options) {
     exaggerationRelativeHeight: exaggerationRelativeHeight,
     includeWebMercatorT: true,
     negativeAltitudeExponentBias: this._negativeAltitudeExponentBias,
-    negativeElevationThreshold: this._negativeElevationThreshold,
+    negativeElevationThreshold: this._negativeElevationThreshold
   });
 
   if (!defined(verticesPromise)) {
@@ -267,7 +267,7 @@ GoogleEarthEnterpriseTerrainData.prototype.interpolateHeight = function (
 };
 
 const upsampleTaskProcessor = new TaskProcessor(
-  "upsampleQuantizedTerrainMesh",
+  'upsampleQuantizedTerrainMesh',
   TerrainData.maximumAsynchronousTasks
 );
 
@@ -296,17 +296,17 @@ GoogleEarthEnterpriseTerrainData.prototype.upsample = function (
   descendantLevel
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("tilingScheme", tilingScheme);
-  Check.typeOf.number("thisX", thisX);
-  Check.typeOf.number("thisY", thisY);
-  Check.typeOf.number("thisLevel", thisLevel);
-  Check.typeOf.number("descendantX", descendantX);
-  Check.typeOf.number("descendantY", descendantY);
-  Check.typeOf.number("descendantLevel", descendantLevel);
+  Check.typeOf.object('tilingScheme', tilingScheme);
+  Check.typeOf.number('thisX', thisX);
+  Check.typeOf.number('thisY', thisY);
+  Check.typeOf.number('thisLevel', thisLevel);
+  Check.typeOf.number('descendantX', descendantX);
+  Check.typeOf.number('descendantY', descendantY);
+  Check.typeOf.number('descendantLevel', descendantLevel);
   const levelDifference = descendantLevel - thisLevel;
   if (levelDifference > 1) {
     throw new DeveloperError(
-      "Upsampling through more than one level at a time is not currently supported."
+      'Upsampling through more than one level at a time is not currently supported.'
     );
   }
   //>>includeEnd('debug');
@@ -337,7 +337,7 @@ GoogleEarthEnterpriseTerrainData.prototype.upsample = function (
     isEastChild: isEastChild,
     isNorthChild: isNorthChild,
     childRectangle: childRectangle,
-    ellipsoid: ellipsoid,
+    ellipsoid: ellipsoid
   });
 
   if (!defined(upsamplePromise)) {
@@ -376,7 +376,7 @@ GoogleEarthEnterpriseTerrainData.prototype.upsample = function (
       northSkirtHeight: skirtHeight,
       childTileMask: 0,
       createdByUpsampling: true,
-      credits: that._credits,
+      credits: that._credits
     });
   });
 };
@@ -400,10 +400,10 @@ GoogleEarthEnterpriseTerrainData.prototype.isChildAvailable = function (
   childY
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("thisX", thisX);
-  Check.typeOf.number("thisY", thisY);
-  Check.typeOf.number("childX", childX);
-  Check.typeOf.number("childY", childY);
+  Check.typeOf.number('thisX', thisX);
+  Check.typeOf.number('thisY', thisY);
+  Check.typeOf.number('childX', childX);
+  Check.typeOf.number('childY', childY);
   //>>includeEnd('debug');
 
   let bitNumber = 2; // northwest child
@@ -425,9 +425,10 @@ GoogleEarthEnterpriseTerrainData.prototype.isChildAvailable = function (
  *
  * @returns {Boolean} True if this instance was created by upsampling; otherwise, false.
  */
-GoogleEarthEnterpriseTerrainData.prototype.wasCreatedByUpsampling = function () {
-  return this._createdByUpsampling;
-};
+GoogleEarthEnterpriseTerrainData.prototype.wasCreatedByUpsampling =
+  function () {
+    return this._createdByUpsampling;
+  };
 
 const texCoordScratch0 = new Cartesian2();
 const texCoordScratch1 = new Cartesian2();

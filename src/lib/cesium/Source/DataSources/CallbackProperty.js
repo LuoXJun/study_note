@@ -1,6 +1,6 @@
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
 
 /**
  * A {@link Property} whose value is lazily evaluated by a callback function.
@@ -29,7 +29,7 @@ Object.defineProperties(CallbackProperty.prototype, {
   isConstant: {
     get: function () {
       return this._isConstant;
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -42,8 +42,8 @@ Object.defineProperties(CallbackProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -66,10 +66,10 @@ CallbackProperty.prototype.getValue = function (time, result) {
 CallbackProperty.prototype.setCallback = function (callback, isConstant) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(callback)) {
-    throw new DeveloperError("callback is required.");
+    throw new DeveloperError('callback is required.');
   }
   if (!defined(isConstant)) {
-    throw new DeveloperError("isConstant is required.");
+    throw new DeveloperError('isConstant is required.');
   }
   //>>includeEnd('debug');
 

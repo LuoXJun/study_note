@@ -1,5 +1,5 @@
-import defined from "./defined.js";
-import parseResponseHeaders from "./parseResponseHeaders.js";
+import defined from './defined.js';
+import parseResponseHeaders from './parseResponseHeaders.js';
 
 /**
  * An event that is raised when a request encounters an error.
@@ -37,7 +37,7 @@ function RequestErrorEvent(statusCode, response, responseHeaders) {
    */
   this.responseHeaders = responseHeaders;
 
-  if (typeof this.responseHeaders === "string") {
+  if (typeof this.responseHeaders === 'string') {
     this.responseHeaders = parseResponseHeaders(this.responseHeaders);
   }
 }
@@ -49,7 +49,7 @@ function RequestErrorEvent(statusCode, response, responseHeaders) {
  * @returns {String} A string representing the provided RequestErrorEvent.
  */
 RequestErrorEvent.prototype.toString = function () {
-  let str = "Request has failed.";
+  let str = 'Request has failed.';
   if (defined(this.statusCode)) {
     str += ` Status Code: ${this.statusCode}`;
   }

@@ -18,6 +18,6 @@ const ReferenceFrame = {
    * @type {Number}
    * @constant
    */
-  INERTIAL: 1,
+  INERTIAL: 1
 };
 export default Object.freeze(ReferenceFrame);

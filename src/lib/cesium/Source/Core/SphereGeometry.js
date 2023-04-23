@@ -1,9 +1,9 @@
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import EllipsoidGeometry from "./EllipsoidGeometry.js";
-import VertexFormat from "./VertexFormat.js";
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import EllipsoidGeometry from './EllipsoidGeometry.js';
+import VertexFormat from './VertexFormat.js';
 
 /**
  * A description of a sphere centered at the origin.
@@ -36,11 +36,11 @@ function SphereGeometry(options) {
     radii: radii,
     stackPartitions: options.stackPartitions,
     slicePartitions: options.slicePartitions,
-    vertexFormat: options.vertexFormat,
+    vertexFormat: options.vertexFormat
   };
 
   this._ellipsoidGeometry = new EllipsoidGeometry(ellipsoidOptions);
-  this._workerName = "createSphereGeometry";
+  this._workerName = 'createSphereGeometry';
 }
 
 /**
@@ -60,7 +60,7 @@ SphereGeometry.packedLength = EllipsoidGeometry.packedLength;
  */
 SphereGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
+  Check.typeOf.object('value', value);
   //>>includeEnd('debug');
 
   return EllipsoidGeometry.pack(value._ellipsoidGeometry, array, startingIndex);
@@ -72,7 +72,7 @@ const scratchOptions = {
   radii: new Cartesian3(),
   vertexFormat: new VertexFormat(),
   stackPartitions: undefined,
-  slicePartitions: undefined,
+  slicePartitions: undefined
 };
 
 /**

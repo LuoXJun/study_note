@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "void geometryStage(inout ProcessedAttributes attributes, mat4 modelView, mat3 normal) \n\
+export default 'void geometryStage(inout ProcessedAttributes attributes, mat4 modelView, mat3 normal) \n\
 {\n\
     // Compute positions in different coordinate systems\n\
     vec3 positionMC = attributes.positionMC;\n\
@@ -37,4 +37,4 @@ export default "void geometryStage(inout ProcessedAttributes attributes, mat4 mo
     // GeometryPipelineStage\n\
     setDynamicVaryings(attributes);\n\
 }\n\
-";
+';

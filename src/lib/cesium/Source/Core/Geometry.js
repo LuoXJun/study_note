@@ -1,18 +1,18 @@
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import GeometryType from "./GeometryType.js";
-import Matrix2 from "./Matrix2.js";
-import Matrix3 from "./Matrix3.js";
-import Matrix4 from "./Matrix4.js";
-import PrimitiveType from "./PrimitiveType.js";
-import Quaternion from "./Quaternion.js";
-import Rectangle from "./Rectangle.js";
-import Transforms from "./Transforms.js";
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import GeometryType from './GeometryType.js';
+import Matrix2 from './Matrix2.js';
+import Matrix3 from './Matrix3.js';
+import Matrix4 from './Matrix4.js';
+import PrimitiveType from './PrimitiveType.js';
+import Quaternion from './Quaternion.js';
+import Rectangle from './Rectangle.js';
+import Transforms from './Transforms.js';
 
 /**
  * A geometry representation with attributes forming vertices and optional index data
@@ -68,7 +68,7 @@ function Geometry(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.attributes", options.attributes);
+  Check.typeOf.object('options.attributes', options.attributes);
   //>>includeEnd('debug');
 
   /**
@@ -181,7 +181,7 @@ function Geometry(options) {
  */
 Geometry.computeNumberOfVertices = function (geometry) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("geometry", geometry);
+  Check.typeOf.object('geometry', geometry);
   //>>includeEnd('debug');
 
   let numberOfVertices = -1;
@@ -196,7 +196,7 @@ Geometry.computeNumberOfVertices = function (geometry) {
       //>>includeStart('debug', pragmas.debug);
       if (numberOfVertices !== num && numberOfVertices !== -1) {
         throw new DeveloperError(
-          "All attribute lists must have the same number of attributes."
+          'All attribute lists must have the same number of attributes.'
         );
       }
       //>>includeEnd('debug');
@@ -213,12 +213,12 @@ const fixedFrameToEnuScratch = new Matrix4();
 const boundingRectanglePointsCartographicScratch = [
   new Cartographic(),
   new Cartographic(),
-  new Cartographic(),
+  new Cartographic()
 ];
 const boundingRectanglePointsEnuScratch = [
   new Cartesian2(),
   new Cartesian2(),
-  new Cartesian2(),
+  new Cartesian2()
 ];
 const points2DScratch = [new Cartesian2(), new Cartesian2(), new Cartesian2()];
 const pointEnuScratch = new Cartesian3();

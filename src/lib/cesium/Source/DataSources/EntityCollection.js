@@ -1,16 +1,16 @@
-import AssociativeArray from "../Core/AssociativeArray.js";
-import createGuid from "../Core/createGuid.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import Iso8601 from "../Core/Iso8601.js";
-import JulianDate from "../Core/JulianDate.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import TimeInterval from "../Core/TimeInterval.js";
-import Entity from "./Entity.js";
+import AssociativeArray from '../Core/AssociativeArray.js';
+import createGuid from '../Core/createGuid.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import Iso8601 from '../Core/Iso8601.js';
+import JulianDate from '../Core/JulianDate.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import TimeInterval from '../Core/TimeInterval.js';
+import Entity from './Entity.js';
 
 const entityOptionsScratch = {
-  id: undefined,
+  id: undefined
 };
 
 function fireChangedEvent(collection) {
@@ -92,7 +92,7 @@ EntityCollection.prototype.resumeEvents = function () {
   //>>includeStart('debug', pragmas.debug);
   if (this._suspendCount === 0) {
     throw new DeveloperError(
-      "resumeEvents can not be called before suspendEvents."
+      'resumeEvents can not be called before suspendEvents.'
     );
   }
   //>>includeEnd('debug');
@@ -122,7 +122,7 @@ Object.defineProperties(EntityCollection.prototype, {
   collectionChanged: {
     get: function () {
       return this._collectionChanged;
-    },
+    }
   },
   /**
    * Gets a globally unique identifier for this collection.
@@ -133,7 +133,7 @@ Object.defineProperties(EntityCollection.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
   /**
    * Gets the array of Entity instances in the collection.
@@ -145,7 +145,7 @@ Object.defineProperties(EntityCollection.prototype, {
   values: {
     get: function () {
       return this._entities.values;
-    },
+    }
   },
   /**
    * Gets whether or not this entity collection should be
@@ -161,7 +161,7 @@ Object.defineProperties(EntityCollection.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(value)) {
-        throw new DeveloperError("value is required.");
+        throw new DeveloperError('value is required.');
       }
       //>>includeEnd('debug');
 
@@ -192,7 +192,7 @@ Object.defineProperties(EntityCollection.prototype, {
         if (oldShow !== entity.isShowing) {
           entity.definitionChanged.raiseEvent(
             entity,
-            "isShowing",
+            'isShowing',
             entity.isShowing,
             oldShow
           );
@@ -200,7 +200,7 @@ Object.defineProperties(EntityCollection.prototype, {
       }
 
       this.resumeEvents();
-    },
+    }
   },
   /**
    * Gets the owner of this entity collection, ie. the data source or composite entity collection which created it.
@@ -211,8 +211,8 @@ Object.defineProperties(EntityCollection.prototype, {
   owner: {
     get: function () {
       return this._owner;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -256,7 +256,7 @@ EntityCollection.prototype.computeAvailability = function () {
   }
   return new TimeInterval({
     start: startTime,
-    stop: stopTime,
+    stop: stopTime
   });
 };
 
@@ -270,7 +270,7 @@ EntityCollection.prototype.computeAvailability = function () {
 EntityCollection.prototype.add = function (entity) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(entity)) {
-    throw new DeveloperError("entity is required.");
+    throw new DeveloperError('entity is required.');
   }
   //>>includeEnd('debug');
 
@@ -323,7 +323,7 @@ EntityCollection.prototype.remove = function (entity) {
 EntityCollection.prototype.contains = function (entity) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(entity)) {
-    throw new DeveloperError("entity is required");
+    throw new DeveloperError('entity is required');
   }
   //>>includeEnd('debug');
   return this._entities.get(entity.id) === entity;
@@ -401,7 +401,7 @@ EntityCollection.prototype.removeAll = function () {
 EntityCollection.prototype.getById = function (id) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(id)) {
-    throw new DeveloperError("id is required.");
+    throw new DeveloperError('id is required.');
   }
   //>>includeEnd('debug');
 
@@ -417,7 +417,7 @@ EntityCollection.prototype.getById = function (id) {
 EntityCollection.prototype.getOrCreateEntity = function (id) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(id)) {
-    throw new DeveloperError("id is required.");
+    throw new DeveloperError('id is required.');
   }
   //>>includeEnd('debug');
 

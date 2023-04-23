@@ -1,6 +1,6 @@
-import defined from "../Core/defined.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import PolylineVolumeGeometry from "../Core/PolylineVolumeGeometry.js";
+import defined from '../Core/defined.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import PolylineVolumeGeometry from '../Core/PolylineVolumeGeometry.js';
 
 function createPolylineVolumeGeometry(polylineVolumeGeometry, offset) {
   if (defined(offset)) {

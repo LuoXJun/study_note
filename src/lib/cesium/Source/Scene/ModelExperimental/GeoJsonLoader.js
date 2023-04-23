@@ -1,24 +1,24 @@
-import Cartesian3 from "../../Core/Cartesian3.js";
-import Check from "../../Core/Check.js";
-import ComponentDatatype from "../../Core/ComponentDatatype.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import Ellipsoid from "../../Core/Ellipsoid.js";
-import IndexDatatype from "../../Core/IndexDatatype.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import PrimitiveType from "../../Core/PrimitiveType.js";
-import RuntimeError from "../../Core/RuntimeError.js";
-import Transforms from "../../Core/Transforms.js";
-import AttributeType from "../AttributeType.js";
-import JsonMetadataTable from "../JsonMetadataTable.js";
-import MetadataSchema from "../MetadataSchema.js";
-import ModelComponents from "../ModelComponents.js";
-import PropertyTable from "../PropertyTable.js";
-import ResourceLoader from "../ResourceLoader.js";
-import StructuralMetadata from "../StructuralMetadata.js";
-import VertexAttributeSemantic from "../VertexAttributeSemantic.js";
-import Buffer from "../../Renderer/Buffer.js";
-import BufferUsage from "../../Renderer/BufferUsage.js";
+import Cartesian3 from '../../Core/Cartesian3.js';
+import Check from '../../Core/Check.js';
+import ComponentDatatype from '../../Core/ComponentDatatype.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import Ellipsoid from '../../Core/Ellipsoid.js';
+import IndexDatatype from '../../Core/IndexDatatype.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import PrimitiveType from '../../Core/PrimitiveType.js';
+import RuntimeError from '../../Core/RuntimeError.js';
+import Transforms from '../../Core/Transforms.js';
+import AttributeType from '../AttributeType.js';
+import JsonMetadataTable from '../JsonMetadataTable.js';
+import MetadataSchema from '../MetadataSchema.js';
+import ModelComponents from '../ModelComponents.js';
+import PropertyTable from '../PropertyTable.js';
+import ResourceLoader from '../ResourceLoader.js';
+import StructuralMetadata from '../StructuralMetadata.js';
+import VertexAttributeSemantic from '../VertexAttributeSemantic.js';
+import Buffer from '../../Renderer/Buffer.js';
+import BufferUsage from '../../Renderer/BufferUsage.js';
 
 /**
  * Loads a GeoJson model as part of the <code>MAXAR_content_geojson</code> extension with the following constraints:
@@ -44,7 +44,7 @@ export default function GeoJsonLoader(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.geoJson", options.geoJson);
+  Check.typeOf.object('options.geoJson', options.geoJson);
   //>>includeEnd('debug');
 
   this._geoJson = options.geoJson;
@@ -71,7 +71,7 @@ Object.defineProperties(GeoJsonLoader.prototype, {
   promise: {
     get: function () {
       return this._promise;
-    },
+    }
   },
   /**
    * The cache key of the resource.
@@ -85,7 +85,7 @@ Object.defineProperties(GeoJsonLoader.prototype, {
   cacheKey: {
     get: function () {
       return undefined;
-    },
+    }
   },
   /**
    * The loaded components.
@@ -99,8 +99,8 @@ Object.defineProperties(GeoJsonLoader.prototype, {
   components: {
     get: function () {
       return this._components;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -134,7 +134,7 @@ GeoJsonLoader.prototype.load = function () {
  */
 GeoJsonLoader.prototype.process = function (frameState) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("frameState", frameState);
+  Check.typeOf.object('frameState', frameState);
   //>>includeEnd('debug');
 
   this._process(this, frameState);
@@ -198,7 +198,7 @@ const geometryTypes = {
   LineString: parseLineString,
   MultiLineString: parseMultiLineString,
   MultiPolygon: parseMultiPolygon,
-  Polygon: parsePolygon,
+  Polygon: parsePolygon
 };
 
 function parseFeature(feature, result) {
@@ -235,7 +235,7 @@ function parseFeatureCollection(featureCollection, result) {
 
 const geoJsonObjectTypes = {
   FeatureCollection: parseFeatureCollection,
-  Feature: parseFeature,
+  Feature: parseFeature
 };
 
 const scratchCartesian = new Cartesian3();
@@ -252,7 +252,7 @@ function parse(geoJson, frameState) {
   const featureCount = result.features.length;
 
   if (featureCount === 0) {
-    throw new RuntimeError("GeoJSON must have at least one feature");
+    throw new RuntimeError('GeoJSON must have at least one feature');
   }
 
   // Allocate space for property values
@@ -277,7 +277,7 @@ function parse(geoJson, frameState) {
     const feature = result.features[i];
     for (const propertyId in properties) {
       if (properties.hasOwnProperty(propertyId)) {
-        const value = defaultValue(feature.properties[propertyId], "");
+        const value = defaultValue(feature.properties[propertyId], '');
         properties[propertyId][i] = value;
       }
     }
@@ -285,13 +285,13 @@ function parse(geoJson, frameState) {
 
   const jsonMetadataTable = new JsonMetadataTable({
     count: featureCount,
-    properties: properties,
+    properties: properties
   });
 
   const propertyTable = new PropertyTable({
     id: 0,
     count: featureCount,
-    jsonMetadataTable: jsonMetadataTable,
+    jsonMetadataTable: jsonMetadataTable
   });
   const propertyTables = [propertyTable];
 
@@ -299,7 +299,7 @@ function parse(geoJson, frameState) {
 
   const structuralMetadata = new StructuralMetadata({
     schema: schema,
-    propertyTables: propertyTables,
+    propertyTables: propertyTables
   });
 
   // Find the cartographic bounding box
@@ -438,14 +438,14 @@ function parse(geoJson, frameState) {
   const positionBuffer = Buffer.createVertexBuffer({
     typedArray: positionsTypedArray,
     context: frameState.context,
-    usage: BufferUsage.STATIC_DRAW,
+    usage: BufferUsage.STATIC_DRAW
   });
   positionBuffer.vertexArrayDestroyable = false;
 
   const featureIdBuffer = Buffer.createVertexBuffer({
     typedArray: featureIdsTypedArray,
     context: frameState.context,
-    usage: BufferUsage.STATIC_DRAW,
+    usage: BufferUsage.STATIC_DRAW
   });
   featureIdBuffer.vertexArrayDestroyable = false;
 
@@ -453,7 +453,7 @@ function parse(geoJson, frameState) {
     typedArray: indicesTypedArray,
     context: frameState.context,
     usage: BufferUsage.STATIC_DRAW,
-    indexDatatype: indexDatatype,
+    indexDatatype: indexDatatype
   });
   indexBuffer.vertexArrayDestroyable = false;
 
@@ -489,7 +489,7 @@ function parse(geoJson, frameState) {
   featureId.featureCount = featureCount;
   featureId.propertyTableId = 0;
   featureId.setIndex = 0;
-  featureId.positionalLabel = "featureId_0";
+  featureId.positionalLabel = 'featureId_0';
 
   const featureIds = [featureId];
 

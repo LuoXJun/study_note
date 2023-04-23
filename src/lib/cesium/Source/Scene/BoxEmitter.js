@@ -1,7 +1,7 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import CesiumMath from "../Core/Math.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import CesiumMath from '../Core/Math.js';
 
 const defaultDimensions = new Cartesian3(1.0, 1.0, 1.0);
 
@@ -18,10 +18,10 @@ function BoxEmitter(dimensions) {
   dimensions = defaultValue(dimensions, defaultDimensions);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("dimensions", dimensions);
-  Check.typeOf.number.greaterThanOrEquals("dimensions.x", dimensions.x, 0.0);
-  Check.typeOf.number.greaterThanOrEquals("dimensions.y", dimensions.y, 0.0);
-  Check.typeOf.number.greaterThanOrEquals("dimensions.z", dimensions.z, 0.0);
+  Check.defined('dimensions', dimensions);
+  Check.typeOf.number.greaterThanOrEquals('dimensions.x', dimensions.x, 0.0);
+  Check.typeOf.number.greaterThanOrEquals('dimensions.y', dimensions.y, 0.0);
+  Check.typeOf.number.greaterThanOrEquals('dimensions.z', dimensions.z, 0.0);
   //>>includeEnd('debug');
 
   this._dimensions = Cartesian3.clone(dimensions);
@@ -40,14 +40,14 @@ Object.defineProperties(BoxEmitter.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.defined("value", value);
-      Check.typeOf.number.greaterThanOrEquals("value.x", value.x, 0.0);
-      Check.typeOf.number.greaterThanOrEquals("value.y", value.y, 0.0);
-      Check.typeOf.number.greaterThanOrEquals("value.z", value.z, 0.0);
+      Check.defined('value', value);
+      Check.typeOf.number.greaterThanOrEquals('value.x', value.x, 0.0);
+      Check.typeOf.number.greaterThanOrEquals('value.y', value.y, 0.0);
+      Check.typeOf.number.greaterThanOrEquals('value.z', value.z, 0.0);
       //>>includeEnd('debug');
       Cartesian3.clone(value, this._dimensions);
-    },
-  },
+    }
+  }
 });
 
 const scratchHalfDim = new Cartesian3();

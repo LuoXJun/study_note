@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "void computeAtmosphereScattering(vec3 positionWC, vec3 lightDirection, out vec3 rayleighColor, out vec3 mieColor, out float opacity) {\n\
+export default 'void computeAtmosphereScattering(vec3 positionWC, vec3 lightDirection, out vec3 rayleighColor, out vec3 mieColor, out float opacity) {\n\
 \n\
     vec3 cameraToPositionWC = positionWC - czm_viewerPositionWC;\n\
     vec3 cameraToPositionWCDirection = normalize(cameraToPositionWC);\n\
@@ -17,4 +17,4 @@ export default "void computeAtmosphereScattering(vec3 positionWC, vec3 lightDire
         opacity\n\
     );\n\
 }\n\
-";
+';

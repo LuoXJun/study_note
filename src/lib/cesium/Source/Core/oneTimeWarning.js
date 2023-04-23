@@ -1,6 +1,6 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 const warnings = {};
 
@@ -29,7 +29,7 @@ const warnings = {};
 function oneTimeWarning(identifier, message) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(identifier)) {
-    throw new DeveloperError("identifier is required.");
+    throw new DeveloperError('identifier is required.');
   }
   //>>includeEnd('debug');
 
@@ -40,13 +40,13 @@ function oneTimeWarning(identifier, message) {
 }
 
 oneTimeWarning.geometryOutlines =
-  "Entity geometry outlines are unsupported on terrain. Outlines will be disabled. To enable outlines, disable geometry terrain clamping by explicitly setting height to 0.";
+  'Entity geometry outlines are unsupported on terrain. Outlines will be disabled. To enable outlines, disable geometry terrain clamping by explicitly setting height to 0.';
 
 oneTimeWarning.geometryZIndex =
-  "Entity geometry with zIndex are unsupported when height or extrudedHeight are defined.  zIndex will be ignored";
+  'Entity geometry with zIndex are unsupported when height or extrudedHeight are defined.  zIndex will be ignored';
 
 oneTimeWarning.geometryHeightReference =
-  "Entity corridor, ellipse, polygon or rectangle with heightReference must also have a defined height.  heightReference will be ignored";
+  'Entity corridor, ellipse, polygon or rectangle with heightReference must also have a defined height.  heightReference will be ignored';
 oneTimeWarning.geometryExtrudedHeightReference =
-  "Entity corridor, ellipse, polygon or rectangle with extrudedHeightReference must also have a defined extrudedHeight.  extrudedHeightReference will be ignored";
+  'Entity corridor, ellipse, polygon or rectangle with extrudedHeightReference must also have a defined extrudedHeight.  extrudedHeightReference will be ignored';
 export default oneTimeWarning;

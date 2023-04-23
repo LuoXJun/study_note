@@ -1,4 +1,4 @@
-import DeveloperError from "../Core/DeveloperError.js";
+import DeveloperError from '../Core/DeveloperError.js';
 
 /**
  * The content of a tile in a {@link Cesium3DTileset}.
@@ -42,7 +42,7 @@ Object.defineProperties(Cesium3DTileContent.prototype, {
     // eslint-disable-next-line getter-return
     get: function () {
       DeveloperError.throwInstantiationError();
-    },
+    }
   },
 
   /**
@@ -63,7 +63,7 @@ Object.defineProperties(Cesium3DTileContent.prototype, {
     // eslint-disable-next-line getter-return
     get: function () {
       DeveloperError.throwInstantiationError();
-    },
+    }
   },
 
   /**
@@ -78,7 +78,7 @@ Object.defineProperties(Cesium3DTileContent.prototype, {
     // eslint-disable-next-line getter-return
     get: function () {
       DeveloperError.throwInstantiationError();
-    },
+    }
   },
 
   /**
@@ -93,7 +93,7 @@ Object.defineProperties(Cesium3DTileContent.prototype, {
     // eslint-disable-next-line getter-return
     get: function () {
       DeveloperError.throwInstantiationError();
-    },
+    }
   },
 
   /**
@@ -108,7 +108,7 @@ Object.defineProperties(Cesium3DTileContent.prototype, {
     // eslint-disable-next-line getter-return
     get: function () {
       DeveloperError.throwInstantiationError();
-    },
+    }
   },
 
   /**
@@ -125,7 +125,7 @@ Object.defineProperties(Cesium3DTileContent.prototype, {
     // eslint-disable-next-line getter-return
     get: function () {
       DeveloperError.throwInstantiationError();
-    },
+    }
   },
 
   /**
@@ -142,7 +142,7 @@ Object.defineProperties(Cesium3DTileContent.prototype, {
     // eslint-disable-next-line getter-return
     get: function () {
       DeveloperError.throwInstantiationError();
-    },
+    }
   },
 
   /**
@@ -157,7 +157,7 @@ Object.defineProperties(Cesium3DTileContent.prototype, {
     // eslint-disable-next-line getter-return
     get: function () {
       DeveloperError.throwInstantiationError();
-    },
+    }
   },
 
   /**
@@ -172,7 +172,7 @@ Object.defineProperties(Cesium3DTileContent.prototype, {
     // eslint-disable-next-line getter-return
     get: function () {
       DeveloperError.throwInstantiationError();
-    },
+    }
   },
 
   /**
@@ -187,7 +187,7 @@ Object.defineProperties(Cesium3DTileContent.prototype, {
     // eslint-disable-next-line getter-return
     get: function () {
       DeveloperError.throwInstantiationError();
-    },
+    }
   },
 
   /**
@@ -201,7 +201,7 @@ Object.defineProperties(Cesium3DTileContent.prototype, {
     // eslint-disable-next-line getter-return
     get: function () {
       DeveloperError.throwInstantiationError();
-    },
+    }
   },
 
   /**
@@ -220,7 +220,7 @@ Object.defineProperties(Cesium3DTileContent.prototype, {
     // eslint-disable-next-line getter-return
     get: function () {
       DeveloperError.throwInstantiationError();
-    },
+    }
   },
 
   /**
@@ -243,7 +243,7 @@ Object.defineProperties(Cesium3DTileContent.prototype, {
     },
     set: function (value) {
       DeveloperError.throwInstantiationError();
-    },
+    }
   },
 
   /**
@@ -267,8 +267,8 @@ Object.defineProperties(Cesium3DTileContent.prototype, {
     },
     set: function (value) {
       DeveloperError.throwInstantiationError();
-    },
-  },
+    }
+  }
 });
 
 /**

@@ -1,11 +1,11 @@
-import clone from "../Core/clone.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import deprecationWarning from "../Core/deprecationWarning.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Resource from "../Core/Resource.js";
-import ConditionsExpression from "./ConditionsExpression.js";
-import Expression from "./Expression.js";
+import clone from '../Core/clone.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import deprecationWarning from '../Core/deprecationWarning.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Resource from '../Core/Resource.js';
+import ConditionsExpression from './ConditionsExpression.js';
+import Expression from './Expression.js';
 
 /**
  * A style that is applied to a {@link Cesium3DTileset}.
@@ -83,11 +83,11 @@ function Cesium3DTileStyle(style) {
 
   this._colorShaderTranslucent = false;
 
-  if (typeof style === "string" || style instanceof Resource) {
+  if (typeof style === 'string' || style instanceof Resource) {
     //>>includeStart('debug', pragmas.debug);
     deprecationWarning(
-      "Cesium3DTileStyle constructor",
-      "string or Resource style parameter in the Cesium3DTileStyle constructor was deprecated in CesiumJS 1.94.  If loading a style from a url, use Cesium3DTileStyle.fromUrl instead."
+      'Cesium3DTileStyle constructor',
+      'string or Resource style parameter in the Cesium3DTileStyle constructor was deprecated in CesiumJS 1.94.  If loading a style from a url, use Cesium3DTileStyle.fromUrl instead.'
     );
     //>>includeEnd('debug');
 
@@ -151,14 +151,16 @@ function setup(that, styleJson) {
 }
 
 function getExpression(tileStyle, value) {
-  const defines = defaultValue(tileStyle._style, defaultValue.EMPTY_OBJECT)
-    .defines;
+  const defines = defaultValue(
+    tileStyle._style,
+    defaultValue.EMPTY_OBJECT
+  ).defines;
 
   if (!defined(value)) {
     return undefined;
-  } else if (typeof value === "boolean" || typeof value === "number") {
+  } else if (typeof value === 'boolean' || typeof value === 'number') {
     return new Expression(String(value));
-  } else if (typeof value === "string") {
+  } else if (typeof value === 'string') {
     return new Expression(value, defines);
   } else if (defined(value.conditions)) {
     return new ConditionsExpression(value, defines);
@@ -196,13 +198,13 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
 
       return this._style;
-    },
+    }
   },
 
   /**
@@ -221,12 +223,12 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
     get: function () {
       //>>includeStart('debug', pragmas.debug);
       deprecationWarning(
-        "ready",
-        "ready was deprecated in CesiumJS 1.94.  It will be removed in 1.96.  If loading a style from a url, use Cesium3DTileStyle.fromUrl instead."
+        'ready',
+        'ready was deprecated in CesiumJS 1.94.  It will be removed in 1.96.  If loading a style from a url, use Cesium3DTileStyle.fromUrl instead.'
       );
       //>>includeEnd('debug');
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -242,12 +244,12 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
     get: function () {
       //>>includeStart('debug', pragmas.debug);
       deprecationWarning(
-        "readyPromise",
-        "readyPromise was deprecated in CesiumJS 1.94.  It will be removed in 1.96.  If loading a style from a url, use Cesium3DTileStyle.fromUrl instead."
+        'readyPromise',
+        'readyPromise was deprecated in CesiumJS 1.94.  It will be removed in 1.96.  If loading a style from a url, use Cesium3DTileStyle.fromUrl instead.'
       );
       //>>includeEnd('debug');
       return this._readyPromise;
-    },
+    }
   },
 
   /**
@@ -308,7 +310,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -319,7 +321,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._show = getExpression(this, value);
       this._style.show = getJsonFromExpression(this._show);
       this._showShaderFunctionReady = false;
-    },
+    }
   },
 
   /**
@@ -373,7 +375,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -384,7 +386,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._color = getExpression(this, value);
       this._style.color = getJsonFromExpression(this._color);
       this._colorShaderFunctionReady = false;
-    },
+    }
   },
 
   /**
@@ -443,7 +445,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -454,7 +456,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._pointSize = getExpression(this, value);
       this._style.pointSize = getJsonFromExpression(this._pointSize);
       this._pointSizeShaderFunctionReady = false;
-    },
+    }
   },
 
   /**
@@ -495,7 +497,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -507,7 +509,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.pointOutlineColor = getJsonFromExpression(
         this._pointOutlineColor
       );
-    },
+    }
   },
 
   /**
@@ -548,7 +550,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -560,7 +562,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.pointOutlineWidth = getJsonFromExpression(
         this._pointOutlineWidth
       );
-    },
+    }
   },
 
   /**
@@ -601,7 +603,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -611,7 +613,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
     set: function (value) {
       this._labelColor = getExpression(this, value);
       this._style.labelColor = getJsonFromExpression(this._labelColor);
-    },
+    }
   },
 
   /**
@@ -652,7 +654,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -664,7 +666,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.labelOutlineColor = getJsonFromExpression(
         this._labelOutlineColor
       );
-    },
+    }
   },
 
   /**
@@ -705,7 +707,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -717,7 +719,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.labelOutlineWidth = getJsonFromExpression(
         this._labelOutlineWidth
       );
-    },
+    }
   },
 
   /**
@@ -758,7 +760,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -768,7 +770,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
     set: function (value) {
       this._font = getExpression(this, value);
       this._style.font = getJsonFromExpression(this._font);
-    },
+    }
   },
 
   /**
@@ -809,7 +811,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -819,7 +821,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
     set: function (value) {
       this._labelStyle = getExpression(this, value);
       this._style.labelStyle = getJsonFromExpression(this._labelStyle);
-    },
+    }
   },
 
   /**
@@ -860,7 +862,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -870,7 +872,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
     set: function (value) {
       this._labelText = getExpression(this, value);
       this._style.labelText = getJsonFromExpression(this._labelText);
-    },
+    }
   },
 
   /**
@@ -911,7 +913,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -923,7 +925,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.backgroundColor = getJsonFromExpression(
         this._backgroundColor
       );
-    },
+    }
   },
 
   /**
@@ -955,7 +957,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -967,7 +969,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.backgroundPadding = getJsonFromExpression(
         this._backgroundPadding
       );
-    },
+    }
   },
 
   /**
@@ -1008,7 +1010,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -1020,7 +1022,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.backgroundEnabled = getJsonFromExpression(
         this._backgroundEnabled
       );
-    },
+    }
   },
 
   /**
@@ -1052,7 +1054,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -1064,7 +1066,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.scaleByDistance = getJsonFromExpression(
         this._scaleByDistance
       );
-    },
+    }
   },
 
   /**
@@ -1096,7 +1098,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -1108,7 +1110,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.translucencyByDistance = getJsonFromExpression(
         this._translucencyByDistance
       );
-    },
+    }
   },
 
   /**
@@ -1140,7 +1142,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -1152,7 +1154,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.distanceDisplayCondition = getJsonFromExpression(
         this._distanceDisplayCondition
       );
-    },
+    }
   },
 
   /**
@@ -1193,7 +1195,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -1203,7 +1205,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
     set: function (value) {
       this._heightOffset = getExpression(this, value);
       this._style.heightOffset = getJsonFromExpression(this._heightOffset);
-    },
+    }
   },
 
   /**
@@ -1244,7 +1246,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -1256,7 +1258,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.anchorLineEnabled = getJsonFromExpression(
         this._anchorLineEnabled
       );
-    },
+    }
   },
 
   /**
@@ -1297,7 +1299,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -1309,7 +1311,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.anchorLineColor = getJsonFromExpression(
         this._anchorLineColor
       );
-    },
+    }
   },
 
   /**
@@ -1350,7 +1352,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -1360,7 +1362,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
     set: function (value) {
       this._image = getExpression(this, value);
       this._style.image = getJsonFromExpression(this._image);
-    },
+    }
   },
 
   /**
@@ -1392,7 +1394,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -1404,7 +1406,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.disableDepthTestDistance = getJsonFromExpression(
         this._disableDepthTestDistance
       );
-    },
+    }
   },
 
   /**
@@ -1445,7 +1447,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -1457,7 +1459,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.horizontalOrigin = getJsonFromExpression(
         this._horizontalOrigin
       );
-    },
+    }
   },
 
   /**
@@ -1498,7 +1500,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -1508,7 +1510,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
     set: function (value) {
       this._verticalOrigin = getExpression(this, value);
       this._style.verticalOrigin = getJsonFromExpression(this._verticalOrigin);
-    },
+    }
   },
 
   /**
@@ -1549,7 +1551,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -1561,7 +1563,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.labelHorizontalOrigin = getJsonFromExpression(
         this._labelHorizontalOrigin
       );
-    },
+    }
   },
 
   /**
@@ -1602,7 +1604,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -1614,7 +1616,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       this._style.labelVerticalOrigin = getJsonFromExpression(
         this._labelVerticalOrigin
       );
-    },
+    }
   },
 
   /**
@@ -1640,7 +1642,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true."
+          'The style is not loaded.  Use Cesium3DTileStyle.readyPromise or wait for Cesium3DTileStyle.ready to be true.'
         );
       }
       //>>includeEnd('debug');
@@ -1649,8 +1651,8 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
     },
     set: function (value) {
       this._meta = value;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -1665,7 +1667,7 @@ Object.defineProperties(Cesium3DTileStyle.prototype, {
 Cesium3DTileStyle.fromUrl = function (url) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(url)) {
-    throw new DeveloperError("url is required");
+    throw new DeveloperError('url is required');
   }
   //>>includeEnd('debug');
 
@@ -1703,7 +1705,7 @@ Cesium3DTileStyle.prototype.getColorShaderFunction = function (
       functionSignature,
       variableSubstitutionMap,
       shaderState,
-      "vec4"
+      'vec4'
     );
   } else {
     this._colorShaderFunction = undefined;
@@ -1741,7 +1743,7 @@ Cesium3DTileStyle.prototype.getShowShaderFunction = function (
       functionSignature,
       variableSubstitutionMap,
       shaderState,
-      "bool"
+      'bool'
     );
   } else {
     this._showShaderFunction = undefined;
@@ -1776,7 +1778,7 @@ Cesium3DTileStyle.prototype.getPointSizeShaderFunction = function (
       functionSignature,
       variableSubstitutionMap,
       shaderState,
-      "float"
+      'float'
     );
   } else {
     this._pointSizeShaderFunction = undefined;

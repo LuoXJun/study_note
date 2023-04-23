@@ -1,27 +1,27 @@
-import ApproximateTerrainHeights from "../Core/ApproximateTerrainHeights.js";
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defer from "../Core/defer.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import OrientedBoundingBox from "../Core/OrientedBoundingBox.js";
-import Rectangle from "../Core/Rectangle.js";
-import TerrainExaggeration from "../Core/TerrainExaggeration.js";
-import ClassificationPrimitive from "./ClassificationPrimitive.js";
-import ClassificationType from "./ClassificationType.js";
-import PerInstanceColorAppearance from "./PerInstanceColorAppearance.js";
-import SceneMode from "./SceneMode.js";
-import ShadowVolumeAppearance from "./ShadowVolumeAppearance.js";
+import ApproximateTerrainHeights from '../Core/ApproximateTerrainHeights.js';
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defer from '../Core/defer.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import OrientedBoundingBox from '../Core/OrientedBoundingBox.js';
+import Rectangle from '../Core/Rectangle.js';
+import TerrainExaggeration from '../Core/TerrainExaggeration.js';
+import ClassificationPrimitive from './ClassificationPrimitive.js';
+import ClassificationType from './ClassificationType.js';
+import PerInstanceColorAppearance from './PerInstanceColorAppearance.js';
+import SceneMode from './SceneMode.js';
+import ShadowVolumeAppearance from './ShadowVolumeAppearance.js';
 
 const GroundPrimitiveUniformMap = {
   u_globeMinimumAltitude: function () {
     return 55000.0;
-  },
+  }
 };
 
 /**
@@ -126,7 +126,7 @@ function GroundPrimitive(options) {
       const attributes = geometryInstancesArray[i].attributes;
       if (defined(attributes) && defined(attributes.color)) {
         appearance = new PerInstanceColorAppearance({
-          flat: true,
+          flat: true
         });
         break;
       }
@@ -246,7 +246,7 @@ function GroundPrimitive(options) {
     _updateAndQueueCommandsFunction: undefined,
     _pickPrimitive: that,
     _extruded: true,
-    _uniformMap: GroundPrimitiveUniformMap,
+    _uniformMap: GroundPrimitiveUniformMap
   };
 }
 
@@ -264,7 +264,7 @@ Object.defineProperties(GroundPrimitive.prototype, {
   vertexCacheOptimize: {
     get: function () {
       return this._classificationPrimitiveOptions.vertexCacheOptimize;
-    },
+    }
   },
 
   /**
@@ -280,7 +280,7 @@ Object.defineProperties(GroundPrimitive.prototype, {
   interleave: {
     get: function () {
       return this._classificationPrimitiveOptions.interleave;
-    },
+    }
   },
 
   /**
@@ -296,7 +296,7 @@ Object.defineProperties(GroundPrimitive.prototype, {
   releaseGeometryInstances: {
     get: function () {
       return this._classificationPrimitiveOptions.releaseGeometryInstances;
-    },
+    }
   },
 
   /**
@@ -312,7 +312,7 @@ Object.defineProperties(GroundPrimitive.prototype, {
   allowPicking: {
     get: function () {
       return this._classificationPrimitiveOptions.allowPicking;
-    },
+    }
   },
 
   /**
@@ -328,7 +328,7 @@ Object.defineProperties(GroundPrimitive.prototype, {
   asynchronous: {
     get: function () {
       return this._classificationPrimitiveOptions.asynchronous;
-    },
+    }
   },
 
   /**
@@ -344,7 +344,7 @@ Object.defineProperties(GroundPrimitive.prototype, {
   compressVertices: {
     get: function () {
       return this._classificationPrimitiveOptions.compressVertices;
-    },
+    }
   },
 
   /**
@@ -360,7 +360,7 @@ Object.defineProperties(GroundPrimitive.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -372,8 +372,8 @@ Object.defineProperties(GroundPrimitive.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise.promise;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -719,7 +719,7 @@ GroundPrimitive.prototype.update = function (frameState) {
     //>>includeStart('debug', pragmas.debug);
     if (!this.asynchronous) {
       throw new DeveloperError(
-        "For synchronous GroundPrimitives, you must call GroundPrimitive.initializeTerrainHeights() and wait for the returned promise to resolve."
+        'For synchronous GroundPrimitives, you must call GroundPrimitive.initializeTerrainHeights() and wait for the returned promise to resolve.'
       );
     }
     //>>includeEnd('debug');
@@ -770,7 +770,7 @@ GroundPrimitive.prototype.update = function (frameState) {
       if (!defined(instanceType) || !defined(instanceType.createShadowVolume)) {
         //>>includeStart('debug', pragmas.debug);
         throw new DeveloperError(
-          "Not all of the geometry instances have GroundPrimitive support."
+          'Not all of the geometry instances have GroundPrimitive support.'
         );
         //>>includeEnd('debug');
       }
@@ -822,20 +822,22 @@ GroundPrimitive.prototype.update = function (frameState) {
           geometry.textureCoordinateRotationPoints;
 
         if (usePlanarExtents) {
-          attributes = ShadowVolumeAppearance.getPlanarTextureCoordinateAttributes(
-            boundingRectangle,
-            textureCoordinateRotationPoints,
-            ellipsoid,
-            frameState.mapProjection,
-            this._maxHeight
-          );
+          attributes =
+            ShadowVolumeAppearance.getPlanarTextureCoordinateAttributes(
+              boundingRectangle,
+              textureCoordinateRotationPoints,
+              ellipsoid,
+              frameState.mapProjection,
+              this._maxHeight
+            );
         } else {
-          attributes = ShadowVolumeAppearance.getSphericalExtentGeometryInstanceAttributes(
-            boundingRectangle,
-            textureCoordinateRotationPoints,
-            ellipsoid,
-            frameState.mapProjection
-          );
+          attributes =
+            ShadowVolumeAppearance.getSphericalExtentGeometryInstanceAttributes(
+              boundingRectangle,
+              textureCoordinateRotationPoints,
+              ellipsoid,
+              frameState.mapProjection
+            );
         }
 
         const instanceAttributes = instance.attributes;
@@ -852,7 +854,7 @@ GroundPrimitive.prototype.update = function (frameState) {
             getComputeMaximumHeightFunction(this)
           ),
           attributes: attributes,
-          id: instance.id,
+          id: instance.id
         });
       }
     } else {
@@ -868,7 +870,7 @@ GroundPrimitive.prototype.update = function (frameState) {
             getComputeMaximumHeightFunction(this)
           ),
           attributes: instance.attributes,
-          id: instance.id,
+          id: instance.id
         });
       }
     }
@@ -957,7 +959,7 @@ GroundPrimitive.prototype.getGeometryInstanceAttributes = function (id) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(this._primitive)) {
     throw new DeveloperError(
-      "must call update before calling getGeometryInstanceAttributes"
+      'must call update before calling getGeometryInstanceAttributes'
     );
   }
   //>>includeEnd('debug');
@@ -1020,7 +1022,7 @@ GroundPrimitive._supportsMaterials = function (context) {
  */
 GroundPrimitive.supportsMaterials = function (scene) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("scene", scene);
+  Check.typeOf.object('scene', scene);
   //>>includeEnd('debug');
 
   return GroundPrimitive._supportsMaterials(scene.frameState.context);

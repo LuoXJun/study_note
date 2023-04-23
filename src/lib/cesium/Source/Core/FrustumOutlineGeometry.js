@@ -1,17 +1,17 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import FrustumGeometry from "./FrustumGeometry.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import OrthographicFrustum from "./OrthographicFrustum.js";
-import PerspectiveFrustum from "./PerspectiveFrustum.js";
-import PrimitiveType from "./PrimitiveType.js";
-import Quaternion from "./Quaternion.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import FrustumGeometry from './FrustumGeometry.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import OrthographicFrustum from './OrthographicFrustum.js';
+import PerspectiveFrustum from './PerspectiveFrustum.js';
+import PrimitiveType from './PrimitiveType.js';
+import Quaternion from './Quaternion.js';
 
 const PERSPECTIVE = 0;
 const ORTHOGRAPHIC = 1;
@@ -29,10 +29,10 @@ const ORTHOGRAPHIC = 1;
  */
 function FrustumOutlineGeometry(options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options", options);
-  Check.typeOf.object("options.frustum", options.frustum);
-  Check.typeOf.object("options.origin", options.origin);
-  Check.typeOf.object("options.orientation", options.orientation);
+  Check.typeOf.object('options', options);
+  Check.typeOf.object('options.frustum', options.frustum);
+  Check.typeOf.object('options.origin', options.origin);
+  Check.typeOf.object('options.orientation', options.orientation);
   //>>includeEnd('debug');
 
   const frustum = options.frustum;
@@ -59,7 +59,7 @@ function FrustumOutlineGeometry(options) {
   this._origin = Cartesian3.clone(origin);
   this._orientation = Quaternion.clone(orientation);
   this._drawNearPlane = drawNearPlane;
-  this._workerName = "createFrustumOutlineGeometry";
+  this._workerName = 'createFrustumOutlineGeometry';
 
   /**
    * The number of elements used to pack the object into an array.
@@ -80,8 +80,8 @@ function FrustumOutlineGeometry(options) {
  */
 FrustumOutlineGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -122,7 +122,7 @@ const scratchPackorigin = new Cartesian3();
  */
 FrustumOutlineGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -161,7 +161,7 @@ FrustumOutlineGeometry.unpack = function (array, startingIndex, result) {
       frustum: frustum,
       origin: origin,
       orientation: orientation,
-      _drawNearPlane: drawNearPlane,
+      _drawNearPlane: drawNearPlane
     });
   }
 
@@ -203,8 +203,8 @@ FrustumOutlineGeometry.createGeometry = function (frustumGeometry) {
     position: new GeometryAttribute({
       componentDatatype: ComponentDatatype.DOUBLE,
       componentsPerAttribute: 3,
-      values: positions,
-    }),
+      values: positions
+    })
   });
 
   let offset;
@@ -248,7 +248,7 @@ FrustumOutlineGeometry.createGeometry = function (frustumGeometry) {
     attributes: attributes,
     indices: indices,
     primitiveType: PrimitiveType.LINES,
-    boundingSphere: BoundingSphere.fromVertices(positions),
+    boundingSphere: BoundingSphere.fromVertices(positions)
   });
 };
 export default FrustumOutlineGeometry;

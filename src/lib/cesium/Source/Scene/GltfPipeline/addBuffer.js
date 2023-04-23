@@ -1,4 +1,4 @@
-import addToArray from "./addToArray.js";
+import addToArray from './addToArray.js';
 
 /**
  * Adds buffer to gltf.
@@ -14,15 +14,15 @@ function addBuffer(gltf, buffer) {
     byteLength: buffer.length,
     extras: {
       _pipeline: {
-        source: buffer,
-      },
-    },
+        source: buffer
+      }
+    }
   };
   const bufferId = addToArray(gltf.buffers, newBuffer);
   const bufferView = {
     buffer: bufferId,
     byteOffset: 0,
-    byteLength: buffer.length,
+    byteLength: buffer.length
   };
   return addToArray(gltf.bufferViews, bufferView);
 }

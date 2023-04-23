@@ -1,11 +1,11 @@
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import Rectangle from "./Rectangle.js";
-import Resource from "./Resource.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import Rectangle from './Rectangle.js';
+import Resource from './Resource.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
-const url = "https://dev.virtualearth.net/REST/v1/Locations";
+const url = 'https://dev.virtualearth.net/REST/v1/Locations';
 
 /**
  * Provides geocoding through Bing Maps.
@@ -21,14 +21,14 @@ function BingMapsGeocoderService(options) {
   const key = options.key;
   //>>includeStart('debug', pragmas.debug);
   if (!defined(key)) {
-    throw new DeveloperError("options.key is required.");
+    throw new DeveloperError('options.key is required.');
   }
   //>>includeEnd('debug');
 
   this._key = key;
 
   const queryParameters = {
-    key: key,
+    key: key
   };
 
   if (defined(options.culture)) {
@@ -37,7 +37,7 @@ function BingMapsGeocoderService(options) {
 
   this._resource = new Resource({
     url: url,
-    queryParameters: queryParameters,
+    queryParameters: queryParameters
   });
 }
 
@@ -51,7 +51,7 @@ Object.defineProperties(BingMapsGeocoderService.prototype, {
   url: {
     get: function () {
       return url;
-    },
+    }
   },
 
   /**
@@ -63,8 +63,8 @@ Object.defineProperties(BingMapsGeocoderService.prototype, {
   key: {
     get: function () {
       return this._key;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -75,16 +75,16 @@ Object.defineProperties(BingMapsGeocoderService.prototype, {
  */
 BingMapsGeocoderService.prototype.geocode = function (query) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("query", query);
+  Check.typeOf.string('query', query);
   //>>includeEnd('debug');
 
   const resource = this._resource.getDerivedResource({
     queryParameters: {
-      query: query,
-    },
+      query: query
+    }
   });
 
-  return resource.fetchJsonp("jsonp").then(function (result) {
+  return resource.fetchJsonp('jsonp').then(function (result) {
     if (result.resourceSets.length === 0) {
       return [];
     }
@@ -99,7 +99,7 @@ BingMapsGeocoderService.prototype.geocode = function (query) {
       const east = bbox[3];
       return {
         displayName: resource.name,
-        destination: Rectangle.fromDegrees(west, south, east, north),
+        destination: Rectangle.fromDegrees(west, south, east, north)
       };
     });
   });

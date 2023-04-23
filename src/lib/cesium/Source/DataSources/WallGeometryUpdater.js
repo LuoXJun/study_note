@@ -1,20 +1,20 @@
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import DistanceDisplayConditionGeometryInstanceAttribute from "../Core/DistanceDisplayConditionGeometryInstanceAttribute.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import Iso8601 from "../Core/Iso8601.js";
-import ShowGeometryInstanceAttribute from "../Core/ShowGeometryInstanceAttribute.js";
-import WallGeometry from "../Core/WallGeometry.js";
-import WallOutlineGeometry from "../Core/WallOutlineGeometry.js";
-import MaterialAppearance from "../Scene/MaterialAppearance.js";
-import PerInstanceColorAppearance from "../Scene/PerInstanceColorAppearance.js";
-import ColorMaterialProperty from "./ColorMaterialProperty.js";
-import DynamicGeometryUpdater from "./DynamicGeometryUpdater.js";
-import GeometryUpdater from "./GeometryUpdater.js";
-import Property from "./Property.js";
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import DistanceDisplayConditionGeometryInstanceAttribute from '../Core/DistanceDisplayConditionGeometryInstanceAttribute.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import Iso8601 from '../Core/Iso8601.js';
+import ShowGeometryInstanceAttribute from '../Core/ShowGeometryInstanceAttribute.js';
+import WallGeometry from '../Core/WallGeometry.js';
+import WallOutlineGeometry from '../Core/WallOutlineGeometry.js';
+import MaterialAppearance from '../Scene/MaterialAppearance.js';
+import PerInstanceColorAppearance from '../Scene/PerInstanceColorAppearance.js';
+import ColorMaterialProperty from './ColorMaterialProperty.js';
+import DynamicGeometryUpdater from './DynamicGeometryUpdater.js';
+import GeometryUpdater from './GeometryUpdater.js';
+import Property from './Property.js';
 
 const scratchColor = new Color();
 
@@ -41,11 +41,11 @@ function WallGeometryUpdater(entity, scene) {
     entity: entity,
     scene: scene,
     geometryOptions: new WallGeometryOptions(entity),
-    geometryPropertyName: "wall",
-    observedPropertyNames: ["availability", "wall"],
+    geometryPropertyName: 'wall',
+    observedPropertyNames: ['availability', 'wall']
   });
 
-  this._onEntityPropertyChanged(entity, "wall", entity.wall, undefined);
+  this._onEntityPropertyChanged(entity, 'wall', entity.wall, undefined);
 }
 
 if (defined(Object.create)) {
@@ -63,11 +63,11 @@ if (defined(Object.create)) {
  */
 WallGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
 
   if (!this._fillEnabled) {
     throw new DeveloperError(
-      "This instance does not represent a filled geometry."
+      'This instance does not represent a filled geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -84,12 +84,12 @@ WallGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
       this._showProperty.getValue(time) &&
       this._fillProperty.getValue(time)
   );
-  const distanceDisplayCondition = this._distanceDisplayConditionProperty.getValue(
-    time
-  );
-  const distanceDisplayConditionAttribute = DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-    distanceDisplayCondition
-  );
+  const distanceDisplayCondition =
+    this._distanceDisplayConditionProperty.getValue(time);
+  const distanceDisplayConditionAttribute =
+    DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+      distanceDisplayCondition
+    );
   if (this._materialProperty instanceof ColorMaterialProperty) {
     let currentColor;
     if (
@@ -105,19 +105,19 @@ WallGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
     attributes = {
       show: show,
       distanceDisplayCondition: distanceDisplayConditionAttribute,
-      color: color,
+      color: color
     };
   } else {
     attributes = {
       show: show,
-      distanceDisplayCondition: distanceDisplayConditionAttribute,
+      distanceDisplayCondition: distanceDisplayConditionAttribute
     };
   }
 
   return new GeometryInstance({
     id: entity,
     geometry: new WallGeometry(this._options),
-    attributes: attributes,
+    attributes: attributes
   });
 };
 
@@ -131,11 +131,11 @@ WallGeometryUpdater.prototype.createFillGeometryInstance = function (time) {
  */
 WallGeometryUpdater.prototype.createOutlineGeometryInstance = function (time) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("time", time);
+  Check.defined('time', time);
 
   if (!this._outlineEnabled) {
     throw new DeveloperError(
-      "This instance does not represent an outlined geometry."
+      'This instance does not represent an outlined geometry.'
     );
   }
   //>>includeEnd('debug');
@@ -148,9 +148,8 @@ WallGeometryUpdater.prototype.createOutlineGeometryInstance = function (time) {
     Color.BLACK,
     scratchColor
   );
-  const distanceDisplayCondition = this._distanceDisplayConditionProperty.getValue(
-    time
-  );
+  const distanceDisplayCondition =
+    this._distanceDisplayConditionProperty.getValue(time);
 
   return new GeometryInstance({
     id: entity,
@@ -163,10 +162,11 @@ WallGeometryUpdater.prototype.createOutlineGeometryInstance = function (time) {
           this._showOutlineProperty.getValue(time)
       ),
       color: ColorGeometryInstanceAttribute.fromColor(outlineColor),
-      distanceDisplayCondition: DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
-        distanceDisplayCondition
-      ),
-    },
+      distanceDisplayCondition:
+        DistanceDisplayConditionGeometryInstanceAttribute.fromDistanceDisplayCondition(
+          distanceDisplayCondition
+        )
+    }
   });
 };
 

@@ -21,6 +21,6 @@ const BoundingSphereState = {
    * @type BoundingSphereState
    * @constant
    */
-  FAILED: 2,
+  FAILED: 2
 };
 export default Object.freeze(BoundingSphereState);

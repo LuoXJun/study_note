@@ -23,7 +23,11 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './defaultValue-97284df2'], (function (exports, defaultValue) { 'use strict';
+define(['exports', './defaultValue-97284df2'], function (
+  exports,
+  defaultValue
+) {
+  'use strict';
 
   /**
    * Constructs an exception object that is thrown due to a developer error, e.g., invalid argument,
@@ -49,7 +53,7 @@ define(['exports', './defaultValue-97284df2'], (function (exports, defaultValue)
      * @type {String}
      * @readonly
      */
-    this.name = "DeveloperError";
+    this.name = 'DeveloperError';
 
     /**
      * The explanation for why this exception was thrown.
@@ -94,7 +98,7 @@ define(['exports', './defaultValue-97284df2'], (function (exports, defaultValue)
    */
   DeveloperError.throwInstantiationError = function () {
     throw new DeveloperError(
-      "This function defines an interface and should not be called directly."
+      'This function defines an interface and should not be called directly.'
     );
   };
 
@@ -139,9 +143,9 @@ define(['exports', './defaultValue-97284df2'], (function (exports, defaultValue)
    * @exception {DeveloperError} test must be typeof 'function'
    */
   Check.typeOf.func = function (name, test) {
-    if (typeof test !== "function") {
+    if (typeof test !== 'function') {
       throw new DeveloperError(
-        getFailedTypeErrorMessage(typeof test, "function", name)
+        getFailedTypeErrorMessage(typeof test, 'function', name)
       );
     }
   };
@@ -154,9 +158,9 @@ define(['exports', './defaultValue-97284df2'], (function (exports, defaultValue)
    * @exception {DeveloperError} test must be typeof 'string'
    */
   Check.typeOf.string = function (name, test) {
-    if (typeof test !== "string") {
+    if (typeof test !== 'string') {
       throw new DeveloperError(
-        getFailedTypeErrorMessage(typeof test, "string", name)
+        getFailedTypeErrorMessage(typeof test, 'string', name)
       );
     }
   };
@@ -169,9 +173,9 @@ define(['exports', './defaultValue-97284df2'], (function (exports, defaultValue)
    * @exception {DeveloperError} test must be typeof 'number'
    */
   Check.typeOf.number = function (name, test) {
-    if (typeof test !== "number") {
+    if (typeof test !== 'number') {
       throw new DeveloperError(
-        getFailedTypeErrorMessage(typeof test, "number", name)
+        getFailedTypeErrorMessage(typeof test, 'number', name)
       );
     }
   };
@@ -252,9 +256,9 @@ define(['exports', './defaultValue-97284df2'], (function (exports, defaultValue)
    * @exception {DeveloperError} test must be typeof 'object'
    */
   Check.typeOf.object = function (name, test) {
-    if (typeof test !== "object") {
+    if (typeof test !== 'object') {
       throw new DeveloperError(
-        getFailedTypeErrorMessage(typeof test, "object", name)
+        getFailedTypeErrorMessage(typeof test, 'object', name)
       );
     }
   };
@@ -267,9 +271,9 @@ define(['exports', './defaultValue-97284df2'], (function (exports, defaultValue)
    * @exception {DeveloperError} test must be typeof 'boolean'
    */
   Check.typeOf.bool = function (name, test) {
-    if (typeof test !== "boolean") {
+    if (typeof test !== 'boolean') {
       throw new DeveloperError(
-        getFailedTypeErrorMessage(typeof test, "boolean", name)
+        getFailedTypeErrorMessage(typeof test, 'boolean', name)
       );
     }
   };
@@ -282,9 +286,9 @@ define(['exports', './defaultValue-97284df2'], (function (exports, defaultValue)
    * @exception {DeveloperError} test must be typeof 'bigint'
    */
   Check.typeOf.bigint = function (name, test) {
-    if (typeof test !== "bigint") {
+    if (typeof test !== 'bigint') {
       throw new DeveloperError(
-        getFailedTypeErrorMessage(typeof test, "bigint", name)
+        getFailedTypeErrorMessage(typeof test, 'bigint', name)
       );
     }
   };
@@ -331,7 +335,7 @@ define(['exports', './defaultValue-97284df2'], (function (exports, defaultValue)
      * @type {String}
      * @readonly
      */
-    this.name = "RuntimeError";
+    this.name = 'RuntimeError';
 
     /**
      * The explanation for why this exception was thrown.
@@ -374,6 +378,5 @@ define(['exports', './defaultValue-97284df2'], (function (exports, defaultValue)
   exports.Check = Check;
   exports.DeveloperError = DeveloperError;
   exports.RuntimeError = RuntimeError;
-
-}));
+});
 //# sourceMappingURL=RuntimeError-4f8ec8a2.js.map

@@ -1,5 +1,5 @@
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
 
 /**
  * Geocodes queries containing longitude and latitude coordinates and an optional height.
@@ -18,7 +18,7 @@ function CartographicGeocoderService() {}
  */
 CartographicGeocoderService.prototype.geocode = function (query) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("query", query);
+  Check.typeOf.string('query', query);
   //>>includeEnd('debug');
 
   const splitQuery = query.match(/[^\s,\n]+/g);
@@ -48,7 +48,7 @@ CartographicGeocoderService.prototype.geocode = function (query) {
     if (!isNaN(longitude) && !isNaN(latitude) && !isNaN(height)) {
       const result = {
         displayName: query,
-        destination: Cartesian3.fromDegrees(longitude, latitude, height),
+        destination: Cartesian3.fromDegrees(longitude, latitude, height)
       };
       return Promise.resolve([result]);
     }

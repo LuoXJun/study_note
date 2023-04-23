@@ -1,10 +1,10 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import FramebufferManager from "../Renderer/FramebufferManager.js";
-import PassState from "../Renderer/PassState.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import FramebufferManager from '../Renderer/FramebufferManager.js';
+import PassState from '../Renderer/PassState.js';
 
 /**
  * @private
@@ -15,13 +15,13 @@ function PickFramebuffer(context) {
   passState.blendingEnabled = false;
   passState.scissorTest = {
     enabled: true,
-    rectangle: new BoundingRectangle(),
+    rectangle: new BoundingRectangle()
   };
   passState.viewport = new BoundingRectangle();
 
   this._context = context;
   this._fb = new FramebufferManager({
-    depthStencil: true,
+    depthStencil: true
   });
   this._passState = passState;
   this._width = 0;
@@ -61,7 +61,7 @@ PickFramebuffer.prototype.end = function (screenSpaceRectangle) {
     y: screenSpaceRectangle.y,
     width: width,
     height: height,
-    framebuffer: this._fb.framebuffer,
+    framebuffer: this._fb.framebuffer
   });
 
   const max = Math.max(width, height);

@@ -1,7 +1,7 @@
-import defined from "../../Core/defined.js";
-import PrimitiveType from "../../Core/PrimitiveType.js";
-import ModelComponents from "../ModelComponents.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
+import defined from '../../Core/defined.js';
+import PrimitiveType from '../../Core/PrimitiveType.js';
+import ModelComponents from '../ModelComponents.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
 
 /**
  * The primitive statistics update stage updates memory usage statistics
@@ -16,7 +16,7 @@ import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
  * @private
  */
 const PrimitiveStatisticsPipelineStage = {};
-PrimitiveStatisticsPipelineStage.name = "PrimitiveStatisticsPipelineStage"; // Helps with debugging
+PrimitiveStatisticsPipelineStage.name = 'PrimitiveStatisticsPipelineStage'; // Helps with debugging
 
 PrimitiveStatisticsPipelineStage.process = function (
   renderResources,
@@ -45,7 +45,7 @@ PrimitiveStatisticsPipelineStage.process = function (
 function countGeometry(statistics, primitive) {
   const indicesCount = defined(primitive.indices)
     ? primitive.indices.count
-    : ModelExperimentalUtility.getAttributeBySemantic(primitive, "POSITION")
+    : ModelExperimentalUtility.getAttributeBySemantic(primitive, 'POSITION')
         .count;
 
   const primitiveType = primitive.primitiveType;
@@ -148,7 +148,7 @@ function getAllTextureReaders(material) {
     material.normalTexture,
     material.occlusionTexture,
     metallicRoughness.baseColorTexture,
-    metallicRoughness.metallicRoughnessTexture,
+    metallicRoughness.metallicRoughnessTexture
   ];
 
   const specularGlossiness = material.specularGlossiness;
@@ -240,9 +240,11 @@ function countPropertyTextures(statistics, structuralMetadata) {
 // Exposed for testing
 PrimitiveStatisticsPipelineStage._countGeometry = countGeometry;
 PrimitiveStatisticsPipelineStage._count2DPositions = count2DPositions;
-PrimitiveStatisticsPipelineStage._countMorphTargetAttributes = countMorphTargetAttributes;
+PrimitiveStatisticsPipelineStage._countMorphTargetAttributes =
+  countMorphTargetAttributes;
 PrimitiveStatisticsPipelineStage._countMaterialTextures = countMaterialTextures;
-PrimitiveStatisticsPipelineStage._countFeatureIdTextures = countFeatureIdTextures;
+PrimitiveStatisticsPipelineStage._countFeatureIdTextures =
+  countFeatureIdTextures;
 PrimitiveStatisticsPipelineStage._countBinaryMetadata = countBinaryMetadata;
 
 export default PrimitiveStatisticsPipelineStage;

@@ -1,19 +1,19 @@
-import Cartesian4 from "../Core/Cartesian4.js";
-import CesiumMath from "../Core/Math.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import mergeSort from "../Core/mergeSort.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import Sampler from "../Renderer/Sampler.js";
-import Texture from "../Renderer/Texture.js";
-import TextureMagnificationFilter from "../Renderer/TextureMagnificationFilter.js";
-import TextureMinificationFilter from "../Renderer/TextureMinificationFilter.js";
-import TextureWrap from "../Renderer/TextureWrap.js";
-import Material from "./Material.js";
+import Cartesian4 from '../Core/Cartesian4.js';
+import CesiumMath from '../Core/Math.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import mergeSort from '../Core/mergeSort.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import Sampler from '../Renderer/Sampler.js';
+import Texture from '../Renderer/Texture.js';
+import TextureMagnificationFilter from '../Renderer/TextureMagnificationFilter.js';
+import TextureMinificationFilter from '../Renderer/TextureMinificationFilter.js';
+import TextureWrap from '../Renderer/TextureWrap.js';
+import Material from './Material.js';
 
 const scratchColor = new Color();
 const scratchColorAbove = new Color();
@@ -34,7 +34,7 @@ function lerpEntryColor(height, entryBefore, entryAfter, result) {
 function createNewEntry(height, color) {
   return {
     height: height,
-    color: Color.clone(color),
+    color: Color.clone(color)
   };
 }
 
@@ -105,7 +105,7 @@ function preprocess(layers) {
 
     //>>includeStart('debug', pragmas.debug);
     if (!Array.isArray(entriesOrig) || entriesLength === 0) {
-      throw new DeveloperError("entries must be an array with size > 0.");
+      throw new DeveloperError('entries must be an array with size > 0.');
     }
     //>>includeEnd('debug');
 
@@ -116,10 +116,10 @@ function preprocess(layers) {
 
       //>>includeStart('debug', pragmas.debug);
       if (!defined(entryOrig.height)) {
-        throw new DeveloperError("entry requires a height.");
+        throw new DeveloperError('entry requires a height.');
       }
       if (!defined(entryOrig.color)) {
-        throw new DeveloperError("entry requires a color.");
+        throw new DeveloperError('entry requires a color.');
       }
       //>>includeEnd('debug');
 
@@ -467,9 +467,9 @@ function createElevationBandMaterial(options) {
   const layers = options.layers;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.scene", scene);
-  Check.defined("options.layers", layers);
-  Check.typeOf.number.greaterThan("options.layers.length", layers.length, 0);
+  Check.typeOf.object('options.scene', scene);
+  Check.defined('options.layers', layers);
+  Check.typeOf.number.greaterThan('options.layers.length', layers.length, 0);
   //>>includeEnd('debug');
 
   const entries = createLayeredEntries(layers);
@@ -507,14 +507,14 @@ function createElevationBandMaterial(options) {
     source: {
       arrayBufferView: heightTexBuffer,
       width: entriesLength,
-      height: 1,
+      height: 1
     },
     sampler: new Sampler({
       wrapS: TextureWrap.CLAMP_TO_EDGE,
       wrapT: TextureWrap.CLAMP_TO_EDGE,
       minificationFilter: TextureMinificationFilter.NEAREST,
-      magnificationFilter: TextureMagnificationFilter.NEAREST,
-    }),
+      magnificationFilter: TextureMagnificationFilter.NEAREST
+    })
   });
 
   const colorsArray = new Uint8Array(entriesLength * 4);
@@ -534,19 +534,19 @@ function createElevationBandMaterial(options) {
     source: {
       arrayBufferView: colorsArray,
       width: entriesLength,
-      height: 1,
+      height: 1
     },
     sampler: new Sampler({
       wrapS: TextureWrap.CLAMP_TO_EDGE,
       wrapT: TextureWrap.CLAMP_TO_EDGE,
       minificationFilter: TextureMinificationFilter.LINEAR,
-      magnificationFilter: TextureMagnificationFilter.LINEAR,
-    }),
+      magnificationFilter: TextureMagnificationFilter.LINEAR
+    })
   });
 
-  const material = Material.fromType("ElevationBand", {
+  const material = Material.fromType('ElevationBand', {
     heights: heightsTex,
-    colors: colorsTex,
+    colors: colorsTex
   });
   return material;
 }

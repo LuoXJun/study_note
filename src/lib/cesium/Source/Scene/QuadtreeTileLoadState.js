@@ -34,6 +34,6 @@ const QuadtreeTileLoadState = {
    * @constant
    * @default 3
    */
-  FAILED: 3,
+  FAILED: 3
 };
 export default Object.freeze(QuadtreeTileLoadState);

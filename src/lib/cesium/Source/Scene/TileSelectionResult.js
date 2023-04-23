@@ -75,6 +75,6 @@ const TileSelectionResult = {
    */
   kick: function (value) {
     return value | 4;
-  },
+  }
 };
 export default TileSelectionResult;

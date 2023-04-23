@@ -1,6 +1,6 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
 
 /**
  * The interface for all properties, which represent a value that can optionally vary over time.
@@ -32,7 +32,7 @@ Object.defineProperties(Property.prototype, {
    * @readonly
    */
   isConstant: {
-    get: DeveloperError.throwInstantiationError,
+    get: DeveloperError.throwInstantiationError
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -44,8 +44,8 @@ Object.defineProperties(Property.prototype, {
    * @readonly
    */
   definitionChanged: {
-    get: DeveloperError.throwInstantiationError,
-  },
+    get: DeveloperError.throwInstantiationError
+  }
 });
 
 /**

@@ -23,7 +23,13 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './ComponentDatatype-4eeb6d9b'], (function (exports, RuntimeError, defaultValue, ComponentDatatype) { 'use strict';
+define([
+  'exports',
+  './RuntimeError-4f8ec8a2',
+  './defaultValue-97284df2',
+  './ComponentDatatype-4eeb6d9b'
+], function (exports, RuntimeError, defaultValue, ComponentDatatype) {
+  'use strict';
 
   const removeDuplicatesEpsilon = ComponentDatatype.CesiumMath.EPSILON10;
 
@@ -76,7 +82,7 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
     removedIndices
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("equalsEpsilon", equalsEpsilon);
+    RuntimeError.Check.defined('equalsEpsilon', equalsEpsilon);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(values)) {
@@ -150,6 +156,5 @@ define(['exports', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './Comp
   }
 
   exports.arrayRemoveDuplicates = arrayRemoveDuplicates;
-
-}));
+});
 //# sourceMappingURL=arrayRemoveDuplicates-1af79ba4.js.map

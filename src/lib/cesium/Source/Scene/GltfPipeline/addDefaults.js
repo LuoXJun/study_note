@@ -1,9 +1,9 @@
-import addToArray from "./addToArray.js";
-import ForEach from "./ForEach.js";
-import getAccessorByteStride from "./getAccessorByteStride.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import WebGLConstants from "../../Core/WebGLConstants.js";
+import addToArray from './addToArray.js';
+import ForEach from './ForEach.js';
+import getAccessorByteStride from './getAccessorByteStride.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import WebGLConstants from '../../Core/WebGLConstants.js';
 
 /**
  * Adds default glTF values if they don't exist.
@@ -34,7 +34,7 @@ function addDefaults(gltf) {
           gltf.materials = [];
         }
         const defaultMaterial = {
-          name: "default",
+          name: 'default'
         };
         primitive.material = addToArray(gltf.materials, defaultMaterial);
       }
@@ -85,11 +85,11 @@ function addDefaults(gltf) {
       values.transparent = defaultValue(values.transparent, false);
       values.doubleSided = defaultValue(values.doubleSided, false);
 
-      if (technique !== "CONSTANT") {
+      if (technique !== 'CONSTANT') {
         values.diffuse = defined(values.diffuse)
           ? values.diffuse
           : [0.0, 0.0, 0.0, 1.0];
-        if (technique !== "LAMBERT") {
+        if (technique !== 'LAMBERT') {
           values.specular = defined(values.specular)
             ? values.specular
             : [0.0, 0.0, 0.0, 1.0];
@@ -103,10 +103,10 @@ function addDefaults(gltf) {
       material.emissiveFactor,
       [0.0, 0.0, 0.0]
     );
-    material.alphaMode = defaultValue(material.alphaMode, "OPAQUE");
+    material.alphaMode = defaultValue(material.alphaMode, 'OPAQUE');
     material.doubleSided = defaultValue(material.doubleSided, false);
 
-    if (material.alphaMode === "MASK") {
+    if (material.alphaMode === 'MASK') {
       material.alphaCutoff = defaultValue(material.alphaCutoff, 0.5);
     }
 
@@ -163,7 +163,7 @@ function addDefaults(gltf) {
 
   ForEach.animation(gltf, function (animation) {
     ForEach.animationSampler(animation, function (sampler) {
-      sampler.interpolation = defaultValue(sampler.interpolation, "LINEAR");
+      sampler.interpolation = defaultValue(sampler.interpolation, 'LINEAR');
     });
   });
 
@@ -184,7 +184,7 @@ function addDefaults(gltf) {
         node.matrix,
         [
           1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0,
-          0.0, 1.0,
+          0.0, 1.0
         ]
       );
     }
@@ -210,7 +210,7 @@ function getAnimatedNodes(gltf) {
       const nodeId = target.node;
       const path = target.path;
       // Ignore animations that target 'weights'
-      if (path === "translation" || path === "rotation" || path === "scale") {
+      if (path === 'translation' || path === 'rotation' || path === 'scale') {
         nodes[nodeId] = true;
       }
     });

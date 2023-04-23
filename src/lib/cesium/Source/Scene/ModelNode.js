@@ -1,4 +1,4 @@
-import Matrix4 from "../Core/Matrix4.js";
+import Matrix4 from '../Core/Matrix4.js';
 
 /**
  * A model node with a transform for user-defined animations.  A glTF asset can
@@ -47,7 +47,7 @@ Object.defineProperties(ModelNode.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
 
   /**
@@ -61,7 +61,7 @@ Object.defineProperties(ModelNode.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
 
   /**
@@ -81,7 +81,7 @@ Object.defineProperties(ModelNode.prototype, {
         this._show = value;
         this._model._perNodeShowDirty = true;
       }
-    },
+    }
   },
 
   /**
@@ -106,7 +106,7 @@ Object.defineProperties(ModelNode.prototype, {
       const model = this._model;
       model._cesiumAnimationsDirty = true;
       this._runtimeNode.dirtyNumber = model._maxDirtyNumber;
-    },
+    }
   },
 
   /**
@@ -119,8 +119,8 @@ Object.defineProperties(ModelNode.prototype, {
   originalMatrix: {
     get: function () {
       return this._originalMatrix;
-    },
-  },
+    }
+  }
 });
 
 /**

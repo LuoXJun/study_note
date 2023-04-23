@@ -1,22 +1,22 @@
-import Check from "../Core/Check.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import CesiumMath from "../Core/Math.js";
-import Buffer from "./Buffer.js";
-import BufferUsage from "./BufferUsage.js";
-import VertexArray from "./VertexArray.js";
+import Check from '../Core/Check.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import CesiumMath from '../Core/Math.js';
+import Buffer from './Buffer.js';
+import BufferUsage from './BufferUsage.js';
+import VertexArray from './VertexArray.js';
 
 /**
  * @private
  */
 function VertexArrayFacade(context, attributes, sizeInVertices, instanced) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("context", context);
+  Check.defined('context', context);
   if (!attributes || attributes.length === 0) {
-    throw new DeveloperError("At least one attribute is required.");
+    throw new DeveloperError('At least one attribute is required.');
   }
   //>>includeEnd('debug');
 
@@ -64,9 +64,8 @@ function VertexArrayFacade(context, attributes, sizeInVertices, instanced) {
       attributesForUsage = attributesByUsage[usage];
 
       attributesForUsage.sort(compare);
-      const vertexSizeInBytes = VertexArrayFacade._vertexSizeInBytes(
-        attributesForUsage
-      );
+      const vertexSizeInBytes =
+        VertexArrayFacade._vertexSizeInBytes(attributesForUsage);
 
       const bufferUsage = attributesForUsage[0].usage;
 
@@ -79,7 +78,7 @@ function VertexArrayFacade(context, attributes, sizeInVertices, instanced) {
         arrayViews: VertexArrayFacade._createArrayViews(
           attributesForUsage,
           vertexSizeInBytes
-        ),
+        )
       };
 
       this._allBuffers.push(buffer);
@@ -115,7 +114,7 @@ VertexArrayFacade._verifyAttributes = function (attributes) {
 
       // There will be either a vertexBuffer or an [optional] usage.
       vertexBuffer: attribute.vertexBuffer,
-      usage: defaultValue(attribute.usage, BufferUsage.STATIC_DRAW),
+      usage: defaultValue(attribute.usage, BufferUsage.STATIC_DRAW)
     };
     attrs.push(attr);
 
@@ -127,20 +126,20 @@ VertexArrayFacade._verifyAttributes = function (attributes) {
       attr.componentsPerAttribute !== 4
     ) {
       throw new DeveloperError(
-        "attribute.componentsPerAttribute must be in the range [1, 4]."
+        'attribute.componentsPerAttribute must be in the range [1, 4].'
       );
     }
 
     const datatype = attr.componentDatatype;
     if (!ComponentDatatype.validate(datatype)) {
       throw new DeveloperError(
-        "Attribute must have a valid componentDatatype or not specify it."
+        'Attribute must have a valid componentDatatype or not specify it.'
       );
     }
 
     if (!BufferUsage.validate(attr.usage)) {
       throw new DeveloperError(
-        "Attribute must have a valid usage or not specify it."
+        'Attribute must have a valid usage or not specify it.'
       );
     }
     //>>includeEnd('debug');
@@ -207,7 +206,7 @@ VertexArrayFacade._createArrayViews = function (attributes, vertexSizeInBytes) {
       vertexSizeInComponentType:
         vertexSizeInBytes / ComponentDatatype.getSizeInBytes(componentDatatype),
 
-      view: undefined,
+      view: undefined
     });
 
     offsetInBytes +=
@@ -311,7 +310,7 @@ const createWriters = [
       view[i + 3] = component3;
       buffer.needsCommit = true;
     };
-  },
+  }
 ];
 
 VertexArrayFacade._appendWriters = function (writers, buffer) {
@@ -368,11 +367,11 @@ VertexArrayFacade.prototype.commit = function (indexBuffer) {
         va: new VertexArray({
           context: this._context,
           attributes: attributes,
-          indexBuffer: indexBuffer,
+          indexBuffer: indexBuffer
         }),
         indicesCount:
           1.5 *
-          (k !== numberOfVertexArrays - 1 ? chunkSize : this._size % chunkSize),
+          (k !== numberOfVertexArrays - 1 ? chunkSize : this._size % chunkSize)
         // TODO: not hardcode 1.5, this assumes 6 indices per 4 vertices (as for Billboard quads).
       });
     }
@@ -397,7 +396,7 @@ function commit(vertexArrayFacade, buffer) {
       buffer.vertexBuffer = Buffer.createVertexBuffer({
         context: vertexArrayFacade._context,
         typedArray: buffer.arrayBuffer,
-        usage: buffer.usage,
+        usage: buffer.usage
       });
       buffer.vertexBuffer.vertexArrayDestroyable = false;
 
@@ -430,7 +429,7 @@ VertexArrayFacade._appendAttributes = function (
       vertexBuffer: buffer.vertexBuffer,
       offsetInBytes: vertexBufferOffset + view.offsetInBytes,
       strideInBytes: buffer.vertexSizeInBytes,
-      instanceDivisor: instanced ? 1 : 0,
+      instanceDivisor: instanced ? 1 : 0
     });
   }
 };
@@ -442,12 +441,12 @@ VertexArrayFacade.prototype.subCommit = function (
   //>>includeStart('debug', pragmas.debug);
   if (offsetInVertices < 0 || offsetInVertices >= this._size) {
     throw new DeveloperError(
-      "offsetInVertices must be greater than or equal to zero and less than the vertex array size."
+      'offsetInVertices must be greater than or equal to zero and less than the vertex array size.'
     );
   }
   if (offsetInVertices + lengthInVertices > this._size) {
     throw new DeveloperError(
-      "offsetInVertices + lengthInVertices cannot exceed the vertex array size."
+      'offsetInVertices + lengthInVertices cannot exceed the vertex array size.'
     );
   }
   //>>includeEnd('debug');

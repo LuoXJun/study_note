@@ -1,7 +1,7 @@
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import PerformanceWatchdog from "../PerformanceWatchdog/PerformanceWatchdog.js";
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import PerformanceWatchdog from '../PerformanceWatchdog/PerformanceWatchdog.js';
 
 /**
  * A mixin which adds the {@link PerformanceWatchdog} widget to the {@link Viewer} widget.
@@ -26,7 +26,7 @@ import PerformanceWatchdog from "../PerformanceWatchdog/PerformanceWatchdog.js";
 function viewerPerformanceWatchdogMixin(viewer, options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(viewer)) {
-    throw new DeveloperError("viewer is required.");
+    throw new DeveloperError('viewer is required.');
   }
   //>>includeEnd('debug');
 
@@ -35,15 +35,15 @@ function viewerPerformanceWatchdogMixin(viewer, options) {
   const performanceWatchdog = new PerformanceWatchdog({
     scene: viewer.scene,
     container: viewer.bottomContainer,
-    lowFrameRateMessage: options.lowFrameRateMessage,
+    lowFrameRateMessage: options.lowFrameRateMessage
   });
 
   Object.defineProperties(viewer, {
     performanceWatchdog: {
       get: function () {
         return performanceWatchdog;
-      },
-    },
+      }
+    }
   });
 }
 export default viewerPerformanceWatchdogMixin;

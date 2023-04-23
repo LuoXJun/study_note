@@ -13,49 +13,49 @@ const VaryingType = {
    * @type {String}
    * @constant
    */
-  FLOAT: "float",
+  FLOAT: 'float',
   /**
    * A vector of 2 floating point values.
    *
    * @type {String}
    * @constant
    */
-  VEC2: "vec2",
+  VEC2: 'vec2',
   /**
    * A vector of 3 floating point values.
    *
    * @type {String}
    * @constant
    */
-  VEC3: "vec3",
+  VEC3: 'vec3',
   /**
    * A vector of 4 floating point values.
    *
    * @type {String}
    * @constant
    */
-  VEC4: "vec4",
+  VEC4: 'vec4',
   /**
    * A 2x2 matrix of floating point values.
    *
    * @type {String}
    * @constant
    */
-  MAT2: "mat2",
+  MAT2: 'mat2',
   /**
    * A 3x3 matrix of floating point values.
    *
    * @type {String}
    * @constant
    */
-  MAT3: "mat2",
+  MAT3: 'mat2',
   /**
    * A 3x3 matrix of floating point values.
    *
    * @type {String}
    * @constant
    */
-  MAT4: "mat4",
+  MAT4: 'mat4'
 };
 
 export default Object.freeze(VaryingType);

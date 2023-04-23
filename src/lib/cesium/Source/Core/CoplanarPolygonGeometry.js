@@ -1,27 +1,27 @@
-import arrayRemoveDuplicates from "./arrayRemoveDuplicates.js";
-import BoundingRectangle from "./BoundingRectangle.js";
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import CoplanarPolygonGeometryLibrary from "./CoplanarPolygonGeometryLibrary.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import GeometryInstance from "./GeometryInstance.js";
-import GeometryPipeline from "./GeometryPipeline.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
-import PolygonGeometryLibrary from "./PolygonGeometryLibrary.js";
-import PolygonPipeline from "./PolygonPipeline.js";
-import PrimitiveType from "./PrimitiveType.js";
-import Quaternion from "./Quaternion.js";
-import VertexFormat from "./VertexFormat.js";
+import arrayRemoveDuplicates from './arrayRemoveDuplicates.js';
+import BoundingRectangle from './BoundingRectangle.js';
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import CoplanarPolygonGeometryLibrary from './CoplanarPolygonGeometryLibrary.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Ellipsoid from './Ellipsoid.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import GeometryInstance from './GeometryInstance.js';
+import GeometryPipeline from './GeometryPipeline.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
+import PolygonGeometryLibrary from './PolygonGeometryLibrary.js';
+import PolygonPipeline from './PolygonPipeline.js';
+import PrimitiveType from './PrimitiveType.js';
+import Quaternion from './Quaternion.js';
+import VertexFormat from './VertexFormat.js';
 
 const scratchPosition = new Cartesian3();
 const scratchBR = new BoundingRectangle();
@@ -178,7 +178,7 @@ function createGeometryFromPolygon(
     attributes.position = new GeometryAttribute({
       componentDatatype: ComponentDatatype.DOUBLE,
       componentsPerAttribute: 3,
-      values: flatPositions,
+      values: flatPositions
     });
   }
 
@@ -186,7 +186,7 @@ function createGeometryFromPolygon(
     attributes.normal = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: normals,
+      values: normals
     });
   }
 
@@ -194,7 +194,7 @@ function createGeometryFromPolygon(
     attributes.tangent = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: tangents,
+      values: tangents
     });
   }
 
@@ -202,7 +202,7 @@ function createGeometryFromPolygon(
     attributes.bitangent = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 3,
-      values: bitangents,
+      values: bitangents
     });
   }
 
@@ -210,14 +210,14 @@ function createGeometryFromPolygon(
     attributes.st = new GeometryAttribute({
       componentDatatype: ComponentDatatype.FLOAT,
       componentsPerAttribute: 2,
-      values: textureCoordinates,
+      values: textureCoordinates
     });
   }
 
   return new Geometry({
     attributes: attributes,
     indices: newIndices,
-    primitiveType: PrimitiveType.TRIANGLES,
+    primitiveType: PrimitiveType.TRIANGLES
   });
 }
 
@@ -251,7 +251,7 @@ function CoplanarPolygonGeometry(options) {
   const polygonHierarchy = options.polygonHierarchy;
   const textureCoordinates = options.textureCoordinates;
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.polygonHierarchy", polygonHierarchy);
+  Check.defined('options.polygonHierarchy', polygonHierarchy);
   //>>includeEnd('debug');
 
   const vertexFormat = defaultValue(options.vertexFormat, VertexFormat.DEFAULT);
@@ -261,7 +261,7 @@ function CoplanarPolygonGeometry(options) {
   this._ellipsoid = Ellipsoid.clone(
     defaultValue(options.ellipsoid, Ellipsoid.WGS84)
   );
-  this._workerName = "createCoplanarPolygonGeometry";
+  this._workerName = 'createCoplanarPolygonGeometry';
   this._textureCoordinates = textureCoordinates;
 
   /**
@@ -314,17 +314,17 @@ CoplanarPolygonGeometry.fromPositions = function (options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.positions", options.positions);
+  Check.defined('options.positions', options.positions);
   //>>includeEnd('debug');
 
   const newOptions = {
     polygonHierarchy: {
-      positions: options.positions,
+      positions: options.positions
     },
     vertexFormat: options.vertexFormat,
     stRotation: options.stRotation,
     ellipsoid: options.ellipsoid,
-    textureCoordinates: options.textureCoordinates,
+    textureCoordinates: options.textureCoordinates
   };
   return new CoplanarPolygonGeometry(newOptions);
 };
@@ -340,8 +340,8 @@ CoplanarPolygonGeometry.fromPositions = function (options) {
  */
 CoplanarPolygonGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -378,7 +378,7 @@ CoplanarPolygonGeometry.pack = function (value, array, startingIndex) {
 const scratchEllipsoid = Ellipsoid.clone(Ellipsoid.UNIT_SPHERE);
 const scratchVertexFormat = new VertexFormat();
 const scratchOptions = {
-  polygonHierarchy: {},
+  polygonHierarchy: {}
 };
 /**
  * Retrieves an instance from a packed array.
@@ -390,7 +390,7 @@ const scratchOptions = {
  */
 CoplanarPolygonGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -473,12 +473,13 @@ CoplanarPolygonGeometry.createGeometry = function (polygonGeometry) {
   let axis1 = axis1Scratch;
   const axis2 = axis2Scratch;
 
-  const validGeometry = CoplanarPolygonGeometryLibrary.computeProjectTo2DArguments(
-    outerPositions,
-    centerScratch,
-    axis1,
-    axis2
-  );
+  const validGeometry =
+    CoplanarPolygonGeometryLibrary.computeProjectTo2DArguments(
+      outerPositions,
+      centerScratch,
+      axis1,
+      axis2
+    );
   if (!validGeometry) {
     return undefined;
   }
@@ -503,16 +504,18 @@ CoplanarPolygonGeometry.createGeometry = function (polygonGeometry) {
     }
   }
 
-  const projectPoints = CoplanarPolygonGeometryLibrary.createProjectPointsTo2DFunction(
-    centerScratch,
-    axis1,
-    axis2
-  );
-  const projectPoint = CoplanarPolygonGeometryLibrary.createProjectPointTo2DFunction(
-    centerScratch,
-    axis1,
-    axis2
-  );
+  const projectPoints =
+    CoplanarPolygonGeometryLibrary.createProjectPointsTo2DFunction(
+      centerScratch,
+      axis1,
+      axis2
+    );
+  const projectPoint =
+    CoplanarPolygonGeometryLibrary.createProjectPointTo2DFunction(
+      centerScratch,
+      axis1,
+      axis2
+    );
 
   if (vertexFormat.tangent) {
     tangent = Cartesian3.clone(axis1, tangent);
@@ -570,7 +573,7 @@ CoplanarPolygonGeometry.createGeometry = function (polygonGeometry) {
         normal,
         tangent,
         bitangent
-      ),
+      )
     });
 
     geometries.push(geometryInstance);
@@ -593,7 +596,7 @@ CoplanarPolygonGeometry.createGeometry = function (polygonGeometry) {
     attributes: attributes,
     indices: geometry.indices,
     primitiveType: geometry.primitiveType,
-    boundingSphere: boundingSphere,
+    boundingSphere: boundingSphere
   });
 };
 export default CoplanarPolygonGeometry;

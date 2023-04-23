@@ -1,4 +1,4 @@
-import defined from "./defined.js";
+import defined from './defined.js';
 
 /**
  * Constructs an exception object that is thrown due to an error that can occur at runtime, e.g.,
@@ -23,7 +23,7 @@ function RuntimeError(message) {
    * @type {String}
    * @readonly
    */
-  this.name = "RuntimeError";
+  this.name = 'RuntimeError';
 
   /**
    * The explanation for why this exception was thrown.

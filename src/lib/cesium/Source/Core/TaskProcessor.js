@@ -1,20 +1,20 @@
-import Uri from "../ThirdParty/Uri.js";
-import buildModuleUrl from "./buildModuleUrl.js";
-import defaultValue from "./defaultValue.js";
-import defer from "./defer.js";
-import defined from "./defined.js";
-import destroyObject from "./destroyObject.js";
-import DeveloperError from "./DeveloperError.js";
-import Event from "./Event.js";
-import FeatureDetection from "./FeatureDetection.js";
-import isCrossOriginUrl from "./isCrossOriginUrl.js";
-import Resource from "./Resource.js";
-import RuntimeError from "./RuntimeError.js";
+import Uri from '../ThirdParty/Uri.js';
+import buildModuleUrl from './buildModuleUrl.js';
+import defaultValue from './defaultValue.js';
+import defer from './defer.js';
+import defined from './defined.js';
+import destroyObject from './destroyObject.js';
+import DeveloperError from './DeveloperError.js';
+import Event from './Event.js';
+import FeatureDetection from './FeatureDetection.js';
+import isCrossOriginUrl from './isCrossOriginUrl.js';
+import Resource from './Resource.js';
+import RuntimeError from './RuntimeError.js';
 
 function canTransferArrayBuffer() {
   if (!defined(TaskProcessor._canTransferArrayBuffer)) {
     const worker = new Worker(
-      getWorkerUrl("Workers/transferTypedArrayTest.js")
+      getWorkerUrl('Workers/transferTypedArrayTest.js')
     );
     worker.postMessage = defaultValue(
       worker.webkitPostMessage,
@@ -29,7 +29,7 @@ function canTransferArrayBuffer() {
       // if transferring array buffers is not supported.
       worker.postMessage(
         {
-          array: array,
+          array: array
         },
         [array.buffer]
       );
@@ -76,10 +76,10 @@ function completeTask(processor, data) {
 
   if (defined(data.error)) {
     let error = data.error;
-    if (error.name === "RuntimeError") {
+    if (error.name === 'RuntimeError') {
       error = new RuntimeError(data.error.message);
       error.stack = data.error.stack;
-    } else if (error.name === "DeveloperError") {
+    } else if (error.name === 'DeveloperError') {
       error = new DeveloperError(data.error.message);
       error.stack = data.error.stack;
     }
@@ -103,7 +103,7 @@ function getWorkerUrl(moduleID) {
     let blob;
     try {
       blob = new Blob([script], {
-        type: "application/javascript",
+        type: 'application/javascript'
       });
     } catch (e) {
       const BlobBuilder =
@@ -113,7 +113,7 @@ function getWorkerUrl(moduleID) {
         window.MSBlobBuilder;
       const blobBuilder = new BlobBuilder();
       blobBuilder.append(script);
-      blob = blobBuilder.getBlob("application/javascript");
+      blob = blobBuilder.getBlob('application/javascript');
     }
 
     const URL = window.URL || window.webkitURL;
@@ -126,7 +126,7 @@ function getWorkerUrl(moduleID) {
 let bootstrapperUrlResult;
 function getBootstrapperUrl() {
   if (!defined(bootstrapperUrlResult)) {
-    bootstrapperUrlResult = getWorkerUrl("Workers/cesiumWorkerBootstrapper.js");
+    bootstrapperUrlResult = getWorkerUrl('Workers/cesiumWorkerBootstrapper.js');
   }
   return bootstrapperUrlResult;
 }
@@ -141,11 +141,11 @@ function createWorker(processor) {
   const bootstrapMessage = {
     loaderConfig: {
       paths: {
-        Workers: buildModuleUrl("Workers"),
+        Workers: buildModuleUrl('Workers')
       },
-      baseUrl: buildModuleUrl.getCesiumBaseUrl().url,
+      baseUrl: buildModuleUrl.getCesiumBaseUrl().url
     },
-    workerModule: processor._workerPath,
+    workerModule: processor._workerPath
   };
 
   worker.postMessage(bootstrapMessage);
@@ -160,7 +160,7 @@ function getWebAssemblyLoaderConfig(processor, wasmOptions) {
   const config = {
     modulePath: undefined,
     wasmBinaryFile: undefined,
-    wasmBinary: undefined,
+    wasmBinary: undefined
   };
 
   // Web assembly not supported, use fallback js module if provided
@@ -179,7 +179,7 @@ function getWebAssemblyLoaderConfig(processor, wasmOptions) {
   config.wasmBinaryFile = buildModuleUrl(wasmOptions.wasmBinaryFile);
 
   return Resource.fetchArrayBuffer({
-    url: config.wasmBinaryFile,
+    url: config.wasmBinaryFile
   }).then(function (arrayBuffer) {
     config.wasmBinary = arrayBuffer;
     return config;
@@ -275,7 +275,7 @@ TaskProcessor.prototype.scheduleTask = function (
       {
         id: id,
         parameters: parameters,
-        canTransferArrayBuffer: canTransferArrayBuffer,
+        canTransferArrayBuffer: canTransferArrayBuffer
       },
       transferableObjects
     );
@@ -371,7 +371,7 @@ TaskProcessor.prototype.destroy = function () {
 TaskProcessor.taskCompletedEvent = taskCompletedEvent;
 
 // exposed for testing purposes
-TaskProcessor._defaultWorkerModulePrefix = "Workers/";
+TaskProcessor._defaultWorkerModulePrefix = 'Workers/';
 TaskProcessor._workerModulePrefix = TaskProcessor._defaultWorkerModulePrefix;
 TaskProcessor._canTransferArrayBuffer = undefined;
 export default TaskProcessor;

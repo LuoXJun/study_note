@@ -1,16 +1,16 @@
-import buildModuleUrl from "../Core/buildModuleUrl.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import IauOrientationAxes from "../Core/IauOrientationAxes.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
-import Simon1994PlanetaryPositions from "../Core/Simon1994PlanetaryPositions.js";
-import Transforms from "../Core/Transforms.js";
-import EllipsoidPrimitive from "./EllipsoidPrimitive.js";
-import Material from "./Material.js";
+import buildModuleUrl from '../Core/buildModuleUrl.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import IauOrientationAxes from '../Core/IauOrientationAxes.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
+import Simon1994PlanetaryPositions from '../Core/Simon1994PlanetaryPositions.js';
+import Transforms from '../Core/Transforms.js';
+import EllipsoidPrimitive from './EllipsoidPrimitive.js';
+import Material from './Material.js';
 
 /**
  * Draws the Moon in 3D.
@@ -34,7 +34,7 @@ function Moon(options) {
 
   let url = options.textureUrl;
   if (!defined(url)) {
-    url = buildModuleUrl("Assets/Textures/moonSmall.jpg");
+    url = buildModuleUrl('Assets/Textures/moonSmall.jpg');
   }
 
   /**
@@ -65,7 +65,7 @@ function Moon(options) {
     radii: this.ellipsoid.radii,
     material: Material.fromType(Material.ImageType),
     depthTestEnabled: false,
-    _owner: this,
+    _owner: this
   });
   this._ellipsoidPrimitive.material.translucent = false;
 
@@ -86,8 +86,8 @@ Object.defineProperties(Moon.prototype, {
   ellipsoid: {
     get: function () {
       return this._ellipsoid;
-    },
-  },
+    }
+  }
 });
 
 const icrfToFixed = new Matrix3();
@@ -116,10 +116,11 @@ Moon.prototype.update = function (frameState) {
   Matrix3.transpose(rotation, rotation);
   Matrix3.multiply(icrfToFixed, rotation, rotation);
 
-  const translation = Simon1994PlanetaryPositions.computeMoonPositionInEarthInertialFrame(
-    date,
-    translationScratch
-  );
+  const translation =
+    Simon1994PlanetaryPositions.computeMoonPositionInEarthInertialFrame(
+      date,
+      translationScratch
+    );
   Matrix3.multiplyByVector(icrfToFixed, translation, translation);
 
   Matrix4.fromRotationTranslation(

@@ -1,9 +1,9 @@
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Quaternion from "../Core/Quaternion.js";
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Quaternion from '../Core/Quaternion.js';
 
 /**
  * @private
@@ -11,7 +11,7 @@ import Quaternion from "../Core/Quaternion.js";
 function DeviceOrientationCameraController(scene) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required.");
+    throw new DeveloperError('scene is required.');
   }
   //>>includeEnd('debug');
 
@@ -41,10 +41,10 @@ function DeviceOrientationCameraController(scene) {
     that._gamma = CesiumMath.toRadians(e.gamma);
   }
 
-  window.addEventListener("deviceorientation", callback, false);
+  window.addEventListener('deviceorientation', callback, false);
 
   this._removeListener = function () {
-    window.removeEventListener("deviceorientation", callback, false);
+    window.removeEventListener('deviceorientation', callback, false);
   };
 }
 

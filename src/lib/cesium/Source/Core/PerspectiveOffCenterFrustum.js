@@ -1,11 +1,11 @@
-import Cartesian3 from "./Cartesian3.js";
-import Cartesian4 from "./Cartesian4.js";
-import CullingVolume from "./CullingVolume.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import CesiumMath from "./Math.js";
-import Matrix4 from "./Matrix4.js";
+import Cartesian3 from './Cartesian3.js';
+import Cartesian4 from './Cartesian4.js';
+import CullingVolume from './CullingVolume.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import CesiumMath from './Math.js';
+import Matrix4 from './Matrix4.js';
 
 /**
  * The viewing frustum is defined by 6 planes.
@@ -103,7 +103,7 @@ function update(frustum) {
     !defined(frustum.far)
   ) {
     throw new DeveloperError(
-      "right, left, top, bottom, near, or far parameters are not set."
+      'right, left, top, bottom, near, or far parameters are not set.'
     );
   }
   //>>includeEnd('debug');
@@ -126,7 +126,7 @@ function update(frustum) {
     //>>includeStart('debug', pragmas.debug);
     if (frustum.near <= 0 || frustum.near > frustum.far) {
       throw new DeveloperError(
-        "near must be greater than zero and less than far."
+        'near must be greater than zero and less than far.'
       );
     }
     //>>includeEnd('debug');
@@ -170,7 +170,7 @@ Object.defineProperties(PerspectiveOffCenterFrustum.prototype, {
     get: function () {
       update(this);
       return this._perspectiveMatrix;
-    },
+    }
   },
 
   /**
@@ -185,8 +185,8 @@ Object.defineProperties(PerspectiveOffCenterFrustum.prototype, {
     get: function () {
       update(this);
       return this._infinitePerspective;
-    },
-  },
+    }
+  }
 });
 
 const getPlanesRight = new Cartesian3();
@@ -213,15 +213,15 @@ PerspectiveOffCenterFrustum.prototype.computeCullingVolume = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(position)) {
-    throw new DeveloperError("position is required.");
+    throw new DeveloperError('position is required.');
   }
 
   if (!defined(direction)) {
-    throw new DeveloperError("direction is required.");
+    throw new DeveloperError('direction is required.');
   }
 
   if (!defined(up)) {
-    throw new DeveloperError("up is required.");
+    throw new DeveloperError('up is required.');
   }
   //>>includeEnd('debug');
 
@@ -378,26 +378,26 @@ PerspectiveOffCenterFrustum.prototype.getPixelDimensions = function (
   //>>includeStart('debug', pragmas.debug);
   if (!defined(drawingBufferWidth) || !defined(drawingBufferHeight)) {
     throw new DeveloperError(
-      "Both drawingBufferWidth and drawingBufferHeight are required."
+      'Both drawingBufferWidth and drawingBufferHeight are required.'
     );
   }
   if (drawingBufferWidth <= 0) {
-    throw new DeveloperError("drawingBufferWidth must be greater than zero.");
+    throw new DeveloperError('drawingBufferWidth must be greater than zero.');
   }
   if (drawingBufferHeight <= 0) {
-    throw new DeveloperError("drawingBufferHeight must be greater than zero.");
+    throw new DeveloperError('drawingBufferHeight must be greater than zero.');
   }
   if (!defined(distance)) {
-    throw new DeveloperError("distance is required.");
+    throw new DeveloperError('distance is required.');
   }
   if (!defined(pixelRatio)) {
-    throw new DeveloperError("pixelRatio is required");
+    throw new DeveloperError('pixelRatio is required');
   }
   if (pixelRatio <= 0) {
-    throw new DeveloperError("pixelRatio must be greater than zero.");
+    throw new DeveloperError('pixelRatio must be greater than zero.');
   }
   if (!defined(result)) {
-    throw new DeveloperError("A result object is required.");
+    throw new DeveloperError('A result object is required.');
   }
   //>>includeEnd('debug');
 

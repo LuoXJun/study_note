@@ -1,4 +1,4 @@
-import defined from "./defined.js";
+import defined from './defined.js';
 
 /**
  * @private
@@ -13,8 +13,8 @@ Object.defineProperties(DoublyLinkedList.prototype, {
   length: {
     get: function () {
       return this._length;
-    },
-  },
+    }
+  }
 });
 
 /**

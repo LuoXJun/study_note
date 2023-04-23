@@ -1,12 +1,12 @@
-import Cartesian3 from "./Cartesian3.js";
-import Cartesian4 from "./Cartesian4.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import LinearSpline from "./LinearSpline.js";
-import Matrix4 from "./Matrix4.js";
-import Spline from "./Spline.js";
-import TridiagonalSystemSolver from "./TridiagonalSystemSolver.js";
+import Cartesian3 from './Cartesian3.js';
+import Cartesian4 from './Cartesian4.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import LinearSpline from './LinearSpline.js';
+import Matrix4 from './Matrix4.js';
+import Spline from './Spline.js';
+import TridiagonalSystemSolver from './TridiagonalSystemSolver.js';
 
 const scratchLower = [];
 const scratchDiagonal = [];
@@ -182,23 +182,23 @@ function HermiteSpline(options) {
     !defined(outTangents)
   ) {
     throw new DeveloperError(
-      "times, points, inTangents, and outTangents are required."
+      'times, points, inTangents, and outTangents are required.'
     );
   }
   if (points.length < 2) {
     throw new DeveloperError(
-      "points.length must be greater than or equal to 2."
+      'points.length must be greater than or equal to 2.'
     );
   }
   if (times.length !== points.length) {
-    throw new DeveloperError("times.length must be equal to points.length.");
+    throw new DeveloperError('times.length must be equal to points.length.');
   }
   if (
     inTangents.length !== outTangents.length ||
     inTangents.length !== points.length - 1
   ) {
     throw new DeveloperError(
-      "inTangents and outTangents must have a length equal to points.length - 1."
+      'inTangents and outTangents must have a length equal to points.length - 1.'
     );
   }
   //>>includeEnd('debug');
@@ -212,7 +212,7 @@ function HermiteSpline(options) {
     this._pointType !== Spline.getPointType(outTangents[0])
   ) {
     throw new DeveloperError(
-      "inTangents and outTangents must be of the same type as points."
+      'inTangents and outTangents must be of the same type as points.'
     );
   }
   //>>includeEnd('debug');
@@ -235,7 +235,7 @@ Object.defineProperties(HermiteSpline.prototype, {
   times: {
     get: function () {
       return this._times;
-    },
+    }
   },
 
   /**
@@ -249,7 +249,7 @@ Object.defineProperties(HermiteSpline.prototype, {
   points: {
     get: function () {
       return this._points;
-    },
+    }
   },
 
   /**
@@ -263,7 +263,7 @@ Object.defineProperties(HermiteSpline.prototype, {
   inTangents: {
     get: function () {
       return this._inTangents;
-    },
+    }
   },
 
   /**
@@ -277,8 +277,8 @@ Object.defineProperties(HermiteSpline.prototype, {
   outTangents: {
     get: function () {
       return this._outTangents;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -328,16 +328,16 @@ HermiteSpline.createC1 = function (options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(points) || !defined(times) || !defined(tangents)) {
-    throw new DeveloperError("points, times and tangents are required.");
+    throw new DeveloperError('points, times and tangents are required.');
   }
   if (points.length < 2) {
     throw new DeveloperError(
-      "points.length must be greater than or equal to 2."
+      'points.length must be greater than or equal to 2.'
     );
   }
   if (times.length !== points.length || times.length !== tangents.length) {
     throw new DeveloperError(
-      "times, points and tangents must have the same length."
+      'times, points and tangents must have the same length.'
     );
   }
   //>>includeEnd('debug');
@@ -349,7 +349,7 @@ HermiteSpline.createC1 = function (options) {
     times: times,
     points: points,
     inTangents: inTangents,
-    outTangents: outTangents,
+    outTangents: outTangents
   });
 };
 
@@ -387,22 +387,22 @@ HermiteSpline.createNaturalCubic = function (options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(points) || !defined(times)) {
-    throw new DeveloperError("points and times are required.");
+    throw new DeveloperError('points and times are required.');
   }
   if (points.length < 2) {
     throw new DeveloperError(
-      "points.length must be greater than or equal to 2."
+      'points.length must be greater than or equal to 2.'
     );
   }
   if (times.length !== points.length) {
-    throw new DeveloperError("times.length must be equal to points.length.");
+    throw new DeveloperError('times.length must be equal to points.length.');
   }
   //>>includeEnd('debug');
 
   if (points.length < 3) {
     return new LinearSpline({
       points: points,
-      times: times,
+      times: times
     });
   }
 
@@ -414,7 +414,7 @@ HermiteSpline.createNaturalCubic = function (options) {
     times: times,
     points: points,
     inTangents: inTangents,
-    outTangents: outTangents,
+    outTangents: outTangents
   });
 };
 
@@ -465,16 +465,16 @@ HermiteSpline.createClampedCubic = function (options) {
     !defined(lastTangent)
   ) {
     throw new DeveloperError(
-      "points, times, firstTangent and lastTangent are required."
+      'points, times, firstTangent and lastTangent are required.'
     );
   }
   if (points.length < 2) {
     throw new DeveloperError(
-      "points.length must be greater than or equal to 2."
+      'points.length must be greater than or equal to 2.'
     );
   }
   if (times.length !== points.length) {
-    throw new DeveloperError("times.length must be equal to points.length.");
+    throw new DeveloperError('times.length must be equal to points.length.');
   }
   //>>includeEnd('debug');
 
@@ -486,7 +486,7 @@ HermiteSpline.createClampedCubic = function (options) {
     PointType !== Spline.getPointType(lastTangent)
   ) {
     throw new DeveloperError(
-      "firstTangent and lastTangent must be of the same type as points."
+      'firstTangent and lastTangent must be of the same type as points.'
     );
   }
   //>>includeEnd('debug');
@@ -494,7 +494,7 @@ HermiteSpline.createClampedCubic = function (options) {
   if (points.length < 3) {
     return new LinearSpline({
       points: points,
-      times: times,
+      times: times
     });
   }
 
@@ -506,7 +506,7 @@ HermiteSpline.createClampedCubic = function (options) {
     times: times,
     points: points,
     inTangents: inTangents,
-    outTangents: outTangents,
+    outTangents: outTangents
   });
 };
 

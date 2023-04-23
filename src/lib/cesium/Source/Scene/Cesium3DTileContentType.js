@@ -18,7 +18,7 @@ const Cesium3DTileContentType = {
    * @constant
    * @private
    */
-  BATCHED_3D_MODEL: "b3dm",
+  BATCHED_3D_MODEL: 'b3dm',
   /**
    * An Instanced 3D Model. This is a binary format with magic number
    * <code>i3dm</code>
@@ -27,7 +27,7 @@ const Cesium3DTileContentType = {
    * @constant
    * @private
    */
-  INSTANCED_3D_MODEL: "i3dm",
+  INSTANCED_3D_MODEL: 'i3dm',
   /**
    * A Composite model. This is a binary format with magic number
    * <code>cmpt</code>
@@ -36,7 +36,7 @@ const Cesium3DTileContentType = {
    * @constant
    * @private
    */
-  COMPOSITE: "cmpt",
+  COMPOSITE: 'cmpt',
   /**
    * A Point Cloud model. This is a binary format with magic number
    * <code>pnts</code>
@@ -45,7 +45,7 @@ const Cesium3DTileContentType = {
    * @constant
    * @private
    */
-  POINT_CLOUD: "pnts",
+  POINT_CLOUD: 'pnts',
   /**
    * Vector tiles. This is a binary format with magic number
    * <code>vctr</code>
@@ -54,7 +54,7 @@ const Cesium3DTileContentType = {
    * @constant
    * @private
    */
-  VECTOR: "vctr",
+  VECTOR: 'vctr',
   /**
    * Geometry tiles. This is a binary format with magic number
    * <code>geom</code>
@@ -63,7 +63,7 @@ const Cesium3DTileContentType = {
    * @constant
    * @private
    */
-  GEOMETRY: "geom",
+  GEOMETRY: 'geom',
   /**
    * A glTF model in JSON + external BIN form. This is treated
    * as a JSON format.
@@ -73,7 +73,7 @@ const Cesium3DTileContentType = {
    * @private
    * @experimental This feature is using part of the 3D Tiles spec that is not final and is subject to change without Cesium's standard deprecation policy.
    */
-  GLTF: "gltf",
+  GLTF: 'gltf',
   /**
    * The binary form of a glTF file. Internally, the magic number is
    * changed from <code>glTF</code> to <code>glb</code> to distinguish it from
@@ -84,7 +84,7 @@ const Cesium3DTileContentType = {
    * @private
    * @experimental This feature is using part of the 3D Tiles spec that is not final and is subject to change without Cesium's standard deprecation policy.
    */
-  GLTF_BINARY: "glb",
+  GLTF_BINARY: 'glb',
   /**
    * For implicit tiling, availability bitstreams are stored in binary subtree files.
    * The magic number is <code>subt</code>
@@ -94,7 +94,7 @@ const Cesium3DTileContentType = {
    * @private
    * @experimental This feature is using part of the 3D Tiles spec that is not final and is subject to change without Cesium's standard deprecation policy.
    */
-  IMPLICIT_SUBTREE: "subt",
+  IMPLICIT_SUBTREE: 'subt',
   /**
    * For implicit tiling. Subtrees can also be represented as JSON files.
    *
@@ -103,7 +103,7 @@ const Cesium3DTileContentType = {
    * @private
    * @experimental This feature is using part of the 3D Tiles spec that is not final and is subject to change without Cesium's standard deprecation policy.
    */
-  IMPLICIT_SUBTREE_JSON: "subtreeJson",
+  IMPLICIT_SUBTREE_JSON: 'subtreeJson',
   /**
    * Contents can reference another tileset.json to use
    * as an external tileset. This is a JSON-based format.
@@ -112,7 +112,7 @@ const Cesium3DTileContentType = {
    * @constant
    * @private
    */
-  EXTERNAL_TILESET: "externalTileset",
+  EXTERNAL_TILESET: 'externalTileset',
   /**
    * Multiple contents are handled separately from the other content types
    * due to differences in request scheduling.
@@ -122,7 +122,7 @@ const Cesium3DTileContentType = {
    * @private
    * @experimental This feature is using part of the 3D Tiles spec that is not final and is subject to change without Cesium's standard deprecation policy.
    */
-  MULTIPLE_CONTENT: "multipleContent",
+  MULTIPLE_CONTENT: 'multipleContent',
   /**
    * GeoJSON content for <code>MAXAR_content_geojson</code> extension.
    *
@@ -131,7 +131,7 @@ const Cesium3DTileContentType = {
    * @private
    * @experimental This feature is using part of the 3D Tiles spec that is not final and is subject to change without Cesium's standard deprecation policy.
    */
-  GEOJSON: "geoJson",
+  GEOJSON: 'geoJson'
 };
 
 /**

@@ -1,8 +1,8 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import knockout from "../ThirdParty/knockout.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import knockout from '../ThirdParty/knockout.js';
 
 /**
  * Create a Command from a given function, for use with ViewModels.
@@ -20,7 +20,7 @@ import knockout from "../ThirdParty/knockout.js";
 function createCommand(func, canExecute) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(func)) {
-    throw new DeveloperError("func is required.");
+    throw new DeveloperError('func is required.');
   }
   //>>includeEnd('debug');
 
@@ -32,13 +32,13 @@ function createCommand(func, canExecute) {
   function command() {
     //>>includeStart('debug', pragmas.debug);
     if (!command.canExecute) {
-      throw new DeveloperError("Cannot execute command, canExecute is false.");
+      throw new DeveloperError('Cannot execute command, canExecute is false.');
     }
     //>>includeEnd('debug');
 
     const commandInfo = {
       args: arguments,
-      cancel: false,
+      cancel: false
     };
 
     let result;
@@ -51,15 +51,15 @@ function createCommand(func, canExecute) {
   }
 
   command.canExecute = canExecute;
-  knockout.track(command, ["canExecute"]);
+  knockout.track(command, ['canExecute']);
 
   Object.defineProperties(command, {
     beforeExecute: {
-      value: beforeExecute,
+      value: beforeExecute
     },
     afterExecute: {
-      value: afterExecute,
-    },
+      value: afterExecute
+    }
   });
 
   return command;

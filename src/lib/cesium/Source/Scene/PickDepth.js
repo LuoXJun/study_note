@@ -1,8 +1,8 @@
-import Cartesian4 from "../Core/Cartesian4.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import FramebufferManager from "../Renderer/FramebufferManager.js";
-import RenderState from "../Renderer/RenderState.js";
+import Cartesian4 from '../Core/Cartesian4.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import FramebufferManager from '../Renderer/FramebufferManager.js';
+import RenderState from '../Renderer/RenderState.js';
 
 /**
  * @private
@@ -18,8 +18,8 @@ Object.defineProperties(PickDepth.prototype, {
   framebuffer: {
     get: function () {
       return this._framebuffer.framebuffer;
-    },
-  },
+    }
+  }
 });
 
 function updateFramebuffers(pickDepth, context, depthTexture) {
@@ -31,20 +31,20 @@ function updateFramebuffers(pickDepth, context, depthTexture) {
 function updateCopyCommands(pickDepth, context, depthTexture) {
   if (!defined(pickDepth._copyDepthCommand)) {
     const fs =
-      "uniform highp sampler2D u_texture;\n" +
-      "varying vec2 v_textureCoordinates;\n" +
-      "void main()\n" +
-      "{\n" +
-      "    gl_FragColor = czm_packDepth(texture2D(u_texture, v_textureCoordinates).r);\n" +
-      "}\n";
+      'uniform highp sampler2D u_texture;\n' +
+      'varying vec2 v_textureCoordinates;\n' +
+      'void main()\n' +
+      '{\n' +
+      '    gl_FragColor = czm_packDepth(texture2D(u_texture, v_textureCoordinates).r);\n' +
+      '}\n';
     pickDepth._copyDepthCommand = context.createViewportQuadCommand(fs, {
       renderState: RenderState.fromCache(),
       uniformMap: {
         u_texture: function () {
           return pickDepth._textureToCopy;
-        },
+        }
       },
-      owner: pickDepth,
+      owner: pickDepth
     });
   }
 
@@ -76,7 +76,7 @@ PickDepth.prototype.getDepth = function (context, x, y) {
     y: y,
     width: 1,
     height: 1,
-    framebuffer: this.framebuffer,
+    framebuffer: this.framebuffer
   });
 
   const packedDepth = Cartesian4.unpack(pixels, 0, scratchPackedDepth);

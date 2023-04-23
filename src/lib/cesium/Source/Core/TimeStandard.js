@@ -25,6 +25,6 @@ const TimeStandard = {
    * @type {Number}
    * @constant
    */
-  TAI: 1,
+  TAI: 1
 };
 export default Object.freeze(TimeStandard);

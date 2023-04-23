@@ -23,7 +23,22 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeError-4f8ec8a2', './Transforms-273eeb44', './ComponentDatatype-4eeb6d9b'], (function (exports, Matrix2, defaultValue, RuntimeError, Transforms, ComponentDatatype) { 'use strict';
+define([
+  'exports',
+  './Matrix2-9e1c22e2',
+  './defaultValue-97284df2',
+  './RuntimeError-4f8ec8a2',
+  './Transforms-273eeb44',
+  './ComponentDatatype-4eeb6d9b'
+], function (
+  exports,
+  Matrix2,
+  defaultValue,
+  RuntimeError,
+  Transforms,
+  ComponentDatatype
+) {
+  'use strict';
 
   /**
    * Defines functions for 2nd order polynomial functions of one variable with only real coefficients.
@@ -42,14 +57,14 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
    */
   QuadraticRealPolynomial.computeDiscriminant = function (a, b, c) {
     //>>includeStart('debug', pragmas.debug);
-    if (typeof a !== "number") {
-      throw new RuntimeError.DeveloperError("a is a required number.");
+    if (typeof a !== 'number') {
+      throw new RuntimeError.DeveloperError('a is a required number.');
     }
-    if (typeof b !== "number") {
-      throw new RuntimeError.DeveloperError("b is a required number.");
+    if (typeof b !== 'number') {
+      throw new RuntimeError.DeveloperError('b is a required number.');
     }
-    if (typeof c !== "number") {
-      throw new RuntimeError.DeveloperError("c is a required number.");
+    if (typeof c !== 'number') {
+      throw new RuntimeError.DeveloperError('c is a required number.');
     }
     //>>includeEnd('debug');
 
@@ -60,8 +75,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
   function addWithCancellationCheck$1(left, right, tolerance) {
     const difference = left + right;
     if (
-      ComponentDatatype.CesiumMath.sign(left) !== ComponentDatatype.CesiumMath.sign(right) &&
-      Math.abs(difference / Math.max(Math.abs(left), Math.abs(right))) < tolerance
+      ComponentDatatype.CesiumMath.sign(left) !==
+        ComponentDatatype.CesiumMath.sign(right) &&
+      Math.abs(difference / Math.max(Math.abs(left), Math.abs(right))) <
+        tolerance
     ) {
       return 0.0;
     }
@@ -79,14 +96,14 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
    */
   QuadraticRealPolynomial.computeRealRoots = function (a, b, c) {
     //>>includeStart('debug', pragmas.debug);
-    if (typeof a !== "number") {
-      throw new RuntimeError.DeveloperError("a is a required number.");
+    if (typeof a !== 'number') {
+      throw new RuntimeError.DeveloperError('a is a required number.');
     }
-    if (typeof b !== "number") {
-      throw new RuntimeError.DeveloperError("b is a required number.");
+    if (typeof b !== 'number') {
+      throw new RuntimeError.DeveloperError('b is a required number.');
     }
-    if (typeof c !== "number") {
-      throw new RuntimeError.DeveloperError("c is a required number.");
+    if (typeof c !== 'number') {
+      throw new RuntimeError.DeveloperError('c is a required number.');
     }
     //>>includeEnd('debug');
 
@@ -148,7 +165,11 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
     // a * x^2 + b * x + c = 0
     const b2 = b * b;
     const four_ac = 4.0 * a * c;
-    const radicand = addWithCancellationCheck$1(b2, -four_ac, ComponentDatatype.CesiumMath.EPSILON14);
+    const radicand = addWithCancellationCheck$1(
+      b2,
+      -four_ac,
+      ComponentDatatype.CesiumMath.EPSILON14
+    );
 
     if (radicand < 0.0) {
       // Both roots are complex.
@@ -187,17 +208,17 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
    */
   CubicRealPolynomial.computeDiscriminant = function (a, b, c, d) {
     //>>includeStart('debug', pragmas.debug);
-    if (typeof a !== "number") {
-      throw new RuntimeError.DeveloperError("a is a required number.");
+    if (typeof a !== 'number') {
+      throw new RuntimeError.DeveloperError('a is a required number.');
     }
-    if (typeof b !== "number") {
-      throw new RuntimeError.DeveloperError("b is a required number.");
+    if (typeof b !== 'number') {
+      throw new RuntimeError.DeveloperError('b is a required number.');
     }
-    if (typeof c !== "number") {
-      throw new RuntimeError.DeveloperError("c is a required number.");
+    if (typeof c !== 'number') {
+      throw new RuntimeError.DeveloperError('c is a required number.');
     }
-    if (typeof d !== "number") {
-      throw new RuntimeError.DeveloperError("d is a required number.");
+    if (typeof d !== 'number') {
+      throw new RuntimeError.DeveloperError('d is a required number.');
     }
     //>>includeEnd('debug');
 
@@ -273,7 +294,9 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
     const squareRootOfDiscriminant = Math.sqrt(discriminant);
     const halfSquareRootOf3 = Math.sqrt(3.0) / 2.0;
 
-    let theta = Math.abs(Math.atan2(A * squareRootOfDiscriminant, -DBarA) / 3.0);
+    let theta = Math.abs(
+      Math.atan2(A * squareRootOfDiscriminant, -DBarA) / 3.0
+    );
     temp = 2.0 * Math.sqrt(-CBarA);
     let cosine = Math.cos(theta);
     temp1 = temp * cosine;
@@ -331,17 +354,17 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
    */
   CubicRealPolynomial.computeRealRoots = function (a, b, c, d) {
     //>>includeStart('debug', pragmas.debug);
-    if (typeof a !== "number") {
-      throw new RuntimeError.DeveloperError("a is a required number.");
+    if (typeof a !== 'number') {
+      throw new RuntimeError.DeveloperError('a is a required number.');
     }
-    if (typeof b !== "number") {
-      throw new RuntimeError.DeveloperError("b is a required number.");
+    if (typeof b !== 'number') {
+      throw new RuntimeError.DeveloperError('b is a required number.');
     }
-    if (typeof c !== "number") {
-      throw new RuntimeError.DeveloperError("c is a required number.");
+    if (typeof c !== 'number') {
+      throw new RuntimeError.DeveloperError('c is a required number.');
     }
-    if (typeof d !== "number") {
-      throw new RuntimeError.DeveloperError("d is a required number.");
+    if (typeof d !== 'number') {
+      throw new RuntimeError.DeveloperError('d is a required number.');
     }
     //>>includeEnd('debug');
 
@@ -360,7 +383,9 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
         // a * x^3 + d = 0
         ratio = -d / a;
         const root =
-          ratio < 0.0 ? -Math.pow(-ratio, 1.0 / 3.0) : Math.pow(ratio, 1.0 / 3.0);
+          ratio < 0.0
+            ? -Math.pow(-ratio, 1.0 / 3.0)
+            : Math.pow(ratio, 1.0 / 3.0);
         return [root, root, root];
       } else if (d === 0.0) {
         // x * (a * x^2 + c) = 0.
@@ -423,20 +448,20 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
    */
   QuarticRealPolynomial.computeDiscriminant = function (a, b, c, d, e) {
     //>>includeStart('debug', pragmas.debug);
-    if (typeof a !== "number") {
-      throw new RuntimeError.DeveloperError("a is a required number.");
+    if (typeof a !== 'number') {
+      throw new RuntimeError.DeveloperError('a is a required number.');
     }
-    if (typeof b !== "number") {
-      throw new RuntimeError.DeveloperError("b is a required number.");
+    if (typeof b !== 'number') {
+      throw new RuntimeError.DeveloperError('b is a required number.');
     }
-    if (typeof c !== "number") {
-      throw new RuntimeError.DeveloperError("c is a required number.");
+    if (typeof c !== 'number') {
+      throw new RuntimeError.DeveloperError('c is a required number.');
     }
-    if (typeof d !== "number") {
-      throw new RuntimeError.DeveloperError("d is a required number.");
+    if (typeof d !== 'number') {
+      throw new RuntimeError.DeveloperError('d is a required number.');
     }
-    if (typeof e !== "number") {
-      throw new RuntimeError.DeveloperError("e is a required number.");
+    if (typeof e !== 'number') {
+      throw new RuntimeError.DeveloperError('e is a required number.');
     }
     //>>includeEnd('debug');
 
@@ -612,7 +637,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
       if (g1 === 0.0 && g2 === 0.0) {
         G = 0.0;
         g = 0.0;
-      } else if (ComponentDatatype.CesiumMath.sign(g1) === ComponentDatatype.CesiumMath.sign(g2)) {
+      } else if (
+        ComponentDatatype.CesiumMath.sign(g1) ===
+        ComponentDatatype.CesiumMath.sign(g2)
+      ) {
         G = g1 + g2;
         g = y / G;
       } else {
@@ -625,7 +653,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
       if (h1 === 0.0 && h2 === 0.0) {
         H = 0.0;
         h = 0.0;
-      } else if (ComponentDatatype.CesiumMath.sign(h1) === ComponentDatatype.CesiumMath.sign(h2)) {
+      } else if (
+        ComponentDatatype.CesiumMath.sign(h1) ===
+        ComponentDatatype.CesiumMath.sign(h2)
+      ) {
         H = h1 + h2;
         h = a0 / H;
       } else {
@@ -673,20 +704,20 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
    */
   QuarticRealPolynomial.computeRealRoots = function (a, b, c, d, e) {
     //>>includeStart('debug', pragmas.debug);
-    if (typeof a !== "number") {
-      throw new RuntimeError.DeveloperError("a is a required number.");
+    if (typeof a !== 'number') {
+      throw new RuntimeError.DeveloperError('a is a required number.');
     }
-    if (typeof b !== "number") {
-      throw new RuntimeError.DeveloperError("b is a required number.");
+    if (typeof b !== 'number') {
+      throw new RuntimeError.DeveloperError('b is a required number.');
     }
-    if (typeof c !== "number") {
-      throw new RuntimeError.DeveloperError("c is a required number.");
+    if (typeof c !== 'number') {
+      throw new RuntimeError.DeveloperError('c is a required number.');
     }
-    if (typeof d !== "number") {
-      throw new RuntimeError.DeveloperError("d is a required number.");
+    if (typeof d !== 'number') {
+      throw new RuntimeError.DeveloperError('d is a required number.');
     }
-    if (typeof e !== "number") {
-      throw new RuntimeError.DeveloperError("e is a required number.");
+    if (typeof e !== 'number') {
+      throw new RuntimeError.DeveloperError('e is a required number.');
     }
     //>>includeEnd('debug');
 
@@ -750,7 +781,9 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
    * @param {Cartesian3} [direction=Cartesian3.ZERO] The direction of the ray.
    */
   function Ray(origin, direction) {
-    direction = Matrix2.Cartesian3.clone(defaultValue.defaultValue(direction, Matrix2.Cartesian3.ZERO));
+    direction = Matrix2.Cartesian3.clone(
+      defaultValue.defaultValue(direction, Matrix2.Cartesian3.ZERO)
+    );
     if (!Matrix2.Cartesian3.equals(direction, Matrix2.Cartesian3.ZERO)) {
       Matrix2.Cartesian3.normalize(direction, direction);
     }
@@ -760,7 +793,9 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
      * @type {Cartesian3}
      * @default {@link Cartesian3.ZERO}
      */
-    this.origin = Matrix2.Cartesian3.clone(defaultValue.defaultValue(origin, Matrix2.Cartesian3.ZERO));
+    this.origin = Matrix2.Cartesian3.clone(
+      defaultValue.defaultValue(origin, Matrix2.Cartesian3.ZERO)
+    );
 
     /**
      * The direction of the ray.
@@ -804,8 +839,8 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
    */
   Ray.getPoint = function (ray, t, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("ray", ray);
-    RuntimeError.Check.typeOf.number("t", t);
+    RuntimeError.Check.typeOf.object('ray', ray);
+    RuntimeError.Check.typeOf.number('t', t);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(result)) {
@@ -834,10 +869,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
   IntersectionTests.rayPlane = function (ray, plane, result) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(ray)) {
-      throw new RuntimeError.DeveloperError("ray is required.");
+      throw new RuntimeError.DeveloperError('ray is required.');
     }
     if (!defaultValue.defined(plane)) {
-      throw new RuntimeError.DeveloperError("plane is required.");
+      throw new RuntimeError.DeveloperError('plane is required.');
     }
     //>>includeEnd('debug');
 
@@ -855,7 +890,8 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
       return undefined;
     }
 
-    const t = (-plane.distance - Matrix2.Cartesian3.dot(normal, origin)) / denominator;
+    const t =
+      (-plane.distance - Matrix2.Cartesian3.dot(normal, origin)) / denominator;
 
     if (t < 0) {
       return undefined;
@@ -896,16 +932,16 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(ray)) {
-      throw new RuntimeError.DeveloperError("ray is required.");
+      throw new RuntimeError.DeveloperError('ray is required.');
     }
     if (!defaultValue.defined(p0)) {
-      throw new RuntimeError.DeveloperError("p0 is required.");
+      throw new RuntimeError.DeveloperError('p0 is required.');
     }
     if (!defaultValue.defined(p1)) {
-      throw new RuntimeError.DeveloperError("p1 is required.");
+      throw new RuntimeError.DeveloperError('p1 is required.');
     }
     if (!defaultValue.defined(p2)) {
-      throw new RuntimeError.DeveloperError("p2 is required.");
+      throw new RuntimeError.DeveloperError('p2 is required.');
     }
     //>>includeEnd('debug');
 
@@ -1042,19 +1078,19 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(v0)) {
-      throw new RuntimeError.DeveloperError("v0 is required.");
+      throw new RuntimeError.DeveloperError('v0 is required.');
     }
     if (!defaultValue.defined(v1)) {
-      throw new RuntimeError.DeveloperError("v1 is required.");
+      throw new RuntimeError.DeveloperError('v1 is required.');
     }
     if (!defaultValue.defined(p0)) {
-      throw new RuntimeError.DeveloperError("p0 is required.");
+      throw new RuntimeError.DeveloperError('p0 is required.');
     }
     if (!defaultValue.defined(p1)) {
-      throw new RuntimeError.DeveloperError("p1 is required.");
+      throw new RuntimeError.DeveloperError('p1 is required.');
     }
     if (!defaultValue.defined(p2)) {
-      throw new RuntimeError.DeveloperError("p2 is required.");
+      throw new RuntimeError.DeveloperError('p2 is required.');
     }
     //>>includeEnd('debug');
 
@@ -1070,7 +1106,11 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
       p2,
       cullBackFaces
     );
-    if (!defaultValue.defined(t) || t < 0.0 || t > Matrix2.Cartesian3.distance(v0, v1)) {
+    if (
+      !defaultValue.defined(t) ||
+      t < 0.0 ||
+      t > Matrix2.Cartesian3.distance(v0, v1)
+    ) {
       return undefined;
     }
 
@@ -1114,7 +1154,7 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
 
   const raySphereRoots = {
     root0: 0.0,
-    root1: 0.0,
+    root1: 0.0
   };
 
   function raySphere(ray, sphere, result) {
@@ -1156,10 +1196,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
   IntersectionTests.raySphere = function (ray, sphere, result) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(ray)) {
-      throw new RuntimeError.DeveloperError("ray is required.");
+      throw new RuntimeError.DeveloperError('ray is required.');
     }
     if (!defaultValue.defined(sphere)) {
-      throw new RuntimeError.DeveloperError("sphere is required.");
+      throw new RuntimeError.DeveloperError('sphere is required.');
     }
     //>>includeEnd('debug');
 
@@ -1187,13 +1227,13 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
   IntersectionTests.lineSegmentSphere = function (p0, p1, sphere, result) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(p0)) {
-      throw new RuntimeError.DeveloperError("p0 is required.");
+      throw new RuntimeError.DeveloperError('p0 is required.');
     }
     if (!defaultValue.defined(p1)) {
-      throw new RuntimeError.DeveloperError("p1 is required.");
+      throw new RuntimeError.DeveloperError('p1 is required.');
     }
     if (!defaultValue.defined(sphere)) {
-      throw new RuntimeError.DeveloperError("sphere is required.");
+      throw new RuntimeError.DeveloperError('sphere is required.');
     }
     //>>includeEnd('debug');
 
@@ -1205,7 +1245,11 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
     Matrix2.Cartesian3.normalize(direction, direction);
 
     result = raySphere(ray, sphere, result);
-    if (!defaultValue.defined(result) || result.stop < 0.0 || result.start > maxT) {
+    if (
+      !defaultValue.defined(result) ||
+      result.stop < 0.0 ||
+      result.start > maxT
+    ) {
       return undefined;
     }
 
@@ -1227,15 +1271,19 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
   IntersectionTests.rayEllipsoid = function (ray, ellipsoid) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(ray)) {
-      throw new RuntimeError.DeveloperError("ray is required.");
+      throw new RuntimeError.DeveloperError('ray is required.');
     }
     if (!defaultValue.defined(ellipsoid)) {
-      throw new RuntimeError.DeveloperError("ellipsoid is required.");
+      throw new RuntimeError.DeveloperError('ellipsoid is required.');
     }
     //>>includeEnd('debug');
 
     const inverseRadii = ellipsoid.oneOverRadii;
-    const q = Matrix2.Cartesian3.multiplyComponents(inverseRadii, ray.origin, scratchQ);
+    const q = Matrix2.Cartesian3.multiplyComponents(
+      inverseRadii,
+      ray.origin,
+      scratchQ
+    );
     const w = Matrix2.Cartesian3.multiplyComponents(
       inverseRadii,
       ray.direction,
@@ -1275,7 +1323,7 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
 
         return {
           start: root1,
-          stop: root0,
+          stop: root0
         };
       }
       // qw2 == product.  Repeated roots (2 intersections).
@@ -1305,8 +1353,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
   function addWithCancellationCheck(left, right, tolerance) {
     const difference = left + right;
     if (
-      ComponentDatatype.CesiumMath.sign(left) !== ComponentDatatype.CesiumMath.sign(right) &&
-      Math.abs(difference / Math.max(Math.abs(left), Math.abs(right))) < tolerance
+      ComponentDatatype.CesiumMath.sign(left) !==
+        ComponentDatatype.CesiumMath.sign(right) &&
+      Math.abs(difference / Math.max(Math.abs(left), Math.abs(right))) <
+        tolerance
     ) {
       return 0.0;
     }
@@ -1318,7 +1368,9 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
     const xSquared = x * x;
     const wSquared = w * w;
 
-    const l2 = (A[Matrix2.Matrix3.COLUMN1ROW1] - A[Matrix2.Matrix3.COLUMN2ROW2]) * wSquared;
+    const l2 =
+      (A[Matrix2.Matrix3.COLUMN1ROW1] - A[Matrix2.Matrix3.COLUMN2ROW2]) *
+      wSquared;
     const l1 =
       w *
       (x *
@@ -1344,7 +1396,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
     const r0 =
       w *
       (x *
-        addWithCancellationCheck(A[Matrix2.Matrix3.COLUMN2ROW0], A[Matrix2.Matrix3.COLUMN0ROW2]) +
+        addWithCancellationCheck(
+          A[Matrix2.Matrix3.COLUMN2ROW0],
+          A[Matrix2.Matrix3.COLUMN0ROW2]
+        ) +
         b.z);
 
     let cosines;
@@ -1399,13 +1454,19 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
 
       //const left = l2 * cosineSquared + l1 * cosine + l0;
       let left;
-      if (ComponentDatatype.CesiumMath.sign(l2) === ComponentDatatype.CesiumMath.sign(l0)) {
+      if (
+        ComponentDatatype.CesiumMath.sign(l2) ===
+        ComponentDatatype.CesiumMath.sign(l0)
+      ) {
         left = addWithCancellationCheck(
           l2 * cosineSquared + l0,
           l1 * cosine,
           ComponentDatatype.CesiumMath.EPSILON12
         );
-      } else if (ComponentDatatype.CesiumMath.sign(l0) === ComponentDatatype.CesiumMath.sign(l1 * cosine)) {
+      } else if (
+        ComponentDatatype.CesiumMath.sign(l0) ===
+        ComponentDatatype.CesiumMath.sign(l1 * cosine)
+      ) {
         left = addWithCancellationCheck(
           l2 * cosineSquared,
           l1 * cosine + l0,
@@ -1468,10 +1529,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
   IntersectionTests.grazingAltitudeLocation = function (ray, ellipsoid) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(ray)) {
-      throw new RuntimeError.DeveloperError("ray is required.");
+      throw new RuntimeError.DeveloperError('ray is required.');
     }
     if (!defaultValue.defined(ellipsoid)) {
-      throw new RuntimeError.DeveloperError("ellipsoid is required.");
+      throw new RuntimeError.DeveloperError('ellipsoid is required.');
     }
     //>>includeEnd('debug');
 
@@ -1479,7 +1540,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
     const direction = ray.direction;
 
     if (!Matrix2.Cartesian3.equals(position, Matrix2.Cartesian3.ZERO)) {
-      const normal = ellipsoid.geodeticSurfaceNormal(position, firstAxisScratch);
+      const normal = ellipsoid.geodeticSurfaceNormal(
+        position,
+        firstAxisScratch
+      );
       if (Matrix2.Cartesian3.dot(direction, normal) >= 0.0) {
         // The location provided is the closest point in altitude
         return position;
@@ -1496,7 +1560,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
 
     // Constructs a basis from the unit scaled direction vector. Construct its rotation and transpose.
     const firstAxis = Matrix2.Cartesian3.normalize(f, f);
-    const reference = Matrix2.Cartesian3.mostOrthogonalAxis(f, referenceScratch);
+    const reference = Matrix2.Cartesian3.mostOrthogonalAxis(
+      f,
+      referenceScratch
+    );
     const secondAxis = Matrix2.Cartesian3.normalize(
       Matrix2.Cartesian3.cross(reference, firstAxis, secondAxisScratch),
       secondAxisScratch
@@ -1558,7 +1625,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
     let altitude;
     const length = solutions.length;
     if (length > 0) {
-      let closest = Matrix2.Cartesian3.clone(Matrix2.Cartesian3.ZERO, closestScratch);
+      let closest = Matrix2.Cartesian3.clone(
+        Matrix2.Cartesian3.ZERO,
+        closestScratch
+      );
       let maximumValue = Number.NEGATIVE_INFINITY;
 
       for (let i = 0; i < length; ++i) {
@@ -1590,7 +1660,10 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
         ) * Math.sqrt(1.0 - maximumValue * maximumValue);
       altitude = intersects ? -altitude : altitude;
       surfacePoint.height = altitude;
-      return ellipsoid.cartographicToCartesian(surfacePoint, new Matrix2.Cartesian3());
+      return ellipsoid.cartographicToCartesian(
+        surfacePoint,
+        new Matrix2.Cartesian3()
+      );
     }
 
     return undefined;
@@ -1626,13 +1699,13 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
   ) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(endPoint0)) {
-      throw new RuntimeError.DeveloperError("endPoint0 is required.");
+      throw new RuntimeError.DeveloperError('endPoint0 is required.');
     }
     if (!defaultValue.defined(endPoint1)) {
-      throw new RuntimeError.DeveloperError("endPoint1 is required.");
+      throw new RuntimeError.DeveloperError('endPoint1 is required.');
     }
     if (!defaultValue.defined(plane)) {
-      throw new RuntimeError.DeveloperError("plane is required.");
+      throw new RuntimeError.DeveloperError('plane is required.');
     }
     //>>includeEnd('debug');
 
@@ -1690,8 +1763,15 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
    */
   IntersectionTests.trianglePlaneIntersection = function (p0, p1, p2, plane) {
     //>>includeStart('debug', pragmas.debug);
-    if (!defaultValue.defined(p0) || !defaultValue.defined(p1) || !defaultValue.defined(p2) || !defaultValue.defined(plane)) {
-      throw new RuntimeError.DeveloperError("p0, p1, p2, and plane are required.");
+    if (
+      !defaultValue.defined(p0) ||
+      !defaultValue.defined(p1) ||
+      !defaultValue.defined(p2) ||
+      !defaultValue.defined(plane)
+    ) {
+      throw new RuntimeError.DeveloperError(
+        'p0, p1, p2, and plane are required.'
+      );
     }
     //>>includeEnd('debug');
 
@@ -1723,18 +1803,11 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
           positions: [p0, p1, p2, u1, u2],
           indices: [
             // Behind
-            0,
-            3,
-            4,
+            0, 3, 4,
 
             // In front
-            1,
-            2,
-            4,
-            1,
-            4,
-            3,
-          ],
+            1, 2, 4, 1, 4, 3
+          ]
         };
       } else if (p1Behind) {
         IntersectionTests.lineSegmentPlane(p1, p2, plane, u1);
@@ -1744,18 +1817,11 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
           positions: [p0, p1, p2, u1, u2],
           indices: [
             // Behind
-            1,
-            3,
-            4,
+            1, 3, 4,
 
             // In front
-            2,
-            0,
-            4,
-            2,
-            4,
-            3,
-          ],
+            2, 0, 4, 2, 4, 3
+          ]
         };
       } else if (p2Behind) {
         IntersectionTests.lineSegmentPlane(p2, p0, plane, u1);
@@ -1765,18 +1831,11 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
           positions: [p0, p1, p2, u1, u2],
           indices: [
             // Behind
-            2,
-            3,
-            4,
+            2, 3, 4,
 
             // In front
-            0,
-            1,
-            4,
-            0,
-            4,
-            3,
-          ],
+            0, 1, 4, 0, 4, 3
+          ]
         };
       }
     } else if (numBehind === 2) {
@@ -1788,18 +1847,11 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
           positions: [p0, p1, p2, u1, u2],
           indices: [
             // Behind
-            1,
-            2,
-            4,
-            1,
-            4,
-            3,
+            1, 2, 4, 1, 4, 3,
 
             // In front
-            0,
-            3,
-            4,
-          ],
+            0, 3, 4
+          ]
         };
       } else if (!p1Behind) {
         IntersectionTests.lineSegmentPlane(p2, p1, plane, u1);
@@ -1809,18 +1861,11 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
           positions: [p0, p1, p2, u1, u2],
           indices: [
             // Behind
-            2,
-            0,
-            4,
-            2,
-            4,
-            3,
+            2, 0, 4, 2, 4, 3,
 
             // In front
-            1,
-            3,
-            4,
-          ],
+            1, 3, 4
+          ]
         };
       } else if (!p2Behind) {
         IntersectionTests.lineSegmentPlane(p0, p2, plane, u1);
@@ -1830,18 +1875,11 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
           positions: [p0, p1, p2, u1, u2],
           indices: [
             // Behind
-            0,
-            1,
-            4,
-            0,
-            4,
-            3,
+            0, 1, 4, 0, 4, 3,
 
             // In front
-            2,
-            3,
-            4,
-          ],
+            2, 3, 4
+          ]
         };
       }
     }
@@ -1853,6 +1891,5 @@ define(['exports', './Matrix2-9e1c22e2', './defaultValue-97284df2', './RuntimeEr
 
   exports.IntersectionTests = IntersectionTests;
   exports.Ray = Ray;
-
-}));
+});
 //# sourceMappingURL=IntersectionTests-ea138127.js.map

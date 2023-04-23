@@ -1,15 +1,15 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import ContextLimits from "../Renderer/ContextLimits.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import Sampler from "../Renderer/Sampler.js";
-import Texture from "../Renderer/Texture.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import ContextLimits from '../Renderer/ContextLimits.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import Sampler from '../Renderer/Sampler.js';
+import Texture from '../Renderer/Texture.js';
 
 /**
  * An object that manages color, show/hide and picking textures for a batch
@@ -28,8 +28,8 @@ import Texture from "../Renderer/Texture.js";
  */
 export default function BatchTexture(options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("options.featuresLength", options.featuresLength);
-  Check.typeOf.object("options.owner", options.owner);
+  Check.typeOf.number('options.featuresLength', options.featuresLength);
+  Check.typeOf.object('options.owner', options.owner);
   //>>includeEnd('debug');
 
   const featuresLength = options.featuresLength;
@@ -85,7 +85,7 @@ Object.defineProperties(BatchTexture.prototype, {
   translucentFeaturesLength: {
     get: function () {
       return this._translucentFeaturesLength;
-    },
+    }
   },
 
   /**
@@ -106,7 +106,7 @@ Object.defineProperties(BatchTexture.prototype, {
         memory += this._batchTexture.sizeInBytes;
       }
       return memory;
-    },
+    }
   },
 
   /**
@@ -120,7 +120,7 @@ Object.defineProperties(BatchTexture.prototype, {
   textureDimensions: {
     get: function () {
       return this._textureDimensions;
-    },
+    }
   },
 
   /**
@@ -135,7 +135,7 @@ Object.defineProperties(BatchTexture.prototype, {
   textureStep: {
     get: function () {
       return this._textureStep;
-    },
+    }
   },
 
   /**
@@ -151,7 +151,7 @@ Object.defineProperties(BatchTexture.prototype, {
   batchTexture: {
     get: function () {
       return this._batchTexture;
-    },
+    }
   },
 
   /**
@@ -165,7 +165,7 @@ Object.defineProperties(BatchTexture.prototype, {
   defaultTexture: {
     get: function () {
       return this._defaultTexture;
-    },
+    }
   },
 
   /**
@@ -180,8 +180,8 @@ Object.defineProperties(BatchTexture.prototype, {
   pickTexture: {
     get: function () {
       return this._pickTexture;
-    },
-  },
+    }
+  }
 });
 
 BatchTexture.DEFAULT_COLOR_VALUE = Color.WHITE;
@@ -217,7 +217,7 @@ function checkBatchId(batchId, featuresLength) {
   if (!defined(batchId) || batchId < 0 || batchId >= featuresLength) {
     throw new DeveloperError(
       `batchId is required and between zero and featuresLength - 1 (${featuresLength}` -
-        +")."
+        +').'
     );
   }
 }
@@ -232,7 +232,7 @@ function checkBatchId(batchId, featuresLength) {
 BatchTexture.prototype.setShow = function (batchId, show) {
   //>>includeStart('debug', pragmas.debug);
   checkBatchId(batchId, this._featuresLength);
-  Check.typeOf.bool("show", show);
+  Check.typeOf.bool('show', show);
   //>>includeEnd('debug');
 
   if (show && !defined(this._showAlphaProperties)) {
@@ -265,7 +265,7 @@ BatchTexture.prototype.setShow = function (batchId, show) {
  */
 BatchTexture.prototype.setAllShow = function (show) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.bool("show", show);
+  Check.typeOf.bool('show', show);
   //>>includeEnd('debug');
 
   const featuresLength = this._featuresLength;
@@ -308,7 +308,7 @@ const scratchColorBytes = new Array(4);
 BatchTexture.prototype.setColor = function (batchId, color) {
   //>>includeStart('debug', pragmas.debug);
   checkBatchId(batchId, this._featuresLength);
-  Check.typeOf.object("color", color);
+  Check.typeOf.object('color', color);
   //>>includeEnd('debug');
 
   if (
@@ -371,7 +371,7 @@ BatchTexture.prototype.setColor = function (batchId, color) {
  */
 BatchTexture.prototype.setAllColor = function (color) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("color", color);
+  Check.typeOf.object('color', color);
   //>>includeEnd('debug');
 
   const featuresLength = this._featuresLength;
@@ -392,7 +392,7 @@ BatchTexture.prototype.setAllColor = function (color) {
 BatchTexture.prototype.getColor = function (batchId, result) {
   //>>includeStart('debug', pragmas.debug);
   checkBatchId(batchId, this._featuresLength);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   if (!defined(this._batchValues)) {
@@ -439,10 +439,10 @@ function createTexture(batchTexture, context, bytes) {
     source: {
       width: dimensions.x,
       height: dimensions.y,
-      arrayBufferView: bytes,
+      arrayBufferView: bytes
     },
     flipY: false,
-    sampler: Sampler.NEAREST,
+    sampler: Sampler.NEAREST
   });
 }
 
@@ -490,8 +490,8 @@ function updateBatchTexture(batchTexture) {
     source: {
       width: dimensions.x,
       height: dimensions.y,
-      arrayBufferView: batchTexture._batchValues,
-    },
+      arrayBufferView: batchTexture._batchValues
+    }
   });
 }
 

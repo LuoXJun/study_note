@@ -1,9 +1,9 @@
-import Cartesian2 from "./Cartesian2.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Rectangle from "./Rectangle.js";
-import WebMercatorProjection from "./WebMercatorProjection.js";
+import Cartesian2 from './Cartesian2.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Ellipsoid from './Ellipsoid.js';
+import Rectangle from './Rectangle.js';
+import WebMercatorProjection from './WebMercatorProjection.js';
 
 /**
  * A tiling scheme for geometry referenced to a {@link WebMercatorProjection}, EPSG:3857.  This is
@@ -84,7 +84,7 @@ Object.defineProperties(WebMercatorTilingScheme.prototype, {
   ellipsoid: {
     get: function () {
       return this._ellipsoid;
-    },
+    }
   },
 
   /**
@@ -95,7 +95,7 @@ Object.defineProperties(WebMercatorTilingScheme.prototype, {
   rectangle: {
     get: function () {
       return this._rectangle;
-    },
+    }
   },
 
   /**
@@ -106,8 +106,8 @@ Object.defineProperties(WebMercatorTilingScheme.prototype, {
   projection: {
     get: function () {
       return this._projection;
-    },
-  },
+    }
+  }
 });
 
 /**

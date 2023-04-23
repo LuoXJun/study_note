@@ -1,4 +1,4 @@
-import WebGLConstants from "../Core/WebGLConstants.js";
+import WebGLConstants from '../Core/WebGLConstants.js';
 
 /**
  * Determines how blending factors are computed.
@@ -124,6 +124,6 @@ const BlendFunction = {
    * @type {Number}
    * @constant
    */
-  SOURCE_ALPHA_SATURATE: WebGLConstants.SRC_ALPHA_SATURATE,
+  SOURCE_ALPHA_SATURATE: WebGLConstants.SRC_ALPHA_SATURATE
 };
 export default Object.freeze(BlendFunction);

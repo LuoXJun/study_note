@@ -1,5 +1,6 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports'], (function (exports) { 'use strict';
+define(['exports'], function (exports) {
+  'use strict';
 
   /**
    * @function
@@ -48,5 +49,4 @@ define(['exports'], (function (exports) { 'use strict';
 
   exports.defaultValue = defaultValue;
   exports.defined = defined;
-
-}));
+});

@@ -1,10 +1,10 @@
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import FeatureDetection from "./FeatureDetection.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import FeatureDetection from './FeatureDetection.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
 
 /**
  * A set of 4-dimensional coordinates used to represent rotation in 3-dimensional space.
@@ -60,8 +60,8 @@ let fromAxisAngleScratch = new Cartesian3();
  */
 Quaternion.fromAxisAngle = function (axis, angle, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("axis", axis);
-  Check.typeOf.number("angle", angle);
+  Check.typeOf.object('axis', axis);
+  Check.typeOf.number('angle', angle);
   //>>includeEnd('debug');
 
   const halfAngle = angle / 2.0;
@@ -95,7 +95,7 @@ const fromRotationMatrixQuat = new Array(3);
  */
 Quaternion.fromRotationMatrix = function (matrix, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("matrix", matrix);
+  Check.typeOf.object('matrix', matrix);
   //>>includeEnd('debug');
 
   let root;
@@ -186,7 +186,7 @@ let scratchRollQuaternion = new Quaternion();
  */
 Quaternion.fromHeadingPitchRoll = function (headingPitchRoll, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("headingPitchRoll", headingPitchRoll);
+  Check.typeOf.object('headingPitchRoll', headingPitchRoll);
   //>>includeEnd('debug');
 
   scratchRollQuaternion = Quaternion.fromAxisAngle(
@@ -235,8 +235,8 @@ Quaternion.packedLength = 4;
  */
 Quaternion.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -259,7 +259,7 @@ Quaternion.pack = function (value, array, startingIndex) {
  */
 Quaternion.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -418,8 +418,8 @@ Quaternion.clone = function (quaternion, result) {
  */
 Quaternion.conjugate = function (quaternion, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("quaternion", quaternion);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('quaternion', quaternion);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   result.x = -quaternion.x;
@@ -437,7 +437,7 @@ Quaternion.conjugate = function (quaternion, result) {
  */
 Quaternion.magnitudeSquared = function (quaternion) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("quaternion", quaternion);
+  Check.typeOf.object('quaternion', quaternion);
   //>>includeEnd('debug');
 
   return (
@@ -467,7 +467,7 @@ Quaternion.magnitude = function (quaternion) {
  */
 Quaternion.normalize = function (quaternion, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   const inverseMagnitude = 1.0 / Quaternion.magnitude(quaternion);
@@ -492,7 +492,7 @@ Quaternion.normalize = function (quaternion, result) {
  */
 Quaternion.inverse = function (quaternion, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   const magnitudeSquared = Quaternion.magnitudeSquared(quaternion);
@@ -510,9 +510,9 @@ Quaternion.inverse = function (quaternion, result) {
  */
 Quaternion.add = function (left, right, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("left", left);
-  Check.typeOf.object("right", right);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('left', left);
+  Check.typeOf.object('right', right);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   result.x = left.x + right.x;
@@ -532,9 +532,9 @@ Quaternion.add = function (left, right, result) {
  */
 Quaternion.subtract = function (left, right, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("left", left);
-  Check.typeOf.object("right", right);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('left', left);
+  Check.typeOf.object('right', right);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   result.x = left.x - right.x;
@@ -553,8 +553,8 @@ Quaternion.subtract = function (left, right, result) {
  */
 Quaternion.negate = function (quaternion, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("quaternion", quaternion);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('quaternion', quaternion);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   result.x = -quaternion.x;
@@ -573,8 +573,8 @@ Quaternion.negate = function (quaternion, result) {
  */
 Quaternion.dot = function (left, right) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("left", left);
-  Check.typeOf.object("right", right);
+  Check.typeOf.object('left', left);
+  Check.typeOf.object('right', right);
   //>>includeEnd('debug');
 
   return (
@@ -592,9 +592,9 @@ Quaternion.dot = function (left, right) {
  */
 Quaternion.multiply = function (left, right, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("left", left);
-  Check.typeOf.object("right", right);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('left', left);
+  Check.typeOf.object('right', right);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   const leftX = left.x;
@@ -629,9 +629,9 @@ Quaternion.multiply = function (left, right, result) {
  */
 Quaternion.multiplyByScalar = function (quaternion, scalar, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("quaternion", quaternion);
-  Check.typeOf.number("scalar", scalar);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('quaternion', quaternion);
+  Check.typeOf.number('scalar', scalar);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   result.x = quaternion.x * scalar;
@@ -651,9 +651,9 @@ Quaternion.multiplyByScalar = function (quaternion, scalar, result) {
  */
 Quaternion.divideByScalar = function (quaternion, scalar, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("quaternion", quaternion);
-  Check.typeOf.number("scalar", scalar);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('quaternion', quaternion);
+  Check.typeOf.number('scalar', scalar);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   result.x = quaternion.x / scalar;
@@ -672,8 +672,8 @@ Quaternion.divideByScalar = function (quaternion, scalar, result) {
  */
 Quaternion.computeAxis = function (quaternion, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("quaternion", quaternion);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('quaternion', quaternion);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   const w = quaternion.w;
@@ -698,7 +698,7 @@ Quaternion.computeAxis = function (quaternion, result) {
  */
 Quaternion.computeAngle = function (quaternion) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("quaternion", quaternion);
+  Check.typeOf.object('quaternion', quaternion);
   //>>includeEnd('debug');
 
   if (Math.abs(quaternion.w - 1.0) < CesiumMath.EPSILON6) {
@@ -719,10 +719,10 @@ let lerpScratch = new Quaternion();
  */
 Quaternion.lerp = function (start, end, t, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("start", start);
-  Check.typeOf.object("end", end);
-  Check.typeOf.number("t", t);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('start', start);
+  Check.typeOf.object('end', end);
+  Check.typeOf.number('t', t);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   lerpScratch = Quaternion.multiplyByScalar(end, t, lerpScratch);
@@ -746,10 +746,10 @@ let slerpScaledR = new Quaternion();
  */
 Quaternion.slerp = function (start, end, t, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("start", start);
-  Check.typeOf.object("end", end);
-  Check.typeOf.number("t", t);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('start', start);
+  Check.typeOf.object('end', end);
+  Check.typeOf.number('t', t);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   let dot = Quaternion.dot(start, end);
@@ -792,8 +792,8 @@ Quaternion.slerp = function (start, end, t, result) {
  */
 Quaternion.log = function (quaternion, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("quaternion", quaternion);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('quaternion', quaternion);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   const theta = CesiumMath.acosClamped(quaternion.w);
@@ -815,8 +815,8 @@ Quaternion.log = function (quaternion, result) {
  */
 Quaternion.exp = function (cartesian, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("cartesian", cartesian);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('cartesian', cartesian);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   const theta = Cartesian3.magnitude(cartesian);
@@ -853,10 +853,10 @@ const squadScratchQuaternion1 = new Quaternion();
  */
 Quaternion.computeInnerQuadrangle = function (q0, q1, q2, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("q0", q0);
-  Check.typeOf.object("q1", q1);
-  Check.typeOf.object("q2", q2);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('q0', q0);
+  Check.typeOf.object('q1', q1);
+  Check.typeOf.object('q2', q2);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   const qInv = Quaternion.conjugate(q1, squadScratchQuaternion0);
@@ -900,12 +900,12 @@ Quaternion.computeInnerQuadrangle = function (q0, q1, q2, result) {
  */
 Quaternion.squad = function (q0, q1, s0, s1, t, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("q0", q0);
-  Check.typeOf.object("q1", q1);
-  Check.typeOf.object("s0", s0);
-  Check.typeOf.object("s1", s1);
-  Check.typeOf.number("t", t);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('q0', q0);
+  Check.typeOf.object('q1', q1);
+  Check.typeOf.object('s0', s0);
+  Check.typeOf.object('s1', s1);
+  Check.typeOf.number('t', t);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   const slerp0 = Quaternion.slerp(q0, q1, t, squadScratchQuaternion0);
@@ -944,10 +944,10 @@ v[7] = (opmu * 8.0) / 17.0;
  */
 Quaternion.fastSlerp = function (start, end, t, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("start", start);
-  Check.typeOf.object("end", end);
-  Check.typeOf.number("t", t);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('start', start);
+  Check.typeOf.object('end', end);
+  Check.typeOf.number('t', t);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   let x = Quaternion.dot(start, end);
@@ -1023,12 +1023,12 @@ Quaternion.fastSlerp = function (start, end, t, result) {
  */
 Quaternion.fastSquad = function (q0, q1, s0, s1, t, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("q0", q0);
-  Check.typeOf.object("q1", q1);
-  Check.typeOf.object("s0", s0);
-  Check.typeOf.object("s1", s1);
-  Check.typeOf.number("t", t);
-  Check.typeOf.object("result", result);
+  Check.typeOf.object('q0', q0);
+  Check.typeOf.object('q1', q1);
+  Check.typeOf.object('s0', s0);
+  Check.typeOf.object('s1', s1);
+  Check.typeOf.number('t', t);
+  Check.typeOf.object('result', result);
   //>>includeEnd('debug');
 
   const slerp0 = Quaternion.fastSlerp(q0, q1, t, squadScratchQuaternion0);

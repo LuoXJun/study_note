@@ -1,19 +1,19 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian2 from "./Cartesian2.js";
-import Cartesian3 from "./Cartesian3.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import GeometryOffsetAttribute from "./GeometryOffsetAttribute.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
-import PrimitiveType from "./PrimitiveType.js";
-import VertexFormat from "./VertexFormat.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian2 from './Cartesian2.js';
+import Cartesian3 from './Cartesian3.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import GeometryOffsetAttribute from './GeometryOffsetAttribute.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
+import PrimitiveType from './PrimitiveType.js';
+import VertexFormat from './VertexFormat.js';
 
 const scratchPosition = new Cartesian3();
 const scratchNormal = new Cartesian3();
@@ -70,12 +70,12 @@ function EllipsoidGeometry(options) {
   //>>includeStart('debug', pragmas.debug);
   if (slicePartitions < 3) {
     throw new DeveloperError(
-      "options.slicePartitions cannot be less than three."
+      'options.slicePartitions cannot be less than three.'
     );
   }
   if (stackPartitions < 3) {
     throw new DeveloperError(
-      "options.stackPartitions cannot be less than three."
+      'options.stackPartitions cannot be less than three.'
     );
   }
   //>>includeEnd('debug');
@@ -90,7 +90,7 @@ function EllipsoidGeometry(options) {
   this._slicePartitions = slicePartitions;
   this._vertexFormat = VertexFormat.clone(vertexFormat);
   this._offsetAttribute = options.offsetAttribute;
-  this._workerName = "createEllipsoidGeometry";
+  this._workerName = 'createEllipsoidGeometry';
 }
 
 /**
@@ -112,10 +112,10 @@ EllipsoidGeometry.packedLength =
 EllipsoidGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(value)) {
-    throw new DeveloperError("value is required");
+    throw new DeveloperError('value is required');
   }
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -154,7 +154,7 @@ const scratchOptions = {
   maximumCone: undefined,
   stackPartitions: undefined,
   slicePartitions: undefined,
-  offsetAttribute: undefined,
+  offsetAttribute: undefined
 };
 
 /**
@@ -168,7 +168,7 @@ const scratchOptions = {
 EllipsoidGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -492,7 +492,7 @@ EllipsoidGeometry.createGeometry = function (ellipsoidGeometry) {
     attributes.position = new GeometryAttribute({
       componentDatatype: ComponentDatatype.DOUBLE,
       componentsPerAttribute: 3,
-      values: positions,
+      values: positions
     });
   }
 
@@ -575,7 +575,7 @@ EllipsoidGeometry.createGeometry = function (ellipsoidGeometry) {
       attributes.st = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 2,
-        values: st,
+        values: st
       });
     }
 
@@ -583,7 +583,7 @@ EllipsoidGeometry.createGeometry = function (ellipsoidGeometry) {
       attributes.normal = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: normals,
+        values: normals
       });
     }
 
@@ -591,7 +591,7 @@ EllipsoidGeometry.createGeometry = function (ellipsoidGeometry) {
       attributes.tangent = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: tangents,
+        values: tangents
       });
     }
 
@@ -599,7 +599,7 @@ EllipsoidGeometry.createGeometry = function (ellipsoidGeometry) {
       attributes.bitangent = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: bitangents,
+        values: bitangents
       });
     }
   }
@@ -614,7 +614,7 @@ EllipsoidGeometry.createGeometry = function (ellipsoidGeometry) {
     attributes.applyOffset = new GeometryAttribute({
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 1,
-      values: applyOffset,
+      values: applyOffset
     });
   }
 
@@ -623,7 +623,7 @@ EllipsoidGeometry.createGeometry = function (ellipsoidGeometry) {
     indices: indices,
     primitiveType: PrimitiveType.TRIANGLES,
     boundingSphere: BoundingSphere.fromEllipsoid(ellipsoidOuter),
-    offsetAttribute: ellipsoidGeometry._offsetAttribute,
+    offsetAttribute: ellipsoidGeometry._offsetAttribute
   });
 };
 
@@ -640,7 +640,7 @@ EllipsoidGeometry.getUnitEllipsoid = function () {
     unitEllipsoidGeometry = EllipsoidGeometry.createGeometry(
       new EllipsoidGeometry({
         radii: new Cartesian3(1.0, 1.0, 1.0),
-        vertexFormat: VertexFormat.POSITION_ONLY,
+        vertexFormat: VertexFormat.POSITION_ONLY
       })
     );
   }

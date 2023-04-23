@@ -1,11 +1,11 @@
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import CesiumMath from "./Math.js";
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import CesiumMath from './Math.js';
 
 function calculateM(ellipticity, major, latitude) {
   if (ellipticity === 0.0) {
@@ -258,7 +258,7 @@ function computeProperties(ellipsoidRhumbLine, start, end, ellipsoid) {
 
   //>>includeStart('debug', pragmas.debug);
   Check.typeOf.number.greaterThanOrEquals(
-    "value",
+    'value',
     Math.abs(
       Math.abs(Cartesian3.angleBetween(firstCartesian, lastCartesian)) - Math.PI
     ),
@@ -409,7 +409,7 @@ Object.defineProperties(EllipsoidRhumbLine.prototype, {
   ellipsoid: {
     get: function () {
       return this._ellipsoid;
-    },
+    }
   },
 
   /**
@@ -421,11 +421,11 @@ Object.defineProperties(EllipsoidRhumbLine.prototype, {
   surfaceDistance: {
     get: function () {
       //>>includeStart('debug', pragmas.debug);
-      Check.defined("distance", this._distance);
+      Check.defined('distance', this._distance);
       //>>includeEnd('debug');
 
       return this._distance;
-    },
+    }
   },
 
   /**
@@ -437,7 +437,7 @@ Object.defineProperties(EllipsoidRhumbLine.prototype, {
   start: {
     get: function () {
       return this._start;
-    },
+    }
   },
 
   /**
@@ -449,7 +449,7 @@ Object.defineProperties(EllipsoidRhumbLine.prototype, {
   end: {
     get: function () {
       return this._end;
-    },
+    }
   },
 
   /**
@@ -461,12 +461,12 @@ Object.defineProperties(EllipsoidRhumbLine.prototype, {
   heading: {
     get: function () {
       //>>includeStart('debug', pragmas.debug);
-      Check.defined("distance", this._distance);
+      Check.defined('distance', this._distance);
       //>>includeEnd('debug');
 
       return this._heading;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -487,10 +487,10 @@ EllipsoidRhumbLine.fromStartHeadingDistance = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("start", start);
-  Check.defined("heading", heading);
-  Check.defined("distance", distance);
-  Check.typeOf.number.greaterThan("distance", distance, 0.0);
+  Check.defined('start', start);
+  Check.defined('heading', heading);
+  Check.defined('distance', distance);
+  Check.typeOf.number.greaterThan('distance', distance, 0.0);
   //>>includeEnd('debug');
 
   const e = defaultValue(ellipsoid, Ellipsoid.WGS84);
@@ -528,8 +528,8 @@ EllipsoidRhumbLine.fromStartHeadingDistance = function (
  */
 EllipsoidRhumbLine.prototype.setEndPoints = function (start, end) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("start", start);
-  Check.defined("end", end);
+  Check.defined('start', start);
+  Check.defined('end', end);
   //>>includeEnd('debug');
 
   computeProperties(this, start, end, this._ellipsoid);
@@ -566,10 +566,10 @@ EllipsoidRhumbLine.prototype.interpolateUsingSurfaceDistance = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("distance", distance);
+  Check.typeOf.number('distance', distance);
   if (!defined(this._distance) || this._distance === 0.0) {
     throw new DeveloperError(
-      "EllipsoidRhumbLine must have distinct start and end set."
+      'EllipsoidRhumbLine must have distinct start and end set.'
     );
   }
   //>>includeEnd('debug');
@@ -599,10 +599,10 @@ EllipsoidRhumbLine.prototype.findIntersectionWithLongitude = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("intersectionLongitude", intersectionLongitude);
+  Check.typeOf.number('intersectionLongitude', intersectionLongitude);
   if (!defined(this._distance) || this._distance === 0.0) {
     throw new DeveloperError(
-      "EllipsoidRhumbLine must have distinct start and end set."
+      'EllipsoidRhumbLine must have distinct start and end set.'
     );
   }
   //>>includeEnd('debug');
@@ -703,10 +703,10 @@ EllipsoidRhumbLine.prototype.findIntersectionWithLatitude = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("intersectionLatitude", intersectionLatitude);
+  Check.typeOf.number('intersectionLatitude', intersectionLatitude);
   if (!defined(this._distance) || this._distance === 0.0) {
     throw new DeveloperError(
-      "EllipsoidRhumbLine must have distinct start and end set."
+      'EllipsoidRhumbLine must have distinct start and end set.'
     );
   }
   //>>includeEnd('debug');

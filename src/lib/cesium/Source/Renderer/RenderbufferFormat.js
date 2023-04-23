@@ -1,4 +1,4 @@
-import WebGLConstants from "../Core/WebGLConstants.js";
+import WebGLConstants from '../Core/WebGLConstants.js';
 
 /**
  * @private
@@ -37,6 +37,6 @@ const RenderbufferFormat = {
       return RenderbufferFormat.RGBA16F;
     }
     return RenderbufferFormat.RGBA8;
-  },
+  }
 };
 export default Object.freeze(RenderbufferFormat);

@@ -1,12 +1,12 @@
-import Buffer from "../../Renderer/Buffer.js";
-import BufferUsage from "../../Renderer/BufferUsage.js";
-import Color from "../../Core/Color.js";
-import ComponentDatatype from "../../Core/ComponentDatatype.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import ModelExperimentalType from "./ModelExperimentalType.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
+import Buffer from '../../Renderer/Buffer.js';
+import BufferUsage from '../../Renderer/BufferUsage.js';
+import Color from '../../Core/Color.js';
+import ComponentDatatype from '../../Core/ComponentDatatype.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import ModelExperimentalType from './ModelExperimentalType.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
 
 /**
  * The picking pipeline stage is responsible for handling picking of primitives.
@@ -15,7 +15,7 @@ import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
  * @private
  */
 const PickingPipelineStage = {};
-PickingPipelineStage.name = "PickingPipelineStage"; // Helps with debugging
+PickingPipelineStage.name = 'PickingPipelineStage'; // Helps with debugging
 
 /**
  * Process a primitive. This modifies the following parts of the render resources:
@@ -54,8 +54,8 @@ PickingPipelineStage.process = function (
     model._pickIds.push(pickId);
 
     shaderBuilder.addUniform(
-      "vec4",
-      "czm_pickColor",
+      'vec4',
+      'czm_pickColor',
       ShaderDestination.FRAGMENT
     );
 
@@ -64,7 +64,7 @@ PickingPipelineStage.process = function (
       return pickId.color;
     };
 
-    renderResources.pickId = "czm_pickColor";
+    renderResources.pickId = 'czm_pickColor';
   }
 };
 
@@ -77,7 +77,7 @@ function buildPickObject(renderResources, instanceId) {
   const detailPickObject = {
     model: model,
     node: renderResources.runtimeNode,
-    primitive: renderResources.runtimePrimitive,
+    primitive: renderResources.runtimePrimitive
   };
 
   let pickObject;
@@ -89,13 +89,13 @@ function buildPickObject(renderResources, instanceId) {
     pickObject = {
       content: content,
       primitive: content.tileset,
-      detail: detailPickObject,
+      detail: detailPickObject
     };
   } else {
     // For models, the model itself is returned as the primitive, with the detail pick object under the detail key.
     pickObject = {
       primitive: model,
-      detail: detailPickObject,
+      detail: detailPickObject
     };
   }
 
@@ -139,8 +139,8 @@ function processPickTexture(renderResources, primitive, instances) {
 
   const shaderBuilder = renderResources.shaderBuilder;
   shaderBuilder.addUniform(
-    "sampler2D",
-    "model_pickTexture",
+    'sampler2D',
+    'model_pickTexture',
     ShaderDestination.FRAGMENT
   );
 
@@ -151,7 +151,7 @@ function processPickTexture(renderResources, primitive, instances) {
 
   // The feature ID  is ignored if it is greater than the number of features.
   renderResources.pickId =
-    "((selectedFeature.id < int(model_featuresLength)) ? texture2D(model_pickTexture, selectedFeature.st) : vec4(0.0))";
+    '((selectedFeature.id < int(model_featuresLength)) ? texture2D(model_pickTexture, selectedFeature.st) : vec4(0.0))';
 }
 
 function processInstancedPickIds(renderResources, context) {
@@ -181,7 +181,7 @@ function processInstancedPickIds(renderResources, context) {
   const pickIdsBuffer = Buffer.createVertexBuffer({
     context: context,
     typedArray: pickIdsTypedArray,
-    usage: BufferUsage.STATIC_DRAW,
+    usage: BufferUsage.STATIC_DRAW
   });
   // Destruction of resources allocated by the ModelExperimental
   // is handled by ModelExperimental.destroyPipelineResources().
@@ -198,16 +198,16 @@ function processInstancedPickIds(renderResources, context) {
     normalize: true,
     offsetInBytes: 0,
     strideInBytes: 0,
-    instanceDivisor: 1,
+    instanceDivisor: 1
   };
 
   renderResources.attributes.push(pickIdsVertexAttribute);
 
   const shaderBuilder = renderResources.shaderBuilder;
-  shaderBuilder.addDefine("USE_PICKING", undefined, ShaderDestination.BOTH);
-  shaderBuilder.addAttribute("vec4", "a_pickColor");
-  shaderBuilder.addVarying("vec4", "v_pickColor");
-  renderResources.pickId = "v_pickColor";
+  shaderBuilder.addDefine('USE_PICKING', undefined, ShaderDestination.BOTH);
+  shaderBuilder.addAttribute('vec4', 'a_pickColor');
+  shaderBuilder.addVarying('vec4', 'v_pickColor');
+  renderResources.pickId = 'v_pickColor';
 }
 
 export default PickingPipelineStage;

@@ -1,26 +1,26 @@
-import binarySearch from "../../Core/binarySearch.js";
-import ClockRange from "../../Core/ClockRange.js";
-import ClockStep from "../../Core/ClockStep.js";
-import defined from "../../Core/defined.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import JulianDate from "../../Core/JulianDate.js";
-import knockout from "../../ThirdParty/knockout.js";
-import createCommand from "../createCommand.js";
-import ToggleButtonViewModel from "../ToggleButtonViewModel.js";
+import binarySearch from '../../Core/binarySearch.js';
+import ClockRange from '../../Core/ClockRange.js';
+import ClockStep from '../../Core/ClockStep.js';
+import defined from '../../Core/defined.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import JulianDate from '../../Core/JulianDate.js';
+import knockout from '../../ThirdParty/knockout.js';
+import createCommand from '../createCommand.js';
+import ToggleButtonViewModel from '../ToggleButtonViewModel.js';
 
 const monthNames = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec'
 ];
 const realtimeShuttleRingAngle = 15;
 const maxShuttleRingAngle = 105;
@@ -101,7 +101,7 @@ function multiplierToAngle(multiplier, shuttleRingTicks, clockViewModel) {
 function AnimationViewModel(clockViewModel) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(clockViewModel)) {
-    throw new DeveloperError("clockViewModel is required.");
+    throw new DeveloperError('clockViewModel is required.');
   }
   //>>includeEnd('debug');
 
@@ -128,11 +128,11 @@ function AnimationViewModel(clockViewModel) {
   this.snapToTicks = false;
 
   knockout.track(this, [
-    "_allShuttleRingTicks",
-    "_dateFormatter",
-    "_timeFormatter",
-    "shuttleRingDragging",
-    "snapToTicks",
+    '_allShuttleRingTicks',
+    '_dateFormatter',
+    '_timeFormatter',
+    'shuttleRingDragging',
+    'snapToTicks'
   ]);
 
   this._sortedFilteredPositiveTicks = [];
@@ -144,7 +144,7 @@ function AnimationViewModel(clockViewModel) {
    * @type {String}
    */
   this.timeLabel = undefined;
-  knockout.defineProperty(this, "timeLabel", function () {
+  knockout.defineProperty(this, 'timeLabel', function () {
     return that._timeFormatter(that._clockViewModel.currentTime, that);
   });
 
@@ -153,7 +153,7 @@ function AnimationViewModel(clockViewModel) {
    * @type {String}
    */
   this.dateLabel = undefined;
-  knockout.defineProperty(this, "dateLabel", function () {
+  knockout.defineProperty(this, 'dateLabel', function () {
     return that._dateFormatter(that._clockViewModel.currentTime, that);
   });
 
@@ -162,10 +162,10 @@ function AnimationViewModel(clockViewModel) {
    * @type {String}
    */
   this.multiplierLabel = undefined;
-  knockout.defineProperty(this, "multiplierLabel", function () {
+  knockout.defineProperty(this, 'multiplierLabel', function () {
     const clockViewModel = that._clockViewModel;
     if (clockViewModel.clockStep === ClockStep.SYSTEM_CLOCK) {
-      return "Today";
+      return 'Today';
     }
 
     const multiplier = clockViewModel.multiplier;
@@ -176,7 +176,7 @@ function AnimationViewModel(clockViewModel) {
     }
 
     //Convert to decimal string and remove any trailing zeroes
-    return `${multiplier.toFixed(3).replace(/0{0,3}$/, "")}x`;
+    return `${multiplier.toFixed(3).replace(/0{0,3}$/, '')}x`;
   });
 
   /**
@@ -184,7 +184,7 @@ function AnimationViewModel(clockViewModel) {
    * @type {Number}
    */
   this.shuttleRingAngle = undefined;
-  knockout.defineProperty(this, "shuttleRingAngle", {
+  knockout.defineProperty(this, 'shuttleRingAngle', {
     get: function () {
       return multiplierToAngle(
         clockViewModel.multiplier,
@@ -228,11 +228,11 @@ function AnimationViewModel(clockViewModel) {
         }
       }
       clockViewModel.multiplier = multiplier;
-    },
+    }
   });
 
   this._canAnimate = undefined;
-  knockout.defineProperty(this, "_canAnimate", function () {
+  knockout.defineProperty(this, '_canAnimate', function () {
     const clockViewModel = that._clockViewModel;
     const clockRange = clockViewModel.clockRange;
 
@@ -265,7 +265,7 @@ function AnimationViewModel(clockViewModel) {
   });
 
   this._isSystemTimeAvailable = undefined;
-  knockout.defineProperty(this, "_isSystemTimeAvailable", function () {
+  knockout.defineProperty(this, '_isSystemTimeAvailable', function () {
     const clockViewModel = that._clockViewModel;
     const clockRange = clockViewModel.clockRange;
     if (clockRange === ClockRange.UNBOUNDED) {
@@ -280,7 +280,7 @@ function AnimationViewModel(clockViewModel) {
   });
 
   this._isAnimating = undefined;
-  knockout.defineProperty(this, "_isAnimating", function () {
+  knockout.defineProperty(this, '_isAnimating', function () {
     return (
       that._clockViewModel.shouldAnimate &&
       (that._canAnimate || that.shuttleRingDragging)
@@ -300,7 +300,7 @@ function AnimationViewModel(clockViewModel) {
     toggled: knockout.computed(function () {
       return !that._isAnimating;
     }),
-    tooltip: "Pause",
+    tooltip: 'Pause'
   });
 
   const playReverseCommand = createCommand(function () {
@@ -316,7 +316,7 @@ function AnimationViewModel(clockViewModel) {
     toggled: knockout.computed(function () {
       return that._isAnimating && clockViewModel.multiplier < 0;
     }),
-    tooltip: "Play Reverse",
+    tooltip: 'Play Reverse'
   });
 
   const playForwardCommand = createCommand(function () {
@@ -336,12 +336,12 @@ function AnimationViewModel(clockViewModel) {
         clockViewModel.clockStep !== ClockStep.SYSTEM_CLOCK
       );
     }),
-    tooltip: "Play Forward",
+    tooltip: 'Play Forward'
   });
 
   const playRealtimeCommand = createCommand(function () {
     that._clockViewModel.clockStep = ClockStep.SYSTEM_CLOCK;
-  }, knockout.getObservable(this, "_isSystemTimeAvailable"));
+  }, knockout.getObservable(this, '_isSystemTimeAvailable'));
 
   this._playRealtimeViewModel = new ToggleButtonViewModel(playRealtimeCommand, {
     toggled: knockout.computed(function () {
@@ -349,9 +349,9 @@ function AnimationViewModel(clockViewModel) {
     }),
     tooltip: knockout.computed(function () {
       return that._isSystemTimeAvailable
-        ? "Today (real-time)"
-        : "Current time not in range";
-    }),
+        ? 'Today (real-time)'
+        : 'Current time not in range';
+    })
   });
 
   this._slower = createCommand(function () {
@@ -423,7 +423,7 @@ AnimationViewModel.defaultTicks = [
   86400.0,
   172800.0,
   345600.0,
-  604800.0,
+  604800.0
 ];
 
 /**
@@ -438,17 +438,17 @@ AnimationViewModel.defaultTimeFormatter = function (date, viewModel) {
   if (Math.abs(viewModel._clockViewModel.multiplier) < 1) {
     return `${gregorianDate.hour
       .toString()
-      .padStart(2, "0")}:${gregorianDate.minute
+      .padStart(2, '0')}:${gregorianDate.minute
       .toString()
-      .padStart(2, "0")}:${gregorianDate.second
+      .padStart(2, '0')}:${gregorianDate.second
       .toString()
-      .padStart(2, "0")}.${millisecond.toString().padStart(3, "0")}`;
+      .padStart(2, '0')}.${millisecond.toString().padStart(3, '0')}`;
   }
   return `${gregorianDate.hour
     .toString()
-    .padStart(2, "0")}:${gregorianDate.minute
+    .padStart(2, '0')}:${gregorianDate.minute
     .toString()
-    .padStart(2, "0")}:${gregorianDate.second.toString().padStart(2, "0")} UTC`;
+    .padStart(2, '0')}:${gregorianDate.second.toString().padStart(2, '0')} UTC`;
 };
 
 /**
@@ -472,7 +472,7 @@ AnimationViewModel.prototype.getShuttleRingTicks = function () {
 AnimationViewModel.prototype.setShuttleRingTicks = function (positiveTicks) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(positiveTicks)) {
-    throw new DeveloperError("positiveTicks is required.");
+    throw new DeveloperError('positiveTicks is required.');
   }
   //>>includeEnd('debug');
 
@@ -514,7 +514,7 @@ Object.defineProperties(AnimationViewModel.prototype, {
   slower: {
     get: function () {
       return this._slower;
-    },
+    }
   },
 
   /**
@@ -525,7 +525,7 @@ Object.defineProperties(AnimationViewModel.prototype, {
   faster: {
     get: function () {
       return this._faster;
-    },
+    }
   },
 
   /**
@@ -537,7 +537,7 @@ Object.defineProperties(AnimationViewModel.prototype, {
   clockViewModel: {
     get: function () {
       return this._clockViewModel;
-    },
+    }
   },
 
   /**
@@ -549,7 +549,7 @@ Object.defineProperties(AnimationViewModel.prototype, {
   pauseViewModel: {
     get: function () {
       return this._pauseViewModel;
-    },
+    }
   },
 
   /**
@@ -561,7 +561,7 @@ Object.defineProperties(AnimationViewModel.prototype, {
   playReverseViewModel: {
     get: function () {
       return this._playReverseViewModel;
-    },
+    }
   },
 
   /**
@@ -573,7 +573,7 @@ Object.defineProperties(AnimationViewModel.prototype, {
   playForwardViewModel: {
     get: function () {
       return this._playForwardViewModel;
-    },
+    }
   },
 
   /**
@@ -585,7 +585,7 @@ Object.defineProperties(AnimationViewModel.prototype, {
   playRealtimeViewModel: {
     get: function () {
       return this._playRealtimeViewModel;
-    },
+    }
   },
 
   /**
@@ -602,13 +602,13 @@ Object.defineProperties(AnimationViewModel.prototype, {
     },
     set: function (dateFormatter) {
       //>>includeStart('debug', pragmas.debug);
-      if (typeof dateFormatter !== "function") {
-        throw new DeveloperError("dateFormatter must be a function");
+      if (typeof dateFormatter !== 'function') {
+        throw new DeveloperError('dateFormatter must be a function');
       }
       //>>includeEnd('debug');
 
       this._dateFormatter = dateFormatter;
-    },
+    }
   },
 
   /**
@@ -625,14 +625,14 @@ Object.defineProperties(AnimationViewModel.prototype, {
     },
     set: function (timeFormatter) {
       //>>includeStart('debug', pragmas.debug);
-      if (typeof timeFormatter !== "function") {
-        throw new DeveloperError("timeFormatter must be a function");
+      if (typeof timeFormatter !== 'function') {
+        throw new DeveloperError('timeFormatter must be a function');
       }
       //>>includeEnd('debug');
 
       this._timeFormatter = timeFormatter;
-    },
-  },
+    }
+  }
 });
 
 //Currently exposed for tests.

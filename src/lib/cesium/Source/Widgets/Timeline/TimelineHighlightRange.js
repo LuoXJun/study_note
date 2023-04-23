@@ -1,5 +1,5 @@
-import defaultValue from "../../Core/defaultValue.js";
-import JulianDate from "../../Core/JulianDate.js";
+import defaultValue from '../../Core/defaultValue.js';
+import JulianDate from '../../Core/JulianDate.js';
 
 /**
  * @private
@@ -32,7 +32,7 @@ TimelineHighlightRange.prototype.setRange = function (start, stop) {
 };
 
 TimelineHighlightRange.prototype.render = function (renderState) {
-  let range = "";
+  let range = '';
   if (this._start && this._stop && this._color) {
     const highlightStart = JulianDate.secondsDifference(
       this._start,

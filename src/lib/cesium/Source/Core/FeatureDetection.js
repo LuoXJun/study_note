@@ -1,18 +1,18 @@
-import defaultValue from "./defaultValue.js";
-import defer from "./defer.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Fullscreen from "./Fullscreen.js";
+import defaultValue from './defaultValue.js';
+import defer from './defer.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Fullscreen from './Fullscreen.js';
 
 let theNavigator;
-if (typeof navigator !== "undefined") {
+if (typeof navigator !== 'undefined') {
   theNavigator = navigator;
 } else {
   theNavigator = {};
 }
 
 function extractVersion(versionString) {
-  const parts = versionString.split(".");
+  const parts = versionString.split('.');
   for (let i = 0, len = parts.length; i < len; ++i) {
     parts[i] = parseInt(parts[i], 10);
   }
@@ -96,13 +96,13 @@ function isInternetExplorer() {
     isInternetExplorerResult = false;
 
     let fields;
-    if (theNavigator.appName === "Microsoft Internet Explorer") {
+    if (theNavigator.appName === 'Microsoft Internet Explorer') {
       fields = /MSIE ([0-9]{1,}[\.0-9]{0,})/.exec(theNavigator.userAgent);
       if (fields !== null) {
         isInternetExplorerResult = true;
         internetExplorerVersionResult = extractVersion(fields[1]);
       }
-    } else if (theNavigator.appName === "Netscape") {
+    } else if (theNavigator.appName === 'Netscape') {
       fields = /Trident\/.*rv:([0-9]{1,}[\.0-9]{0,})/.exec(
         theNavigator.userAgent
       );
@@ -164,9 +164,9 @@ let isIPadOrIOSResult;
 function isIPadOrIOS() {
   if (!defined(isIPadOrIOSResult)) {
     isIPadOrIOSResult =
-      navigator.platform === "iPhone" ||
-      navigator.platform === "iPod" ||
-      navigator.platform === "iPad";
+      navigator.platform === 'iPhone' ||
+      navigator.platform === 'iPod' ||
+      navigator.platform === 'iPad';
   }
 
   return isIPadOrIOSResult;
@@ -187,7 +187,7 @@ function supportsPointerEvents() {
     //Firefox disabled because of https://github.com/CesiumGS/cesium/issues/6372
     hasPointerEvents =
       !isFirefox() &&
-      typeof PointerEvent !== "undefined" &&
+      typeof PointerEvent !== 'undefined' &&
       (!defined(theNavigator.pointerEnabled) || theNavigator.pointerEnabled);
   }
   return hasPointerEvents;
@@ -197,14 +197,14 @@ let imageRenderingValueResult;
 let supportsImageRenderingPixelatedResult;
 function supportsImageRenderingPixelated() {
   if (!defined(supportsImageRenderingPixelatedResult)) {
-    const canvas = document.createElement("canvas");
+    const canvas = document.createElement('canvas');
     canvas.setAttribute(
-      "style",
-      "image-rendering: -moz-crisp-edges;" + "image-rendering: pixelated;"
+      'style',
+      'image-rendering: -moz-crisp-edges;' + 'image-rendering: pixelated;'
     );
     //canvas.style.imageRendering will be undefined, null or an empty string on unsupported browsers.
     const tmp = canvas.style.imageRendering;
-    supportsImageRenderingPixelatedResult = defined(tmp) && tmp !== "";
+    supportsImageRenderingPixelatedResult = defined(tmp) && tmp !== '';
     if (supportsImageRenderingPixelatedResult) {
       imageRenderingValueResult = tmp;
     }
@@ -222,7 +222,7 @@ function supportsWebP() {
   //>>includeStart('debug', pragmas.debug);
   if (!supportsWebP.initialized) {
     throw new DeveloperError(
-      "You must call FeatureDetection.supportsWebP.initialize and wait for the promise to resolve before calling FeatureDetection.supportsWebP"
+      'You must call FeatureDetection.supportsWebP.initialize and wait for the promise to resolve before calling FeatureDetection.supportsWebP'
     );
   }
   //>>includeEnd('debug');
@@ -258,7 +258,7 @@ supportsWebP.initialize = function () {
   };
 
   image.src =
-    "data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA";
+    'data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA';
 
   return supportsWebPDeferred.promise;
 };
@@ -266,12 +266,12 @@ Object.defineProperties(supportsWebP, {
   initialized: {
     get: function () {
       return defined(supportsWebP._result);
-    },
-  },
+    }
+  }
 });
 
 const typedArrayTypes = [];
-if (typeof ArrayBuffer !== "undefined") {
+if (typeof ArrayBuffer !== 'undefined') {
   typedArrayTypes.push(
     Int8Array,
     Uint8Array,
@@ -283,20 +283,20 @@ if (typeof ArrayBuffer !== "undefined") {
     Float64Array
   );
 
-  if (typeof Uint8ClampedArray !== "undefined") {
+  if (typeof Uint8ClampedArray !== 'undefined') {
     typedArrayTypes.push(Uint8ClampedArray);
   }
 
-  if (typeof Uint8ClampedArray !== "undefined") {
+  if (typeof Uint8ClampedArray !== 'undefined') {
     typedArrayTypes.push(Uint8ClampedArray);
   }
 
-  if (typeof BigInt64Array !== "undefined") {
+  if (typeof BigInt64Array !== 'undefined') {
     // eslint-disable-next-line no-undef
     typedArrayTypes.push(BigInt64Array);
   }
 
-  if (typeof BigUint64Array !== "undefined") {
+  if (typeof BigUint64Array !== 'undefined') {
     // eslint-disable-next-line no-undef
     typedArrayTypes.push(BigUint64Array);
   }
@@ -328,7 +328,7 @@ const FeatureDetection = {
   supportsImageRenderingPixelated: supportsImageRenderingPixelated,
   supportsWebP: supportsWebP,
   imageRenderingValue: imageRenderingValue,
-  typedArrayTypes: typedArrayTypes,
+  typedArrayTypes: typedArrayTypes
 };
 
 /**
@@ -361,7 +361,7 @@ FeatureDetection.supportsFullscreen = function () {
  * @see {@link https://tc39.es/ecma262/#sec-typedarray-objects|Typed Array Specification}
  */
 FeatureDetection.supportsTypedArrays = function () {
-  return typeof ArrayBuffer !== "undefined";
+  return typeof ArrayBuffer !== 'undefined';
 };
 
 /**
@@ -372,7 +372,7 @@ FeatureDetection.supportsTypedArrays = function () {
  * @see {@link https://tc39.es/ecma262/#sec-typedarray-objects|Typed Array Specification}
  */
 FeatureDetection.supportsBigInt64Array = function () {
-  return typeof BigInt64Array !== "undefined";
+  return typeof BigInt64Array !== 'undefined';
 };
 
 /**
@@ -383,7 +383,7 @@ FeatureDetection.supportsBigInt64Array = function () {
  * @see {@link https://tc39.es/ecma262/#sec-typedarray-objects|Typed Array Specification}
  */
 FeatureDetection.supportsBigUint64Array = function () {
-  return typeof BigUint64Array !== "undefined";
+  return typeof BigUint64Array !== 'undefined';
 };
 
 /**
@@ -394,7 +394,7 @@ FeatureDetection.supportsBigUint64Array = function () {
  * @see {@link https://tc39.es/ecma262/#sec-bigint-objects|BigInt Specification}
  */
 FeatureDetection.supportsBigInt = function () {
-  return typeof BigInt !== "undefined";
+  return typeof BigInt !== 'undefined';
 };
 
 /**
@@ -405,7 +405,7 @@ FeatureDetection.supportsBigInt = function () {
  * @see {@link http://www.w3.org/TR/workers/}
  */
 FeatureDetection.supportsWebWorkers = function () {
-  return typeof Worker !== "undefined";
+  return typeof Worker !== 'undefined';
 };
 
 /**
@@ -416,6 +416,6 @@ FeatureDetection.supportsWebWorkers = function () {
  * @see {@link https://developer.mozilla.org/en-US/docs/WebAssembly}
  */
 FeatureDetection.supportsWebAssembly = function () {
-  return typeof WebAssembly !== "undefined";
+  return typeof WebAssembly !== 'undefined';
 };
 export default FeatureDetection;

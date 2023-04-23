@@ -1,9 +1,9 @@
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import DataSource from "./DataSource.js";
-import EntityCluster from "./EntityCluster.js";
-import EntityCollection from "./EntityCollection.js";
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import DataSource from './DataSource.js';
+import EntityCluster from './EntityCluster.js';
+import EntityCollection from './EntityCollection.js';
 
 /**
  * A {@link DataSource} implementation which can be used to manually manage a group of entities.
@@ -51,7 +51,7 @@ Object.defineProperties(CustomDataSource.prototype, {
         this._name = value;
         this._changed.raiseEvent(this);
       }
-    },
+    }
   },
   /**
    * Gets or sets the clock for this instance.
@@ -67,7 +67,7 @@ Object.defineProperties(CustomDataSource.prototype, {
         this._clock = value;
         this._changed.raiseEvent(this);
       }
-    },
+    }
   },
   /**
    * Gets the collection of {@link Entity} instances.
@@ -77,7 +77,7 @@ Object.defineProperties(CustomDataSource.prototype, {
   entities: {
     get: function () {
       return this._entityCollection;
-    },
+    }
   },
   /**
    * Gets or sets whether the data source is currently loading data.
@@ -90,7 +90,7 @@ Object.defineProperties(CustomDataSource.prototype, {
     },
     set: function (value) {
       DataSource.setLoading(this, value);
-    },
+    }
   },
   /**
    * Gets an event that will be raised when the underlying data changes.
@@ -100,7 +100,7 @@ Object.defineProperties(CustomDataSource.prototype, {
   changedEvent: {
     get: function () {
       return this._changed;
-    },
+    }
   },
   /**
    * Gets an event that will be raised if an error is encountered during processing.
@@ -110,7 +110,7 @@ Object.defineProperties(CustomDataSource.prototype, {
   errorEvent: {
     get: function () {
       return this._error;
-    },
+    }
   },
   /**
    * Gets an event that will be raised when the data source either starts or stops loading.
@@ -120,7 +120,7 @@ Object.defineProperties(CustomDataSource.prototype, {
   loadingEvent: {
     get: function () {
       return this._loading;
-    },
+    }
   },
   /**
    * Gets whether or not this data source should be displayed.
@@ -133,7 +133,7 @@ Object.defineProperties(CustomDataSource.prototype, {
     },
     set: function (value) {
       this._entityCollection.show = value;
-    },
+    }
   },
 
   /**
@@ -149,12 +149,12 @@ Object.defineProperties(CustomDataSource.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(value)) {
-        throw new DeveloperError("value must be defined.");
+        throw new DeveloperError('value must be defined.');
       }
       //>>includeEnd('debug');
       this._entityCluster = value;
-    },
-  },
+    }
+  }
 });
 
 /**

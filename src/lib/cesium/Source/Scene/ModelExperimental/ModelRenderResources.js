@@ -1,6 +1,6 @@
-import Check from "../../Core/Check.js";
-import ModelAlphaOptions from "./ModelAlphaOptions.js";
-import ShaderBuilder from "../../Renderer/ShaderBuilder.js";
+import Check from '../../Core/Check.js';
+import ModelAlphaOptions from './ModelAlphaOptions.js';
+import ShaderBuilder from '../../Renderer/ShaderBuilder.js';
 
 /**
  * Model render resources are for setting details that are consistent across
@@ -13,7 +13,7 @@ import ShaderBuilder from "../../Renderer/ShaderBuilder.js";
  */
 export default function ModelRenderResources(model) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("model", model);
+  Check.typeOf.object('model', model);
   //>>includeEnd('debug');
 
   /**

@@ -1,9 +1,9 @@
-import Clock from "../Core/Clock.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import EventHelper from "../Core/EventHelper.js";
-import JulianDate from "../Core/JulianDate.js";
-import knockout from "../ThirdParty/knockout.js";
+import Clock from '../Core/Clock.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import EventHelper from '../Core/EventHelper.js';
+import JulianDate from '../Core/JulianDate.js';
+import knockout from '../ThirdParty/knockout.js';
 
 /**
  * A view model which exposes a {@link Clock} for user interfaces.
@@ -131,15 +131,15 @@ function ClockViewModel(clock) {
   }, this);
 
   knockout.track(this, [
-    "systemTime",
-    "startTime",
-    "stopTime",
-    "currentTime",
-    "multiplier",
-    "clockStep",
-    "clockRange",
-    "canAnimate",
-    "shouldAnimate",
+    'systemTime',
+    'startTime',
+    'stopTime',
+    'currentTime',
+    'multiplier',
+    'clockStep',
+    'clockRange',
+    'canAnimate',
+    'shouldAnimate'
   ]);
 }
 
@@ -152,8 +152,8 @@ Object.defineProperties(ClockViewModel.prototype, {
   clock: {
     get: function () {
       return this._clock;
-    },
-  },
+    }
+  }
 });
 
 /**

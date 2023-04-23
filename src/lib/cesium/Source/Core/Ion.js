@@ -1,10 +1,10 @@
-import Credit from "./Credit.js";
-import defined from "./defined.js";
-import Resource from "./Resource.js";
+import Credit from './Credit.js';
+import defined from './defined.js';
+import Resource from './Resource.js';
 
 let defaultTokenCredit;
 const defaultAccessToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwNzAxODk2YS03MTc4LTQxYmYtOWYwMC0xZmUwNTQ5ZWYwMDYiLCJpZCI6MjU5LCJpYXQiOjE2NTY2ODI5ODF9.9O2dVq-nQdlJbXG3lZYFNpzv_tR0jF_xjr0gb02x9M4";
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwNzAxODk2YS03MTc4LTQxYmYtOWYwMC0xZmUwNTQ5ZWYwMDYiLCJpZCI6MjU5LCJpYXQiOjE2NTY2ODI5ODF9.9O2dVq-nQdlJbXG3lZYFNpzv_tR0jF_xjr0gb02x9M4';
 
 /**
  * Default settings for accessing the Cesium ion API.
@@ -35,7 +35,7 @@ Ion.defaultAccessToken = defaultAccessToken;
  * @type {String|Resource}
  * @default https://api.cesium.com
  */
-Ion.defaultServer = new Resource({ url: "https://api.cesium.com/" });
+Ion.defaultServer = new Resource({ url: 'https://api.cesium.com/' });
 
 Ion.getDefaultTokenCredit = function (providedKey) {
   if (providedKey !== defaultAccessToken) {

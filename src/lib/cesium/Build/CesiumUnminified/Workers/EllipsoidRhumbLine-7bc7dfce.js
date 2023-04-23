@@ -23,7 +23,14 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultValue-97284df2', './ComponentDatatype-4eeb6d9b'], (function (exports, Matrix2, RuntimeError, defaultValue, ComponentDatatype) { 'use strict';
+define([
+  'exports',
+  './Matrix2-9e1c22e2',
+  './RuntimeError-4f8ec8a2',
+  './defaultValue-97284df2',
+  './ComponentDatatype-4eeb6d9b'
+], function (exports, Matrix2, RuntimeError, defaultValue, ComponentDatatype) {
+  'use strict';
 
   function calculateM(ellipticity, major, latitude) {
     if (ellipticity === 0.0) {
@@ -73,7 +80,9 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
           (3675 * e10) / 262144 +
           (13475 * e12) / 1048576) *
           sin6Phi +
-        ((315 * e8) / 131072 + (2205 * e10) / 524288 + (43659 * e12) / 8388608) *
+        ((315 * e8) / 131072 +
+          (2205 * e10) / 524288 +
+          (43659 * e12) / 8388608) *
           sin8Phi -
         ((693 * e10) / 1310720 + (6237 * e12) / 5242880) * sin10Phi +
         ((1001 * e12) / 8388608) * sin12Phi)
@@ -179,12 +188,16 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
   function calculateSigma(ellipticity, latitude) {
     if (ellipticity === 0.0) {
       // sphere
-      return Math.log(Math.tan(0.5 * (ComponentDatatype.CesiumMath.PI_OVER_TWO + latitude)));
+      return Math.log(
+        Math.tan(0.5 * (ComponentDatatype.CesiumMath.PI_OVER_TWO + latitude))
+      );
     }
 
     const eSinL = ellipticity * Math.sin(latitude);
     return (
-      Math.log(Math.tan(0.5 * (ComponentDatatype.CesiumMath.PI_OVER_TWO + latitude))) -
+      Math.log(
+        Math.tan(0.5 * (ComponentDatatype.CesiumMath.PI_OVER_TWO + latitude))
+      ) -
       (ellipticity / 2.0) * Math.log((1 + eSinL) / (1 - eSinL))
     );
   }
@@ -196,13 +209,18 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     secondLongitude,
     secondLatitude
   ) {
-    const sigma1 = calculateSigma(ellipsoidRhumbLine._ellipticity, firstLatitude);
+    const sigma1 = calculateSigma(
+      ellipsoidRhumbLine._ellipticity,
+      firstLatitude
+    );
     const sigma2 = calculateSigma(
       ellipsoidRhumbLine._ellipticity,
       secondLatitude
     );
     return Math.atan2(
-      ComponentDatatype.CesiumMath.negativePiToPi(secondLongitude - firstLongitude),
+      ComponentDatatype.CesiumMath.negativePiToPi(
+        secondLongitude - firstLongitude
+      ),
       sigma2 - sigma1
     );
   }
@@ -242,7 +260,9 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
           (major *
             Math.cos(firstLatitude) *
             ComponentDatatype.CesiumMath.negativePiToPi(deltaLongitude)) /
-          Math.sqrt(1 - ellipsoidRhumbLine._ellipticitySquared * sinPhi * sinPhi);
+          Math.sqrt(
+            1 - ellipsoidRhumbLine._ellipticitySquared * sinPhi * sinPhi
+          );
       }
     } else {
       const M1 = calculateM(
@@ -276,9 +296,11 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
 
     //>>includeStart('debug', pragmas.debug);
     RuntimeError.Check.typeOf.number.greaterThanOrEquals(
-      "value",
+      'value',
       Math.abs(
-        Math.abs(Matrix2.Cartesian3.angleBetween(firstCartesian, lastCartesian)) - Math.PI
+        Math.abs(
+          Matrix2.Cartesian3.angleBetween(firstCartesian, lastCartesian)
+        ) - Math.PI
       ),
       0.0125
     );
@@ -300,7 +322,10 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     );
     ellipsoidRhumbLine._start.height = 0;
 
-    ellipsoidRhumbLine._end = Matrix2.Cartographic.clone(end, ellipsoidRhumbLine._end);
+    ellipsoidRhumbLine._end = Matrix2.Cartographic.clone(
+      end,
+      ellipsoidRhumbLine._end
+    );
     ellipsoidRhumbLine._end.height = 0;
 
     ellipsoidRhumbLine._heading = calculateHeading(
@@ -342,7 +367,8 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     //Check to see if the rhumb line has constant latitude
     //This won't converge if heading is close to 90 degrees
     if (
-      Math.abs(ComponentDatatype.CesiumMath.PI_OVER_TWO - Math.abs(heading)) > ComponentDatatype.CesiumMath.EPSILON8
+      Math.abs(ComponentDatatype.CesiumMath.PI_OVER_TWO - Math.abs(heading)) >
+      ComponentDatatype.CesiumMath.EPSILON8
     ) {
       //Calculate latitude of the second point
       const M1 = calculateM(ellipticity, major, start.latitude);
@@ -354,7 +380,9 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
       const sigma1 = calculateSigma(ellipticity, start.latitude);
       const sigma2 = calculateSigma(ellipticity, latitude);
       deltaLongitude = Math.tan(heading) * (sigma2 - sigma1);
-      longitude = ComponentDatatype.CesiumMath.negativePiToPi(start.longitude + deltaLongitude);
+      longitude = ComponentDatatype.CesiumMath.negativePiToPi(
+        start.longitude + deltaLongitude
+      );
     } else {
       //If heading is close to 90 degrees
       latitude = start.latitude;
@@ -372,9 +400,13 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
 
       deltaLongitude = distance / localRad;
       if (heading > 0.0) {
-        longitude = ComponentDatatype.CesiumMath.negativePiToPi(start.longitude + deltaLongitude);
+        longitude = ComponentDatatype.CesiumMath.negativePiToPi(
+          start.longitude + deltaLongitude
+        );
       } else {
-        longitude = ComponentDatatype.CesiumMath.negativePiToPi(start.longitude - deltaLongitude);
+        longitude = ComponentDatatype.CesiumMath.negativePiToPi(
+          start.longitude - deltaLongitude
+        );
       }
     }
 
@@ -427,7 +459,7 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     ellipsoid: {
       get: function () {
         return this._ellipsoid;
-      },
+      }
     },
 
     /**
@@ -439,11 +471,11 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     surfaceDistance: {
       get: function () {
         //>>includeStart('debug', pragmas.debug);
-        RuntimeError.Check.defined("distance", this._distance);
+        RuntimeError.Check.defined('distance', this._distance);
         //>>includeEnd('debug');
 
         return this._distance;
-      },
+      }
     },
 
     /**
@@ -455,7 +487,7 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     start: {
       get: function () {
         return this._start;
-      },
+      }
     },
 
     /**
@@ -467,7 +499,7 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     end: {
       get: function () {
         return this._end;
-      },
+      }
     },
 
     /**
@@ -479,12 +511,12 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     heading: {
       get: function () {
         //>>includeStart('debug', pragmas.debug);
-        RuntimeError.Check.defined("distance", this._distance);
+        RuntimeError.Check.defined('distance', this._distance);
         //>>includeEnd('debug');
 
         return this._heading;
-      },
-    },
+      }
+    }
   });
 
   /**
@@ -505,10 +537,10 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("start", start);
-    RuntimeError.Check.defined("heading", heading);
-    RuntimeError.Check.defined("distance", distance);
-    RuntimeError.Check.typeOf.number.greaterThan("distance", distance, 0.0);
+    RuntimeError.Check.defined('start', start);
+    RuntimeError.Check.defined('heading', heading);
+    RuntimeError.Check.defined('distance', distance);
+    RuntimeError.Check.typeOf.number.greaterThan('distance', distance, 0.0);
     //>>includeEnd('debug');
 
     const e = defaultValue.defaultValue(ellipsoid, Matrix2.Ellipsoid.WGS84);
@@ -546,8 +578,8 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
    */
   EllipsoidRhumbLine.prototype.setEndPoints = function (start, end) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("start", start);
-    RuntimeError.Check.defined("end", end);
+    RuntimeError.Check.defined('start', start);
+    RuntimeError.Check.defined('end', end);
     //>>includeEnd('debug');
 
     computeProperties(this, start, end, this._ellipsoid);
@@ -584,10 +616,10 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("distance", distance);
+    RuntimeError.Check.typeOf.number('distance', distance);
     if (!defaultValue.defined(this._distance) || this._distance === 0.0) {
       throw new RuntimeError.DeveloperError(
-        "EllipsoidRhumbLine must have distinct start and end set."
+        'EllipsoidRhumbLine must have distinct start and end set.'
       );
     }
     //>>includeEnd('debug');
@@ -617,10 +649,13 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("intersectionLongitude", intersectionLongitude);
+    RuntimeError.Check.typeOf.number(
+      'intersectionLongitude',
+      intersectionLongitude
+    );
     if (!defaultValue.defined(this._distance) || this._distance === 0.0) {
       throw new RuntimeError.DeveloperError(
-        "EllipsoidRhumbLine must have distinct start and end set."
+        'EllipsoidRhumbLine must have distinct start and end set.'
       );
     }
     //>>includeEnd('debug');
@@ -630,7 +665,9 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     const absHeading = Math.abs(heading);
     const start = this._start;
 
-    intersectionLongitude = ComponentDatatype.CesiumMath.negativePiToPi(intersectionLongitude);
+    intersectionLongitude = ComponentDatatype.CesiumMath.negativePiToPi(
+      intersectionLongitude
+    );
 
     if (
       ComponentDatatype.CesiumMath.equalsEpsilon(
@@ -639,7 +676,8 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
         ComponentDatatype.CesiumMath.EPSILON14
       )
     ) {
-      intersectionLongitude = ComponentDatatype.CesiumMath.sign(start.longitude) * Math.PI;
+      intersectionLongitude =
+        ComponentDatatype.CesiumMath.sign(start.longitude) * Math.PI;
     }
 
     if (!defaultValue.defined(result)) {
@@ -648,7 +686,10 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
 
     // If heading is -PI/2 or PI/2, this is an E-W rhumb line
     // If heading is 0 or PI, this is an N-S rhumb line
-    if (Math.abs(ComponentDatatype.CesiumMath.PI_OVER_TWO - absHeading) <= ComponentDatatype.CesiumMath.EPSILON8) {
+    if (
+      Math.abs(ComponentDatatype.CesiumMath.PI_OVER_TWO - absHeading) <=
+      ComponentDatatype.CesiumMath.EPSILON8
+    ) {
       result.longitude = intersectionLongitude;
       result.latitude = start.latitude;
       result.height = 0;
@@ -673,7 +714,9 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
       result.longitude = intersectionLongitude;
       result.latitude =
         ComponentDatatype.CesiumMath.PI_OVER_TWO *
-        ComponentDatatype.CesiumMath.sign(ComponentDatatype.CesiumMath.PI_OVER_TWO - heading);
+        ComponentDatatype.CesiumMath.sign(
+          ComponentDatatype.CesiumMath.PI_OVER_TWO - heading
+        );
       result.height = 0;
       return result;
     }
@@ -698,7 +741,13 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
             leftComponent * Math.pow(numerator / denominator, ellipticity / 2)
           ) -
         ComponentDatatype.CesiumMath.PI_OVER_TWO;
-    } while (!ComponentDatatype.CesiumMath.equalsEpsilon(newPhi, phi, ComponentDatatype.CesiumMath.EPSILON12));
+    } while (
+      !ComponentDatatype.CesiumMath.equalsEpsilon(
+        newPhi,
+        phi,
+        ComponentDatatype.CesiumMath.EPSILON12
+      )
+    );
 
     result.longitude = intersectionLongitude;
     result.latitude = newPhi;
@@ -721,10 +770,13 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.number("intersectionLatitude", intersectionLatitude);
+    RuntimeError.Check.typeOf.number(
+      'intersectionLatitude',
+      intersectionLatitude
+    );
     if (!defaultValue.defined(this._distance) || this._distance === 0.0) {
       throw new RuntimeError.DeveloperError(
-        "EllipsoidRhumbLine must have distinct start and end set."
+        'EllipsoidRhumbLine must have distinct start and end set.'
       );
     }
     //>>includeEnd('debug');
@@ -748,7 +800,9 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
     const sigma1 = calculateSigma(ellipticity, start.latitude);
     const sigma2 = calculateSigma(ellipticity, intersectionLatitude);
     const deltaLongitude = Math.tan(heading) * (sigma2 - sigma1);
-    const longitude = ComponentDatatype.CesiumMath.negativePiToPi(start.longitude + deltaLongitude);
+    const longitude = ComponentDatatype.CesiumMath.negativePiToPi(
+      start.longitude + deltaLongitude
+    );
 
     if (defaultValue.defined(result)) {
       result.longitude = longitude;
@@ -762,6 +816,5 @@ define(['exports', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './defaultVa
   };
 
   exports.EllipsoidRhumbLine = EllipsoidRhumbLine;
-
-}));
+});
 //# sourceMappingURL=EllipsoidRhumbLine-7bc7dfce.js.map

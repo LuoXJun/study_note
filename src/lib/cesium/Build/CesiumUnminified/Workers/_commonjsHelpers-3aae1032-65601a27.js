@@ -23,27 +23,45 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports'], (function (exports) { 'use strict';
+define(['exports'], function (exports) {
+  'use strict';
 
-	/* This file is automatically rebuilt by the Cesium build process. */
-	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+  /* This file is automatically rebuilt by the Cesium build process. */
+  var commonjsGlobal =
+    typeof globalThis !== 'undefined'
+      ? globalThis
+      : typeof window !== 'undefined'
+      ? window
+      : typeof global !== 'undefined'
+      ? global
+      : typeof self !== 'undefined'
+      ? self
+      : {};
 
-	function createCommonjsModule(fn, basedir, module) {
-		return module = {
-			path: basedir,
-			exports: {},
-			require: function (path, base) {
-				return commonjsRequire(path, (base === undefined || base === null) ? module.path : base);
-			}
-		}, fn(module, module.exports), module.exports;
-	}
+  function createCommonjsModule(fn, basedir, module) {
+    return (
+      (module = {
+        path: basedir,
+        exports: {},
+        require: function (path, base) {
+          return commonjsRequire(
+            path,
+            base === undefined || base === null ? module.path : base
+          );
+        }
+      }),
+      fn(module, module.exports),
+      module.exports
+    );
+  }
 
-	function commonjsRequire () {
-		throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
-	}
+  function commonjsRequire() {
+    throw new Error(
+      'Dynamic requires are not currently supported by @rollup/plugin-commonjs'
+    );
+  }
 
-	exports.commonjsGlobal = commonjsGlobal;
-	exports.createCommonjsModule = createCommonjsModule;
-
-}));
+  exports.commonjsGlobal = commonjsGlobal;
+  exports.createCommonjsModule = createCommonjsModule;
+});
 //# sourceMappingURL=_commonjsHelpers-3aae1032-65601a27.js.map

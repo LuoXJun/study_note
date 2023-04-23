@@ -1,30 +1,30 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import PrimitiveType from "../Core/PrimitiveType.js";
-import Buffer from "../Renderer/Buffer.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import ComputeCommand from "../Renderer/ComputeCommand.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import Texture from "../Renderer/Texture.js";
-import VertexArray from "../Renderer/VertexArray.js";
-import SunFS from "../Shaders/SunFS.js";
-import SunTextureFS from "../Shaders/SunTextureFS.js";
-import SunVS from "../Shaders/SunVS.js";
-import BlendingState from "./BlendingState.js";
-import SceneMode from "./SceneMode.js";
-import SceneTransforms from "./SceneTransforms.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import PrimitiveType from '../Core/PrimitiveType.js';
+import Buffer from '../Renderer/Buffer.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import ComputeCommand from '../Renderer/ComputeCommand.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import Texture from '../Renderer/Texture.js';
+import VertexArray from '../Renderer/VertexArray.js';
+import SunFS from '../Shaders/SunFS.js';
+import SunTextureFS from '../Shaders/SunTextureFS.js';
+import SunVS from '../Shaders/SunVS.js';
+import BlendingState from './BlendingState.js';
+import SceneMode from './SceneMode.js';
+import SceneTransforms from './SceneTransforms.js';
 
 /**
  * Draws a sun billboard.
@@ -51,11 +51,11 @@ function Sun() {
   this._drawCommand = new DrawCommand({
     primitiveType: PrimitiveType.TRIANGLES,
     boundingVolume: new BoundingSphere(),
-    owner: this,
+    owner: this
   });
   this._commands = {
     drawCommand: this._drawCommand,
-    computeCommand: undefined,
+    computeCommand: undefined
   };
   this._boundingVolume = new BoundingSphere();
   this._boundingVolume2D = new BoundingSphere();
@@ -78,7 +78,7 @@ function Sun() {
     },
     u_size: function () {
       return that._size;
-    },
+    }
   };
 }
 
@@ -100,8 +100,8 @@ Object.defineProperties(Sun.prototype, {
       glowFactor = Math.max(glowFactor, 0.0);
       this._glowFactor = glowFactor;
       this._glowFactorDirty = true;
-    },
-  },
+    }
+  }
 });
 
 const scratchPositionWC = new Cartesian2();
@@ -161,7 +161,7 @@ Sun.prototype.update = function (frameState, passState, useHdr) {
       width: size,
       height: size,
       pixelFormat: PixelFormat.RGBA,
-      pixelDatatype: pixelDatatype,
+      pixelDatatype: pixelDatatype
     });
 
     this._glowLengthTS = this._glowFactor * 5.0;
@@ -171,7 +171,7 @@ Sun.prototype.update = function (frameState, passState, useHdr) {
     const uniformMap = {
       u_radiusTS: function () {
         return that._radiusTS;
-      },
+      }
     };
 
     this._commands.computeCommand = new ComputeCommand({
@@ -182,7 +182,7 @@ Sun.prototype.update = function (frameState, passState, useHdr) {
       owner: this,
       postExecute: function () {
         that._commands.computeCommand = undefined;
-      },
+      }
     });
   }
 
@@ -190,7 +190,7 @@ Sun.prototype.update = function (frameState, passState, useHdr) {
 
   if (!defined(drawCommand.vertexArray)) {
     const attributeLocations = {
-      direction: 0,
+      direction: 0
     };
 
     const directions = new Uint8Array(4 * 2);
@@ -209,7 +209,7 @@ Sun.prototype.update = function (frameState, passState, useHdr) {
     const vertexBuffer = Buffer.createVertexBuffer({
       context: context,
       typedArray: directions,
-      usage: BufferUsage.STATIC_DRAW,
+      usage: BufferUsage.STATIC_DRAW
     });
     const attributes = [
       {
@@ -217,31 +217,31 @@ Sun.prototype.update = function (frameState, passState, useHdr) {
         vertexBuffer: vertexBuffer,
         componentsPerAttribute: 2,
         normalize: true,
-        componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
-      },
+        componentDatatype: ComponentDatatype.UNSIGNED_BYTE
+      }
     ];
     // Workaround Internet Explorer 11.0.8 lack of TRIANGLE_FAN
     const indexBuffer = Buffer.createIndexBuffer({
       context: context,
       typedArray: new Uint16Array([0, 1, 2, 0, 2, 3]),
       usage: BufferUsage.STATIC_DRAW,
-      indexDatatype: IndexDatatype.UNSIGNED_SHORT,
+      indexDatatype: IndexDatatype.UNSIGNED_SHORT
     });
     drawCommand.vertexArray = new VertexArray({
       context: context,
       attributes: attributes,
-      indexBuffer: indexBuffer,
+      indexBuffer: indexBuffer
     });
 
     drawCommand.shaderProgram = ShaderProgram.fromCache({
       context: context,
       vertexShaderSource: SunVS,
       fragmentShaderSource: SunFS,
-      attributeLocations: attributeLocations,
+      attributeLocations: attributeLocations
     });
 
     drawCommand.renderState = RenderState.fromCache({
-      blending: BlendingState.ALPHA_BLEND,
+      blending: BlendingState.ALPHA_BLEND
     });
     drawCommand.uniformMap = this._uniformMap;
   }

@@ -1,5 +1,11 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './ComponentDatatype-4a60b8d6'], (function (exports, RuntimeError, defaultValue, ComponentDatatype) { 'use strict';
+define([
+  'exports',
+  './RuntimeError-c581ca93',
+  './defaultValue-94c3e563',
+  './ComponentDatatype-4a60b8d6'
+], function (exports, RuntimeError, defaultValue, ComponentDatatype) {
+  'use strict';
 
   const removeDuplicatesEpsilon = ComponentDatatype.CesiumMath.EPSILON10;
 
@@ -52,7 +58,7 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Comp
     removedIndices
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("equalsEpsilon", equalsEpsilon);
+    RuntimeError.Check.defined('equalsEpsilon', equalsEpsilon);
     //>>includeEnd('debug');
 
     if (!defaultValue.defined(values)) {
@@ -126,5 +132,4 @@ define(['exports', './RuntimeError-c581ca93', './defaultValue-94c3e563', './Comp
   }
 
   exports.arrayRemoveDuplicates = arrayRemoveDuplicates;
-
-}));
+});

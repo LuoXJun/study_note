@@ -23,7 +23,34 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDatatype-4eeb6d9b', './CylinderGeometryLibrary-365438d7', './defaultValue-97284df2', './RuntimeError-4f8ec8a2', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './GeometryOffsetAttribute-59b14f45', './IndexDatatype-f228f5fd', './VertexFormat-563ab2cc'], (function (exports, Transforms, Matrix2, ComponentDatatype, CylinderGeometryLibrary, defaultValue, RuntimeError, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, IndexDatatype, VertexFormat) { 'use strict';
+define([
+  'exports',
+  './Transforms-273eeb44',
+  './Matrix2-9e1c22e2',
+  './ComponentDatatype-4eeb6d9b',
+  './CylinderGeometryLibrary-365438d7',
+  './defaultValue-97284df2',
+  './RuntimeError-4f8ec8a2',
+  './GeometryAttribute-9be2d2e5',
+  './GeometryAttributes-734a3446',
+  './GeometryOffsetAttribute-59b14f45',
+  './IndexDatatype-f228f5fd',
+  './VertexFormat-563ab2cc'
+], function (
+  exports,
+  Transforms,
+  Matrix2,
+  ComponentDatatype,
+  CylinderGeometryLibrary,
+  defaultValue,
+  RuntimeError,
+  GeometryAttribute,
+  GeometryAttributes,
+  GeometryOffsetAttribute,
+  IndexDatatype,
+  VertexFormat
+) {
+  'use strict';
 
   const radiusScratch = new Matrix2.Cartesian2();
   const normalScratch = new Matrix2.Cartesian3();
@@ -58,35 +85,46 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
    * const geometry = Cesium.CylinderGeometry.createGeometry(cylinder);
    */
   function CylinderGeometry(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     const length = options.length;
     const topRadius = options.topRadius;
     const bottomRadius = options.bottomRadius;
-    const vertexFormat = defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
+    const vertexFormat = defaultValue.defaultValue(
+      options.vertexFormat,
+      VertexFormat.VertexFormat.DEFAULT
+    );
     const slices = defaultValue.defaultValue(options.slices, 128);
 
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(length)) {
-      throw new RuntimeError.DeveloperError("options.length must be defined.");
+      throw new RuntimeError.DeveloperError('options.length must be defined.');
     }
     if (!defaultValue.defined(topRadius)) {
-      throw new RuntimeError.DeveloperError("options.topRadius must be defined.");
+      throw new RuntimeError.DeveloperError(
+        'options.topRadius must be defined.'
+      );
     }
     if (!defaultValue.defined(bottomRadius)) {
-      throw new RuntimeError.DeveloperError("options.bottomRadius must be defined.");
+      throw new RuntimeError.DeveloperError(
+        'options.bottomRadius must be defined.'
+      );
     }
     if (slices < 3) {
       throw new RuntimeError.DeveloperError(
-        "options.slices must be greater than or equal to 3."
+        'options.slices must be greater than or equal to 3.'
       );
     }
     if (
       defaultValue.defined(options.offsetAttribute) &&
-      options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP
+      options.offsetAttribute ===
+        GeometryOffsetAttribute.GeometryOffsetAttribute.TOP
     ) {
       throw new RuntimeError.DeveloperError(
-        "GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry."
+        'GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry.'
       );
     }
     //>>includeEnd('debug');
@@ -97,7 +135,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
     this._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat);
     this._slices = slices;
     this._offsetAttribute = options.offsetAttribute;
-    this._workerName = "createCylinderGeometry";
+    this._workerName = 'createCylinderGeometry';
   }
 
   /**
@@ -118,10 +156,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
   CylinderGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(value)) {
-      throw new RuntimeError.DeveloperError("value is required");
+      throw new RuntimeError.DeveloperError('value is required');
     }
     if (!defaultValue.defined(array)) {
-      throw new RuntimeError.DeveloperError("array is required");
+      throw new RuntimeError.DeveloperError('array is required');
     }
     //>>includeEnd('debug');
 
@@ -134,7 +172,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
     array[startingIndex++] = value._topRadius;
     array[startingIndex++] = value._bottomRadius;
     array[startingIndex++] = value._slices;
-    array[startingIndex] = defaultValue.defaultValue(value._offsetAttribute, -1);
+    array[startingIndex] = defaultValue.defaultValue(
+      value._offsetAttribute,
+      -1
+    );
 
     return array;
   };
@@ -146,7 +187,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
     topRadius: undefined,
     bottomRadius: undefined,
     slices: undefined,
-    offsetAttribute: undefined,
+    offsetAttribute: undefined
   };
 
   /**
@@ -160,7 +201,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
   CylinderGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(array)) {
-      throw new RuntimeError.DeveloperError("array is required");
+      throw new RuntimeError.DeveloperError('array is required');
     }
     //>>includeEnd('debug');
 
@@ -189,7 +230,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
       return new CylinderGeometry(scratchOptions);
     }
 
-    result._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat, result._vertexFormat);
+    result._vertexFormat = VertexFormat.VertexFormat.clone(
+      vertexFormat,
+      result._vertexFormat
+    );
     result._length = length;
     result._topRadius = topRadius;
     result._bottomRadius = bottomRadius;
@@ -226,13 +270,14 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
     const threeSlices = slices + twoSlices;
     const numVertices = twoSlices + twoSlices;
 
-    const positions = CylinderGeometryLibrary.CylinderGeometryLibrary.computePositions(
-      length,
-      topRadius,
-      bottomRadius,
-      slices,
-      true
-    );
+    const positions =
+      CylinderGeometryLibrary.CylinderGeometryLibrary.computePositions(
+        length,
+        topRadius,
+        bottomRadius,
+        slices,
+        true
+      );
 
     const st = vertexFormat.st ? new Float32Array(numVertices * 2) : undefined;
     const normals = vertexFormat.normal
@@ -273,7 +318,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
 
           if (computeTangent) {
             tangent = Matrix2.Cartesian3.normalize(
-              Matrix2.Cartesian3.cross(Matrix2.Cartesian3.UNIT_Z, normal, tangent),
+              Matrix2.Cartesian3.cross(
+                Matrix2.Cartesian3.UNIT_Z,
+                normal,
+                tangent
+              ),
               tangent
             );
           }
@@ -349,7 +398,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
     }
 
     const numIndices = 12 * slices - 12;
-    const indices = IndexDatatype.IndexDatatype.createTypedArray(numVertices, numIndices);
+    const indices = IndexDatatype.IndexDatatype.createTypedArray(
+      numVertices,
+      numIndices
+    );
     let index = 0;
     let j = 0;
     for (i = 0; i < slices - 1; i++) {
@@ -387,7 +439,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
     if (vertexFormat.st) {
       const rad = Math.max(topRadius, bottomRadius);
       for (i = 0; i < numVertices; i++) {
-        const position = Matrix2.Cartesian3.fromArray(positions, i * 3, positionScratch);
+        const position = Matrix2.Cartesian3.fromArray(
+          positions,
+          i * 3,
+          positionScratch
+        );
         st[textureCoordIndex++] = (position.x + rad) / (2.0 * rad);
         st[textureCoordIndex++] = (position.y + rad) / (2.0 * rad);
       }
@@ -398,7 +454,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
       attributes.position = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: positions,
+        values: positions
       });
     }
 
@@ -406,7 +462,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
       attributes.normal = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: normals,
+        values: normals
       });
     }
 
@@ -414,7 +470,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
       attributes.tangent = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: tangents,
+        values: tangents
       });
     }
 
@@ -422,7 +478,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
       attributes.bitangent = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: bitangents,
+        values: bitangents
       });
     }
 
@@ -430,7 +486,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
       attributes.st = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 2,
-        values: st,
+        values: st
       });
     }
 
@@ -445,14 +501,15 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
     if (defaultValue.defined(cylinderGeometry._offsetAttribute)) {
       length = positions.length;
       const offsetValue =
-        cylinderGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
+        cylinderGeometry._offsetAttribute ===
+        GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
           ? 0
           : 1;
       const applyOffset = new Uint8Array(length / 3).fill(offsetValue);
       attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,
-        values: applyOffset,
+        values: applyOffset
       });
     }
 
@@ -461,7 +518,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
       indices: indices,
       primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES,
       boundingSphere: boundingSphere,
-      offsetAttribute: cylinderGeometry._offsetAttribute,
+      offsetAttribute: cylinderGeometry._offsetAttribute
     });
   };
 
@@ -480,7 +537,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
           topRadius: 1.0,
           bottomRadius: 1.0,
           length: 1.0,
-          vertexFormat: VertexFormat.VertexFormat.POSITION_ONLY,
+          vertexFormat: VertexFormat.VertexFormat.POSITION_ONLY
         })
       );
     }
@@ -488,6 +545,5 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './ComponentDa
   };
 
   exports.CylinderGeometry = CylinderGeometry;
-
-}));
+});
 //# sourceMappingURL=CylinderGeometry-3675fb23.js.map

@@ -1,5 +1,42 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93', './defaultValue-94c3e563', './ComponentDatatype-4a60b8d6', './ArcType-0cf52f8c', './arrayRemoveDuplicates-06991c15', './EllipsoidGeodesic-dc94f381', './EllipsoidRhumbLine-daebc75b', './EncodedCartesian3-d3e254ea', './GeometryAttribute-a441ff32', './IntersectionTests-68fbc42d', './Plane-e20fba8c', './WebMercatorProjection-843df830', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './WebGLConstants-7dccdc96'], (function (Transforms, Matrix2, RuntimeError, defaultValue, ComponentDatatype, ArcType, arrayRemoveDuplicates, EllipsoidGeodesic, EllipsoidRhumbLine, EncodedCartesian3, GeometryAttribute, IntersectionTests, Plane, WebMercatorProjection, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
+define([
+  './Transforms-3ac41eb6',
+  './Matrix2-fc7e9822',
+  './RuntimeError-c581ca93',
+  './defaultValue-94c3e563',
+  './ComponentDatatype-4a60b8d6',
+  './ArcType-0cf52f8c',
+  './arrayRemoveDuplicates-06991c15',
+  './EllipsoidGeodesic-dc94f381',
+  './EllipsoidRhumbLine-daebc75b',
+  './EncodedCartesian3-d3e254ea',
+  './GeometryAttribute-a441ff32',
+  './IntersectionTests-68fbc42d',
+  './Plane-e20fba8c',
+  './WebMercatorProjection-843df830',
+  './_commonjsHelpers-3aae1032-f55dc0c4',
+  './combine-761d9c3f',
+  './WebGLConstants-7dccdc96'
+], function (
+  Transforms,
+  Matrix2,
+  RuntimeError,
+  defaultValue,
+  ComponentDatatype,
+  ArcType,
+  arrayRemoveDuplicates,
+  EllipsoidGeodesic,
+  EllipsoidRhumbLine,
+  EncodedCartesian3,
+  GeometryAttribute,
+  IntersectionTests,
+  Plane,
+  WebMercatorProjection,
+  _commonjsHelpers3aae1032,
+  combine,
+  WebGLConstants
+) {
+  'use strict';
 
   /**
    * A tiling scheme for geometry referenced to a simple {@link GeographicProjection} where
@@ -19,10 +56,19 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
    * the tile tree.
    */
   function GeographicTilingScheme(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
-    this._ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
-    this._rectangle = defaultValue.defaultValue(options.rectangle, Matrix2.Rectangle.MAX_VALUE);
+    this._ellipsoid = defaultValue.defaultValue(
+      options.ellipsoid,
+      Matrix2.Ellipsoid.WGS84
+    );
+    this._rectangle = defaultValue.defaultValue(
+      options.rectangle,
+      Matrix2.Rectangle.MAX_VALUE
+    );
     this._projection = new Transforms.GeographicProjection(this._ellipsoid);
     this._numberOfLevelZeroTilesX = defaultValue.defaultValue(
       options.numberOfLevelZeroTilesX,
@@ -43,7 +89,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     ellipsoid: {
       get: function () {
         return this._ellipsoid;
-      },
+      }
     },
 
     /**
@@ -54,7 +100,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     rectangle: {
       get: function () {
         return this._rectangle;
-      },
+      }
     },
 
     /**
@@ -65,8 +111,8 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     projection: {
       get: function () {
         return this._projection;
-      },
-    },
+      }
+    }
   });
 
   /**
@@ -104,7 +150,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("rectangle", rectangle);
+    RuntimeError.Check.defined('rectangle', rectangle);
     //>>includeEnd('debug');
 
     const west = ComponentDatatype.CesiumMath.toDegrees(rectangle.west);
@@ -142,10 +188,18 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     result
   ) {
     const rectangleRadians = this.tileXYToRectangle(x, y, level, result);
-    rectangleRadians.west = ComponentDatatype.CesiumMath.toDegrees(rectangleRadians.west);
-    rectangleRadians.south = ComponentDatatype.CesiumMath.toDegrees(rectangleRadians.south);
-    rectangleRadians.east = ComponentDatatype.CesiumMath.toDegrees(rectangleRadians.east);
-    rectangleRadians.north = ComponentDatatype.CesiumMath.toDegrees(rectangleRadians.north);
+    rectangleRadians.west = ComponentDatatype.CesiumMath.toDegrees(
+      rectangleRadians.west
+    );
+    rectangleRadians.south = ComponentDatatype.CesiumMath.toDegrees(
+      rectangleRadians.south
+    );
+    rectangleRadians.east = ComponentDatatype.CesiumMath.toDegrees(
+      rectangleRadians.east
+    );
+    rectangleRadians.north = ComponentDatatype.CesiumMath.toDegrees(
+      rectangleRadians.north
+    );
     return rectangleRadians;
   };
 
@@ -255,7 +309,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     new Matrix2.Cartographic(),
     new Matrix2.Cartographic(),
     new Matrix2.Cartographic(),
-    new Matrix2.Cartographic(),
+    new Matrix2.Cartographic()
   ];
   const scratchTileXY = new Matrix2.Cartesian2();
 
@@ -276,7 +330,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     }
 
     initPromise = Transforms.Resource.fetchJson(
-      Transforms.buildModuleUrl("Assets/approximateTerrainHeights.json")
+      Transforms.buildModuleUrl('Assets/approximateTerrainHeights.json')
     ).then(function (json) {
       ApproximateTerrainHeights._terrainHeights = json;
     });
@@ -296,10 +350,10 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     ellipsoid
   ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("rectangle", rectangle);
+    RuntimeError.Check.defined('rectangle', rectangle);
     if (!defaultValue.defined(ApproximateTerrainHeights._terrainHeights)) {
       throw new RuntimeError.DeveloperError(
-        "You must call ApproximateTerrainHeights.initialize and wait for the promise to resolve before using this function"
+        'You must call ApproximateTerrainHeights.initialize and wait for the promise to resolve before using this function'
       );
     }
     //>>includeEnd('debug');
@@ -355,7 +409,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
 
     return {
       minimumTerrainHeight: minTerrainHeight,
-      maximumTerrainHeight: maxTerrainHeight,
+      maximumTerrainHeight: maxTerrainHeight
     };
   };
 
@@ -365,12 +419,15 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
    * @param {Ellipsoid} [ellipsoid=Ellipsoid.WGS84] The ellipsoid
    * @return {BoundingSphere} The result bounding sphere
    */
-  ApproximateTerrainHeights.getBoundingSphere = function (rectangle, ellipsoid) {
+  ApproximateTerrainHeights.getBoundingSphere = function (
+    rectangle,
+    ellipsoid
+  ) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("rectangle", rectangle);
+    RuntimeError.Check.defined('rectangle', rectangle);
     if (!defaultValue.defined(ApproximateTerrainHeights._terrainHeights)) {
       throw new RuntimeError.DeveloperError(
-        "You must call ApproximateTerrainHeights.initialize and wait for the promise to resolve before using this function"
+        'You must call ApproximateTerrainHeights.initialize and wait for the promise to resolve before using this function'
       );
     }
     //>>includeEnd('debug');
@@ -388,7 +445,11 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       }
     }
 
-    const result = Transforms.BoundingSphere.fromRectangle3D(rectangle, ellipsoid, 0.0);
+    const result = Transforms.BoundingSphere.fromRectangle3D(
+      rectangle,
+      ellipsoid,
+      0.0
+    );
     Transforms.BoundingSphere.fromRectangle3D(
       rectangle,
       ellipsoid,
@@ -396,7 +457,11 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       scratchBoundingSphere
     );
 
-    return Transforms.BoundingSphere.union(result, scratchBoundingSphere, result);
+    return Transforms.BoundingSphere.union(
+      result,
+      scratchBoundingSphere,
+      result
+    );
   };
 
   function getTileXYLevel(rectangle) {
@@ -440,7 +505,10 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
         if (j === 0) {
           currentX = scratchTileXY.x;
           currentY = scratchTileXY.y;
-        } else if (currentX !== scratchTileXY.x || currentY !== scratchTileXY.y) {
+        } else if (
+          currentX !== scratchTileXY.x ||
+          currentY !== scratchTileXY.y
+        ) {
           failed = true;
           break;
         }
@@ -461,7 +529,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     return {
       x: lastLevelX,
       y: lastLevelY,
-      level: i > maxLevel ? maxLevel : i - 1,
+      level: i > maxLevel ? maxLevel : i - 1
     };
   }
 
@@ -482,15 +550,22 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     initialized: {
       get: function () {
         return defaultValue.defined(ApproximateTerrainHeights._terrainHeights);
-      },
-    },
+      }
+    }
   });
 
-  const PROJECTIONS = [Transforms.GeographicProjection, WebMercatorProjection.WebMercatorProjection];
+  const PROJECTIONS = [
+    Transforms.GeographicProjection,
+    WebMercatorProjection.WebMercatorProjection
+  ];
   const PROJECTION_COUNT = PROJECTIONS.length;
 
-  const MITER_BREAK_SMALL = Math.cos(ComponentDatatype.CesiumMath.toRadians(30.0));
-  const MITER_BREAK_LARGE = Math.cos(ComponentDatatype.CesiumMath.toRadians(150.0));
+  const MITER_BREAK_SMALL = Math.cos(
+    ComponentDatatype.CesiumMath.toRadians(30.0)
+  );
+  const MITER_BREAK_LARGE = Math.cos(
+    ComponentDatatype.CesiumMath.toRadians(150.0)
+  );
 
   // Initial heights for constructing the wall.
   // Keeping WALL_INITIAL_MIN_HEIGHT near the ellipsoid surface helps
@@ -534,12 +609,17 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
    * });
    */
   function GroundPolylineGeometry(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
     const positions = options.positions;
 
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(positions) || positions.length < 2) {
-      throw new RuntimeError.DeveloperError("At least two positions are required.");
+      throw new RuntimeError.DeveloperError(
+        'At least two positions are required.'
+      );
     }
     if (
       defaultValue.defined(options.arcType) &&
@@ -547,7 +627,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       options.arcType !== ArcType.ArcType.RHUMB
     ) {
       throw new RuntimeError.DeveloperError(
-        "Valid options for arcType are ArcType.GEODESIC and ArcType.RHUMB."
+        'Valid options for arcType are ArcType.GEODESIC and ArcType.RHUMB.'
       );
     }
     //>>includeEnd('debug');
@@ -581,13 +661,16 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
      * @type {ArcType}
      * @default ArcType.GEODESIC
      */
-    this.arcType = defaultValue.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
+    this.arcType = defaultValue.defaultValue(
+      options.arcType,
+      ArcType.ArcType.GEODESIC
+    );
 
     this._ellipsoid = Matrix2.Ellipsoid.WGS84;
 
     // MapProjections can't be packed, so store the index to a known MapProjection.
     this._projectionIndex = 0;
-    this._workerName = "createGroundPolylineGeometry";
+    this._workerName = 'createGroundPolylineGeometry';
 
     // Used by GroundPolylinePrimitive to signal worker that scenemode is 3D only.
     this._scene3DOnly = false;
@@ -613,8 +696,8 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
           1.0 +
           1.0
         );
-      },
-    },
+      }
+    }
   });
 
   /**
@@ -679,9 +762,17 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
 
     let ellipsoidLine;
     if (arcType === ArcType.ArcType.GEODESIC) {
-      ellipsoidLine = new EllipsoidGeodesic.EllipsoidGeodesic(start, end, ellipsoid);
+      ellipsoidLine = new EllipsoidGeodesic.EllipsoidGeodesic(
+        start,
+        end,
+        ellipsoid
+      );
     } else if (arcType === ArcType.ArcType.RHUMB) {
-      ellipsoidLine = new EllipsoidRhumbLine.EllipsoidRhumbLine(start, end, ellipsoid);
+      ellipsoidLine = new EllipsoidRhumbLine.EllipsoidRhumbLine(
+        start,
+        end,
+        ellipsoid
+      );
     }
 
     const surfaceDistance = ellipsoidLine.surfaceDistance;
@@ -704,10 +795,11 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     const pointsToAdd = segments - 1;
     let packIndex = normalsArray.length;
     for (let i = 0; i < pointsToAdd; i++) {
-      const interpolatedCartographic = ellipsoidLine.interpolateUsingSurfaceDistance(
-        distanceFromStart,
-        interpolatedCartographicScratch
-      );
+      const interpolatedCartographic =
+        ellipsoidLine.interpolateUsingSurfaceDistance(
+          distanceFromStart,
+          interpolatedCartographicScratch
+        );
       const interpolatedBottom = getPosition(
         ellipsoid,
         interpolatedCartographic,
@@ -722,7 +814,11 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       );
 
       Matrix2.Cartesian3.pack(interpolatedNormal, normalsArray, packIndex);
-      Matrix2.Cartesian3.pack(interpolatedBottom, bottomPositionsArray, packIndex);
+      Matrix2.Cartesian3.pack(
+        interpolatedBottom,
+        bottomPositionsArray,
+        packIndex
+      );
       Matrix2.Cartesian3.pack(interpolatedTop, topPositionsArray, packIndex);
       cartographicsArray.push(interpolatedCartographic.latitude);
       cartographicsArray.push(interpolatedCartographic.longitude);
@@ -754,8 +850,8 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
    */
   GroundPolylineGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     let index = defaultValue.defaultValue(startingIndex, 0);
@@ -793,7 +889,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
    */
   GroundPolylineGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     let index = defaultValue.defaultValue(startingIndex, 0);
@@ -817,7 +913,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
 
     if (!defaultValue.defined(result)) {
       result = new GroundPolylineGeometry({
-        positions: positions,
+        positions: positions
       });
     }
 
@@ -870,7 +966,12 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       up,
       toPreviousScratch
     );
-    const toNext = tangentDirection(nextBottom, vertexBottom, up, toNextScratch);
+    const toNext = tangentDirection(
+      nextBottom,
+      vertexBottom,
+      up,
+      toNextScratch
+    );
 
     // Check if tangents are almost opposite - if so, no need to miter.
     if (
@@ -898,7 +999,10 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     return result;
   }
 
-  const XZ_PLANE = Plane.Plane.fromPointNormal(Matrix2.Cartesian3.ZERO, Matrix2.Cartesian3.UNIT_Y);
+  const XZ_PLANE = Plane.Plane.fromPointNormal(
+    Matrix2.Cartesian3.ZERO,
+    Matrix2.Cartesian3.UNIT_Y
+  );
 
   const previousBottomScratch = new Matrix2.Cartesian3();
   const vertexBottomScratch = new Matrix2.Cartesian3();
@@ -947,7 +1051,11 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     let p1;
     let c0;
     let c1;
-    const rhumbLine = new EllipsoidRhumbLine.EllipsoidRhumbLine(undefined, undefined, ellipsoid);
+    const rhumbLine = new EllipsoidRhumbLine.EllipsoidRhumbLine(
+      undefined,
+      undefined,
+      ellipsoid
+    );
     let intersection;
     let intersectionCartographic;
     let intersectionLongitude;
@@ -963,8 +1071,16 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       );
       if (
         defaultValue.defined(intersection) &&
-        !Matrix2.Cartesian3.equalsEpsilon(intersection, p0, ComponentDatatype.CesiumMath.EPSILON7) &&
-        !Matrix2.Cartesian3.equalsEpsilon(intersection, p1, ComponentDatatype.CesiumMath.EPSILON7)
+        !Matrix2.Cartesian3.equalsEpsilon(
+          intersection,
+          p0,
+          ComponentDatatype.CesiumMath.EPSILON7
+        ) &&
+        !Matrix2.Cartesian3.equalsEpsilon(
+          intersection,
+          p1,
+          ComponentDatatype.CesiumMath.EPSILON7
+        )
       ) {
         if (groundPolylineGeometry.arcType === ArcType.ArcType.GEODESIC) {
           splitPositions.push(Matrix2.Cartesian3.clone(intersection));
@@ -986,8 +1102,16 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
           );
           if (
             defaultValue.defined(intersection) &&
-            !Matrix2.Cartesian3.equalsEpsilon(intersection, p0, ComponentDatatype.CesiumMath.EPSILON7) &&
-            !Matrix2.Cartesian3.equalsEpsilon(intersection, p1, ComponentDatatype.CesiumMath.EPSILON7)
+            !Matrix2.Cartesian3.equalsEpsilon(
+              intersection,
+              p0,
+              ComponentDatatype.CesiumMath.EPSILON7
+            ) &&
+            !Matrix2.Cartesian3.equalsEpsilon(
+              intersection,
+              p1,
+              ComponentDatatype.CesiumMath.EPSILON7
+            )
           ) {
             splitPositions.push(Matrix2.Cartesian3.clone(intersection));
           }
@@ -1007,8 +1131,16 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       );
       if (
         defaultValue.defined(intersection) &&
-        !Matrix2.Cartesian3.equalsEpsilon(intersection, p0, ComponentDatatype.CesiumMath.EPSILON7) &&
-        !Matrix2.Cartesian3.equalsEpsilon(intersection, p1, ComponentDatatype.CesiumMath.EPSILON7)
+        !Matrix2.Cartesian3.equalsEpsilon(
+          intersection,
+          p0,
+          ComponentDatatype.CesiumMath.EPSILON7
+        ) &&
+        !Matrix2.Cartesian3.equalsEpsilon(
+          intersection,
+          p1,
+          ComponentDatatype.CesiumMath.EPSILON7
+        )
       ) {
         if (groundPolylineGeometry.arcType === ArcType.ArcType.GEODESIC) {
           splitPositions.push(Matrix2.Cartesian3.clone(intersection));
@@ -1030,8 +1162,16 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
           );
           if (
             defaultValue.defined(intersection) &&
-            !Matrix2.Cartesian3.equalsEpsilon(intersection, p0, ComponentDatatype.CesiumMath.EPSILON7) &&
-            !Matrix2.Cartesian3.equalsEpsilon(intersection, p1, ComponentDatatype.CesiumMath.EPSILON7)
+            !Matrix2.Cartesian3.equalsEpsilon(
+              intersection,
+              p0,
+              ComponentDatatype.CesiumMath.EPSILON7
+            ) &&
+            !Matrix2.Cartesian3.equalsEpsilon(
+              intersection,
+              p1,
+              ComponentDatatype.CesiumMath.EPSILON7
+            )
           ) {
             splitPositions.push(Matrix2.Cartesian3.clone(intersection));
           }
@@ -1087,7 +1227,12 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       minHeight,
       previousBottom
     );
-    nextBottom = getPosition(ellipsoid, nextCartographic, minHeight, nextBottom);
+    nextBottom = getPosition(
+      ellipsoid,
+      nextCartographic,
+      minHeight,
+      nextBottom
+    );
     vertexBottom = getPosition(
       ellipsoid,
       startCartographic,
@@ -1265,7 +1410,11 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
   const matrix3Scratch = new Matrix2.Matrix3();
   const quaternionScratch = new Transforms.Quaternion();
   function breakMiter(endGeometryNormal, startBottom, endBottom, endTop) {
-    const lineDirection = direction(endBottom, startBottom, lineDirectionScratch);
+    const lineDirection = direction(
+      endBottom,
+      startBottom,
+      lineDirectionScratch
+    );
 
     const dot = Matrix2.Cartesian3.dot(lineDirection, endGeometryNormal);
     if (dot > MITER_BREAK_SMALL || dot < MITER_BREAK_LARGE) {
@@ -1279,7 +1428,10 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
         angle,
         quaternionScratch
       );
-      const rotationMatrix = Matrix2.Matrix3.fromQuaternion(quaternion, matrix3Scratch);
+      const rotationMatrix = Matrix2.Matrix3.fromQuaternion(
+        quaternion,
+        matrix3Scratch
+      );
       Matrix2.Matrix3.multiplyByVector(
         rotationMatrix,
         endGeometryNormal,
@@ -1305,7 +1457,11 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       projection._ellipsoid,
       normalStartpointScratch
     );
-    let normalEndpoint = Matrix2.Cartesian3.add(position, normal, normalEndpointScratch);
+    let normalEndpoint = Matrix2.Cartesian3.add(
+      position,
+      normal,
+      normalEndpointScratch
+    );
     let flipNormal = false;
 
     const ellipsoid = projection._ellipsoid;
@@ -1392,15 +1548,33 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     const endToXZdistance = Plane.Plane.getPointDistance(XZ_PLANE, end);
     let offset = nudgeDirectionScratch;
     // Larger epsilon than what's used in GeometryPipeline, a centimeter in world space
-    if (ComponentDatatype.CesiumMath.equalsEpsilon(startToXZdistance, 0.0, ComponentDatatype.CesiumMath.EPSILON2)) {
+    if (
+      ComponentDatatype.CesiumMath.equalsEpsilon(
+        startToXZdistance,
+        0.0,
+        ComponentDatatype.CesiumMath.EPSILON2
+      )
+    ) {
       offset = direction(end, start, offset);
-      Matrix2.Cartesian3.multiplyByScalar(offset, ComponentDatatype.CesiumMath.EPSILON2, offset);
+      Matrix2.Cartesian3.multiplyByScalar(
+        offset,
+        ComponentDatatype.CesiumMath.EPSILON2,
+        offset
+      );
       Matrix2.Cartesian3.add(start, offset, start);
     } else if (
-      ComponentDatatype.CesiumMath.equalsEpsilon(endToXZdistance, 0.0, ComponentDatatype.CesiumMath.EPSILON2)
+      ComponentDatatype.CesiumMath.equalsEpsilon(
+        endToXZdistance,
+        0.0,
+        ComponentDatatype.CesiumMath.EPSILON2
+      )
     ) {
       offset = direction(start, end, offset);
-      Matrix2.Cartesian3.multiplyByScalar(offset, ComponentDatatype.CesiumMath.EPSILON2, offset);
+      Matrix2.Cartesian3.multiplyByScalar(
+        offset,
+        ComponentDatatype.CesiumMath.EPSILON2,
+        offset
+      );
       Matrix2.Cartesian3.add(end, offset, end);
     }
   }
@@ -1412,16 +1586,26 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     const absStartLon = Math.abs(start.longitude);
     const absEndLon = Math.abs(end.longitude);
     if (
-      ComponentDatatype.CesiumMath.equalsEpsilon(absStartLon, ComponentDatatype.CesiumMath.PI, ComponentDatatype.CesiumMath.EPSILON11)
+      ComponentDatatype.CesiumMath.equalsEpsilon(
+        absStartLon,
+        ComponentDatatype.CesiumMath.PI,
+        ComponentDatatype.CesiumMath.EPSILON11
+      )
     ) {
       const endSign = ComponentDatatype.CesiumMath.sign(end.longitude);
-      start.longitude = endSign * (absStartLon - ComponentDatatype.CesiumMath.EPSILON11);
+      start.longitude =
+        endSign * (absStartLon - ComponentDatatype.CesiumMath.EPSILON11);
       return 1;
     } else if (
-      ComponentDatatype.CesiumMath.equalsEpsilon(absEndLon, ComponentDatatype.CesiumMath.PI, ComponentDatatype.CesiumMath.EPSILON11)
+      ComponentDatatype.CesiumMath.equalsEpsilon(
+        absEndLon,
+        ComponentDatatype.CesiumMath.PI,
+        ComponentDatatype.CesiumMath.EPSILON11
+      )
     ) {
       const startSign = ComponentDatatype.CesiumMath.sign(start.longitude);
-      end.longitude = startSign * (absEndLon - ComponentDatatype.CesiumMath.EPSILON11);
+      end.longitude =
+        startSign * (absEndLon - ComponentDatatype.CesiumMath.EPSILON11);
       return 2;
     }
     return 0;
@@ -1439,7 +1623,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
 
   const getHeightCartographics = [
     startCartographicScratch,
-    endCartographicScratch,
+    endCartographicScratch
   ];
   const getHeightRectangleScratch = new Matrix2.Rectangle();
 
@@ -1467,7 +1651,10 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
 
   const normalNudgeScratch = new Matrix2.Cartesian3();
 
-  const scratchBoundingSpheres = [new Transforms.BoundingSphere(), new Transforms.BoundingSphere()];
+  const scratchBoundingSpheres = [
+    new Transforms.BoundingSphere(),
+    new Transforms.BoundingSphere()
+  ];
 
   // Winding order is reversed so each segment's volume is inside-out
   const REFERENCE_INDICES = [
@@ -1506,7 +1693,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     2,
     3,
     7,
-    6, // top
+    6 // top
   ];
   const REFERENCE_INDICES_LENGTH = REFERENCE_INDICES.length;
 
@@ -1619,7 +1806,10 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
         index,
         segmentEndCartesian
       );
-      length3D += Matrix2.Cartesian3.distance(segmentStartCartesian, segmentEndCartesian);
+      length3D += Matrix2.Cartesian3.distance(
+        segmentStartCartesian,
+        segmentEndCartesian
+      );
       index += 3;
     }
 
@@ -1637,7 +1827,11 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       0,
       segmentEndBottomScratch
     );
-    let endTop = Matrix2.Cartesian3.unpack(topPositionsArray, 0, segmentEndTopScratch);
+    let endTop = Matrix2.Cartesian3.unpack(
+      topPositionsArray,
+      0,
+      segmentEndTopScratch
+    );
     let endGeometryNormal = Matrix2.Cartesian3.unpack(
       normalsArray,
       0,
@@ -1666,7 +1860,10 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
     let sumHeights = 0.0;
 
     for (i = 0; i < segmentCount; i++) {
-      const startBottom = Matrix2.Cartesian3.clone(endBottom, segmentStartBottomScratch);
+      const startBottom = Matrix2.Cartesian3.clone(
+        endBottom,
+        segmentStartBottomScratch
+      );
       const startTop = Matrix2.Cartesian3.clone(endTop, segmentStartTopScratch);
       let startGeometryNormal = Matrix2.Cartesian3.clone(
         endGeometryNormal,
@@ -1685,14 +1882,23 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
         index,
         segmentEndBottomScratch
       );
-      endTop = Matrix2.Cartesian3.unpack(topPositionsArray, index, segmentEndTopScratch);
+      endTop = Matrix2.Cartesian3.unpack(
+        topPositionsArray,
+        index,
+        segmentEndTopScratch
+      );
       endGeometryNormal = Matrix2.Cartesian3.unpack(
         normalsArray,
         index,
         segmentEndNormalScratch
       );
 
-      miterBroken = breakMiter(endGeometryNormal, startBottom, endBottom, endTop);
+      miterBroken = breakMiter(
+        endGeometryNormal,
+        startBottom,
+        endBottom,
+        endTop
+      );
 
       // 2D - don't clone anything from previous segment b/c possible IDL touch
       startCartographic.latitude = cartographicsArray[cartographicsIndex];
@@ -1705,7 +1911,10 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       let endGeometryNormal2D;
 
       if (compute2dAttributes) {
-        const nudgeResult = nudgeCartographic(startCartographic, endCartographic);
+        const nudgeResult = nudgeCartographic(
+          startCartographic,
+          endCartographic
+        );
         start2D = projection.project(startCartographic, segmentStart2DScratch);
         end2D = projection.project(endCartographic, segmentEnd2DScratch);
         const direction2D = direction(end2D, start2D, forwardOffset2DScratch);
@@ -1715,7 +1924,8 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
         endGeometryNormal2D = segmentEndNormal2DScratch;
         if (
           nudgeResult === 0 ||
-          Matrix2.Cartesian3.dot(direction2D, Matrix2.Cartesian3.UNIT_Y) > MITER_BREAK_SMALL
+          Matrix2.Cartesian3.dot(direction2D, Matrix2.Cartesian3.UNIT_Y) >
+            MITER_BREAK_SMALL
         ) {
           // No nudge - project the original normal
           // Or, if the line's angle relative to the IDL is very acute,
@@ -1792,9 +2002,17 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       );
       const forward = Matrix2.Cartesian3.normalize(forwardOffset, rightScratch);
 
-      let startUp = Matrix2.Cartesian3.subtract(startTop, startBottom, startUpScratch);
+      let startUp = Matrix2.Cartesian3.subtract(
+        startTop,
+        startBottom,
+        startUpScratch
+      );
       startUp = Matrix2.Cartesian3.normalize(startUp, startUp);
-      let rightNormal = Matrix2.Cartesian3.cross(forward, startUp, rightScratch);
+      let rightNormal = Matrix2.Cartesian3.cross(
+        forward,
+        startUp,
+        rightScratch
+      );
       rightNormal = Matrix2.Cartesian3.normalize(rightNormal, rightNormal);
 
       let startPlaneNormal = Matrix2.Cartesian3.cross(
@@ -1802,7 +2020,10 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
         startGeometryNormal,
         startPlaneNormalScratch
       );
-      startPlaneNormal = Matrix2.Cartesian3.normalize(startPlaneNormal, startPlaneNormal);
+      startPlaneNormal = Matrix2.Cartesian3.normalize(
+        startPlaneNormal,
+        startPlaneNormal
+      );
 
       let endUp = Matrix2.Cartesian3.subtract(endTop, endBottom, endUpScratch);
       endUp = Matrix2.Cartesian3.normalize(endUp, endUp);
@@ -1811,7 +2032,10 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
         endUp,
         endPlaneNormalScratch
       );
-      endPlaneNormal = Matrix2.Cartesian3.normalize(endPlaneNormal, endPlaneNormal);
+      endPlaneNormal = Matrix2.Cartesian3.normalize(
+        endPlaneNormal,
+        endPlaneNormal
+      );
 
       const texcoordNormalization3DX = segmentLength3D / length3D;
       const texcoordNormalization3DY = lengthSoFar3D / length3D;
@@ -1859,10 +2083,18 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
           j === 2 || j === 3 || j === 6 || j === 7 ? 1.0 : -1.0;
 
         // 3D
-        Matrix2.Cartesian3.pack(encodedStart.high, startHiAndForwardOffsetX, vec4Index);
+        Matrix2.Cartesian3.pack(
+          encodedStart.high,
+          startHiAndForwardOffsetX,
+          vec4Index
+        );
         startHiAndForwardOffsetX[wIndex] = forwardOffset.x;
 
-        Matrix2.Cartesian3.pack(encodedStart.low, startLoAndForwardOffsetY, vec4Index);
+        Matrix2.Cartesian3.pack(
+          encodedStart.low,
+          startLoAndForwardOffsetY,
+          vec4Index
+        );
         startLoAndForwardOffsetY[wIndex] = forwardOffset.y;
 
         Matrix2.Cartesian3.pack(
@@ -1890,9 +2122,8 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
         if (texcoordNormalization === 0.0 && topBottomSide < 0.0) {
           texcoordNormalization = 9.0; // some value greater than 1.0
         }
-        rightNormalAndTextureCoordinateNormalizationY[
-          wIndex
-        ] = texcoordNormalization;
+        rightNormalAndTextureCoordinateNormalizationY[wIndex] =
+          texcoordNormalization;
 
         // 2D
         if (compute2dAttributes) {
@@ -1970,18 +2201,46 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
         normalNudge,
         adjustHeightStartBottom
       );
-      Matrix2.Cartesian3.add(adjustHeightEndBottom, normalNudge, adjustHeightEndBottom);
-      Matrix2.Cartesian3.add(adjustHeightStartTop, normalNudge, adjustHeightStartTop);
-      Matrix2.Cartesian3.add(adjustHeightEndTop, normalNudge, adjustHeightEndTop);
+      Matrix2.Cartesian3.add(
+        adjustHeightEndBottom,
+        normalNudge,
+        adjustHeightEndBottom
+      );
+      Matrix2.Cartesian3.add(
+        adjustHeightStartTop,
+        normalNudge,
+        adjustHeightStartTop
+      );
+      Matrix2.Cartesian3.add(
+        adjustHeightEndTop,
+        normalNudge,
+        adjustHeightEndTop
+      );
 
       // If the segment is very close to the XZ plane, nudge the vertices slightly to avoid touching it.
       nudgeXZ(adjustHeightStartBottom, adjustHeightEndBottom);
       nudgeXZ(adjustHeightStartTop, adjustHeightEndTop);
 
-      Matrix2.Cartesian3.pack(adjustHeightStartBottom, positionsArray, vec3sWriteIndex);
-      Matrix2.Cartesian3.pack(adjustHeightEndBottom, positionsArray, vec3sWriteIndex + 3);
-      Matrix2.Cartesian3.pack(adjustHeightEndTop, positionsArray, vec3sWriteIndex + 6);
-      Matrix2.Cartesian3.pack(adjustHeightStartTop, positionsArray, vec3sWriteIndex + 9);
+      Matrix2.Cartesian3.pack(
+        adjustHeightStartBottom,
+        positionsArray,
+        vec3sWriteIndex
+      );
+      Matrix2.Cartesian3.pack(
+        adjustHeightEndBottom,
+        positionsArray,
+        vec3sWriteIndex + 3
+      );
+      Matrix2.Cartesian3.pack(
+        adjustHeightEndTop,
+        positionsArray,
+        vec3sWriteIndex + 6
+      );
+      Matrix2.Cartesian3.pack(
+        adjustHeightStartTop,
+        positionsArray,
+        vec3sWriteIndex + 9
+      );
 
       normalNudge = Matrix2.Cartesian3.multiplyByScalar(
         rightNormal,
@@ -1993,9 +2252,21 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
         normalNudge,
         adjustHeightStartBottom
       );
-      Matrix2.Cartesian3.add(adjustHeightEndBottom, normalNudge, adjustHeightEndBottom);
-      Matrix2.Cartesian3.add(adjustHeightStartTop, normalNudge, adjustHeightStartTop);
-      Matrix2.Cartesian3.add(adjustHeightEndTop, normalNudge, adjustHeightEndTop);
+      Matrix2.Cartesian3.add(
+        adjustHeightEndBottom,
+        normalNudge,
+        adjustHeightEndBottom
+      );
+      Matrix2.Cartesian3.add(
+        adjustHeightStartTop,
+        normalNudge,
+        adjustHeightStartTop
+      );
+      Matrix2.Cartesian3.add(
+        adjustHeightEndTop,
+        normalNudge,
+        adjustHeightEndTop
+      );
 
       nudgeXZ(adjustHeightStartBottom, adjustHeightEndBottom);
       nudgeXZ(adjustHeightStartTop, adjustHeightEndTop);
@@ -2010,8 +2281,16 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
         positionsArray,
         vec3sWriteIndex + 15
       );
-      Matrix2.Cartesian3.pack(adjustHeightEndTop, positionsArray, vec3sWriteIndex + 18);
-      Matrix2.Cartesian3.pack(adjustHeightStartTop, positionsArray, vec3sWriteIndex + 21);
+      Matrix2.Cartesian3.pack(
+        adjustHeightEndTop,
+        positionsArray,
+        vec3sWriteIndex + 18
+      );
+      Matrix2.Cartesian3.pack(
+        adjustHeightStartTop,
+        positionsArray,
+        vec3sWriteIndex + 21
+      );
 
       cartographicsIndex += 2;
       index += 3;
@@ -2047,7 +2326,8 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       3,
       boundingSpheres[1]
     );
-    const boundingSphere = Transforms.BoundingSphere.fromBoundingSpheres(boundingSpheres);
+    const boundingSphere =
+      Transforms.BoundingSphere.fromBoundingSpheres(boundingSpheres);
 
     // Adjust bounding sphere height and radius to cover more of the volume
     boundingSphere.radius += sumHeights / (segmentCount * 2.0);
@@ -2057,7 +2337,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
         componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
         normalize: false,
-        values: positionsArray,
+        values: positionsArray
       }),
       startHiAndForwardOffsetX: getVec4GeometryAttribute(
         startHiAndForwardOffsetX
@@ -2073,25 +2353,27 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       ),
       rightNormalAndTextureCoordinateNormalizationY: getVec4GeometryAttribute(
         rightNormalAndTextureCoordinateNormalizationY
-      ),
+      )
     };
 
     if (compute2dAttributes) {
       attributes.startHiLo2D = getVec4GeometryAttribute(startHiLo2D);
       attributes.offsetAndRight2D = getVec4GeometryAttribute(offsetAndRight2D);
-      attributes.startEndNormals2D = getVec4GeometryAttribute(startEndNormals2D);
-      attributes.texcoordNormalization2D = new GeometryAttribute.GeometryAttribute({
-        componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
-        componentsPerAttribute: 2,
-        normalize: false,
-        values: texcoordNormalization2D,
-      });
+      attributes.startEndNormals2D =
+        getVec4GeometryAttribute(startEndNormals2D);
+      attributes.texcoordNormalization2D =
+        new GeometryAttribute.GeometryAttribute({
+          componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
+          componentsPerAttribute: 2,
+          normalize: false,
+          values: texcoordNormalization2D
+        });
     }
 
     return new GeometryAttribute.Geometry({
       attributes: attributes,
       indices: indices,
-      boundingSphere: boundingSphere,
+      boundingSphere: boundingSphere
     });
   }
 
@@ -2100,7 +2382,7 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
       componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
       componentsPerAttribute: 4,
       normalize: false,
-      values: typedArray,
+      values: typedArray
     });
   }
 
@@ -2131,5 +2413,4 @@ define(['./Transforms-3ac41eb6', './Matrix2-fc7e9822', './RuntimeError-c581ca93'
   }
 
   return createGroundPolylineGeometry;
-
-}));
+});

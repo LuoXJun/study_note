@@ -1,11 +1,11 @@
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import CesiumMath from "./Math.js";
-import scaleToGeodeticSurface from "./scaleToGeodeticSurface.js";
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import CesiumMath from './Math.js';
+import scaleToGeodeticSurface from './scaleToGeodeticSurface.js';
 
 function initialize(ellipsoid, x, y, z) {
   x = defaultValue(x, 0.0);
@@ -13,9 +13,9 @@ function initialize(ellipsoid, x, y, z) {
   z = defaultValue(z, 0.0);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number.greaterThanOrEquals("x", x, 0.0);
-  Check.typeOf.number.greaterThanOrEquals("y", y, 0.0);
-  Check.typeOf.number.greaterThanOrEquals("z", z, 0.0);
+  Check.typeOf.number.greaterThanOrEquals('x', x, 0.0);
+  Check.typeOf.number.greaterThanOrEquals('y', y, 0.0);
+  Check.typeOf.number.greaterThanOrEquals('z', z, 0.0);
   //>>includeEnd('debug');
 
   ellipsoid._radii = new Cartesian3(x, y, z);
@@ -96,7 +96,7 @@ Object.defineProperties(Ellipsoid.prototype, {
   radii: {
     get: function () {
       return this._radii;
-    },
+    }
   },
   /**
    * Gets the squared radii of the ellipsoid.
@@ -107,7 +107,7 @@ Object.defineProperties(Ellipsoid.prototype, {
   radiiSquared: {
     get: function () {
       return this._radiiSquared;
-    },
+    }
   },
   /**
    * Gets the radii of the ellipsoid raise to the fourth power.
@@ -118,7 +118,7 @@ Object.defineProperties(Ellipsoid.prototype, {
   radiiToTheFourth: {
     get: function () {
       return this._radiiToTheFourth;
-    },
+    }
   },
   /**
    * Gets one over the radii of the ellipsoid.
@@ -129,7 +129,7 @@ Object.defineProperties(Ellipsoid.prototype, {
   oneOverRadii: {
     get: function () {
       return this._oneOverRadii;
-    },
+    }
   },
   /**
    * Gets one over the squared radii of the ellipsoid.
@@ -140,7 +140,7 @@ Object.defineProperties(Ellipsoid.prototype, {
   oneOverRadiiSquared: {
     get: function () {
       return this._oneOverRadiiSquared;
-    },
+    }
   },
   /**
    * Gets the minimum radius of the ellipsoid.
@@ -151,7 +151,7 @@ Object.defineProperties(Ellipsoid.prototype, {
   minimumRadius: {
     get: function () {
       return this._minimumRadius;
-    },
+    }
   },
   /**
    * Gets the maximum radius of the ellipsoid.
@@ -162,8 +162,8 @@ Object.defineProperties(Ellipsoid.prototype, {
   maximumRadius: {
     get: function () {
       return this._maximumRadius;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -282,8 +282,8 @@ Ellipsoid.packedLength = Cartesian3.packedLength;
  */
 Ellipsoid.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -303,7 +303,7 @@ Ellipsoid.pack = function (value, array, startingIndex) {
  */
 Ellipsoid.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -334,7 +334,7 @@ Ellipsoid.prototype.geodeticSurfaceNormalCartographic = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("cartographic", cartographic);
+  Check.typeOf.object('cartographic', cartographic);
   //>>includeEnd('debug');
 
   const longitude = cartographic.longitude;
@@ -428,7 +428,7 @@ Ellipsoid.prototype.cartographicArrayToCartesianArray = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("cartographics", cartographics);
+  Check.defined('cartographics', cartographics);
   //>>includeEnd('debug')
 
   const length = cartographics.length;
@@ -504,7 +504,7 @@ Ellipsoid.prototype.cartesianArrayToCartographicArray = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("cartesians", cartesians);
+  Check.defined('cartesians', cartesians);
   //>>includeEnd('debug');
 
   const length = cartesians.length;
@@ -548,7 +548,7 @@ Ellipsoid.prototype.scaleToGeodeticSurface = function (cartesian, result) {
  */
 Ellipsoid.prototype.scaleToGeocentricSurface = function (cartesian, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("cartesian", cartesian);
+  Check.typeOf.object('cartesian', cartesian);
   //>>includeEnd('debug');
 
   if (!defined(result)) {
@@ -658,7 +658,7 @@ Ellipsoid.prototype.getSurfaceNormalIntersectionWithZAxis = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("position", position);
+  Check.typeOf.object('position', position);
 
   if (
     !CesiumMath.equalsEpsilon(
@@ -668,11 +668,11 @@ Ellipsoid.prototype.getSurfaceNormalIntersectionWithZAxis = function (
     )
   ) {
     throw new DeveloperError(
-      "Ellipsoid must be an ellipsoid of revolution (radii.x == radii.y)"
+      'Ellipsoid must be an ellipsoid of revolution (radii.x == radii.y)'
     );
   }
 
-  Check.typeOf.number.greaterThan("Ellipsoid.radii.z", this._radii.z, 0);
+  Check.typeOf.number.greaterThan('Ellipsoid.radii.z', this._radii.z, 0);
   //>>includeEnd('debug');
 
   buffer = defaultValue(buffer, 0.0);
@@ -695,20 +695,12 @@ Ellipsoid.prototype.getSurfaceNormalIntersectionWithZAxis = function (
 };
 
 const abscissas = [
-  0.14887433898163,
-  0.43339539412925,
-  0.67940956829902,
-  0.86506336668898,
-  0.97390652851717,
-  0.0,
+  0.14887433898163, 0.43339539412925, 0.67940956829902, 0.86506336668898,
+  0.97390652851717, 0.0
 ];
 const weights = [
-  0.29552422471475,
-  0.26926671930999,
-  0.21908636251598,
-  0.14945134915058,
-  0.066671344308684,
-  0.0,
+  0.29552422471475, 0.26926671930999, 0.21908636251598, 0.14945134915058,
+  0.066671344308684, 0.0
 ];
 
 /**
@@ -723,9 +715,9 @@ const weights = [
  */
 function gaussLegendreQuadrature(a, b, func) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("a", a);
-  Check.typeOf.number("b", b);
-  Check.typeOf.func("func", func);
+  Check.typeOf.number('a', a);
+  Check.typeOf.number('b', b);
+  Check.typeOf.func('func', func);
   //>>includeEnd('debug');
 
   // The range is half of the normal range since the five weights add to one (ten weights add to two).
@@ -763,7 +755,7 @@ function gaussLegendreQuadrature(a, b, func) {
  */
 Ellipsoid.prototype.surfaceArea = function (rectangle) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rectangle", rectangle);
+  Check.typeOf.object('rectangle', rectangle);
   //>>includeEnd('debug');
   const minLongitude = rectangle.west;
   let maxLongitude = rectangle.east;

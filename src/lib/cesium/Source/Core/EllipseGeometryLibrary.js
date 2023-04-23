@@ -1,7 +1,7 @@
-import Cartesian3 from "./Cartesian3.js";
-import CesiumMath from "./Math.js";
-import Matrix3 from "./Matrix3.js";
-import Quaternion from "./Quaternion.js";
+import Cartesian3 from './Cartesian3.js';
+import CesiumMath from './Math.js';
+import Matrix3 from './Matrix3.js';
+import Quaternion from './Quaternion.js';
 
 const EllipseGeometryLibrary = {};
 

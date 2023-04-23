@@ -1,26 +1,26 @@
-import buildDrawCommand from "./buildDrawCommand.js";
-import BoundingSphere from "../../Core/BoundingSphere.js";
-import Cartesian3 from "../../Core/Cartesian3.js";
-import Check from "../../Core/Check.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import ImageBasedLightingPipelineStage from "./ImageBasedLightingPipelineStage.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import ModelExperimentalArticulation from "./ModelExperimentalArticulation.js";
-import ModelColorPipelineStage from "./ModelColorPipelineStage.js";
-import ModelClippingPlanesPipelineStage from "./ModelClippingPlanesPipelineStage.js";
-import ModelExperimentalPrimitive from "./ModelExperimentalPrimitive.js";
-import ModelExperimentalNode from "./ModelExperimentalNode.js";
-import ModelExperimentalSkin from "./ModelExperimentalSkin.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
-import ModelRenderResources from "./ModelRenderResources.js";
-import ModelSilhouettePipelineStage from "./ModelSilhouettePipelineStage.js";
-import ModelSplitterPipelineStage from "./ModelSplitterPipelineStage.js";
-import NodeRenderResources from "./NodeRenderResources.js";
-import PrimitiveRenderResources from "./PrimitiveRenderResources.js";
-import SceneMode from "../SceneMode.js";
-import SplitDirection from "../SplitDirection.js";
-import Transforms from "../../Core/Transforms.js";
+import buildDrawCommand from './buildDrawCommand.js';
+import BoundingSphere from '../../Core/BoundingSphere.js';
+import Cartesian3 from '../../Core/Cartesian3.js';
+import Check from '../../Core/Check.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import ImageBasedLightingPipelineStage from './ImageBasedLightingPipelineStage.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import ModelExperimentalArticulation from './ModelExperimentalArticulation.js';
+import ModelColorPipelineStage from './ModelColorPipelineStage.js';
+import ModelClippingPlanesPipelineStage from './ModelClippingPlanesPipelineStage.js';
+import ModelExperimentalPrimitive from './ModelExperimentalPrimitive.js';
+import ModelExperimentalNode from './ModelExperimentalNode.js';
+import ModelExperimentalSkin from './ModelExperimentalSkin.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
+import ModelRenderResources from './ModelRenderResources.js';
+import ModelSilhouettePipelineStage from './ModelSilhouettePipelineStage.js';
+import ModelSplitterPipelineStage from './ModelSplitterPipelineStage.js';
+import NodeRenderResources from './NodeRenderResources.js';
+import PrimitiveRenderResources from './PrimitiveRenderResources.js';
+import SceneMode from '../SceneMode.js';
+import SplitDirection from '../SplitDirection.js';
+import Transforms from '../../Core/Transforms.js';
 
 /**
  * An in memory representation of the scene graph for a {@link ModelExperimental}
@@ -39,8 +39,8 @@ export default function ModelExperimentalSceneGraph(options) {
   const components = options.modelComponents;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.model", options.model);
-  Check.typeOf.object("options.modelComponents", components);
+  Check.typeOf.object('options.model', options.model);
+  Check.typeOf.object('options.modelComponents', components);
   //>>includeEnd('debug');
 
   /**
@@ -175,7 +175,7 @@ Object.defineProperties(ModelExperimentalSceneGraph.prototype, {
   components: {
     get: function () {
       return this._components;
-    },
+    }
   },
 
   /**
@@ -189,7 +189,7 @@ Object.defineProperties(ModelExperimentalSceneGraph.prototype, {
   computedModelMatrix: {
     get: function () {
       return this._computedModelMatrix;
-    },
+    }
   },
 
   /**
@@ -204,7 +204,7 @@ Object.defineProperties(ModelExperimentalSceneGraph.prototype, {
   axisCorrectionMatrix: {
     get: function () {
       return this._axisCorrectionMatrix;
-    },
+    }
   },
 
   /**
@@ -219,8 +219,8 @@ Object.defineProperties(ModelExperimentalSceneGraph.prototype, {
   boundingSphere: {
     get: function () {
       return this._boundingSphere;
-    },
-  },
+    }
+  }
 });
 
 function initialize(sceneGraph) {
@@ -240,7 +240,7 @@ function initialize(sceneGraph) {
     const articulation = articulations[i];
     const runtimeArticulation = new ModelExperimentalArticulation({
       articulation: articulation,
-      sceneGraph: sceneGraph,
+      sceneGraph: sceneGraph
     });
 
     const name = runtimeArticulation.name;
@@ -280,7 +280,7 @@ function initialize(sceneGraph) {
     runtimeSkins.push(
       new ModelExperimentalSkin({
         skin: skin,
-        sceneGraph: sceneGraph,
+        sceneGraph: sceneGraph
       })
     );
   }
@@ -404,7 +404,7 @@ function traverseSceneGraph(sceneGraph, node, transformToRoot) {
     transform: transform,
     transformToRoot: transformToRoot,
     children: childrenIndices,
-    sceneGraph: sceneGraph,
+    sceneGraph: sceneGraph
   });
 
   const primitivesLength = node.primitives.length;
@@ -413,7 +413,7 @@ function traverseSceneGraph(sceneGraph, node, transformToRoot) {
       new ModelExperimentalPrimitive({
         primitive: node.primitives[i],
         node: node,
-        model: sceneGraph._model,
+        model: sceneGraph._model
       })
     );
   }
@@ -760,7 +760,7 @@ ModelExperimentalSceneGraph.prototype.setArticulationStage = function (
   articulationStageKey,
   value
 ) {
-  const names = articulationStageKey.split(" ");
+  const names = articulationStageKey.split(' ');
   if (names.length !== 2) {
     return;
   }

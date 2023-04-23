@@ -1,14 +1,14 @@
-import Cartesian3 from "../../Core/Cartesian3.js";
-import Check from "../../Core/Check.js";
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import Matrix4 from "../../Core/Matrix4.js";
-import InstancingPipelineStage from "./InstancingPipelineStage.js";
-import ModelMatrixUpdateStage from "./ModelMatrixUpdateStage.js";
-import TranslationRotationScale from "../../Core/TranslationRotationScale.js";
-import Quaternion from "../../Core/Quaternion.js";
-import NodeStatisticsPipelineStage from "./NodeStatisticsPipelineStage.js";
+import Cartesian3 from '../../Core/Cartesian3.js';
+import Check from '../../Core/Check.js';
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import Matrix4 from '../../Core/Matrix4.js';
+import InstancingPipelineStage from './InstancingPipelineStage.js';
+import ModelMatrixUpdateStage from './ModelMatrixUpdateStage.js';
+import TranslationRotationScale from '../../Core/TranslationRotationScale.js';
+import Quaternion from '../../Core/Quaternion.js';
+import NodeStatisticsPipelineStage from './NodeStatisticsPipelineStage.js';
 
 /**
  * An in-memory representation of a node as part of the {@link ModelExperimentalSceneGraph}.
@@ -29,11 +29,11 @@ import NodeStatisticsPipelineStage from "./NodeStatisticsPipelineStage.js";
 export default function ModelExperimentalNode(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.node", options.node);
-  Check.typeOf.object("options.transform", options.transform);
-  Check.typeOf.object("options.transformToRoot", options.transformToRoot);
-  Check.typeOf.object("options.sceneGraph", options.sceneGraph);
-  Check.typeOf.object("options.children", options.children);
+  Check.typeOf.object('options.node', options.node);
+  Check.typeOf.object('options.transform', options.transform);
+  Check.typeOf.object('options.transformToRoot', options.transformToRoot);
+  Check.typeOf.object('options.sceneGraph', options.sceneGraph);
+  Check.typeOf.object('options.children', options.children);
   //>>includeEnd('debug');
 
   const sceneGraph = options.sceneGraph;
@@ -130,7 +130,7 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
   node: {
     get: function () {
       return this._node;
-    },
+    }
   },
   /**
    * The scene graph this node belongs to.
@@ -143,7 +143,7 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
   sceneGraph: {
     get: function () {
       return this._sceneGraph;
-    },
+    }
   },
 
   /**
@@ -155,7 +155,7 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
   children: {
     get: function () {
       return this._children;
-    },
+    }
   },
 
   /**
@@ -179,7 +179,7 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
       }
       this._transformDirty = true;
       this._transform = Matrix4.clone(value, this._transform);
-    },
+    }
   },
 
   /**
@@ -195,7 +195,7 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
   transformToRoot: {
     get: function () {
       return this._transformToRoot;
-    },
+    }
   },
 
   /**
@@ -209,7 +209,7 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
   computedTransform: {
     get: function () {
       return this._computedTransform;
-    },
+    }
   },
 
   /**
@@ -222,7 +222,7 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
   originalTransform: {
     get: function () {
       return this._originalTransform;
-    },
+    }
   },
 
   /**
@@ -250,7 +250,7 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(transformParameters)) {
         throw new DeveloperError(
-          "The translation of a node cannot be set if it was defined using a matrix in the model."
+          'The translation of a node cannot be set if it was defined using a matrix in the model.'
         );
       }
       //>>includeEnd('debug');
@@ -266,7 +266,7 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
       );
 
       updateTransformFromParameters(this, transformParameters);
-    },
+    }
   },
 
   /**
@@ -294,7 +294,7 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(transformParameters)) {
         throw new DeveloperError(
-          "The rotation of a node cannot be set if it was defined using a matrix in the model."
+          'The rotation of a node cannot be set if it was defined using a matrix in the model.'
         );
       }
       //>>includeEnd('debug');
@@ -310,7 +310,7 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
       );
 
       updateTransformFromParameters(this, transformParameters);
-    },
+    }
   },
 
   /**
@@ -337,7 +337,7 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!defined(transformParameters)) {
         throw new DeveloperError(
-          "The scale of a node cannot be set if it was defined using a matrix in the model."
+          'The scale of a node cannot be set if it was defined using a matrix in the model.'
         );
       }
       //>>includeEnd('debug');
@@ -352,7 +352,7 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
       );
 
       updateTransformFromParameters(this, transformParameters);
-    },
+    }
   },
 
   /**
@@ -373,14 +373,14 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (this._morphWeights.length !== valueLength) {
         throw new DeveloperError(
-          "value must have the same length as the original weights array."
+          'value must have the same length as the original weights array.'
         );
       }
       //>>includeEnd('debug');
       for (let i = 0; i < valueLength; i++) {
         this._morphWeights[i] = value[i];
       }
-    },
+    }
   },
 
   /**
@@ -393,7 +393,7 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
   runtimeSkin: {
     get: function () {
       return this._runtimeSkin;
-    },
+    }
   },
 
   /**
@@ -406,8 +406,8 @@ Object.defineProperties(ModelExperimentalNode.prototype, {
   computedJointMatrices: {
     get: function () {
       return this._computedJointMatrices;
-    },
-  },
+    }
+  }
 });
 
 function initialize(runtimeNode) {
@@ -472,10 +472,10 @@ function updateTransformFromParameters(runtimeNode, transformParameters) {
  */
 ModelExperimentalNode.prototype.getChild = function (index) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("index", index);
+  Check.typeOf.number('index', index);
   if (index < 0 || index >= this.children.length) {
     throw new DeveloperError(
-      "index must be greater than or equal to 0 and less than the number of children."
+      'index must be greater than or equal to 0 and less than the number of children.'
     );
   }
   //>>includeEnd('debug');

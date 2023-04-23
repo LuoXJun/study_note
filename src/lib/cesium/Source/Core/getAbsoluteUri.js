@@ -1,7 +1,7 @@
-import Uri from "../ThirdParty/Uri.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import Uri from '../ThirdParty/Uri.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Given a relative Uri and a base Uri, returns the absolute Uri of the relative Uri.
@@ -17,7 +17,7 @@ import DeveloperError from "./DeveloperError.js";
  */
 function getAbsoluteUri(relative, base) {
   let documentObject;
-  if (typeof document !== "undefined") {
+  if (typeof document !== 'undefined') {
     documentObject = document;
   }
 
@@ -27,19 +27,19 @@ function getAbsoluteUri(relative, base) {
 getAbsoluteUri._implementation = function (relative, base, documentObject) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(relative)) {
-    throw new DeveloperError("relative uri is required.");
+    throw new DeveloperError('relative uri is required.');
   }
   //>>includeEnd('debug');
 
   if (!defined(base)) {
-    if (typeof documentObject === "undefined") {
+    if (typeof documentObject === 'undefined') {
       return relative;
     }
     base = defaultValue(documentObject.baseURI, documentObject.location.href);
   }
 
   const relativeUri = new Uri(relative);
-  if (relativeUri.scheme() !== "") {
+  if (relativeUri.scheme() !== '') {
     return relativeUri.toString();
   }
   return relativeUri.absoluteTo(base).toString();

@@ -1,15 +1,15 @@
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import FeatureDetection from "../../Core/FeatureDetection.js";
-import knockout from "../../ThirdParty/knockout.js";
-import getElement from "../getElement.js";
-import GeocoderViewModel from "./GeocoderViewModel.js";
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import FeatureDetection from '../../Core/FeatureDetection.js';
+import knockout from '../../ThirdParty/knockout.js';
+import getElement from '../getElement.js';
+import GeocoderViewModel from './GeocoderViewModel.js';
 
 const startSearchPath =
-  "M29.772,26.433l-7.126-7.126c0.96-1.583,1.523-3.435,1.524-5.421C24.169,8.093,19.478,3.401,13.688,3.399C7.897,3.401,3.204,8.093,3.204,13.885c0,5.789,4.693,10.481,10.484,10.481c1.987,0,3.839-0.563,5.422-1.523l7.128,7.127L29.772,26.433zM7.203,13.885c0.006-3.582,2.903-6.478,6.484-6.486c3.579,0.008,6.478,2.904,6.484,6.486c-0.007,3.58-2.905,6.476-6.484,6.484C10.106,20.361,7.209,17.465,7.203,13.885z";
+  'M29.772,26.433l-7.126-7.126c0.96-1.583,1.523-3.435,1.524-5.421C24.169,8.093,19.478,3.401,13.688,3.399C7.897,3.401,3.204,8.093,3.204,13.885c0,5.789,4.693,10.481,10.484,10.481c1.987,0,3.839-0.563,5.422-1.523l7.128,7.127L29.772,26.433zM7.203,13.885c0.006-3.582,2.903-6.478,6.484-6.486c3.579,0.008,6.478,2.904,6.484,6.486c-0.007,3.58-2.905,6.476-6.484,6.484C10.106,20.361,7.209,17.465,7.203,13.885z';
 const stopSearchPath =
-  "M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z";
+  'M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z';
 
 /**
  * A widget for finding addresses and landmarks, and flying the camera to them.  Geocoding is
@@ -29,10 +29,10 @@ const stopSearchPath =
 function Geocoder(options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options) || !defined(options.container)) {
-    throw new DeveloperError("options.container is required.");
+    throw new DeveloperError('options.container is required.');
   }
   if (!defined(options.scene)) {
-    throw new DeveloperError("options.scene is required.");
+    throw new DeveloperError('options.scene is required.');
   }
   //>>includeEnd('debug');
 
@@ -42,15 +42,15 @@ function Geocoder(options) {
   viewModel._startSearchPath = startSearchPath;
   viewModel._stopSearchPath = stopSearchPath;
 
-  const form = document.createElement("form");
-  form.setAttribute("data-bind", "submit: search");
+  const form = document.createElement('form');
+  form.setAttribute('data-bind', 'submit: search');
 
-  const textBox = document.createElement("input");
-  textBox.type = "search";
-  textBox.className = "cesium-geocoder-input";
-  textBox.setAttribute("placeholder", "Enter an address or landmark...");
+  const textBox = document.createElement('input');
+  textBox.type = 'search';
+  textBox.className = 'cesium-geocoder-input';
+  textBox.setAttribute('placeholder', 'Enter an address or landmark...');
   textBox.setAttribute(
-    "data-bind",
+    'data-bind',
     '\
 textInput: searchText,\
 disable: isSearchInProgress,\
@@ -67,39 +67,39 @@ hasFocus: _focusTextbox'
     }, 0);
   };
 
-  textBox.addEventListener("focus", this._onTextBoxFocus, false);
+  textBox.addEventListener('focus', this._onTextBoxFocus, false);
   form.appendChild(textBox);
   this._textBox = textBox;
 
-  const searchButton = document.createElement("span");
-  searchButton.className = "cesium-geocoder-searchButton";
+  const searchButton = document.createElement('span');
+  searchButton.className = 'cesium-geocoder-searchButton';
   searchButton.setAttribute(
-    "data-bind",
-    "\
+    'data-bind',
+    '\
 click: search,\
-cesiumSvgPath: { path: isSearchInProgress ? _stopSearchPath : _startSearchPath, width: 32, height: 32 }"
+cesiumSvgPath: { path: isSearchInProgress ? _stopSearchPath : _startSearchPath, width: 32, height: 32 }'
   );
   form.appendChild(searchButton);
 
   container.appendChild(form);
 
-  const searchSuggestionsContainer = document.createElement("div");
-  searchSuggestionsContainer.className = "search-results";
+  const searchSuggestionsContainer = document.createElement('div');
+  searchSuggestionsContainer.className = 'search-results';
   searchSuggestionsContainer.setAttribute(
-    "data-bind",
-    "visible: _suggestionsVisible"
+    'data-bind',
+    'visible: _suggestionsVisible'
   );
 
-  const suggestionsList = document.createElement("ul");
-  suggestionsList.setAttribute("data-bind", "foreach: _suggestions");
-  const suggestions = document.createElement("li");
+  const suggestionsList = document.createElement('ul');
+  suggestionsList.setAttribute('data-bind', 'foreach: _suggestions');
+  const suggestions = document.createElement('li');
   suggestionsList.appendChild(suggestions);
   suggestions.setAttribute(
-    "data-bind",
-    "text: $data.displayName, \
+    'data-bind',
+    'text: $data.displayName, \
 click: $parent.activateSuggestion, \
 event: { mouseover: $parent.handleMouseover}, \
-css: { active: $data === $parent._selectedSuggestion }"
+css: { active: $data === $parent._selectedSuggestion }'
   );
 
   searchSuggestionsContainer.appendChild(suggestionsList);
@@ -121,7 +121,7 @@ css: { active: $data === $parent._selectedSuggestion }"
     // back to legacy behavior if its not being used.
 
     let target = e.target;
-    if (typeof e.composedPath === "function") {
+    if (typeof e.composedPath === 'function') {
       target = e.composedPath()[0];
     }
 
@@ -140,15 +140,15 @@ css: { active: $data === $parent._selectedSuggestion }"
   //focus no matter where on the widget is clicked.
 
   if (FeatureDetection.supportsPointerEvents()) {
-    document.addEventListener("pointerdown", this._onInputBegin, true);
-    container.addEventListener("pointerup", this._onInputEnd, true);
-    container.addEventListener("pointercancel", this._onInputEnd, true);
+    document.addEventListener('pointerdown', this._onInputBegin, true);
+    container.addEventListener('pointerup', this._onInputEnd, true);
+    container.addEventListener('pointercancel', this._onInputEnd, true);
   } else {
-    document.addEventListener("mousedown", this._onInputBegin, true);
-    container.addEventListener("mouseup", this._onInputEnd, true);
-    document.addEventListener("touchstart", this._onInputBegin, true);
-    container.addEventListener("touchend", this._onInputEnd, true);
-    container.addEventListener("touchcancel", this._onInputEnd, true);
+    document.addEventListener('mousedown', this._onInputBegin, true);
+    container.addEventListener('mouseup', this._onInputEnd, true);
+    document.addEventListener('touchstart', this._onInputBegin, true);
+    container.addEventListener('touchend', this._onInputEnd, true);
+    container.addEventListener('touchcancel', this._onInputEnd, true);
   }
 }
 
@@ -162,7 +162,7 @@ Object.defineProperties(Geocoder.prototype, {
   container: {
     get: function () {
       return this._container;
-    },
+    }
   },
 
   /**
@@ -174,7 +174,7 @@ Object.defineProperties(Geocoder.prototype, {
   searchSuggestionsContainer: {
     get: function () {
       return this._searchSuggestionsContainer;
-    },
+    }
   },
 
   /**
@@ -186,8 +186,8 @@ Object.defineProperties(Geocoder.prototype, {
   viewModel: {
     get: function () {
       return this._viewModel;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -204,20 +204,20 @@ Geocoder.prototype.isDestroyed = function () {
 Geocoder.prototype.destroy = function () {
   const container = this._container;
   if (FeatureDetection.supportsPointerEvents()) {
-    document.removeEventListener("pointerdown", this._onInputBegin, true);
-    container.removeEventListener("pointerup", this._onInputEnd, true);
+    document.removeEventListener('pointerdown', this._onInputBegin, true);
+    container.removeEventListener('pointerup', this._onInputEnd, true);
   } else {
-    document.removeEventListener("mousedown", this._onInputBegin, true);
-    container.removeEventListener("mouseup", this._onInputEnd, true);
-    document.removeEventListener("touchstart", this._onInputBegin, true);
-    container.removeEventListener("touchend", this._onInputEnd, true);
+    document.removeEventListener('mousedown', this._onInputBegin, true);
+    container.removeEventListener('mouseup', this._onInputEnd, true);
+    document.removeEventListener('touchstart', this._onInputBegin, true);
+    container.removeEventListener('touchend', this._onInputEnd, true);
   }
   this._viewModel.destroy();
   knockout.cleanNode(this._form);
   knockout.cleanNode(this._searchSuggestionsContainer);
   container.removeChild(this._form);
   container.removeChild(this._searchSuggestionsContainer);
-  this._textBox.removeEventListener("focus", this._onTextBoxFocus, false);
+  this._textBox.removeEventListener('focus', this._onTextBoxFocus, false);
 
   return destroyObject(this);
 };

@@ -1,5 +1,5 @@
-import defaultValue from "../Core/defaultValue.js";
-import Pass from "../Renderer/Pass.js";
+import defaultValue from '../Core/defaultValue.js';
+import Pass from '../Renderer/Pass.js';
 
 /**
  * Defines a list of commands whose geometry are bound by near and far distances from the camera.

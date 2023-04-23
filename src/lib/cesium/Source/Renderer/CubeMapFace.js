@@ -1,9 +1,9 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import PixelDatatype from "./PixelDatatype.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import PixelDatatype from './PixelDatatype.js';
 
 /**
  * @private
@@ -38,18 +38,18 @@ Object.defineProperties(CubeMapFace.prototype, {
   pixelFormat: {
     get: function () {
       return this._pixelFormat;
-    },
+    }
   },
   pixelDatatype: {
     get: function () {
       return this._pixelDatatype;
-    },
+    }
   },
   _target: {
     get: function () {
       return this._targetFace;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -83,24 +83,24 @@ Object.defineProperties(CubeMapFace.prototype, {
  */
 CubeMapFace.prototype.copyFrom = function (options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options", options);
+  Check.defined('options', options);
   //>>includeEnd('debug');
 
   const xOffset = defaultValue(options.xOffset, 0);
   const yOffset = defaultValue(options.yOffset, 0);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.source", options.source);
-  Check.typeOf.number.greaterThanOrEquals("xOffset", xOffset, 0);
-  Check.typeOf.number.greaterThanOrEquals("yOffset", yOffset, 0);
+  Check.defined('options.source', options.source);
+  Check.typeOf.number.greaterThanOrEquals('xOffset', xOffset, 0);
+  Check.typeOf.number.greaterThanOrEquals('yOffset', yOffset, 0);
   if (xOffset + options.source.width > this._size) {
     throw new DeveloperError(
-      "xOffset + options.source.width must be less than or equal to width."
+      'xOffset + options.source.width must be less than or equal to width.'
     );
   }
   if (yOffset + options.source.height > this._size) {
     throw new DeveloperError(
-      "yOffset + options.source.height must be less than or equal to height."
+      'yOffset + options.source.height must be less than or equal to height.'
     );
   }
   //>>includeEnd('debug');
@@ -306,36 +306,36 @@ CubeMapFace.prototype.copyFromFramebuffer = function (
   height = defaultValue(height, this._size);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number.greaterThanOrEquals("xOffset", xOffset, 0);
-  Check.typeOf.number.greaterThanOrEquals("yOffset", yOffset, 0);
+  Check.typeOf.number.greaterThanOrEquals('xOffset', xOffset, 0);
+  Check.typeOf.number.greaterThanOrEquals('yOffset', yOffset, 0);
   Check.typeOf.number.greaterThanOrEquals(
-    "framebufferXOffset",
+    'framebufferXOffset',
     framebufferXOffset,
     0
   );
   Check.typeOf.number.greaterThanOrEquals(
-    "framebufferYOffset",
+    'framebufferYOffset',
     framebufferYOffset,
     0
   );
   if (xOffset + width > this._size) {
     throw new DeveloperError(
-      "xOffset + source.width must be less than or equal to width."
+      'xOffset + source.width must be less than or equal to width.'
     );
   }
   if (yOffset + height > this._size) {
     throw new DeveloperError(
-      "yOffset + source.height must be less than or equal to height."
+      'yOffset + source.height must be less than or equal to height.'
     );
   }
   if (this._pixelDatatype === PixelDatatype.FLOAT) {
     throw new DeveloperError(
-      "Cannot call copyFromFramebuffer when the texture pixel data type is FLOAT."
+      'Cannot call copyFromFramebuffer when the texture pixel data type is FLOAT.'
     );
   }
   if (this._pixelDatatype === PixelDatatype.HALF_FLOAT) {
     throw new DeveloperError(
-      "Cannot call copyFromFramebuffer when the texture pixel data type is HALF_FLOAT."
+      'Cannot call copyFromFramebuffer when the texture pixel data type is HALF_FLOAT.'
     );
   }
   //>>includeEnd('debug');

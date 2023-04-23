@@ -1,4 +1,4 @@
-import Check from "../Core/Check.js";
+import Check from '../Core/Check.js';
 
 /**
  * An enum describing whether a variable should be added to the
@@ -9,7 +9,7 @@ import Check from "../Core/Check.js";
 const ShaderDestination = {
   VERTEX: 0,
   FRAGMENT: 1,
-  BOTH: 2,
+  BOTH: 2
 };
 
 /**
@@ -21,7 +21,7 @@ const ShaderDestination = {
  */
 ShaderDestination.includesVertexShader = function (destination) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("destination", destination);
+  Check.typeOf.number('destination', destination);
   //>>includeEnd('debug');
 
   return (
@@ -39,7 +39,7 @@ ShaderDestination.includesVertexShader = function (destination) {
  */
 ShaderDestination.includesFragmentShader = function (destination) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("destination", destination);
+  Check.typeOf.number('destination', destination);
   //>>includeEnd('debug');
   //
   return (

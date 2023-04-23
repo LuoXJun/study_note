@@ -1,4 +1,4 @@
-import Check from "../Core/Check.js";
+import Check from '../Core/Check.js';
 
 /**
  * The state for a 3D Tiles update pass.
@@ -8,8 +8,8 @@ import Check from "../Core/Check.js";
  */
 function Cesium3DTilePassState(options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options", options);
-  Check.typeOf.number("options.pass", options.pass);
+  Check.typeOf.object('options', options);
+  Check.typeOf.number('options.pass', options.pass);
   //>>includeEnd('debug');
 
   /**

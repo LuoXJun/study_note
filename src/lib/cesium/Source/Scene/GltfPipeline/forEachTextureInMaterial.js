@@ -1,6 +1,6 @@
-import ForEach from "./ForEach.js";
-import Check from "../../Core/Check.js";
-import defined from "../../Core/defined.js";
+import ForEach from './ForEach.js';
+import Check from '../../Core/Check.js';
+import defined from '../../Core/defined.js';
 
 /**
  * Calls the provider handler function on each texture used by the material.
@@ -11,8 +11,8 @@ import defined from "../../Core/defined.js";
  * @private
  */
 function forEachTextureInMaterial(material, handler) {
-  Check.typeOf.object("material", material);
-  Check.defined("handler", handler);
+  Check.typeOf.object('material', material);
+  Check.defined('handler', handler);
 
   // Metallic roughness
   const pbrMetallicRoughness = material.pbrMetallicRoughness;

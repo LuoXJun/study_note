@@ -1,20 +1,20 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import defined from "../Core/defined.js";
-import Cartographic from "../Core/Cartographic.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import Intersect from "../Core/Intersect.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Plane from "../Core/Plane.js";
-import CoplanarPolygonOutlineGeometry from "../Core/CoplanarPolygonOutlineGeometry.js";
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Check from "../Core/Check.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import defaultValue from "../Core/defaultValue.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import Matrix4 from "../Core/Matrix4.js";
-import PerInstanceColorAppearance from "./PerInstanceColorAppearance.js";
-import Primitive from "./Primitive.js";
-import S2Cell from "../Core/S2Cell.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import defined from '../Core/defined.js';
+import Cartographic from '../Core/Cartographic.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import Intersect from '../Core/Intersect.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Plane from '../Core/Plane.js';
+import CoplanarPolygonOutlineGeometry from '../Core/CoplanarPolygonOutlineGeometry.js';
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Check from '../Core/Check.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import defaultValue from '../Core/defaultValue.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import Matrix4 from '../Core/Matrix4.js';
+import PerInstanceColorAppearance from './PerInstanceColorAppearance.js';
+import Primitive from './Primitive.js';
+import S2Cell from '../Core/S2Cell.js';
 let centerCartographicScratch = new Cartographic();
 /**
  * A tile bounding volume specified as an S2 cell token with minimum and maximum heights.
@@ -35,8 +35,8 @@ let centerCartographicScratch = new Cartographic();
  */
 function TileBoundingS2Cell(options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options", options);
-  Check.typeOf.string("options.token", options.token);
+  Check.typeOf.object('options', options);
+  Check.typeOf.string('options.token', options.token);
   //>>includeEnd('debug');
 
   const s2Cell = S2Cell.fromToken(options.token);
@@ -89,20 +89,20 @@ function TileBoundingS2Cell(options) {
       vertices[i % 4],
       vertices[(i + 1) % 4],
       vertices[4 + ((i + 1) % 4)],
-      vertices[4 + i],
+      vertices[4 + i]
     ]);
   }
 
   this._planeVertices = [
     this._vertices.slice(0, 4),
-    this._vertices.slice(4, 8),
+    this._vertices.slice(4, 8)
   ];
   for (i = 0; i < 4; i++) {
     this._planeVertices.push([
       this._vertices[i % 4],
       this._vertices[(i + 1) % 4],
       this._vertices[4 + ((i + 1) % 4)],
-      this._vertices[4 + i],
+      this._vertices[4 + i]
     ]);
   }
 
@@ -338,7 +338,7 @@ Object.defineProperties(TileBoundingS2Cell.prototype, {
   boundingVolume: {
     get: function () {
       return this;
-    },
+    }
   },
   /**
    * The underlying bounding sphere.
@@ -351,8 +351,8 @@ Object.defineProperties(TileBoundingS2Cell.prototype, {
   boundingSphere: {
     get: function () {
       return this._boundingSphere;
-    },
-  },
+    }
+  }
 });
 
 const facePointScratch = new Cartesian3();
@@ -390,7 +390,7 @@ const facePointScratch = new Cartesian3();
  */
 TileBoundingS2Cell.prototype.distanceToCamera = function (frameState) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("frameState", frameState);
+  Check.defined('frameState', frameState);
   //>>includeEnd('debug');
 
   const point = frameState.camera.positionWC;
@@ -453,7 +453,7 @@ TileBoundingS2Cell.prototype.distanceToCamera = function (frameState) {
         ],
         this._vertices[
           4 * selectedPlaneIndices[0] + ((selectedPlaneIndices[1] - 2 + 1) % 4)
-        ],
+        ]
       ];
       facePoint = closestPointLineSegment(point, edge[0], edge[1]);
       return Cartesian3.distance(facePoint, point);
@@ -593,7 +593,7 @@ function closestPointPolygon(p, vertices, plane, edgeNormals) {
  */
 TileBoundingS2Cell.prototype.intersectPlane = function (plane) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("plane", plane);
+  Check.defined('plane', plane);
   //>>includeEnd('debug');
 
   let plusCount = 0;
@@ -625,61 +625,58 @@ TileBoundingS2Cell.prototype.intersectPlane = function (plane) {
  */
 TileBoundingS2Cell.prototype.createDebugVolume = function (color) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("color", color);
+  Check.defined('color', color);
   //>>includeEnd('debug');
 
   const modelMatrix = new Matrix4.clone(Matrix4.IDENTITY);
   const topPlanePolygon = new CoplanarPolygonOutlineGeometry({
     polygonHierarchy: {
-      positions: this._planeVertices[0],
-    },
+      positions: this._planeVertices[0]
+    }
   });
-  const topPlaneGeometry = CoplanarPolygonOutlineGeometry.createGeometry(
-    topPlanePolygon
-  );
+  const topPlaneGeometry =
+    CoplanarPolygonOutlineGeometry.createGeometry(topPlanePolygon);
   const topPlaneInstance = new GeometryInstance({
     geometry: topPlaneGeometry,
-    id: "outline",
+    id: 'outline',
     modelMatrix: modelMatrix,
     attributes: {
-      color: ColorGeometryInstanceAttribute.fromColor(color),
-    },
+      color: ColorGeometryInstanceAttribute.fromColor(color)
+    }
   });
 
   const bottomPlanePolygon = new CoplanarPolygonOutlineGeometry({
     polygonHierarchy: {
-      positions: this._planeVertices[1],
-    },
+      positions: this._planeVertices[1]
+    }
   });
-  const bottomPlaneGeometry = CoplanarPolygonOutlineGeometry.createGeometry(
-    bottomPlanePolygon
-  );
+  const bottomPlaneGeometry =
+    CoplanarPolygonOutlineGeometry.createGeometry(bottomPlanePolygon);
   const bottomPlaneInstance = new GeometryInstance({
     geometry: bottomPlaneGeometry,
-    id: "outline",
+    id: 'outline',
     modelMatrix: modelMatrix,
     attributes: {
-      color: ColorGeometryInstanceAttribute.fromColor(color),
-    },
+      color: ColorGeometryInstanceAttribute.fromColor(color)
+    }
   });
 
   const sideInstances = [];
   for (let i = 0; i < 4; i++) {
     const sidePlanePolygon = new CoplanarPolygonOutlineGeometry({
       polygonHierarchy: {
-        positions: this._planeVertices[2 + i],
-      },
+        positions: this._planeVertices[2 + i]
+      }
     });
-    const sidePlaneGeometry = CoplanarPolygonOutlineGeometry.createGeometry(
-      sidePlanePolygon
-    );
+    const sidePlaneGeometry =
+      CoplanarPolygonOutlineGeometry.createGeometry(sidePlanePolygon);
     sideInstances[i] = new GeometryInstance({
       geometry: sidePlaneGeometry,
-      id: "outline",
+      id: 'outline',
       modelMatrix: modelMatrix,
       attributes: {
-        color: ColorGeometryInstanceAttribute.fromColor(color),
-      },
+        color: ColorGeometryInstanceAttribute.fromColor(color)
+      }
     });
   }
 
@@ -690,13 +687,13 @@ TileBoundingS2Cell.prototype.createDebugVolume = function (color) {
       sideInstances[2],
       sideInstances[3],
       bottomPlaneInstance,
-      topPlaneInstance,
+      topPlaneInstance
     ],
     appearance: new PerInstanceColorAppearance({
       translucent: false,
-      flat: true,
+      flat: true
     }),
-    asynchronous: false,
+    asynchronous: false
   });
 };
 

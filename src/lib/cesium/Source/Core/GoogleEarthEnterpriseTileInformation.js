@@ -1,5 +1,5 @@
-import defined from "./defined.js";
-import isBitSet from "./isBitSet.js";
+import defined from './defined.js';
+import isBitSet from './isBitSet.js';
 
 // Bitmask for checking tile properties
 const childrenBitmasks = [0x01, 0x02, 0x04, 0x08];

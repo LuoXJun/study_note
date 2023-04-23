@@ -34,6 +34,6 @@ const SDFSettings = {
    * @type {Number}
    * @constant
    */
-  CUTOFF: 0.25,
+  CUTOFF: 0.25
 };
 export default Object.freeze(SDFSettings);

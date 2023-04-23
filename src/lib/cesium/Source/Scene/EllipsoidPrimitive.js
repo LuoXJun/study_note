@@ -1,29 +1,29 @@
-import BoundingSphere from "../Core/BoundingSphere.js";
-import BoxGeometry from "../Core/BoxGeometry.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import combine from "../Core/combine.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Matrix4 from "../Core/Matrix4.js";
-import VertexFormat from "../Core/VertexFormat.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import Pass from "../Renderer/Pass.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import VertexArray from "../Renderer/VertexArray.js";
-import EllipsoidFS from "../Shaders/EllipsoidFS.js";
-import EllipsoidVS from "../Shaders/EllipsoidVS.js";
-import BlendingState from "./BlendingState.js";
-import CullFace from "./CullFace.js";
-import Material from "./Material.js";
-import SceneMode from "./SceneMode.js";
+import BoundingSphere from '../Core/BoundingSphere.js';
+import BoxGeometry from '../Core/BoxGeometry.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import combine from '../Core/combine.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Matrix4 from '../Core/Matrix4.js';
+import VertexFormat from '../Core/VertexFormat.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import Pass from '../Renderer/Pass.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import VertexArray from '../Renderer/VertexArray.js';
+import EllipsoidFS from '../Shaders/EllipsoidFS.js';
+import EllipsoidVS from '../Shaders/EllipsoidVS.js';
+import BlendingState from './BlendingState.js';
+import CullFace from './CullFace.js';
+import Material from './Material.js';
+import SceneMode from './SceneMode.js';
 
 const attributeLocations = {
-  position: 0,
+  position: 0
 };
 
 /**
@@ -188,11 +188,11 @@ function EllipsoidPrimitive(options) {
   this._pickId = undefined;
 
   this._colorCommand = new DrawCommand({
-    owner: defaultValue(options._owner, this),
+    owner: defaultValue(options._owner, this)
   });
   this._pickCommand = new DrawCommand({
     owner: defaultValue(options._owner, this),
-    pickOnly: true,
+    pickOnly: true
   });
 
   const that = this;
@@ -202,13 +202,13 @@ function EllipsoidPrimitive(options) {
     },
     u_oneOverEllipsoidRadiiSquared: function () {
       return that._oneOverEllipsoidRadiiSquared;
-    },
+    }
   };
 
   this._pickUniforms = {
     czm_pickColor: function () {
       return that._pickId.color;
-    },
+    }
   };
 }
 
@@ -222,7 +222,7 @@ function getVertexArray(context) {
   const geometry = BoxGeometry.createGeometry(
     BoxGeometry.fromDimensions({
       dimensions: new Cartesian3(2.0, 2.0, 2.0),
-      vertexFormat: VertexFormat.POSITION_ONLY,
+      vertexFormat: VertexFormat.POSITION_ONLY
     })
   );
 
@@ -231,7 +231,7 @@ function getVertexArray(context) {
     geometry: geometry,
     attributeLocations: attributeLocations,
     bufferUsage: BufferUsage.STATIC_DRAW,
-    interleave: true,
+    interleave: true
   });
 
   context.cache.ellipsoidPrimitive_vertexArray = vertexArray;
@@ -239,9 +239,9 @@ function getVertexArray(context) {
 }
 
 const logDepthExtension =
-  "#ifdef GL_EXT_frag_depth \n" +
-  "#extension GL_EXT_frag_depth : enable \n" +
-  "#endif \n\n";
+  '#ifdef GL_EXT_frag_depth \n' +
+  '#extension GL_EXT_frag_depth : enable \n' +
+  '#endif \n\n';
 
 /**
  * Called when {@link Viewer} or {@link CesiumWidget} render the scene to
@@ -265,7 +265,7 @@ EllipsoidPrimitive.prototype.update = function (frameState) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(this.material)) {
-    throw new DeveloperError("this.material must be defined.");
+    throw new DeveloperError('this.material must be defined.');
   }
   //>>includeEnd('debug');
 
@@ -285,15 +285,15 @@ EllipsoidPrimitive.prototype.update = function (frameState) {
       // disappear if the viewer enters the bounding box.
       cull: {
         enabled: true,
-        face: CullFace.FRONT,
+        face: CullFace.FRONT
       },
       depthTest: {
-        enabled: this._depthTestEnabled,
+        enabled: this._depthTestEnabled
       },
       // Only write depth when EXT_frag_depth is supported since the depth for
       // the bounding box is wrong; it is not the true depth of the ray casted ellipsoid.
       depthMask: !translucent && context.fragmentDepth,
-      blending: translucent ? BlendingState.ALPHA_BLEND : undefined,
+      blending: translucent ? BlendingState.ALPHA_BLEND : undefined
     });
   }
 
@@ -364,20 +364,20 @@ EllipsoidPrimitive.prototype.update = function (frameState) {
     useLogDepthChanged
   ) {
     vs = new ShaderSource({
-      sources: [EllipsoidVS],
+      sources: [EllipsoidVS]
     });
     fs = new ShaderSource({
-      sources: [this.material.shaderSource, EllipsoidFS],
+      sources: [this.material.shaderSource, EllipsoidFS]
     });
     if (this.onlySunLighting) {
-      fs.defines.push("ONLY_SUN_LIGHTING");
+      fs.defines.push('ONLY_SUN_LIGHTING');
     }
     if (!translucent && context.fragmentDepth) {
-      fs.defines.push("WRITE_DEPTH");
+      fs.defines.push('WRITE_DEPTH');
     }
     if (this._useLogDepth) {
-      vs.defines.push("LOG_DEPTH");
-      fs.defines.push("LOG_DEPTH");
+      vs.defines.push('LOG_DEPTH');
+      fs.defines.push('LOG_DEPTH');
       fs.sources.push(logDepthExtension);
     }
 
@@ -386,7 +386,7 @@ EllipsoidPrimitive.prototype.update = function (frameState) {
       shaderProgram: this._sp,
       vertexShaderSource: vs,
       fragmentShaderSource: fs,
-      attributeLocations: attributeLocations,
+      attributeLocations: attributeLocations
     });
 
     colorCommand.vertexArray = this._va;
@@ -416,7 +416,7 @@ EllipsoidPrimitive.prototype.update = function (frameState) {
       this._pickId = this._pickId && this._pickId.destroy();
       this._pickId = context.createPickId({
         primitive: this,
-        id: this.id,
+        id: this.id
       });
     }
 
@@ -428,21 +428,21 @@ EllipsoidPrimitive.prototype.update = function (frameState) {
       useLogDepthChanged
     ) {
       vs = new ShaderSource({
-        sources: [EllipsoidVS],
+        sources: [EllipsoidVS]
       });
       fs = new ShaderSource({
         sources: [this.material.shaderSource, EllipsoidFS],
-        pickColorQualifier: "uniform",
+        pickColorQualifier: 'uniform'
       });
       if (this.onlySunLighting) {
-        fs.defines.push("ONLY_SUN_LIGHTING");
+        fs.defines.push('ONLY_SUN_LIGHTING');
       }
       if (!translucent && context.fragmentDepth) {
-        fs.defines.push("WRITE_DEPTH");
+        fs.defines.push('WRITE_DEPTH');
       }
       if (this._useLogDepth) {
-        vs.defines.push("LOG_DEPTH");
-        fs.defines.push("LOG_DEPTH");
+        vs.defines.push('LOG_DEPTH');
+        fs.defines.push('LOG_DEPTH');
         fs.sources.push(logDepthExtension);
       }
 
@@ -451,7 +451,7 @@ EllipsoidPrimitive.prototype.update = function (frameState) {
         shaderProgram: this._pickSP,
         vertexShaderSource: vs,
         fragmentShaderSource: fs,
-        attributeLocations: attributeLocations,
+        attributeLocations: attributeLocations
       });
 
       pickCommand.vertexArray = this._va;

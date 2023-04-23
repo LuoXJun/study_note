@@ -1,8 +1,8 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import hasExtension from "./hasExtension.js";
-import TileMetadata from "./TileMetadata.js";
-import oneTimeWarning from "../Core/oneTimeWarning.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import hasExtension from './hasExtension.js';
+import TileMetadata from './TileMetadata.js';
+import oneTimeWarning from '../Core/oneTimeWarning.js';
 
 /**
  * Check if a tile has metadata, either defined in its metadata field (3D Tiles 1.1)
@@ -20,8 +20,8 @@ import oneTimeWarning from "../Core/oneTimeWarning.js";
  * @experimental This feature is using part of the 3D Tiles spec that is not final and is subject to change without Cesium's standard deprecation policy.
  */
 function findTileMetadata(tileset, tileHeader) {
-  const metadataJson = hasExtension(tileHeader, "3DTILES_metadata")
-    ? tileHeader.extensions["3DTILES_metadata"]
+  const metadataJson = hasExtension(tileHeader, '3DTILES_metadata')
+    ? tileHeader.extensions['3DTILES_metadata']
     : tileHeader.metadata;
 
   if (!defined(metadataJson)) {
@@ -30,8 +30,8 @@ function findTileMetadata(tileset, tileHeader) {
 
   if (!defined(tileset.schema)) {
     findTileMetadata._oneTimeWarning(
-      "findTileMetadata-missing-root-schema",
-      "Could not find a metadata schema for tile metadata. For tilesets that contain external tilesets, make sure the schema is added to the root tileset.json."
+      'findTileMetadata-missing-root-schema',
+      'Could not find a metadata schema for tile metadata. For tilesets that contain external tilesets, make sure the schema is added to the root tileset.json.'
     );
     return undefined;
   }
@@ -44,7 +44,7 @@ function findTileMetadata(tileset, tileHeader) {
     const tileClass = classes[metadataJson.class];
     return new TileMetadata({
       tile: metadataJson,
-      class: tileClass,
+      class: tileClass
     });
   }
 

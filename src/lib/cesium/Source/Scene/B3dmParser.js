@@ -1,8 +1,8 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import deprecationWarning from "../Core/deprecationWarning.js";
-import getJsonFromTypedArray from "../Core/getJsonFromTypedArray.js";
-import RuntimeError from "../Core/RuntimeError.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import deprecationWarning from '../Core/deprecationWarning.js';
+import getJsonFromTypedArray from '../Core/getJsonFromTypedArray.js';
+import RuntimeError from '../Core/RuntimeError.js';
 
 /**
  * Handles parsing of a Batched 3D Model.
@@ -27,7 +27,7 @@ const sizeOfUint32 = Uint32Array.BYTES_PER_ELEMENT;
 B3dmParser.parse = function (arrayBuffer, byteOffset) {
   const byteStart = defaultValue(byteOffset, 0);
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("arrayBuffer", arrayBuffer);
+  Check.defined('arrayBuffer', arrayBuffer);
   //>>includeEnd('debug');
 
   byteOffset = byteStart;
@@ -76,8 +76,8 @@ B3dmParser.parse = function (arrayBuffer, byteOffset) {
     featureTableJsonByteLength = 0;
     featureTableBinaryByteLength = 0;
     B3dmParser._deprecationWarning(
-      "b3dm-legacy-header",
-      "This b3dm header is using the legacy format [batchLength] [batchTableByteLength]. The new format is [featureTableJsonByteLength] [featureTableBinaryByteLength] [batchTableJsonByteLength] [batchTableBinaryByteLength] from https://github.com/CesiumGS/3d-tiles/tree/main/specification/TileFormats/Batched3DModel."
+      'b3dm-legacy-header',
+      'This b3dm header is using the legacy format [batchLength] [batchTableByteLength]. The new format is [featureTableJsonByteLength] [featureTableBinaryByteLength] [batchTableJsonByteLength] [batchTableBinaryByteLength] from https://github.com/CesiumGS/3d-tiles/tree/main/specification/TileFormats/Batched3DModel.'
     );
   } else if (batchTableBinaryByteLength >= 570425344) {
     // Second legacy check
@@ -88,15 +88,15 @@ B3dmParser.parse = function (arrayBuffer, byteOffset) {
     featureTableJsonByteLength = 0;
     featureTableBinaryByteLength = 0;
     B3dmParser._deprecationWarning(
-      "b3dm-legacy-header",
-      "This b3dm header is using the legacy format [batchTableJsonByteLength] [batchTableBinaryByteLength] [batchLength]. The new format is [featureTableJsonByteLength] [featureTableBinaryByteLength] [batchTableJsonByteLength] [batchTableBinaryByteLength] from https://github.com/CesiumGS/3d-tiles/tree/main/specification/TileFormats/Batched3DModel."
+      'b3dm-legacy-header',
+      'This b3dm header is using the legacy format [batchTableJsonByteLength] [batchTableBinaryByteLength] [batchLength]. The new format is [featureTableJsonByteLength] [featureTableBinaryByteLength] [batchTableJsonByteLength] [batchTableBinaryByteLength] from https://github.com/CesiumGS/3d-tiles/tree/main/specification/TileFormats/Batched3DModel.'
     );
   }
 
   let featureTableJson;
   if (featureTableJsonByteLength === 0) {
     featureTableJson = {
-      BATCH_LENGTH: defaultValue(batchLength, 0),
+      BATCH_LENGTH: defaultValue(batchLength, 0)
     };
   } else {
     featureTableJson = getJsonFromTypedArray(
@@ -144,7 +144,7 @@ B3dmParser.parse = function (arrayBuffer, byteOffset) {
 
   const gltfByteLength = byteStart + byteLength - byteOffset;
   if (gltfByteLength === 0) {
-    throw new RuntimeError("glTF byte length must be greater than 0.");
+    throw new RuntimeError('glTF byte length must be greater than 0.');
   }
 
   let gltfView;
@@ -153,8 +153,8 @@ B3dmParser.parse = function (arrayBuffer, byteOffset) {
   } else {
     // Create a copy of the glb so that it is 4-byte aligned
     B3dmParser._deprecationWarning(
-      "b3dm-glb-unaligned",
-      "The embedded glb is not aligned to a 4-byte boundary."
+      'b3dm-glb-unaligned',
+      'The embedded glb is not aligned to a 4-byte boundary.'
     );
     gltfView = new Uint8Array(
       uint8Array.subarray(byteOffset, byteOffset + gltfByteLength)
@@ -167,7 +167,7 @@ B3dmParser.parse = function (arrayBuffer, byteOffset) {
     featureTableBinary: featureTableBinary,
     batchTableJson: batchTableJson,
     batchTableBinary: batchTableBinary,
-    gltf: gltfView,
+    gltf: gltfView
   };
 };
 

@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "/**\n\
+export default '/**\n\
  * Unpack unsigned integers of 1-4 bytes. in WebGL 1, there is no uint type,\n\
  * so the return value is an int.\n\
  * <p>\n\
@@ -30,4 +30,4 @@ export default "/**\n\
    vec4 rounded = czm_round(packedValue * 255.0);\n\
    return int(dot(rounded, vec4(1.0, 256.0, 65536.0, 16777216.0)));\n\
  }\n\
-";
+';

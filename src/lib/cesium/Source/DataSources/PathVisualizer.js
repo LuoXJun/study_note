@@ -1,24 +1,24 @@
-import AssociativeArray from "../Core/AssociativeArray.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import JulianDate from "../Core/JulianDate.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Matrix4 from "../Core/Matrix4.js";
-import ReferenceFrame from "../Core/ReferenceFrame.js";
-import TimeInterval from "../Core/TimeInterval.js";
-import Transforms from "../Core/Transforms.js";
-import PolylineCollection from "../Scene/PolylineCollection.js";
-import SceneMode from "../Scene/SceneMode.js";
-import CompositePositionProperty from "./CompositePositionProperty.js";
-import ConstantPositionProperty from "./ConstantPositionProperty.js";
-import MaterialProperty from "./MaterialProperty.js";
-import Property from "./Property.js";
-import ReferenceProperty from "./ReferenceProperty.js";
-import SampledPositionProperty from "./SampledPositionProperty.js";
-import ScaledPositionProperty from "./ScaledPositionProperty.js";
-import TimeIntervalCollectionPositionProperty from "./TimeIntervalCollectionPositionProperty.js";
+import AssociativeArray from '../Core/AssociativeArray.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import JulianDate from '../Core/JulianDate.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Matrix4 from '../Core/Matrix4.js';
+import ReferenceFrame from '../Core/ReferenceFrame.js';
+import TimeInterval from '../Core/TimeInterval.js';
+import Transforms from '../Core/Transforms.js';
+import PolylineCollection from '../Scene/PolylineCollection.js';
+import SceneMode from '../Scene/SceneMode.js';
+import CompositePositionProperty from './CompositePositionProperty.js';
+import ConstantPositionProperty from './ConstantPositionProperty.js';
+import MaterialProperty from './MaterialProperty.js';
+import Property from './Property.js';
+import ReferenceProperty from './ReferenceProperty.js';
+import SampledPositionProperty from './SampledPositionProperty.js';
+import ScaledPositionProperty from './ScaledPositionProperty.js';
+import TimeIntervalCollectionPositionProperty from './TimeIntervalCollectionPositionProperty.js';
 
 const defaultResolution = 60.0;
 const defaultWidth = 1.0;
@@ -587,10 +587,10 @@ PolylineUpdater.prototype.destroy = function () {
 function PathVisualizer(scene, entityCollection) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required.");
+    throw new DeveloperError('scene is required.');
   }
   if (!defined(entityCollection)) {
-    throw new DeveloperError("entityCollection is required.");
+    throw new DeveloperError('entityCollection is required.');
   }
   //>>includeEnd('debug');
 
@@ -617,7 +617,7 @@ function PathVisualizer(scene, entityCollection) {
 PathVisualizer.prototype.update = function (time) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required.");
+    throw new DeveloperError('time is required.');
   }
   //>>includeEnd('debug');
 

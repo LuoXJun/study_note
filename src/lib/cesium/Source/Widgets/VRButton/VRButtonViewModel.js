@@ -1,14 +1,14 @@
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import destroyObject from "../../Core/destroyObject.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import EventHelper from "../../Core/EventHelper.js";
-import Fullscreen from "../../Core/Fullscreen.js";
-import OrthographicFrustum from "../../Core/OrthographicFrustum.js";
-import knockout from "../../ThirdParty/knockout.js";
-import NoSleep from "../../ThirdParty/nosleep.js";
-import createCommand from "../createCommand.js";
-import getElement from "../getElement.js";
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import destroyObject from '../../Core/destroyObject.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import EventHelper from '../../Core/EventHelper.js';
+import Fullscreen from '../../Core/Fullscreen.js';
+import OrthographicFrustum from '../../Core/OrthographicFrustum.js';
+import knockout from '../../ThirdParty/knockout.js';
+import NoSleep from '../../ThirdParty/nosleep.js';
+import createCommand from '../createCommand.js';
+import getElement from '../getElement.js';
 
 function lockScreen(orientation) {
   let locked = false;
@@ -62,7 +62,7 @@ function toggleVR(viewModel, scene, isVRMode, isOrthographic) {
     }
     viewModel._noSleep.enable();
     if (!viewModel._locked) {
-      viewModel._locked = lockScreen("landscape");
+      viewModel._locked = lockScreen('landscape');
     }
     scene.useWebVR = true;
     isVRMode(true);
@@ -80,7 +80,7 @@ function toggleVR(viewModel, scene, isVRMode, isOrthographic) {
 function VRButtonViewModel(scene, vrElement) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(scene)) {
-    throw new DeveloperError("scene is required.");
+    throw new DeveloperError('scene is required.');
   }
   //>>includeEnd('debug');
 
@@ -95,10 +95,10 @@ function VRButtonViewModel(scene, vrElement) {
    * @type {Boolean}
    */
   this.isVRMode = undefined;
-  knockout.defineProperty(this, "isVRMode", {
+  knockout.defineProperty(this, 'isVRMode', {
     get: function () {
       return isVRMode();
-    },
+    }
   });
 
   /**
@@ -108,13 +108,13 @@ function VRButtonViewModel(scene, vrElement) {
    * @see Fullscreen.enabled
    */
   this.isVREnabled = undefined;
-  knockout.defineProperty(this, "isVREnabled", {
+  knockout.defineProperty(this, 'isVREnabled', {
     get: function () {
       return isEnabled();
     },
     set: function (value) {
       isEnabled(value && Fullscreen.enabled);
-    },
+    }
   });
 
   /**
@@ -123,20 +123,20 @@ function VRButtonViewModel(scene, vrElement) {
    * @type {String}
    */
   this.tooltip = undefined;
-  knockout.defineProperty(this, "tooltip", function () {
+  knockout.defineProperty(this, 'tooltip', function () {
     if (!isEnabled()) {
-      return "VR mode is unavailable";
+      return 'VR mode is unavailable';
     }
-    return isVRMode() ? "Exit VR mode" : "Enter VR mode";
+    return isVRMode() ? 'Exit VR mode' : 'Enter VR mode';
   });
 
   const isOrthographic = knockout.observable(false);
 
   this._isOrthographic = undefined;
-  knockout.defineProperty(this, "_isOrthographic", {
+  knockout.defineProperty(this, '_isOrthographic', {
     get: function () {
       return isOrthographic();
-    },
+    }
   });
 
   this._eventHelper = new EventHelper();
@@ -149,7 +149,7 @@ function VRButtonViewModel(scene, vrElement) {
 
   this._command = createCommand(function () {
     toggleVR(that, scene, isVRMode, isOrthographic);
-  }, knockout.getObservable(this, "isVREnabled"));
+  }, knockout.getObservable(this, 'isVREnabled'));
 
   this._vrElement = defaultValue(getElement(vrElement), document.body);
 
@@ -183,12 +183,12 @@ Object.defineProperties(VRButtonViewModel.prototype, {
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
       if (!(value instanceof Element)) {
-        throw new DeveloperError("value must be a valid Element.");
+        throw new DeveloperError('value must be a valid Element.');
       }
       //>>includeEnd('debug');
 
       this._vrElement = value;
-    },
+    }
   },
 
   /**
@@ -200,8 +200,8 @@ Object.defineProperties(VRButtonViewModel.prototype, {
   command: {
     get: function () {
       return this._command;
-    },
-  },
+    }
+  }
 });
 
 /**

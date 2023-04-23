@@ -23,7 +23,30 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './ComponentDatatype-4eeb6d9b', './defaultValue-97284df2', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './GeometryOffsetAttribute-59b14f45', './VertexFormat-563ab2cc'], (function (exports, Transforms, Matrix2, RuntimeError, ComponentDatatype, defaultValue, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, VertexFormat) { 'use strict';
+define([
+  'exports',
+  './Transforms-273eeb44',
+  './Matrix2-9e1c22e2',
+  './RuntimeError-4f8ec8a2',
+  './ComponentDatatype-4eeb6d9b',
+  './defaultValue-97284df2',
+  './GeometryAttribute-9be2d2e5',
+  './GeometryAttributes-734a3446',
+  './GeometryOffsetAttribute-59b14f45',
+  './VertexFormat-563ab2cc'
+], function (
+  exports,
+  Transforms,
+  Matrix2,
+  RuntimeError,
+  ComponentDatatype,
+  defaultValue,
+  GeometryAttribute,
+  GeometryAttributes,
+  GeometryOffsetAttribute,
+  VertexFormat
+) {
+  'use strict';
 
   const diffScratch = new Matrix2.Cartesian3();
 
@@ -53,31 +76,38 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * const geometry = Cesium.BoxGeometry.createGeometry(box);
    */
   function BoxGeometry(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     const min = options.minimum;
     const max = options.maximum;
 
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("min", min);
-    RuntimeError.Check.typeOf.object("max", max);
+    RuntimeError.Check.typeOf.object('min', min);
+    RuntimeError.Check.typeOf.object('max', max);
     if (
       defaultValue.defined(options.offsetAttribute) &&
-      options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP
+      options.offsetAttribute ===
+        GeometryOffsetAttribute.GeometryOffsetAttribute.TOP
     ) {
       throw new RuntimeError.DeveloperError(
-        "GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry."
+        'GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry.'
       );
     }
     //>>includeEnd('debug');
 
-    const vertexFormat = defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
+    const vertexFormat = defaultValue.defaultValue(
+      options.vertexFormat,
+      VertexFormat.VertexFormat.DEFAULT
+    );
 
     this._minimum = Matrix2.Cartesian3.clone(min);
     this._maximum = Matrix2.Cartesian3.clone(max);
     this._vertexFormat = vertexFormat;
     this._offsetAttribute = options.offsetAttribute;
-    this._workerName = "createBoxGeometry";
+    this._workerName = 'createBoxGeometry';
   }
 
   /**
@@ -101,23 +131,42 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * @see BoxGeometry.createGeometry
    */
   BoxGeometry.fromDimensions = function (options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
     const dimensions = options.dimensions;
 
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("dimensions", dimensions);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("dimensions.x", dimensions.x, 0);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("dimensions.y", dimensions.y, 0);
-    RuntimeError.Check.typeOf.number.greaterThanOrEquals("dimensions.z", dimensions.z, 0);
+    RuntimeError.Check.typeOf.object('dimensions', dimensions);
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'dimensions.x',
+      dimensions.x,
+      0
+    );
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'dimensions.y',
+      dimensions.y,
+      0
+    );
+    RuntimeError.Check.typeOf.number.greaterThanOrEquals(
+      'dimensions.z',
+      dimensions.z,
+      0
+    );
     //>>includeEnd('debug');
 
-    const corner = Matrix2.Cartesian3.multiplyByScalar(dimensions, 0.5, new Matrix2.Cartesian3());
+    const corner = Matrix2.Cartesian3.multiplyByScalar(
+      dimensions,
+      0.5,
+      new Matrix2.Cartesian3()
+    );
 
     return new BoxGeometry({
       minimum: Matrix2.Cartesian3.negate(corner, new Matrix2.Cartesian3()),
       maximum: corner,
       vertexFormat: options.vertexFormat,
-      offsetAttribute: options.offsetAttribute,
+      offsetAttribute: options.offsetAttribute
     });
   };
 
@@ -143,12 +192,12 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    */
   BoxGeometry.fromAxisAlignedBoundingBox = function (boundingBox) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("boundingBox", boundingBox);
+    RuntimeError.Check.typeOf.object('boundingBox', boundingBox);
     //>>includeEnd('debug');
 
     return new BoxGeometry({
       minimum: boundingBox.minimum,
-      maximum: boundingBox.maximum,
+      maximum: boundingBox.maximum
     });
   };
 
@@ -157,7 +206,9 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    * @type {Number}
    */
   BoxGeometry.packedLength =
-    2 * Matrix2.Cartesian3.packedLength + VertexFormat.VertexFormat.packedLength + 1;
+    2 * Matrix2.Cartesian3.packedLength +
+    VertexFormat.VertexFormat.packedLength +
+    1;
 
   /**
    * Stores the provided instance into the provided array.
@@ -170,8 +221,8 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    */
   BoxGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.typeOf.object("value", value);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.typeOf.object('value', value);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -188,7 +239,9 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       startingIndex + 2 * Matrix2.Cartesian3.packedLength
     );
     array[
-      startingIndex + 2 * Matrix2.Cartesian3.packedLength + VertexFormat.VertexFormat.packedLength
+      startingIndex +
+        2 * Matrix2.Cartesian3.packedLength +
+        VertexFormat.VertexFormat.packedLength
     ] = defaultValue.defaultValue(value._offsetAttribute, -1);
 
     return array;
@@ -201,7 +254,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     minimum: scratchMin,
     maximum: scratchMax,
     vertexFormat: scratchVertexFormat,
-    offsetAttribute: undefined,
+    offsetAttribute: undefined
   };
 
   /**
@@ -214,7 +267,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
    */
   BoxGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    RuntimeError.Check.defined("array", array);
+    RuntimeError.Check.defined('array', array);
     //>>includeEnd('debug');
 
     startingIndex = defaultValue.defaultValue(startingIndex, 0);
@@ -232,7 +285,9 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     );
     const offsetAttribute =
       array[
-        startingIndex + 2 * Matrix2.Cartesian3.packedLength + VertexFormat.VertexFormat.packedLength
+        startingIndex +
+          2 * Matrix2.Cartesian3.packedLength +
+          VertexFormat.VertexFormat.packedLength
       ];
 
     if (!defaultValue.defined(result)) {
@@ -243,7 +298,10 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
 
     result._minimum = Matrix2.Cartesian3.clone(min, result._minimum);
     result._maximum = Matrix2.Cartesian3.clone(max, result._maximum);
-    result._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat, result._vertexFormat);
+    result._vertexFormat = VertexFormat.VertexFormat.clone(
+      vertexFormat,
+      result._vertexFormat
+    );
     result._offsetAttribute =
       offsetAttribute === -1 ? undefined : offsetAttribute;
 
@@ -367,7 +425,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         attributes.position = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
           componentsPerAttribute: 3,
-          values: positions,
+          values: positions
         });
       }
 
@@ -461,7 +519,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         attributes.normal = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 3,
-          values: normals,
+          values: normals
         });
       }
 
@@ -531,7 +589,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         attributes.st = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 2,
-          values: texCoords,
+          values: texCoords
         });
       }
 
@@ -625,7 +683,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         attributes.tangent = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 3,
-          values: tangents,
+          values: tangents
         });
       }
 
@@ -719,7 +777,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
         attributes.bitangent = new GeometryAttribute.GeometryAttribute({
           componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
           componentsPerAttribute: 3,
-          values: bitangents,
+          values: bitangents
         });
       }
 
@@ -805,7 +863,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       attributes.position = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: positions,
+        values: positions
       });
 
       // 12 triangles:  6 faces, 2 triangles each.
@@ -866,12 +924,15 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
     if (defaultValue.defined(boxGeometry._offsetAttribute)) {
       const length = positions.length;
       const offsetValue =
-        boxGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
+        boxGeometry._offsetAttribute ===
+        GeometryOffsetAttribute.GeometryOffsetAttribute.NONE
+          ? 0
+          : 1;
       const applyOffset = new Uint8Array(length / 3).fill(offsetValue);
       attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,
-        values: applyOffset,
+        values: applyOffset
       });
     }
 
@@ -879,8 +940,11 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       attributes: attributes,
       indices: indices,
       primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES,
-      boundingSphere: new Transforms.BoundingSphere(Matrix2.Cartesian3.ZERO, radius),
-      offsetAttribute: boxGeometry._offsetAttribute,
+      boundingSphere: new Transforms.BoundingSphere(
+        Matrix2.Cartesian3.ZERO,
+        radius
+      ),
+      offsetAttribute: boxGeometry._offsetAttribute
     });
   };
 
@@ -897,7 +961,7 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
       unitBoxGeometry = BoxGeometry.createGeometry(
         BoxGeometry.fromDimensions({
           dimensions: new Matrix2.Cartesian3(1.0, 1.0, 1.0),
-          vertexFormat: VertexFormat.VertexFormat.POSITION_ONLY,
+          vertexFormat: VertexFormat.VertexFormat.POSITION_ONLY
         })
       );
     }
@@ -905,6 +969,5 @@ define(['exports', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeErro
   };
 
   exports.BoxGeometry = BoxGeometry;
-
-}));
+});
 //# sourceMappingURL=BoxGeometry-97fb4823.js.map

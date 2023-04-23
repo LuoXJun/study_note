@@ -1,17 +1,17 @@
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import Event from "../Core/Event.js";
-import JulianDate from "../Core/JulianDate.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import BillboardCollection from "./BillboardCollection.js";
-import CircleEmitter from "./CircleEmitter.js";
-import Particle from "./Particle.js";
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import Event from '../Core/Event.js';
+import JulianDate from '../Core/JulianDate.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import BillboardCollection from './BillboardCollection.js';
+import CircleEmitter from './CircleEmitter.js';
+import Particle from './Particle.js';
 
 const defaultImageSize = new Cartesian2(1.0, 1.0);
 
@@ -195,10 +195,10 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.defined("value", value);
+      Check.defined('value', value);
       //>>includeEnd('debug');
       this._emitter = value;
-    },
+    }
   },
   /**
    * An array of {@link ParticleBurst}, emitting bursts of particles at periodic times.
@@ -213,7 +213,7 @@ Object.defineProperties(ParticleSystem.prototype, {
     set: function (value) {
       this._bursts = value;
       this._updateParticlePool = true;
-    },
+    }
   },
   /**
    * The 4x4 transformation matrix that transforms the particle system from model to world coordinates.
@@ -227,12 +227,12 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.defined("value", value);
+      Check.defined('value', value);
       //>>includeEnd('debug');
       this._matrixDirty =
         this._matrixDirty || !Matrix4.equals(this._modelMatrix, value);
       Matrix4.clone(value, this._modelMatrix);
-    },
+    }
   },
   /**
    * The 4x4 transformation matrix that transforms the particle system emitter within the particle systems local coordinate system.
@@ -246,12 +246,12 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.defined("value", value);
+      Check.defined('value', value);
       //>>includeEnd('debug');
       this._matrixDirty =
         this._matrixDirty || !Matrix4.equals(this._emitterModelMatrix, value);
       Matrix4.clone(value, this._emitterModelMatrix);
-    },
+    }
   },
   /**
    * The color of the particle at the beginning of its life.
@@ -265,10 +265,10 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.defined("value", value);
+      Check.defined('value', value);
       //>>includeEnd('debug');
       Color.clone(value, this._startColor);
-    },
+    }
   },
   /**
    * The color of the particle at the end of its life.
@@ -282,10 +282,10 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.defined("value", value);
+      Check.defined('value', value);
       //>>includeEnd('debug');
       Color.clone(value, this._endColor);
-    },
+    }
   },
   /**
    * The initial scale to apply to the image of the particle at the beginning of its life.
@@ -299,10 +299,10 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number.greaterThanOrEquals("value", value, 0.0);
+      Check.typeOf.number.greaterThanOrEquals('value', value, 0.0);
       //>>includeEnd('debug');
       this._startScale = value;
-    },
+    }
   },
   /**
    * The final scale to apply to the image of the particle at the end of its life.
@@ -316,10 +316,10 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number.greaterThanOrEquals("value", value, 0.0);
+      Check.typeOf.number.greaterThanOrEquals('value', value, 0.0);
       //>>includeEnd('debug');
       this._endScale = value;
-    },
+    }
   },
   /**
    * The number of particles to emit per second.
@@ -333,11 +333,11 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number.greaterThanOrEquals("value", value, 0.0);
+      Check.typeOf.number.greaterThanOrEquals('value', value, 0.0);
       //>>includeEnd('debug');
       this._emissionRate = value;
       this._updateParticlePool = true;
-    },
+    }
   },
   /**
    * Sets the minimum bound in meters per second above which a particle's actual speed will be randomly chosen.
@@ -351,10 +351,10 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number.greaterThanOrEquals("value", value, 0.0);
+      Check.typeOf.number.greaterThanOrEquals('value', value, 0.0);
       //>>includeEnd('debug');
       this._minimumSpeed = value;
-    },
+    }
   },
   /**
    * Sets the maximum bound in meters per second below which a particle's actual speed will be randomly chosen.
@@ -368,10 +368,10 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number.greaterThanOrEquals("value", value, 0.0);
+      Check.typeOf.number.greaterThanOrEquals('value', value, 0.0);
       //>>includeEnd('debug');
       this._maximumSpeed = value;
-    },
+    }
   },
   /**
    * Sets the minimum bound in seconds for the possible duration of a particle's life above which a particle's actual life will be randomly chosen.
@@ -385,10 +385,10 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number.greaterThanOrEquals("value", value, 0.0);
+      Check.typeOf.number.greaterThanOrEquals('value', value, 0.0);
       //>>includeEnd('debug');
       this._minimumParticleLife = value;
-    },
+    }
   },
   /**
    * Sets the maximum bound in seconds for the possible duration of a particle's life below which a particle's actual life will be randomly chosen.
@@ -402,11 +402,11 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number.greaterThanOrEquals("value", value, 0.0);
+      Check.typeOf.number.greaterThanOrEquals('value', value, 0.0);
       //>>includeEnd('debug');
       this._maximumParticleLife = value;
       this._updateParticlePool = true;
-    },
+    }
   },
   /**
    * Sets the minimum mass of particles in kilograms.
@@ -420,10 +420,10 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number.greaterThanOrEquals("value", value, 0.0);
+      Check.typeOf.number.greaterThanOrEquals('value', value, 0.0);
       //>>includeEnd('debug');
       this._minimumMass = value;
-    },
+    }
   },
   /**
    * Sets the maximum mass of particles in kilograms.
@@ -437,10 +437,10 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number.greaterThanOrEquals("value", value, 0.0);
+      Check.typeOf.number.greaterThanOrEquals('value', value, 0.0);
       //>>includeEnd('debug');
       this._maximumMass = value;
-    },
+    }
   },
   /**
    * Sets the minimum bound, width by height, above which to randomly scale the particle image's dimensions in pixels.
@@ -454,12 +454,12 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.object("value", value);
-      Check.typeOf.number.greaterThanOrEquals("value.x", value.x, 0.0);
-      Check.typeOf.number.greaterThanOrEquals("value.y", value.y, 0.0);
+      Check.typeOf.object('value', value);
+      Check.typeOf.number.greaterThanOrEquals('value.x', value.x, 0.0);
+      Check.typeOf.number.greaterThanOrEquals('value.y', value.y, 0.0);
       //>>includeEnd('debug');
       this._minimumImageSize = value;
-    },
+    }
   },
   /**
    * Sets the maximum bound, width by height, below which to randomly scale the particle image's dimensions in pixels.
@@ -473,12 +473,12 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.object("value", value);
-      Check.typeOf.number.greaterThanOrEquals("value.x", value.x, 0.0);
-      Check.typeOf.number.greaterThanOrEquals("value.y", value.y, 0.0);
+      Check.typeOf.object('value', value);
+      Check.typeOf.number.greaterThanOrEquals('value.x', value.x, 0.0);
+      Check.typeOf.number.greaterThanOrEquals('value.y', value.y, 0.0);
       //>>includeEnd('debug');
       this._maximumImageSize = value;
-    },
+    }
   },
   /**
    * Gets or sets if the particle size is in meters or pixels. <code>true</code> to size particles in meters; otherwise, the size is in pixels.
@@ -492,10 +492,10 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.bool("value", value);
+      Check.typeOf.bool('value', value);
       //>>includeEnd('debug');
       this._sizeInMeters = value;
-    },
+    }
   },
   /**
    * How long the particle system will emit particles, in seconds.
@@ -509,10 +509,10 @@ Object.defineProperties(ParticleSystem.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number.greaterThanOrEquals("value", value, 0.0);
+      Check.typeOf.number.greaterThanOrEquals('value', value, 0.0);
       //>>includeEnd('debug');
       this._lifetime = value;
-    },
+    }
   },
   /**
    * Fires an event when the particle system has reached the end of its lifetime.
@@ -522,7 +522,7 @@ Object.defineProperties(ParticleSystem.prototype, {
   complete: {
     get: function () {
       return this._complete;
-    },
+    }
   },
   /**
    * When <code>true</code>, the particle system has reached the end of its lifetime; <code>false</code> otherwise.
@@ -532,8 +532,8 @@ Object.defineProperties(ParticleSystem.prototype, {
   isComplete: {
     get: function () {
       return this._isComplete;
-    },
-  },
+    }
+  }
 });
 
 function updateParticlePool(system) {
@@ -563,7 +563,7 @@ function updateParticlePool(system) {
   for (let j = 0; j < numToAdd; ++j) {
     const particle = new Particle();
     particle._billboard = billboardCollection.add({
-      image: image,
+      image: image
     });
     particlePool.push(particle);
   }
@@ -612,7 +612,7 @@ function updateBillboard(system, particle) {
   let billboard = particle._billboard;
   if (!defined(billboard)) {
     billboard = particle._billboard = system._billboardCollection.add({
-      image: particle.image,
+      image: particle.image
     });
   }
   billboard.width = particle.imageSize.x;

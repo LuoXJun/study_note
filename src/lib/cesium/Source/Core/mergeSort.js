@@ -1,5 +1,5 @@
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 const leftScratchArray = [];
 const rightScratchArray = [];
@@ -71,10 +71,10 @@ function sort(array, compare, userDefinedObject, start, end) {
 function mergeSort(array, comparator, userDefinedObject) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(array)) {
-    throw new DeveloperError("array is required.");
+    throw new DeveloperError('array is required.');
   }
   if (!defined(comparator)) {
-    throw new DeveloperError("comparator is required.");
+    throw new DeveloperError('comparator is required.');
   }
   //>>includeEnd('debug');
 

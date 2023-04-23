@@ -1,9 +1,9 @@
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import SelectedFeatureIdStageCommon from "../../Shaders/ModelExperimental/SelectedFeatureIdStageCommon.js";
-import ModelComponents from "../ModelComponents.js";
-import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import SelectedFeatureIdStageCommon from '../../Shaders/ModelExperimental/SelectedFeatureIdStageCommon.js';
+import ModelComponents from '../ModelComponents.js';
+import ModelExperimentalUtility from './ModelExperimentalUtility.js';
 
 /**
  * The selected feature ID pipeline stage is responsible for handling the
@@ -13,16 +13,16 @@ import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
  * @private
  */
 const SelectedFeatureIdPipelineStage = {};
-SelectedFeatureIdPipelineStage.name = "SelectedFeatureIdPipelineStage"; // Helps with debugging
+SelectedFeatureIdPipelineStage.name = 'SelectedFeatureIdPipelineStage'; // Helps with debugging
 
-SelectedFeatureIdPipelineStage.STRUCT_ID_SELECTED_FEATURE = "SelectedFeature";
-SelectedFeatureIdPipelineStage.STRUCT_NAME_SELECTED_FEATURE = "SelectedFeature";
+SelectedFeatureIdPipelineStage.STRUCT_ID_SELECTED_FEATURE = 'SelectedFeature';
+SelectedFeatureIdPipelineStage.STRUCT_NAME_SELECTED_FEATURE = 'SelectedFeature';
 SelectedFeatureIdPipelineStage.FUNCTION_ID_FEATURE_VARYINGS_VS =
-  "updateFeatureStructVS";
+  'updateFeatureStructVS';
 SelectedFeatureIdPipelineStage.FUNCTION_ID_FEATURE_VARYINGS_FS =
-  "updateFeatureStructFS";
+  'updateFeatureStructFS';
 SelectedFeatureIdPipelineStage.FUNCTION_SIGNATURE_UPDATE_FEATURE =
-  "void updateFeatureStruct(inout SelectedFeature feature)";
+  'void updateFeatureStruct(inout SelectedFeature feature)';
 
 /**
  * Process a primitive. This modifies the following parts of the render resources:
@@ -50,7 +50,7 @@ SelectedFeatureIdPipelineStage.process = function (
   const shaderDestination = selectedFeatureIds.shaderDestination;
 
   shaderBuilder.addDefine(
-    "HAS_SELECTED_FEATURE_ID",
+    'HAS_SELECTED_FEATURE_ID',
     undefined,
     shaderDestination
   );
@@ -59,7 +59,7 @@ SelectedFeatureIdPipelineStage.process = function (
   // Example: #define SELECTED_FEATURE_ID featureId_1
   // This corresponds to featureIds.featureId_1
   shaderBuilder.addDefine(
-    "SELECTED_FEATURE_ID",
+    'SELECTED_FEATURE_ID',
     selectedFeatureIds.variableName,
     shaderDestination
   );
@@ -79,11 +79,11 @@ SelectedFeatureIdPipelineStage.process = function (
   const uniformMap = renderResources.uniformMap;
   if (defined(nullFeatureId)) {
     shaderBuilder.addDefine(
-      "HAS_NULL_FEATURE_ID",
+      'HAS_NULL_FEATURE_ID',
       undefined,
       shaderDestination
     );
-    shaderBuilder.addUniform("int", "model_nullFeatureId", shaderDestination);
+    shaderBuilder.addUniform('int', 'model_nullFeatureId', shaderDestination);
     uniformMap.model_nullFeatureId = function () {
       return nullFeatureId;
     };
@@ -97,10 +97,10 @@ SelectedFeatureIdPipelineStage.process = function (
 
 function getFeatureIdDefine(featureIds) {
   if (featureIds instanceof ModelComponents.FeatureIdTexture) {
-    return "HAS_SELECTED_FEATURE_ID_TEXTURE";
+    return 'HAS_SELECTED_FEATURE_ID_TEXTURE';
   }
 
-  return "HAS_SELECTED_FEATURE_ID_ATTRIBUTE";
+  return 'HAS_SELECTED_FEATURE_ID_ATTRIBUTE';
 }
 
 function getShaderDestination(featureIds) {
@@ -131,7 +131,7 @@ function getSelectedFeatureIds(model, node, primitive) {
         featureIds: featureIds,
         variableName: variableName,
         shaderDestination: getShaderDestination(featureIds),
-        featureIdDefine: getFeatureIdDefine(featureIds),
+        featureIdDefine: getFeatureIdDefine(featureIds)
       };
     }
   }
@@ -146,7 +146,7 @@ function getSelectedFeatureIds(model, node, primitive) {
     featureIds: featureIds,
     variableName: variableName,
     shaderDestination: getShaderDestination(featureIds),
-    featureIdDefine: getFeatureIdDefine(featureIds),
+    featureIdDefine: getFeatureIdDefine(featureIds)
   };
 }
 
@@ -166,20 +166,20 @@ function getSelectedFeatureIds(model, node, primitive) {
 function updateFeatureStruct(shaderBuilder) {
   shaderBuilder.addStructField(
     SelectedFeatureIdPipelineStage.STRUCT_ID_SELECTED_FEATURE,
-    "int",
-    "id"
+    'int',
+    'id'
   );
 
   shaderBuilder.addStructField(
     SelectedFeatureIdPipelineStage.STRUCT_ID_SELECTED_FEATURE,
-    "vec2",
-    "st"
+    'vec2',
+    'st'
   );
 
   shaderBuilder.addStructField(
     SelectedFeatureIdPipelineStage.STRUCT_ID_SELECTED_FEATURE,
-    "vec4",
-    "color"
+    'vec4',
+    'color'
   );
 }
 

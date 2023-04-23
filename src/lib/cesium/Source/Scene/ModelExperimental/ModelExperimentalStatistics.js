@@ -1,4 +1,4 @@
-import Check from "../../Core/Check.js";
+import Check from '../../Core/Check.js';
 
 /**
  * Rendering statistics for a single model
@@ -85,8 +85,8 @@ ModelExperimentalStatistics.prototype.addBuffer = function (
   hasCpuCopy
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("buffer", buffer);
-  Check.typeOf.bool("hasCpuCopy", hasCpuCopy);
+  Check.typeOf.object('buffer', buffer);
+  Check.typeOf.bool('hasCpuCopy', hasCpuCopy);
   //>>includeEnd('debug');
 
   if (!this.bufferIdSet.hasOwnProperty(buffer._id)) {
@@ -101,7 +101,7 @@ ModelExperimentalStatistics.prototype.addBuffer = function (
 
 ModelExperimentalStatistics.prototype.addTexture = function (texture) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("texture", texture);
+  Check.typeOf.object('texture', texture);
   //>>includeEnd('debug');
 
   if (!this.textureIdSet.hasOwnProperty(texture._id)) {

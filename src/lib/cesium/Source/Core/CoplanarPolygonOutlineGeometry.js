@@ -1,19 +1,19 @@
-import arrayRemoveDuplicates from "./arrayRemoveDuplicates.js";
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import CoplanarPolygonGeometryLibrary from "./CoplanarPolygonGeometryLibrary.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import GeometryInstance from "./GeometryInstance.js";
-import GeometryPipeline from "./GeometryPipeline.js";
-import IndexDatatype from "./IndexDatatype.js";
-import PolygonGeometryLibrary from "./PolygonGeometryLibrary.js";
-import PrimitiveType from "./PrimitiveType.js";
+import arrayRemoveDuplicates from './arrayRemoveDuplicates.js';
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import CoplanarPolygonGeometryLibrary from './CoplanarPolygonGeometryLibrary.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import GeometryInstance from './GeometryInstance.js';
+import GeometryPipeline from './GeometryPipeline.js';
+import IndexDatatype from './IndexDatatype.js';
+import PolygonGeometryLibrary from './PolygonGeometryLibrary.js';
+import PrimitiveType from './PrimitiveType.js';
 
 function createGeometryFromPositions(positions) {
   const length = positions.length;
@@ -37,14 +37,14 @@ function createGeometryFromPositions(positions) {
     position: new GeometryAttribute({
       componentDatatype: ComponentDatatype.DOUBLE,
       componentsPerAttribute: 3,
-      values: flatPositions,
-    }),
+      values: flatPositions
+    })
   });
 
   return new Geometry({
     attributes: attributes,
     indices: indices,
-    primitiveType: PrimitiveType.LINES,
+    primitiveType: PrimitiveType.LINES
   });
 }
 
@@ -74,11 +74,11 @@ function CoplanarPolygonOutlineGeometry(options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
   const polygonHierarchy = options.polygonHierarchy;
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.polygonHierarchy", polygonHierarchy);
+  Check.defined('options.polygonHierarchy', polygonHierarchy);
   //>>includeEnd('debug');
 
   this._polygonHierarchy = polygonHierarchy;
-  this._workerName = "createCoplanarPolygonOutlineGeometry";
+  this._workerName = 'createCoplanarPolygonOutlineGeometry';
 
   /**
    * The number of elements used to pack the object into an array.
@@ -102,13 +102,13 @@ CoplanarPolygonOutlineGeometry.fromPositions = function (options) {
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("options.positions", options.positions);
+  Check.defined('options.positions', options.positions);
   //>>includeEnd('debug');
 
   const newOptions = {
     polygonHierarchy: {
-      positions: options.positions,
-    },
+      positions: options.positions
+    }
   };
   return new CoplanarPolygonOutlineGeometry(newOptions);
 };
@@ -124,8 +124,8 @@ CoplanarPolygonOutlineGeometry.fromPositions = function (options) {
  */
 CoplanarPolygonOutlineGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -143,7 +143,7 @@ CoplanarPolygonOutlineGeometry.pack = function (value, array, startingIndex) {
 };
 
 const scratchOptions = {
-  polygonHierarchy: {},
+  polygonHierarchy: {}
 };
 /**
  * Retrieves an instance from a packed array.
@@ -159,7 +159,7 @@ CoplanarPolygonOutlineGeometry.unpack = function (
   result
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -219,7 +219,7 @@ CoplanarPolygonOutlineGeometry.createGeometry = function (polygonGeometry) {
 
   for (let i = 0; i < polygons.length; i++) {
     const geometryInstance = new GeometryInstance({
-      geometry: createGeometryFromPositions(polygons[i]),
+      geometry: createGeometryFromPositions(polygons[i])
     });
     geometries.push(geometryInstance);
   }
@@ -231,7 +231,7 @@ CoplanarPolygonOutlineGeometry.createGeometry = function (polygonGeometry) {
     attributes: geometry.attributes,
     indices: geometry.indices,
     primitiveType: geometry.primitiveType,
-    boundingSphere: boundingSphere,
+    boundingSphere: boundingSphere
   });
 };
 export default CoplanarPolygonOutlineGeometry;

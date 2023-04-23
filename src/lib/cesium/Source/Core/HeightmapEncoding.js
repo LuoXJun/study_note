@@ -20,6 +20,6 @@ const HeightmapEncoding = {
    *
    * @see {@link https://github.com/Esri/lerc|The LERC specification}
    */
-  LERC: 1,
+  LERC: 1
 };
 export default Object.freeze(HeightmapEncoding);

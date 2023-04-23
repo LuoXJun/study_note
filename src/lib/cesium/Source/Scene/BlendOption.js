@@ -23,6 +23,6 @@ const BlendOption = {
    * @type {Number}
    * @constant
    */
-  OPAQUE_AND_TRANSLUCENT: 2,
+  OPAQUE_AND_TRANSLUCENT: 2
 };
 export default Object.freeze(BlendOption);

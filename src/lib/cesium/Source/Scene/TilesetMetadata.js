@@ -1,7 +1,7 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import MetadataEntity from "./MetadataEntity.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import MetadataEntity from './MetadataEntity.js';
 
 /**
  * Metadata about the tileset.
@@ -24,8 +24,8 @@ function TilesetMetadata(options) {
   const metadataClass = options.class;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options.tileset", tileset);
-  Check.typeOf.object("options.class", metadataClass);
+  Check.typeOf.object('options.tileset', tileset);
+  Check.typeOf.object('options.class', metadataClass);
   //>>includeEnd('debug');
 
   const properties = defined(tileset.properties) ? tileset.properties : {};
@@ -48,7 +48,7 @@ Object.defineProperties(TilesetMetadata.prototype, {
   class: {
     get: function () {
       return this._class;
-    },
+    }
   },
 
   /**
@@ -62,7 +62,7 @@ Object.defineProperties(TilesetMetadata.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -76,8 +76,8 @@ Object.defineProperties(TilesetMetadata.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
-  },
+    }
+  }
 });
 
 /**

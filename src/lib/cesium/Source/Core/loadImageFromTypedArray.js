@@ -1,7 +1,7 @@
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Resource from "./Resource.js";
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Resource from './Resource.js';
 
 /**
  * @private
@@ -16,12 +16,12 @@ function loadImageFromTypedArray(options) {
     false
   );
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("uint8Array", uint8Array);
-  Check.typeOf.string("format", format);
+  Check.typeOf.object('uint8Array', uint8Array);
+  Check.typeOf.string('format', format);
   //>>includeEnd('debug');
 
   const blob = new Blob([uint8Array], {
-    type: format,
+    type: format
   });
 
   let blobUrl;
@@ -32,7 +32,7 @@ function loadImageFromTypedArray(options) {
           Resource.createImageBitmapFromBlob(blob, {
             flipY: flipY,
             premultiplyAlpha: false,
-            skipColorSpaceConversion: skipColorSpaceConversion,
+            skipColorSpaceConversion: skipColorSpaceConversion
           })
         );
       }
@@ -40,12 +40,12 @@ function loadImageFromTypedArray(options) {
       blobUrl = window.URL.createObjectURL(blob);
       const resource = new Resource({
         url: blobUrl,
-        request: request,
+        request: request
       });
 
       return resource.fetchImage({
         flipY: flipY,
-        skipColorSpaceConversion: skipColorSpaceConversion,
+        skipColorSpaceConversion: skipColorSpaceConversion
       });
     })
     .then(function (result) {

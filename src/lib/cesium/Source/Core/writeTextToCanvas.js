@@ -1,7 +1,7 @@
-import Color from "./Color.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
+import Color from './Color.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
 
 function measureText(context2D, textString, font, stroke, fill) {
   const metrics = context2D.measureText(textString);
@@ -10,9 +10,9 @@ function measureText(context2D, textString, font, stroke, fill) {
   if (!isSpace) {
     const fontSize = document.defaultView
       .getComputedStyle(context2D.canvas)
-      .getPropertyValue("font-size")
-      .replace("px", "");
-    const canvas = document.createElement("canvas");
+      .getPropertyValue('font-size')
+      .replace('px', '');
+    const canvas = document.createElement('canvas');
     const padding = 100;
     const width = (metrics.width + padding) | 0;
     const height = 3 * fontSize;
@@ -20,19 +20,19 @@ function measureText(context2D, textString, font, stroke, fill) {
     canvas.width = width;
     canvas.height = height;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     ctx.font = font;
-    ctx.fillStyle = "white";
+    ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, canvas.width + 1, canvas.height + 1);
 
     if (stroke) {
-      ctx.strokeStyle = "black";
+      ctx.strokeStyle = 'black';
       ctx.lineWidth = context2D.lineWidth;
       ctx.strokeText(textString, padding / 2, baseline);
     }
 
     if (fill) {
-      ctx.fillStyle = "black";
+      ctx.fillStyle = 'black';
       ctx.fillText(textString, padding / 2, baseline);
     }
 
@@ -82,7 +82,7 @@ function measureText(context2D, textString, font, stroke, fill) {
       height: descent - ascent,
       ascent: baseline - ascent,
       descent: descent - baseline,
-      minx: minx - padding / 2,
+      minx: minx - padding / 2
     };
   }
 
@@ -91,7 +91,7 @@ function measureText(context2D, textString, font, stroke, fill) {
     height: 0,
     ascent: 0,
     descent: 0,
-    minx: 0,
+    minx: 0
   };
 }
 
@@ -120,15 +120,15 @@ let imageSmoothingEnabledName;
 function writeTextToCanvas(text, options) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(text)) {
-    throw new DeveloperError("text is required.");
+    throw new DeveloperError('text is required.');
   }
   //>>includeEnd('debug');
-  if (text === "") {
+  if (text === '') {
     return undefined;
   }
 
   options = defaultValue(options, defaultValue.EMPTY_OBJECT);
-  const font = defaultValue(options.font, "10px sans-serif");
+  const font = defaultValue(options.font, '10px sans-serif');
   const stroke = defaultValue(options.stroke, false);
   const fill = defaultValue(options.fill, true);
   const strokeWidth = defaultValue(options.strokeWidth, 1);
@@ -139,32 +139,32 @@ function writeTextToCanvas(text, options) {
   const padding = defaultValue(options.padding, 0);
   const doublePadding = padding * 2.0;
 
-  const canvas = document.createElement("canvas");
+  const canvas = document.createElement('canvas');
   canvas.width = 1;
   canvas.height = 1;
   canvas.style.font = font;
-  const context2D = canvas.getContext("2d");
+  const context2D = canvas.getContext('2d');
 
   if (!defined(imageSmoothingEnabledName)) {
     if (defined(context2D.imageSmoothingEnabled)) {
-      imageSmoothingEnabledName = "imageSmoothingEnabled";
+      imageSmoothingEnabledName = 'imageSmoothingEnabled';
     } else if (defined(context2D.mozImageSmoothingEnabled)) {
-      imageSmoothingEnabledName = "mozImageSmoothingEnabled";
+      imageSmoothingEnabledName = 'mozImageSmoothingEnabled';
     } else if (defined(context2D.webkitImageSmoothingEnabled)) {
-      imageSmoothingEnabledName = "webkitImageSmoothingEnabled";
+      imageSmoothingEnabledName = 'webkitImageSmoothingEnabled';
     } else if (defined(context2D.msImageSmoothingEnabled)) {
-      imageSmoothingEnabledName = "msImageSmoothingEnabled";
+      imageSmoothingEnabledName = 'msImageSmoothingEnabled';
     }
   }
 
   context2D.font = font;
-  context2D.lineJoin = "round";
+  context2D.lineJoin = 'round';
   context2D.lineWidth = strokeWidth;
   context2D[imageSmoothingEnabledName] = false;
 
   // in order for measureText to calculate style, the canvas has to be
   // (temporarily) added to the DOM.
-  canvas.style.visibility = "hidden";
+  canvas.style.visibility = 'hidden';
   document.body.appendChild(canvas);
 
   const dimensions = measureText(context2D, text, font, stroke, fill);
@@ -172,7 +172,7 @@ function writeTextToCanvas(text, options) {
   canvas.dimensions = dimensions;
 
   document.body.removeChild(canvas);
-  canvas.style.visibility = "";
+  canvas.style.visibility = '';
 
   // Some characters, such as the letter j, have a non-zero starting position.
   // This value is used for kerning later, but we need to take it into account
@@ -195,7 +195,7 @@ function writeTextToCanvas(text, options) {
 
   // Properties must be explicitly set again after changing width and height
   context2D.font = font;
-  context2D.lineJoin = "round";
+  context2D.lineJoin = 'round';
   context2D.lineWidth = strokeWidth;
   context2D[imageSmoothingEnabledName] = false;
 

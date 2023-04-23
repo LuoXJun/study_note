@@ -1,28 +1,28 @@
-import Credit from "./Credit.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Event from "./Event.js";
-import GeographicTilingScheme from "./GeographicTilingScheme.js";
-import GoogleEarthEnterpriseMetadata from "./GoogleEarthEnterpriseMetadata.js";
-import GoogleEarthEnterpriseTerrainData from "./GoogleEarthEnterpriseTerrainData.js";
-import HeightmapTerrainData from "./HeightmapTerrainData.js";
-import JulianDate from "./JulianDate.js";
-import CesiumMath from "./Math.js";
-import Rectangle from "./Rectangle.js";
-import Request from "./Request.js";
-import RequestState from "./RequestState.js";
-import RequestType from "./RequestType.js";
-import Resource from "./Resource.js";
-import RuntimeError from "./RuntimeError.js";
-import TaskProcessor from "./TaskProcessor.js";
-import TileProviderError from "./TileProviderError.js";
+import Credit from './Credit.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Event from './Event.js';
+import GeographicTilingScheme from './GeographicTilingScheme.js';
+import GoogleEarthEnterpriseMetadata from './GoogleEarthEnterpriseMetadata.js';
+import GoogleEarthEnterpriseTerrainData from './GoogleEarthEnterpriseTerrainData.js';
+import HeightmapTerrainData from './HeightmapTerrainData.js';
+import JulianDate from './JulianDate.js';
+import CesiumMath from './Math.js';
+import Rectangle from './Rectangle.js';
+import Request from './Request.js';
+import RequestState from './RequestState.js';
+import RequestType from './RequestType.js';
+import Resource from './Resource.js';
+import RuntimeError from './RuntimeError.js';
+import TaskProcessor from './TaskProcessor.js';
+import TileProviderError from './TileProviderError.js';
 
 const TerrainState = {
   UNKNOWN: 0,
   NONE: 1,
   SELF: 2,
-  PARENT: 3,
+  PARENT: 3
 };
 
 const julianDateScratch = new JulianDate();
@@ -35,7 +35,7 @@ function TerrainCache() {
 TerrainCache.prototype.add = function (quadKey, buffer) {
   this._terrainCache[quadKey] = {
     buffer: buffer,
-    timestamp: JulianDate.now(),
+    timestamp: JulianDate.now()
   };
 };
 
@@ -94,7 +94,7 @@ function GoogleEarthEnterpriseTerrainProvider(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!(defined(options.url) || defined(options.metadata))) {
-    throw new DeveloperError("options.url or options.metadata is required.");
+    throw new DeveloperError('options.url or options.metadata is required.');
   }
   //>>includeEnd('debug');
 
@@ -116,11 +116,11 @@ function GoogleEarthEnterpriseTerrainProvider(options) {
       CesiumMath.PI,
       CesiumMath.PI
     ),
-    ellipsoid: options.ellipsoid,
+    ellipsoid: options.ellipsoid
   });
 
   let credit = options.credit;
-  if (typeof credit === "string") {
+  if (typeof credit === 'string') {
     credit = new Credit(credit);
   }
   this._credit = credit;
@@ -185,7 +185,7 @@ Object.defineProperties(GoogleEarthEnterpriseTerrainProvider.prototype, {
   url: {
     get: function () {
       return this._metadata.url;
-    },
+    }
   },
 
   /**
@@ -197,7 +197,7 @@ Object.defineProperties(GoogleEarthEnterpriseTerrainProvider.prototype, {
   proxy: {
     get: function () {
       return this._metadata.proxy;
-    },
+    }
   },
 
   /**
@@ -212,13 +212,13 @@ Object.defineProperties(GoogleEarthEnterpriseTerrainProvider.prototype, {
       //>>includeStart('debug', pragmas.debug);
       if (!this._ready) {
         throw new DeveloperError(
-          "tilingScheme must not be called before the imagery provider is ready."
+          'tilingScheme must not be called before the imagery provider is ready.'
         );
       }
       //>>includeEnd('debug');
 
       return this._tilingScheme;
-    },
+    }
   },
 
   /**
@@ -232,7 +232,7 @@ Object.defineProperties(GoogleEarthEnterpriseTerrainProvider.prototype, {
   errorEvent: {
     get: function () {
       return this._errorEvent;
-    },
+    }
   },
 
   /**
@@ -244,7 +244,7 @@ Object.defineProperties(GoogleEarthEnterpriseTerrainProvider.prototype, {
   ready: {
     get: function () {
       return this._ready;
-    },
+    }
   },
 
   /**
@@ -256,7 +256,7 @@ Object.defineProperties(GoogleEarthEnterpriseTerrainProvider.prototype, {
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   /**
@@ -269,7 +269,7 @@ Object.defineProperties(GoogleEarthEnterpriseTerrainProvider.prototype, {
   credit: {
     get: function () {
       return this._credit;
-    },
+    }
   },
 
   /**
@@ -284,7 +284,7 @@ Object.defineProperties(GoogleEarthEnterpriseTerrainProvider.prototype, {
   hasWaterMask: {
     get: function () {
       return false;
-    },
+    }
   },
 
   /**
@@ -297,7 +297,7 @@ Object.defineProperties(GoogleEarthEnterpriseTerrainProvider.prototype, {
   hasVertexNormals: {
     get: function () {
       return false;
-    },
+    }
   },
 
   /**
@@ -312,11 +312,11 @@ Object.defineProperties(GoogleEarthEnterpriseTerrainProvider.prototype, {
   availability: {
     get: function () {
       return undefined;
-    },
-  },
+    }
+  }
 });
 
-const taskProcessor = new TaskProcessor("decodeGoogleEarthEnterprisePacket");
+const taskProcessor = new TaskProcessor('decodeGoogleEarthEnterprisePacket');
 
 // If the tile has its own terrain, then you can just use its child bitmask. If it was requested using it's parent
 //  then you need to check all of its children to see if they have terrain.
@@ -362,7 +362,7 @@ GoogleEarthEnterpriseTerrainProvider.prototype.requestTileGeometry = function (
   //>>includeStart('debug', pragmas.debug)
   if (!this._ready) {
     throw new DeveloperError(
-      "requestTileGeometry must not be called before the terrain provider is ready."
+      'requestTileGeometry must not be called before the terrain provider is ready.'
     );
   }
   //>>includeEnd('debug');
@@ -393,7 +393,7 @@ GoogleEarthEnterpriseTerrainProvider.prototype.requestTileGeometry = function (
         childTileMask: computeChildMask(quadKey, info, metadata),
         credits: defined(credit) ? [credit] : undefined,
         negativeAltitudeExponentBias: metadata.negativeAltitudeExponentBias,
-        negativeElevationThreshold: metadata.negativeAltitudeThreshold,
+        negativeElevationThreshold: metadata.negativeAltitudeThreshold
       })
     );
   }
@@ -408,7 +408,7 @@ GoogleEarthEnterpriseTerrainProvider.prototype.requestTileGeometry = function (
       new HeightmapTerrainData({
         buffer: new Uint8Array(16 * 16),
         width: 16,
-        height: 16,
+        height: 16
       })
     );
   } else if (terrainState === TerrainState.NONE) {
@@ -476,8 +476,8 @@ GoogleEarthEnterpriseTerrainProvider.prototype.requestTileGeometry = function (
           .scheduleTask(
             {
               buffer: terrain,
-              type: "Terrain",
-              key: metadata.key,
+              type: 'Terrain',
+              key: metadata.key
             },
             [terrain]
           )
@@ -504,7 +504,7 @@ GoogleEarthEnterpriseTerrainProvider.prototype.requestTileGeometry = function (
           });
       }
 
-      return Promise.reject(new RuntimeError("Failed to load terrain."));
+      return Promise.reject(new RuntimeError('Failed to load terrain.'));
     });
 
     terrainPromises[q] = sharedPromise; // Store promise without delete from terrainPromises
@@ -527,11 +527,11 @@ GoogleEarthEnterpriseTerrainProvider.prototype.requestTileGeometry = function (
           childTileMask: computeChildMask(quadKey, info, metadata),
           credits: defined(credit) ? [credit] : undefined,
           negativeAltitudeExponentBias: metadata.negativeAltitudeExponentBias,
-          negativeElevationThreshold: metadata.negativeAltitudeThreshold,
+          negativeElevationThreshold: metadata.negativeAltitudeThreshold
         });
       }
 
-      return Promise.reject(new RuntimeError("Failed to load terrain."));
+      return Promise.reject(new RuntimeError('Failed to load terrain.'));
     })
     .catch(function (error) {
       if (sharedRequest.state === RequestState.CANCELLED) {
@@ -549,11 +549,10 @@ GoogleEarthEnterpriseTerrainProvider.prototype.requestTileGeometry = function (
  * @param {Number} level The tile level for which to get the maximum geometric error.
  * @returns {Number} The maximum geometric error.
  */
-GoogleEarthEnterpriseTerrainProvider.prototype.getLevelMaximumGeometricError = function (
-  level
-) {
-  return this._levelZeroMaximumGeometricError / (1 << level);
-};
+GoogleEarthEnterpriseTerrainProvider.prototype.getLevelMaximumGeometricError =
+  function (level) {
+    return this._levelZeroMaximumGeometricError / (1 << level);
+  };
 
 /**
  * Determines whether data for a tile is available to be loaded.
@@ -605,7 +604,7 @@ GoogleEarthEnterpriseTerrainProvider.prototype.getTileDataAvailable = function (
     const request = new Request({
       throttle: false,
       throttleByServer: true,
-      type: RequestType.TERRAIN,
+      type: RequestType.TERRAIN
     });
     metadata.populateSubtree(x, y, level, request);
   }
@@ -620,13 +619,10 @@ GoogleEarthEnterpriseTerrainProvider.prototype.getTileDataAvailable = function (
  * @param {Number} level The level of the tile for which to request geometry.
  * @returns {undefined}
  */
-GoogleEarthEnterpriseTerrainProvider.prototype.loadTileDataAvailability = function (
-  x,
-  y,
-  level
-) {
-  return undefined;
-};
+GoogleEarthEnterpriseTerrainProvider.prototype.loadTileDataAvailability =
+  function (x, y, level) {
+    return undefined;
+  };
 
 //
 // Functions to handle imagery packets
@@ -635,7 +631,7 @@ function buildTerrainResource(terrainProvider, quadKey, version, request) {
   version = defined(version) && version > 0 ? version : 1;
   return terrainProvider._metadata.resource.getDerivedResource({
     url: `flatfile?f1c-0${quadKey}-t.${version.toString()}`,
-    request: request,
+    request: request
   });
 }
 export default GoogleEarthEnterpriseTerrainProvider;

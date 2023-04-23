@@ -1,7 +1,7 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import destroyObject from "../Core/destroyObject.js";
-import FramebufferManager from "../Renderer/FramebufferManager.js";
-import PassState from "../Renderer/PassState.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import destroyObject from '../Core/destroyObject.js';
+import FramebufferManager from '../Renderer/FramebufferManager.js';
+import PassState from '../Renderer/PassState.js';
 
 /**
  * @private
@@ -10,7 +10,7 @@ function PickDepthFramebuffer() {
   this._framebuffer = new FramebufferManager({
     color: false,
     depthStencil: true,
-    supportsDepthTexture: true,
+    supportsDepthTexture: true
   });
   this._passState = undefined;
 }
@@ -19,8 +19,8 @@ Object.defineProperties(PickDepthFramebuffer.prototype, {
   framebuffer: {
     get: function () {
       return this._framebuffer.framebuffer;
-    },
-  },
+    }
+  }
 });
 
 function destroyResources(pickDepth) {
@@ -37,7 +37,7 @@ function createResources(pickDepth, context) {
   passState.blendingEnabled = false;
   passState.scissorTest = {
     enabled: true,
-    rectangle: new BoundingRectangle(),
+    rectangle: new BoundingRectangle()
   };
   passState.viewport = new BoundingRectangle();
   pickDepth._passState = passState;

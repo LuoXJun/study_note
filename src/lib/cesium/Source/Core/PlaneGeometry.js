@@ -1,14 +1,14 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import Check from "./Check.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import PrimitiveType from "./PrimitiveType.js";
-import VertexFormat from "./VertexFormat.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import Check from './Check.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import PrimitiveType from './PrimitiveType.js';
+import VertexFormat from './VertexFormat.js';
 
 /**
  * Describes geometry representing a plane centered at the origin, with a unit width and length.
@@ -30,7 +30,7 @@ function PlaneGeometry(options) {
   const vertexFormat = defaultValue(options.vertexFormat, VertexFormat.DEFAULT);
 
   this._vertexFormat = vertexFormat;
-  this._workerName = "createPlaneGeometry";
+  this._workerName = 'createPlaneGeometry';
 }
 
 /**
@@ -50,8 +50,8 @@ PlaneGeometry.packedLength = VertexFormat.packedLength;
  */
 PlaneGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("value", value);
-  Check.defined("array", array);
+  Check.typeOf.object('value', value);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -63,7 +63,7 @@ PlaneGeometry.pack = function (value, array, startingIndex) {
 
 const scratchVertexFormat = new VertexFormat();
 const scratchOptions = {
-  vertexFormat: scratchVertexFormat,
+  vertexFormat: scratchVertexFormat
 };
 
 /**
@@ -76,7 +76,7 @@ const scratchOptions = {
  */
 PlaneGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("array", array);
+  Check.defined('array', array);
   //>>includeEnd('debug');
 
   startingIndex = defaultValue(startingIndex, 0);
@@ -133,7 +133,7 @@ PlaneGeometry.createGeometry = function (planeGeometry) {
     attributes.position = new GeometryAttribute({
       componentDatatype: ComponentDatatype.DOUBLE,
       componentsPerAttribute: 3,
-      values: positions,
+      values: positions
     });
 
     if (vertexFormat.normal) {
@@ -156,7 +156,7 @@ PlaneGeometry.createGeometry = function (planeGeometry) {
       attributes.normal = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: normals,
+        values: normals
       });
     }
 
@@ -176,7 +176,7 @@ PlaneGeometry.createGeometry = function (planeGeometry) {
       attributes.st = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 2,
-        values: texCoords,
+        values: texCoords
       });
     }
 
@@ -200,7 +200,7 @@ PlaneGeometry.createGeometry = function (planeGeometry) {
       attributes.tangent = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: tangents,
+        values: tangents
       });
     }
 
@@ -224,7 +224,7 @@ PlaneGeometry.createGeometry = function (planeGeometry) {
       attributes.bitangent = new GeometryAttribute({
         componentDatatype: ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: bitangents,
+        values: bitangents
       });
     }
 
@@ -244,7 +244,7 @@ PlaneGeometry.createGeometry = function (planeGeometry) {
     attributes: attributes,
     indices: indices,
     primitiveType: PrimitiveType.TRIANGLES,
-    boundingSphere: new BoundingSphere(Cartesian3.ZERO, Math.sqrt(2.0)),
+    boundingSphere: new BoundingSphere(Cartesian3.ZERO, Math.sqrt(2.0))
   });
 };
 export default PlaneGeometry;

@@ -1,7 +1,7 @@
-import combine from "../../Core/combine.js";
-import ShaderDestination from "../../Renderer/ShaderDestination.js";
-import SkinningStageVS from "../../Shaders/ModelExperimental/SkinningStageVS.js";
-import VertexAttributeSemantic from "../VertexAttributeSemantic.js";
+import combine from '../../Core/combine.js';
+import ShaderDestination from '../../Renderer/ShaderDestination.js';
+import SkinningStageVS from '../../Shaders/ModelExperimental/SkinningStageVS.js';
+import VertexAttributeSemantic from '../VertexAttributeSemantic.js';
 
 /**
  * The skinning pipeline stage processes the joint matrices of a skinned primitive.
@@ -12,11 +12,11 @@ import VertexAttributeSemantic from "../VertexAttributeSemantic.js";
  */
 
 const SkinningPipelineStage = {};
-SkinningPipelineStage.name = "SkinningPipelineStage"; // Helps with debugging
+SkinningPipelineStage.name = 'SkinningPipelineStage'; // Helps with debugging
 
-SkinningPipelineStage.FUNCTION_ID_GET_SKINNING_MATRIX = "getSkinningMatrix";
+SkinningPipelineStage.FUNCTION_ID_GET_SKINNING_MATRIX = 'getSkinningMatrix';
 SkinningPipelineStage.FUNCTION_SIGNATURE_GET_SKINNING_MATRIX =
-  "mat4 getSkinningMatrix()";
+  'mat4 getSkinningMatrix()';
 
 /**
  * This pipeline stage processes the joint matrices of a skinned primitive, adding
@@ -36,14 +36,14 @@ SkinningPipelineStage.FUNCTION_SIGNATURE_GET_SKINNING_MATRIX =
 SkinningPipelineStage.process = function (renderResources, primitive) {
   const shaderBuilder = renderResources.shaderBuilder;
 
-  shaderBuilder.addDefine("HAS_SKINNING", undefined, ShaderDestination.VERTEX);
+  shaderBuilder.addDefine('HAS_SKINNING', undefined, ShaderDestination.VERTEX);
   addGetSkinningMatrixFunction(shaderBuilder, primitive);
 
   const runtimeNode = renderResources.runtimeNode;
   const jointMatrices = runtimeNode.computedJointMatrices;
 
   shaderBuilder.addUniform(
-    "mat4",
+    'mat4',
     `u_jointMatrices[${jointMatrices.length}]`,
     ShaderDestination.VERTEX
   );
@@ -53,7 +53,7 @@ SkinningPipelineStage.process = function (renderResources, primitive) {
   const uniformMap = {
     u_jointMatrices: function () {
       return runtimeNode.computedJointMatrices;
-    },
+    }
   };
 
   renderResources.uniformMap = combine(uniformMap, renderResources.uniformMap);
@@ -86,7 +86,7 @@ function addGetSkinningMatrixFunction(shaderBuilder, primitive) {
     ShaderDestination.VERTEX
   );
 
-  const initialLine = "mat4 skinnedMatrix = mat4(0);";
+  const initialLine = 'mat4 skinnedMatrix = mat4(0);';
   shaderBuilder.addFunctionLines(
     SkinningPipelineStage.FUNCTION_ID_GET_SKINNING_MATRIX,
     [initialLine]
@@ -94,7 +94,7 @@ function addGetSkinningMatrixFunction(shaderBuilder, primitive) {
 
   let setIndex;
   let componentIndex;
-  const componentStrings = ["x", "y", "z", "w"];
+  const componentStrings = ['x', 'y', 'z', 'w'];
   const maximumSetIndex = getMaximumAttributeSetIndex(primitive);
   for (setIndex = 0; setIndex <= maximumSetIndex; setIndex++) {
     for (componentIndex = 0; componentIndex <= 3; componentIndex++) {
@@ -108,7 +108,7 @@ function addGetSkinningMatrixFunction(shaderBuilder, primitive) {
     }
   }
 
-  const returnLine = "return skinnedMatrix;";
+  const returnLine = 'return skinnedMatrix;';
   shaderBuilder.addFunctionLines(
     SkinningPipelineStage.FUNCTION_ID_GET_SKINNING_MATRIX,
     [returnLine]

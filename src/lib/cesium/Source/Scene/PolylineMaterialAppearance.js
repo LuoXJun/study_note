@@ -1,12 +1,12 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import FeatureDetection from "../Core/FeatureDetection.js";
-import VertexFormat from "../Core/VertexFormat.js";
-import PolylineMaterialAppearanceVS from "../Shaders/Appearances/PolylineMaterialAppearanceVS.js";
-import PolylineCommon from "../Shaders/PolylineCommon.js";
-import PolylineFS from "../Shaders/PolylineFS.js";
-import Appearance from "./Appearance.js";
-import Material from "./Material.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import FeatureDetection from '../Core/FeatureDetection.js';
+import VertexFormat from '../Core/VertexFormat.js';
+import PolylineMaterialAppearanceVS from '../Shaders/Appearances/PolylineMaterialAppearanceVS.js';
+import PolylineCommon from '../Shaders/PolylineCommon.js';
+import PolylineFS from '../Shaders/PolylineFS.js';
+import Appearance from './Appearance.js';
+import Material from './Material.js';
 
 let defaultVertexShaderSource = `${PolylineCommon}\n${PolylineMaterialAppearanceVS}`;
 const defaultFragmentShaderSource = PolylineFS;
@@ -118,7 +118,7 @@ Object.defineProperties(PolylineMaterialAppearance.prototype, {
         vs = `#define POLYLINE_DASH\n${vs}`;
       }
       return vs;
-    },
+    }
   },
 
   /**
@@ -132,7 +132,7 @@ Object.defineProperties(PolylineMaterialAppearance.prototype, {
   fragmentShaderSource: {
     get: function () {
       return this._fragmentShaderSource;
-    },
+    }
   },
 
   /**
@@ -151,7 +151,7 @@ Object.defineProperties(PolylineMaterialAppearance.prototype, {
   renderState: {
     get: function () {
       return this._renderState;
-    },
+    }
   },
 
   /**
@@ -169,7 +169,7 @@ Object.defineProperties(PolylineMaterialAppearance.prototype, {
   closed: {
     get: function () {
       return this._closed;
-    },
+    }
   },
 
   /**
@@ -187,8 +187,8 @@ Object.defineProperties(PolylineMaterialAppearance.prototype, {
   vertexFormat: {
     get: function () {
       return this._vertexFormat;
-    },
-  },
+    }
+  }
 });
 
 /**

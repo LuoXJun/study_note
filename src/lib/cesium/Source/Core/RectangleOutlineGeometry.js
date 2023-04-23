@@ -1,21 +1,21 @@
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import Cartographic from "./Cartographic.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import GeometryOffsetAttribute from "./GeometryOffsetAttribute.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
-import PolygonPipeline from "./PolygonPipeline.js";
-import PrimitiveType from "./PrimitiveType.js";
-import Rectangle from "./Rectangle.js";
-import RectangleGeometryLibrary from "./RectangleGeometryLibrary.js";
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import Cartographic from './Cartographic.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import GeometryOffsetAttribute from './GeometryOffsetAttribute.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
+import PolygonPipeline from './PolygonPipeline.js';
+import PrimitiveType from './PrimitiveType.js';
+import Rectangle from './Rectangle.js';
+import RectangleGeometryLibrary from './RectangleGeometryLibrary.js';
 
 const bottomBoundingSphere = new BoundingSphere();
 const topBoundingSphere = new BoundingSphere();
@@ -145,13 +145,13 @@ function constructRectangle(geometry, computedOptions) {
 
   const geo = new Geometry({
     attributes: new GeometryAttributes(),
-    primitiveType: PrimitiveType.LINES,
+    primitiveType: PrimitiveType.LINES
   });
 
   geo.attributes.position = new GeometryAttribute({
     componentDatatype: ComponentDatatype.DOUBLE,
     componentsPerAttribute: 3,
-    values: positions,
+    values: positions
   });
   geo.indices = indices;
 
@@ -284,12 +284,12 @@ function RectangleOutlineGeometry(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(rectangle)) {
-    throw new DeveloperError("rectangle is required.");
+    throw new DeveloperError('rectangle is required.');
   }
   Rectangle.validate(rectangle);
   if (rectangle.north < rectangle.south) {
     throw new DeveloperError(
-      "options.rectangle.north must be greater than options.rectangle.south"
+      'options.rectangle.north must be greater than options.rectangle.south'
     );
   }
   //>>includeEnd('debug');
@@ -304,7 +304,7 @@ function RectangleOutlineGeometry(options) {
   this._rotation = rotation;
   this._extrudedHeight = Math.min(height, extrudedHeight);
   this._offsetAttribute = options.offsetAttribute;
-  this._workerName = "createRectangleOutlineGeometry";
+  this._workerName = 'createRectangleOutlineGeometry';
 }
 
 /**
@@ -326,11 +326,11 @@ RectangleOutlineGeometry.packedLength =
 RectangleOutlineGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(value)) {
-    throw new DeveloperError("value is required");
+    throw new DeveloperError('value is required');
   }
 
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -360,7 +360,7 @@ const scratchOptions = {
   height: undefined,
   rotation: undefined,
   extrudedHeight: undefined,
-  offsetAttribute: undefined,
+  offsetAttribute: undefined
 };
 
 /**
@@ -374,7 +374,7 @@ const scratchOptions = {
 RectangleOutlineGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -480,7 +480,7 @@ RectangleOutlineGeometry.createGeometry = function (rectangleGeometry) {
       geometry.attributes.applyOffset = new GeometryAttribute({
         componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,
-        values: offsetAttribute,
+        values: offsetAttribute
       });
     }
     const topBS = BoundingSphere.fromRectangle3D(
@@ -515,7 +515,7 @@ RectangleOutlineGeometry.createGeometry = function (rectangleGeometry) {
       geometry.attributes.applyOffset = new GeometryAttribute({
         componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 1,
-        values: applyOffset,
+        values: applyOffset
       });
     }
 
@@ -531,7 +531,7 @@ RectangleOutlineGeometry.createGeometry = function (rectangleGeometry) {
     indices: geometry.indices,
     primitiveType: PrimitiveType.LINES,
     boundingSphere: boundingSphere,
-    offsetAttribute: rectangleGeometry._offsetAttribute,
+    offsetAttribute: rectangleGeometry._offsetAttribute
   });
 };
 export default RectangleOutlineGeometry;

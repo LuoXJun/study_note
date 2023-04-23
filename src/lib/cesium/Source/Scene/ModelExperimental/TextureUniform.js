@@ -1,11 +1,11 @@
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import Resource from "../../Core/Resource.js";
-import PixelFormat from "../../Core/PixelFormat.js";
-import PixelDatatype from "../../Renderer/PixelDatatype.js";
-import Sampler from "../../Renderer/Sampler.js";
-import TextureWrap from "../../Renderer/TextureWrap.js";
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import Resource from '../../Core/Resource.js';
+import PixelFormat from '../../Core/PixelFormat.js';
+import PixelDatatype from '../../Renderer/PixelDatatype.js';
+import Sampler from '../../Renderer/Sampler.js';
+import TextureWrap from '../../Renderer/TextureWrap.js';
 
 /**
  * A simple struct that serves as a value of a <code>sampler2D</code>-valued
@@ -35,12 +35,12 @@ export default function TextureUniform(options) {
   const hasUrl = defined(options.url);
   if (hasTypedArray === hasUrl) {
     throw new DeveloperError(
-      "exactly one of options.typedArray, options.url must be defined"
+      'exactly one of options.typedArray, options.url must be defined'
     );
   }
   if (hasTypedArray && (!defined(options.width) || !defined(options.height))) {
     throw new DeveloperError(
-      "options.width and options.height are required when options.typedArray is defined"
+      'options.width and options.height are required when options.typedArray is defined'
     );
   }
   //>>includeEnd('debug');
@@ -55,7 +55,7 @@ export default function TextureUniform(options) {
   );
 
   let resource = options.url;
-  if (typeof resource === "string") {
+  if (typeof resource === 'string') {
     resource = Resource.createIfNeeded(resource);
   }
   this.resource = resource;
@@ -67,6 +67,6 @@ export default function TextureUniform(options) {
     wrapT: wrap,
     minificationFilter: options.minificationFilter,
     magnificationFilter: options.magnificationFilter,
-    maximumAnisotropy: options.maximumAnisotropy,
+    maximumAnisotropy: options.maximumAnisotropy
   });
 }

@@ -1,4 +1,4 @@
-import Check from "./Check.js";
+import Check from './Check.js';
 
 const dataUriRegex = /^data:/i;
 
@@ -14,7 +14,7 @@ const dataUriRegex = /^data:/i;
  */
 function isDataUri(uri) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("uri", uri);
+  Check.typeOf.string('uri', uri);
   //>>includeEnd('debug');
 
   return dataUriRegex.test(uri);

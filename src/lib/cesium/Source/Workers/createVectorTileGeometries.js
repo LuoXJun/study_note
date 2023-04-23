@@ -1,5 +1,46 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./Transforms-3ac41eb6', './BoxGeometry-9a897756', './Matrix2-fc7e9822', './Color-305ce16b', './CylinderGeometry-31990f10', './defaultValue-94c3e563', './EllipsoidGeometry-2a0ae467', './IndexDatatype-db156785', './createTaskProcessorWorker', './RuntimeError-c581ca93', './ComponentDatatype-4a60b8d6', './WebGLConstants-7dccdc96', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './GeometryAttribute-a441ff32', './GeometryAttributes-7df9bef6', './GeometryOffsetAttribute-ec11b721', './VertexFormat-e46f29d6', './CylinderGeometryLibrary-7b029c87'], (function (Transforms, BoxGeometry, Matrix2, Color, CylinderGeometry, defaultValue, EllipsoidGeometry, IndexDatatype, createTaskProcessorWorker, RuntimeError, ComponentDatatype, WebGLConstants, _commonjsHelpers3aae1032, combine, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute, VertexFormat, CylinderGeometryLibrary) { 'use strict';
+define([
+  './Transforms-3ac41eb6',
+  './BoxGeometry-9a897756',
+  './Matrix2-fc7e9822',
+  './Color-305ce16b',
+  './CylinderGeometry-31990f10',
+  './defaultValue-94c3e563',
+  './EllipsoidGeometry-2a0ae467',
+  './IndexDatatype-db156785',
+  './createTaskProcessorWorker',
+  './RuntimeError-c581ca93',
+  './ComponentDatatype-4a60b8d6',
+  './WebGLConstants-7dccdc96',
+  './_commonjsHelpers-3aae1032-f55dc0c4',
+  './combine-761d9c3f',
+  './GeometryAttribute-a441ff32',
+  './GeometryAttributes-7df9bef6',
+  './GeometryOffsetAttribute-ec11b721',
+  './VertexFormat-e46f29d6',
+  './CylinderGeometryLibrary-7b029c87'
+], function (
+  Transforms,
+  BoxGeometry,
+  Matrix2,
+  Color,
+  CylinderGeometry,
+  defaultValue,
+  EllipsoidGeometry,
+  IndexDatatype,
+  createTaskProcessorWorker,
+  RuntimeError,
+  ComponentDatatype,
+  WebGLConstants,
+  _commonjsHelpers3aae1032,
+  combine,
+  GeometryAttribute,
+  GeometryAttributes,
+  GeometryOffsetAttribute,
+  VertexFormat,
+  CylinderGeometryLibrary
+) {
+  'use strict';
 
   /**
    * Describes a renderable batch of geometry.
@@ -40,20 +81,26 @@ define(['./Transforms-3ac41eb6', './BoxGeometry-9a897756', './Matrix2-fc7e9822',
 
   const scratchCartesian = new Matrix2.Cartesian3();
 
-  const packedBoxLength = Matrix2.Matrix4.packedLength + Matrix2.Cartesian3.packedLength;
+  const packedBoxLength =
+    Matrix2.Matrix4.packedLength + Matrix2.Cartesian3.packedLength;
   const packedCylinderLength = Matrix2.Matrix4.packedLength + 2;
-  const packedEllipsoidLength = Matrix2.Matrix4.packedLength + Matrix2.Cartesian3.packedLength;
+  const packedEllipsoidLength =
+    Matrix2.Matrix4.packedLength + Matrix2.Cartesian3.packedLength;
   const packedSphereLength = Matrix2.Cartesian3.packedLength + 1;
 
   const scratchModelMatrixAndBV = {
     modelMatrix: new Matrix2.Matrix4(),
-    boundingVolume: new Transforms.BoundingSphere(),
+    boundingVolume: new Transforms.BoundingSphere()
   };
 
   function boxModelMatrixAndBoundingVolume(boxes, index) {
     let boxIndex = index * packedBoxLength;
 
-    const dimensions = Matrix2.Cartesian3.unpack(boxes, boxIndex, scratchCartesian);
+    const dimensions = Matrix2.Cartesian3.unpack(
+      boxes,
+      boxIndex,
+      scratchCartesian
+    );
     boxIndex += Matrix2.Cartesian3.packedLength;
 
     const boxModelMatrix = Matrix2.Matrix4.unpack(
@@ -87,7 +134,11 @@ define(['./Transforms-3ac41eb6', './BoxGeometry-9a897756', './Matrix2-fc7e9822',
       cylinderIndex,
       scratchModelMatrixAndBV.modelMatrix
     );
-    Matrix2.Matrix4.multiplyByScale(cylinderModelMatrix, scale, cylinderModelMatrix);
+    Matrix2.Matrix4.multiplyByScale(
+      cylinderModelMatrix,
+      scale,
+      cylinderModelMatrix
+    );
 
     const boundingVolume = scratchModelMatrixAndBV.boundingVolume;
     Matrix2.Cartesian3.clone(Matrix2.Cartesian3.ZERO, boundingVolume.center);
@@ -99,7 +150,11 @@ define(['./Transforms-3ac41eb6', './BoxGeometry-9a897756', './Matrix2-fc7e9822',
   function ellipsoidModelMatrixAndBoundingVolume(ellipsoids, index) {
     let ellipsoidIndex = index * packedEllipsoidLength;
 
-    const radii = Matrix2.Cartesian3.unpack(ellipsoids, ellipsoidIndex, scratchCartesian);
+    const radii = Matrix2.Cartesian3.unpack(
+      ellipsoids,
+      ellipsoidIndex,
+      scratchCartesian
+    );
     ellipsoidIndex += Matrix2.Cartesian3.packedLength;
 
     const ellipsoidModelMatrix = Matrix2.Matrix4.unpack(
@@ -107,7 +162,11 @@ define(['./Transforms-3ac41eb6', './BoxGeometry-9a897756', './Matrix2-fc7e9822',
       ellipsoidIndex,
       scratchModelMatrixAndBV.modelMatrix
     );
-    Matrix2.Matrix4.multiplyByScale(ellipsoidModelMatrix, radii, ellipsoidModelMatrix);
+    Matrix2.Matrix4.multiplyByScale(
+      ellipsoidModelMatrix,
+      radii,
+      ellipsoidModelMatrix
+    );
 
     const boundingVolume = scratchModelMatrixAndBV.boundingVolume;
     Matrix2.Cartesian3.clone(Matrix2.Cartesian3.ZERO, boundingVolume.center);
@@ -185,14 +244,26 @@ define(['./Transforms-3ac41eb6', './BoxGeometry-9a897756', './Matrix2-fc7e9822',
         i
       );
       const primitiveModelMatrix = primitiveModelMatrixAndBV.modelMatrix;
-      Matrix2.Matrix4.multiply(modelMatrix, primitiveModelMatrix, primitiveModelMatrix);
+      Matrix2.Matrix4.multiply(
+        modelMatrix,
+        primitiveModelMatrix,
+        primitiveModelMatrix
+      );
 
       const batchId = primitiveBatchIds[i];
 
       const positionsLength = geometryPositions.length;
       for (let j = 0; j < positionsLength; j += 3) {
-        const position = Matrix2.Cartesian3.unpack(geometryPositions, j, scratchPosition);
-        Matrix2.Matrix4.multiplyByPoint(primitiveModelMatrix, position, position);
+        const position = Matrix2.Cartesian3.unpack(
+          geometryPositions,
+          j,
+          scratchPosition
+        );
+        Matrix2.Matrix4.multiplyByPoint(
+          primitiveModelMatrix,
+          position,
+          position
+        );
         Matrix2.Cartesian3.subtract(position, center, position);
 
         Matrix2.Cartesian3.pack(position, positions, positionOffset * 3 + j);
@@ -209,7 +280,7 @@ define(['./Transforms-3ac41eb6', './BoxGeometry-9a897756', './Matrix2-fc7e9822',
         offset: indexOffset,
         count: indicesLength,
         color: Color.Color.fromRgba(batchTableColors[batchId]),
-        batchIds: [batchId],
+        batchIds: [batchId]
       });
       batchIds[offset] = batchId;
       indexOffsets[offset] = indexOffset;
@@ -322,13 +393,21 @@ define(['./Transforms-3ac41eb6', './BoxGeometry-9a897756', './Matrix2-fc7e9822',
       : undefined;
 
     const numberOfBoxes = defaultValue.defined(boxes) ? boxBatchIds.length : 0;
-    const numberOfCylinders = defaultValue.defined(cylinders) ? cylinderBatchIds.length : 0;
-    const numberOfEllipsoids = defaultValue.defined(ellipsoids) ? ellipsoidBatchIds.length : 0;
-    const numberOfSpheres = defaultValue.defined(spheres) ? sphereBatchIds.length : 0;
+    const numberOfCylinders = defaultValue.defined(cylinders)
+      ? cylinderBatchIds.length
+      : 0;
+    const numberOfEllipsoids = defaultValue.defined(ellipsoids)
+      ? ellipsoidBatchIds.length
+      : 0;
+    const numberOfSpheres = defaultValue.defined(spheres)
+      ? sphereBatchIds.length
+      : 0;
 
     const boxGeometry = BoxGeometry.BoxGeometry.getUnitBox();
-    const cylinderGeometry = CylinderGeometry.CylinderGeometry.getUnitCylinder();
-    const ellipsoidGeometry = EllipsoidGeometry.EllipsoidGeometry.getUnitEllipsoid();
+    const cylinderGeometry =
+      CylinderGeometry.CylinderGeometry.getUnitCylinder();
+    const ellipsoidGeometry =
+      EllipsoidGeometry.EllipsoidGeometry.getUnitEllipsoid();
 
     const boxPositions = boxGeometry.attributes.position.values;
     const cylinderPositions = cylinderGeometry.attributes.position.values;
@@ -380,7 +459,7 @@ define(['./Transforms-3ac41eb6', './BoxGeometry-9a897756', './Matrix2-fc7e9822',
       indexOffset: 0,
       batchedIndicesOffset: 0,
       modelMatrix: scratchMatrix4,
-      center: scratchCenter,
+      center: scratchCenter
     };
 
     createPrimitive(
@@ -436,11 +515,12 @@ define(['./Transforms-3ac41eb6', './BoxGeometry-9a897756', './Matrix2-fc7e9822',
       indexOffsets: indexOffsets.buffer,
       indexCounts: indexCounts.buffer,
       batchIds: batchIds.buffer,
-      packedBuffer: packedBuffer.buffer,
+      packedBuffer: packedBuffer.buffer
     };
   }
-  var createVectorTileGeometries$1 = createTaskProcessorWorker(createVectorTileGeometries);
+  var createVectorTileGeometries$1 = createTaskProcessorWorker(
+    createVectorTileGeometries
+  );
 
   return createVectorTileGeometries$1;
-
-}));
+});

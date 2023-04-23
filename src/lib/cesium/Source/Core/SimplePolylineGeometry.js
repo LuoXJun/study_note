@@ -1,19 +1,19 @@
-import ArcType from "./ArcType.js";
-import BoundingSphere from "./BoundingSphere.js";
-import Cartesian3 from "./Cartesian3.js";
-import Color from "./Color.js";
-import ComponentDatatype from "./ComponentDatatype.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Ellipsoid from "./Ellipsoid.js";
-import Geometry from "./Geometry.js";
-import GeometryAttribute from "./GeometryAttribute.js";
-import GeometryAttributes from "./GeometryAttributes.js";
-import IndexDatatype from "./IndexDatatype.js";
-import CesiumMath from "./Math.js";
-import PolylinePipeline from "./PolylinePipeline.js";
-import PrimitiveType from "./PrimitiveType.js";
+import ArcType from './ArcType.js';
+import BoundingSphere from './BoundingSphere.js';
+import Cartesian3 from './Cartesian3.js';
+import Color from './Color.js';
+import ComponentDatatype from './ComponentDatatype.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Ellipsoid from './Ellipsoid.js';
+import Geometry from './Geometry.js';
+import GeometryAttribute from './GeometryAttribute.js';
+import GeometryAttributes from './GeometryAttributes.js';
+import IndexDatatype from './IndexDatatype.js';
+import CesiumMath from './Math.js';
+import PolylinePipeline from './PolylinePipeline.js';
+import PrimitiveType from './PrimitiveType.js';
 
 function interpolateColors(p0, p1, color0, color1, minDistance, array, offset) {
   const numPoints = PolylinePipeline.numberOfPoints(p0, p1, minDistance);
@@ -94,14 +94,14 @@ function SimplePolylineGeometry(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(positions) || positions.length < 2) {
-    throw new DeveloperError("At least two positions are required.");
+    throw new DeveloperError('At least two positions are required.');
   }
   if (
     defined(colors) &&
     ((colorsPerVertex && colors.length < positions.length) ||
       (!colorsPerVertex && colors.length < positions.length - 1))
   ) {
-    throw new DeveloperError("colors has an invalid length.");
+    throw new DeveloperError('colors has an invalid length.');
   }
   //>>includeEnd('debug');
 
@@ -115,7 +115,7 @@ function SimplePolylineGeometry(options) {
     CesiumMath.RADIANS_PER_DEGREE
   );
   this._ellipsoid = defaultValue(options.ellipsoid, Ellipsoid.WGS84);
-  this._workerName = "createSimplePolylineGeometry";
+  this._workerName = 'createSimplePolylineGeometry';
 
   let numComponents = 1 + positions.length * Cartesian3.packedLength;
   numComponents += defined(colors) ? 1 + colors.length * Color.packedLength : 1;
@@ -139,10 +139,10 @@ function SimplePolylineGeometry(options) {
 SimplePolylineGeometry.pack = function (value, array, startingIndex) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(value)) {
-    throw new DeveloperError("value is required");
+    throw new DeveloperError('value is required');
   }
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -187,7 +187,7 @@ SimplePolylineGeometry.pack = function (value, array, startingIndex) {
 SimplePolylineGeometry.unpack = function (array, startingIndex, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(array)) {
-    throw new DeveloperError("array is required");
+    throw new DeveloperError('array is required');
   }
   //>>includeEnd('debug');
 
@@ -223,7 +223,7 @@ SimplePolylineGeometry.unpack = function (array, startingIndex, result) {
       ellipsoid: ellipsoid,
       colorsPerVertex: colorsPerVertex,
       arcType: arcType,
-      granularity: granularity,
+      granularity: granularity
     });
   }
 
@@ -244,7 +244,7 @@ const generateArcOptionsScratch = {
   height: scratchArray2,
   ellipsoid: undefined,
   minDistance: undefined,
-  granularity: undefined,
+  granularity: undefined
 };
 
 /**
@@ -422,7 +422,7 @@ SimplePolylineGeometry.createGeometry = function (simplePolylineGeometry) {
   attributes.position = new GeometryAttribute({
     componentDatatype: ComponentDatatype.DOUBLE,
     componentsPerAttribute: 3,
-    values: positionValues,
+    values: positionValues
   });
 
   if (defined(colors)) {
@@ -430,7 +430,7 @@ SimplePolylineGeometry.createGeometry = function (simplePolylineGeometry) {
       componentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentsPerAttribute: 4,
       values: colorValues,
-      normalize: true,
+      normalize: true
     });
   }
 
@@ -451,7 +451,7 @@ SimplePolylineGeometry.createGeometry = function (simplePolylineGeometry) {
     attributes: attributes,
     indices: indices,
     primitiveType: PrimitiveType.LINES,
-    boundingSphere: BoundingSphere.fromPoints(positions),
+    boundingSphere: BoundingSphere.fromPoints(positions)
   });
 };
 export default SimplePolylineGeometry;

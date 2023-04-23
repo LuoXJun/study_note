@@ -1,8 +1,8 @@
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import TimeIntervalCollection from "../Core/TimeIntervalCollection.js";
-import Property from "./Property.js";
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import TimeIntervalCollection from '../Core/TimeIntervalCollection.js';
+import Property from './Property.js';
 
 /**
  * A {@link Property} which is defined by a {@link TimeIntervalCollection}, where the
@@ -61,7 +61,7 @@ Object.defineProperties(TimeIntervalCollectionProperty.prototype, {
   isConstant: {
     get: function () {
       return this._intervals.isEmpty;
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -75,7 +75,7 @@ Object.defineProperties(TimeIntervalCollectionProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
   /**
    * Gets the interval collection.
@@ -87,8 +87,8 @@ Object.defineProperties(TimeIntervalCollectionProperty.prototype, {
   intervals: {
     get: function () {
       return this._intervals;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -101,12 +101,12 @@ Object.defineProperties(TimeIntervalCollectionProperty.prototype, {
 TimeIntervalCollectionProperty.prototype.getValue = function (time, result) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
-    throw new DeveloperError("time is required");
+    throw new DeveloperError('time is required');
   }
   //>>includeEnd('debug');
 
   const value = this._intervals.findDataForIntervalContainingDate(time);
-  if (defined(value) && typeof value.clone === "function") {
+  if (defined(value) && typeof value.clone === 'function') {
     return value.clone(result);
   }
   return value;

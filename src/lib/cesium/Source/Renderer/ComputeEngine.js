@@ -1,16 +1,16 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import PrimitiveType from "../Core/PrimitiveType.js";
-import ViewportQuadVS from "../Shaders/ViewportQuadVS.js";
-import ClearCommand from "./ClearCommand.js";
-import DrawCommand from "./DrawCommand.js";
-import Framebuffer from "./Framebuffer.js";
-import RenderState from "./RenderState.js";
-import ShaderProgram from "./ShaderProgram.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import PrimitiveType from '../Core/PrimitiveType.js';
+import ViewportQuadVS from '../Shaders/ViewportQuadVS.js';
+import ClearCommand from './ClearCommand.js';
+import DrawCommand from './DrawCommand.js';
+import Framebuffer from './Framebuffer.js';
+import RenderState from './RenderState.js';
+import ShaderProgram from './ShaderProgram.js';
 
 /**
  * @private
@@ -21,17 +21,17 @@ function ComputeEngine(context) {
 
 let renderStateScratch;
 const drawCommandScratch = new DrawCommand({
-  primitiveType: PrimitiveType.TRIANGLES,
+  primitiveType: PrimitiveType.TRIANGLES
 });
 const clearCommandScratch = new ClearCommand({
-  color: new Color(0.0, 0.0, 0.0, 0.0),
+  color: new Color(0.0, 0.0, 0.0, 0.0)
 });
 
 function createFramebuffer(context, outputTexture) {
   return new Framebuffer({
     context: context,
     colorTextures: [outputTexture],
-    destroyAttachments: false,
+    destroyAttachments: false
   });
 }
 
@@ -42,8 +42,8 @@ function createViewportQuadShader(context, fragmentShaderSource) {
     fragmentShaderSource: fragmentShaderSource,
     attributeLocations: {
       position: 0,
-      textureCoordinates: 1,
-    },
+      textureCoordinates: 1
+    }
   });
 }
 
@@ -54,7 +54,7 @@ function createRenderState(width, height) {
     renderStateScratch.viewport.height !== height
   ) {
     renderStateScratch = RenderState.fromCache({
-      viewport: new BoundingRectangle(0, 0, width, height),
+      viewport: new BoundingRectangle(0, 0, width, height)
     });
   }
   return renderStateScratch;
@@ -62,7 +62,7 @@ function createRenderState(width, height) {
 
 ComputeEngine.prototype.execute = function (computeCommand) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("computeCommand", computeCommand);
+  Check.defined('computeCommand', computeCommand);
   //>>includeEnd('debug');
 
   // This may modify the command's resources, so do error checking afterwards
@@ -76,11 +76,11 @@ ComputeEngine.prototype.execute = function (computeCommand) {
     !defined(computeCommand.shaderProgram)
   ) {
     throw new DeveloperError(
-      "computeCommand.fragmentShaderSource or computeCommand.shaderProgram is required."
+      'computeCommand.fragmentShaderSource or computeCommand.shaderProgram is required.'
     );
   }
 
-  Check.defined("computeCommand.outputTexture", computeCommand.outputTexture);
+  Check.defined('computeCommand.outputTexture', computeCommand.outputTexture);
   //>>includeEnd('debug');
 
   const outputTexture = computeCommand.outputTexture;

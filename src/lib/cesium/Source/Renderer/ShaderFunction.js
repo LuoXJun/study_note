@@ -43,5 +43,5 @@ ShaderFunction.prototype.addLines = function (lines) {
  * @return {String[]}
  */
 ShaderFunction.prototype.generateGlslLines = function () {
-  return [].concat(this.signature, "{", this.body, "}");
+  return [].concat(this.signature, '{', this.body, '}');
 };

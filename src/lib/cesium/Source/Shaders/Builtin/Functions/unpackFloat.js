@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "/**\n\
+export default '/**\n\
  * Unpack an IEEE 754 single-precision float that is packed as a little-endian unsigned normalized vec4.\n\
  *\n\
  * @name czm_unpackFloat\n\
@@ -23,4 +23,4 @@ float czm_unpackFloat(vec4 packedFloat)\n\
     float result = sign * exp2(exponent - 23.0) * mantissa;\n\
     return result;\n\
 }\n\
-";
+';

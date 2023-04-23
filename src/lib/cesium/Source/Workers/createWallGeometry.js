@@ -1,5 +1,46 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6', './ComponentDatatype-4a60b8d6', './RuntimeError-c581ca93', './GeometryAttribute-a441ff32', './GeometryAttributes-7df9bef6', './IndexDatatype-db156785', './VertexFormat-e46f29d6', './WallGeometryLibrary-627e5288', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './WebGLConstants-7dccdc96', './arrayRemoveDuplicates-06991c15', './PolylinePipeline-0e310844', './EllipsoidGeodesic-dc94f381', './EllipsoidRhumbLine-daebc75b', './IntersectionTests-68fbc42d', './Plane-e20fba8c'], (function (defaultValue, Matrix2, Transforms, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, VertexFormat, WallGeometryLibrary, _commonjsHelpers3aae1032, combine, WebGLConstants, arrayRemoveDuplicates, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
+define([
+  './defaultValue-94c3e563',
+  './Matrix2-fc7e9822',
+  './Transforms-3ac41eb6',
+  './ComponentDatatype-4a60b8d6',
+  './RuntimeError-c581ca93',
+  './GeometryAttribute-a441ff32',
+  './GeometryAttributes-7df9bef6',
+  './IndexDatatype-db156785',
+  './VertexFormat-e46f29d6',
+  './WallGeometryLibrary-627e5288',
+  './_commonjsHelpers-3aae1032-f55dc0c4',
+  './combine-761d9c3f',
+  './WebGLConstants-7dccdc96',
+  './arrayRemoveDuplicates-06991c15',
+  './PolylinePipeline-0e310844',
+  './EllipsoidGeodesic-dc94f381',
+  './EllipsoidRhumbLine-daebc75b',
+  './IntersectionTests-68fbc42d',
+  './Plane-e20fba8c'
+], function (
+  defaultValue,
+  Matrix2,
+  Transforms,
+  ComponentDatatype,
+  RuntimeError,
+  GeometryAttribute,
+  GeometryAttributes,
+  IndexDatatype,
+  VertexFormat,
+  WallGeometryLibrary,
+  _commonjsHelpers3aae1032,
+  combine,
+  WebGLConstants,
+  arrayRemoveDuplicates,
+  PolylinePipeline,
+  EllipsoidGeodesic,
+  EllipsoidRhumbLine,
+  IntersectionTests,
+  Plane
+) {
+  'use strict';
 
   const scratchCartesian3Position1 = new Matrix2.Cartesian3();
   const scratchCartesian3Position2 = new Matrix2.Cartesian3();
@@ -49,7 +90,10 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
    * const geometry = Cesium.WallGeometry.createGeometry(wall);
    */
   function WallGeometry(options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
 
     const wallPositions = options.positions;
     const maximumHeights = options.maximumHeights;
@@ -57,14 +101,14 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
 
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(wallPositions)) {
-      throw new RuntimeError.DeveloperError("options.positions is required.");
+      throw new RuntimeError.DeveloperError('options.positions is required.');
     }
     if (
       defaultValue.defined(maximumHeights) &&
       maximumHeights.length !== wallPositions.length
     ) {
       throw new RuntimeError.DeveloperError(
-        "options.positions and options.maximumHeights must have the same length."
+        'options.positions and options.maximumHeights must have the same length.'
       );
     }
     if (
@@ -72,17 +116,23 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       minimumHeights.length !== wallPositions.length
     ) {
       throw new RuntimeError.DeveloperError(
-        "options.positions and options.minimumHeights must have the same length."
+        'options.positions and options.minimumHeights must have the same length.'
       );
     }
     //>>includeEnd('debug');
 
-    const vertexFormat = defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
+    const vertexFormat = defaultValue.defaultValue(
+      options.vertexFormat,
+      VertexFormat.VertexFormat.DEFAULT
+    );
     const granularity = defaultValue.defaultValue(
       options.granularity,
       ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
     );
-    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    const ellipsoid = defaultValue.defaultValue(
+      options.ellipsoid,
+      Matrix2.Ellipsoid.WGS84
+    );
 
     this._positions = wallPositions;
     this._minimumHeights = minimumHeights;
@@ -90,9 +140,10 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     this._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat);
     this._granularity = granularity;
     this._ellipsoid = Matrix2.Ellipsoid.clone(ellipsoid);
-    this._workerName = "createWallGeometry";
+    this._workerName = 'createWallGeometry';
 
-    let numComponents = 1 + wallPositions.length * Matrix2.Cartesian3.packedLength + 2;
+    let numComponents =
+      1 + wallPositions.length * Matrix2.Cartesian3.packedLength + 2;
     if (defaultValue.defined(minimumHeights)) {
       numComponents += minimumHeights.length;
     }
@@ -105,7 +156,10 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
      * @type {Number}
      */
     this.packedLength =
-      numComponents + Matrix2.Ellipsoid.packedLength + VertexFormat.VertexFormat.packedLength + 1;
+      numComponents +
+      Matrix2.Ellipsoid.packedLength +
+      VertexFormat.VertexFormat.packedLength +
+      1;
   }
 
   /**
@@ -120,10 +174,10 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
   WallGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(value)) {
-      throw new RuntimeError.DeveloperError("value is required");
+      throw new RuntimeError.DeveloperError('value is required');
     }
     if (!defaultValue.defined(array)) {
-      throw new RuntimeError.DeveloperError("array is required");
+      throw new RuntimeError.DeveloperError('array is required');
     }
     //>>includeEnd('debug');
 
@@ -135,7 +189,11 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     let length = positions.length;
     array[startingIndex++] = length;
 
-    for (i = 0; i < length; ++i, startingIndex += Matrix2.Cartesian3.packedLength) {
+    for (
+      i = 0;
+      i < length;
+      ++i, startingIndex += Matrix2.Cartesian3.packedLength
+    ) {
       Matrix2.Cartesian3.pack(positions[i], array, startingIndex);
     }
 
@@ -170,7 +228,9 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     return array;
   };
 
-  const scratchEllipsoid = Matrix2.Ellipsoid.clone(Matrix2.Ellipsoid.UNIT_SPHERE);
+  const scratchEllipsoid = Matrix2.Ellipsoid.clone(
+    Matrix2.Ellipsoid.UNIT_SPHERE
+  );
   const scratchVertexFormat = new VertexFormat.VertexFormat();
   const scratchOptions = {
     positions: undefined,
@@ -178,7 +238,7 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     maximumHeights: undefined,
     ellipsoid: scratchEllipsoid,
     vertexFormat: scratchVertexFormat,
-    granularity: undefined,
+    granularity: undefined
   };
 
   /**
@@ -192,7 +252,7 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
   WallGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(array)) {
-      throw new RuntimeError.DeveloperError("array is required");
+      throw new RuntimeError.DeveloperError('array is required');
     }
     //>>includeEnd('debug');
 
@@ -203,7 +263,11 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     let length = array[startingIndex++];
     const positions = new Array(length);
 
-    for (i = 0; i < length; ++i, startingIndex += Matrix2.Cartesian3.packedLength) {
+    for (
+      i = 0;
+      i < length;
+      ++i, startingIndex += Matrix2.Cartesian3.packedLength
+    ) {
       positions[i] = Matrix2.Cartesian3.unpack(array, startingIndex);
     }
 
@@ -227,7 +291,11 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       }
     }
 
-    const ellipsoid = Matrix2.Ellipsoid.unpack(array, startingIndex, scratchEllipsoid);
+    const ellipsoid = Matrix2.Ellipsoid.unpack(
+      array,
+      startingIndex,
+      scratchEllipsoid
+    );
     startingIndex += Matrix2.Ellipsoid.packedLength;
 
     const vertexFormat = VertexFormat.VertexFormat.unpack(
@@ -251,7 +319,10 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     result._minimumHeights = minimumHeights;
     result._maximumHeights = maximumHeights;
     result._ellipsoid = Matrix2.Ellipsoid.clone(ellipsoid, result._ellipsoid);
-    result._vertexFormat = VertexFormat.VertexFormat.clone(vertexFormat, result._vertexFormat);
+    result._vertexFormat = VertexFormat.VertexFormat.clone(
+      vertexFormat,
+      result._vertexFormat
+    );
     result._granularity = granularity;
 
     return result;
@@ -290,12 +361,15 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
    * @see WallGeometry#createGeometry
    */
   WallGeometry.fromConstantHeights = function (options) {
-    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(
+      options,
+      defaultValue.defaultValue.EMPTY_OBJECT
+    );
     const positions = options.positions;
 
     //>>includeStart('debug', pragmas.debug);
     if (!defaultValue.defined(positions)) {
-      throw new RuntimeError.DeveloperError("options.positions is required.");
+      throw new RuntimeError.DeveloperError('options.positions is required.');
     }
     //>>includeEnd('debug');
 
@@ -328,7 +402,7 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       maximumHeights: maxHeights,
       minimumHeights: minHeights,
       ellipsoid: options.ellipsoid,
-      vertexFormat: options.vertexFormat,
+      vertexFormat: options.vertexFormat
     };
     return new WallGeometry(newOptions);
   };
@@ -366,7 +440,9 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
     let length = topPositions.length;
     let size = length * 2;
 
-    const positions = vertexFormat.position ? new Float64Array(size) : undefined;
+    const positions = vertexFormat.position
+      ? new Float64Array(size)
+      : undefined;
     const normals = vertexFormat.normal ? new Float32Array(size) : undefined;
     const tangents = vertexFormat.tangent ? new Float32Array(size) : undefined;
     const bitangents = vertexFormat.bitangent
@@ -424,7 +500,11 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
         textureCoordinates[stIndex++] = 1.0;
       }
 
-      if (vertexFormat.normal || vertexFormat.tangent || vertexFormat.bitangent) {
+      if (
+        vertexFormat.normal ||
+        vertexFormat.tangent ||
+        vertexFormat.bitangent
+      ) {
         let nextTop = Matrix2.Cartesian3.clone(
           Matrix2.Cartesian3.ZERO,
           scratchCartesian3Position5
@@ -457,14 +537,22 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
             scratchCartesian3Position1
           );
           normal = Matrix2.Cartesian3.normalize(
-            Matrix2.Cartesian3.cross(scaledGroundPosition, scalednextPosition, normal),
+            Matrix2.Cartesian3.cross(
+              scaledGroundPosition,
+              scalednextPosition,
+              normal
+            ),
             normal
           );
           recomputeNormal = false;
         }
 
         if (
-          Matrix2.Cartesian3.equalsEpsilon(topPosition, nextTop, ComponentDatatype.CesiumMath.EPSILON10)
+          Matrix2.Cartesian3.equalsEpsilon(
+            topPosition,
+            nextTop,
+            ComponentDatatype.CesiumMath.EPSILON10
+          )
         ) {
           recomputeNormal = true;
         } else {
@@ -521,7 +609,7 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       attributes.position = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.DOUBLE,
         componentsPerAttribute: 3,
-        values: positions,
+        values: positions
       });
     }
 
@@ -529,7 +617,7 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       attributes.normal = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: normals,
+        values: normals
       });
     }
 
@@ -537,7 +625,7 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       attributes.tangent = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: tangents,
+        values: tangents
       });
     }
 
@@ -545,7 +633,7 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       attributes.bitangent = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 3,
-        values: bitangents,
+        values: bitangents
       });
     }
 
@@ -553,7 +641,7 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       attributes.st = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.FLOAT,
         componentsPerAttribute: 2,
-        values: textureCoordinates,
+        values: textureCoordinates
       });
     }
 
@@ -573,7 +661,10 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
 
     const numVertices = size / 3;
     size -= 6 * (numCorners + 1);
-    const indices = IndexDatatype.IndexDatatype.createTypedArray(numVertices, size);
+    const indices = IndexDatatype.IndexDatatype.createTypedArray(
+      numVertices,
+      size
+    );
 
     let edgeIndex = 0;
     for (i = 0; i < numVertices - 2; i += 2) {
@@ -589,7 +680,13 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
         LR * 3,
         scratchCartesian3Position2
       );
-      if (Matrix2.Cartesian3.equalsEpsilon(pl, pr, ComponentDatatype.CesiumMath.EPSILON10)) {
+      if (
+        Matrix2.Cartesian3.equalsEpsilon(
+          pl,
+          pr,
+          ComponentDatatype.CesiumMath.EPSILON10
+        )
+      ) {
         continue;
       }
       const UL = i + 1;
@@ -607,7 +704,7 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
       attributes: attributes,
       indices: indices,
       primitiveType: GeometryAttribute.PrimitiveType.TRIANGLES,
-      boundingSphere: new Transforms.BoundingSphere.fromVertices(positions),
+      boundingSphere: new Transforms.BoundingSphere.fromVertices(positions)
     });
   };
 
@@ -620,5 +717,4 @@ define(['./defaultValue-94c3e563', './Matrix2-fc7e9822', './Transforms-3ac41eb6'
   }
 
   return createWallGeometry;
-
-}));
+});

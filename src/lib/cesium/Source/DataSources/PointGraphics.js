@@ -1,8 +1,8 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
 
 /**
  * @typedef {Object} PointGraphics.ConstructorOptions
@@ -66,7 +66,7 @@ Object.defineProperties(PointGraphics.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -75,7 +75,7 @@ Object.defineProperties(PointGraphics.prototype, {
    * @type {Property|undefined}
    * @default true
    */
-  show: createPropertyDescriptor("show"),
+  show: createPropertyDescriptor('show'),
 
   /**
    * Gets or sets the numeric Property specifying the size in pixels.
@@ -83,7 +83,7 @@ Object.defineProperties(PointGraphics.prototype, {
    * @type {Property|undefined}
    * @default 1
    */
-  pixelSize: createPropertyDescriptor("pixelSize"),
+  pixelSize: createPropertyDescriptor('pixelSize'),
 
   /**
    * Gets or sets the Property specifying the {@link HeightReference}.
@@ -91,7 +91,7 @@ Object.defineProperties(PointGraphics.prototype, {
    * @type {Property|undefined}
    * @default HeightReference.NONE
    */
-  heightReference: createPropertyDescriptor("heightReference"),
+  heightReference: createPropertyDescriptor('heightReference'),
 
   /**
    * Gets or sets the Property specifying the {@link Color} of the point.
@@ -99,7 +99,7 @@ Object.defineProperties(PointGraphics.prototype, {
    * @type {Property|undefined}
    * @default Color.WHITE
    */
-  color: createPropertyDescriptor("color"),
+  color: createPropertyDescriptor('color'),
 
   /**
    * Gets or sets the Property specifying the {@link Color} of the outline.
@@ -107,7 +107,7 @@ Object.defineProperties(PointGraphics.prototype, {
    * @type {Property|undefined}
    * @default Color.BLACK
    */
-  outlineColor: createPropertyDescriptor("outlineColor"),
+  outlineColor: createPropertyDescriptor('outlineColor'),
 
   /**
    * Gets or sets the numeric Property specifying the the outline width in pixels.
@@ -115,7 +115,7 @@ Object.defineProperties(PointGraphics.prototype, {
    * @type {Property|undefined}
    * @default 0
    */
-  outlineWidth: createPropertyDescriptor("outlineWidth"),
+  outlineWidth: createPropertyDescriptor('outlineWidth'),
 
   /**
    * Gets or sets the {@link NearFarScalar} Property used to scale the point based on distance.
@@ -123,7 +123,7 @@ Object.defineProperties(PointGraphics.prototype, {
    * @memberof PointGraphics.prototype
    * @type {Property|undefined}
    */
-  scaleByDistance: createPropertyDescriptor("scaleByDistance"),
+  scaleByDistance: createPropertyDescriptor('scaleByDistance'),
 
   /**
    * Gets or sets {@link NearFarScalar} Property specifying the translucency of the point based on the distance from the camera.
@@ -134,7 +134,7 @@ Object.defineProperties(PointGraphics.prototype, {
    * @memberof PointGraphics.prototype
    * @type {Property|undefined}
    */
-  translucencyByDistance: createPropertyDescriptor("translucencyByDistance"),
+  translucencyByDistance: createPropertyDescriptor('translucencyByDistance'),
 
   /**
    * Gets or sets the {@link DistanceDisplayCondition} Property specifying at what distance from the camera that this point will be displayed.
@@ -142,7 +142,7 @@ Object.defineProperties(PointGraphics.prototype, {
    * @type {Property|undefined}
    */
   distanceDisplayCondition: createPropertyDescriptor(
-    "distanceDisplayCondition"
+    'distanceDisplayCondition'
   ),
 
   /**
@@ -151,9 +151,7 @@ Object.defineProperties(PointGraphics.prototype, {
    * @memberof PointGraphics.prototype
    * @type {Property|undefined}
    */
-  disableDepthTestDistance: createPropertyDescriptor(
-    "disableDepthTestDistance"
-  ),
+  disableDepthTestDistance: createPropertyDescriptor('disableDepthTestDistance')
 });
 
 /**
@@ -188,7 +186,7 @@ PointGraphics.prototype.clone = function (result) {
 PointGraphics.prototype.merge = function (source) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
-    throw new DeveloperError("source is required.");
+    throw new DeveloperError('source is required.');
   }
   //>>includeEnd('debug');
 

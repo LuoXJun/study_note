@@ -47,6 +47,6 @@ const Cesium3DTileColorBlendMode = {
    * @type {Number}
    * @constant
    */
-  MIX: 2,
+  MIX: 2
 };
 export default Object.freeze(Cesium3DTileColorBlendMode);

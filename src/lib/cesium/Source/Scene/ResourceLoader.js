@@ -1,8 +1,8 @@
-import Check from "../Core/Check.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import RuntimeError from "../Core/RuntimeError.js";
+import Check from '../Core/Check.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import RuntimeError from '../Core/RuntimeError.js';
 
 /**
  * A cache resource.
@@ -33,7 +33,7 @@ Object.defineProperties(ResourceLoader.prototype, {
     // eslint-disable-next-line getter-return
     get: function () {
       DeveloperError.throwInstantiationError();
-    },
+    }
   },
   /**
    * The cache key of the resource.
@@ -48,8 +48,8 @@ Object.defineProperties(ResourceLoader.prototype, {
     // eslint-disable-next-line getter-return
     get: function () {
       DeveloperError.throwInstantiationError();
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -86,7 +86,7 @@ ResourceLoader.prototype.process = function (frameState) {};
  */
 ResourceLoader.prototype.getError = function (errorMessage, error) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("errorMessage", errorMessage);
+  Check.typeOf.string('errorMessage', errorMessage);
   //>>includeEnd('debug');
 
   if (defined(error)) {

@@ -1,5 +1,5 @@
-import BlendEquation from "./BlendEquation.js";
-import BlendFunction from "./BlendFunction.js";
+import BlendEquation from './BlendEquation.js';
+import BlendFunction from './BlendFunction.js';
 
 /**
  * The blending state combines {@link BlendEquation} and {@link BlendFunction} and the
@@ -19,7 +19,7 @@ const BlendingState = {
    * @constant
    */
   DISABLED: Object.freeze({
-    enabled: false,
+    enabled: false
   }),
 
   /**
@@ -35,7 +35,7 @@ const BlendingState = {
     functionSourceRgb: BlendFunction.SOURCE_ALPHA,
     functionSourceAlpha: BlendFunction.ONE,
     functionDestinationRgb: BlendFunction.ONE_MINUS_SOURCE_ALPHA,
-    functionDestinationAlpha: BlendFunction.ONE_MINUS_SOURCE_ALPHA,
+    functionDestinationAlpha: BlendFunction.ONE_MINUS_SOURCE_ALPHA
   }),
 
   /**
@@ -51,7 +51,7 @@ const BlendingState = {
     functionSourceRgb: BlendFunction.ONE,
     functionSourceAlpha: BlendFunction.ONE,
     functionDestinationRgb: BlendFunction.ONE_MINUS_SOURCE_ALPHA,
-    functionDestinationAlpha: BlendFunction.ONE_MINUS_SOURCE_ALPHA,
+    functionDestinationAlpha: BlendFunction.ONE_MINUS_SOURCE_ALPHA
   }),
 
   /**
@@ -67,7 +67,7 @@ const BlendingState = {
     functionSourceRgb: BlendFunction.SOURCE_ALPHA,
     functionSourceAlpha: BlendFunction.ONE,
     functionDestinationRgb: BlendFunction.ONE,
-    functionDestinationAlpha: BlendFunction.ONE,
-  }),
+    functionDestinationAlpha: BlendFunction.ONE
+  })
 };
 export default Object.freeze(BlendingState);

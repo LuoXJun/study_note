@@ -1,7 +1,7 @@
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import ShaderProgram from "./ShaderProgram.js";
-import ShaderSource from "./ShaderSource.js";
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import ShaderProgram from './ShaderProgram.js';
+import ShaderSource from './ShaderSource.js';
 
 /**
  * @private
@@ -17,8 +17,8 @@ Object.defineProperties(ShaderCache.prototype, {
   numberOfShaders: {
     get: function () {
       return this._numberOfShaders;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -75,15 +75,15 @@ ShaderCache.prototype.getShaderProgram = function (options) {
   let fragmentShaderSource = options.fragmentShaderSource;
   const attributeLocations = options.attributeLocations;
 
-  if (typeof vertexShaderSource === "string") {
+  if (typeof vertexShaderSource === 'string') {
     vertexShaderSource = new ShaderSource({
-      sources: [vertexShaderSource],
+      sources: [vertexShaderSource]
     });
   }
 
-  if (typeof fragmentShaderSource === "string") {
+  if (typeof fragmentShaderSource === 'string') {
     fragmentShaderSource = new ShaderSource({
-      sources: [fragmentShaderSource],
+      sources: [fragmentShaderSource]
     });
   }
 
@@ -113,7 +113,7 @@ ShaderCache.prototype.getShaderProgram = function (options) {
       vertexShaderText: vertexShaderText,
       fragmentShaderSource: fragmentShaderSource,
       fragmentShaderText: fragmentShaderText,
-      attributeLocations: attributeLocations,
+      attributeLocations: attributeLocations
     });
 
     cachedShader = {
@@ -121,7 +121,7 @@ ShaderCache.prototype.getShaderProgram = function (options) {
       shaderProgram: shaderProgram,
       keyword: keyword,
       derivedKeywords: [],
-      count: 0,
+      count: 0
     };
 
     // A shader can't be in more than one cache.
@@ -179,26 +179,24 @@ ShaderCache.prototype.createDerivedShaderProgram = function (
   let fragmentShaderSource = options.fragmentShaderSource;
   const attributeLocations = options.attributeLocations;
 
-  if (typeof vertexShaderSource === "string") {
+  if (typeof vertexShaderSource === 'string') {
     vertexShaderSource = new ShaderSource({
-      sources: [vertexShaderSource],
+      sources: [vertexShaderSource]
     });
   }
 
-  if (typeof fragmentShaderSource === "string") {
+  if (typeof fragmentShaderSource === 'string') {
     fragmentShaderSource = new ShaderSource({
-      sources: [fragmentShaderSource],
+      sources: [fragmentShaderSource]
     });
   }
 
   const context = this._context;
 
-  const vertexShaderText = vertexShaderSource.createCombinedVertexShader(
-    context
-  );
-  const fragmentShaderText = fragmentShaderSource.createCombinedFragmentShader(
-    context
-  );
+  const vertexShaderText =
+    vertexShaderSource.createCombinedVertexShader(context);
+  const fragmentShaderText =
+    fragmentShaderSource.createCombinedFragmentShader(context);
 
   const derivedShaderProgram = new ShaderProgram({
     gl: context._gl,
@@ -208,7 +206,7 @@ ShaderCache.prototype.createDerivedShaderProgram = function (
     vertexShaderText: vertexShaderText,
     fragmentShaderSource: fragmentShaderSource,
     fragmentShaderText: fragmentShaderText,
-    attributeLocations: attributeLocations,
+    attributeLocations: attributeLocations
   });
 
   const derivedCachedShader = {
@@ -216,7 +214,7 @@ ShaderCache.prototype.createDerivedShaderProgram = function (
     shaderProgram: derivedShaderProgram,
     keyword: derivedKeyword,
     derivedKeywords: [],
-    count: 0,
+    count: 0
   };
 
   cachedShader.derivedKeywords.push(keyword);

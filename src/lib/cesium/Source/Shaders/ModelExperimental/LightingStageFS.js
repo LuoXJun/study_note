@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "#ifdef LIGHTING_PBR\n\
+export default '#ifdef LIGHTING_PBR\n\
 vec3 computePbrLighting(czm_modelMaterial inputMaterial, ProcessedAttributes attributes)\n\
 {\n\
     czm_pbrParameters pbrParameters;\n\
@@ -69,4 +69,4 @@ void lightingStage(inout czm_modelMaterial material, ProcessedAttributes attribu
 \n\
     material.diffuse = color;\n\
 }\n\
-";
+';

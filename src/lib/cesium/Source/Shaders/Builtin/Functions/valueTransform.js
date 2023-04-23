@@ -1,5 +1,5 @@
 //This file is automatically rebuilt by the Cesium build process.
-export default "/**\n\
+export default '/**\n\
  * Transform metadata values following the EXT_structural_metadata spec\n\
  * by multiplying by scale and adding the offset. Operations are always\n\
  * performed component-wise, even for matrices.\n\
@@ -37,4 +37,4 @@ mat3 czm_valueTransform(mat3 offset, mat3 scale, mat3 value) {\n\
 mat4 czm_valueTransform(mat4 offset, mat4 scale, mat4 value) {\n\
   return matrixCompMult(scale, value) + offset;\n\
 }\n\
-";
+';

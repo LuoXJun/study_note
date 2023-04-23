@@ -1,4 +1,4 @@
-import DeveloperError from "./DeveloperError.js";
+import DeveloperError from './DeveloperError.js';
 
 /**
  * Static interface for types which can store their values as packed
@@ -35,6 +35,6 @@ const Packable = {
    * @param {Object} [result] The object into which to store the result.
    * @returns {Object} The modified result parameter or a new Object instance if one was not provided.
    */
-  unpack: DeveloperError.throwInstantiationError,
+  unpack: DeveloperError.throwInstantiationError
 };
 export default Packable;

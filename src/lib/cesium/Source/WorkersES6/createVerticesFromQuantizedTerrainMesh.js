@@ -1,19 +1,19 @@
-import AxisAlignedBoundingBox from "../Core/AxisAlignedBoundingBox.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartographic from "../Core/Cartographic.js";
-import defined from "../Core/defined.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
-import EllipsoidalOccluder from "../Core/EllipsoidalOccluder.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import Rectangle from "../Core/Rectangle.js";
-import TerrainEncoding from "../Core/TerrainEncoding.js";
-import TerrainProvider from "../Core/TerrainProvider.js";
-import Transforms from "../Core/Transforms.js";
-import WebMercatorProjection from "../Core/WebMercatorProjection.js";
-import createTaskProcessorWorker from "./createTaskProcessorWorker.js";
+import AxisAlignedBoundingBox from '../Core/AxisAlignedBoundingBox.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartographic from '../Core/Cartographic.js';
+import defined from '../Core/defined.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
+import EllipsoidalOccluder from '../Core/EllipsoidalOccluder.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import Rectangle from '../Core/Rectangle.js';
+import TerrainEncoding from '../Core/TerrainEncoding.js';
+import TerrainProvider from '../Core/TerrainProvider.js';
+import Transforms from '../Core/Transforms.js';
+import WebMercatorProjection from '../Core/WebMercatorProjection.js';
+import createTaskProcessorWorker from './createTaskProcessorWorker.js';
 
 const maxShort = 32767;
 
@@ -60,9 +60,8 @@ function createVerticesFromQuantizedTerrainMesh(
   let southMercatorY;
   let oneOverMercatorHeight;
   if (includeWebMercatorT) {
-    southMercatorY = WebMercatorProjection.geodeticLatitudeToMercatorAngle(
-      south
-    );
+    southMercatorY =
+      WebMercatorProjection.geodeticLatitudeToMercatorAngle(south);
     oneOverMercatorHeight =
       1.0 /
       (WebMercatorProjection.geodeticLatitudeToMercatorAngle(north) -
@@ -151,40 +150,41 @@ function createVerticesFromQuantizedTerrainMesh(
     Cartesian3.maximumByComponent(cartesian3Scratch, maximum, maximum);
   }
 
-  const westIndicesSouthToNorth = copyAndSort(parameters.westIndices, function (
-    a,
-    b
-  ) {
-    return uvs[a].y - uvs[b].y;
-  });
-  const eastIndicesNorthToSouth = copyAndSort(parameters.eastIndices, function (
-    a,
-    b
-  ) {
-    return uvs[b].y - uvs[a].y;
-  });
-  const southIndicesEastToWest = copyAndSort(parameters.southIndices, function (
-    a,
-    b
-  ) {
-    return uvs[b].x - uvs[a].x;
-  });
-  const northIndicesWestToEast = copyAndSort(parameters.northIndices, function (
-    a,
-    b
-  ) {
-    return uvs[a].x - uvs[b].x;
-  });
+  const westIndicesSouthToNorth = copyAndSort(
+    parameters.westIndices,
+    function (a, b) {
+      return uvs[a].y - uvs[b].y;
+    }
+  );
+  const eastIndicesNorthToSouth = copyAndSort(
+    parameters.eastIndices,
+    function (a, b) {
+      return uvs[b].y - uvs[a].y;
+    }
+  );
+  const southIndicesEastToWest = copyAndSort(
+    parameters.southIndices,
+    function (a, b) {
+      return uvs[b].x - uvs[a].x;
+    }
+  );
+  const northIndicesWestToEast = copyAndSort(
+    parameters.northIndices,
+    function (a, b) {
+      return uvs[a].x - uvs[b].x;
+    }
+  );
 
   let occludeePointInScaledSpace;
   if (minimumHeight < 0.0) {
     // Horizon culling point needs to be recomputed since the tile is at least partly under the ellipsoid.
     const occluder = new EllipsoidalOccluder(ellipsoid);
-    occludeePointInScaledSpace = occluder.computeHorizonCullingPointPossiblyUnderEllipsoid(
-      center,
-      positions,
-      minimumHeight
-    );
+    occludeePointInScaledSpace =
+      occluder.computeHorizonCullingPointPossiblyUnderEllipsoid(
+        center,
+        positions,
+        minimumHeight
+      );
   }
 
   let hMin = minimumHeight;
@@ -398,7 +398,7 @@ function createVerticesFromQuantizedTerrainMesh(
     maximumHeight: maximumHeight,
     occludeePointInScaledSpace: occludeePointInScaledSpace,
     encoding: encoding,
-    indexCountWithoutSkirts: parameters.indices.length,
+    indexCountWithoutSkirts: parameters.indices.length
   };
 }
 
@@ -528,9 +528,9 @@ function addSkirt(
 
 function copyAndSort(typedArray, comparator) {
   let copy;
-  if (typeof typedArray.slice === "function") {
+  if (typeof typedArray.slice === 'function') {
     copy = typedArray.slice();
-    if (typeof copy.sort !== "function") {
+    if (typeof copy.sort !== 'function') {
       // Sliced typed array isn't sortable, so we can't use it.
       copy = undefined;
     }

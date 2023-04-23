@@ -1,8 +1,8 @@
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import JulianDate from "./JulianDate.js";
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import JulianDate from './JulianDate.js';
 
 /**
  * An interval defined by a start and a stop time; optionally including those times as part of the interval.
@@ -111,8 +111,8 @@ Object.defineProperties(TimeInterval.prototype, {
         (stopComparedToStart === 0 &&
           (!this.isStartIncluded || !this.isStopIncluded))
       );
-    },
-  },
+    }
+  }
 });
 
 const scratchInterval = {
@@ -120,7 +120,7 @@ const scratchInterval = {
   stop: undefined,
   isStartIncluded: undefined,
   isStopIncluded: undefined,
-  data: undefined,
+  data: undefined
 };
 
 /**
@@ -138,14 +138,14 @@ const scratchInterval = {
  */
 TimeInterval.fromIso8601 = function (options, result) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options", options);
-  Check.typeOf.string("options.iso8601", options.iso8601);
+  Check.typeOf.object('options', options);
+  Check.typeOf.string('options.iso8601', options.iso8601);
   //>>includeEnd('debug');
 
-  const dates = options.iso8601.split("/");
+  const dates = options.iso8601.split('/');
   if (dates.length !== 2) {
     throw new DeveloperError(
-      "options.iso8601 is an invalid ISO 8601 interval."
+      'options.iso8601 is an invalid ISO 8601 interval.'
     );
   }
   const start = JulianDate.fromIso8601(dates[0]);
@@ -180,7 +180,7 @@ TimeInterval.fromIso8601 = function (options, result) {
  */
 TimeInterval.toIso8601 = function (timeInterval, precision) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("timeInterval", timeInterval);
+  Check.typeOf.object('timeInterval', timeInterval);
   //>>includeEnd('debug');
 
   return `${JulianDate.toIso8601(
@@ -274,7 +274,7 @@ TimeInterval.equalsEpsilon = function (left, right, epsilon, dataComparer) {
  */
 TimeInterval.intersect = function (left, right, result, mergeCallback) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("left", left);
+  Check.typeOf.object('left', left);
   //>>includeEnd('debug');
 
   if (!defined(right)) {
@@ -335,8 +335,8 @@ TimeInterval.intersect = function (left, right, result, mergeCallback) {
  */
 TimeInterval.contains = function (timeInterval, julianDate) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("timeInterval", timeInterval);
-  Check.typeOf.object("julianDate", julianDate);
+  Check.typeOf.object('timeInterval', timeInterval);
+  Check.typeOf.object('julianDate', julianDate);
   //>>includeEnd('debug');
 
   if (timeInterval.isEmpty) {
@@ -415,7 +415,7 @@ TimeInterval.EMPTY = Object.freeze(
     start: new JulianDate(),
     stop: new JulianDate(),
     isStartIncluded: false,
-    isStopIncluded: false,
+    isStopIncluded: false
   })
 );
 

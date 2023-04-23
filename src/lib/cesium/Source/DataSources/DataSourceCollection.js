@@ -1,9 +1,9 @@
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import Event from "../Core/Event.js";
-import CesiumMath from "../Core/Math.js";
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import Event from '../Core/Event.js';
+import CesiumMath from '../Core/Math.js';
 
 /**
  * A collection of {@link DataSource} instances.
@@ -27,7 +27,7 @@ Object.defineProperties(DataSourceCollection.prototype, {
   length: {
     get: function () {
       return this._dataSources.length;
-    },
+    }
   },
 
   /**
@@ -40,7 +40,7 @@ Object.defineProperties(DataSourceCollection.prototype, {
   dataSourceAdded: {
     get: function () {
       return this._dataSourceAdded;
-    },
+    }
   },
 
   /**
@@ -53,7 +53,7 @@ Object.defineProperties(DataSourceCollection.prototype, {
   dataSourceRemoved: {
     get: function () {
       return this._dataSourceRemoved;
-    },
+    }
   },
 
   /**
@@ -66,8 +66,8 @@ Object.defineProperties(DataSourceCollection.prototype, {
   dataSourceMoved: {
     get: function () {
       return this._dataSourceMoved;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -81,7 +81,7 @@ Object.defineProperties(DataSourceCollection.prototype, {
 DataSourceCollection.prototype.add = function (dataSource) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(dataSource)) {
-    throw new DeveloperError("dataSource is required.");
+    throw new DeveloperError('dataSource is required.');
   }
   //>>includeEnd('debug');
 
@@ -114,7 +114,7 @@ DataSourceCollection.prototype.remove = function (dataSource, destroy) {
     this._dataSources.splice(index, 1);
     this._dataSourceRemoved.raiseEvent(this, dataSource);
 
-    if (destroy && typeof dataSource.destroy === "function") {
+    if (destroy && typeof dataSource.destroy === 'function') {
       dataSource.destroy();
     }
 
@@ -137,7 +137,7 @@ DataSourceCollection.prototype.removeAll = function (destroy) {
     const dataSource = dataSources[i];
     this._dataSourceRemoved.raiseEvent(this, dataSource);
 
-    if (destroy && typeof dataSource.destroy === "function") {
+    if (destroy && typeof dataSource.destroy === 'function') {
       dataSource.destroy();
     }
   }
@@ -173,7 +173,7 @@ DataSourceCollection.prototype.indexOf = function (dataSource) {
 DataSourceCollection.prototype.get = function (index) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(index)) {
-    throw new DeveloperError("index is required.");
+    throw new DeveloperError('index is required.');
   }
   //>>includeEnd('debug');
 
@@ -189,7 +189,7 @@ DataSourceCollection.prototype.get = function (index) {
 DataSourceCollection.prototype.getByName = function (name) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(name)) {
-    throw new DeveloperError("name is required.");
+    throw new DeveloperError('name is required.');
   }
   //>>includeEnd('debug');
 
@@ -201,7 +201,7 @@ DataSourceCollection.prototype.getByName = function (name) {
 function getIndex(dataSources, dataSource) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(dataSource)) {
-    throw new DeveloperError("dataSource is required.");
+    throw new DeveloperError('dataSource is required.');
   }
   //>>includeEnd('debug');
 
@@ -209,7 +209,7 @@ function getIndex(dataSources, dataSource) {
 
   //>>includeStart('debug', pragmas.debug);
   if (index === -1) {
-    throw new DeveloperError("dataSource is not in this collection.");
+    throw new DeveloperError('dataSource is not in this collection.');
   }
   //>>includeEnd('debug');
 

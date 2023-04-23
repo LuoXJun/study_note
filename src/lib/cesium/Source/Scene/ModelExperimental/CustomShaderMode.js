@@ -14,7 +14,7 @@ const CustomShaderMode = {
    * @type {String}
    * @constant
    */
-  MODIFY_MATERIAL: "MODIFY_MATERIAL",
+  MODIFY_MATERIAL: 'MODIFY_MATERIAL',
   /**
    * The custom shader will be used instead of the material stage. This is a hint
    * to optimize out the material processing code.
@@ -22,7 +22,7 @@ const CustomShaderMode = {
    * @type {String}
    * @constant
    */
-  REPLACE_MATERIAL: "REPLACE_MATERIAL",
+  REPLACE_MATERIAL: 'REPLACE_MATERIAL'
 };
 
 /**

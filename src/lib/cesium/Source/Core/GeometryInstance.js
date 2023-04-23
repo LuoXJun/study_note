@@ -1,7 +1,7 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import Matrix4 from "./Matrix4.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import Matrix4 from './Matrix4.js';
 
 /**
  * Geometry instancing allows one {@link Geometry} object to be positions in several
@@ -53,7 +53,7 @@ function GeometryInstance(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(options.geometry)) {
-    throw new DeveloperError("options.geometry is required.");
+    throw new DeveloperError('options.geometry is required.');
   }
   //>>includeEnd('debug');
 

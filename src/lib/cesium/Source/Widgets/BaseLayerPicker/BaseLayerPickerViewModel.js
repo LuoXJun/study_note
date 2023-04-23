@@ -1,9 +1,9 @@
-import defaultValue from "../../Core/defaultValue.js";
-import defined from "../../Core/defined.js";
-import DeveloperError from "../../Core/DeveloperError.js";
-import EllipsoidTerrainProvider from "../../Core/EllipsoidTerrainProvider.js";
-import knockout from "../../ThirdParty/knockout.js";
-import createCommand from "../createCommand.js";
+import defaultValue from '../../Core/defaultValue.js';
+import defined from '../../Core/defined.js';
+import DeveloperError from '../../Core/DeveloperError.js';
+import EllipsoidTerrainProvider from '../../Core/EllipsoidTerrainProvider.js';
+import knockout from '../../ThirdParty/knockout.js';
+import createCommand from '../createCommand.js';
 
 /**
  * The view model for {@link BaseLayerPicker}.
@@ -35,7 +35,7 @@ function BaseLayerPickerViewModel(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(globe)) {
-    throw new DeveloperError("globe is required");
+    throw new DeveloperError('globe is required');
   }
   //>>includeEnd('debug');
 
@@ -63,14 +63,14 @@ function BaseLayerPickerViewModel(options) {
   this.dropDownVisible = false;
 
   knockout.track(this, [
-    "imageryProviderViewModels",
-    "terrainProviderViewModels",
-    "dropDownVisible",
+    'imageryProviderViewModels',
+    'terrainProviderViewModels',
+    'dropDownVisible'
   ]);
 
   const imageryObservable = knockout.getObservable(
     this,
-    "imageryProviderViewModels"
+    'imageryProviderViewModels'
   );
   const imageryProviders = knockout.pureComputed(function () {
     const providers = imageryObservable();
@@ -92,7 +92,7 @@ function BaseLayerPickerViewModel(options) {
       const name = allCategoryNames[i];
       result.push({
         name: name,
-        providers: categories[name],
+        providers: categories[name]
       });
     }
     return result;
@@ -101,7 +101,7 @@ function BaseLayerPickerViewModel(options) {
 
   const terrainObservable = knockout.getObservable(
     this,
-    "terrainProviderViewModels"
+    'terrainProviderViewModels'
   );
   const terrainProviders = knockout.pureComputed(function () {
     const providers = terrainObservable();
@@ -123,7 +123,7 @@ function BaseLayerPickerViewModel(options) {
       const name = allCategoryNames[i];
       result.push({
         name: name,
-        providers: categories[name],
+        providers: categories[name]
       });
     }
     return result;
@@ -135,7 +135,7 @@ function BaseLayerPickerViewModel(options) {
    * @type {String}
    */
   this.buttonTooltip = undefined;
-  knockout.defineProperty(this, "buttonTooltip", function () {
+  knockout.defineProperty(this, 'buttonTooltip', function () {
     const selectedImagery = this.selectedImagery;
     const selectedTerrain = this.selectedTerrain;
 
@@ -159,7 +159,7 @@ function BaseLayerPickerViewModel(options) {
    * @type {String}
    */
   this.buttonImageUrl = undefined;
-  knockout.defineProperty(this, "buttonImageUrl", function () {
+  knockout.defineProperty(this, 'buttonImageUrl', function () {
     const selectedImagery = this.selectedImagery;
     if (defined(selectedImagery)) {
       return selectedImagery.iconUrl;
@@ -175,7 +175,7 @@ function BaseLayerPickerViewModel(options) {
   const selectedImageryViewModel = knockout.observable();
 
   this._currentImageryProviders = [];
-  knockout.defineProperty(this, "selectedImagery", {
+  knockout.defineProperty(this, 'selectedImagery', {
     get: function () {
       return selectedImageryViewModel();
     },
@@ -225,7 +225,7 @@ function BaseLayerPickerViewModel(options) {
       }
       selectedImageryViewModel(value);
       this.dropDownVisible = false;
-    },
+    }
   });
 
   /**
@@ -236,7 +236,7 @@ function BaseLayerPickerViewModel(options) {
   this.selectedTerrain = undefined;
   const selectedTerrainViewModel = knockout.observable();
 
-  knockout.defineProperty(this, "selectedTerrain", {
+  knockout.defineProperty(this, 'selectedTerrain', {
     get: function () {
       return selectedTerrainViewModel();
     },
@@ -257,7 +257,7 @@ function BaseLayerPickerViewModel(options) {
       this._globe.terrainProvider = newProvider;
       selectedTerrainViewModel(value);
       this.dropDownVisible = false;
-    },
+    }
   });
 
   const that = this;
@@ -285,7 +285,7 @@ Object.defineProperties(BaseLayerPickerViewModel.prototype, {
   toggleDropDown: {
     get: function () {
       return this._toggleDropDown;
-    },
+    }
   },
 
   /**
@@ -297,7 +297,7 @@ Object.defineProperties(BaseLayerPickerViewModel.prototype, {
   globe: {
     get: function () {
       return this._globe;
-    },
-  },
+    }
+  }
 });
 export default BaseLayerPickerViewModel;

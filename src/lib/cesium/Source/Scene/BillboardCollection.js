@@ -1,39 +1,39 @@
-import AttributeCompression from "../Core/AttributeCompression.js";
-import BoundingSphere from "../Core/BoundingSphere.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import EncodedCartesian3 from "../Core/EncodedCartesian3.js";
-import IndexDatatype from "../Core/IndexDatatype.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import WebGLConstants from "../Core/WebGLConstants.js";
-import Buffer from "../Renderer/Buffer.js";
-import BufferUsage from "../Renderer/BufferUsage.js";
-import ContextLimits from "../Renderer/ContextLimits.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import Pass from "../Renderer/Pass.js";
-import RenderState from "../Renderer/RenderState.js";
-import ShaderProgram from "../Renderer/ShaderProgram.js";
-import ShaderSource from "../Renderer/ShaderSource.js";
-import VertexArrayFacade from "../Renderer/VertexArrayFacade.js";
-import BillboardCollectionFS from "../Shaders/BillboardCollectionFS.js";
-import BillboardCollectionVS from "../Shaders/BillboardCollectionVS.js";
-import Billboard from "./Billboard.js";
-import BlendingState from "./BlendingState.js";
-import BlendOption from "./BlendOption.js";
-import HeightReference from "./HeightReference.js";
-import HorizontalOrigin from "./HorizontalOrigin.js";
-import SceneMode from "./SceneMode.js";
-import SDFSettings from "./SDFSettings.js";
-import TextureAtlas from "./TextureAtlas.js";
-import VerticalOrigin from "./VerticalOrigin.js";
+import AttributeCompression from '../Core/AttributeCompression.js';
+import BoundingSphere from '../Core/BoundingSphere.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import EncodedCartesian3 from '../Core/EncodedCartesian3.js';
+import IndexDatatype from '../Core/IndexDatatype.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import WebGLConstants from '../Core/WebGLConstants.js';
+import Buffer from '../Renderer/Buffer.js';
+import BufferUsage from '../Renderer/BufferUsage.js';
+import ContextLimits from '../Renderer/ContextLimits.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import Pass from '../Renderer/Pass.js';
+import RenderState from '../Renderer/RenderState.js';
+import ShaderProgram from '../Renderer/ShaderProgram.js';
+import ShaderSource from '../Renderer/ShaderSource.js';
+import VertexArrayFacade from '../Renderer/VertexArrayFacade.js';
+import BillboardCollectionFS from '../Shaders/BillboardCollectionFS.js';
+import BillboardCollectionVS from '../Shaders/BillboardCollectionVS.js';
+import Billboard from './Billboard.js';
+import BlendingState from './BlendingState.js';
+import BlendOption from './BlendOption.js';
+import HeightReference from './HeightReference.js';
+import HorizontalOrigin from './HorizontalOrigin.js';
+import SceneMode from './SceneMode.js';
+import SDFSettings from './SDFSettings.js';
+import TextureAtlas from './TextureAtlas.js';
+import VerticalOrigin from './VerticalOrigin.js';
 
 const SHOW_INDEX = Billboard.SHOW_INDEX;
 const POSITION_INDEX = Billboard.POSITION_INDEX;
@@ -70,7 +70,7 @@ const attributeLocationsBatched = {
   compressedAttribute3: 8,
   textureCoordinateBoundsOrLabelTranslate: 9,
   a_batchId: 10,
-  sdf: 11,
+  sdf: 11
 };
 
 const attributeLocationsInstanced = {
@@ -86,7 +86,7 @@ const attributeLocationsInstanced = {
   compressedAttribute3: 9,
   textureCoordinateBoundsOrLabelTranslate: 10,
   a_batchId: 11,
-  sdf: 12,
+  sdf: 12
 };
 
 /**
@@ -310,7 +310,7 @@ function BillboardCollection(options) {
     BufferUsage.STATIC_DRAW, // TRANSLUCENCY_BY_DISTANCE_INDEX
     BufferUsage.STATIC_DRAW, // PIXEL_OFFSET_SCALE_BY_DISTANCE_INDEX
     BufferUsage.STATIC_DRAW, // DISTANCE_DISPLAY_CONDITION_INDEX
-    BufferUsage.STATIC_DRAW, // TEXTURE_COORDINATE_BOUNDS
+    BufferUsage.STATIC_DRAW // TEXTURE_COORDINATE_BOUNDS
   ];
 
   this._highlightColor = Color.clone(Color.WHITE); // Only used by Vector3DTilePoints
@@ -322,7 +322,7 @@ function BillboardCollection(options) {
     },
     u_highlightColor: function () {
       return that._highlightColor;
-    },
+    }
   };
 
   const scene = this._scene;
@@ -354,7 +354,7 @@ Object.defineProperties(BillboardCollection.prototype, {
     get: function () {
       removeBillboards(this);
       return this._billboards.length;
-    },
+    }
   },
 
   /**
@@ -376,7 +376,7 @@ Object.defineProperties(BillboardCollection.prototype, {
         this._textureAtlas = value;
         this._createVertexArray = true; // New per-billboard texture coordinates
       }
-    },
+    }
   },
 
   /**
@@ -409,8 +409,8 @@ Object.defineProperties(BillboardCollection.prototype, {
     },
     set: function (value) {
       this._destroyTextureAtlas = value;
-    },
-  },
+    }
+  }
 });
 
 function destroyBillboards(billboards) {
@@ -614,7 +614,7 @@ BillboardCollection.prototype.contains = function (billboard) {
  */
 BillboardCollection.prototype.get = function (index) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number("index", index);
+  Check.typeOf.number('index', index);
   //>>includeEnd('debug');
 
   removeBillboards(this);
@@ -651,7 +651,7 @@ function getIndexBufferBatched(context) {
     context: context,
     typedArray: indices,
     usage: BufferUsage.STATIC_DRAW,
-    indexDatatype: IndexDatatype.UNSIGNED_SHORT,
+    indexDatatype: IndexDatatype.UNSIGNED_SHORT
   });
   indexBuffer.vertexArrayDestroyable = false;
   context.cache.billboardCollection_indexBufferBatched = indexBuffer;
@@ -668,7 +668,7 @@ function getIndexBufferInstanced(context) {
     context: context,
     typedArray: new Uint16Array([0, 1, 2, 0, 2, 3]),
     usage: BufferUsage.STATIC_DRAW,
-    indexDatatype: IndexDatatype.UNSIGNED_SHORT,
+    indexDatatype: IndexDatatype.UNSIGNED_SHORT
   });
 
   indexBuffer.vertexArrayDestroyable = false;
@@ -685,7 +685,7 @@ function getVertexBufferInstanced(context) {
   vertexBuffer = Buffer.createVertexBuffer({
     context: context,
     typedArray: new Float32Array([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0]),
-    usage: BufferUsage.STATIC_DRAW,
+    usage: BufferUsage.STATIC_DRAW
   });
 
   vertexBuffer.vertexArrayDestroyable = false;
@@ -721,62 +721,62 @@ function createVAF(
       index: attributeLocations.positionHighAndScale,
       componentsPerAttribute: 4,
       componentDatatype: ComponentDatatype.FLOAT,
-      usage: buffersUsage[POSITION_INDEX],
+      usage: buffersUsage[POSITION_INDEX]
     },
     {
       index: attributeLocations.positionLowAndRotation,
       componentsPerAttribute: 4,
       componentDatatype: ComponentDatatype.FLOAT,
-      usage: buffersUsage[POSITION_INDEX],
+      usage: buffersUsage[POSITION_INDEX]
     },
     {
       index: attributeLocations.compressedAttribute0,
       componentsPerAttribute: 4,
       componentDatatype: ComponentDatatype.FLOAT,
-      usage: buffersUsage[PIXEL_OFFSET_INDEX],
+      usage: buffersUsage[PIXEL_OFFSET_INDEX]
     },
     {
       index: attributeLocations.compressedAttribute1,
       componentsPerAttribute: 4,
       componentDatatype: ComponentDatatype.FLOAT,
-      usage: buffersUsage[TRANSLUCENCY_BY_DISTANCE_INDEX],
+      usage: buffersUsage[TRANSLUCENCY_BY_DISTANCE_INDEX]
     },
     {
       index: attributeLocations.compressedAttribute2,
       componentsPerAttribute: 4,
       componentDatatype: ComponentDatatype.FLOAT,
-      usage: buffersUsage[COLOR_INDEX],
+      usage: buffersUsage[COLOR_INDEX]
     },
     {
       index: attributeLocations.eyeOffset,
       componentsPerAttribute: 4,
       componentDatatype: ComponentDatatype.FLOAT,
-      usage: buffersUsage[EYE_OFFSET_INDEX],
+      usage: buffersUsage[EYE_OFFSET_INDEX]
     },
     {
       index: attributeLocations.scaleByDistance,
       componentsPerAttribute: 4,
       componentDatatype: ComponentDatatype.FLOAT,
-      usage: buffersUsage[SCALE_BY_DISTANCE_INDEX],
+      usage: buffersUsage[SCALE_BY_DISTANCE_INDEX]
     },
     {
       index: attributeLocations.pixelOffsetScaleByDistance,
       componentsPerAttribute: 4,
       componentDatatype: ComponentDatatype.FLOAT,
-      usage: buffersUsage[PIXEL_OFFSET_SCALE_BY_DISTANCE_INDEX],
+      usage: buffersUsage[PIXEL_OFFSET_SCALE_BY_DISTANCE_INDEX]
     },
     {
       index: attributeLocations.compressedAttribute3,
       componentsPerAttribute: 4,
       componentDatatype: ComponentDatatype.FLOAT,
-      usage: buffersUsage[DISTANCE_DISPLAY_CONDITION_INDEX],
+      usage: buffersUsage[DISTANCE_DISPLAY_CONDITION_INDEX]
     },
     {
       index: attributeLocations.textureCoordinateBoundsOrLabelTranslate,
       componentsPerAttribute: 4,
       componentDatatype: ComponentDatatype.FLOAT,
-      usage: buffersUsage[TEXTURE_COORDINATE_BOUNDS],
-    },
+      usage: buffersUsage[TEXTURE_COORDINATE_BOUNDS]
+    }
   ];
 
   // Instancing requires one non-instanced attribute.
@@ -785,7 +785,7 @@ function createVAF(
       index: attributeLocations.direction,
       componentsPerAttribute: 2,
       componentDatatype: ComponentDatatype.FLOAT,
-      vertexBuffer: getVertexBufferInstanced(context),
+      vertexBuffer: getVertexBufferInstanced(context)
     });
   }
 
@@ -794,7 +794,7 @@ function createVAF(
       index: attributeLocations.a_batchId,
       componentsPerAttribute: 1,
       componentDatatype: ComponentDatatype.FLOAT,
-      bufferUsage: BufferUsage.STATIC_DRAW,
+      bufferUsage: BufferUsage.STATIC_DRAW
     });
   }
 
@@ -803,7 +803,7 @@ function createVAF(
       index: attributeLocations.sdf,
       componentsPerAttribute: 2,
       componentDatatype: ComponentDatatype.FLOAT,
-      usage: buffersUsage[SDF_INDEX],
+      usage: buffersUsage[SDF_INDEX]
     });
   }
 
@@ -996,21 +996,17 @@ function writeCompressedAttrib0(
 
   scratchCartesian2.x = bottomLeftX;
   scratchCartesian2.y = bottomLeftY;
-  const compressedTexCoordsLL = AttributeCompression.compressTextureCoordinates(
-    scratchCartesian2
-  );
+  const compressedTexCoordsLL =
+    AttributeCompression.compressTextureCoordinates(scratchCartesian2);
   scratchCartesian2.x = topRightX;
-  const compressedTexCoordsLR = AttributeCompression.compressTextureCoordinates(
-    scratchCartesian2
-  );
+  const compressedTexCoordsLR =
+    AttributeCompression.compressTextureCoordinates(scratchCartesian2);
   scratchCartesian2.y = topRightY;
-  const compressedTexCoordsUR = AttributeCompression.compressTextureCoordinates(
-    scratchCartesian2
-  );
+  const compressedTexCoordsUR =
+    AttributeCompression.compressTextureCoordinates(scratchCartesian2);
   scratchCartesian2.x = bottomLeftX;
-  const compressedTexCoordsUL = AttributeCompression.compressTextureCoordinates(
-    scratchCartesian2
-  );
+  const compressedTexCoordsUL =
+    AttributeCompression.compressTextureCoordinates(scratchCartesian2);
 
   if (billboardCollection._instanced) {
     i = billboard._index;
@@ -1255,9 +1251,8 @@ function writeEyeOffset(
 
     scratchCartesian2.x = width;
     scratchCartesian2.y = height;
-    const compressedTexCoordsRange = AttributeCompression.compressTextureCoordinates(
-      scratchCartesian2
-    );
+    const compressedTexCoordsRange =
+      AttributeCompression.compressTextureCoordinates(scratchCartesian2);
 
     i = billboard._index;
     writer(i, eyeOffset.x, eyeOffset.y, eyeOffsetZ, compressedTexCoordsRange);
@@ -1788,19 +1783,19 @@ function updateBoundingVolume(collection, frameState, boundingVolume) {
 
 function createDebugCommand(billboardCollection, context) {
   const fs =
-    "uniform sampler2D billboard_texture; \n" +
-    "varying vec2 v_textureCoordinates; \n" +
-    "void main() \n" +
-    "{ \n" +
-    "    gl_FragColor = texture2D(billboard_texture, v_textureCoordinates); \n" +
-    "} \n";
+    'uniform sampler2D billboard_texture; \n' +
+    'varying vec2 v_textureCoordinates; \n' +
+    'void main() \n' +
+    '{ \n' +
+    '    gl_FragColor = texture2D(billboard_texture, v_textureCoordinates); \n' +
+    '} \n';
 
   const drawCommand = context.createViewportQuadCommand(fs, {
     uniformMap: {
       billboard_texture: function () {
         return billboardCollection._textureAtlas.texture;
-      },
-    },
+      }
+    }
   });
   drawCommand.pass = Pass.OVERLAY;
   return drawCommand;
@@ -1840,7 +1835,7 @@ BillboardCollection.prototype.update = function (frameState) {
   let textureAtlas = this._textureAtlas;
   if (!defined(textureAtlas)) {
     textureAtlas = this._textureAtlas = new TextureAtlas({
-      context: context,
+      context: context
     });
 
     for (let ii = 0; ii < billboardsLength; ++ii) {
@@ -2066,9 +2061,9 @@ BillboardCollection.prototype.update = function (frameState) {
       this._rsOpaque = RenderState.fromCache({
         depthTest: {
           enabled: true,
-          func: WebGLConstants.LESS,
+          func: WebGLConstants.LESS
         },
-        depthMask: true,
+        depthMask: true
       });
     } else {
       this._rsOpaque = undefined;
@@ -2090,10 +2085,10 @@ BillboardCollection.prototype.update = function (frameState) {
           enabled: true,
           func: useTranslucentDepthMask
             ? WebGLConstants.LEQUAL
-            : WebGLConstants.LESS,
+            : WebGLConstants.LESS
         },
         depthMask: useTranslucentDepthMask,
-        blending: BlendingState.ALPHA_BLEND,
+        blending: BlendingState.ALPHA_BLEND
       });
     } else {
       this._rsTranslucent = undefined;
@@ -2134,10 +2129,10 @@ BillboardCollection.prototype.update = function (frameState) {
 
     vertDefines = [];
     if (defined(this._batchTable)) {
-      vertDefines.push("VECTOR_TILE");
+      vertDefines.push('VECTOR_TILE');
       vsSource = this._batchTable.getVertexShaderCallback(
         false,
-        "a_batchId",
+        'a_batchId',
         undefined
       )(vsSource);
       fsSource = this._batchTable.getFragmentShaderCallback(
@@ -2148,63 +2143,63 @@ BillboardCollection.prototype.update = function (frameState) {
 
     vs = new ShaderSource({
       defines: vertDefines,
-      sources: [vsSource],
+      sources: [vsSource]
     });
     if (this._instanced) {
-      vs.defines.push("INSTANCED");
+      vs.defines.push('INSTANCED');
     }
     if (this._shaderRotation) {
-      vs.defines.push("ROTATION");
+      vs.defines.push('ROTATION');
     }
     if (this._shaderAlignedAxis) {
-      vs.defines.push("ALIGNED_AXIS");
+      vs.defines.push('ALIGNED_AXIS');
     }
     if (this._shaderScaleByDistance) {
-      vs.defines.push("EYE_DISTANCE_SCALING");
+      vs.defines.push('EYE_DISTANCE_SCALING');
     }
     if (this._shaderTranslucencyByDistance) {
-      vs.defines.push("EYE_DISTANCE_TRANSLUCENCY");
+      vs.defines.push('EYE_DISTANCE_TRANSLUCENCY');
     }
     if (this._shaderPixelOffsetScaleByDistance) {
-      vs.defines.push("EYE_DISTANCE_PIXEL_OFFSET");
+      vs.defines.push('EYE_DISTANCE_PIXEL_OFFSET');
     }
     if (this._shaderDistanceDisplayCondition) {
-      vs.defines.push("DISTANCE_DISPLAY_CONDITION");
+      vs.defines.push('DISTANCE_DISPLAY_CONDITION');
     }
     if (this._shaderDisableDepthDistance) {
-      vs.defines.push("DISABLE_DEPTH_DISTANCE");
+      vs.defines.push('DISABLE_DEPTH_DISTANCE');
     }
     if (this._shaderClampToGround) {
       if (supportVSTextureReads) {
-        vs.defines.push("VERTEX_DEPTH_CHECK");
+        vs.defines.push('VERTEX_DEPTH_CHECK');
       } else {
-        vs.defines.push("FRAGMENT_DEPTH_CHECK");
+        vs.defines.push('FRAGMENT_DEPTH_CHECK');
       }
     }
 
     const sdfEdge = 1.0 - SDFSettings.CUTOFF;
 
     if (this._sdf) {
-      vs.defines.push("SDF");
+      vs.defines.push('SDF');
     }
 
-    const vectorFragDefine = defined(this._batchTable) ? "VECTOR_TILE" : "";
+    const vectorFragDefine = defined(this._batchTable) ? 'VECTOR_TILE' : '';
 
     if (this._blendOption === BlendOption.OPAQUE_AND_TRANSLUCENT) {
       fs = new ShaderSource({
-        defines: ["OPAQUE", vectorFragDefine],
-        sources: [fsSource],
+        defines: ['OPAQUE', vectorFragDefine],
+        sources: [fsSource]
       });
       if (this._shaderClampToGround) {
         if (supportVSTextureReads) {
-          fs.defines.push("VERTEX_DEPTH_CHECK");
+          fs.defines.push('VERTEX_DEPTH_CHECK');
         } else {
-          fs.defines.push("FRAGMENT_DEPTH_CHECK");
+          fs.defines.push('FRAGMENT_DEPTH_CHECK');
         }
       }
 
       if (this._sdf) {
-        fs.defines.push("SDF");
+        fs.defines.push('SDF');
         fs.defines.push(`SDF_EDGE ${sdfEdge}`);
       }
 
@@ -2213,22 +2208,22 @@ BillboardCollection.prototype.update = function (frameState) {
         shaderProgram: this._sp,
         vertexShaderSource: vs,
         fragmentShaderSource: fs,
-        attributeLocations: attributeLocations,
+        attributeLocations: attributeLocations
       });
 
       fs = new ShaderSource({
-        defines: ["TRANSLUCENT", vectorFragDefine],
-        sources: [fsSource],
+        defines: ['TRANSLUCENT', vectorFragDefine],
+        sources: [fsSource]
       });
       if (this._shaderClampToGround) {
         if (supportVSTextureReads) {
-          fs.defines.push("VERTEX_DEPTH_CHECK");
+          fs.defines.push('VERTEX_DEPTH_CHECK');
         } else {
-          fs.defines.push("FRAGMENT_DEPTH_CHECK");
+          fs.defines.push('FRAGMENT_DEPTH_CHECK');
         }
       }
       if (this._sdf) {
-        fs.defines.push("SDF");
+        fs.defines.push('SDF');
         fs.defines.push(`SDF_EDGE ${sdfEdge}`);
       }
       this._spTranslucent = ShaderProgram.replaceCache({
@@ -2236,24 +2231,24 @@ BillboardCollection.prototype.update = function (frameState) {
         shaderProgram: this._spTranslucent,
         vertexShaderSource: vs,
         fragmentShaderSource: fs,
-        attributeLocations: attributeLocations,
+        attributeLocations: attributeLocations
       });
     }
 
     if (this._blendOption === BlendOption.OPAQUE) {
       fs = new ShaderSource({
         defines: [vectorFragDefine],
-        sources: [fsSource],
+        sources: [fsSource]
       });
       if (this._shaderClampToGround) {
         if (supportVSTextureReads) {
-          fs.defines.push("VERTEX_DEPTH_CHECK");
+          fs.defines.push('VERTEX_DEPTH_CHECK');
         } else {
-          fs.defines.push("FRAGMENT_DEPTH_CHECK");
+          fs.defines.push('FRAGMENT_DEPTH_CHECK');
         }
       }
       if (this._sdf) {
-        fs.defines.push("SDF");
+        fs.defines.push('SDF');
         fs.defines.push(`SDF_EDGE ${sdfEdge}`);
       }
       this._sp = ShaderProgram.replaceCache({
@@ -2261,24 +2256,24 @@ BillboardCollection.prototype.update = function (frameState) {
         shaderProgram: this._sp,
         vertexShaderSource: vs,
         fragmentShaderSource: fs,
-        attributeLocations: attributeLocations,
+        attributeLocations: attributeLocations
       });
     }
 
     if (this._blendOption === BlendOption.TRANSLUCENT) {
       fs = new ShaderSource({
         defines: [vectorFragDefine],
-        sources: [fsSource],
+        sources: [fsSource]
       });
       if (this._shaderClampToGround) {
         if (supportVSTextureReads) {
-          fs.defines.push("VERTEX_DEPTH_CHECK");
+          fs.defines.push('VERTEX_DEPTH_CHECK');
         } else {
-          fs.defines.push("FRAGMENT_DEPTH_CHECK");
+          fs.defines.push('FRAGMENT_DEPTH_CHECK');
         }
       }
       if (this._sdf) {
-        fs.defines.push("SDF");
+        fs.defines.push('SDF');
         fs.defines.push(`SDF_EDGE ${sdfEdge}`);
       }
       this._spTranslucent = ShaderProgram.replaceCache({
@@ -2286,16 +2281,19 @@ BillboardCollection.prototype.update = function (frameState) {
         shaderProgram: this._spTranslucent,
         vertexShaderSource: vs,
         fragmentShaderSource: fs,
-        attributeLocations: attributeLocations,
+        attributeLocations: attributeLocations
       });
     }
 
     this._compiledShaderRotation = this._shaderRotation;
     this._compiledShaderAlignedAxis = this._shaderAlignedAxis;
     this._compiledShaderScaleByDistance = this._shaderScaleByDistance;
-    this._compiledShaderTranslucencyByDistance = this._shaderTranslucencyByDistance;
-    this._compiledShaderPixelOffsetScaleByDistance = this._shaderPixelOffsetScaleByDistance;
-    this._compiledShaderDistanceDisplayCondition = this._shaderDistanceDisplayCondition;
+    this._compiledShaderTranslucencyByDistance =
+      this._shaderTranslucencyByDistance;
+    this._compiledShaderPixelOffsetScaleByDistance =
+      this._shaderPixelOffsetScaleByDistance;
+    this._compiledShaderDistanceDisplayCondition =
+      this._shaderDistanceDisplayCondition;
     this._compiledShaderDisableDepthDistance = this._shaderDisableDepthDistance;
     this._compiledShaderClampToGround = this._shaderClampToGround;
     this._compiledSDF = this._sdf;
@@ -2319,7 +2317,7 @@ BillboardCollection.prototype.update = function (frameState) {
       uniforms = this._batchTable.getUniformMapCallback()(uniforms);
       pickId = this._batchTable.getPickId();
     } else {
-      pickId = "v_pickColor";
+      pickId = 'v_pickColor';
     }
 
     colorList.length = vaLength;

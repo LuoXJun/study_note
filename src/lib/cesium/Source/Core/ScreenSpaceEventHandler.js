@@ -1,13 +1,13 @@
-import AssociativeArray from "./AssociativeArray.js";
-import Cartesian2 from "./Cartesian2.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import destroyObject from "./destroyObject.js";
-import DeveloperError from "./DeveloperError.js";
-import FeatureDetection from "./FeatureDetection.js";
-import getTimestamp from "./getTimestamp.js";
-import KeyboardEventModifier from "./KeyboardEventModifier.js";
-import ScreenSpaceEventType from "./ScreenSpaceEventType.js";
+import AssociativeArray from './AssociativeArray.js';
+import Cartesian2 from './Cartesian2.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import destroyObject from './destroyObject.js';
+import DeveloperError from './DeveloperError.js';
+import FeatureDetection from './FeatureDetection.js';
+import getTimestamp from './getTimestamp.js';
+import KeyboardEventModifier from './KeyboardEventModifier.js';
+import ScreenSpaceEventType from './ScreenSpaceEventType.js';
 
 function getPosition(screenSpaceEventHandler, event, result) {
   const element = screenSpaceEventHandler._element;
@@ -46,7 +46,7 @@ function getModifier(event) {
 const MouseButton = {
   LEFT: 0,
   MIDDLE: 1,
-  RIGHT: 2,
+  RIGHT: 2
 };
 
 function registerListener(screenSpaceEventHandler, domType, element, callback) {
@@ -59,7 +59,7 @@ function registerListener(screenSpaceEventHandler, domType, element, callback) {
   } else {
     element.addEventListener(domType, listener, {
       capture: false,
-      passive: false,
+      passive: false
     });
   }
 
@@ -81,68 +81,68 @@ function registerListeners(screenSpaceEventHandler) {
   if (FeatureDetection.supportsPointerEvents()) {
     registerListener(
       screenSpaceEventHandler,
-      "pointerdown",
+      'pointerdown',
       element,
       handlePointerDown
     );
     registerListener(
       screenSpaceEventHandler,
-      "pointerup",
+      'pointerup',
       element,
       handlePointerUp
     );
     registerListener(
       screenSpaceEventHandler,
-      "pointermove",
+      'pointermove',
       element,
       handlePointerMove
     );
     registerListener(
       screenSpaceEventHandler,
-      "pointercancel",
+      'pointercancel',
       element,
       handlePointerUp
     );
   } else {
     registerListener(
       screenSpaceEventHandler,
-      "mousedown",
+      'mousedown',
       element,
       handleMouseDown
     );
     registerListener(
       screenSpaceEventHandler,
-      "mouseup",
+      'mouseup',
       alternateElement,
       handleMouseUp
     );
     registerListener(
       screenSpaceEventHandler,
-      "mousemove",
+      'mousemove',
       alternateElement,
       handleMouseMove
     );
     registerListener(
       screenSpaceEventHandler,
-      "touchstart",
+      'touchstart',
       element,
       handleTouchStart
     );
     registerListener(
       screenSpaceEventHandler,
-      "touchend",
+      'touchend',
       alternateElement,
       handleTouchEnd
     );
     registerListener(
       screenSpaceEventHandler,
-      "touchmove",
+      'touchmove',
       alternateElement,
       handleTouchMove
     );
     registerListener(
       screenSpaceEventHandler,
-      "touchcancel",
+      'touchcancel',
       alternateElement,
       handleTouchEnd
     );
@@ -150,22 +150,22 @@ function registerListeners(screenSpaceEventHandler) {
 
   registerListener(
     screenSpaceEventHandler,
-    "dblclick",
+    'dblclick',
     element,
     handleDblClick
   );
 
   // detect available wheel event
   let wheelEvent;
-  if ("onwheel" in element) {
+  if ('onwheel' in element) {
     // spec event type
-    wheelEvent = "wheel";
+    wheelEvent = 'wheel';
   } else if (document.onmousewheel !== undefined) {
     // legacy event type
-    wheelEvent = "mousewheel";
+    wheelEvent = 'mousewheel';
   } else {
     // older Firefox
-    wheelEvent = "DOMMouseScroll";
+    wheelEvent = 'DOMMouseScroll';
   }
 
   registerListener(screenSpaceEventHandler, wheelEvent, element, handleWheel);
@@ -179,7 +179,7 @@ function unregisterListeners(screenSpaceEventHandler) {
 }
 
 const mouseDownEvent = {
-  position: new Cartesian2(),
+  position: new Cartesian2()
 };
 
 function gotTouchEvent(screenSpaceEventHandler) {
@@ -245,10 +245,10 @@ function handleMouseDown(screenSpaceEventHandler, event) {
 }
 
 const mouseUpEvent = {
-  position: new Cartesian2(),
+  position: new Cartesian2()
 };
 const mouseClickEvent = {
-  position: new Cartesian2(),
+  position: new Cartesian2()
 };
 
 function cancelMouseEvent(
@@ -344,7 +344,7 @@ function handleMouseUp(screenSpaceEventHandler, event) {
 
 const mouseMoveEvent = {
   startPosition: new Cartesian2(),
-  endPosition: new Cartesian2(),
+  endPosition: new Cartesian2()
 };
 
 function handleMouseMove(screenSpaceEventHandler, event) {
@@ -385,7 +385,7 @@ function handleMouseMove(screenSpaceEventHandler, event) {
 }
 
 const mouseDblClickEvent = {
-  position: new Cartesian2(),
+  position: new Cartesian2()
 };
 
 function handleDblClick(screenSpaceEventHandler, event) {
@@ -518,20 +518,20 @@ function handleTouchEnd(screenSpaceEventHandler, event) {
 }
 
 const touchStartEvent = {
-  position: new Cartesian2(),
+  position: new Cartesian2()
 };
 const touch2StartEvent = {
   position1: new Cartesian2(),
-  position2: new Cartesian2(),
+  position2: new Cartesian2()
 };
 const touchEndEvent = {
-  position: new Cartesian2(),
+  position: new Cartesian2()
 };
 const touchClickEvent = {
-  position: new Cartesian2(),
+  position: new Cartesian2()
 };
 const touchHoldEvent = {
-  position: new Cartesian2(),
+  position: new Cartesian2()
 };
 
 function fireTouchEvents(screenSpaceEventHandler, event) {
@@ -731,17 +731,17 @@ function handleTouchMove(screenSpaceEventHandler, event) {
 
 const touchMoveEvent = {
   startPosition: new Cartesian2(),
-  endPosition: new Cartesian2(),
+  endPosition: new Cartesian2()
 };
 const touchPinchMovementEvent = {
   distance: {
     startPosition: new Cartesian2(),
-    endPosition: new Cartesian2(),
+    endPosition: new Cartesian2()
   },
   angleAndHeight: {
     startPosition: new Cartesian2(),
-    endPosition: new Cartesian2(),
-  },
+    endPosition: new Cartesian2()
+  }
 };
 
 function fireTouchMoveEvents(screenSpaceEventHandler, event) {
@@ -832,7 +832,7 @@ function fireTouchMoveEvents(screenSpaceEventHandler, event) {
 function handlePointerDown(screenSpaceEventHandler, event) {
   event.target.setPointerCapture(event.pointerId);
 
-  if (event.pointerType === "touch") {
+  if (event.pointerType === 'touch') {
     const positions = screenSpaceEventHandler._positions;
 
     const identifier = event.pointerId;
@@ -854,7 +854,7 @@ function handlePointerDown(screenSpaceEventHandler, event) {
 }
 
 function handlePointerUp(screenSpaceEventHandler, event) {
-  if (event.pointerType === "touch") {
+  if (event.pointerType === 'touch') {
     const positions = screenSpaceEventHandler._positions;
 
     const identifier = event.pointerId;
@@ -870,7 +870,7 @@ function handlePointerUp(screenSpaceEventHandler, event) {
 }
 
 function handlePointerMove(screenSpaceEventHandler, event) {
-  if (event.pointerType === "touch") {
+  if (event.pointerType === 'touch') {
     const positions = screenSpaceEventHandler._positions;
 
     const identifier = event.pointerId;
@@ -984,11 +984,12 @@ function ScreenSpaceEventHandler(element) {
   this._buttonDown = {
     LEFT: false,
     MIDDLE: false,
-    RIGHT: false,
+    RIGHT: false
   };
   this._isPinching = false;
   this._isTouchHolding = false;
-  this._lastSeenTouchEvent = -ScreenSpaceEventHandler.mouseEmulationIgnoreMilliseconds;
+  this._lastSeenTouchEvent =
+    -ScreenSpaceEventHandler.mouseEmulationIgnoreMilliseconds;
 
   this._primaryStartPosition = new Cartesian2();
   this._primaryPosition = new Cartesian2();
@@ -1029,10 +1030,10 @@ ScreenSpaceEventHandler.prototype.setInputAction = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(action)) {
-    throw new DeveloperError("action is required.");
+    throw new DeveloperError('action is required.');
   }
   if (!defined(type)) {
-    throw new DeveloperError("type is required.");
+    throw new DeveloperError('type is required.');
   }
   //>>includeEnd('debug');
 
@@ -1055,7 +1056,7 @@ ScreenSpaceEventHandler.prototype.setInputAction = function (
 ScreenSpaceEventHandler.prototype.getInputAction = function (type, modifier) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(type)) {
-    throw new DeveloperError("type is required.");
+    throw new DeveloperError('type is required.');
   }
   //>>includeEnd('debug');
 
@@ -1079,7 +1080,7 @@ ScreenSpaceEventHandler.prototype.removeInputAction = function (
 ) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(type)) {
-    throw new DeveloperError("type is required.");
+    throw new DeveloperError('type is required.');
   }
   //>>includeEnd('debug');
 

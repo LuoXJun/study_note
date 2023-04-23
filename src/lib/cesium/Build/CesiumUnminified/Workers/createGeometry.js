@@ -23,7 +23,48 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-define(['./defaultValue-97284df2', './PrimitivePipeline-be008fb1', './createTaskProcessorWorker', './Transforms-273eeb44', './Matrix2-9e1c22e2', './RuntimeError-4f8ec8a2', './ComponentDatatype-4eeb6d9b', './WebGLConstants-6da700a2', './_commonjsHelpers-3aae1032-65601a27', './combine-d11b1f00', './GeometryAttribute-9be2d2e5', './GeometryAttributes-734a3446', './GeometryPipeline-d7363877', './AttributeCompression-f202be44', './EncodedCartesian3-491ac596', './IndexDatatype-f228f5fd', './IntersectionTests-ea138127', './Plane-76b84425', './WebMercatorProjection-3b121d41'], (function (defaultValue, PrimitivePipeline, createTaskProcessorWorker, Transforms, Matrix2, RuntimeError, ComponentDatatype, WebGLConstants, _commonjsHelpers3aae1032, combine, GeometryAttribute, GeometryAttributes, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection) { 'use strict';
+define([
+  './defaultValue-97284df2',
+  './PrimitivePipeline-be008fb1',
+  './createTaskProcessorWorker',
+  './Transforms-273eeb44',
+  './Matrix2-9e1c22e2',
+  './RuntimeError-4f8ec8a2',
+  './ComponentDatatype-4eeb6d9b',
+  './WebGLConstants-6da700a2',
+  './_commonjsHelpers-3aae1032-65601a27',
+  './combine-d11b1f00',
+  './GeometryAttribute-9be2d2e5',
+  './GeometryAttributes-734a3446',
+  './GeometryPipeline-d7363877',
+  './AttributeCompression-f202be44',
+  './EncodedCartesian3-491ac596',
+  './IndexDatatype-f228f5fd',
+  './IntersectionTests-ea138127',
+  './Plane-76b84425',
+  './WebMercatorProjection-3b121d41'
+], function (
+  defaultValue,
+  PrimitivePipeline,
+  createTaskProcessorWorker,
+  Transforms,
+  Matrix2,
+  RuntimeError,
+  ComponentDatatype,
+  WebGLConstants,
+  _commonjsHelpers3aae1032,
+  combine,
+  GeometryAttribute,
+  GeometryAttributes,
+  GeometryPipeline,
+  AttributeCompression,
+  EncodedCartesian3,
+  IndexDatatype,
+  IntersectionTests,
+  Plane,
+  WebMercatorProjection
+) {
+  'use strict';
 
   /* global require */
 
@@ -32,7 +73,7 @@ define(['./defaultValue-97284df2', './PrimitivePipeline-be008fb1', './createTask
   function getModule(moduleName) {
     let module = moduleCache[moduleName];
     if (!defaultValue.defined(module)) {
-      if (typeof exports === "object") {
+      if (typeof exports === 'object') {
         // Use CommonJS-style require.
         moduleCache[module] = module = require(`Workers/${moduleName}`);
       } else {
@@ -76,6 +117,5 @@ define(['./defaultValue-97284df2', './PrimitivePipeline-be008fb1', './createTask
   var createGeometry$1 = createTaskProcessorWorker(createGeometry);
 
   return createGeometry$1;
-
-}));
+});
 //# sourceMappingURL=createGeometry.js.map

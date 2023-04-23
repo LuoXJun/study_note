@@ -1,7 +1,7 @@
-import Check from "../Core/Check.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import MetadataClassProperty from "./MetadataClassProperty.js";
+import Check from '../Core/Check.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import MetadataClassProperty from './MetadataClassProperty.js';
 
 /**
  * A metadata class.
@@ -26,8 +26,8 @@ function MetadataClass(options) {
   const classDefinition = options.class;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.string("options.id", id);
-  Check.typeOf.object("options.class", classDefinition);
+  Check.typeOf.string('options.id', id);
+  Check.typeOf.object('options.class', classDefinition);
   //>>includeEnd('debug');
 
   const properties = {};
@@ -37,7 +37,7 @@ function MetadataClass(options) {
       const property = new MetadataClassProperty({
         id: propertyId,
         property: classDefinition.properties[propertyId],
-        enums: options.enums,
+        enums: options.enums
       });
       properties[propertyId] = property;
       if (defined(property.semantic)) {
@@ -67,7 +67,7 @@ Object.defineProperties(MetadataClass.prototype, {
   properties: {
     get: function () {
       return this._properties;
-    },
+    }
   },
 
   /**
@@ -82,7 +82,7 @@ Object.defineProperties(MetadataClass.prototype, {
   propertiesBySemantic: {
     get: function () {
       return this._propertiesBySemantic;
-    },
+    }
   },
 
   /**
@@ -96,7 +96,7 @@ Object.defineProperties(MetadataClass.prototype, {
   id: {
     get: function () {
       return this._id;
-    },
+    }
   },
 
   /**
@@ -110,7 +110,7 @@ Object.defineProperties(MetadataClass.prototype, {
   name: {
     get: function () {
       return this._name;
-    },
+    }
   },
 
   /**
@@ -124,7 +124,7 @@ Object.defineProperties(MetadataClass.prototype, {
   description: {
     get: function () {
       return this._description;
-    },
+    }
   },
 
   /**
@@ -138,7 +138,7 @@ Object.defineProperties(MetadataClass.prototype, {
   extras: {
     get: function () {
       return this._extras;
-    },
+    }
   },
 
   /**
@@ -152,8 +152,8 @@ Object.defineProperties(MetadataClass.prototype, {
   extensions: {
     get: function () {
       return this._extensions;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -162,6 +162,6 @@ Object.defineProperties(MetadataClass.prototype, {
  *
  * @private
  */
-MetadataClass.BATCH_TABLE_CLASS_NAME = "_batchTable";
+MetadataClass.BATCH_TABLE_CLASS_NAME = '_batchTable';
 
 export default MetadataClass;

@@ -1,11 +1,11 @@
-import Cartesian3 from "./Cartesian3.js";
-import Cartesian4 from "./Cartesian4.js";
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import HermiteSpline from "./HermiteSpline.js";
-import Matrix4 from "./Matrix4.js";
-import Spline from "./Spline.js";
+import Cartesian3 from './Cartesian3.js';
+import Cartesian4 from './Cartesian4.js';
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import HermiteSpline from './HermiteSpline.js';
+import Matrix4 from './Matrix4.js';
+import Spline from './Spline.js';
 
 const scratchTimeVec = new Cartesian4();
 const scratchTemp0 = new Cartesian3();
@@ -156,12 +156,12 @@ function CatmullRomSpline(options) {
   let lastTangent = options.lastTangent;
 
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("points", points);
-  Check.defined("times", times);
-  Check.typeOf.number.greaterThanOrEquals("points.length", points.length, 2);
+  Check.defined('points', points);
+  Check.defined('times', times);
+  Check.typeOf.number.greaterThanOrEquals('points.length', points.length, 2);
   Check.typeOf.number.equals(
-    "times.length",
-    "points.length",
+    'times.length',
+    'points.length',
     times.length,
     points.length
   );
@@ -207,7 +207,7 @@ Object.defineProperties(CatmullRomSpline.prototype, {
   times: {
     get: function () {
       return this._times;
-    },
+    }
   },
 
   /**
@@ -221,7 +221,7 @@ Object.defineProperties(CatmullRomSpline.prototype, {
   points: {
     get: function () {
       return this._points;
-    },
+    }
   },
 
   /**
@@ -235,7 +235,7 @@ Object.defineProperties(CatmullRomSpline.prototype, {
   firstTangent: {
     get: function () {
       return this._firstTangent;
-    },
+    }
   },
 
   /**
@@ -249,8 +249,8 @@ Object.defineProperties(CatmullRomSpline.prototype, {
   lastTangent: {
     get: function () {
       return this._lastTangent;
-    },
-  },
+    }
+  }
 });
 
 /**

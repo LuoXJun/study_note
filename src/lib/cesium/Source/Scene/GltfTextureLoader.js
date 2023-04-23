@@ -1,16 +1,16 @@
-import Check from "../Core/Check.js";
-import CesiumMath from "../Core/Math.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import Texture from "../Renderer/Texture.js";
-import TextureMinificationFilter from "../Renderer/TextureMinificationFilter.js";
-import TextureWrap from "../Renderer/TextureWrap.js";
-import GltfLoaderUtil from "./GltfLoaderUtil.js";
-import JobType from "./JobType.js";
-import ResourceLoader from "./ResourceLoader.js";
-import ResourceLoaderState from "./ResourceLoaderState.js";
-import resizeImageToNextPowerOfTwo from "../Core/resizeImageToNextPowerOfTwo.js";
+import Check from '../Core/Check.js';
+import CesiumMath from '../Core/Math.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import Texture from '../Renderer/Texture.js';
+import TextureMinificationFilter from '../Renderer/TextureMinificationFilter.js';
+import TextureWrap from '../Renderer/TextureWrap.js';
+import GltfLoaderUtil from './GltfLoaderUtil.js';
+import JobType from './JobType.js';
+import ResourceLoader from './ResourceLoader.js';
+import ResourceLoaderState from './ResourceLoaderState.js';
+import resizeImageToNextPowerOfTwo from '../Core/resizeImageToNextPowerOfTwo.js';
 
 /**
  * Loads a glTF texture.
@@ -46,12 +46,12 @@ export default function GltfTextureLoader(options) {
   const asynchronous = defaultValue(options.asynchronous, true);
 
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.func("options.resourceCache", resourceCache);
-  Check.typeOf.object("options.gltf", gltf);
-  Check.typeOf.object("options.textureInfo", textureInfo);
-  Check.typeOf.object("options.gltfResource", gltfResource);
-  Check.typeOf.object("options.baseResource", baseResource);
-  Check.typeOf.object("options.supportedImageFormats", supportedImageFormats);
+  Check.typeOf.func('options.resourceCache', resourceCache);
+  Check.typeOf.object('options.gltf', gltf);
+  Check.typeOf.object('options.textureInfo', textureInfo);
+  Check.typeOf.object('options.gltfResource', gltfResource);
+  Check.typeOf.object('options.baseResource', baseResource);
+  Check.typeOf.object('options.supportedImageFormats', supportedImageFormats);
   //>>includeEnd('debug');
 
   const textureId = textureInfo.index;
@@ -61,7 +61,7 @@ export default function GltfTextureLoader(options) {
   const imageId = GltfLoaderUtil.getImageIdFromTexture({
     gltf: gltf,
     textureId: textureId,
-    supportedImageFormats: supportedImageFormats,
+    supportedImageFormats: supportedImageFormats
   });
 
   this._resourceCache = resourceCache;
@@ -99,7 +99,7 @@ Object.defineProperties(GltfTextureLoader.prototype, {
   promise: {
     get: function () {
       return this._promise;
-    },
+    }
   },
   /**
    * The cache key of the resource.
@@ -113,7 +113,7 @@ Object.defineProperties(GltfTextureLoader.prototype, {
   cacheKey: {
     get: function () {
       return this._cacheKey;
-    },
+    }
   },
   /**
    * The texture.
@@ -127,8 +127,8 @@ Object.defineProperties(GltfTextureLoader.prototype, {
   texture: {
     get: function () {
       return this._texture;
-    },
-  },
+    }
+  }
 });
 
 const scratchTextureJob = new CreateTextureJob();
@@ -144,7 +144,7 @@ GltfTextureLoader.prototype.load = function () {
     gltf: this._gltf,
     imageId: this._imageId,
     gltfResource: this._gltfResource,
-    baseResource: this._baseResource,
+    baseResource: this._baseResource
   });
 
   this._imageLoader = imageLoader;
@@ -215,7 +215,7 @@ GltfTextureLoader.prototype.load = function () {
       }
       that.unload();
       that._state = ResourceLoaderState.FAILED;
-      const errorMessage = "Failed to load texture";
+      const errorMessage = 'Failed to load texture';
       return Promise.reject(that.getError(errorMessage, error));
     });
 
@@ -266,7 +266,7 @@ function createTexture(gltf, textureInfo, image, mipLevels, context) {
   const sampler = GltfLoaderUtil.createSampler({
     gltf: gltf,
     textureInfo: textureInfo,
-    compressedTextureNoMipmap: compressedTextureNoMipmap,
+    compressedTextureNoMipmap: compressedTextureNoMipmap
   });
 
   const minFilter = sampler.minificationFilter;
@@ -311,7 +311,7 @@ function createTexture(gltf, textureInfo, image, mipLevels, context) {
       requiresPowerOfTwo
     ) {
       console.warn(
-        "Compressed texture uses REPEAT or MIRRORED_REPEAT texture wrap mode and dimensions are not powers of two. The texture may be rendered incorrectly."
+        'Compressed texture uses REPEAT or MIRRORED_REPEAT texture wrap mode and dimensions are not powers of two. The texture may be rendered incorrectly.'
       );
     }
 
@@ -319,12 +319,12 @@ function createTexture(gltf, textureInfo, image, mipLevels, context) {
       context: context,
       source: {
         arrayBufferView: image.bufferView, // Only defined for CompressedTextureBuffer
-        mipLevels: mipLevels,
+        mipLevels: mipLevels
       },
       width: image.width,
       height: image.height,
       pixelFormat: image.internalFormat, // Only defined for CompressedTextureBuffer
-      sampler: sampler,
+      sampler: sampler
     });
   } else {
     if (requiresResize) {
@@ -335,7 +335,7 @@ function createTexture(gltf, textureInfo, image, mipLevels, context) {
       source: image,
       sampler: sampler,
       flipY: false,
-      skipColorSpaceConversion: true,
+      skipColorSpaceConversion: true
     });
   }
 
@@ -354,7 +354,7 @@ function createTexture(gltf, textureInfo, image, mipLevels, context) {
  */
 GltfTextureLoader.prototype.process = function (frameState) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("frameState", frameState);
+  Check.typeOf.object('frameState', frameState);
   //>>includeEnd('debug');
 
   return this._process(this, frameState);

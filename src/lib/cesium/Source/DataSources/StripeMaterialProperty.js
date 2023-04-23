@@ -1,10 +1,10 @@
-import Color from "../Core/Color.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import Event from "../Core/Event.js";
-import createPropertyDescriptor from "./createPropertyDescriptor.js";
-import Property from "./Property.js";
-import StripeOrientation from "./StripeOrientation.js";
+import Color from '../Core/Color.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import Event from '../Core/Event.js';
+import createPropertyDescriptor from './createPropertyDescriptor.js';
+import Property from './Property.js';
+import StripeOrientation from './StripeOrientation.js';
 
 const defaultOrientation = StripeOrientation.HORIZONTAL;
 const defaultEvenColor = Color.WHITE;
@@ -64,7 +64,7 @@ Object.defineProperties(StripeMaterialProperty.prototype, {
         Property.isConstant(this._offset) && //
         Property.isConstant(this._repeat)
       );
-    },
+    }
   },
   /**
    * Gets the event that is raised whenever the definition of this property changes.
@@ -78,7 +78,7 @@ Object.defineProperties(StripeMaterialProperty.prototype, {
   definitionChanged: {
     get: function () {
       return this._definitionChanged;
-    },
+    }
   },
 
   /**
@@ -87,7 +87,7 @@ Object.defineProperties(StripeMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default StripeOrientation.HORIZONTAL
    */
-  orientation: createPropertyDescriptor("orientation"),
+  orientation: createPropertyDescriptor('orientation'),
 
   /**
    * Gets or sets the Property specifying the first {@link Color}.
@@ -95,7 +95,7 @@ Object.defineProperties(StripeMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default Color.WHITE
    */
-  evenColor: createPropertyDescriptor("evenColor"),
+  evenColor: createPropertyDescriptor('evenColor'),
 
   /**
    * Gets or sets the Property specifying the second {@link Color}.
@@ -103,7 +103,7 @@ Object.defineProperties(StripeMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default Color.BLACK
    */
-  oddColor: createPropertyDescriptor("oddColor"),
+  oddColor: createPropertyDescriptor('oddColor'),
 
   /**
    * Gets or sets the numeric Property specifying the point into the pattern
@@ -114,7 +114,7 @@ Object.defineProperties(StripeMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default 0.0
    */
-  offset: createPropertyDescriptor("offset"),
+  offset: createPropertyDescriptor('offset'),
 
   /**
    * Gets or sets the numeric Property specifying how many times the stripes repeat.
@@ -122,7 +122,7 @@ Object.defineProperties(StripeMaterialProperty.prototype, {
    * @type {Property|undefined}
    * @default 1.0
    */
-  repeat: createPropertyDescriptor("repeat"),
+  repeat: createPropertyDescriptor('repeat')
 });
 
 /**
@@ -132,7 +132,7 @@ Object.defineProperties(StripeMaterialProperty.prototype, {
  * @returns {String} The type of material.
  */
 StripeMaterialProperty.prototype.getType = function (time) {
-  return "Stripe";
+  return 'Stripe';
 };
 
 /**

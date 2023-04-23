@@ -1,5 +1,5 @@
-import knockout from "../../ThirdParty/knockout.js";
-import createCommand from "../createCommand.js";
+import knockout from '../../ThirdParty/knockout.js';
+import createCommand from '../createCommand.js';
 
 /**
  * The view model for {@link NavigationHelpButton}.
@@ -32,9 +32,9 @@ function NavigationHelpButtonViewModel() {
    *
    * @type {String}
    */
-  this.tooltip = "Navigation Instructions";
+  this.tooltip = 'Navigation Instructions';
 
-  knockout.track(this, ["tooltip", "showInstructions", "_touch"]);
+  knockout.track(this, ['tooltip', 'showInstructions', '_touch']);
 }
 
 Object.defineProperties(NavigationHelpButtonViewModel.prototype, {
@@ -47,7 +47,7 @@ Object.defineProperties(NavigationHelpButtonViewModel.prototype, {
   command: {
     get: function () {
       return this._command;
-    },
+    }
   },
 
   /**
@@ -59,7 +59,7 @@ Object.defineProperties(NavigationHelpButtonViewModel.prototype, {
   showClick: {
     get: function () {
       return this._showClick;
-    },
+    }
   },
 
   /**
@@ -71,7 +71,7 @@ Object.defineProperties(NavigationHelpButtonViewModel.prototype, {
   showTouch: {
     get: function () {
       return this._showTouch;
-    },
-  },
+    }
+  }
 });
 export default NavigationHelpButtonViewModel;

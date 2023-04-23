@@ -1,6 +1,6 @@
-import Check from "./Check.js";
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
+import Check from './Check.js';
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
 
 /**
  * Array implementation of a heap.
@@ -14,8 +14,8 @@ import defined from "./defined.js";
  */
 function Heap(options) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("options", options);
-  Check.defined("options.comparator", options.comparator);
+  Check.typeOf.object('options', options);
+  Check.defined('options.comparator', options.comparator);
   //>>includeEnd('debug');
 
   this._comparator = options.comparator;
@@ -36,7 +36,7 @@ Object.defineProperties(Heap.prototype, {
   length: {
     get: function () {
       return this._length;
-    },
+    }
   },
 
   /**
@@ -50,7 +50,7 @@ Object.defineProperties(Heap.prototype, {
   internalArray: {
     get: function () {
       return this._array;
-    },
+    }
   },
 
   /**
@@ -66,7 +66,7 @@ Object.defineProperties(Heap.prototype, {
     },
     set: function (value) {
       //>>includeStart('debug', pragmas.debug);
-      Check.typeOf.number.greaterThanOrEquals("maximumLength", value, 0);
+      Check.typeOf.number.greaterThanOrEquals('maximumLength', value, 0);
       //>>includeEnd('debug');
       const originalLength = this._length;
       if (value < originalLength) {
@@ -79,7 +79,7 @@ Object.defineProperties(Heap.prototype, {
         array.length = value;
       }
       this._maximumLength = value;
-    },
+    }
   },
 
   /**
@@ -92,8 +92,8 @@ Object.defineProperties(Heap.prototype, {
   comparator: {
     get: function () {
       return this._comparator;
-    },
-  },
+    }
+  }
 });
 
 function swap(array, a, b) {
@@ -167,7 +167,7 @@ Heap.prototype.resort = function () {
  */
 Heap.prototype.insert = function (element) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("element", element);
+  Check.defined('element', element);
   //>>includeEnd('debug');
 
   const array = this._array;
@@ -213,7 +213,7 @@ Heap.prototype.pop = function (index) {
     return undefined;
   }
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.number.lessThan("index", index, this._length);
+  Check.typeOf.number.lessThan('index', index, this._length);
   //>>includeEnd('debug');
 
   const array = this._array;

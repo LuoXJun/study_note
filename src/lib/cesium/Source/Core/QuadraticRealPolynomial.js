@@ -1,5 +1,5 @@
-import DeveloperError from "./DeveloperError.js";
-import CesiumMath from "./Math.js";
+import DeveloperError from './DeveloperError.js';
+import CesiumMath from './Math.js';
 
 /**
  * Defines functions for 2nd order polynomial functions of one variable with only real coefficients.
@@ -18,14 +18,14 @@ const QuadraticRealPolynomial = {};
  */
 QuadraticRealPolynomial.computeDiscriminant = function (a, b, c) {
   //>>includeStart('debug', pragmas.debug);
-  if (typeof a !== "number") {
-    throw new DeveloperError("a is a required number.");
+  if (typeof a !== 'number') {
+    throw new DeveloperError('a is a required number.');
   }
-  if (typeof b !== "number") {
-    throw new DeveloperError("b is a required number.");
+  if (typeof b !== 'number') {
+    throw new DeveloperError('b is a required number.');
   }
-  if (typeof c !== "number") {
-    throw new DeveloperError("c is a required number.");
+  if (typeof c !== 'number') {
+    throw new DeveloperError('c is a required number.');
   }
   //>>includeEnd('debug');
 
@@ -55,14 +55,14 @@ function addWithCancellationCheck(left, right, tolerance) {
  */
 QuadraticRealPolynomial.computeRealRoots = function (a, b, c) {
   //>>includeStart('debug', pragmas.debug);
-  if (typeof a !== "number") {
-    throw new DeveloperError("a is a required number.");
+  if (typeof a !== 'number') {
+    throw new DeveloperError('a is a required number.');
   }
-  if (typeof b !== "number") {
-    throw new DeveloperError("b is a required number.");
+  if (typeof b !== 'number') {
+    throw new DeveloperError('b is a required number.');
   }
-  if (typeof c !== "number") {
-    throw new DeveloperError("c is a required number.");
+  if (typeof c !== 'number') {
+    throw new DeveloperError('c is a required number.');
   }
   //>>includeEnd('debug');
 

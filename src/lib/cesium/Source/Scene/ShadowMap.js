@@ -1,49 +1,49 @@
-import BoundingRectangle from "../Core/BoundingRectangle.js";
-import BoundingSphere from "../Core/BoundingSphere.js";
-import BoxOutlineGeometry from "../Core/BoxOutlineGeometry.js";
-import Cartesian2 from "../Core/Cartesian2.js";
-import Cartesian3 from "../Core/Cartesian3.js";
-import Cartesian4 from "../Core/Cartesian4.js";
-import Cartographic from "../Core/Cartographic.js";
-import clone from "../Core/clone.js";
-import Color from "../Core/Color.js";
-import ColorGeometryInstanceAttribute from "../Core/ColorGeometryInstanceAttribute.js";
-import combine from "../Core/combine.js";
-import CullingVolume from "../Core/CullingVolume.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import FeatureDetection from "../Core/FeatureDetection.js";
-import GeometryInstance from "../Core/GeometryInstance.js";
-import Intersect from "../Core/Intersect.js";
-import CesiumMath from "../Core/Math.js";
-import Matrix4 from "../Core/Matrix4.js";
-import OrthographicOffCenterFrustum from "../Core/OrthographicOffCenterFrustum.js";
-import PerspectiveFrustum from "../Core/PerspectiveFrustum.js";
-import PixelFormat from "../Core/PixelFormat.js";
-import Quaternion from "../Core/Quaternion.js";
-import SphereOutlineGeometry from "../Core/SphereOutlineGeometry.js";
-import WebGLConstants from "../Core/WebGLConstants.js";
-import ClearCommand from "../Renderer/ClearCommand.js";
-import ContextLimits from "../Renderer/ContextLimits.js";
-import CubeMap from "../Renderer/CubeMap.js";
-import DrawCommand from "../Renderer/DrawCommand.js";
-import Framebuffer from "../Renderer/Framebuffer.js";
-import Pass from "../Renderer/Pass.js";
-import PassState from "../Renderer/PassState.js";
-import PixelDatatype from "../Renderer/PixelDatatype.js";
-import Renderbuffer from "../Renderer/Renderbuffer.js";
-import RenderbufferFormat from "../Renderer/RenderbufferFormat.js";
-import RenderState from "../Renderer/RenderState.js";
-import Sampler from "../Renderer/Sampler.js";
-import Texture from "../Renderer/Texture.js";
-import Camera from "./Camera.js";
-import CullFace from "./CullFace.js";
-import DebugCameraPrimitive from "./DebugCameraPrimitive.js";
-import PerInstanceColorAppearance from "./PerInstanceColorAppearance.js";
-import Primitive from "./Primitive.js";
-import ShadowMapShader from "./ShadowMapShader.js";
+import BoundingRectangle from '../Core/BoundingRectangle.js';
+import BoundingSphere from '../Core/BoundingSphere.js';
+import BoxOutlineGeometry from '../Core/BoxOutlineGeometry.js';
+import Cartesian2 from '../Core/Cartesian2.js';
+import Cartesian3 from '../Core/Cartesian3.js';
+import Cartesian4 from '../Core/Cartesian4.js';
+import Cartographic from '../Core/Cartographic.js';
+import clone from '../Core/clone.js';
+import Color from '../Core/Color.js';
+import ColorGeometryInstanceAttribute from '../Core/ColorGeometryInstanceAttribute.js';
+import combine from '../Core/combine.js';
+import CullingVolume from '../Core/CullingVolume.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import FeatureDetection from '../Core/FeatureDetection.js';
+import GeometryInstance from '../Core/GeometryInstance.js';
+import Intersect from '../Core/Intersect.js';
+import CesiumMath from '../Core/Math.js';
+import Matrix4 from '../Core/Matrix4.js';
+import OrthographicOffCenterFrustum from '../Core/OrthographicOffCenterFrustum.js';
+import PerspectiveFrustum from '../Core/PerspectiveFrustum.js';
+import PixelFormat from '../Core/PixelFormat.js';
+import Quaternion from '../Core/Quaternion.js';
+import SphereOutlineGeometry from '../Core/SphereOutlineGeometry.js';
+import WebGLConstants from '../Core/WebGLConstants.js';
+import ClearCommand from '../Renderer/ClearCommand.js';
+import ContextLimits from '../Renderer/ContextLimits.js';
+import CubeMap from '../Renderer/CubeMap.js';
+import DrawCommand from '../Renderer/DrawCommand.js';
+import Framebuffer from '../Renderer/Framebuffer.js';
+import Pass from '../Renderer/Pass.js';
+import PassState from '../Renderer/PassState.js';
+import PixelDatatype from '../Renderer/PixelDatatype.js';
+import Renderbuffer from '../Renderer/Renderbuffer.js';
+import RenderbufferFormat from '../Renderer/RenderbufferFormat.js';
+import RenderState from '../Renderer/RenderState.js';
+import Sampler from '../Renderer/Sampler.js';
+import Texture from '../Renderer/Texture.js';
+import Camera from './Camera.js';
+import CullFace from './CullFace.js';
+import DebugCameraPrimitive from './DebugCameraPrimitive.js';
+import PerInstanceColorAppearance from './PerInstanceColorAppearance.js';
+import Primitive from './Primitive.js';
+import ShadowMapShader from './ShadowMapShader.js';
 
 /**
  * Use {@link Viewer#shadowMap} to get the scene's shadow map. Do not construct this directly.
@@ -82,17 +82,17 @@ function ShadowMap(options) {
 
   //>>includeStart('debug', pragmas.debug);
   if (!defined(context)) {
-    throw new DeveloperError("context is required.");
+    throw new DeveloperError('context is required.');
   }
   if (!defined(options.lightCamera)) {
-    throw new DeveloperError("lightCamera is required.");
+    throw new DeveloperError('lightCamera is required.');
   }
   if (
     defined(options.numberOfCascades) &&
     options.numberOfCascades !== 1 &&
     options.numberOfCascades !== 4
   ) {
-    throw new DeveloperError("Only one or four cascades are supported.");
+    throw new DeveloperError('Only one or four cascades are supported.');
   }
   //>>includeEnd('debug');
 
@@ -161,7 +161,7 @@ function ShadowMap(options) {
     normalOffsetScale: 0.5,
     normalShading: true,
     normalShadingSmooth: 0.3,
-    depthBias: 0.0001,
+    depthBias: 0.0001
   };
 
   this._primitiveBias = {
@@ -172,7 +172,7 @@ function ShadowMap(options) {
     normalOffsetScale: 0.1,
     normalShading: true,
     normalShadingSmooth: 0.05,
-    depthBias: 0.00002,
+    depthBias: 0.00002
   };
 
   this._pointBias = {
@@ -183,7 +183,7 @@ function ShadowMap(options) {
     normalOffsetScale: 0.0,
     normalShading: true,
     normalShadingSmooth: 0.1,
-    depthBias: 0.0005,
+    depthBias: 0.0005
   };
 
   // Framebuffer resources
@@ -232,7 +232,7 @@ function ShadowMap(options) {
     new Matrix4(),
     new Matrix4(),
     new Matrix4(),
-    new Matrix4(),
+    new Matrix4()
   ];
   this._cascadeDistances = new Cartesian4();
 
@@ -274,7 +274,7 @@ function ShadowMap(options) {
   // For clearing the shadow map texture every frame
   this._clearCommand = new ClearCommand({
     depth: 1.0,
-    color: new Color(),
+    color: new Color()
   });
 
   this._clearPassState = new PassState(context);
@@ -304,23 +304,23 @@ function createRenderState(colorMask, bias) {
   return RenderState.fromCache({
     cull: {
       enabled: true,
-      face: CullFace.BACK,
+      face: CullFace.BACK
     },
     depthTest: {
-      enabled: true,
+      enabled: true
     },
     colorMask: {
       red: colorMask,
       green: colorMask,
       blue: colorMask,
-      alpha: colorMask,
+      alpha: colorMask
     },
     depthMask: true,
     polygonOffset: {
       enabled: bias.polygonOffset,
       factor: bias.polygonOffsetFactor,
-      units: bias.polygonOffsetUnits,
-    },
+      units: bias.polygonOffsetUnits
+    }
   });
 }
 
@@ -363,7 +363,7 @@ Object.defineProperties(ShadowMap.prototype, {
     set: function (value) {
       this.dirty = this._enabled !== value;
       this._enabled = value;
-    },
+    }
   },
 
   /**
@@ -383,7 +383,7 @@ Object.defineProperties(ShadowMap.prototype, {
       this._terrainBias.normalOffset = value;
       this._primitiveBias.normalOffset = value;
       this._pointBias.normalOffset = value;
-    },
+    }
   },
 
   /**
@@ -400,7 +400,7 @@ Object.defineProperties(ShadowMap.prototype, {
     set: function (value) {
       this.dirty = this._softShadows !== value;
       this._softShadows = value;
-    },
+    }
   },
 
   /**
@@ -416,7 +416,7 @@ Object.defineProperties(ShadowMap.prototype, {
     },
     set: function (value) {
       resize(this, value);
-    },
+    }
   },
 
   /**
@@ -430,7 +430,7 @@ Object.defineProperties(ShadowMap.prototype, {
   outOfView: {
     get: function () {
       return this._outOfView;
-    },
+    }
   },
 
   /**
@@ -444,7 +444,7 @@ Object.defineProperties(ShadowMap.prototype, {
   shadowMapCullingVolume: {
     get: function () {
       return this._shadowMapCullingVolume;
-    },
+    }
   },
 
   /**
@@ -458,7 +458,7 @@ Object.defineProperties(ShadowMap.prototype, {
   passes: {
     get: function () {
       return this._passes;
-    },
+    }
   },
 
   /**
@@ -472,7 +472,7 @@ Object.defineProperties(ShadowMap.prototype, {
   isPointLight: {
     get: function () {
       return this._isPointLight;
-    },
+    }
   },
 
   /**
@@ -490,8 +490,8 @@ Object.defineProperties(ShadowMap.prototype, {
     set: function (value) {
       this.dirty = this._debugCascadeColors !== value;
       this._debugCascadeColors = value;
-    },
-  },
+    }
+  }
 });
 
 function destroyFramebuffer(shadowMap) {
@@ -517,7 +517,7 @@ function createFramebufferColor(shadowMap, context) {
     context: context,
     width: shadowMap._textureSize.x,
     height: shadowMap._textureSize.y,
-    format: RenderbufferFormat.DEPTH_COMPONENT16,
+    format: RenderbufferFormat.DEPTH_COMPONENT16
   });
 
   const colorTexture = new Texture({
@@ -526,14 +526,14 @@ function createFramebufferColor(shadowMap, context) {
     height: shadowMap._textureSize.y,
     pixelFormat: PixelFormat.RGBA,
     pixelDatatype: PixelDatatype.UNSIGNED_BYTE,
-    sampler: Sampler.NEAREST,
+    sampler: Sampler.NEAREST
   });
 
   const framebuffer = new Framebuffer({
     context: context,
     depthRenderbuffer: depthRenderbuffer,
     colorTextures: [colorTexture],
-    destroyAttachments: false,
+    destroyAttachments: false
   });
 
   const length = shadowMap._passes.length;
@@ -555,13 +555,13 @@ function createFramebufferDepth(shadowMap, context) {
     height: shadowMap._textureSize.y,
     pixelFormat: PixelFormat.DEPTH_STENCIL,
     pixelDatatype: PixelDatatype.UNSIGNED_INT_24_8,
-    sampler: Sampler.NEAREST,
+    sampler: Sampler.NEAREST
   });
 
   const framebuffer = new Framebuffer({
     context: context,
     depthStencilTexture: depthStencilTexture,
-    destroyAttachments: false,
+    destroyAttachments: false
   });
 
   const length = shadowMap._passes.length;
@@ -580,7 +580,7 @@ function createFramebufferCube(shadowMap, context) {
     context: context,
     width: shadowMap._textureSize.x,
     height: shadowMap._textureSize.y,
-    format: RenderbufferFormat.DEPTH_COMPONENT16,
+    format: RenderbufferFormat.DEPTH_COMPONENT16
   });
 
   const cubeMap = new CubeMap({
@@ -589,7 +589,7 @@ function createFramebufferCube(shadowMap, context) {
     height: shadowMap._textureSize.y,
     pixelFormat: PixelFormat.RGBA,
     pixelDatatype: PixelDatatype.UNSIGNED_BYTE,
-    sampler: Sampler.NEAREST,
+    sampler: Sampler.NEAREST
   });
 
   const faces = [
@@ -598,7 +598,7 @@ function createFramebufferCube(shadowMap, context) {
     cubeMap.negativeZ,
     cubeMap.positiveX,
     cubeMap.positiveY,
-    cubeMap.positiveZ,
+    cubeMap.positiveZ
   ];
 
   for (let i = 0; i < 6; ++i) {
@@ -606,7 +606,7 @@ function createFramebufferCube(shadowMap, context) {
       context: context,
       depthRenderbuffer: depthRenderbuffer,
       colorTextures: [faces[i]],
-      destroyAttachments: false,
+      destroyAttachments: false
     });
     const pass = shadowMap._passes[i];
     pass.framebuffer = framebuffer;
@@ -760,70 +760,70 @@ function createDebugShadowViewCommand(shadowMap, context) {
   let fs;
   if (shadowMap._isPointLight) {
     fs =
-      "uniform samplerCube shadowMap_textureCube; \n" +
-      "varying vec2 v_textureCoordinates; \n" +
-      "void main() \n" +
-      "{ \n" +
-      "    vec2 uv = v_textureCoordinates; \n" +
-      "    vec3 dir; \n" +
-      " \n" +
-      "    if (uv.y < 0.5) \n" +
-      "    { \n" +
-      "        if (uv.x < 0.333) \n" +
-      "        { \n" +
-      "            dir.x = -1.0; \n" +
-      "            dir.y = uv.x * 6.0 - 1.0; \n" +
-      "            dir.z = uv.y * 4.0 - 1.0; \n" +
-      "        } \n" +
-      "        else if (uv.x < 0.666) \n" +
-      "        { \n" +
-      "            dir.y = -1.0; \n" +
-      "            dir.x = uv.x * 6.0 - 3.0; \n" +
-      "            dir.z = uv.y * 4.0 - 1.0; \n" +
-      "        } \n" +
-      "        else \n" +
-      "        { \n" +
-      "            dir.z = -1.0; \n" +
-      "            dir.x = uv.x * 6.0 - 5.0; \n" +
-      "            dir.y = uv.y * 4.0 - 1.0; \n" +
-      "        } \n" +
-      "    } \n" +
-      "    else \n" +
-      "    { \n" +
-      "        if (uv.x < 0.333) \n" +
-      "        { \n" +
-      "            dir.x = 1.0; \n" +
-      "            dir.y = uv.x * 6.0 - 1.0; \n" +
-      "            dir.z = uv.y * 4.0 - 3.0; \n" +
-      "        } \n" +
-      "        else if (uv.x < 0.666) \n" +
-      "        { \n" +
-      "            dir.y = 1.0; \n" +
-      "            dir.x = uv.x * 6.0 - 3.0; \n" +
-      "            dir.z = uv.y * 4.0 - 3.0; \n" +
-      "        } \n" +
-      "        else \n" +
-      "        { \n" +
-      "            dir.z = 1.0; \n" +
-      "            dir.x = uv.x * 6.0 - 5.0; \n" +
-      "            dir.y = uv.y * 4.0 - 3.0; \n" +
-      "        } \n" +
-      "    } \n" +
-      " \n" +
-      "    float shadow = czm_unpackDepth(textureCube(shadowMap_textureCube, dir)); \n" +
-      "    gl_FragColor = vec4(vec3(shadow), 1.0); \n" +
-      "} \n";
+      'uniform samplerCube shadowMap_textureCube; \n' +
+      'varying vec2 v_textureCoordinates; \n' +
+      'void main() \n' +
+      '{ \n' +
+      '    vec2 uv = v_textureCoordinates; \n' +
+      '    vec3 dir; \n' +
+      ' \n' +
+      '    if (uv.y < 0.5) \n' +
+      '    { \n' +
+      '        if (uv.x < 0.333) \n' +
+      '        { \n' +
+      '            dir.x = -1.0; \n' +
+      '            dir.y = uv.x * 6.0 - 1.0; \n' +
+      '            dir.z = uv.y * 4.0 - 1.0; \n' +
+      '        } \n' +
+      '        else if (uv.x < 0.666) \n' +
+      '        { \n' +
+      '            dir.y = -1.0; \n' +
+      '            dir.x = uv.x * 6.0 - 3.0; \n' +
+      '            dir.z = uv.y * 4.0 - 1.0; \n' +
+      '        } \n' +
+      '        else \n' +
+      '        { \n' +
+      '            dir.z = -1.0; \n' +
+      '            dir.x = uv.x * 6.0 - 5.0; \n' +
+      '            dir.y = uv.y * 4.0 - 1.0; \n' +
+      '        } \n' +
+      '    } \n' +
+      '    else \n' +
+      '    { \n' +
+      '        if (uv.x < 0.333) \n' +
+      '        { \n' +
+      '            dir.x = 1.0; \n' +
+      '            dir.y = uv.x * 6.0 - 1.0; \n' +
+      '            dir.z = uv.y * 4.0 - 3.0; \n' +
+      '        } \n' +
+      '        else if (uv.x < 0.666) \n' +
+      '        { \n' +
+      '            dir.y = 1.0; \n' +
+      '            dir.x = uv.x * 6.0 - 3.0; \n' +
+      '            dir.z = uv.y * 4.0 - 3.0; \n' +
+      '        } \n' +
+      '        else \n' +
+      '        { \n' +
+      '            dir.z = 1.0; \n' +
+      '            dir.x = uv.x * 6.0 - 5.0; \n' +
+      '            dir.y = uv.y * 4.0 - 3.0; \n' +
+      '        } \n' +
+      '    } \n' +
+      ' \n' +
+      '    float shadow = czm_unpackDepth(textureCube(shadowMap_textureCube, dir)); \n' +
+      '    gl_FragColor = vec4(vec3(shadow), 1.0); \n' +
+      '} \n';
   } else {
     fs =
       `${
-        "uniform sampler2D shadowMap_texture; \n" +
-        "varying vec2 v_textureCoordinates; \n" +
-        "void main() \n" +
-        "{ \n"
+        'uniform sampler2D shadowMap_texture; \n' +
+        'varying vec2 v_textureCoordinates; \n' +
+        'void main() \n' +
+        '{ \n'
       }${
         shadowMap._usesDepthTexture
-          ? "    float shadow = texture2D(shadowMap_texture, v_textureCoordinates).r; \n"
-          : "    float shadow = czm_unpackDepth(texture2D(shadowMap_texture, v_textureCoordinates)); \n"
+          ? '    float shadow = texture2D(shadowMap_texture, v_textureCoordinates).r; \n'
+          : '    float shadow = czm_unpackDepth(texture2D(shadowMap_texture, v_textureCoordinates)); \n'
       }    gl_FragColor = vec4(vec3(shadow), 1.0); \n` + `} \n`;
   }
 
@@ -834,8 +834,8 @@ function createDebugShadowViewCommand(shadowMap, context) {
       },
       shadowMap_textureCube: function () {
         return shadowMap._shadowMapTexture;
-      },
-    },
+      }
+    }
   });
   drawCommand.pass = Pass.OVERLAY;
   return drawCommand;
@@ -866,7 +866,7 @@ function updateDebugShadowViewCommand(shadowMap, frameState) {
     !BoundingRectangle.equals(debugCommand.renderState.viewport, viewport)
   ) {
     debugCommand.renderState = RenderState.fromCache({
-      viewport: BoundingRectangle.clone(viewport),
+      viewport: BoundingRectangle.clone(viewport)
     });
   }
 
@@ -893,30 +893,30 @@ function createDebugPointLight(modelMatrix, color) {
   const box = new GeometryInstance({
     geometry: new BoxOutlineGeometry({
       minimum: new Cartesian3(-0.5, -0.5, -0.5),
-      maximum: new Cartesian3(0.5, 0.5, 0.5),
+      maximum: new Cartesian3(0.5, 0.5, 0.5)
     }),
     attributes: {
-      color: ColorGeometryInstanceAttribute.fromColor(color),
-    },
+      color: ColorGeometryInstanceAttribute.fromColor(color)
+    }
   });
 
   const sphere = new GeometryInstance({
     geometry: new SphereOutlineGeometry({
-      radius: 0.5,
+      radius: 0.5
     }),
     attributes: {
-      color: ColorGeometryInstanceAttribute.fromColor(color),
-    },
+      color: ColorGeometryInstanceAttribute.fromColor(color)
+    }
   });
 
   return new Primitive({
     geometryInstances: [box, sphere],
     appearance: new PerInstanceColorAppearance({
       translucent: false,
-      flat: true,
+      flat: true
     }),
     asynchronous: false,
-    modelMatrix: modelMatrix,
+    modelMatrix: modelMatrix
   });
 }
 
@@ -940,7 +940,7 @@ function applyDebugSettings(shadowMap, frameState) {
       shadowMap._debugCameraFrustum = new DebugCameraPrimitive({
         camera: shadowMap._sceneCamera,
         color: Color.CYAN,
-        updateOnChange: false,
+        updateOnChange: false
       });
     }
     shadowMap._debugCameraFrustum.update(frameState);
@@ -957,7 +957,7 @@ function applyDebugSettings(shadowMap, frameState) {
         shadowMap._debugLightFrustum = new DebugCameraPrimitive({
           camera: shadowMap._shadowMapCamera,
           color: Color.YELLOW,
-          updateOnChange: false,
+          updateOnChange: false
         });
       }
       shadowMap._debugLightFrustum.update(frameState);
@@ -971,7 +971,7 @@ function applyDebugSettings(shadowMap, frameState) {
           shadowMap._debugCascadeFrustums[i] = new DebugCameraPrimitive({
             camera: shadowMap._passes[i].camera,
             color: debugOutlineColors[i],
-            updateOnChange: false,
+            updateOnChange: false
           });
         }
         shadowMap._debugCascadeFrustums[i].update(frameState);
@@ -1008,7 +1008,7 @@ function applyDebugSettings(shadowMap, frameState) {
       shadowMap._debugLightFrustum = new DebugCameraPrimitive({
         camera: shadowMap._shadowMapCamera,
         color: Color.YELLOW,
-        updateOnChange: false,
+        updateOnChange: false
       });
     }
     shadowMap._debugLightFrustum.update(frameState);
@@ -1351,7 +1351,7 @@ const directions = [
   new Cartesian3(0.0, 0.0, -1.0),
   new Cartesian3(1.0, 0.0, 0.0),
   new Cartesian3(0.0, 1.0, 0.0),
-  new Cartesian3(0.0, 0.0, 1.0),
+  new Cartesian3(0.0, 0.0, 1.0)
 ];
 
 const ups = [
@@ -1360,7 +1360,7 @@ const ups = [
   new Cartesian3(0.0, -1.0, 0.0),
   new Cartesian3(0.0, -1.0, 0.0),
   new Cartesian3(0.0, 0.0, 1.0),
-  new Cartesian3(0.0, -1.0, 0.0),
+  new Cartesian3(0.0, -1.0, 0.0)
 ];
 
 const rights = [
@@ -1369,7 +1369,7 @@ const rights = [
   new Cartesian3(-1.0, 0.0, 0.0),
   new Cartesian3(0.0, 0.0, -1.0),
   new Cartesian3(1.0, 0.0, 0.0),
-  new Cartesian3(1.0, 0.0, 0.0),
+  new Cartesian3(1.0, 0.0, 0.0)
 ];
 
 function computeOmnidirectional(shadowMap, frameState) {
@@ -1383,10 +1383,11 @@ function computeOmnidirectional(shadowMap, frameState) {
   for (let i = 0; i < 6; ++i) {
     const camera = shadowMap._passes[i].camera;
     camera.positionWC = shadowMap._shadowMapCamera.positionWC;
-    camera.positionCartographic = frameState.mapProjection.ellipsoid.cartesianToCartographic(
-      camera.positionWC,
-      camera.positionCartographic
-    );
+    camera.positionCartographic =
+      frameState.mapProjection.ellipsoid.cartesianToCartographic(
+        camera.positionWC,
+        camera.positionCartographic
+      );
     camera.directionWC = directions[i];
     camera.upWC = ups[i];
     camera.rightWC = rights[i];
@@ -1425,10 +1426,11 @@ function checkVisibility(shadowMap, frameState) {
     }
 
     // If the light source is below the horizon then the shadow map is out of view
-    const surfaceNormal = frameState.mapProjection.ellipsoid.geodeticSurfaceNormal(
-      sceneCamera.positionWC,
-      scratchCartesian1
-    );
+    const surfaceNormal =
+      frameState.mapProjection.ellipsoid.geodeticSurfaceNormal(
+        sceneCamera.positionWC,
+        scratchCartesian1
+      );
     const lightDirection = Cartesian3.negate(
       shadowMapCamera.directionWC,
       scratchCartesian2
@@ -1582,11 +1584,8 @@ ShadowMap.prototype.update = function (frameState) {
       const position = shadowMapCamera.positionWC;
       const direction = shadowMapCamera.directionWC;
       const up = shadowMapCamera.upWC;
-      this._shadowMapCullingVolume = shadowMapCamera.frustum.computeCullingVolume(
-        position,
-        direction,
-        up
-      );
+      this._shadowMapCullingVolume =
+        shadowMapCamera.frustum.computeCullingVolume(position, direction, up);
 
       if (this._passes.length === 1) {
         // Since there is only one pass, use the shadow map camera as the pass camera.
@@ -1680,7 +1679,7 @@ function combineUniforms(shadowMap, uniforms, isTerrain) {
     },
 
     combinedUniforms1: new Cartesian4(),
-    combinedUniforms2: new Cartesian4(),
+    combinedUniforms2: new Cartesian4()
   };
 
   return combine(uniforms, mapUniforms, false);
@@ -1751,7 +1750,7 @@ function createCastDerivedCommand(
         {
           vertexShaderSource: castVS,
           fragmentShaderSource: castFS,
-          attributeLocations: shaderProgram._attributeLocations,
+          attributeLocations: shaderProgram._attributeLocations
         }
       );
     }
@@ -1864,7 +1863,7 @@ ShadowMap.createReceiveDerivedCommand = function (
           {
             vertexShaderSource: receiveVS,
             fragmentShaderSource: receiveFS,
-            attributeLocations: shaderProgram._attributeLocations,
+            attributeLocations: shaderProgram._attributeLocations
           }
         );
       }

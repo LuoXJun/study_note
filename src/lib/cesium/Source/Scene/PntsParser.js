@@ -1,15 +1,15 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import Color from "../Core/Color.js";
-import combine from "../Core/combine.js";
-import ComponentDatatype from "../Core/ComponentDatatype.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import getJsonFromTypedArray from "../Core/getJsonFromTypedArray.js";
-import RuntimeError from "../Core/RuntimeError.js";
-import AttributeType from "./AttributeType.js";
-import Cesium3DTileFeatureTable from "./Cesium3DTileFeatureTable.js";
-import VertexAttributeSemantic from "./VertexAttributeSemantic.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import Color from '../Core/Color.js';
+import combine from '../Core/combine.js';
+import ComponentDatatype from '../Core/ComponentDatatype.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import getJsonFromTypedArray from '../Core/getJsonFromTypedArray.js';
+import RuntimeError from '../Core/RuntimeError.js';
+import AttributeType from './AttributeType.js';
+import Cesium3DTileFeatureTable from './Cesium3DTileFeatureTable.js';
+import VertexAttributeSemantic from './VertexAttributeSemantic.js';
 
 /**
  * Handles parsing of a Point Cloud
@@ -33,7 +33,7 @@ const sizeOfUint32 = Uint32Array.BYTES_PER_ELEMENT;
 PntsParser.parse = function (arrayBuffer, byteOffset) {
   byteOffset = defaultValue(byteOffset, 0);
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("arrayBuffer", arrayBuffer);
+  Check.defined('arrayBuffer', arrayBuffer);
   //>>includeEnd('debug');
 
   const uint8Array = new Uint8Array(arrayBuffer);
@@ -54,7 +54,7 @@ PntsParser.parse = function (arrayBuffer, byteOffset) {
   const featureTableJsonByteLength = view.getUint32(byteOffset, true);
   if (featureTableJsonByteLength === 0) {
     throw new RuntimeError(
-      "Feature table must have a byte length greater than zero"
+      'Feature table must have a byte length greater than zero'
     );
   }
   byteOffset += sizeOfUint32;
@@ -109,17 +109,17 @@ PntsParser.parse = function (arrayBuffer, byteOffset) {
     featureTableBinary
   );
 
-  const pointsLength = featureTable.getGlobalProperty("POINTS_LENGTH");
+  const pointsLength = featureTable.getGlobalProperty('POINTS_LENGTH');
   featureTable.featuresLength = pointsLength;
 
   if (!defined(pointsLength)) {
     throw new RuntimeError(
-      "Feature table global property: POINTS_LENGTH must be defined"
+      'Feature table global property: POINTS_LENGTH must be defined'
     );
   }
 
   let rtcCenter = featureTable.getGlobalProperty(
-    "RTC_CENTER",
+    'RTC_CENTER',
     ComponentDatatype.FLOAT,
     3
   );
@@ -142,7 +142,7 @@ PntsParser.parse = function (arrayBuffer, byteOffset) {
 
   if (!parsedContent.hasPositions) {
     throw new RuntimeError(
-      "Either POSITION or POSITION_QUANTIZED must be defined."
+      'Either POSITION or POSITION_QUANTIZED must be defined.'
     );
   }
 
@@ -167,10 +167,10 @@ PntsParser.parse = function (arrayBuffer, byteOffset) {
   }
 
   if (parsedContent.hasBatchIds) {
-    const batchLength = featureTable.getGlobalProperty("BATCH_LENGTH");
+    const batchLength = featureTable.getGlobalProperty('BATCH_LENGTH');
     if (!defined(batchLength)) {
       throw new RuntimeError(
-        "Global property: BATCH_LENGTH must be defined when BATCH_ID is defined."
+        'Global property: BATCH_LENGTH must be defined when BATCH_ID is defined.'
       );
     }
     parsedContent.batchLength = batchLength;
@@ -193,11 +193,11 @@ function parseDracoProperties(featureTable, batchTableJson) {
   let dracoBatchTableProperties;
 
   const featureTableDraco = defined(featureTableJson.extensions)
-    ? featureTableJson.extensions["3DTILES_draco_point_compression"]
+    ? featureTableJson.extensions['3DTILES_draco_point_compression']
     : undefined;
   const batchTableDraco =
     defined(batchTableJson) && defined(batchTableJson.extensions)
-      ? batchTableJson.extensions["3DTILES_draco_point_compression"]
+      ? batchTableJson.extensions['3DTILES_draco_point_compression']
       : undefined;
 
   if (defined(batchTableDraco)) {
@@ -219,7 +219,7 @@ function parseDracoProperties(featureTable, batchTableJson) {
       !defined(dracoByteLength)
     ) {
       throw new RuntimeError(
-        "Draco properties, byteOffset, and byteLength must be defined"
+        'Draco properties, byteOffset, and byteLength must be defined'
       );
     }
     dracoBuffer = featureTable.buffer.slice(
@@ -245,7 +245,7 @@ function parseDracoProperties(featureTable, batchTableJson) {
         dracoFeatureTableProperties,
         dracoBatchTableProperties
       ),
-      dequantizeInShader: true,
+      dequantizeInShader: true
     };
   }
 
@@ -255,7 +255,7 @@ function parseDracoProperties(featureTable, batchTableJson) {
     hasColors: hasColors,
     isTranslucent: isTranslucent,
     hasNormals: hasNormals,
-    hasBatchIds: hasBatchIds,
+    hasBatchIds: hasBatchIds
   };
 }
 
@@ -265,7 +265,7 @@ function parsePositions(featureTable) {
   let positions;
   if (defined(featureTableJson.POSITION)) {
     positions = featureTable.getPropertyArray(
-      "POSITION",
+      'POSITION',
       ComponentDatatype.FLOAT,
       3
     );
@@ -276,35 +276,35 @@ function parsePositions(featureTable) {
       typedArray: positions,
       isQuantized: false,
       componentDatatype: ComponentDatatype.FLOAT,
-      type: AttributeType.VEC3,
+      type: AttributeType.VEC3
     };
   } else if (defined(featureTableJson.POSITION_QUANTIZED)) {
     positions = featureTable.getPropertyArray(
-      "POSITION_QUANTIZED",
+      'POSITION_QUANTIZED',
       ComponentDatatype.UNSIGNED_SHORT,
       3
     );
 
     const quantizedVolumeScale = featureTable.getGlobalProperty(
-      "QUANTIZED_VOLUME_SCALE",
+      'QUANTIZED_VOLUME_SCALE',
       ComponentDatatype.FLOAT,
       3
     );
     if (!defined(quantizedVolumeScale)) {
       throw new RuntimeError(
-        "Global property: QUANTIZED_VOLUME_SCALE must be defined for quantized positions."
+        'Global property: QUANTIZED_VOLUME_SCALE must be defined for quantized positions.'
       );
     }
     const quantizedRange = (1 << 16) - 1;
 
     const quantizedVolumeOffset = featureTable.getGlobalProperty(
-      "QUANTIZED_VOLUME_OFFSET",
+      'QUANTIZED_VOLUME_OFFSET',
       ComponentDatatype.FLOAT,
       3
     );
     if (!defined(quantizedVolumeOffset)) {
       throw new RuntimeError(
-        "Global property: QUANTIZED_VOLUME_OFFSET must be defined for quantized positions."
+        'Global property: QUANTIZED_VOLUME_OFFSET must be defined for quantized positions.'
       );
     }
 
@@ -319,7 +319,7 @@ function parsePositions(featureTable) {
       quantizedVolumeOffset: Cartesian3.unpack(quantizedVolumeOffset),
       quantizedVolumeScale: Cartesian3.unpack(quantizedVolumeScale),
       quantizedComponentDatatype: ComponentDatatype.UNSIGNED_SHORT,
-      quantizedType: AttributeType.VEC3,
+      quantizedType: AttributeType.VEC3
     };
   }
 }
@@ -330,7 +330,7 @@ function parseColors(featureTable) {
   let colors;
   if (defined(featureTableJson.RGBA)) {
     colors = featureTable.getPropertyArray(
-      "RGBA",
+      'RGBA',
       ComponentDatatype.UNSIGNED_BYTE,
       4
     );
@@ -343,16 +343,16 @@ function parseColors(featureTable) {
       type: AttributeType.VEC4,
       normalized: true,
       isRGB565: false,
-      isTranslucent: true,
+      isTranslucent: true
     };
   } else if (defined(featureTableJson.RGB)) {
     colors = featureTable.getPropertyArray(
-      "RGB",
+      'RGB',
       ComponentDatatype.UNSIGNED_BYTE,
       3
     );
     return {
-      name: "COLOR",
+      name: 'COLOR',
       semantic: VertexAttributeSemantic.COLOR,
       setIndex: 0,
       typedArray: colors,
@@ -360,16 +360,16 @@ function parseColors(featureTable) {
       type: AttributeType.VEC3,
       normalized: true,
       isRGB565: false,
-      isTranslucent: false,
+      isTranslucent: false
     };
   } else if (defined(featureTableJson.RGB565)) {
     colors = featureTable.getPropertyArray(
-      "RGB565",
+      'RGB565',
       ComponentDatatype.UNSIGNED_SHORT,
       1
     );
     return {
-      name: "COLOR",
+      name: 'COLOR',
       semantic: VertexAttributeSemantic.COLOR,
       setIndex: 0,
       typedArray: colors,
@@ -381,11 +381,11 @@ function parseColors(featureTable) {
       type: AttributeType.VEC3,
       normalized: false,
       isRGB565: true,
-      isTranslucent: false,
+      isTranslucent: false
     };
   } else if (defined(featureTableJson.CONSTANT_RGBA)) {
     const constantRGBA = featureTable.getGlobalProperty(
-      "CONSTANT_RGBA",
+      'CONSTANT_RGBA',
       ComponentDatatype.UNSIGNED_BYTE,
       4
     );
@@ -407,7 +407,7 @@ function parseColors(featureTable) {
       componentDatatype: ComponentDatatype.FLOAT,
       type: AttributeType.VEC4,
       isQuantized: false,
-      isTranslucent: isTranslucent,
+      isTranslucent: isTranslucent
     };
   }
 
@@ -419,7 +419,7 @@ function parseNormals(featureTable) {
   let normals;
   if (defined(featureTableJson.NORMAL)) {
     normals = featureTable.getPropertyArray(
-      "NORMAL",
+      'NORMAL',
       ComponentDatatype.FLOAT,
       3
     );
@@ -430,11 +430,11 @@ function parseNormals(featureTable) {
       octEncoded: false,
       octEncodedZXY: false,
       componentDatatype: ComponentDatatype.FLOAT,
-      type: AttributeType.VEC3,
+      type: AttributeType.VEC3
     };
   } else if (defined(featureTableJson.NORMAL_OCT16P)) {
     normals = featureTable.getPropertyArray(
-      "NORMAL_OCT16P",
+      'NORMAL_OCT16P',
       ComponentDatatype.UNSIGNED_BYTE,
       2
     );
@@ -449,7 +449,7 @@ function parseNormals(featureTable) {
       quantizedType: AttributeType.VEC2,
       quantizedComponentDatatype: ComponentDatatype.UNSIGNED_BYTE,
       componentDatatype: ComponentDatatype.FLOAT,
-      type: AttributeType.VEC3,
+      type: AttributeType.VEC3
     };
   }
 
@@ -460,7 +460,7 @@ function parseBatchIds(featureTable) {
   const featureTableJson = featureTable.json;
   if (defined(featureTableJson.BATCH_ID)) {
     const batchIds = featureTable.getPropertyArray(
-      "BATCH_ID",
+      'BATCH_ID',
       ComponentDatatype.UNSIGNED_SHORT,
       1
     );
@@ -470,7 +470,7 @@ function parseBatchIds(featureTable) {
       setIndex: 0,
       typedArray: batchIds,
       componentDatatype: ComponentDatatype.fromTypedArray(batchIds),
-      type: AttributeType.SCALAR,
+      type: AttributeType.SCALAR
     };
   }
 

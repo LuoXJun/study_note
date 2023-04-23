@@ -1,4 +1,4 @@
-import defined from "./defined.js";
+import defined from './defined.js';
 
 let _supportsFullscreen;
 const _names = {
@@ -7,7 +7,7 @@ const _names = {
   fullscreenEnabled: undefined,
   fullscreenElement: undefined,
   fullscreenchange: undefined,
-  fullscreenerror: undefined,
+  fullscreenerror: undefined
 };
 
 /**
@@ -34,7 +34,7 @@ Object.defineProperties(Fullscreen, {
       }
 
       return document[_names.fullscreenElement];
-    },
+    }
   },
 
   /**
@@ -53,7 +53,7 @@ Object.defineProperties(Fullscreen, {
       }
 
       return _names.fullscreenchange;
-    },
+    }
   },
 
   /**
@@ -70,7 +70,7 @@ Object.defineProperties(Fullscreen, {
       }
 
       return _names.fullscreenerror;
-    },
+    }
   },
 
   /**
@@ -88,7 +88,7 @@ Object.defineProperties(Fullscreen, {
       }
 
       return document[_names.fullscreenEnabled];
-    },
+    }
   },
 
   /**
@@ -104,8 +104,8 @@ Object.defineProperties(Fullscreen, {
       }
 
       return Fullscreen.element !== null;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -122,32 +122,32 @@ Fullscreen.supportsFullscreen = function () {
   _supportsFullscreen = false;
 
   const body = document.body;
-  if (typeof body.requestFullscreen === "function") {
+  if (typeof body.requestFullscreen === 'function') {
     // go with the unprefixed, standard set of names
-    _names.requestFullscreen = "requestFullscreen";
-    _names.exitFullscreen = "exitFullscreen";
-    _names.fullscreenEnabled = "fullscreenEnabled";
-    _names.fullscreenElement = "fullscreenElement";
-    _names.fullscreenchange = "fullscreenchange";
-    _names.fullscreenerror = "fullscreenerror";
+    _names.requestFullscreen = 'requestFullscreen';
+    _names.exitFullscreen = 'exitFullscreen';
+    _names.fullscreenEnabled = 'fullscreenEnabled';
+    _names.fullscreenElement = 'fullscreenElement';
+    _names.fullscreenchange = 'fullscreenchange';
+    _names.fullscreenerror = 'fullscreenerror';
     _supportsFullscreen = true;
     return _supportsFullscreen;
   }
 
   //check for the correct combination of prefix plus the various names that browsers use
-  const prefixes = ["webkit", "moz", "o", "ms", "khtml"];
+  const prefixes = ['webkit', 'moz', 'o', 'ms', 'khtml'];
   let name;
   for (let i = 0, len = prefixes.length; i < len; ++i) {
     const prefix = prefixes[i];
 
     // casing of Fullscreen differs across browsers
     name = `${prefix}RequestFullscreen`;
-    if (typeof body[name] === "function") {
+    if (typeof body[name] === 'function') {
       _names.requestFullscreen = name;
       _supportsFullscreen = true;
     } else {
       name = `${prefix}RequestFullScreen`;
-      if (typeof body[name] === "function") {
+      if (typeof body[name] === 'function') {
         _names.requestFullscreen = name;
         _supportsFullscreen = true;
       }
@@ -155,11 +155,11 @@ Fullscreen.supportsFullscreen = function () {
 
     // disagreement about whether it's "exit" as per spec, or "cancel"
     name = `${prefix}ExitFullscreen`;
-    if (typeof document[name] === "function") {
+    if (typeof document[name] === 'function') {
       _names.exitFullscreen = name;
     } else {
       name = `${prefix}CancelFullScreen`;
-      if (typeof document[name] === "function") {
+      if (typeof document[name] === 'function') {
         _names.exitFullscreen = name;
       }
     }
@@ -191,8 +191,8 @@ Fullscreen.supportsFullscreen = function () {
     // event names do not have 'on' in the front, but the property on the document does
     if (document[`on${name}`] !== undefined) {
       //except on IE
-      if (prefix === "ms") {
-        name = "MSFullscreenChange";
+      if (prefix === 'ms') {
+        name = 'MSFullscreenChange';
       }
       _names.fullscreenchange = name;
     }
@@ -200,8 +200,8 @@ Fullscreen.supportsFullscreen = function () {
     name = `${prefix}fullscreenerror`;
     if (document[`on${name}`] !== undefined) {
       //except on IE
-      if (prefix === "ms") {
-        name = "MSFullscreenError";
+      if (prefix === 'ms') {
+        name = 'MSFullscreenError';
       }
       _names.fullscreenerror = name;
     }

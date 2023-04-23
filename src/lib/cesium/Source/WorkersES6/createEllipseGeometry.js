@@ -1,7 +1,7 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import defined from "../Core/defined.js";
-import EllipseGeometry from "../Core/EllipseGeometry.js";
-import Ellipsoid from "../Core/Ellipsoid.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import defined from '../Core/defined.js';
+import EllipseGeometry from '../Core/EllipseGeometry.js';
+import Ellipsoid from '../Core/Ellipsoid.js';
 
 function createEllipseGeometry(ellipseGeometry, offset) {
   if (defined(offset)) {

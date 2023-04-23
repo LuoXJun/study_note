@@ -1,20 +1,20 @@
-import Cartesian3 from "../Core/Cartesian3.js";
-import Check from "../Core/Check.js";
-import clone from "../Core/clone.js";
-import combine from "../Core/combine.js";
-import defaultValue from "../Core/defaultValue.js";
-import defined from "../Core/defined.js";
-import destroyObject from "../Core/destroyObject.js";
-import DeveloperError from "../Core/DeveloperError.js";
-import CesiumMath from "../Core/Math.js";
-import HilbertOrder from "../Core/HilbertOrder.js";
-import Matrix3 from "../Core/Matrix3.js";
-import Rectangle from "../Core/Rectangle.js";
-import S2Cell from "../Core/S2Cell.js";
-import ImplicitSubtree from "./ImplicitSubtree.js";
-import hasExtension from "./hasExtension.js";
-import MetadataSemantic from "./MetadataSemantic.js";
-import parseBoundingVolumeSemantics from "./parseBoundingVolumeSemantics.js";
+import Cartesian3 from '../Core/Cartesian3.js';
+import Check from '../Core/Check.js';
+import clone from '../Core/clone.js';
+import combine from '../Core/combine.js';
+import defaultValue from '../Core/defaultValue.js';
+import defined from '../Core/defined.js';
+import destroyObject from '../Core/destroyObject.js';
+import DeveloperError from '../Core/DeveloperError.js';
+import CesiumMath from '../Core/Math.js';
+import HilbertOrder from '../Core/HilbertOrder.js';
+import Matrix3 from '../Core/Matrix3.js';
+import Rectangle from '../Core/Rectangle.js';
+import S2Cell from '../Core/S2Cell.js';
+import ImplicitSubtree from './ImplicitSubtree.js';
+import hasExtension from './hasExtension.js';
+import MetadataSemantic from './MetadataSemantic.js';
+import parseBoundingVolumeSemantics from './parseBoundingVolumeSemantics.js';
 
 /**
  * A specialized {@link Cesium3DTileContent} that lazily evaluates an implicit
@@ -51,10 +51,10 @@ export default function Implicit3DTileContent(
   byteOffset
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.defined("tile.implicitTileset", tile.implicitTileset);
-  Check.defined("tile.implicitCoordinates", tile.implicitCoordinates);
+  Check.defined('tile.implicitTileset', tile.implicitTileset);
+  Check.defined('tile.implicitCoordinates', tile.implicitCoordinates);
   if (defined(json) === defined(arrayBuffer)) {
-    throw new DeveloperError("One of json and arrayBuffer must be defined.");
+    throw new DeveloperError('One of json and arrayBuffer must be defined.');
   }
   //>>includeEnd('debug');
 
@@ -76,7 +76,7 @@ export default function Implicit3DTileContent(
   const templateValues = implicitCoordinates.getTemplateValues();
   const subtreeResource = implicitTileset.subtreeUriTemplate.getDerivedResource(
     {
-      templateValues: templateValues,
+      templateValues: templateValues
     }
   );
   this._url = subtreeResource.getUrlComponent(true);
@@ -88,67 +88,67 @@ Object.defineProperties(Implicit3DTileContent.prototype, {
   featuresLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   pointsLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   trianglesLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   geometryByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   texturesByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   batchTableByteLength: {
     get: function () {
       return 0;
-    },
+    }
   },
 
   innerContents: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   readyPromise: {
     get: function () {
       return this._readyPromise;
-    },
+    }
   },
 
   tileset: {
     get: function () {
       return this._tileset;
-    },
+    }
   },
 
   tile: {
     get: function () {
       return this._tile;
-    },
+    }
   },
 
   url: {
     get: function () {
       return this._url;
-    },
+    }
   },
 
   /**
@@ -163,15 +163,15 @@ Object.defineProperties(Implicit3DTileContent.prototype, {
     },
     set: function () {
       //>>includeStart('debug', pragmas.debug);
-      throw new DeveloperError("Implicit3DTileContent cannot have metadata");
+      throw new DeveloperError('Implicit3DTileContent cannot have metadata');
       //>>includeEnd('debug');
-    },
+    }
   },
 
   batchTable: {
     get: function () {
       return undefined;
-    },
+    }
   },
 
   group: {
@@ -180,8 +180,8 @@ Object.defineProperties(Implicit3DTileContent.prototype, {
     },
     set: function (value) {
       this._group = value;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -287,7 +287,7 @@ function listChildSubtrees(content, subtree, bottomRow) {
       if (subtree.childSubtreeIsAvailableAtIndex(index)) {
         results.push({
           tile: leafTile,
-          childIndex: j,
+          childIndex: j
         });
       }
     }
@@ -373,7 +373,7 @@ function transcodeSubtreeTiles(content, subtree, placeholderTile, childIndex) {
   return {
     rootTile: rootTile,
     // At the end of the last loop, bottomRow was moved to parentRow
-    bottomRow: parentRow,
+    bottomRow: parentRow
   };
 }
 
@@ -419,9 +419,8 @@ function deriveChildTile(
   if (defaultValue(parentIsPlaceholderTile, false)) {
     implicitCoordinates = parentTile.implicitCoordinates;
   } else {
-    implicitCoordinates = parentTile.implicitCoordinates.getChildCoordinates(
-      childIndex
-    );
+    implicitCoordinates =
+      parentTile.implicitCoordinates.getChildCoordinates(childIndex);
   }
 
   // Parse metadata and bounding volume semantics at the beginning
@@ -464,10 +463,10 @@ function deriveChildTile(
     }
     const childContentTemplate = implicitTileset.contentUriTemplates[i];
     const childContentUri = childContentTemplate.getDerivedResource({
-      templateValues: implicitCoordinates.getTemplateValues(),
+      templateValues: implicitCoordinates.getTemplateValues()
     }).url;
     const contentJson = {
-      uri: childContentUri,
+      uri: childContentUri
     };
 
     const contentBoundingVolume = getContentBoundingVolume(
@@ -494,7 +493,7 @@ function deriveChildTile(
     boundingVolume: boundingVolume,
     geometricError: childGeometricError,
     refine: implicitTileset.refine,
-    contents: contentJsons,
+    contents: contentJsons
   };
 
   // combine() is used to pass through any additional properties the
@@ -537,7 +536,7 @@ function canUpdateHeights(boundingVolume, tileBounds) {
     defined(boundingVolume) &&
     defined(tileBounds) &&
     (defined(tileBounds.minimumHeight) || defined(tileBounds.maximumHeight)) &&
-    (hasExtension(boundingVolume, "3DTILES_bounding_volume_S2") ||
+    (hasExtension(boundingVolume, '3DTILES_bounding_volume_S2') ||
       defined(boundingVolume.region))
   );
 }
@@ -561,9 +560,9 @@ function updateHeights(boundingVolume, tileBounds) {
     return;
   }
 
-  if (hasExtension(boundingVolume, "3DTILES_bounding_volume_S2")) {
+  if (hasExtension(boundingVolume, '3DTILES_bounding_volume_S2')) {
     updateS2CellHeights(
-      boundingVolume.extensions["3DTILES_bounding_volume_S2"],
+      boundingVolume.extensions['3DTILES_bounding_volume_S2'],
       tileBounds.minimumHeight,
       tileBounds.maximumHeight
     );
@@ -750,7 +749,7 @@ function deriveBoundingVolume(
 ) {
   const rootBoundingVolume = implicitTileset.boundingVolume;
 
-  if (hasExtension(rootBoundingVolume, "3DTILES_bounding_volume_S2")) {
+  if (hasExtension(rootBoundingVolume, '3DTILES_bounding_volume_S2')) {
     return deriveBoundingVolumeS2(
       parentIsPlaceholderTile,
       parentTile,
@@ -772,7 +771,7 @@ function deriveBoundingVolume(
     );
 
     return {
-      region: childRegion,
+      region: childRegion
     };
   }
 
@@ -785,7 +784,7 @@ function deriveBoundingVolume(
   );
 
   return {
-    box: childBox,
+    box: childBox
   };
 }
 
@@ -820,14 +819,14 @@ function deriveBoundingVolumeS2(
   z
 ) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.bool("parentIsPlaceholderTile", parentIsPlaceholderTile);
-  Check.typeOf.object("parentTile", parentTile);
-  Check.typeOf.number("childIndex", childIndex);
-  Check.typeOf.number("level", level);
-  Check.typeOf.number("x", x);
-  Check.typeOf.number("y", y);
+  Check.typeOf.bool('parentIsPlaceholderTile', parentIsPlaceholderTile);
+  Check.typeOf.object('parentTile', parentTile);
+  Check.typeOf.number('childIndex', childIndex);
+  Check.typeOf.number('level', level);
+  Check.typeOf.number('x', x);
+  Check.typeOf.number('y', y);
   if (defined(z)) {
-    Check.typeOf.number("z", z);
+    Check.typeOf.number('z', z);
   }
   //>>includeEnd('debug');
 
@@ -837,12 +836,12 @@ function deriveBoundingVolumeS2(
   if (parentIsPlaceholderTile) {
     return {
       extensions: {
-        "3DTILES_bounding_volume_S2": {
+        '3DTILES_bounding_volume_S2': {
           token: S2Cell.getTokenFromId(boundingVolumeS2.s2Cell._cellId),
           minimumHeight: boundingVolumeS2.minimumHeight,
-          maximumHeight: boundingVolumeS2.maximumHeight,
-        },
-      },
+          maximumHeight: boundingVolumeS2.maximumHeight
+        }
+      }
     };
   }
 
@@ -873,12 +872,12 @@ function deriveBoundingVolumeS2(
 
   return {
     extensions: {
-      "3DTILES_bounding_volume_S2": {
+      '3DTILES_bounding_volume_S2': {
         token: S2Cell.getTokenFromId(cell._cellId),
         minimumHeight: minHeight,
-        maximumHeight: maxHeight,
-      },
-    },
+        maximumHeight: maxHeight
+      }
+    }
   };
 }
 
@@ -911,12 +910,12 @@ const scratchHalfAxes = new Matrix3();
  */
 function deriveBoundingBox(rootBox, level, x, y, z) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rootBox", rootBox);
-  Check.typeOf.number("level", level);
-  Check.typeOf.number("x", x);
-  Check.typeOf.number("y", y);
+  Check.typeOf.object('rootBox', rootBox);
+  Check.typeOf.number('level', level);
+  Check.typeOf.number('x', x);
+  Check.typeOf.number('y', y);
   if (defined(z)) {
-    Check.typeOf.number("z", z);
+    Check.typeOf.number('z', z);
   }
   //>>includeEnd('debug');
 
@@ -988,12 +987,12 @@ const scratchRectangle = new Rectangle();
  */
 function deriveBoundingRegion(rootRegion, level, x, y, z) {
   //>>includeStart('debug', pragmas.debug);
-  Check.typeOf.object("rootRegion", rootRegion);
-  Check.typeOf.number("level", level);
-  Check.typeOf.number("x", x);
-  Check.typeOf.number("y", y);
+  Check.typeOf.object('rootRegion', rootRegion);
+  Check.typeOf.number('level', level);
+  Check.typeOf.number('x', x);
+  Check.typeOf.number('y', y);
   if (defined(z)) {
-    Check.typeOf.number("z", z);
+    Check.typeOf.number('z', z);
   }
   //>>includeEnd('debug');
 
@@ -1038,9 +1037,8 @@ function deriveBoundingRegion(rootRegion, level, x, y, z) {
  */
 function makePlaceholderChildSubtree(content, parentTile, childIndex) {
   const implicitTileset = content._implicitTileset;
-  const implicitCoordinates = parentTile.implicitCoordinates.getChildCoordinates(
-    childIndex
-  );
+  const implicitCoordinates =
+    parentTile.implicitCoordinates.getChildCoordinates(childIndex);
 
   const childBoundingVolume = deriveBoundingVolume(
     implicitTileset,
@@ -1061,7 +1059,7 @@ function makePlaceholderChildSubtree(content, parentTile, childIndex) {
 
   const childContentUri = implicitTileset.subtreeUriTemplate.getDerivedResource(
     {
-      templateValues: implicitCoordinates.getTemplateValues(),
+      templateValues: implicitCoordinates.getTemplateValues()
     }
   ).url;
   const tileJson = {
@@ -1070,9 +1068,9 @@ function makePlaceholderChildSubtree(content, parentTile, childIndex) {
     refine: implicitTileset.refine,
     contents: [
       {
-        uri: childContentUri,
-      },
-    ],
+        uri: childContentUri
+      }
+    ]
   };
 
   const tile = makeTile(

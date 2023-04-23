@@ -1,7 +1,7 @@
-import defaultValue from "./defaultValue.js";
-import defined from "./defined.js";
-import DeveloperError from "./DeveloperError.js";
-import RuntimeError from "./RuntimeError.js";
+import defaultValue from './defaultValue.js';
+import defined from './defined.js';
+import DeveloperError from './DeveloperError.js';
+import RuntimeError from './RuntimeError.js';
 
 /**
  * Reads a string from a Uint8Array.
@@ -18,16 +18,16 @@ import RuntimeError from "./RuntimeError.js";
 function getStringFromTypedArray(uint8Array, byteOffset, byteLength) {
   //>>includeStart('debug', pragmas.debug);
   if (!defined(uint8Array)) {
-    throw new DeveloperError("uint8Array is required.");
+    throw new DeveloperError('uint8Array is required.');
   }
   if (byteOffset < 0) {
-    throw new DeveloperError("byteOffset cannot be negative.");
+    throw new DeveloperError('byteOffset cannot be negative.');
   }
   if (byteLength < 0) {
-    throw new DeveloperError("byteLength cannot be negative.");
+    throw new DeveloperError('byteLength cannot be negative.');
   }
   if (byteOffset + byteLength > uint8Array.byteLength) {
-    throw new DeveloperError("sub-region exceeds array bounds.");
+    throw new DeveloperError('sub-region exceeds array bounds.');
   }
   //>>includeEnd('debug');
 
@@ -41,12 +41,12 @@ function getStringFromTypedArray(uint8Array, byteOffset, byteLength) {
 
 // Exposed functions for testing
 getStringFromTypedArray.decodeWithTextDecoder = function (view) {
-  const decoder = new TextDecoder("utf-8");
+  const decoder = new TextDecoder('utf-8');
   return decoder.decode(view);
 };
 
 getStringFromTypedArray.decodeWithFromCharCode = function (view) {
-  let result = "";
+  let result = '';
   const codePoints = utf8Handler(view);
   const length = codePoints.length;
   for (let i = 0; i < length; ++i) {
@@ -126,7 +126,7 @@ function utf8Handler(utfBytes) {
         continue;
       }
 
-      throw new RuntimeError("String decoding failed.");
+      throw new RuntimeError('String decoding failed.');
     }
 
     // Out of range, so ignore the first part(s) of the character and continue with this byte on its own
@@ -156,7 +156,7 @@ function utf8Handler(utfBytes) {
   return codePoints;
 }
 
-if (typeof TextDecoder !== "undefined") {
+if (typeof TextDecoder !== 'undefined') {
   getStringFromTypedArray.decode =
     getStringFromTypedArray.decodeWithTextDecoder;
 } else {
