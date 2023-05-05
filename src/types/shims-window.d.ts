@@ -4,4 +4,5 @@ declare interface Window {
     prodUrl: string;
   };
   TIME_OUT: number;
+  CESIUM_BASE_URL: string;
 }

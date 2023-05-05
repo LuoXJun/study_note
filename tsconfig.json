@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "typeRoots": [
-      "node_modules/@types", // 默认值
-      "src/types"
+      "node_modules/@types" // 默认值
     ],
     // 将每个文件作为单独的模块
     "isolatedModules": true,
@@ -35,6 +34,7 @@
     "resolveJsonModule": true,
     "skipDefaultLibCheck": false,
     "esModuleInterop": true,
+    "allowUmdGlobalAccess": true,
     "lib": ["esnext", "dom"],
     "baseUrl": "./",
     "types": ["node", "axios", "element-plus/global"],

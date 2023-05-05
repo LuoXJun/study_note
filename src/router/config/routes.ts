@@ -16,30 +16,66 @@ export const routeConfig: RouteOptions[] = [
     component: 'cesium',
     children: [
       {
-        path: 'entity',
-        name: 'entity',
-        title: 'entity',
+        path: 'globeMaterials',
+        name: 'globeMaterials',
+        title: '全局材质',
         icon: 'Edit',
-        component: 'cesium/entity',
-        type: 'menu'
+        component: 'cesium/globeMaterials',
+        type: 'link'
       },
       {
-        path: 'scene',
-        name: 'scene',
-        title: 'scene',
+        path: 'shader',
+        name: 'cesiumShader',
+        title: 'shader',
         icon: 'Edit',
-        component: 'cesium/scene',
+        component: 'cesium/shader',
         type: 'menu',
         children: [
           {
-            path: 'createScene',
-            name: 'createScene',
-            title: '基础场景',
+            path: 'fire',
+            name: 'fire',
+            title: 'fire',
             icon: 'Edit',
-            component: 'cesium/scene/createScene',
+            component: 'cesium/shader/fire',
             type: 'link'
           }
         ]
+      }
+    ]
+  },
+  {
+    path: 'threejs',
+    name: 'threejs',
+    title: 'threejs',
+    icon: 'cesium.jpeg',
+    type: 'menu',
+    component: 'threejs',
+    children: [
+      {
+        path: 'shader',
+        name: 'threeShader',
+        title: 'shader',
+        icon: 'Edit',
+        component: 'threejs/shader',
+        type: 'menu',
+        children: [
+          {
+            path: 'sea',
+            name: 'sea',
+            title: 'sea',
+            icon: 'Edit',
+            component: 'threejs/shader/sea',
+            type: 'link'
+          }
+        ]
+      },
+      {
+        path: 'primitives',
+        name: 'primitives',
+        title: 'primitives',
+        icon: 'Edit',
+        component: 'threejs/primitives',
+        type: 'link'
       }
     ]
   },

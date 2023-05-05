@@ -90,7 +90,8 @@ const buildConfig: UserConfigExport = {
         assetFileNames: 'static/[ext]/name-[hash].[ext]',
         manualChunks: {
           vue: ['vue', 'vue-router', 'pinia', 'axios'],
-          lodash: ['lodash']
+          lodash: ['lodash'],
+          cesium: ['cesium']
         }
       }
     }
