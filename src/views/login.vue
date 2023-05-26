@@ -31,9 +31,8 @@ onMounted(() => {
 onUnmounted(() => {
   scene.value?.traverse((ele) => {
     //@ts-ignore
-    if (ele.isMesh) scene.value?.remove(ele);
+    if (ele.isMesh) scene.value.remove(ele);
   });
-  console.log(scene.value);
 });
 </script>
 <style lang="scss">

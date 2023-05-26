@@ -3,8 +3,11 @@
 </template>
 
 <script setup lang="ts">
+import { useCesium } from '@/store/useCesium';
 const sceneContainer = ref<HTMLDivElement>();
 const viewer = ref<Cesium.Viewer>();
+
+const cesiumStore = useCesium();
 
 const setGYpolyLine = async (viewer: Cesium.Viewer) => {
   const maskGeojson = await Cesium.Resource.fetchJson({
@@ -25,13 +28,13 @@ const setGYpolyLine = async (viewer: Cesium.Viewer) => {
       width: 3,
       clampToGround: true,
       material: Cesium.Color.BLUE
+    },
+    polygon: {
+      hierarchy: new Cesium.PolygonHierarchy(pointArr, []),
+      material: new Cesium.ColorMaterialProperty(
+        Cesium.Color.fromCssColorString('#f5ad4f').withAlpha(0.6)
+      )
     }
-    // polygon: {
-    //   hierarchy: new Cesium.PolygonHierarchy(pointArr, []),
-    //   material: new Cesium.ColorMaterialProperty(
-    //     Cesium.Color.fromCssColorString('#f5ad4f').withAlpha(0.6)
-    //   )
-    // }
   });
 };
 
@@ -71,9 +74,9 @@ onMounted(async () => {
   viewer.value.camera.flyTo({
     destination: Cesium.Rectangle.fromDegrees(103.36, 29.13, 109.35, 24.37)
   });
-});
 
-defineExpose({ viewer });
+  cesiumStore.viewer = viewer.value;
+});
 </script>
 
 <style>

@@ -6,11 +6,11 @@
 
 <script setup lang="ts">
 import BaseScene from '../../Acomponents/baseScene.vue';
-import { source } from '../config/fire';
+import { source } from '../config/fireGLSL';
 import colorMap from '@/assets/colorMap/colorMap.png';
+import { useCesium } from '@/store/useCesium';
 
-const baseScene = shallowRef();
-const viewer = shallowRef<Cesium.Viewer>();
+const cesiumStore = useCesium();
 
 const createPlane = () => {
   const a = Cesium.Cartographic.fromDegrees(103.36, 29.13);
@@ -49,12 +49,10 @@ const createPlane = () => {
     })
   });
 
-  viewer.value!.scene.primitives.add(c);
+  cesiumStore.viewer.scene.primitives.add(c);
 };
 
 onMounted(() => {
-  viewer.value = baseScene.value.viewer;
-
   createPlane();
 });
 </script>

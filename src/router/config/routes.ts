@@ -70,12 +70,38 @@ export const routeConfig: RouteOptions[] = [
         ]
       },
       {
-        path: 'primitives',
-        name: 'primitives',
-        title: 'primitives',
+        path: 'lesson1',
+        name: 'lesson1',
+        title: 'lesson1',
         icon: 'Edit',
-        component: 'threejs/primitives',
+        component: 'threejs/lesson1',
         type: 'link'
+      }
+    ]
+  },
+  {
+    path: 'canvas',
+    name: 'canvas',
+    title: 'canvas',
+    icon: 'User',
+    type: 'menu',
+    component: 'canvas',
+    children: [
+      {
+        path: 'drawCartographic',
+        name: 'drawCartographic',
+        title: '弧度扇形',
+        icon: 'User',
+        type: 'link',
+        component: 'canvas/drawCartographic'
+      },
+      {
+        path: 'drawColorMap',
+        name: 'drawColorMap',
+        title: '色标',
+        icon: 'User',
+        type: 'link',
+        component: 'canvas/drawColorMap'
       }
     ]
   },
@@ -86,5 +112,23 @@ export const routeConfig: RouteOptions[] = [
     icon: 'User',
     type: 'link',
     component: 'auth'
+  },
+  {
+    path: 'node',
+    name: 'node',
+    title: 'node',
+    icon: 'User',
+    type: 'menu',
+    component: 'node',
+    children: [
+      {
+        path: 'serve',
+        name: 'nodeServe',
+        title: '本地服务',
+        icon: 'User',
+        type: 'link',
+        component: 'nodeServe'
+      }
+    ]
   }
 ];

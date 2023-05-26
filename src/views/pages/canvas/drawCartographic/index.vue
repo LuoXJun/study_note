@@ -1,7 +1,7 @@
 <!-- 绘制弧形背景和弧形文字 -->
 <template>
   <div>
-    <canvas id="canvas a" width="1500" height="1000"></canvas>
+    <canvas id="canvas" width="1500" height="1000"></canvas>
   </div>
 </template>
 

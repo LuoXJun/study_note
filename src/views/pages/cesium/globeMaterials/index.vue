@@ -1,15 +1,15 @@
 <template>
   <div>
     <!-- 等高线 -->
-    <BaseScene ref="baseScene" />
+    <BaseScene />
   </div>
 </template>
 
 <script setup lang="ts">
 import BaseScene from '@/views/pages/cesium/Acomponents/baseScene.vue';
+import { useCesium } from '@/store/useCesium';
 
-const baseScene = shallowRef();
-const viewer = shallowRef<Cesium.Viewer>();
+const cesiumStore = useCesium();
 
 const lineUniforms = {
   color: Cesium.Color.fromCssColorString('#000'),
@@ -69,12 +69,9 @@ const both = () => {
 };
 
 onMounted(() => {
-  //  等高线
-  viewer.value = baseScene.value.viewer;
-
-  viewer.value!.scene.globe.material = elevationContour();
-  viewer.value!.scene.globe.material = ElevationRamp();
-  viewer.value!.scene.globe.material = both();
+  cesiumStore.viewer.scene.globe.material = elevationContour();
+  cesiumStore.viewer.scene.globe.material = ElevationRamp();
+  cesiumStore.viewer.scene.globe.material = both();
 });
 </script>
 

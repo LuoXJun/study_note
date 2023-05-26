@@ -76,6 +76,10 @@ watch(
           form.value.level = '';
           ElMessage.warning('菜单不能作为菜单之外的子集');
         }
+        if (item.type == 'link' && form.value.type !== 'other') {
+          form.value.level = '';
+          ElMessage.warning('按钮的子级只能是详情页');
+        }
         if (item.type == 'other' && form.value.type !== 'other') {
           form.value.level = '';
           ElMessage.warning('详情页的子级只能是详情页');
